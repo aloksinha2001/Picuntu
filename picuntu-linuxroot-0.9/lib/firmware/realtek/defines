@@ -1,0 +1,82 @@
+[base]
+desc: Realtek wired and wireless network adapters
+files:
+ RTL8192E/boot.img
+ RTL8192E/data.img
+ RTL8192E/main.img
+ RTL8192SU/rtl8192sfw.bin
+ rtl_nic/rtl8105e-1.fw
+ rtl_nic/rtl8168d-1.fw
+ rtl_nic/rtl8168d-2.fw
+ rtl_nic/rtl8168e-1.fw
+ rtl_nic/rtl8168e-2.fw
+ rtl_nic/rtl8168e-3.fw
+ rtl_nic/rtl8168f-1.fw
+ rtl_nic/rtl8168f-2.fw
+ rtlwifi/rtl8192cfw.bin
+ rtlwifi/rtl8192cufw.bin
+ rtlwifi/rtl8192defw.bin
+ rtlwifi/rtl8192sefw.bin
+ rtlwifi/rtl8712u.bin
+longdesc: some Ethernet adapters with the RTL8111/RTL8168 chips supported
+ by the r8169 driver; and wireless network cards with the RTL8188,
+ RTL8192 and RTL8712 chips supported by the r8192_pci, r8192s_usb,
+ r8712u, rtl8192ce, rtl8192cu, rtl8192de and rtl8192se drivers
+support: initramfs-tools
+uri: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+
+[RTL8192E/boot.img_base]
+desc: Realtek RTL8192E boot code
+
+[RTL8192E/data.img_base]
+desc: Realtek RTL8192E init data
+
+[RTL8192E/main.img_base]
+desc: Realtek RTL8192E main code
+
+[RTL8192SU/rtl8192sfw.bin_base]
+desc: Realtek RTL8192SU firmware
+version: 902B
+
+[rtl_nic/rtl8105e-1.fw_base]
+desc: Realtek RTL8105E-1 firmware
+
+[rtl_nic/rtl8168d-1.fw_base]
+desc: Realtek RTL8111D-1/RTL8168D-1 firmware
+
+[rtl_nic/rtl8168d-2.fw_base]
+desc: Realtek RTL8111D-2/RTL8168D-2 firmware
+
+[rtl_nic/rtl8168e-1.fw_base]
+desc: Realtek RTL8168E-1 firmware
+
+[rtl_nic/rtl8168e-2.fw_base]
+desc: Realtek RTL8168E-2 firmware
+
+[rtl_nic/rtl8168e-3.fw_base]
+desc: Realtek RTL8168E-3 firmware
+version: 0.0.4
+
+[rtl_nic/rtl8168f-1.fw_base]
+desc: Realtek RTL8168F-1 firmware
+version: 0.0.4
+
+[rtl_nic/rtl8168f-2.fw_base]
+desc: Realtek RTL8168F-2 firmware
+version: 0.0.4
+
+[rtlwifi/rtl8192cfw.bin_base]
+desc: Realtek RTL8192CE/RTL8188CE firmware
+
+[rtlwifi/rtl8192cufw.bin_base]
+desc: Realtek RTL8192CU/RTL8188CU firmware
+
+[rtlwifi/rtl8192defw.bin_base]
+desc: Realtek RTL8192DE firmware
+
+[rtlwifi/rtl8192sefw.bin_base]
+desc: Realtek RTL8192SE/RTL8191SE firmware
+
+[rtlwifi/rtl8712u.bin_base]
+desc: Realtek RTL8192SU/RTL8712U firmware
+version: 2.6.6

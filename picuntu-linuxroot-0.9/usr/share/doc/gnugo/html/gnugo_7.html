@@ -1,0 +1,1022 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 7. Worms and Dragons</title>
+
+<meta name="description" content="GNU Go Documentation: 7. Worms and Dragons">
+<meta name="keywords" content="GNU Go Documentation: 7. Worms and Dragons">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Worms-and-Dragons"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_6.html#End-Game" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Worms-and-Dragons-1"></a>
+<h1 class="chapter">7. Worms and Dragons</h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Worms">7.1 Worms</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Amalgamation">7.2 Amalgamation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      How two Worms are amalgamated.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Connection">7.3 Connection</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Connections.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Half-Eyes">7.4 Half Eyes and False Eyes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Dragons">7.5 Dragons</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                           Union of WORMS.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Dragons-in-Color">7.6 Colored Dragon Display</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  Colored display of DRAGONS.
+</td></tr>
+</table>
+
+<p>Before considering its move, GNU Go collects some data in several
+arrays. Two of these arrays, called <code>worm</code> and <code>dragon</code>, are
+discussed in this document. Others are discussed in See section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>.
+</p>
+<p>This information is intended to help evaluate the connectedness, eye
+shape, escape potential and life status of each group.
+</p>
+<p>Later routines called by <code>genmove()</code> will then have access to this
+information. This document attempts to explain the philosophy and
+algorithms of this preliminary analysis, which is carried out by the
+two routines <code>make_worm()</code> and <code>make_dragon()</code> in 
+&lsquo;<tt>dragon.c</tt>&rsquo;.
+</p>
+<a name="index-dragon"></a>
+<a name="index-worm"></a>
+<a name="index-string"></a>
+<p>A <em>worm</em> is a maximal set of stones on the board which are connected
+along the horizontal and vertical lines, and are of the same color.
+We often say <em>string</em> instead of worm.
+</p>
+<p>A <em>dragon</em> is a union of strings of the same color which will be
+treated as a unit. The dragons are generated anew at each move. If two strings
+are in the dragon, it is the computer&rsquo;s working hypothesis that they will live
+or die together and are effectively connected.
+</p>
+<p>The purpose of the dragon code is to allow the computer to formulate
+meaningful statements about life and death.  To give one example,
+consider the following situation:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+      OOOOO
+     OOXXXOO
+     OX...XO
+     OXXXXXO
+      OOOOO
+
+</pre></td></tr></table>
+
+<p>The X&rsquo;s here should be considered a single group with one three-space
+eye, but they consist of two separate strings.  Thus we must
+amalgamate these two strings into a single dragon. Then the assertion
+makes sense, that playing at the center will kill or save the dragon,
+and is a vital point for both players. It would be difficult to
+formulate this statement if the X&rsquo;s are not perceived as a unit.
+</p>
+<p>The present implementation of the dragon code involves simplifying
+assumptions which can be refined in later implementations.
+</p>
+<hr size="6">
+<a name="Worms"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Amalgamation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Worms-1"></a>
+<h2 class="section">7.1 Worms</h2>
+<a name="index-worm-1"></a>
+
+<p>The array <code>struct worm_data worm[MAX_BOARD]</code> collects information about
+the worms. We will give definitions of the various fields. Each field has
+constant value at each vertex of the worm. We will define each field.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+struct worm_data {
+  int color;
+  int size;
+  float effective_size;
+  int origin;
+  int liberties;
+  int liberties2;
+  int liberties3;
+  int liberties4;
+  int lunch;
+  int cutstone;
+  int cutstone2;
+  int genus;
+  int inessential;
+  int invincible;
+  int unconditional_status;
+  int attack_points[MAX_TACTICAL_POINTS];
+  int attack_codes[MAX_TACTICAL_POINTS];
+  int defense_points[MAX_TACTICAL_POINTS];
+  int defend_codes[MAX_TACTICAL_POINTS];
+  int attack_threat_points[MAX_TACTICAL_POINTS];
+  int attack_threat_codes[MAX_TACTICAL_POINTS]; 
+  int defense_threat_points[MAX_TACTICAL_POINTS];
+  int defense_threat_codes[MAX_TACTICAL_POINTS];
+};
+</pre></td></tr></table>
+
+<ul>
+<li> <code>color</code>
+<blockquote><p>The color of the worm. 
+</p></blockquote>
+</li><li> <code>size</code>
+<blockquote><p>This field contains the cardinality of the worm.
+</p></blockquote>
+</li><li> <code>effective_size</code>
+<blockquote><a name="index-effective-size-_0028worm_0029"></a>
+<p>This is the number of stones in a worm plus the number
+of empty intersections that are at least as close to this worm as to any
+other worm. Intersections that are shared are counted with equal
+fractional values for each worm. This measures the direct territorial
+value of capturing a worm. <em>effective_size</em> is a floating point number.
+Only intersections at a distance of 4 or less are counted.
+</p></blockquote>
+</li><li> <code>origin</code>
+<blockquote><a name="index-origin-_0028worm_0029"></a>
+<p>Each worm has a distinguished member, called its <em>origin</em>.
+The purpose of this field is to make it easy to determine when two vertices
+lie in the same worm: we compare their origin. Also if we wish to perform some
+test once for each worm, we simply perform it at the origin and ignore the
+other vertices. The origin is characterized by the test:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">worm[pos].origin == pos.
+</pre></td></tr></table>
+</blockquote>
+</li><li> <code>liberties</code>
+</li><li> <code>liberties2</code>
+</li><li> <code>liberties3</code>
+</li><li> <code>liberties4</code>
+<blockquote><a name="index-liberties-_0028worm_0029"></a>
+<a name="index-liberties_002c-higher-order-_0028worm_0029"></a>
+<p>For a nonempty worm the field liberties is the number of liberties of the
+string. This is supplemented by <code>LIBERTIES2</code>, <code>LIBERTIES3</code> and
+<code>LIBERTIES4</code>, which are the number of second order, third order, and
+fourth order liberties, respectively.
+The definition of liberties of order &gt;1 is adapted to the
+problem of detecting the shape of the surrounding
+empty space. In particular we want to be able to see if a group
+is loosely surrounded. A <em>liberty of order n</em> is an empty
+vertex which may be connected to the string by placing n
+stones of the same color on the board, but no fewer. The
+path of connection may pass through an intervening group
+of the same color. The stones placed at distance &gt;1 may
+not touch a group of the opposite color. Connections through
+ko are not permitted. Thus in the following configuration:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+          .XX...    We label the     .XX.4.
+          XO....    liberties of     XO1234
+          XO....    order &lt; 5 of     XO1234
+          ......    the O group:     .12.4.
+          .X.X..                     .X.X..
+
+</pre></td></tr></table>
+
+<p>The convention that liberties of order &gt;1 may not touch a
+group of the opposite color means that knight&rsquo;s moves and
+one space jumps are perceived as impenetrable barriers.
+This is useful in determining when the string is becoming
+surrounded.
+</p>
+<p>The path may also not pass through a liberty at distance
+1 if that liberty is flanked by two stones of the opposing color. This
+reflects the fact that the O stone is blocked from expansion to the
+left by the two X stones in the following situation:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+          X.
+          .O
+          X.
+
+</pre></td></tr></table>
+<a name="index-distance-from-liberty-to-dragon"></a>
+<p>We say that n is the <em>distance</em> of the liberty of order n from the dragon.
+</p></blockquote>
+</li><li> <code>lunch</code>
+<blockquote><a name="index-lunch-_0028worm_0029"></a>
+<p>If nonzero, <code>lunch</code> points to a boundary worm which can be easily
+captured.  (It does not matter whether or not the string can be
+defended.)
+</p></blockquote>
+</li></ul>
+
+<p>We have two distinct notions of cutting stone, which we keep track
+of in the separate fields <code>worm.cutstone</code> and <code>worm.cutstone2</code>.
+We use currently use both concepts in parallel.
+</p>
+<ul>
+<li> <code>cutstone</code> 
+<blockquote><a name="index-cutting-stone"></a>
+<p>This field is equal to 2 for cutting stones, 1 for potential cutting
+stones. Otherwise it is zero.  Definitions for this field: a <em>cutting
+stone</em> is one adjacent to two enemy strings, which do not have a liberty in
+common. The most common type of cutting string is in this situation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+          XO
+          OX
+
+</pre></td></tr></table>
+<a name="index-cutting-stone_002c-potential"></a>
+<a name="index-potential-cutting-stone"></a>
+
+<p>A <em>potential cutting stone</em> is adjacent to two enemy strings which do
+share a liberty. For example, X in:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+          XO
+          O.
+
+</pre></td></tr></table>
+
+<p>For cutting strings we set <code>worm[].cutstone=2</code>. For
+potential cutting strings we set <code>worm[].cutstone=1</code>.
+</p></blockquote>
+</li><li> <code>cutstone2</code> 
+<blockquote><p>Cutting points are identified by the patterns in the connections
+database. Proper cuts are handled by the fact that attacking and
+defending moves also count as moves cutting or connecting the
+surrounding dragons.  The <code>cutstone2</code> field is set during 
+<code>find_cuts()</code>, called from <code>make_domains()</code>.
+</p></blockquote>
+<a name="index-find_005fcuts"></a>
+<a name="index-make_005fdomains"></a>
+</li><li> <code>genus</code> 
+<blockquote><a name="index-genus-_0028worm_0029"></a>
+<p>There are two separate notions of <em>genus</em> for worms and
+dragons. The dragon notion is more important, so
+<code>dragon[pos].genus</code> is a far more useful field than
+<code>worm[pos].genus</code>. Both fields are intended as approximations
+to the number of eyes. The <em>genus</em> of a string is the number
+of connected components of its complement, minus one. It is
+an approximation to the number of eyes of the string.
+</p></blockquote>
+</li><li> <code>inessential</code> 
+<blockquote><a name="index-inessential-string"></a>
+<p>An <em>inessential</em> string is one which meets a
+criterion designed to guarantee that it has no life
+potential unless a particular surrounding string of the
+opposite color can be killed. More precisely an
+<em>inessential string</em> is a string S of genus zero,
+not adjacent to any opponent string which can be easily
+captured, and which has no edge liberties or second
+order liberties, and which satisfies the following
+further property: If the string is removed from the
+board, then the remaining cavity only borders worms of the
+opposite color.
+</p>
+</blockquote>
+<a name="index-unconditional_005flife"></a>
+</li><li> <code>invincible</code> 
+<blockquote><a name="index-invincible-worm"></a>
+<p>An <em>invincible</em> worm is one which GNU Go thinks
+cannot be captured. Invincible worms are computed by the
+function <code>unconditional_life()</code> which tries to
+find those worms of the given color that can never be captured,
+even if the opponent is allowed an arbitrary number of consecutive
+moves.
+</p></blockquote>
+</li><li> unconditional_status
+<blockquote><p>Unconditional status is also set by the function
+<code>unconditional_life</code>. This is set <code>ALIVE</code> for stones which are
+invincible. Stones which can not be turned invincible even if the
+defender is allowed an arbitrary number of consecutive moves are given
+an unconditional status of <code>DEAD</code>. Empty points where the opponent
+cannot form an invincible worm are called unconditional territory. The
+unconditional status is set to <code>WHITE_TERRITORY</code> or
+<code>BLACK_TERRITORY</code> depending on who owns the territory. Finally, if
+a stone can be captured but is adjacent to unconditional territory of
+its own color, it is also given the unconditional status <code>ALIVE</code>.
+In all other cases the unconditional status is <code>UNKNOWN</code>.
+</p>
+<p>To make sense of these definitions it is important to notice that any
+stone which is alive in the ordinary sense (even if only in seki) can be
+transformed into an invincible group by some number of consecutive
+moves. Well, this is not entirely true because there is a rare class of
+seki groups not satisfying this condition. Exactly which these are is
+left as an exercise for the reader. Currently <code>unconditional_life</code>,
+which strictly follows the definitions above, calls such seki groups
+unconditionally dead, which of course is a misfeature. It is possible to
+avoid this problem by making the algorithm slightly more complex, but
+this is left for a later revision.
+</p></blockquote>
+</li><li> <code>int attack_points[MAX_TACTICAL_POINTS]</code>
+</li><li> <code>attack_codes[MAX_TACTICAL_POINTS]</code>
+</li><li> <code>int defense_points[MAX_TACTICAL_POINTS];</code>
+</li><li> <code>int defend_codes[MAX_TACTICAL_POINTS];</code>
+<blockquote><p>If the tactical reading code (see section <a href="gnugo_11.html#Tactical-Reading">Tactical reading</a>) finds that the
+worm can be attacked, <code>attack_points[0]</code> is a point of attack, and
+<code>attack_codes[0]</code> is the attack code, <code>WIN</code>, <code>KO_A</code> or 
+<code>KO_B</code>. If multiple attacks are known, <code>attack_points[k]</code> and
+<code>attack_codes[k]</code> are used. Similarly with the defense
+codes and defense points.
+</p></blockquote>
+</li><li> <code>int attack_threat_points[MAX_TACTICAL_POINTS];</code>
+</li><li> <code>int attack_threat_codes[MAX_TACTICAL_POINTS];</code>
+</li><li> <code>int defense_threat_points[MAX_TACTICAL_POINTS];</code>
+</li><li> <code>int defense_threat_codes[MAX_TACTICAL_POINTS];</code>
+<blockquote><p>These are points that threaten to attack or defend a worm.
+</p></blockquote>
+</li></ul>
+
+<p>The function <code>makeworms()</code> will generate data for all worms.
+</p>
+<hr size="6">
+<a name="Amalgamation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Worms" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Connection" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Amalgamation-1"></a>
+<h2 class="section">7.2 Amalgamation</h2>
+<a name="index-amalgamation-of-worms-into-dragons"></a>
+
+<p>A dragon, we have said, is a group of stones which are treated as a
+unit. It is a working hypothesis that these stones will live or die
+together. Thus the program will not expect to disconnect an opponent&rsquo;s
+strings if they have been amalgamated into a single dragon.
+</p>
+<p>The function <code>make_dragons()</code> will amalgamate worms into dragons by
+maintaining separate arrays <code>worm[]</code> and <code>dragon[]</code> containing
+similar data. Each dragon is a union of worms. Just as the data maintained in
+<code>worm[]</code> is constant on each worm, the data in
+<code>dragon[]</code> is constant on each dragon.
+</p>
+<p>Amalgamation of worms in GNU Go proceeds as follows.
+First we amalgamate all boundary components of an eyeshape. Thus in
+the following example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+.OOOO.       The four X strings are amalgamated into a 
+OOXXO.       single dragon because they are the boundary
+OX..XO       components of a blackbordered cave. The
+OX..XO       cave could contain an inessential string
+OOXXO.       with no effect on this amalgamation.
+XXX...       
+
+</pre></td></tr></table>
+<a name="index-dragon_005feye"></a>
+
+<p>The code for this type of amalgamation is in the routine
+<code>dragon_eye()</code>, discussed further in EYES.
+</p>
+<p>Next, we amalgamate strings which seem uncuttable. We amalgamate dragons
+which either share two or more common liberties, or share one liberty
+into the which the opponent cannot play without being
+captured. (ignores ko rule).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+   X.    X.X     XXXX.XXX         X.O
+   .X    X.X     X......X         X.X
+                 XXXXXX.X         OXX
+
+</pre></td></tr></table>
+
+<p>A database of connection patterns may be found in &lsquo;<tt>patterns/conn.db</tt>&rsquo;.
+</p>
+<hr size="6">
+<a name="Connection"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Amalgamation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Half-Eyes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Connection-1"></a>
+<h2 class="section">7.3 Connection</h2>
+<a name="index-connections"></a>
+
+<p>The fields <code>black_eye.cut</code> and <code>white_eye.cut</code> are set where the
+opponent can cut, and this is done by the B (break) class patterns in
+&lsquo;<tt>conn.db</tt>&rsquo;.  There are two important uses for this field, which can be
+accessed by the autohelper functions <code>xcut()</code> and <code>ocut()</code>. The
+first use is to stop amalgamation in positions like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+..X..
+OO*OO
+X.O.X
+..O..
+
+</pre></td></tr></table>
+
+<p>where X can play at * to cut off either branch. What happens
+here is that first connection pattern CB1 finds the double cut
+and marks * as a cutting point. Later the C (connection) class
+patterns in conn.db are searched to find secure connections
+over which to amalgamate dragons.  Normally a diagonal
+connection would be deemed secure and amalgamated by connection
+pattern CC101, but there is a constraint requiring that neither of
+the empty intersections is a cutting point.
+<a name="index-amalgamate_005fmost_005fvaluable_005fhelper"></a>
+</p>
+<p>A weakness with this scheme is that X can only cut one connection, not
+both, so we should be allowed to amalgamate over one of the connections.
+This is performed by connection pattern CC401, which with the help of
+<code>amalgamate_most_valuable_helper()</code> decides which connection to
+prefer. 
+</p>
+<p>The other use is to simplify making alternative connection patterns to
+the solid connection. Positions where the diag_miai helper thinks a
+connection is necessary are marked as cutting points by connection
+pattern 12. Thus we can write a connection pattern like <code>CC6</code>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+?xxx?     straight extension to connect
+XOO*?
+O...?
+
+:8,C,NULL
+
+?xxx?
+XOOb?
+Oa..?
+
+;xcut(a) &amp;&amp; odefend_against(b,a)
+
+</pre></td></tr></table>
+
+<p>where we verify that a move at <code>*</code> would stop the enemy from safely
+playing at the cutting point, thus defending against the cut.
+</p>
+<hr size="6">
+<a name="Half-Eyes"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Connection" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Dragons" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Half-Eyes-and-False-Eyes"></a>
+<h2 class="section">7.4 Half Eyes and False Eyes</h2>
+<a name="index-half-eye"></a>
+<a name="index-false-eye"></a>
+
+<p>A <em>half eye</em> is a place where, if the defender plays first, an eye
+will materialize, but where if the attacker plays first, no eye will
+materialize. A <em>false eye</em> is a vertex which is surrounded by a
+dragon yet is not an eye. Here is a half eye:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+XXXXX
+OO..X
+O.O.X
+OOXXX
+
+</pre></td></tr></table>
+
+<p>Here is a false eye:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+XXXXX
+XOO.X
+O.O.X
+OOXXX
+
+</pre></td></tr></table>
+
+<p>The &quot;topological&quot; algorithm for determining half and false eyes
+is described elsewhere (see section <a href="gnugo_8.html#Eye-Topology">Topology of Half Eyes and False Eyes</a>).
+</p>
+<p>The half eye data is collected in the dragon array. Before this is done,
+however, an auxiliary array called half_eye_data is filled with
+information. The field <code>type</code> is 0, or else <code>HALF_EYE</code> or 
+<code>FALSE_EYE</code> depending on which type is found; the fields
+<code>attack_point[]</code> point to up to 4 points to attack
+the half eye, and similarly <code>defense_point[]</code> gives points
+to defend the half eye.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+struct half_eye_data half_eye[MAX_BOARD];
+
+struct half_eye_data {
+  float value;          /* Topological eye value */
+  int type;             /* HALF_EYE or FALSE_EYE */
+  int num_attacks;      /* Number of attacking points */
+  int attack_point[4];  /* The moves to attack a topological halfeye */
+  int num_defends;      /* Number of defending points */
+  int defense_point[4]; /* The moves to defend a topological halfeye */
+};
+
+</pre></td></tr></table>
+
+<p>The array <code>struct half_eye_data half_eye[MAX_BOARD]</code> 
+contains information about half and false eyes.  If the type is
+<code>HALF_EYE</code> then up to four moves are recorded which can
+either attack or defend the eye. In rare cases the attack points
+could be different from the defense points.
+</p>
+<hr size="6">
+<a name="Dragons"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Half-Eyes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Dragons-in-Color" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Dragons-1"></a>
+<h2 class="section">7.5 Dragons</h2>
+<a name="index-dragons"></a>
+
+<p>The array <code>struct dragon_data dragon[MAX_BOARD]</code>
+collects information about the dragons. We will give definitions of the
+various fields. Each field has constant value at each vertex of the
+dragon. (Fields will be discussed below.)
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+struct dragon_data {
+  int color;    /* its color                               */
+  int id;       /* the index into the dragon2 array        */
+  int origin;   /* the origin of the dragon. Two vertices  */
+                /* are in the same dragon iff they have    */
+                /* same origin.                            */
+  int size;     /* size of the dragon                      */
+  float effective_size; /* stones and surrounding spaces   */
+  int crude_status;     /* (ALIVE, DEAD, UNKNOWN, CRITICAL)*/
+  int status;           /* best trusted status             */
+};
+
+extern struct dragon_data dragon[BOARDMAX];
+
+</pre></td></tr></table>
+
+<p>Other fields attached to the dragon are contained in the <code>dragon_data2</code>
+struct array. (Fields will be discussed below.)
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+struct dragon_data2 {
+  int origin;
+  int adjacent[MAX_NEIGHBOR_DRAGONS];
+  int neighbors;
+  int hostile_neighbors;
+  int moyo_size;
+  float moyo_territorial_value;
+  int safety;
+  float weakness;
+  float weakness_pre_owl;
+  int escape_route;
+  struct eyevalue genus;
+  int heye;
+  int lunch;
+  int surround_status;
+  int surround_size;
+  int semeais;
+  int semeai_margin_of_safety;
+  int semeai_defense_point;
+  int semeai_defense_certain;  
+  int semeai_attack_point;
+  int semeai_attack_certain;
+  int owl_threat_status;
+  int owl_status;
+  int owl_attack_point;
+  int owl_attack_code;
+  int owl_attack_certain;
+  int owl_second_attack_point;
+  int owl_defense_point;
+  int owl_defense_code;
+  int owl_defense_certain;
+  int owl_second_defense_point;
+  int owl_attack_kworm;
+  int owl_defense_kworm;
+};
+
+extern struct dragon_data2 *dragon2;
+
+</pre></td></tr></table>
+
+<p>The difference between the two arrays is that the <code>dragon</code> array 
+is indexed by the board, and there is a copy of the dragon data 
+at every stone in the dragon, while there is only one copy of
+the dragon2 data. The dragons are numbered, and the <code>id</code> field
+of the dragon is a key into the dragon2 array. Two macros DRAGON
+and DRAGON2 are provided for gaining access to the two arrays.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#define DRAGON2(pos) dragon2[dragon[pos].id]
+#define DRAGON(d) dragon[dragon2[d].origin]
+</pre></td></tr></table>
+
+<p>Thus if you know the position <code>pos</code> of a stone in the dragon
+you can access the dragon array directly, for example accessing the
+origin with <code>dragon[pos].origin</code>. However if you need a field
+from the dragon2 array, you can access it using the DRAGON2 macro,
+for example you can access its neighor dragons by
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">for (k = 0; k &lt; DRAGON2(pos).neighbors; k++) {
+  int d = DRAGON2(pos).adjacent[k];
+  int apos = dragon2[d].origin;
+  do_something(apos);
+}
+</pre></td></tr></table>
+
+<p>Similarly if you know the dragon number (which is <code>dragon[pos].id</code>)
+then you can access the <code>dragon2</code> array directly, or you can
+access the <code>dragon</code> array using the DRAGON macro.
+</p>
+<p>Here are the definitions of each field in the <code>dragon</code> arrray.
+</p>
+<ul>
+<li> <code>color</code> 
+<blockquote><a name="index-color-_0028dragon_0029"></a>
+<p>The color of the dragon.
+</p></blockquote>
+</li><li> <code>id</code>
+<a name="index-dragon-number"></a>
+<blockquote><p>The dragon number, used as a key into the <code>dragon2</code> array.
+</p></blockquote>
+</li><li> origin
+<a name="index-dragon-origin"></a>
+<blockquote><p>The origin of the dragon is a unique particular vertex
+of the dragon, useful for determining when two vertices belong
+to the same dragon. Before amalgamation the worm origins are
+copied to the dragon origins. Amalgamation of two dragons
+amounts to changing the origin of one.
+</p></blockquote>
+</li><li> size
+<a name="index-dragon-size"></a>
+<blockquote><p>The number of stones in the dragon.
+</p></blockquote>
+</li><li> effective size
+<a name="index-effective-size"></a>
+<blockquote><p>The sum of the effective sizes of the constituent worms.
+Remembering that vertices equidistant between two or more worms are
+counted fractionally in <code>worm.effective_size</code>, this equals the
+cardinality of the dragon plus the number of empty vertices which are
+nearer this dragon than any other.
+</p></blockquote>
+</li><li> crude_status
+<blockquote><p>(ALIVE, DEAD, UNKNOWN, CRITICAL). An early measure of the life
+potential of the dragon. It is computed before the owl code is
+run and is superceded by the status as soon as that becomes
+available.
+</p></blockquote>
+</li><li> status
+<a name="index-dragon-status"></a>
+<blockquote><p>The dragon status is the best measure of the dragon&rsquo;s health.
+It is computed after the owl code is run, then revised again
+when the semeai code is run.
+</p></blockquote>
+</li></ul>
+
+<p>Here are definitions of the fields in the <code>dragon2</code> array.
+</p>
+<ul>
+<li> origin
+<blockquote><p>The origin field is duplicated here.
+</p></blockquote>
+</li><li> adjacent
+</li><li> <code>adjacent[MAX_NEIGHBOR_DRAGONS]</code>
+<a name="index-neighbor-dragons"></a>
+<a name="index-adjacent-dragons"></a>
+<a name="index-find_005fneighbor_005fdragons"></a>
+<blockquote><p>Dragons of either color near the given one are called <em>neighbors</em>.
+They are computed by the function <code>find_neighbor_dragons()</code>.
+The <code>dragon2.adjacent</code> array gives the dragon numbers of
+these dragons.
+</p></blockquote>
+</li><li> <code>neighbors</code>
+<a name="index-neighbor-dragons-1"></a>
+<a name="index-adjacent-dragons-1"></a>
+<a name="index-find_005fneighbor_005fdragons-1"></a>
+<blockquote><p>Dragons of either color near the given one are called <em>neighbors</em>.
+They are computed by the function <code>find_neighbor_dragons()</code>.
+The <code>dragon2.adjacent</code> array gives the dragon numbers of
+these dragons.
+</p></blockquote>
+</li><li> neighbors
+<blockquote><p>The number of neighbor dragons.
+</p></blockquote>
+</li><li> hostile_neighbors
+<blockquote><p>The number of neighbor dragons of the opposite color.
+</p></blockquote>
+</li><li> moyo_size
+</li><li> float moyo_territorial_value
+<a name="index-compute_005fsurrounding_005fmoyo_005fsizes"></a>
+<blockquote><p>The function <code>compute_surrounding_moyo_sizes()</code> assigns
+a size and a territorial value to the moyo around
+each dragon (see section <a href="gnugo_13.html#Territory-and-Moyo">Territory, Moyo and Area</a>). This is the 
+moyo size. They are recorded in these fields.
+</p></blockquote>
+</li><li> safety
+<a name="index-dragon-safety"></a>
+<blockquote><p>The dragon safety can take on one of the values
+</p><ul class="toc">
+<li>- TACTICALLY_DEAD - a dragon consisting of a single worm found dead by the
+reading code (very reliable)
+</li><li>- ALIVE - found alive by the owl or semeai code
+</li><li>- STRONGLY_ALIVE - alive without much question
+</li><li>- INVINCIBLE - definitively alive even after many tenukis
+</li><li>- ALIVE_IN_SEKI - determined to be seki by the semeai code
+</li><li>- CRITICAL - lives or dies depending on who moves first
+</li><li>- DEAD - found to be dead by the owl code
+</li><li>- INESSENTIAL - the dragon is unimportant (e.g. nakade stones) and dead
+</li></ul>
+</blockquote>
+</li><li> weakness
+</li><li> weakness_pre_owl
+<a name="index-dragon-weakness"></a>
+<a name="index-weakness"></a>
+<blockquote><p>A floating point measure of the safety of a dragon. The dragon
+weakness is a number between 0. and 1., higher numbers for
+dragons in greater need of safety. The field <code>weakness_pre_owl</code>
+is a preliminary computation before the owl code is run.
+</p></blockquote>
+</li><li> escape_route
+<a name="index-dragon-escape_005froute"></a>
+<a name="index-escape_005froute"></a>
+<a name="index-compute_005fescape"></a>
+<blockquote><p>A measure of the dragon&rsquo;s potential to escape towards safety,
+in case it cannot make two eyes locally. Documentation
+may be found in <a href="gnugo_13.html#Escape">Escape</a>.
+</p></blockquote>
+</li><li> struct eyevalue genus
+<a name="index-dragon-genus"></a>
+<a name="index-genus"></a>
+<blockquote><p>The approximate number of eyes the dragon can be expected to
+get. Not guaranteed to be accurate. The eyevalue struct, which
+is used throughout the engine, is declared thus:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+struct eyevalue {
+  unsigned char a; /* # of eyes if attacker plays twice */
+  unsigned char b; /* # of eyes if attacker plays first */
+  unsigned char c; /* # of eyes if defender plays first */
+  unsigned char d; /* # of eyes if defender plays twice */
+};
+
+</pre></td></tr></table>
+</blockquote>
+</li><li> heye
+<blockquote><p>Location of a half eye attached to the dragon.
+</p></blockquote>
+</li><li> lunch
+<a name="index-dragon-lunch"></a>
+<a name="index-lunch"></a>
+<blockquote><p>If nonzero, this is the location of a boundary string which
+can be captured. In contrast with worm lunches, a dragon
+lunch must be able to defend itself.
+</p></blockquote>
+</li><li> surround_status
+</li><li> surround_size
+<a name="index-surround_005fstatus"></a>
+<a name="index-surround_005fsize"></a>
+<a name="index-surround"></a>
+<blockquote><p>In estimating the safety of a dragon it is useful to know if
+it is <em>surrounded</em>. See <a href="gnugo_13.html#Surrounded-Dragons">Surrounded Dragons</a> and
+the comments in &lsquo;<tt>surround.c</tt>&rsquo; for more information about the
+algorithm.  Used in computing the escape_route, and also callable
+from patterns (currently used by CB258).  
+</p></blockquote>
+</li><li> semeais
+</li><li> semeai_defense_point
+</li><li> semeai_defense_certain
+</li><li> semeai_attack_point
+</li><li> semeai_attack_certain
+<a name="index-semeai-1"></a>
+<a name="index-semeai_005fdefense_005fpoint"></a>
+<a name="index-semeai_005fdefense_005fcertain"></a>
+<a name="index-semeai_005fattack_005fpoint"></a>
+<a name="index-semeai_005fattack_005fcertain"></a>
+<blockquote><p>If two dragons of opposite color both have the status CRITICAL
+or DEAD they are in a <em>semeai</em> (capturing race), and their
+status must be adjudicated by the function
+<code>owl_analyze_semeai()</code> in &lsquo;<tt>owl.c</tt>&rsquo;, which attempts to
+determine which is alive, which dead, or if the result is
+seki, and whether it is important who moves first. The
+function &lsquo;<tt>new_semeai()</tt>&rsquo; in &lsquo;<tt>semeai.c</tt>&rsquo; attempts
+to revise the statuses and to generate move reasons based
+on these results. The field <code>dragon2.semeais</code> is nonzero
+if the dragon is an element of a semeai, and equals the
+number of semeais (seldom more than one). The semeai defense
+and attack points are locations the defender or attacker
+must move to win the semeai. The field <code>semeai_margin_of_safety</code>
+is intended to indicate whether the semeai is close or not
+but currently this field is not maintained. The fields
+<code>semeai_defense_certain</code> and <code>semeai_attack_certain</code>
+indicate that the semeai code was able to finish analysis
+without running out of nodes.
+</p></blockquote>
+</li><li> owl_status
+<blockquote><p>This is a classification similar to <code>dragon.crude_status</code>, but
+based on the life and death reading in &lsquo;<tt>owl.c</tt>&rsquo;.
+The owl code (see section <a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>) is skipped for dragons
+which appear safe by certain heuristics. If the owl code
+is not run, the owl status is <code>UNCHECKED</code>.
+If <code>owl_attack()</code> determines that the dragon cannot be
+attacked, it is classified as <code>ALIVE</code>. Otherwise,
+<code>owl_defend()</code> is run, and if it can be defended it
+is classified as <code>CRITICAL</code>, and if not, as <code>DEAD</code>.
+</p></blockquote>
+</li><li> owl_attack_point
+<a name="index-owl_005fattack_005fpoint"></a>
+<blockquote><p>If the dragon can be attacked this is the point to attack the dragon.
+</p></blockquote>
+</li><li> owl_attack_code
+<a name="index-owl_005fattack_005fcode"></a>
+<blockquote><p>The owl attack code, It can be WIN, KO_A, KO_B or 0 (see <a href="gnugo_11.html#Return-Codes">Return Codes</a>).
+</p></blockquote>
+</li><li> owl_attack_certain
+<a name="index-owl_005fattack_005fcertain"></a>
+<blockquote><p>The owl reading is able to finish analyzing the attack
+without running out of nodes.
+</p></blockquote>
+</li><li> owl_second_attack_point
+<a name="index-owl_005fsecond_005fattack_005fpoint"></a>
+<blockquote><p>A second attack point.
+</p></blockquote>
+</li><li> owl_defense_point
+<a name="index-owl_005fdefense_005fpoint"></a>
+<blockquote><p>If the dragon can be defended, this is the place to play.
+</p></blockquote>
+</li><li> owl_defense_code
+<a name="index-owl_005fdefense_005fcode"></a>
+<blockquote><p>The owl defense code, It can be WIN, KO_A, KO_B or 0 (see <a href="gnugo_11.html#Return-Codes">Return Codes</a>).
+</p></blockquote>
+</li><li> owl_defense_certain
+<a name="index-owl_005fdefense_005fcertain"></a>
+<blockquote><p>The owl code is able to finish analyzing the defense without
+running out of nodes.
+</p></blockquote>
+</li><li> owl_second_defense_point
+<a name="index-owl_005fsecond_005fdefense_005fpoint"></a>
+<blockquote><p>A second owl defense point.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Dragons-in-Color"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Dragons" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Colored-Dragon-Display"></a>
+<h2 class="section">7.6 Colored Dragon Display</h2>
+<a name="index-colored-display-1"></a>
+
+<p>You can get a colored ASCII display of the board in which each dragon
+is assigned a different letter; and the different values of
+<code>dragon.status</code> values (<code>ALIVE</code>, <code>DEAD</code>, <code>UNKNOWN</code>,
+<code>CRITICAL</code>) have different colors. This is very handy for debugging.
+A second diagram shows the values of <code>owl.status</code>. If this
+is <code>UNCHECKED</code> the dragon is displayed in White.
+</p>
+<p>Save a game in sgf format using CGoban, or using the &lsquo;<samp>-o</samp>&rsquo; option with
+GNU Go itself.
+</p>
+<p>Open an <code>xterm</code> or <code>rxvt</code> window. You may also use the Linux
+console.  Using the console, you may need to use &ldquo;SHIFT-PAGE UP&rdquo; to see the
+first diagram. Xterm will only work if it is compiled with color support&mdash;if
+you do not see the colors try <code>rxvt</code>. Make the background color black
+and the foreground color white.
+</p>
+<p>Execute:
+</p>
+<p><code>gnugo -l [filename] -L [movenum] -T</code> to get the colored display.
+</p>
+<p>The color scheme: Green = <code>ALIVE</code>; Yellow = <code>UNKNOWN</code>; 
+Cyan = <code>DEAD</code> and Red = <code>CRITICAL</code>. Worms which have been
+amalgamated into the same dragon are labelled with the same letter.
+</p>
+<p>Other useful colored displays may be obtained by using instead:
+</p>
+<ul>
+<li> the option -E to display eye spaces (see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>).
+</li><li> the option -m 0x0180 to display territory, moyo and area 
+(see section <a href="gnugo_13.html#Territory-and-Moyo">Territory, Moyo and Area</a>).
+</li></ul>
+
+<p>The colored displays are documented elsewhere (see section <a href="gnugo_5.html#Colored-Display">Colored Display</a>).
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

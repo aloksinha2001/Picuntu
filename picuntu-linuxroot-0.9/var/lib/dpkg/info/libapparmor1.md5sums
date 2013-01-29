@@ -1,0 +1,7 @@
+8a4b1d8cae7618bd61eed2553d4fa50d  usr/lib/libapparmor.so.1.0.2
+3670b76547a23200e9d5dfba0a1b827b  usr/share/doc/libapparmor1/changelog.Debian.gz
+ac5b0ee124f72a4c1622f6aca084d16f  usr/share/doc/libapparmor1/copyright
+25df32271c82f3159dcee676be7fdf3a  usr/share/man/man2/aa_change_hat.2.gz
+61f80aa5a214726f2ef300654d2f6661  usr/share/man/man2/aa_change_profile.2.gz
+bd910a89282d249332630c08ef90b4e8  usr/share/man/man2/aa_find_mountpoint.2.gz
+b5553c11c78e726a26d5780af85163c5  usr/share/man/man2/aa_getcon.2.gz

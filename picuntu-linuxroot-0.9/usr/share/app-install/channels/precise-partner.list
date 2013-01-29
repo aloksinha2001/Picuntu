@@ -1,0 +1,4 @@
+# channel for the precise (12.04) partner channel
+# 
+#:description:This channel contains the partner software for precise
+deb http://archive.canonical.com/ubuntu precise partner

@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 12. Pattern Based Reading</title>
+
+<meta name="description" content="GNU Go Documentation: 12. Pattern Based Reading">
+<meta name="keywords" content="GNU Go Documentation: 12. Pattern Based Reading">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Pattern-Based-Reading"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_11.html#Connection-Reading" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-Owl-Code" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Pattern-Based-Reading-1"></a>
+<h1 class="chapter">12. Pattern Based Reading</h1>
+
+<p>In the tactical reading code in &lsquo;<tt>reading.c</tt>&rsquo;, the 
+code generating the moves which are tried are all hand
+coded in C, for efficiency. There is much to be said for
+another type of reading, in which the moves to be tried are
+generated from a pattern database.
+</p>
+<p>GNU Go does three main types of pattern based reading. First,
+there is the OWL code (Optics with Limit Negotiation) which
+attempts to read out to a point where the code in
+&lsquo;<tt>engine/optics.c</tt>&rsquo; (see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>) can be used to evaluate
+it.  Like the tactical reading code, a persistent cache is
+employed to maintain some of the owl data from move to
+move. This is an essential speedup without which GNU Go would
+play too slowly.
+</p>
+<p>Secondly, there is the &lsquo;<tt>engine/combination.c</tt>&rsquo; which
+attempts to find combinations&mdash;situations where a series
+of threats eventually culminates in one that cannot be
+parried.
+</p>
+<p>Finally there is the semeai module. A <strong>semeai</strong> is
+a capturing race between two adjacent DEAD or CRITICAL
+dragons of opposite colors. The principal function,
+<code>owl_analyze_semeai()</code> is contained in &lsquo;<tt>owl.c</tt>&rsquo;.
+Due to the complex nature of semeais, the results of
+this function are more frequently wrong than the usual
+owl code.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#The-Owl-Code">12.1 The Owl Code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Life and death reading
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Combinations">12.2 Combination reading</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Combinations
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="The-Owl-Code"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Combinations" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Owl-Code-1"></a>
+<h2 class="section">12.1 The Owl Code</h2>
+
+<p>The life and death code in &lsquo;<tt>optics.c</tt>&rsquo;, described elsewhere
+(see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>), works reasonably well as long as the position is in a
+<em>terminal position</em>, which we define to be one where there are no
+moves left which can expand the eye space, or limit it. In situations
+where the dragon is surrounded, yet has room to thrash around a bit
+making eyes, a simple application of the graph-based analysis will not
+work. Instead, a bit of reading is needed to reach a terminal position.
+</p>
+<p>The defender tries to expand his eyespace, the attacker to limit
+it, and when neither finds an effective move, the position is
+evaluated. We call this type of life and death reading
+<em>Optics With Limit-negotiation</em> (OWL). The module which
+implements it is in &lsquo;<tt>engine/owl.c</tt>&rsquo;.
+</p>
+<p>There are two reasonably small databases
+&lsquo;<tt>patterns/owl_defendpats.db</tt>&rsquo; and &lsquo;<tt>patterns/owl_attackpats.db</tt>&rsquo;
+of expanding and limiting moves. The code in &lsquo;<tt>owl.c</tt>&rsquo; generates a
+small move tree, allowing the attacker only moves from
+&lsquo;<tt>owl_attackpats.db</tt>&rsquo;, and the defender only moves from
+&lsquo;<tt>owl_defendpats.db</tt>&rsquo;. In addition to the moves suggested by
+patterns, vital moves from the eye space analysis are also tested.
+</p>
+<p>A third database, &lsquo;<tt>owl_vital_apats.db</tt>&rsquo; includes patterns which
+override the eyespace analysis done by the optics code. Since the
+eyeshape graphs ignore the complications of shortage of liberties and
+cutting points in the surrounding chains, the static analysis of
+eyespace is sometimes wrong. The problem is when the optics code says
+that a dragon definitely has 2 eyes, but it isn&rsquo;t true due to 
+shortage of liberties, so the ordinary owl patterns never get into play.
+In such situations &lsquo;<tt>owl_vital_apats.db</tt>&rsquo; is the only available measure
+to correct mistakes by the optics. Currently the patterns in
+&lsquo;<tt>owl_vital_apats.db</tt>&rsquo; are only matched when the level is 9 or
+greater.
+</p>
+<p>The owl code is tuned by editing these three pattern databases,
+principally the first two.
+</p>
+<a name="index-owl_005fattack"></a>
+<a name="index-owl_005fdefend"></a>
+<a name="index-compute_005feyes_005fpessimistic-1"></a>
+<p>A node of the move tree is considered <code>terminal</code> if no further moves 
+are found from &lsquo;<tt>owl_attackpats.db</tt>&rsquo; or &lsquo;<tt>owl_defendpats.db</tt>&rsquo;, or if
+the function <code>compute_eyes_pessimistic()</code> reports that the group is
+definitely alive. At this point, the status of the group is evaluated.
+The functions <code>owl_attack()</code> and <code>owl_defend()</code>, with
+usage similar to <code>attack()</code> and <code>find_defense()</code>, make
+use of the owl pattern databases to generate the move tree and decide
+the status of the group.
+</p>
+<p>The function <code>compute_eyes_pessimistic()</code> used by the owl
+code is very conservative and only feels certain about eyes if the
+eyespace is completely closed (i.e. no marginal vertices). 
+</p>
+<p>The maximum number of moves tried at each node is limited by
+the parameter <code>MAX_MOVES</code> defined at the beginning of
+&lsquo;<tt>engine/owl.c</tt>&rsquo;. The most most valuable moves are
+tried first, with the following restrictions:
+</p>
+<ul>
+<li>
+If <code>stackp &gt; owl_branch_depth</code> then only one move is tried per
+variation. 
+</li><li>
+If <code>stackp &gt; owl_reading_depth</code> then the reading terminates,
+and the situation is declared a win for the defender (since
+deep reading may be a sign of escape).
+</li><li>
+If the node count exceeds <code>owl_node_limit</code>, the reading also
+terminates with a win for the defender.
+</li><li>
+Any pattern with value 99 is considered a forced move: no
+other move is tried, and if two such moves are found, the function
+returns false. This is only relevant for the attacker.
+</li><li>
+Any pattern in &lsquo;<tt>patterns/owl_attackpats.db</tt>&rsquo; and 
+&lsquo;<tt>patterns/owl_defendpats.db</tt>&rsquo; with value 100 is considered a win: if
+such a pattern is found by <code>owl_attack</code> or <code>owl_defend</code>, the
+function returns true. This feature must be used most carefully.
+</li></ul>
+
+<p>The functions <code>owl_attack()</code> and <code>owl_defend()</code> may, like
+<code>attack()</code> and <code>find_defense()</code>, return an attacking or
+defending move through their pointer arguments. If the position is
+already won, <code>owl_attack()</code> may or may not return an attacking
+move. If it finds no move of interest, it will return <code>PASS</code>, that
+is, <code>0</code>. The same goes for <code>owl_defend()</code>.
+</p>
+<p>When <code>owl_attack()</code> or <code>owl_defend()</code> is called,
+the dragon under attack is marked in the array <code>goal</code>.
+The stones of the dragon originally on the board are marked
+with goal=1; those added by <code>owl_defend()</code> are marked
+with goal=2. If all the original strings of the original dragon 
+are captured, <code>owl_attack()</code> considers the dragon to be defeated,
+even if some stones added later can make a live group.
+</p>
+<p>Only dragons with small escape route are studied when the
+functions are called from <code>make_dragons()</code>.
+</p>
+<p>The owl code can be conveniently tested using the 
+&lsquo;<samp>--decide-owl <var>location</var></samp>&rsquo; option. This should be used with 
+&lsquo;<samp>-t</samp>&rsquo; to produce a useful trace, &lsquo;<samp>-o</samp>&rsquo; to produce
+an SGF file of variations produced when the life and death of
+the dragon at <var>location</var> is checked, or both. 
+&lsquo;<samp>--decide-position</samp>&rsquo; performs the same analysis for all
+dragons with small escape route. 
+</p>
+<hr size="6">
+<a name="Combinations"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#The-Owl-Code" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Combination-reading"></a>
+<h2 class="section">12.2 Combination reading</h2>
+
+<p>It may happen that no single one of a set of worms can be killed,
+yet there is a move that guarantees that at least one can be captured. 
+The simplest example is a double atari.  The purpose of the code in
+&lsquo;<tt>combination.c</tt>&rsquo; is to find such moves.
+</p>
+<p>For example, consider the following situation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
++---------
+|....OOOOX
+|....OOXXX
+|..O.OXX..
+|.OXO.OX..
+|.OX..OO..
+|.XXOOOXO.
+|..*XXOX..
+|....XOX..
+|.XX..X...
+|X........
+
+</pre></td></tr></table>
+
+<p>Every &lsquo;<samp>X</samp>&rsquo; stone in this position is alive. However the move
+at &lsquo;<samp>*</samp>&rsquo; produces a position in which at least one of four
+strings will get captured. This is a <em>combination</em>.
+</p>
+<p>The driving function is called <code>atari_atari</code> because typically
+a combination involves a sequence of ataris culminating in a capture,
+though sometimes the moves involved are not ataris. For example in
+the above example, the first move at &lsquo;<samp>*</samp>&rsquo; is <em>not</em> an
+atari, though after &lsquo;<samp>O</samp>&rsquo; defends the four stones above, a
+sequence of ataris ensues resulting in the capture of some
+string.
+</p>
+<p>Like the owl functions <code>atari_atari</code> does pattern-based
+reading. The database generating the attacking moves is
+&lsquo;<tt>aa_attackpats.db</tt>&rsquo;. One danger with this function is
+that the first atari tried might be irrelevant to the actual
+combination.  To detect this possibility, once we&rsquo;ve found a
+combination, we mark that first move as forbidden, then try
+again. If no combination of the same size or larger turns
+up, then the first move was indeed essential.
+</p>
+<ul>
+<li> <code>void combinations(int color)</code>
+<a name="index-combinations"></a>
+<blockquote><p>Generate move reasons for combination attacks and defenses against
+them. This is one of the move generators called from genmove().
+</p></blockquote>
+</li><li> <code>int atari_atari(int color, int *attack_move, char defense_moves[BOARDMAX], int save_verbose)</code>
+<a name="index-atari_005fatari-2"></a>
+<blockquote><p>Look for a combination for <code>color</code>. For the purpose of
+the move generation, returns the size of the smallest of the
+worms under attack.
+</p></blockquote>
+</li><li> <code>int atari_atari_confirm_safety(int color, int move, int *defense, int minsize, const char saved_dragons[BOARDMAX], const char saved_worms[BOARDMAX])</code>
+<a name="index-atari_005fatari_005fconfirm_005fsafety"></a>
+<blockquote><p>Tries to determine whether a move is a blunder.  Wrapper
+around atari_atari_blunder_size. Check whether a combination
+attack of size at least <code>minsize</code> appears after move at
+<code>move</code> has been made.  The arrays <code>saved_dragons[]</code> and
+<code>saved_worms[]</code> should be one for stones belonging to dragons
+or worms respectively, which are supposedly saved by <code>move</code>.
+</p></blockquote>
+</li><li> <code>int atari_atari_blunder_size(int color, int move, int *defense, const char safe_stones[BOARDMAX])</code>
+<a name="index-atari_005fatari_005fblunder_005fsize"></a>
+<blockquote><p>This function checks whether any new combination attack appears after
+move at (move) has been made, and returns its size (in points).
+<code>safe_stones</code> marks which of our stones are supposedly safe
+after this move.
+</p></blockquote>
+</li></ul>
+
+
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Pattern-Based-Reading" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

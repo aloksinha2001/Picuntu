@@ -1,0 +1,11 @@
+libsync-menu.so.1 libsync-menu1 #MINVER#
+ sync_menu_app_get_desktop_id@Base 12.10.1
+ sync_menu_app_get_menu@Base 12.10.1
+ sync_menu_app_get_paused@Base 12.10.1
+ sync_menu_app_get_state@Base 12.10.1
+ sync_menu_app_get_type@Base 12.10.1
+ sync_menu_app_new@Base 12.10.1
+ sync_menu_app_set_menu@Base 12.10.1
+ sync_menu_app_set_paused@Base 12.10.1
+ sync_menu_app_set_state@Base 12.10.1
+ sync_menu_state_get_type@Base 12.10.1

@@ -1,0 +1,8 @@
+#! /bin/sh
+FILE_WITH_PATH=`which $1`
+if [ -f $FILE_WITH_PATH ] 2> /dev/null; then
+    OWNING_PACKAGE=`rpm -qf $FILE_WITH_PATH`
+    rpm -qi $OWNING_PACKAGE
+else
+    echo "There's no such command in your path."
+fi

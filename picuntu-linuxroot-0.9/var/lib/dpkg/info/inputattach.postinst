@@ -1,0 +1,13 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installudev
+if [ "$1" = configure ]; then
+	if [ -e "/etc/udev/rules.d/z60_inputattach.rules" ]; then
+		echo "Preserving user changes to /etc/udev/rules.d/40-inputattach.rules ..."
+		if [ -e "/etc/udev/rules.d/40-inputattach.rules" ]; then
+			mv -f "/etc/udev/rules.d/40-inputattach.rules" "/etc/udev/rules.d/40-inputattach.rules.dpkg-new"
+		fi
+		mv -f "/etc/udev/rules.d/z60_inputattach.rules" "/etc/udev/rules.d/40-inputattach.rules"
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,11 @@
+1f53e0fd41412310d063d2b341b694a4  usr/share/doc/libalgorithm-diff-perl/README
+65485232489c552396340b0b0ec13fb4  usr/share/doc/libalgorithm-diff-perl/changelog.Debian.gz
+3261f700aed63ad6d1b0ad772d0516f4  usr/share/doc/libalgorithm-diff-perl/copyright
+a51fcda100f50232c525a8d59c9b1d1a  usr/share/doc/libalgorithm-diff-perl/examples/cdiff.pl.gz
+37f1d004cb10052c56f52e7dddf03ee4  usr/share/doc/libalgorithm-diff-perl/examples/diff.pl
+9d3eb5667a94db847e5f9e81cbe79aa1  usr/share/doc/libalgorithm-diff-perl/examples/diffnew.pl.gz
+bae8372392723576e8419633aceac005  usr/share/doc/libalgorithm-diff-perl/examples/htmldiff.pl
+3ff0fb665043bfa32a742c0281f4a3d3  usr/share/man/man3/Algorithm::Diff.3pm.gz
+602e65df74bc6f5ca3d7f8aae1ab47c5  usr/share/man/man3/Algorithm::DiffOld.3pm.gz
+2f242fe18268eb30a89d712a57a82c37  usr/share/perl5/Algorithm/Diff.pm
+25a834b19bab35edcb87f45463978945  usr/share/perl5/Algorithm/DiffOld.pm

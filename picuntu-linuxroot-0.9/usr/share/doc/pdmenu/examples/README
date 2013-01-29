@@ -1,0 +1,16 @@
+This is a collection of sample pdmenurc files for Pdmenu and support files
+for the rc's:
+
+pdmenurc         - A simple pdmenurc file for beginners to modify
+pdmenurc.monitor - An example of a pdmenurc file I use to display system
+                   monitoring info on a dumb terminal.
+pdmenurc.complex - Shows off advanced features of the pdmenurc file, and how
+                   to accomplish some neat tricks in a pdmenurc file.
+newbie/          - Contributed pdmenurc file and associated helper scripts 
+                   that tries to offer as much to the newbie unix user as 
+                   possible.
+ba.lpd           - Cornell University Bear Access Launchpad clone based on 
+                   pdmenu.
+
+If you have an interesting pdmenurc, please send it to joey@kitenet.net for
+inclusion here.

@@ -1,0 +1,49 @@
+Change Log - 0.9 RC 3
+Target: 31-Jan-13
+
+Bug Fixes
+	- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
+	- 
+
+Enhancements
+	- Picuntu does not have telnet !!! must include (almost a BUG !!)
+	- 
+	
+New modules
+	- HF20F9 USB dongle
+	- ftdi_sio
+	- pl2303 - Prolific Technologies
+
+New Packages
+	- Serial port managers
+		- ser2net - to divert data from serial to tcp port
+		- minicom, picocom
+		- Include modules up as well
+	- GPS device packages
+		- gpsd python-gps gpsdrive viking gpsd-clients libgps-dev libgtk2.0-dev glutg3-dev libcegui-mk2-dev libxmu-dev libsdl-dev libpcre3-dev libspeechd-dev libtiff-dev libdevil-dev build-essential subversion automake
+	- To test, joomla !!
+
+
+
+
+
+
+Change Log - 0.9 RC 2.2
+
+
+# Pre-picuntu
+  - Fixed an error, that did not allow dialog to be installed.
+  - Fixed an error that did not permit the radio link to go off air
+  
+# Release pre-picuntu.sh as zip file to take care of the version.
+  As well as for many users, downloading txt file not saveable as .sh
+  
+# Picuntu-da-server
+ - Entry in /etc/network/intefaces not correct for eth0 - when using assitant - also bcm40181, not in /etc/modules
+ - Static IP configuration was not working
+ - Add pv  to base 
+ - Add uudecode (sharutils) in Dev Pack 
+ - In Network config menu, there should be an option  network restart 
+ - system giving error, when running --net
+ - Lot of cleaning up in the network config
+ - Switch AutoFix was not working now 

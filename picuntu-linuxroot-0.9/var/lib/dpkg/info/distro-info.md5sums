@@ -1,0 +1,10 @@
+523e25c4f74c15a9ee94995f81c36d22  usr/bin/debian-distro-info
+2c9d011d9de348267d43c820b60a9b14  usr/bin/ubuntu-distro-info
+cd4a8bd4913e000eb415a857dae59c68  usr/share/distro-info/shunit2-helper-functions.sh
+98f2fac21ca115d8541542fc60a513d0  usr/share/distro-info/test-debian-distro-info
+25bdb8026c85d55e9f24e59226245741  usr/share/distro-info/test-ubuntu-distro-info
+80842cdbb43b5ab7db2140fdce3cd4bb  usr/share/doc/distro-info/changelog.gz
+512519f96bd3c0c30dc2b260742d95e5  usr/share/doc/distro-info/copyright
+a5c73197b2637b0fec0458ebbb7d2511  usr/share/man/man1/debian-distro-info.1.gz
+f6fa09c47a899a9bc8ce91da82389db6  usr/share/man/man1/distro-info.1.gz
+cb2e504b8f4b91dbc0407ee864317132  usr/share/man/man1/ubuntu-distro-info.1.gz

@@ -1,0 +1,764 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 2. Installation</title>
+
+<meta name="description" content="GNU Go Documentation: 2. Installation">
+<meta name="keywords" content="GNU Go Documentation: 2. Installation">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Installation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_1.html#Development" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#GNU_002fLinux-and-Unix" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_1.html#Introduction" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Installation-1"></a>
+<h1 class="chapter">2. Installation</h1>
+
+
+<p>You can get the most recent version of GNU Go ftp.gnu.org or a mirror
+(see <a href="http://www.gnu.org/order/ftp.html">http://www.gnu.org/order/ftp.html</a> for a list).  You can read
+about newer versions and get other information at
+<a href="http://www.gnu.org/software/gnugo/">http://www.gnu.org/software/gnugo/</a>. 
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#GNU_002fLinux-and-Unix">2.1 GNU/Linux and Unix</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          GNU Linux and Unix Installation
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Configure-Options">2.2 Configure Options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Windows-and-MS_002dDOS">2.3 Compiling GNU Go on Microsoft platforms</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          Windows Installation
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Macintosh">2.4 Macintosh</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Macintosh Installation
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="GNU_002fLinux-and-Unix"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Installation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Configure-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Installation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="GNU_002fLinux-and-Unix-1"></a>
+<h2 class="section">2.1 GNU/Linux and Unix</h2>
+<a name="index-installation"></a>
+
+<p>Untar the sources, change to the directory gnugo-3.8. Now do:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   ./configure [OPTIONS]
+   make
+</pre></td></tr></table>
+
+<p>Several configure options will be explained in the next section. You do not
+need to set these unless you are dissatisfied with GNU Go&rsquo;s performance or
+wish to vary the experimental options.
+</p>
+<p>As an example,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   ./configure --enable-level=9 --enable-cosmic-gnugo
+</pre></td></tr></table>
+
+<p>will make a binary in which the default level is 9, and the experimental
+&ldquo;cosmic&rdquo;&rsquo; option is enabled. A list of all configure options can be
+obtained by running <code>./configure --help</code>. Further information
+about the experimental options can be found in the next section
+(see section <a href="#Configure-Options">Configure Options</a>).
+</p>
+<p>After running configure and make, you have now made a binary called
+&lsquo;<tt>interface/gnugo</tt>&rsquo;. Now (running as root) type
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   make install
+</pre></td></tr></table>
+
+<p>to install &lsquo;<tt>gnugo</tt>&rsquo; in &lsquo;<tt>/usr/local/bin</tt>&rsquo;.
+</p>
+<p>There are different methods of using GNU Go. You may run it from the
+command line by just typing:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   gnugo
+</pre></td></tr></table>
+
+<p>but it is nicer to run it using CGoban 1 (under X Window System), 
+Quarry, Jago (on any platform with a Java Runtime Environment) or other
+client programs offering a GUI.
+</p>
+<p>You can get the most recent version of CGoban 1 from 
+<a href="http://sourceforge.net/projects/cgoban1/">http://sourceforge.net/projects/cgoban1/</a>. The earlier version
+1.12 is available from <a href="http://www.igoweb.org/~wms/comp/cgoban/index.html">http://www.igoweb.org/~wms/comp/cgoban/index.html</a>.
+The CGoban version number MUST be 1.9.1 at least or it won&rsquo;t work. CGoban 2
+will not work.
+</p>
+<p>See section <a href="gnugo_3.html#CGoban">Running GNU Go via CGoban</a>, for instructions on how to run GNU Go from Cgoban, or
+See section <a href="gnugo_3.html#Other-Clients">Other Clients</a>, for Jago or other clients.
+</p>
+<p>Quarry is available at <a href="http://home.gna.org/quarry/">http://home.gna.org/quarry/</a>.
+</p>
+<hr size="6">
+<a name="Configure-Options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#GNU_002fLinux-and-Unix" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Ram-Cache" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Installation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Configure-Options-1"></a>
+<h2 class="section">2.2 Configure Options</h2>
+
+<p>There are three options which you should consider configuring,
+particularly if you are dissatisfied with GNU Go&rsquo;s performance.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Ram-Cache">2.2.1 Ram Cache</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Default-Level">2.2.2 Default Level</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Other-Options">2.2.3 Other Options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="Ram-Cache"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Configure-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Default-Level" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Configure-Options" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Ram-Cache-1"></a>
+<h3 class="subsection">2.2.1 Ram Cache</h3>
+
+<p>By default, GNU Go makes a cache of about 8 Megabytes in RAM for its
+internal use. The cache is used to store intermediate results during
+its analysis of the position. More precisely the default cache size is
+350000 entries, which translates to 8.01 MB on typical 32 bit
+platforms and 10.68 MB on typical 64 bit platforms.
+</p>
+<p>Increasing the cache size will often give a modest speed improvement.
+If your system has lots of RAM, consider increasing the cache
+size. But if the cache is too large, swapping will occur,
+causing hard drive accesses and degrading performance. If
+your hard drive seems to be running excessively your cache
+may be too large. On GNU/Linux systems, you may detect swapping
+using the program &rsquo;top&rsquo;. Use the &rsquo;f&rsquo; command to toggle SWAP
+display.
+</p>
+<p>You may override the size of the default cache at compile time 
+by running one of:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   ./configure --enable-cache-size=n
+</pre></td></tr></table>
+
+<p>to set the cache size to <code>n</code> megabytes. For example
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   ./configure --enable-cache-size=32
+</pre></td></tr></table>
+
+<p>creates a cache of size 32 megabytes. If you omit this, your default
+cache size will be 8-11 MB as discussed above. Setting cache size
+negative also gives the default size. You must recompile and reinstall
+GNU Go after reconfiguring it by running <code>make</code> and
+<code>make install</code>.
+</p>
+<p>You may override the compile-time defaults by running &lsquo;<tt>gnugo</tt>&rsquo;
+with the option &lsquo;<samp>--cache-size n</samp>&rsquo;, where <code>n</code> is the size in
+megabytes of the cache you want, and &lsquo;<samp>--level</samp>&rsquo; where n is the
+level desired.  We will discuss setting these parameters next in
+detail.
+</p>
+<hr size="6">
+<a name="Default-Level"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Ram-Cache" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Other-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Configure-Options" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Default-Level-1"></a>
+<h3 class="subsection">2.2.2 Default Level</h3>
+
+<p>GNU Go can play at different levels. Up to level 10 is
+supported. At level 10 GNU Go is much more accurate but takes
+an average of about 1.6 times longer to play than at level 8.
+</p>
+<p>The level can be set at run time using the &lsquo;<samp>--level</samp>&rsquo; option.
+If you don&rsquo;t set this, the default level will be used. You
+can set the default level with the configure option
+&lsquo;<samp>--enable-level=n</samp>&rsquo;. For example
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">./configure --enable-level=9
+</pre></td></tr></table>
+
+<p>sets the default level to 9. If you omit this parameter,
+the compiler sets the default level to 10. We recommend
+using level 10 unless you find it too slow. If you decide
+you want to change the default you may rerun configure
+and recompile the program.
+</p>
+<hr size="6">
+<a name="Other-Options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Default-Level" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Configure-Options" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Other-Options-1"></a>
+<h3 class="subsection">2.2.3 Other Options</h3>
+
+<p>Anything new in the engine is generally tested as an experimental option
+which can be turned on or off at compile time or run time. Some
+&ldquo;experimental&rdquo; options such as the break-in code are no longer
+experimental but are enabled by default.
+</p>
+<p>This section can be skipped unless you are interested in the
+experimental options.
+</p>
+<p>Moreover, some configure options were removed from the stable
+release. For example it is known that the owl extension code
+can cause crashes, so the configure option &ndash;enable-experimental-owl-ext
+was disabled for 3.8.
+</p>
+<p>The term &ldquo;default&rdquo; must be clarified, since there
+are really two sets of defaults at hand, runtime defaults
+specified in &lsquo;<tt>config.h</tt>&rsquo; and compile time default
+values for the runtime defaults, contained in &lsquo;<tt>configure</tt>&rsquo;
+(which is created by editing &lsquo;<tt>configure.in</tt>&rsquo; then running
+<code>autoconf</code>. For example we find in &lsquo;<tt>config.h</tt>&rsquo;
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/* Center oriented influence. Disabled by default. */
+#define COSMIC_GNUGO 0
+
+/* Break-in module. Enabled by default. */
+#define USE_BREAK_IN 1
+</pre></td></tr></table>
+
+<p>This means that the experimental cosmic option, which causes
+GNU Go to play a center-oriented game (and makes the engine
+weaker) is disabled by default, but that the break-in module
+is used. These are defaults which are used when GNU Go is
+run without command line options. They can be overridden
+with the run time options:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gnugo --cosmic-gnugo --without-break-in
+</pre></td></tr></table>
+
+<p>Alternatively you can configure GNU Go as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">./configure --enable-cosmic-gnugo --disable-experimental-break-in
+</pre></td></tr></table>
+
+<p>then recompile GNU Go. This changes the defaults in &lsquo;<tt>config.h</tt>&rsquo;,
+so that you do not have to pass any command line options to GNU Go
+at run time to get the experimental owl extension turned on and
+the experimental break-in code turned off.
+</p>
+<p>If you want to find out what experimental options were compiled into your GNU
+Go binary you can run <code>gnugo --options</code> to find out. Here is a list
+of experimental options in GNU Go.
+</p>
+<ul>
+<li> <code>experimental-break-in</code>. Experimental break-in code
+(see section <a href="gnugo_13.html#Break-Ins">Break Ins</a>). You should not need to configure this because
+the break in code is enabled by default in level 10, and is turned
+off at level 9. If you don&rsquo;t want the breakin code just play at
+level 9.
+</li><li> <code>cosmic-gnugo</code>. An experimental style which plays a center
+oriented game and has a good winning rate against standard GNU Go,
+though it makes GNU Go weaker against other opponents.
+</li><li> <code>large-scale</code>. Attempt to make large-scale captures.
+See:
+
+<p><a href="http://lists.gnu.org/archive/html/gnugo-devel/2003-07/msg00209.html">http://lists.gnu.org/archive/html/gnugo-devel/2003-07/msg00209.html</a>
+</p>
+<p>for the philosophy of this option. This option makes the engine slower.
+</p></li><li> <code>metamachine</code>. Enables the metamachine, which allows
+you to run the engine in an experimental mode whereby it forks
+a new <code>gnugo</code> process which acts as an &ldquo;oracle.&rdquo; Has no
+effect unless combined with the &lsquo;<samp>--metamachine</samp>&rsquo; run-time
+option.
+</li></ul>
+
+<p>Other options are not experimental, and can be changed as
+configure or runtime options.
+</p>
+<ul>
+<li> <code>chinese-rules</code> Use Chinese (area) counting.
+</li><li> <code>resignation-allowed</code> Allow GNU Go to resign games.
+This is on by default.
+</li></ul>
+
+<hr size="6">
+<a name="Windows-and-MS_002dDOS"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Other-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-with-older-visual-studio" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Installation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Compiling-GNU-Go-on-Microsoft-platforms"></a>
+<h2 class="section">2.3 Compiling GNU Go on Microsoft platforms</h2>
+
+<hr size="6">
+<a name="Building-with-older-visual-studio"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-with-Visual-Studio-project-files" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.1 Building with older visual studio</h3>
+
+<p>The distribution directories contain some .dsp and .dsw files with
+GNU Go. These have been brought up to date in the sense that they
+should work if you have the older VC++ with Visual Studio 6
+but the distributed .dsp and .dsw files will only be of use with 
+older version of Visual Studio.
+</p>
+<p>In most cases (unless you are building in Cygwin) the preferred way 
+to build GNU Go on Windows platforms is to use CMake. CMake
+understands about many versions of Visual C/Visual Studio, and will
+generate project/solution files for the tools installed on your
+system. So even if you have Visual Studio 6 you may use CMake
+and dispense with the distributed .dsp and .dsw files.
+</p>
+<hr size="6">
+<a name="Building-with-Visual-Studio-project-files"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-with-older-visual-studio" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-with-Nmake-makefiles" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.2 Building with Visual Studio project files</h3>
+
+<p>Before you compile the GNU Go source, you need to run CMake first, to 
+generate the build files you&rsquo;ll give to Visual Studio.
+</p>
+<p>From the cmd.exe command prompt, CD into the GNU Go source directory. 
+To confirm you&rsquo;re in the right place, you should see the file 
+&rsquo;CMakeLists.txt&rsquo; in the top-level directory of the GNU Go code (as well 
+as others in lower subdirectories).
+</p>
+<p>Direct CMake to generate the new Visual Studio build files by typing:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cmake CMakeLists.txt
+</pre></td></tr></table>
+
+<p>Compile the code by invoking the newly-created Solution file:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    vcbuild GNUGo.sln
+</pre></td></tr></table>
+
+<p>This will take a few moments, as CMake generates 4 debug/retail targets:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    debug
+    release
+    minsizerel
+    relwithdebinfo
+</pre></td></tr></table>
+
+<p>For each of these targets, Visual Studio is generating a version of 
+gnugo.exe:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    interface\debug\gnugo.exe
+    interface\release\gnugo.exe
+    interface\minsizerel\gnugo.exe
+    interface\relwithdebinfo\gnugo.exe
+</pre></td></tr></table>
+
+<p>Additionally, there is an &rsquo;Install&rsquo; target available, that will copy the 
+the gnugo.exe into the %ProgramFiles% directory. To do this, type:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    vcbuild INSTALL.vcproj
+</pre></td></tr></table>
+
+<p>This should result in copying GNU/Go into:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    &quot;%ProgramFiles%\GNUGo\bin\gnugo.exe&quot; --options
+</pre></td></tr></table>
+
+<p>In addition to command line use, CMake also has a GUI version. Users of 
+the Visual Studio GUI might prefer to use that.
+</p>
+<hr size="6">
+<a name="Building-with-Nmake-makefiles"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-with-Visual-Studio-project-files" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-with-MinGW-Makefiles" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.3 Building with Nmake makefiles</h3>
+
+<p>GNU Go will also build using NMake makefiles. Optionally, instead of 
+Visual Studio project/solution files, you may direct CMake to generate 
+NMake makefiles. To generate the makefiles:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cmake -G &quot;NMake Makefiles&quot; CMakeLists.txt
+</pre></td></tr></table>
+
+<p>The default rule for the makefile is &rsquo;all&rsquo;. Use the &rsquo;help&rsquo; rule to show 
+a list of available targets.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    nmake -f Makefile help
+</pre></td></tr></table>
+
+<p>To compile GNU Go:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    nmake -f Makefil, all
+</pre></td></tr></table>
+
+<p>One sysand 2009 tems, GNU GO may fail to build when using NMake makefiles. 
+only fails the first time run, run NMake again with the &rsquo;clean all&rsquo; 
+targets, and it will compile the second and subsequent times.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    nmake -f Makefile clean all
+</pre></td></tr></table>
+
+<p>Which will successfully generate a gnugo.exe.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    interface\gnugo.exe --options
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Building-with-MinGW-Makefiles"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-with-Nmake-makefiles" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-with-MSYS-makefiles-_0028MinGW_0029" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.4 Building with MinGW Makefiles</h3>
+
+<p>GNU Go can be built on Windows systems using MinGW.
+</p>
+<p>This development environment uses: the GCC compiler (gcc.exe, not 
+cl.exe), the Microsoft C runtime libraries (MSCRT, not GLibC), the GNU 
+Make build tool (<code>mingw32-make.exe</code>, not NMake), all from the Windows 
+shell (<code>cmd.exe</code>, not sh/bash).
+</p>
+<p>For CMake to work, in addition to the base MinGW installation, the C++ 
+compiler (g++.exe) and GNU Make (mingw32-make.exe) need to be installed. 
+This was tested using GCC v3, not the experimental v4. To debug, use 
+GDB, as the GCC-generated symbols won&rsquo;t work with NTSD/Windbg/Visual Studio.
+</p>
+<p>To create the makfiles, run CMake with the MinGW generator option:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cmake -G &quot;MinGW Makefiles&quot; CMakeLists.txt
+</pre></td></tr></table>
+
+<p>To build GNU Go, from a cmd.exe shell, run GNU Make (against the 
+newly-created &rsquo;Makefile&rsquo; and it&rsquo;s default &rsquo;all&rsquo; target):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    mingw32-make
+    ..\interface\gnugo.exe --options
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Building-with-MSYS-makefiles-_0028MinGW_0029"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-with-MinGW-Makefiles" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-on-cygwin" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.5 Building with MSYS makefiles (MinGW)</h3>
+
+<p>GNU Go can be built on Windows systems using MSYS.
+</p>
+<p>This development environment uses: the GCC compiler (gcc.exe, not 
+cl.exe), the Microsoft C runtime libraries (MSCRT, not GLibC), the GNU 
+Make build tool (make, not NMake), all from the GNU Bash (sh.exe, not 
+cmd.exe).
+</p>
+<p>To create the makfiles, run CMake with the MSYS generator option:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cmake -G &quot;MSYS Makefiles&quot; CMakeLists.txt
+</pre></td></tr></table>
+
+<p>Start MSYS&rsquo;s Bash shell, either clicking on a shortcut on from the 
+command line:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cd /d c:\msys\1.0
+    msys.bat
+</pre></td></tr></table>
+
+<p>To build GNU Go, from a Bash shell, run GNU Make (against the 
+newly-created &rsquo;Makefile&rsquo; and it&rsquo;s default &rsquo;all&rsquo; target):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    make
+    ../interface/gnugo.exe --options
+</pre></td></tr></table>
+
+<p>To debug, use GDB, as the GCC-generated symbols won&rsquo;t work with 
+NTSD/Windbg/Visual Studio.
+</p>
+<hr size="6">
+<a name="Building-on-cygwin"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-with-MSYS-makefiles-_0028MinGW_0029" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Testing-on-Windows_003a" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.6 Building on cygwin</h3>
+
+<p>With Cygwin, you should be able to 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  tar zxvf gnugo-3.8.tar.gz
+  cd gnugo-3.8
+  env CC='gcc -mno-cygwin' ./configure
+  make
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Testing-on-Windows_003a"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-on-cygwin" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Macintosh" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Windows-and-MS_002dDOS" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">2.3.7 Testing on Windows:</h3>
+
+<p>&lsquo;<tt>regression/regress.cmd</tt>&rsquo; is a simplified cmd.exe-centric port of the main
+gnugo Unix shell script regress.sh. It can be used to help verify that the
+generated binary might be operational. Read the script&rsquo;s comment header for
+more information. For access to the full GNU Go tests, use Unix, not Windows.
+</p>
+<p>To test:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    cd regression
+    regress.cmd ..\interface\gnugo.exe
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Macintosh"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Testing-on-Windows_003a" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Installation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Macintosh-1"></a>
+<h2 class="section">2.4 Macintosh</h2>
+
+<p>If you have Mac OS X you can build GNU Go using Apple&rsquo;s compiler, 
+which is derived from GCC. You will need Xcode.
+</p>
+<p>One issue is that the configure test for socket support is
+too conservative. On OS/X, the configure test fails, but
+actually socket support exists. So if you want to be able
+to connect to the engine through tcp/ip (using gtp) you
+may <code>configure --enable-socket-support</code>.  There
+will be an error message but you may build the engine
+and socket support should work.
+</p>
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

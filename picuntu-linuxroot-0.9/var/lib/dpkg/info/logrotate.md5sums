@@ -1,0 +1,6 @@
+47845617db5c615c553d0956b92caa50  usr/sbin/logrotate
+e9692f3468cef7a5b27d6face1c59f4e  usr/share/bug/logrotate/script
+668b76bc35d189da1d21505a1adf59db  usr/share/doc/logrotate/README.Debian
+16f851d09b664a05dbe7443d44814ea9  usr/share/doc/logrotate/changelog.Debian.gz
+8b524d7e9bd11950f6baf522ef1641f3  usr/share/doc/logrotate/copyright
+e381e0933f0745ae4a6a22c1983c0df5  usr/share/man/man8/logrotate.8.gz

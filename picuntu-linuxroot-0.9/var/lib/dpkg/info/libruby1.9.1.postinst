@@ -1,0 +1,25 @@
+#! /bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]
+then
+	if [ -w /usr/local/lib -a ! -e /usr/local/lib/site_ruby/1.9.1 ]
+	then
+	    mkdir -p /usr/local/lib/site_ruby/1.9.1/arm-linux-eabihf 2>/dev/null || true
+	    chown root:staff /usr/local/lib/site_ruby/1.9.1/arm-linux-eabihf 2>/dev/null || true
+	    chmod 2775 /usr/local/lib/site_ruby/1.9.1/arm-linux-eabihf 2>/dev/null || true
+	fi
+	if [ -e /var/lib/gems/1.9.1/source_cache ]
+	then
+        rmdir /var/lib/gems/1.9.1/source_cache 2>/dev/null || true
+    fi
+fi
+
+# Automatically added by dh_makeshlibs
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+# End automatically added section
+
+

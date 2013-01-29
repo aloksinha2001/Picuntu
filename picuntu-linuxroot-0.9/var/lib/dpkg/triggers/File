@@ -1,0 +1,8 @@
+/usr/lib/mime/packages mime-support
+/etc/init ureadahead
+/etc/init.d ureadahead
+/usr/share/info install-info
+/etc/lsb-release plymouth-theme-ubuntu-text
+/usr/lib/arm-linux-gnueabihf/gio/modules libglib2.0-0:armhf
+/usr/lib/gio/modules libglib2.0-0:armhf
+/usr/share/glib-2.0/schemas libglib2.0-0:armhf

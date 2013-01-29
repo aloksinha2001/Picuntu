@@ -1,0 +1,529 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 5. Analyzing GNU Go's moves</title>
+
+<meta name="description" content="GNU Go Documentation: 5. Analyzing GNU Go's moves">
+<meta name="keywords" content="GNU Go Documentation: 5. Analyzing GNU Go's moves">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Analyzing"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_4.html#Navigating-the-Source" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Traces" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Analyzing-GNU-Go_0027s-moves"></a>
+<h1 class="chapter">5. Analyzing GNU Go&rsquo;s moves</h1>
+
+<p>In this chapter we will discuss methods of finding
+out how GNU Go understands a given position. These
+methods will be of interest to anyone working on the
+program, or simply curious about its workings.
+</p>
+<p>In practice, most tuning of GNU Go is done in conjunction
+with maintaining the &lsquo;<tt>regression/</tt>&rsquo; directory
+(see section <a href="gnugo_20.html#Regression">Regression testing</a>).
+</p>
+<p>We assume that you have a game GNU Go played saved
+as an sgf file, and you want to know why it made a
+certain move.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Traces">5.1 Interpreting Traces</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">			Analyzing traces in GNU Go 3.6
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Output-File">5.2 The Output File</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Decide-string">5.3 Checking the reading code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Decide-dragon">5.4 Checking the Owl Code</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">		Checking the owl code
+</td></tr>
+<tr><td align="left" valign="top"><a href="#GTP-and-GDB-techniques">5.5 GTP and GDB techniques</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#view_002epike">5.6 Debugging on a Graphical Board</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Debugging on a Graphic Board
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Scoring">5.7 Scoring the game</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                     Finding out the winner of the game
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Colored-Display">5.8 Colored Display</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="Traces"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Analyzing" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Output-File" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Interpreting-Traces"></a>
+<h2 class="section">5.1 Interpreting Traces</h2>
+<a name="index-traces"></a>
+<a name="index-tuning-GNU-Go"></a>
+
+<p>A quick way to find out roughly the reason for a move is to run
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gnugo -l <var>filename</var> -t -L <var>move number</var>
+</pre></td></tr></table>
+
+<p>(You may also want to add &lsquo;<samp>--quiet</samp>&rsquo; to suppress the copyright
+message.) In GNU Go 3.6, the moves together with their reasons are
+listed, followed by a numerical analysis of the values given to each
+move.
+</p>
+<p>If you are tuning (see section <a href="gnugo_9.html#Tuning">Tuning the Pattern databases</a>) you may want to add the &lsquo;<samp>-a</samp>&rsquo;
+option. This causes GNU Go to report all patterns matched, even ones
+that cannot affect the outcome of the move. The reasons for doing
+this is that you may want to modify a pattern already matched 
+instead of introducing a new one.
+</p>
+<p>If you use the &lsquo;<samp>-w</samp>&rsquo; option, GNU Go will report the statuses of
+worms and dragons around the board. This type of information is
+available by different methods, however (see section <a href="#view_002epike">Debugging on a Graphical Board</a>,
+see section <a href="#Colored-Display">Colored Display</a>).
+</p>
+<hr size="6">
+<a name="Output-File"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Traces" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Decide-string" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Output-File"></a>
+<h2 class="section">5.2 The Output File</h2>
+<a name="index-output-file"></a>
+
+<p>If GNU Go is invoked with the option &lsquo;<samp>-o filename</samp>&rsquo; it will
+produce an output file. This option can be added at the command line
+in the Go Modem Protocol Setup Window of CGoban. The output file will
+show the locations of the moves considered and their weights. It is
+worth noting that by enlarging the CGoban window to its fullest size
+it can display 3 digit numbers. Dragons with status <code>DEAD</code> are
+labelled with an &lsquo;<samp>X</samp>&rsquo;, and dragons with status <code>CRITICAL</code> are
+labelled with a &lsquo;<samp>!</samp>&rsquo;.
+</p>
+<p>If you have a game file which is not commented this way, or
+which was produced by a non-current version of GNU Go you may
+ask GNU Go to produce a commented version by running:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">gnugo --quiet -l &lt;old file&gt; --replay &lt;color&gt; -o &lt;new file&gt;
+</pre></td></tr></table>
+
+<p>Here &lt;color&gt; can be &rsquo;black,&rsquo; &rsquo;white&rsquo; or &rsquo;both&rsquo;. The replay
+option will also help you to find out if your current version
+of GNU Go would play differently than the program that created
+the file.
+</p>
+<hr size="6">
+<a name="Decide-string"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Output-File" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Decide-dragon" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Checking-the-reading-code"></a>
+<h2 class="section">5.3 Checking the reading code</h2>
+<a name="index-decide_002dstring"></a>
+
+<p>The &lsquo;<samp>--decide-string</samp>&rsquo; option is used to check the tactical reading code
+(see section <a href="gnugo_11.html#Tactical-Reading">Tactical reading</a>). This option takes an argument, which is a location
+on the board in the usual algebraic notation (e.g. 
+&lsquo;<samp>--decide-string C17</samp>&rsquo;). This will tell you whether the reading code (in
+&lsquo;<tt>engine/reading.c</tt>&rsquo;) believes the string can be captured, and if so,
+whether it believes it can be defended, which moves it finds to attack or
+defend the move, how many nodes it searched in coming to these
+conclusions. Note that when GNU Go runs normally (not with
+&lsquo;<samp>--decide-string</samp>&rsquo;) the points of attack and defense are 
+computed when <code>make_worms()</code> runs and cached in
+<code>worm.attack</code> and <code>worm.defend</code>. 
+</p>
+<p>If used with an output file (&lsquo;<samp>-o <var>filename</var></samp>&rsquo;) 
+&lsquo;<samp>--decide-string</samp>&rsquo; will produce a variation tree showing
+all the variations which are considered. This is a useful way
+of debugging the reading code, and also of educating yourself
+with the way it works. The variation tree can be displayed
+graphically using CGoban. 
+</p>
+<p>At each node, the comment contains some information. For example you
+may find a comment:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+attack4-B at D12 (variation 6, hash 51180fdf)
+break_chain D12: 0
+defend3 D12: 1 G12 (trivial extension)
+
+</pre></td></tr></table>
+
+<p>This is to be interpreted as follows. The node in question
+was generated by the function <code>attack3()</code> in &lsquo;<tt>engine/reading.c</tt>&rsquo;,
+which was called on the string at <code>D12</code>. The data in 
+parentheses tell you the values of <code>count_variations</code> and
+<code>hashdata.hashval</code>. 
+</p>
+<p>The second value (&ldquo;hash&rdquo;) you probably will not need to know
+unless you are debugging the hash code, and we will not discuss it.
+But the first value (&ldquo;variation&rdquo;) is useful when using the debugger
+<code>gdb</code>. You can first make an output file using
+the &lsquo;<samp>-o</samp>&rsquo; option, then walk through the reading with
+<code>gdb</code>, and to coordinate the SGF file with the debugger,
+display the value of <code>count_variations</code>. Specifically,
+from the debugger you can find out where you are as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(gdb) set dump_stack()
+B:D13 W:E12 B:E13 W:F12 B:F11  (variation 6)
+</pre></td></tr></table>
+
+<p>If you place yourself right after the call to <code>trymove()</code>
+which generated the move in question, then the variation number
+in the SGF file should match the variation number displayed by
+<code>dump_stack()</code>, and the move in question will be the
+last move played (F11 in this example).
+</p>
+<p>This displays the sequence of moves leading up to the variation
+in question, and it also prints <code>count_variations-1</code>.
+</p>
+<p>The second two lines tell you that from this node, the function
+<code>break_chain()</code> was called at D12 and returned 0 meaning
+that no way was found of rescuing the string by attacking
+an element of the surrounding chain, and the function
+<code>defend3()</code> was called also at D12 and returned 1,
+meaning that the string can be defended, and that
+G12 is the move that defends it. If you have trouble
+finding the function calls which generate these comments,
+try setting <code>sgf_dumptree=1</code> and setting a breakpoint in
+<code>sgf_trace</code>.
+</p>
+<hr size="6">
+<a name="Decide-dragon"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Decide-string" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#GTP-and-GDB-techniques" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Checking-the-Owl-Code"></a>
+<h2 class="section">5.4 Checking the Owl Code</h2>
+<a name="index-decide_002ddragon"></a>
+
+<p>You can similarly debug the Owl code using the option
+&lsquo;<samp>--decide-dragon</samp>&rsquo;. Usage is entirely similar to
+&lsquo;<samp>--decide-string</samp>&rsquo;, and it can be used similarly
+to produce variation trees. These should be typically
+much smaller than the variation trees produced by
+&lsquo;<samp>--decide-string</samp>&rsquo;.
+</p>
+<hr size="6">
+<a name="GTP-and-GDB-techniques"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Decide-dragon" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#view_002epike" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="GTP-and-GDB-techniques-1"></a>
+<h2 class="section">5.5 GTP and GDB techniques</h2>
+<a name="index-GDB"></a>
+<a name="index-GTP-1"></a>
+
+<p>You can use the Go Text Protocol (see section <a href="gnugo_19.html#GTP">The Go Text Protocol</a>) to determine
+the statuses of dragons and other information needed for
+debugging. The GTP command <code>dragon_data P12</code> will list
+the dragon data of the dragon at <code>P12</code> and
+<code>worm_data</code> will list the worm data; other GTP
+commands may be useful as well.
+</p>
+<p>You can also conveniently get such information from GDB.
+A suggested &lsquo;<tt>.gdbinit</tt>&rsquo; file may be found in
+See section <a href="gnugo_11.html#Debugging">Debugging the reading code</a>. Assuming this file is loaded, you can
+list the dragon data with the command:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">(gdb) dragon P12
+</pre></td></tr></table>
+
+<p>Similarly you can get the worm data with <code>worm P12</code>.
+</p>
+<hr size="6">
+<a name="view_002epike"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#GTP-and-GDB-techniques" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Scoring" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Debugging-on-a-Graphical-Board"></a>
+<h2 class="section">5.6 Debugging on a Graphical Board</h2>
+<a name="index-debugging-on-a-graphical-board"></a>
+
+<p>The quickest way to analyze most positions is to use the tool
+&lsquo;<tt>view.pike</tt>&rsquo; in the &lsquo;<tt>regression</tt>&rsquo; directory. It can be started
+with a testcase specified, e.g. <code>pike view.pike strategy:40</code> or
+at a move in an sgf file, e.g. <code>pike view.pike mistake.sgf:125</code>.
+When started it shows the position on a grapical board on which it also
+marks information like move values, dragon status, and so on. By
+clicking on the board further information about the valuation of moves,
+contents of various data structures, and other data can be made
+available.
+</p>
+<p>Specific information on how to use &lsquo;<tt>view.pike</tt>&rsquo; for influence tuning
+can be found in See section <a href="gnugo_13.html#Influence-Tuning">Influence Tuning with <code>view.pike</code></a>.
+</p>
+<hr size="6">
+<a name="Scoring"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#view_002epike" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Colored-Display" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Scoring-the-game"></a>
+<h2 class="section">5.7 Scoring the game</h2>
+<a name="index-scoring"></a>
+
+<p>GNU Go can score the game. Normally GNU Go will report its opinion about
+the score at the end of the game, but if you want this information about
+a game stored in a file, use the &lsquo;<samp>--score</samp>&rsquo; option (see section <a href="gnugo_3.html#Invoking-GNU-Go">Invoking GNU Go: Command line options</a>).
+</p>
+<hr size="6">
+<a name="Colored-Display"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Scoring" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Dragon-Display" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Colored-Display-1"></a>
+<h2 class="section">5.8 Colored Display</h2>
+<a name="index-colored-display"></a>
+
+<p>Various colored displays of the board may be obtained in a color
+<code>xterm</code> or <code>rxvt</code> window. Xterm will only work if xterm is
+compiled with color support. If the colors are not displayed on your xterm,
+try <code>rxvt</code>.  You may also use the Linux console. The colored display
+will work best if the background color is black; if this is not the case you
+may want to edit your &lsquo;<tt>.Xdefaults</tt>&rsquo; file or add the options
+&lsquo;<samp>-bg black -fg white</samp>&rsquo; to <code>xterm</code> or <code>rxvt</code>.
+On Mac OS X put <code>setenv TERM xterm-color</code> in your &lsquo;<tt>.tcshrc</tt>&rsquo;
+file to enable color in the terminal.
+</p>
+<hr size="6">
+<a name="Dragon-Display"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Colored-Display" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Space-Display" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Colored-Display" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">5.8.1 Dragon Display</h3>
+
+<p>You can get a colored ASCII display of the board in which each dragon
+is assigned a different letter; and the different <code>matcher_status</code> values
+(<code>ALIVE</code>, <code>DEAD</code>, <code>UNKNOWN</code>, <code>CRITICAL</code>) have different
+colors. This is very handy for debugging. Actually two diagrams are generated.
+The reason for this is concerns the way the matcher status is computed.
+The dragon_status (see section <a href="gnugo_7.html#Dragons">Dragons</a>) is computed first, then for some, but not
+all dragons, a more accurate owl status is computed. The matcher status is
+the owl status if available; otherwise it is the dragon_status. Both the
+dragon_status and the owl_status are displayed. The color scheme is as
+follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">green = alive
+cyan = dead
+red = critical
+yellow = unknown
+magenta = unchecked
+</pre></td></tr></table>
+
+<p>To get the colored display, save a game in sgf format using CGoban, or using
+the &lsquo;<samp>-o</samp>&rsquo; option with GNU Go itself.
+</p>
+<p>Open an <code>xterm</code> or <code>rxvt</code> window. 
+</p>
+<p>Execute <code>gnugo -l [filename] -L [movenum] -T</code> to get the colored 
+display.
+</p>
+<p>Other useful colored displays may be obtained by using instead:
+</p>
+<hr size="6">
+<a name="Eye-Space-Display"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Dragon-Display" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Colored-Display" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">5.8.2 Eye Space Display</h3>
+<a name="index-eye-space-display"></a>
+
+<p>Instead of &lsquo;<samp>-T</samp>&rsquo;, try this with &lsquo;<samp>-E</samp>&rsquo;. This gives a colored
+display of the eyespaces, with marginal eye spaces marked &lsquo;<samp>!</samp>&rsquo;
+(see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>).
+</p>
+
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_6.html#Move-Generation" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

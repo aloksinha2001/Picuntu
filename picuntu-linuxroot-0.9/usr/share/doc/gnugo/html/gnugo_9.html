@@ -1,0 +1,2284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 9. The Pattern Code</title>
+
+<meta name="description" content="GNU Go Documentation: 9. The Pattern Code">
+<meta name="keywords" content="GNU Go Documentation: 9. The Pattern Code">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Patterns"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_8.html#Eye-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns-Overview" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_8.html#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Pattern-Code"></a>
+<h1 class="chapter">9. The Pattern Code</h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Patterns-Overview">9.1 Overview</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Overview of the pattern database.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Pattern-Classification">9.2 Pattern Attributes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        The classification field
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Pattern-Values">9.3 Pattern Attributes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                The value field
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Helper-Functions">9.4 Helper Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Autohelpers-and-Constraints">9.5 Autohelpers and Constraints</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">   Automatic generation of helper functions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Autohelper-Actions">9.6 Autohelper Actions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Autohelper-Functions">9.7 Autohelper Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Attack-and-Defense-DB">9.8 Attack and Defense Database</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         The Attack and defense moves database.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Connections-Database">9.9 The Connections Database</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          The connection database.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Connection-Functions">9.10 Connections Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          Functions in &lsquo;<tt>connections.c</tt>&rsquo;
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Tuning">9.11 Tuning the Pattern databases</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                        Tuning the pattern database.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#PM-Implementation">9.12 Implementation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Symmetry-_0026-transformations">9.13 Symmetry and transformations</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Details">9.14 Implementation Details</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                       Details of implementation.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Grid-optimization">9.15 The &ldquo;Grid&rdquo; Optimization</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             The &ldquo;grid&rdquo; optimization.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Joseki-Compiler">9.16 The Joseki Compiler</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               The joseki compiler.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Ladders-in-Joseki">9.17 Ladders in Joseki</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Example: ladders in joseki.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Corner-Matcher">9.18 Corner Matcher</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                A special matcher for joseki patterns.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Editing-Patterns">9.19 Emacs Mode for Editing Patterns</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Emacs major mode for pattern files.
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Patterns-Overview"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Patterns" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Classification" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Overview-1"></a>
+<h2 class="section">9.1 Overview</h2>
+
+<a name="index-pattern-overview"></a>
+<a name="index-pattern-matching"></a>
+<a name="index-pattern-database"></a>
+<a name="index-eye-shapes-database"></a>
+<a name="index-defence-shapes-database"></a>
+<a name="index-attack-shapes-database"></a>
+<a name="index-connection-shapes-database"></a>
+<a name="index-pattern_002eh"></a>
+<a name="index-pattern_002ec"></a>
+
+<p>Several pattern databases are in the patterns directory.  This chapter
+primarily discusses the patterns in &lsquo;<tt>patterns.db</tt>&rsquo;, &lsquo;<tt>patterns2.db</tt>&rsquo;,
+and the pattern files &lsquo;<tt>hoshi.db</tt>&rsquo; etc.  which are compiled from the SGF
+files &lsquo;<tt>hoshi.sgf</tt>&rsquo; (see section <a href="#Joseki-Compiler">The Joseki Compiler</a>). There is no essential
+difference between these files, except that the ones in &lsquo;<tt>patterns.db</tt>&rsquo; and
+&lsquo;<tt>patterns2.db</tt>&rsquo; are hand written. They are concatenated before being
+compiled by <code>mkpat</code> into &lsquo;<tt>patterns.c</tt>&rsquo;. The purpose of the separate
+file &lsquo;<tt>patterns2.db</tt>&rsquo; is that it is handy to move patterns into a new
+directory in the course of organizing them. The patterns in &lsquo;<tt>patterns.db</tt>&rsquo;
+are more disorganized, and are slowly being moved to &lsquo;<tt>patterns2.db</tt>&rsquo;.
+</p>
+<p>During the execution of <code>genmove()</code>, the patterns are matched in
+&lsquo;<tt>shapes.c</tt>&rsquo; in order to find move reasons.
+</p>
+<p>The same basic pattern format is used by &lsquo;<tt>attack.db</tt>&rsquo;, &lsquo;<tt>defense.db</tt>&rsquo;,
+&lsquo;<tt>conn.db</tt>&rsquo;, &lsquo;<tt>apats.db</tt>&rsquo; and &lsquo;<tt>dpats.db</tt>&rsquo;.  However these patterns
+are used for different purposes. These databases are discussed in other parts
+of this documentation. The patterns in &lsquo;<tt>eyes.db</tt>&rsquo; are entirely different
+and are documented elsewhere (see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>).
+</p>
+<a name="index-format-of-the-pattern-database"></a>
+<a name="index-description-of-shapes"></a>
+<a name="index-ascii-description-of-shapes"></a>
+
+<p>The patterns described in the databases are ascii representations, of
+the form:
+</p>
+<p>Pattern EB112
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+  ?X?.?       jump under
+  O.*oo
+  O....
+  o....
+  -----
+  
+  :8,ed,NULL
+</pre></td></tr></table>
+
+<p>Here &lsquo;<samp>O</samp>&rsquo; marks a friendly stone, &lsquo;<samp>X</samp>&rsquo; marks an enemy stone, &lsquo;<samp>.</samp>&rsquo; marks
+an empty vertex, &lsquo;<samp>*</samp>&rsquo; marks O&rsquo;s next move, &lsquo;<samp>o</samp>&rsquo; marks a square either
+containing &lsquo;<samp>O</samp>&rsquo; or empty but not &lsquo;<samp>X</samp>&rsquo;. (The symbol &lsquo;<samp>x</samp>&rsquo;, which does not
+appear in this pattern, means &lsquo;<samp>X</samp>&rsquo; or &lsquo;<samp>.</samp>&rsquo;.) Finally &lsquo;<samp>?</samp>&rsquo; Indicates a
+location where we don&rsquo;t care what is there, except that it cannot be
+off the edge of the board.
+</p>
+<p>The line of &lsquo;<samp>-</samp>&rsquo;&rsquo;s along the bottom in this example is the edge of the
+board itself&mdash;this is an edge pattern. Corners can also be indicated.
+Elements are not generated for &lsquo;<samp>?</samp>&rsquo; markers, but they are not
+completely ignored - see below.
+</p>        
+<p>The line beginning &lsquo;<samp>:</samp>&rsquo; describes various attributes of the pattern, such
+as its symmetry and its class. Optionally, a function called a
+&ldquo;helper&rdquo; can be provided to assist the matcher in deciding whether
+to accept move. Most patterns do not require a helper, and this field
+is filled with NULL.
+</p>
+<a name="index-shapes_005fcallback"></a>
+<p>The matcher in &lsquo;<tt>matchpat.c</tt>&rsquo; searches the board for places where this
+layout appears on the board, and the callback function
+<code>shapes_callback()</code> in &lsquo;<tt>shapes.c</tt>&rsquo; registers the appropriate move
+reasons.
+</p>
+<p>After the pattern, there is some supplementary information in the format:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+  :trfno, classification, [values], helper_function
+
+</pre></td></tr></table>
+
+<p>Here trfno represents the number of transformations of the pattern to
+consider, usually &lsquo;<samp>8</samp>&rsquo; (no symmetry, for historical reasons), or one of 
+&lsquo;<samp>|</samp>&rsquo;, &lsquo;<samp>\</samp>&rsquo;, &lsquo;<samp>/</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo;, &lsquo;<samp>+</samp>&rsquo;, &lsquo;<samp>X</samp>&rsquo;, where the line 
+represents the axis of symmetry. (E.g. &lsquo;<samp>|</samp>&rsquo; means symmetrical about a
+vertical axis.)
+</p>
+<p>The above pattern could equally well be written on the left edge:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+  |oOO?
+  |...X
+  |..*?
+  |..o.
+  |..o?
+
+  :8,ed,NULL
+</pre></td></tr></table>
+
+<p>The program <code>mkpat</code> is capable of parsing patterns written this
+way, or for that matter, on the top or right edges, or in any
+of the four corners. As a matter of convention all the edge patterns 
+in &lsquo;<tt>patterns.db</tt>&rsquo; are written on the bottom edge or in the lower left
+corners. In the &lsquo;<tt>patterns/</tt>&rsquo; directory there is a program called
+<code>transpat</code> which can rotate or otherwise transpose patterns.
+This program is not built by default&mdash;if you think you need it,
+<code>make transpat</code> in the &lsquo;<tt>patterns/</tt>&rsquo; directory and
+consult the usage remarks at the beginning of &lsquo;<tt>patterns/transpat.c</tt>&rsquo;.
+</p>
+<hr size="6">
+<a name="Pattern-Classification"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Patterns-Overview" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Constraint-Pattern-Attributes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Pattern-Attributes-1"></a>
+<h2 class="section">9.2 Pattern Attributes</h2>
+
+<a name="index-pattern-attributes"></a>
+<a name="index-shape-attributes"></a>
+
+<p>The attribute field in the &lsquo;<samp>:</samp>&rsquo; line of a pattern consists of a sequence
+of zero or more of the following characters, each with a different
+meaning. The attributes may be roughly classified as <em>constraints</em>,
+which determine whether or not the pattern is matched, and <em>actions</em>,
+which describe what is to be done when the pattern is matched, typically
+to add a move reason.
+</p>
+<hr size="6">
+<a name="Constraint-Pattern-Attributes"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Pattern-Classification" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Action-Attributes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Classification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">9.2.1 Constraint Pattern Attributes</h3>
+
+<ul>
+<li> &lsquo;<samp>s</samp>&rsquo;
+<blockquote><p>Safety of the move is not checked.  This is appropriate for sacrifice
+patterns. If this classification is omitted, the matcher requires that the
+stone played cannot be trivially captured. Even with s classification, a check
+for legality is made, though.
+</p></blockquote>
+</li><li> &lsquo;<samp>n</samp>&rsquo;
+<blockquote><p>In addition to usual check that the stone played cannot be
+trivially captured, it is also confirmed that an opponent
+move here could not be captured.
+</p></blockquote>
+</li><li> &lsquo;<samp>O</samp>&rsquo;
+<blockquote><p>It is checked that every friendly (&lsquo;<samp>O</samp>&rsquo;) stone of the pattern belongs to a
+dragon which has status (see section <a href="gnugo_7.html#Dragons">Dragons</a>) <code>ALIVE</code> or
+<code>UNKNOWN</code>. The <code>CRITICAL</code> matcher status is excluded. It is possible
+for a string to have <code>ALIVE</code> status and still be tactically
+critical, since it might be amalgamated into an ALIVE dragon, and the matcher
+status is constant on the dragon.  Therefore, an additional test is performed:
+if the pattern contains a string which is tactically critical, and if &lsquo;<samp>*</samp>&rsquo;
+does not rescue it, the pattern is rejected.
+</p></blockquote>
+</li><li> &lsquo;<samp>o</samp>&rsquo;
+<blockquote><p>It is checked that every friendly (&lsquo;<samp>O</samp>&rsquo;) stone of the pattern
+belongs to a dragon which is classified as <code>DEAD</code> or <code>UNKNOWN</code>.
+</p></blockquote>
+</li><li> &lsquo;<samp>X</samp>&rsquo;
+<blockquote><p>It is checked that every opponent (&lsquo;<samp>X</samp>&rsquo;) stone of the pattern
+belongs to a dragon with status <code>ALIVE</code>, <code>UNKNOWN</code> or 
+<code>CRITICAL</code>. Note that there is an asymmetry with &lsquo;<samp>O</samp>&rsquo; patterns, where
+<code>CRITICAL</code> dragons are rejected.
+</p></blockquote>
+</li><li> &lsquo;<samp>x</samp>&rsquo;
+<blockquote><p>It is checked that every opponent (&lsquo;<samp>X</samp>&rsquo;) stone of the pattern
+belongs to a dragon which is classified as <code>DEAD</code> or <code>UNKNOWN</code>
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Action-Attributes"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Constraint-Pattern-Attributes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Values" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-Classification" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">9.2.2 Action Attributes</h3>
+
+<ul>
+<li> &lsquo;<samp>C</samp>&rsquo;
+<blockquote><p>If two or more distinct O dragons occur in the pattern, the
+move is given the move reasons that it connects each pair of
+dragons. An exception is made for dragons where the underlying
+worm can be tactically captured and is not defended by the
+considered move.
+</p></blockquote>
+</li><li> &lsquo;<samp>c</samp>&rsquo;
+<blockquote><p>Add strategical defense move reason for all our
+dragons and a small shape bonus. This classification is
+appropriate for weak connection patterns.
+</p></blockquote>
+</li><li> &lsquo;<samp>B</samp>&rsquo;
+<blockquote><p>If two or more distinct &lsquo;<samp>X</samp>&rsquo; dragons occur in the pattern, the
+move is given the move reasons that it cuts each pair of
+dragons.
+</p></blockquote>
+</li><li> &lsquo;<samp>e</samp>&rsquo;
+<blockquote><p>The move makes or secures territory.
+</p></blockquote>
+</li><li> &lsquo;<samp>E</samp>&rsquo;
+<blockquote><p>The move attempts increase influence and create/expand a moyo.
+</p></blockquote>
+</li><li> &lsquo;<samp>d</samp>&rsquo;
+<blockquote><p>The move strategically defends all O dragons in the pattern,
+except those that can be tactically captured and are not
+tactically defended by this move. If any O dragon should
+happen to be perfectly safe already, this only reflects in
+the move reason being valued to zero.
+</p></blockquote>
+</li><li> &lsquo;<samp>a</samp>&rsquo;
+<blockquote><p>The move strategically attacks all &lsquo;<samp>X</samp>&rsquo; dragons in the pattern.
+</p></blockquote>
+</li><li> &lsquo;<samp>J</samp>&rsquo;
+<blockquote><p>Standard joseki move. Unless there is an urgent move on the board these moves
+are made as soon as they can be.  This is equivalent to adding the &lsquo;<samp>d</samp>&rsquo;
+and &lsquo;<samp>a</samp>&rsquo; classifications together with a minimum accepted value of 27.
+</p></blockquote>
+</li><li> &lsquo;<samp>F</samp>&rsquo;
+<blockquote><p>This indicates a fuseki pattern. This is only effective together with
+either the &lsquo;<samp>j</samp>&rsquo; or &lsquo;<samp>t</samp>&rsquo; classification, and is used to ensure
+indeterministic play during fuseki.
+</p></blockquote>
+</li><li> &lsquo;<samp>j</samp>&rsquo;
+<blockquote><p>Slightly less urgent joseki move. These moves will be made after those
+with the &lsquo;<samp>J</samp>&rsquo; classification. This adds the
+&lsquo;<samp>e</samp>&rsquo; and &lsquo;<samp>E</samp>&rsquo; classifications. If the move has the &lsquo;<samp>F</samp>&rsquo; 
+classification, it also gets a fixed value of 20.1, otherwise it
+gets a minimum accepted value of 20. (This makes sure that GNU Go chooses
+randomly between different moves that have &lsquo;<samp>jF</samp>&rsquo; as classification.)
+</p></blockquote>
+</li><li> &lsquo;<samp>t</samp>&rsquo;
+<blockquote><p>Minor joseki move (tenuki OK). This is equivalent to adding the &lsquo;<samp>e</samp>&rsquo; and
+&lsquo;<samp>E</samp>&rsquo; classifications together with either a fixed value of 15.07 (if
+the move has &lsquo;<samp>F</samp>&rsquo; classification) or a minimum value of 15 (otherwise).
+</p></blockquote>
+</li><li> &lsquo;<samp>U</samp>&rsquo;
+<blockquote><p>Urgent joseki move (never tenuki). This is equivalent to the &lsquo;<samp>d</samp>&rsquo; and
+&lsquo;<samp>a</samp>&rsquo; classifications together with a shape bonus of 15 and a minimum
+accepted value of 40.  
+</p></blockquote>
+</li></ul>
+
+<p>A commonly used class is <code>OX</code> (which rejects pattern if either side
+has dead stones). The string &lsquo;<samp>-</samp>&rsquo; may be used as a placeholder. (In
+fact any characters other than the above and &lsquo;<samp>,</samp>&rsquo; are ignored.)
+</p>
+<p>The types &lsquo;<samp>o</samp>&rsquo; and &lsquo;<samp>O</samp>&rsquo; could conceivably appear in a class, meaning it 
+applies only to <code>UNKNOWN</code>. &lsquo;<samp>X</samp>&rsquo; and &lsquo;<samp>x</samp>&rsquo; could similarly be used together.
+All classes can be combined arbitrarily.
+</p>
+<hr size="6">
+<a name="Pattern-Values"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Action-Attributes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Helper-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Pattern-Attributes"></a>
+<h2 class="section">9.3 Pattern Attributes</h2>
+
+<p>The second and following fields in the &lsquo;<samp>:</samp>&rsquo; line of a pattern
+are optional and of the form <code>value1(x),value2(y),...</code>. The available set
+of values are as follows.
+</p>
+<ul>
+<li> <code>terri(x)</code>
+<a name="index-terri"></a>
+<blockquote><p>Forces the territorial value of the move to be at least x.
+</p></blockquote>
+</li><li> <code>minterri(x)</code>
+<a name="index-minterri"></a>
+<blockquote><p>Forces the territorial value of the move to be at least x.
+</p></blockquote>
+</li><li> <code>maxterri(x)</code>
+<a name="index-maxterri"></a>
+<blockquote><p>Forces the territorial value of the move to be at most x.
+</p></blockquote>
+</li><li> <code>value(x)</code>
+<a name="index-value"></a>
+<blockquote><p>Forces the final value of the move to be at least x.
+</p></blockquote>
+</li><li> <code>minvalue(x)</code>, <code>maxvalue(x)</code>
+<a name="index-minvalue"></a>
+<a name="index-maxvalue"></a>
+<blockquote><p>Forces the final value of the move to be at least/most x.
+</p></blockquote>
+</li><li> <code>shape(x)</code>
+<a name="index-shape"></a>
+<blockquote><p>Adds x to the move&rsquo;s shape value.
+</p></blockquote>
+</li><li> <code>followup(x)</code>
+<a name="index-followup"></a>
+<blockquote><p>Adds x to the move&rsquo;s followup value.
+</p></blockquote>
+</li></ul>
+
+<p>The meaning of these values is documented in See section <a href="gnugo_6.html#Move-Generation">Move generation</a>.
+</p>
+<hr size="6">
+<a name="Helper-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Pattern-Values" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Autohelpers-and-Constraints" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Helper-Functions-1"></a>
+<h2 class="section">9.4 Helper Functions</h2>
+
+<a name="index-helper-functions-in-pattern-matching"></a>
+
+<p>Helper functions can be provided to assist the matcher in deciding
+whether to accept a pattern, register move reasons, and setting
+various move values. The helper is supplied with the compiled pattern
+entry in the table, and the (absolute) position on the board of the
+&lsquo;<samp>*</samp>&rsquo; point.
+</p>
+<p>One difficulty is that the helper must be able to cope with all the
+possible transformations of the pattern. To help with this, the OFFSET
+macro is used to transform relative pattern coordinates to absolute
+board locations.
+</p>
+<p>The actual helper functions are in &lsquo;<tt>helpers.c</tt>&rsquo;. They are declared
+in &lsquo;<tt>patterns.h</tt>&rsquo;.
+</p>
+<p>As an example to show how to write a helper function, we consider
+a hypothetical helper called <code>wedge_helper</code>. Such a helper
+used to exist, but has been replaced by a constraint. Due to
+its simplicity it&rsquo;s still a good example. The helper begins with a
+comment:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">/*
+
+?O.           ?Ob
+.X*           aX*
+?O.           ?Oc
+
+:8,C,wedge_helper
+*/
+</pre></td></tr></table>
+
+<p>The image on the left is the actual pattern. On the right we&rsquo;ve taken
+this image and added letters to label <code>apos</code>, <code>bpos</code>, and
+<code>cpos</code>. The position of *, the point where GNU Go will move if the
+pattern is adopted, is passed through the parameter <code>move</code>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">int 
+wedge_helper(ARGS)
+{
+  int apos, bpos, cpos;
+  int other = OTHER_COLOR(color);
+  int success = 0;
+  
+  apos = OFFSET(0, -2);
+  bpos = OFFSET(-1, 0);
+  cpos = OFFSET(1, 0);
+
+  if (TRYMOVE(move, color)) {
+    if (TRYMOVE(apos, other)) {
+      if (board[apos] == EMPTY || attack(apos, NULL))
+        success = 1;
+      else if (TRYMOVE(bpos, color)) {
+        if (!safe_move(cpos, other))
+          success = 1;
+        popgo();
+      }
+      popgo();
+    }
+    popgo();
+  }
+  
+  return success;
+}
+
+</pre></td></tr></table>
+
+<p>The <code>OFFSET</code> lines tell GNU Go the positions of the three stones at
+&lsquo;<samp>a</samp>&rsquo;, &lsquo;<samp>b</samp>&rsquo;, and &lsquo;<samp>c</samp>&rsquo;. To decide whether the pattern
+guarantees a connection, we do some reading. First we use the
+<code>TRYMOVE</code> macro to place an &lsquo;<samp>O</samp>&rsquo; at &lsquo;<samp>move</samp>&rsquo; and let
+&lsquo;<samp>X</samp>&rsquo; draw back to &lsquo;<samp>a</samp>&rsquo;. Then we ask whether &lsquo;<samp>O</samp>&rsquo; can capture
+these stones by calling <code>attack()</code>. The test if there is a stone at
+&lsquo;<samp>a</samp>&rsquo; before calling <code>attack()</code> is in this position not really
+necessary but it&rsquo;s good practice to do so, because if the attacked stone
+should happen to already have been captured while placing stones, GNU Go
+would crash with an assertion failure.
+</p>
+<p>If this attack fails we let &lsquo;<samp>O</samp>&rsquo; connect at &lsquo;<samp>b</samp>&rsquo; and use the
+<code>safe_move()</code> function to examine whether a cut by &lsquo;<samp>X</samp>&rsquo; at
+&lsquo;<samp>c</samp>&rsquo; could be immediately captured. Before we return the result we
+need to remove the stones we placed from the reading stack. This is done
+with the function <code>popgo()</code>.
+</p>
+<hr size="6">
+<a name="Autohelpers-and-Constraints"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Helper-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Autohelper-Actions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Autohelpers-and-Constraints-1"></a>
+<h2 class="section">9.5 Autohelpers and Constraints</h2>
+
+<a name="index-generation-of-helper-functions"></a>
+<a name="index-Autohelpers"></a>
+
+<p>In addition to the hand-written helper functions in &lsquo;<tt>helpers.c</tt>&rsquo;, GNU Go
+can automatically generate helper functions from a diagram with labels
+and an expression describing a constraint. The constraint diagram,
+specifying the labels, is placed below the &lsquo;<samp>:</samp>&rsquo; line and the constraint
+expression is placed below the diagram on line starting with a &lsquo;<samp>;</samp>&rsquo;.
+Constraints can only be used to accept or reject a pattern. If the
+constraint evaluates to zero (false) the pattern is rejected,
+otherwise it&rsquo;s accepted (still conditioned on passing all other tests
+of course). To give a simple example we consider a connection pattern.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+Pattern Conn311
+
+O*.
+?XO
+
+:8,C,NULL
+
+O*a
+?BO
+
+;oplay_attack_either(*,a,a,B)
+
+</pre></td></tr></table>
+
+<p>Here we have given the label &lsquo;<samp>a</samp>&rsquo; to the empty spot to the right of
+the considered move and the label &lsquo;<samp>B</samp>&rsquo; to the &lsquo;<samp>X</samp>&rsquo; stone in the
+pattern. In addition to these, &lsquo;<samp>*</samp>&rsquo; can also be used as a label. A
+label may be any lowercase or uppercase ascii letter except <code>OoXxt</code>. By
+convention we use uppercase letters for &lsquo;<samp>X</samp>&rsquo; stones and lowercase for &lsquo;<samp>O</samp>&rsquo;
+stones and empty intersections. When labeling a stone that&rsquo;s part of a
+larger string in the pattern, all stones of the string should be marked
+with the label. (These conventions are not enforced by the pattern
+compiler, but to make the database consistent and easy to read they
+should be followed.)
+</p>
+<p>The labels can now be used in the constraint expression. In this example
+we have a reading constraint which should be interpreted as &quot;Play an
+&lsquo;<samp>O</samp>&rsquo; stone at &lsquo;<samp>*</samp>&rsquo; followed by an &lsquo;<samp>X</samp>&rsquo; stone at
+&lsquo;<samp>a</samp>&rsquo;. Accept the pattern if &lsquo;<samp>O</samp>&rsquo; now can capture either at
+&lsquo;<samp>a</samp>&rsquo; or at &lsquo;<samp>B</samp>&rsquo; (or both strings).&quot;
+</p>
+<p>The functions that are available for use in the constraints are listed
+in the section &lsquo;Autohelpers Functions&rsquo; below. Technically the
+constraint expression is transformed by mkpat into an automatically
+generated helper function in &lsquo;<tt>patterns.c</tt>&rsquo;. The functions in the
+constraint are replaced by C expressions, often functions calls. In
+principle any valid C code can be used in the constraints, but there
+is in practice no reason to use anything more than boolean and
+arithmetic operators in addition to the autohelper functions.
+Constraints can span multiple lines, which are then concatenated.
+</p>
+<hr size="6">
+<a name="Autohelper-Actions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Autohelpers-and-Constraints" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Autohelper-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Autohelper-Actions-1"></a>
+<h2 class="section">9.6 Autohelper Actions</h2>
+
+<a name="index-autohelper-actions"></a>
+
+<p>As a complement to the constraints, which only can accept or reject a
+pattern, one can also specify an action to perform when the pattern
+has passed all tests and finally has been accepted.
+</p>
+<p>Example:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+Pattern EJ4
+
+...*.     continuation
+.OOX.
+..XOX
+.....
+-----
+
+:8,Ed,NULL
+
+...*.     never play a here
+.OOX.
+.aXOX
+.....
+-----
+
+&gt;antisuji(a)
+
+</pre></td></tr></table>
+
+<p>The line starting with &lsquo;<samp>&gt;</samp>&rsquo; is the action line. In this case it tells
+the move generation that the move at a should not be considered,
+whatever move reasons are found by other patterns. The action line
+uses the labels from the constraint diagram. Both constraint and
+action can be used in the same pattern. If the action only needs to
+refer to &lsquo;<samp>*</samp>&rsquo;, no constraint diagram is required. Like constraints,
+actions can span multiple lines.
+</p>
+<p>Here is a partial list of the autohelper macros which are typically
+called from action lines. This list is not complete. If you cannot find an
+autohelper macro in an action line in this list, consult &lsquo;<tt>mkpat.c</tt>&rsquo; to
+find out what function in the engine is actually called. If no
+macro exists which does what you want, you can add macros by
+editing the list in &lsquo;<tt>mkpat.c</tt>&rsquo;.
+</p>
+<ul>
+<li> <code>antisuji(a);</code>
+<blockquote><p>Mark &lsquo;<samp>a</samp>&rsquo; as an antisuji, that is, a move that must never
+be played.
+</p></blockquote>
+</li><li> <code>replace(a,*)</code>
+<blockquote><p>This is appropriate if the move at &lsquo;<samp>*</samp>&rsquo; is definitely better
+than the move at &lsquo;<samp>a</samp>&rsquo;. The macro adds a point redistribution rule. Any 
+points which are assigned to &lsquo;<samp>a</samp>&rsquo; during the move generation
+by any move reason are redistributed to &lsquo;<samp>*</samp>&rsquo;.
+</p></blockquote>
+</li><li> <code>prevent_attack_threat(a)</code>
+<blockquote><p>Add a reverse followup value because the opponent&rsquo;s move here
+would threaten to capture &lsquo;<samp>a</samp>&rsquo;.
+</p></blockquote>
+</li><li> <code>threaten_to_save(a)</code>
+<blockquote><p>Add a followup value because the move at &lsquo;<samp>*</samp>&rsquo; threatens to
+rescue the dead string at &lsquo;<samp>a</samp>&rsquo;.
+</p></blockquote>
+</li><li> <code>defend_against_atari(a)</code>
+<blockquote><p>Estimate the value of defending the string &lsquo;<samp>a</samp>&rsquo; which can be put into
+atari and add this as a reverse followup value.
+</p></blockquote>
+</li><li> <code>add_defend_both_move(a,b);</code>
+<blockquote></blockquote>
+</li><li> <code>add_cut_move(c,d);</code>
+<blockquote><p>Add to the move reasons that the move at &lsquo;<samp>*</samp>&rsquo; threatens to cut
+&lsquo;<samp>c</samp>&rsquo; and &lsquo;<samp>d</samp>&rsquo;.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Autohelper-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Autohelper-Actions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Attack-and-Defense-DB" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Autohelper-Functions-1"></a>
+<h2 class="section">9.7 Autohelper Functions</h2>
+
+<p>The autohelper functions are translated into C code by the program in
+&lsquo;<tt>mkpat.c</tt>&rsquo;. To see exactly how the functions are implemented,
+consult the autohelper function definitions in that file. Autohelper
+functions can be used in both constraint and action lines.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>lib(x)</code>
+<code>lib2(x)</code>
+<code>lib3(x)</code>
+<code>lib4(x)</code>
+
+</pre></td></tr></table>
+
+<p>Number of first, second, third, and fourth order liberties of a worm
+respectively. See section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>, the documentation on worms for
+definitions.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>xlib(x)</code>
+<code>olib(x)</code>
+
+</pre></td></tr></table>
+
+<p>The number of liberties that an enemy or own stone, respectively,
+would obtain if played at the empty intersection &lsquo;<samp>x</samp>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>xcut(x)</code>
+<code>ocut(x)</code>
+</pre></td></tr></table>
+
+<p>Calls <code>cut_possible</code> (see section <a href="gnugo_18.html#General-Utilities">General Utilities</a>) to determine
+whether &lsquo;<samp>X</samp>&rsquo; or &lsquo;<samp>O</samp>&rsquo; can cut at the empty intersection &lsquo;<samp>x</samp>&rsquo;. 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>ko(x)</code>
+</pre></td></tr></table>
+
+<p>True if &lsquo;<samp>x</samp>&rsquo; is either a stone or an empty point involved in a ko
+position.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>status(x)</code>
+</pre></td></tr></table>
+
+
+<p>The matcher status of a dragon. status(x) returns an integer that can have the
+values <code>ALIVE</code>, <code>UNKNOWN</code>, <code>CRITICAL</code>, or <code>DEAD</code>
+(see section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>alive(x)</code>
+<code>unknown(x)</code>
+<code>critical(x)</code>
+<code>dead(x)</code>
+</pre></td></tr></table>
+
+<p>Each function true if the dragon has the corresponding matcher status and
+false otherwise (see section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>status(x)</code>
+</pre></td></tr></table>
+
+<p>Returns the status of the dragon at &lsquo;<samp>x</samp>&rsquo; (see section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>genus(x)</code>
+</pre></td></tr></table>
+
+<p>The number of eyes of a dragon. It is only meaningful to compare this
+value against 0, 1, or 2.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>xarea(x)</code>
+<code>oarea(x)</code>
+<code>xmoyo(x)</code>
+<code>omoyo(x)</code>
+<code>xterri(x)</code>
+<code>oterri(x)</code>
+
+</pre></td></tr></table>
+
+<p>These functions call <code>whose_territory()</code>, <code>whose_moyo()</code>
+and <code>whose_area()</code> (see section <a href="gnugo_13.html#Territory-and-Moyo">Territory, Moyo and Area</a>). For example
+<code>xarea(x)</code> evaluates to true if &lsquo;<samp>x</samp>&rsquo; is either a living enemy stone
+or an empty point within the opponent&rsquo;s &ldquo;area&rdquo;. The function <code>oarea(x)</code>
+is analogous but with respect to our stones and area.  The main difference
+between area, moyo, and terri is that area is a very far reaching kind of
+influence, moyo gives a more realistic estimate of what may turn in to
+territory, and terri gives the points that already are believed to be secure
+territory.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>weak(x)</code>
+</pre></td></tr></table>
+
+<p>True for a dragon that is perceived as weak.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>attack(x)</code>
+<code>defend(x)</code>
+
+</pre></td></tr></table>
+
+<p>Results of tactical reading. <code>attack(x)</code> is true if the worm can be
+captured, <code>defend(x)</code> is true if there also is a defending move. Please
+notice that <code>defend(x)</code> will return false if there is no attack on the
+worm.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>safe_xmove(x)</code>
+<code>safe_omove(x)</code>
+
+</pre></td></tr></table>
+
+<p>True if an enemy or friendly stone, respectively, can safely be played at
+&lsquo;<samp>x</samp>&rsquo;. By safe it is understood that the move is legal and that it cannot
+be captured right away.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>legal_xmove(x)</code>
+<code>legal_omove(x)</code>
+
+</pre></td></tr></table>
+
+<p>True if an enemy or friendly stone, respectively, can legally be played at x.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+o_somewhere(x,y,z, ...)
+x_somewhere(x,y,z, ...)
+
+</pre></td></tr></table>
+
+<p>True if O (respectively X) has a stone at one of the labelled vertices.
+In the diagram, these vertices should be marked with a &lsquo;<samp>?</samp>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+odefend_against(x,y)
+xdefend_against(x,y)
+
+</pre></td></tr></table>
+
+<p>True if an own stone at &lsquo;<samp>x</samp>&rsquo; would stop the enemy from safely playing at
+&lsquo;<samp>y</samp>&rsquo;, and conversely for the second function.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>does_defend(x,y)</code>
+<code>does_attack(x,y)</code>
+
+</pre></td></tr></table>
+
+<p>True if a move at &lsquo;<samp>x</samp>&rsquo; defends/attacks the worm at &lsquo;<samp>y</samp>&rsquo;. For 
+defense a move of the same color as &lsquo;<samp>y</samp>&rsquo; is tried and for attack a move of
+the opposite color.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>xplay_defend(a,b,c,...,z)</code>
+<code>oplay_defend(a,b,c,...,z)</code>
+<code>xplay_attack(a,b,c,...,z)</code>
+<code>oplay_attack(a,b,c,...,z)</code>
+
+</pre></td></tr></table>
+
+<p>These functions make it possible to do more complex reading
+experiments in the constraints. All of them work so that first the
+sequence of moves &lsquo;<samp>a</samp>&rsquo;,&lsquo;<samp>b</samp>&rsquo;,&lsquo;<samp>c</samp>&rsquo;,... is played through with
+alternating colors, starting with &lsquo;<samp>X</samp>&rsquo; or &lsquo;<samp>O</samp>&rsquo; as indicated by
+the name. Then it is tested whether the worm at &lsquo;<samp>z</samp>&rsquo; can be attacked or
+defended, respectively. It doesn&rsquo;t matter who would be in turn to move,
+a worm of either color may be attacked or defended. For attacks the
+opposite color of the string being attacked starts moving and for
+defense the same color starts. The defend functions return true if the
+worm cannot be attacked in the position or if it can be attacked but
+also defended.  The attack functions return true if there is a way to
+capture the worm, whether or not it can also be defended. If there is no
+stone present at &lsquo;<samp>z</samp>&rsquo; after the moves have been played, it is assumed that
+an attack has already been successful or a defense has already failed.
+If some of the moves should happen to be illegal, typically because it
+would have been suicide, the following moves are played as if nothing
+has happened and the attack or defense is tested as usual. It is assumed
+that this convention will give the relevant result without requiring a
+lot of special cases.
+</p>
+<p>The special label &lsquo;<samp>?</samp>&rsquo; can be used to represent a tenuki.
+Thus <code>oplay_defend(a,?,b,c)</code> tries moves by &lsquo;<samp>O</samp>&rsquo; at &lsquo;<samp>a</samp>&rsquo; and
+&lsquo;<samp>b</samp>&rsquo;, as if &lsquo;<samp>X</samp>&rsquo; plays the second move in another part of
+the board, then asks if &lsquo;<samp>c</samp>&rsquo; can be defended. The tenuki cannot
+be the first move of the sequence, nor does it need to be:
+instead of <code>oplay_defend(?,a,b,c)</code> you can use
+<code>xplay_defend(a,b,c)</code>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>xplay_defend_both(a,b,c,...,y,z)</code>
+<code>oplay_defend_both(a,b,c,...,y,z)</code>
+<code>xplay_attack_either(a,b,c,...,y,z)</code>
+<code>oplay_attack_either(a,b,c,...,y,z)</code>
+
+</pre></td></tr></table>
+
+<p>These functions are similar to the previous ones. The difference is
+that the last *two* arguments denote worms to be attacked or defended
+simultaneously. Obviously &lsquo;<samp>y</samp>&rsquo; and &lsquo;<samp>z</samp>&rsquo; must have the same color. If either
+location is empty, it is assumed that an attack has been successful or
+a defense has failed. The typical use for these functions is in
+cutting patterns, where it usually suffices to capture either
+cutstone.
+</p>
+<p>The function <code>xplay_defend_both</code> plays alternate moves
+beginning with an &lsquo;<samp>X</samp>&rsquo; at &lsquo;<samp>a</samp>&rsquo;. Then it passes the last
+two arguments to <code>defend_both</code> in
+&lsquo;<tt>engine/utils.c</tt>&rsquo;. This function checks to determine
+whether the two strings can be simultaneously defended.
+</p>
+<p>The function <code>xplay_attack_either</code> plays alternate
+moves beginning with an &lsquo;<samp>X</samp>&rsquo; move at &lsquo;<samp>a</samp>&rsquo;. Then it passes
+the last two arguments to <code>attack_either</code> in
+&lsquo;<tt>engine/utils.c</tt>&rsquo;. This function looks for a move
+which captures at least one of the two strings. In its
+current implementation <code>attack_either</code> only looks
+for uncoordinated attacks and would thus miss a double
+atari.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>xplay_connect(a,b,c,...,y,z)</code>
+<code>oplay_connect(a,b,c,...,y,z)</code>
+<code>xplay_disconnect(a,b,c,...,y,z)</code>
+<code>oplay_disconnect(a,b,c,...,y,z)</code>
+
+</pre></td></tr></table>
+
+<p>The function <code>xplay_connect(a,b,c,...,y,z)</code> begins
+with an &lsquo;<samp>X</samp>&rsquo; move at &lsquo;<samp>a</samp>&rsquo;, then an &lsquo;<samp>O</samp>&rsquo;
+move at &lsquo;<samp>b</samp>&rsquo;, and so forth, then finally calls
+<code>string_connect()</code> to determine whether
+&lsquo;<samp>x</samp>&rsquo; and &lsquo;<samp>y</samp>&rsquo; can be connected. The other
+functions are similar (see section <a href="gnugo_11.html#Connection-Reading">Connection Reading</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+<code>xplay_break_through(a,b,c,...,x,y,z)</code>
+<code>oplay_break_through(a,b,c,...,x,y,z)</code>
+
+</pre></td></tr></table>
+
+<p>These functions are used to set up a position like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+.O.    .y.
+OXO    xXz
+
+</pre></td></tr></table>
+
+<p>and &lsquo;<samp>X</samp>&rsquo; aims at capturing at least one of &lsquo;<samp>x</samp>&rsquo;, &lsquo;<samp>y</samp>&rsquo;, and
+&lsquo;<samp>z</samp>&rsquo;. If this succeeds &lsquo;<samp>1</samp>&rsquo; is returned. If it doesn&rsquo;t, &lsquo;<samp>X</samp>&rsquo;
+tries instead to cut through on either side and if this succeeds,
+&lsquo;<samp>2</samp>&rsquo; is returned. Of course the same shape with opposite colors can
+also be used.
+</p>
+<p>Important notice: &lsquo;<samp>x</samp>&rsquo;, &lsquo;<samp>y</samp>&rsquo;, and &lsquo;<samp>z</samp>&rsquo; must be given in the
+order they have in the diagram above, or any reflection and/or rotation
+of it.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">seki_helper(x)
+</pre></td></tr></table>
+
+<p>Checks whether the string at &lsquo;<samp>x</samp>&rsquo; can attack any surrounding
+string. If so, return false as the move to create a seki (probably)
+wouldn&rsquo;t work.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">threaten_to_save(x)
+</pre></td></tr></table>
+
+<p>Calls <code>add_followup_value</code> to add as a move reason a conservative
+estimate of the value of saving the string &lsquo;<samp>x</samp>&rsquo; by capturing one opponent
+stone.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">area_stone(x)
+</pre></td></tr></table>
+
+<p>Returns the number of stones in the area around &lsquo;<samp>x</samp>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">area_space(x)
+</pre></td></tr></table>
+
+<p>Returns the amount of space in the area around &lsquo;<samp>x</samp>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>eye(x)</code>
+<code>proper_eye(x)</code>
+<code>marginal_eye(x)</code>
+</pre></td></tr></table>
+
+<p>True if &lsquo;<samp>x</samp>&rsquo; is an eye space for either color, a non-marginal eye space
+for either color, or a marginal eye space for either color,
+respectively.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>antisuji(x)</code>
+</pre></td></tr></table>
+
+<p>Tell the move generation that &lsquo;<samp>x</samp>&rsquo; is a substandard move that never should
+be played.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">same_dragon(x,y)
+same_worm(x,y)
+</pre></td></tr></table>
+
+<p>Return true if &lsquo;<samp>x</samp>&rsquo; and &lsquo;<samp>y</samp>&rsquo; are the same dragon or worm respectively.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>dragonsize(x)</code>
+<code>wormsize(x)</code>
+</pre></td></tr></table>
+
+<p>Number of stones in the indicated dragon or worm.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>add_connect_move(x,y)</code>
+<code>add_cut_move(x,y)</code>
+<code>add_attack_either_move(x,y)</code>
+<code>add_defend_both_move(x,y)</code>
+</pre></td></tr></table>
+
+<p>Explicitly notify the move generation about move reasons for the move
+in the pattern.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>halfeye(x)</code>
+</pre></td></tr></table>
+
+<p>Returns true if the empty intersection at &lsquo;<samp>x</samp>&rsquo; is a half eye.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>remove_attack(x)</code>
+</pre></td></tr></table>
+
+<p>Inform the tactical reading that a supposed attack does in fact not
+work.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>potential_cutstone(x)</code>
+</pre></td></tr></table>
+
+<p>True if <code>cutstone2</code> field from worm data is larger than one. This
+indicates that saving the worm would introduce at least two new
+cutting points.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>not_lunch(x,y)</code>
+</pre></td></tr></table>
+
+<p>Prevents the misreporting of &lsquo;<samp>x</samp>&rsquo; as lunch for &lsquo;<samp>y</samp>&rsquo;.
+For example, the following pattern tells GNU Go that even
+though the stone at &lsquo;<samp>a</samp>&rsquo; can be captured, it should not
+be considered &ldquo;lunch&rdquo; for the dragon at &lsquo;<samp>b</samp>&rsquo;, because
+capturing it does not produce an eye:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XO|          ba|
+O*|          O*|
+oo|          oo|
+?o|          ?o|
+
+&gt; not_lunch(a,b)
+</pre></td></tr></table>
+
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>vital_chain(x)</code>
+</pre></td></tr></table>
+
+<p>Calls <code>vital_chain</code> to determine whether capturing
+the stone at &lsquo;<samp>x</samp>&rsquo; will result in one eye for an adjacent
+dragon. The current implementation just checks that the stone
+is not a singleton on the first line.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>amalgamate(x,y)</code>
+</pre></td></tr></table>
+
+<p>Amalgamate (join) the dragons at &lsquo;<samp>x</samp>&rsquo; and &lsquo;<samp>y</samp>&rsquo; (see section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>amalgamate_most_valuable(x,y,z)</code>
+</pre></td></tr></table>
+
+<p>Called when &lsquo;<samp>x</samp>&rsquo;, &lsquo;<samp>y</samp>&rsquo;, &lsquo;<samp>z</samp>&rsquo; point to three (preferably distinct)
+dragons, in situations such as this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+.O.X
+X*OX
+.O.X
+
+</pre></td></tr></table>
+
+<p>In this situation, the opponent can play at &lsquo;<samp>*</samp>&rsquo;, preventing
+the three dragons from becoming connected. However &lsquo;<samp>O</samp>&rsquo;
+can decide which cut to allow. The helper amalgamates the
+dragon at &lsquo;<samp>y</samp>&rsquo; with either &lsquo;<samp>x</samp>&rsquo; or &lsquo;<samp>z</samp>&rsquo;, 
+whichever is largest.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">make_proper_eye(x)
+</pre></td></tr></table>
+
+<p>This autohelper should be called when &lsquo;<samp>x</samp>&rsquo; is an eyespace
+which is misidentified as marginal. It is reclassified as
+a proper eyespace (see section <a href="gnugo_8.html#Eye-Space">Eye spaces</a>).
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">remove_halfeye(x)
+</pre></td></tr></table>
+
+<p>Remove a half eye from the eyespace. This helper should not be run after
+<code>make_dragons</code> is finished, since by that time the eyespaces have
+already been analyzed.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">remove_eyepoint(x)
+</pre></td></tr></table>
+
+<p>Remove an eye point. This function can only be used before the
+segmentation into eyespaces.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>owl_topological_eye(x,y)</code>
+</pre></td></tr></table>
+
+<p>Here &lsquo;<samp>x</samp>&rsquo; is an empty intersection which may be an
+eye or half eye for some dragon, and &lsquo;<samp>y</samp>&rsquo; is a 
+stone of the dragon, used only to determine the color
+of the eyespace in question. Returns the sum of the values
+of the diagonal intersections, relative to &lsquo;<samp>x</samp>&rsquo;, as
+explained in See section <a href="gnugo_8.html#Eye-Topology">Topology of Half Eyes and False Eyes</a>, equal to 4 or more if the
+eye at &lsquo;<samp>x</samp>&rsquo; is false, 3 if it is a half eye, and 2 if it
+is a true eye. 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>owl_escape_value(x)</code>
+</pre></td></tr></table>
+
+<p>Returns the escape value at &lsquo;<samp>x</samp>&rsquo;. This is only useful in owl
+attack and defense patterns.
+</p>
+<hr size="6">
+<a name="Attack-and-Defense-DB"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Autohelper-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Connections-Database" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Attack-and-Defense-Database"></a>
+<h2 class="section">9.8 Attack and Defense Database</h2>
+
+<p>The patterns in &lsquo;<tt>attack.db</tt>&rsquo; and &lsquo;<tt>defense.db</tt>&rsquo; are used to assist the
+tactical reading in finding moves that attacks or defends worms. The
+matching is performed during <code>make_worms()</code>, at the time when the
+tactical status of all worms is decided. None of the classes described
+above are useful in these databases, instead we have two other
+classes.
+</p>
+<dl compact="compact">
+<dt> &lsquo;<samp>D</samp>&rsquo;</dt>
+<dd><p>For each &lsquo;<samp>O</samp>&rsquo; worm in the pattern that can be tactically captured
+(<code>worm[m][n].attack_code != 0</code>), the move at &lsquo;<samp>*</samp>&rsquo; is
+tried. If it is found to defend the stone, this is registered as a
+reason for the move &lsquo;<samp>*</samp>&rsquo; and the defense point of the worm is set to
+&lsquo;<samp>*</samp>&rsquo;.
+</p></dd>
+<dt> &lsquo;<samp>A</samp>&rsquo;</dt>
+<dd><p>For each &lsquo;<samp>X</samp>&rsquo; worm in the pattern, it&rsquo;s tested whether the move
+at &lsquo;<samp>*</samp>&rsquo; captures the worm. If that is the case, this is
+registered as a reason for the move at &lsquo;<samp>*</samp>&rsquo;. The attack point of
+the worm is set to &lsquo;<samp>*</samp>&rsquo; and if it wasn&rsquo;t attacked before, a
+defense is searched for.
+</p></dd>
+</dl>
+
+<p>Furthermore, &lsquo;<samp>A</samp>&rsquo; patterns can only be used in &lsquo;<tt>attack.db</tt>&rsquo; and
+&lsquo;<samp>D</samp>&rsquo; patterns only in &lsquo;<tt>defense.db</tt>&rsquo;. Unclassified patterns may
+appear in these databases, but then they must work through actions to be
+effective.
+</p>
+<hr size="6">
+<a name="Connections-Database"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Attack-and-Defense-DB" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Connection-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Connections-Database"></a>
+<h2 class="section">9.9 The Connections Database</h2>
+
+<a name="index-connections-database"></a>
+<a name="index-connection-shapes-database-1"></a>
+
+<p>The patterns in &lsquo;<tt>conn.db</tt>&rsquo; are used for helping <code>make_dragons()</code>
+amalgamate worms into dragons and to some extent for modifying eye spaces.
+The patterns in this database use the classifications &lsquo;<samp>B</samp>&rsquo;, 
+&lsquo;<samp>C</samp>&rsquo;, and &lsquo;<samp>e</samp>&rsquo;. &lsquo;<samp>B</samp>&rsquo; patterns are used for finding cutting points,
+where amalgamation should not be performed, &lsquo;<samp>C</samp>&rsquo; patterns are used for
+finding existing connections, over which amalgamation is to be done, and 
+&lsquo;<samp>e</samp>&rsquo; patterns are used for modifying eye spaces and reevaluating lunches.
+There are also some patterns without classification, which use action lines to
+have an impact. These are matched together with the &lsquo;<samp>C</samp>&rsquo; patterns. Further
+details and examples can be found in See section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>.
+</p>
+<p>We will illustrate these databases by example. In this situation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XOO
+O.O
+...
+</pre></td></tr></table>
+<p>&lsquo;<samp>X</samp>&rsquo; cannot play safely at the cutting point, so the &lsquo;<samp>O</samp>&rsquo; dragons
+are to be amalgamated. Two patterns are matched here:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Pattern CC204
+
+O
+.
+O
+
+:+,C
+
+O
+A
+O
+
+;!safe_xmove(A) &amp;&amp; !ko(A) &amp;&amp; !xcut(A)
+
+Pattern CC205
+
+XO
+O.
+
+:\,C
+
+AO
+OB
+
+;attack(A) || (!safe_xmove(B) &amp;&amp; !ko(B) &amp;&amp; !xcut(B))
+</pre></td></tr></table>
+
+<p>The constraints are mostly clear. For example the second
+pattern should not be matched if the &lsquo;<samp>X</samp>&rsquo; stone cannot
+be attacked and &lsquo;<samp>X</samp>&rsquo; can play safely at &lsquo;<samp>B</samp>&rsquo;, or
+if &lsquo;<samp>B</samp>&rsquo; is a ko. The constraint <code>!xcut(B)</code> means
+that connection has not previously been inhibited by 
+<code>find_cuts</code>. For example consider this situation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+OOXX
+O.OX
+X..O
+X.OO
+</pre></td></tr></table>
+<p>The previous pattern is matched here twice, yet &lsquo;<samp>X</samp>&rsquo; can push
+in and break one of the connections. To fix this, we include
+a pattern:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Pattern CB11
+
+?OX?
+O!OX
+?*!O
+??O?
+
+:8,B
+
+?OA?
+OaOB
+?*bO
+??O?
+
+; !attack(A) &amp;&amp; !attack(B) &amp;&amp; !xplay_attack(*,a,b,*) &amp;&amp; !xplay_attack(*,b,a,*)
+</pre></td></tr></table>
+
+<p>After this pattern is found, the <code>xcut</code> autohelper macro will return
+true at any of the points &lsquo;<samp>*</samp>&rsquo;, &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo;. Thus the
+patterns <code>CB204</code> and <code>CB205</code> will not be matched, and the dragons will
+not be amalgamated.
+</p>
+<hr size="6">
+<a name="Connection-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Connections-Database" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Tuning" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Connections-Functions"></a>
+<h2 class="section">9.10 Connections Functions</h2>
+
+<p>Here are the public functions in &lsquo;<tt>connections.c</tt>&rsquo;.
+</p>
+<ul>
+<li> <code>static void cut_connect_callback(int m, int n, int color, 
+        struct pattern *pattern, int ll, void *data)</code>
+<a name="index-cut_005fconnect_005fcallback"></a>
+<blockquote><p>Try to match all (permutations of) connection patterns at <code>(m,n)</code>.
+For each match, if it is a B pattern, set cutting point in worm
+data structure and make eye space marginal for the connection
+inhibiting entries of the pattern. If it is a &lsquo;<samp>C</samp>&rsquo; pattern, amalgamate
+the dragons in the pattern.
+</p></blockquote>
+</li><li> <code>void find_cuts(void)</code>
+<a name="index-find_005fcuts-1"></a>
+<blockquote><p>Find cutting points which should inhibit amalgamations and sever
+the adjacent eye space. This goes through the connection database
+consulting only patterns of type B. When such a function is found,
+the function <code>cut_connect_callback</code> is invoked.
+</p></blockquote>
+</li><li> <code>void find_connections(void)</code>
+<a name="index-find_005fconnections"></a>
+<blockquote><p>Find explicit connection patterns and amalgamate the involved dragons.
+This goes through the connection database consulting patterns except those of
+type B, E or e. When such a function is found, the function
+<code>cut_connect_callback</code> is invoked.
+</p></blockquote>
+</li><li> void modify_eye_spaces1(void)
+<a name="index-modify_005feye_005fspaces1"></a>
+<blockquote><p>Find explicit connection patterns and amalgamate the involved dragons.
+This goes through the connection database consulting only patterns
+of type E (see section <a href="#Connections-Database">The Connections Database</a>). When such a function is found, the
+function <code>cut_connect_callback</code> is invoked.  
+</p></blockquote>
+</li><li> void modify_eye_spaces1(void)
+<a name="index-modify_005feye_005fspaces1-1"></a>
+<blockquote><p>Find explicit connection patterns and amalgamate the involved dragons.
+This goes through the connection database consulting only patterns
+of type e (see section <a href="#Connections-Database">The Connections Database</a>). When such a function is found, the
+function <code>cut_connect_callback</code> is invoked.  
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Tuning"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Connection-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#PM-Implementation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Tuning-the-Pattern-databases"></a>
+<h2 class="section">9.11 Tuning the Pattern databases</h2>
+
+<a name="index-tuning-the-pattern-database"></a>
+<a name="index-tuning-the-shapes-database"></a>
+
+<p>Since the pattern databases, together with the valuation of move
+reasons, decide GNU Go&rsquo;s personality, much time can be devoted to
+&ldquo;tuning&rdquo; them. Here are some suggestions.
+</p>
+<p>If you want to experiment with modifying the pattern database, invoke
+with the &lsquo;<samp>-a</samp>&rsquo; option. This will cause every pattern to be evaluated,
+even when some of them may be skipped due to various optimizations.
+</p>
+<p>You can obtain a Smart Game Format (SGF) record of your game in at least
+two different ways. One is to use CGoban to record the game. You can
+also have GNU Go record the game in Smart Game Format, using the &lsquo;<samp>-o</samp>&rsquo;
+option. It is best to combine this with &lsquo;<samp>-a</samp>&rsquo;. Do not try to read the SGF
+file until the game is finished and you have closed the game
+window. This does not mean that you have to play the game out to its
+conclusion. You may close the CGoban window on the game and GNU Go
+will close the SGF file so that you can read it.
+</p>
+<p>If you record a game in SGF form using the &lsquo;<samp>-o</samp>&rsquo; option, GNU Go will add
+labels to the board to show all the moves it considered, with their
+values. This is an extremely useful feature, since one can see at a
+glance whether the right moves with appropriate weights are being
+proposed by the move generation.
+</p>
+<p>First, due to a bug of unknown nature, it occasionally happens
+that GNU Go will not receive the <code>SIGTERM</code> signal from CGoban that it
+needs to know that the game is over. When this happens, the SGF file
+ends without a closing parenthesis, and CGoban will not open the
+file. You can fix the file by typing:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ echo &quot;)&quot; &gt;&gt;[filename]  
+
+</pre></td></tr></table>
+
+<p>at the command line to add this closing parenthesis. Or you could
+add the ) using an editor.
+</p>
+<p>Move values exceeding 99 (these should be rare) can be displayed by
+CGoban but you may have to resize the window in order to see all three
+digits. Grab the lower right margin of the CGoban window and pull it
+until the window is large. All three digits should be visible.
+</p>
+<p>If you are playing a game without the &lsquo;<samp>-o</samp>&rsquo; option and you wish to
+analyze a move, you may still use CGoban&rsquo;s &ldquo;Save Game&rdquo; button to get
+an SGF file. It will not have the values of the moves labelled, of
+course.
+</p>
+<p>Once you have a game saved in SGF format, you can analyze any
+particular move by running:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+  gnugo -l [filename] -L [move number] -t -a -w
+
+</pre></td></tr></table>
+
+<p>to see why GNU Go made that move, and if you make changes to the
+pattern database and recompile the program, you may ask GNU Go to
+repeat the move to see how the behavior changes. If you&rsquo;re using
+emacs, it&rsquo;s a good idea to run GNU Go in a shell in a buffer (M-x
+shell) since this gives good navigation and search facilities.
+</p>
+<p>Instead of a move number, you can also give a board coordinate to &lsquo;<samp>-L</samp>&rsquo;
+in order to stop at the first move played at this location. If you
+omit the &lsquo;<samp>-L</samp>&rsquo; option, the move after those in the file will be
+considered. 
+</p>
+<p>If a bad move is proposed, this can have several reasons. To begin
+with, each move should be valued in terms of actual points on the
+board, as accurately as can be expected by the program. If it&rsquo;s not,
+something is wrong. This may have two reasons. One possibility is that
+there are reasons missing for the move or that bogus reasons have been
+found. The other possibility is that the move reasons have been
+misevaluated by the move valuation functions. Tuning of patterns is
+with a few exceptions a question of fixing the first kind of problems.
+</p>
+<p>If there are bogus move reasons found, search through the trace output
+for the pattern that is responsible. (Some move reasons, e.g. most
+tactical attack and defense, do not originate from patterns. If no
+pattern produced the bogus move reason, it is not a tuning problem.)
+Probably this pattern was too general or had a faulty constraint. Try
+to make it more specific or correct bugs if there were any. If the
+pattern and the constraint looks right, verify that the tactical
+reading evaluates the constraint correctly. If not, this is either a
+reading bug or a case where the reading is too complicated for GNU Go.
+</p>
+<p>If a connecting move reason is found, but the strings are already
+effectively connected, there may be missing patterns in &lsquo;<tt>conn.db</tt>&rsquo;.
+Similarly, worms may be incorrectly amalgamated due to some too
+general or faulty pattern in &lsquo;<tt>conn.db</tt>&rsquo;. To get trace output from the
+matching of patterns in &lsquo;<tt>conn.db</tt>&rsquo; you need to add a second
+&lsquo;<samp>-t</samp>&rsquo; option.
+</p>
+<p>If a move reason is missing, there may be a hole in the database. It
+could also be caused by some existing pattern being needlessly
+specific, having a faulty constraint, or being rejected due to a
+reading mistake. Unless you are familiar with the pattern databases,
+it may be hard to verify that there really is a pattern missing. Look
+around the databases to try to get a feeling for how they are
+organized. (This is admittedly a weak point of the pattern databases,
+but the goal is to make them more organized with time.) If you decide
+that a new pattern is needed, try to make it as general as possible,
+without allowing incorrect matches, by using proper classification
+from among snOoXx and constraints. The reading functions can be put to
+good use. The reason for making the patterns as general as they can be
+is that we need a smaller number of them then, which makes the
+database much easier to maintain. Of course, if you need too
+complicated constraints, it&rsquo;s usually better to split the pattern.
+</p>
+<p>If a move has the correct set of reasons but still is misevaluated,
+this is usually not a tuning problem. There are, however, some
+possibilities to work around these mistakes with the use of patterns.
+In particular, if the territorial value is off because <code>delta_terri()</code>
+give strange results, the (min)terri and maxterri values can be set by
+patterns as a workaround. This is typically done by the endgame
+patterns, where we can know the (minimum) value fairly well from the
+pattern. If it should be needed, (min)value and maxvalue can be used
+similarly. These possibilities should be used conservatively though,
+since such patterns are likely to become obsolete when better (or at
+least different) functions for e.g. territory estimation are being
+developed.
+</p>
+<p>In order to choose between moves with the same move reasons, e.g.
+moves that connect two dragons in different ways, patterns with a
+nonzero shape value should be used. These should give positive shape
+values for moves that give good shape or good aji and negative values
+for bad shape and bad aji. Notice that these values are additive, so
+it&rsquo;s important that the matches are unique.
+</p>
+<p>Sente moves are indicated by the use of the pattern followup value.
+This can usually not be estimated very accurately, but a good rule is
+to be rather conservative. As usual it should be measured in terms of
+actual points on the board. These values are also additive so the same
+care must be taken to avoid unintended multiple matches.
+</p>
+<p>You can also get a visual display of the dragons using the &lsquo;<samp>-T</samp>&rsquo;
+option. The default GNU Go configuration tries to build a
+version with color support using either curses or the
+ansi escape sequences. You are more likely to find color
+support in rxvt than xterm, at least on many systems, so
+we recommend running:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  gnugo -l [filename] -L [move number] -T
+</pre></td></tr></table>
+
+<p>in an rxvt window. If you do not see a color display,
+and if your host is a GNU/Linux machine, try this again
+in the Linux console.
+</p>
+<p>Worms belonging to the same dragon are labelled with the same letters.
+The colors indicate the value of the field <code>dragon.safety</code>, which
+is set in &lsquo;<tt>moyo.c</tt>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="format">Green:  GNU Go thinks the dragon is alive
+Yellow: Status unknown
+Blue:   GNU Go thinks the dragon is dead
+Red:    Status critical (1.5 eyes) or weak by the algorithm
+        in &lsquo;<tt>moyo.c</tt>&rsquo;
+</pre></td></tr></table>
+
+<a name="index-eliminate-the-randomness"></a>
+
+<p>If you want to get the same game over and over again, you can
+eliminate the randomness in GNU Go&rsquo;s play by providing a fixed
+random seed with the &lsquo;<samp>-r</samp>&rsquo; option.
+</p>
+
+<hr size="6">
+<a name="PM-Implementation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Tuning" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Symmetry-_0026-transformations" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Implementation"></a>
+<h2 class="section">9.12 Implementation</h2>
+
+<a name="index-implementation-of-pattern-matching"></a>
+
+<p>The pattern code in GNU Go is fairly straightforward conceptually, but
+because the matcher consumes a significant part of the time in
+choosing a move, the code is optimized for speed. Because of this
+there are implementation details which obscure things slightly.
+</p>
+
+<p>In GNU Go, the ascii &lsquo;<tt>.db</tt>&rsquo; files are precompiled into tables (see
+&lsquo;<tt>patterns.h</tt>&rsquo;) by a standalone program &lsquo;<tt>mkpat.c</tt>&rsquo;, and the resulting 
+&lsquo;<tt>.c</tt>&rsquo; files are compiled and linked into the main GNU Go executable.
+</p>
+<p>Each pattern is compiled to a header, and a sequence of elements,
+which are (notionally) checked sequentially at every position and
+orientation of the board. These elements are relative to the pattern
+&rsquo;anchor&rsquo; (or origin).  One &lsquo;<samp>X</samp>&rsquo; or &lsquo;<samp>O</samp>&rsquo; stone is (arbitrarily) chosen to
+represent the origin of the pattern. (We cannot dictate one or the
+other since some patterns contain only one colour or the other.)  All
+the elements are in co-ordinates relative to this position. So a
+pattern matches &quot;at&quot; board position <code>(m,n,o)</code> if the the pattern anchor
+stone is on <code>(m,n)</code>, and the other elements match the board when the
+pattern is transformed by transformation number &lsquo;<samp>o</samp>&rsquo;. (See below for
+the details of the transformations, though these should not be
+necessary)
+</p>
+
+<hr size="6">
+<a name="Symmetry-_0026-transformations"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#PM-Implementation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Details" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Symmetry-and-transformations"></a>
+<h2 class="section">9.13 Symmetry and transformations</h2>
+
+<a name="index-symmetry-and-transformations"></a>
+<a name="index-symmetry-and-transformations-of-shapes"></a>
+
+<p>In general, each pattern must be tried in each of 8 different
+permutations, to reflect the symmetry of the board. But some
+patterns have symmetries which mean that it is unnecessary
+(and therefore inefficient) to try all eight. The first
+character after the &lsquo;<samp>:</samp>&rsquo; can be one of &lsquo;<samp>8</samp>&rsquo;,&lsquo;<samp>|</samp>&rsquo;,&lsquo;<samp>\</samp>&rsquo;,&lsquo;<samp>/</samp>&rsquo;,
+&lsquo;<samp>X</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo;, &lsquo;<samp>+</samp>&rsquo;, representing the axes of symmetry. It can also
+be &lsquo;<samp>O</samp>&rsquo;, representing symmetry under 180 degrees rotation.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="format">transformation   I    -    |     .     \    l    r     /
+                ABC  GHI  CBA   IHG   ADG  CFI  GDA   IFC
+                DEF  DEF  FED   FED   BEH  BEH  HEB   HEB
+                GHI  ABC  IHG   CBA   CFI  ADG  IFC   GDA
+
+                 a    b    c     d     e    f    g     h
+</pre></td></tr></table>
+
+<p>Then if the pattern has the following symmetries, the
+following are true:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+|  c=a, d=b, g=e, h=f
+-  b=a, c=d, e=f, g=h
+\  e=a, g=b, f=c, h=d
+/  h=a, f=b, g=c, e=d
+O  a=d, b=c, e=h, f=g
+X  a=d=e=h, b=c=f=g
++  a=b=c=d, e=f=g=h
+
+</pre></td></tr></table>
+
+<p>We can choose to use transformations a,d,f,g as the unique
+transformations for patterns with either &lsquo;<samp>|</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo;, &lsquo;<samp>\</samp>&rsquo;, or
+&lsquo;<samp>/</samp>&rsquo; symmetry.
+</p>
+<p>Thus we choose to order the transformations a,g,d,f,h,b,e,c and choose
+first 2 for &lsquo;<samp>X</samp>&rsquo; and &lsquo;<samp>+</samp>&rsquo;, the first 4 for &lsquo;<samp>|</samp>&rsquo;, &lsquo;<samp>-</samp>&rsquo;,
+&lsquo;<samp>/</samp>&rsquo;, and &lsquo;<samp>\</samp>&rsquo;, the middle 4 for &lsquo;<samp>O</samp>&rsquo;, and all 8 for
+non-symmetrical patterns.
+</p>
+<p>Each of the reflection operations (e-h) is equivalent to reflection
+about one arbitrary axis followed by one of the rotations (a-d).  We
+can choose to reflect about the axis of symmetry (which causes no
+net change) and can therefore conclude that each of e-h is
+equivalent to the reflection (no-op) followed by a-d.  This argument
+therefore extends to include &lsquo;<samp>-</samp>&rsquo; and &lsquo;<samp>/</samp>&rsquo; as well as &lsquo;<samp>|</samp>&rsquo;
+and &lsquo;<samp>\</samp>&rsquo;.
+</p>
+<hr size="6">
+<a name="Details"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Symmetry-_0026-transformations" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Grid-optimization" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Implementation-Details"></a>
+<h2 class="section">9.14 Implementation Details</h2>
+
+<a name="index-pattern-matching-optimization"></a>
+<a name="index-grid-optimization"></a>
+
+<ol>
+<li> An entry in the pattern header states whether the anchor is an &lsquo;<samp>X</samp>&rsquo; or
+an &lsquo;<samp>O</samp>&rsquo;. This helps performance, since all transformations can be
+rejected at once if the anchor stone does not match. (Ideally, we
+could just define that the anchor is always &lsquo;<samp>O</samp>&rsquo; or always &lsquo;<samp>X</samp>&rsquo;, but some
+patterns contain no &lsquo;<samp>O</samp>&rsquo; and some contain no &lsquo;<samp>X</samp>&rsquo;.)
+
+</li><li> The pattern header contains the size of the pattern (ie the
+co-ordinates of the top left and bottom right elements) relative to
+the anchor. This allows the pattern can be rejected quickly if there
+is not room for the pattern to fit around the anchor stone in a given
+orientation (ie it is too near the edge of the board).  The bounding
+box information must first be transformed like the elements before it
+can be tested, and after transforming, we need to work out where the
+top-left and bottom-right corners are.
+
+</li><li> The edge constraints are implemented by notionally padding the
+pattern with rows or columns of &lsquo;<samp>?</samp>&rsquo; until it is exactly 19 (or
+whatever the current board size is) elements wide or high. Then the
+pattern is quickly rejected by (ii) above if it is not at the edge. So
+the example pattern above is compiled as if it was written
+
+
+<table><tr><td>&nbsp;</td><td><pre class="example">
+&quot;example&quot;
+.OO????????????????
+*XX????????????????
+o??????????????????
+:8,80
+
+</pre></td></tr></table>
+
+</li><li> The elements in a pattern are sorted so that non-space
+elements are checked before space elements. It is hoped that,
+for most of the game, more squares are empty, and so the
+pattern can be more quickly rejected doing it this way.
+
+</li><li> The actual tests are performed using an &rsquo;and-compare&rsquo;
+sequence. Each board position is a 2-bit quantity.
+%00 for empty, %01 for &lsquo;<samp>O</samp>&rsquo;, %10 for &lsquo;<samp>X</samp>&rsquo;.
+We can test for an exact match by and-ing with %11 (no-op),
+then comparing with 0, 1 or 2. The test for &lsquo;<samp>o</samp>&rsquo; is the
+same as a test for &rsquo;not-X&rsquo;, ie not %10. So and with %01
+should give 0 if it matches. Similarly &lsquo;<samp>x</samp>&rsquo; is a test that
+bit 0 is not set.
+
+</li></ol>
+
+<hr size="6">
+<a name="Grid-optimization"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Details" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Joseki-Compiler" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-_0060_0060Grid_0027_0027-Optimization"></a>
+<h2 class="section">9.15 The &ldquo;Grid&rdquo; Optimization</h2>
+
+<p>The comparisons between pattern and board are performed as 2-bit
+bitwise operations. Therefore they can be performed in parallel,
+16-at-a-time on a 32-bit machine.
+</p>
+<p>Suppose the board is layed out as follows :
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ .X.O....OO
+ XXXXO.....
+ .X..OOOOOO
+ X.X.......
+ ....X...O.
+
+</pre></td></tr></table>
+
+<p>which is internally stored internally in a 2d array (binary)
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ 00 10 00 01 00 00 00 00 01 01
+ 10 10 10 10 01 00 00 00 00 00
+ 00 10 00 00 01 01 01 01 01 01
+ 10 00 10 00 00 00 00 00 00 00
+ 00 00 00 00 10 00 00 00 01 00
+
+</pre></td></tr></table>
+
+<p>we can compile this to a composite array in which each element
+stores the state of a 4x4 grid of squares :
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ ????????  ????????  ???????? ...
+ ??001000  00100001  10000100
+ ??101010  10101010  10101001
+ ??001000  00100000  10000001
+
+ ??001000  00100001  ...
+ ??101010  10101010
+ ??001000  00100000
+ ??001000  10001000 
+
+...
+
+ ??100010  ...
+ ??000000
+ ????????
+ ????????
+
+</pre></td></tr></table>
+
+<p>Where &rsquo;??&rsquo; is off the board.
+</p>
+<p>We can store these 32-bit composites in a 2d merged-board array,
+substituting the illegal value %11 for &rsquo;??&rsquo;.
+</p>
+<p>Similarly, for each pattern, mkpat produces appropriate 32-bit and-value
+masks for the pattern elements near the anchor. It is a simple matter
+to test the pattern with a similar test to (5) above, but for 32-bits
+at a time.
+</p>
+<hr size="6">
+<a name="Joseki-Compiler"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Grid-optimization" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Ladders-in-Joseki" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Joseki-Compiler"></a>
+<h2 class="section">9.16 The Joseki Compiler</h2>
+
+<a name="index-joseki"></a>
+<a name="index-how-GNU-Go-learns-new-joseki"></a>
+<a name="index-the-joseki-compiler"></a>
+<a name="index-teaching-josekis-to-GNU-Go"></a>
+
+<p>GNU Go includes a joseki compiler in &lsquo;<tt>patterns/joseki.c</tt>&rsquo;. This processes
+an SGF file (with variations) and produces a sequence of patterns
+which can then be fed back into mkpat. The joseki database is currently in files
+in &lsquo;<tt>patterns/</tt>&rsquo; called &lsquo;<tt>hoshi.sgf</tt>&rsquo;, &lsquo;<tt>komoku.sgf</tt>&rsquo;, &lsquo;<tt>sansan.sgf</tt>&rsquo;, 
+&lsquo;<tt>mokuhazushi.sgf</tt>&rsquo; and &lsquo;<tt>takamoku.sgf</tt>&rsquo;.  This division can be revised
+whenever need arises.
+</p>
+<p>The SGF files are transformed into the pattern database &lsquo;<tt>.db</tt>&rsquo; format by
+the program in &lsquo;<tt>joseki.c</tt>&rsquo;. These files are in turn transformed into C
+code by the program in &lsquo;<tt>mkpat.c</tt>&rsquo; and the C files are compiled and linked
+into the GNU Go binary.
+</p>
+<p>Not every node in the SGF file contributes a pattern. The nodes which
+contribute patterns have the joseki in the upper right corner, with
+the boundary marked with a square mark and other information to determine
+the resulting pattern marked in the comments.
+</p>
+<p>The intention is that the move valuation should be able to choose
+between the available variations by normal valuation. When this fails
+the primary workaround is to use shape values to increase or decrease
+the value. It is also possible to add antisuji variations to forbid
+popular suboptimal moves. As usual constraints can be used, e.g. to
+condition a variation on a working ladder.
+</p>
+<p>The joseki format has the following components for each SGF node:
+</p>
+<ul>
+<li>
+A square mark (<code>SQ</code> or <code>MA</code> property) to decide how large part of the
+board should be included in the pattern.
+</li><li> A move (&lsquo;<samp>W</samp>&rsquo; or &lsquo;<samp>B</samp>&rsquo; property) with the natural interpretation.
+If the square mark is missing or the move is a pass, no pattern is
+produced for the node.
+</li><li> Optional labels (<code>LB</code> property), which must be a single letter each.
+If there is at least one label, a constraint diagram will be
+produced with these labels.
+</li><li> A comment (&lsquo;<samp>C</samp>&rsquo; property). As the first character it should have one of the
+following characters to decide its classification:
+<ul class="toc">
+<li>- &lsquo;<samp>U</samp>&rsquo; - urgent move
+</li><li>- &lsquo;<samp>S</samp>&rsquo; or &lsquo;<samp>J</samp>&rsquo; - standard move
+</li><li>- &lsquo;<samp>s</samp>&rsquo; or &lsquo;<samp>j</samp>&rsquo; - lesser joseki
+</li><li>- &lsquo;<samp>T</samp>&rsquo; - trick move
+</li><li>- &lsquo;<samp>t</samp>&rsquo; - minor joseki move (tenuki OK)
+</li><li>- &lsquo;<samp>0</samp>&rsquo; - antisuji (&lsquo;<samp>A</samp>&rsquo; can also be used)
+</li></ul>
+<p>The rest of the line is ignored, as is the case of the letter. If neither of
+these is found, it&rsquo;s assumed to be a standard joseki move.
+</p>
+<p>In addition to this, rows starting with the following characters are
+recognized:
+</p><ul class="toc">
+<li>- &lsquo;<samp>#</samp>&rsquo; - Comments. These are copied into the patterns file, above the diagram.
+</li><li>- &lsquo;<samp>;</samp>&rsquo; - Constraints. These are copied into the patterns file, below the
+constraint diagram.
+</li><li>-  &lsquo;<samp>&gt;</samp>&rsquo; - Actions. These are copied into the patterns file, below the
+constraint diagram.
+</li><li>- &lsquo;<samp>:</samp>&rsquo; - Colon line. This is a little more complicated, but the colon
+line of the produced patterns always start out with &quot;:8,s&quot; for
+transformation number and sacrifice pattern class (it usually
+isn&rsquo;t a sacrifice, but it&rsquo;s pointless spending time checking for
+tactical safety). Then a joseki pattern class character is
+appended and finally what is included on the colon line in the
+comment for the SGF node.
+</li></ul>
+</li></ul>
+
+<p>Example: If the comment in the SGF file looks like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">F
+:C,shape(3)
+;xplay_attack(A,B,C,D,*)
+</pre></td></tr></table>
+
+<p>the generated pattern will have a colon line
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">:8,sjC,shape(3)
+</pre></td></tr></table>
+
+<p>and a constraint
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">;xplay_attack(A,B,C,D,*)
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Ladders-in-Joseki"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Joseki-Compiler" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Corner-Matcher" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Ladders-in-Joseki-1"></a>
+<h2 class="section">9.17 Ladders in Joseki</h2>
+
+<p>As an example of how to use autohelpers with the
+Joseki compiler, we consider an example where a Joseki
+is bad if a ladder fails. Assume we have the taisha and are
+considering connecting on the outside with the pattern
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">--------+
+........|
+........|
+...XX...|
+...OXO..|
+...*O...|
+....X...|
+........|
+........|
+</pre></td></tr></table>
+
+<p>But this is bad unless we have a ladder in our favor. To check this we
+add a constraint which may look like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">--------+
+........|
+........|
+...XX...|
+...OXO..|
+...*OAC.|
+....DB..|
+........|
+........|
+
+;oplay_attack(*,A,B,C,D)
+</pre></td></tr></table>
+
+<p>In order to accept the pattern we require that the constraint on the
+semicolon line evaluates to true. This particular constraint has the
+interpretation &quot;Play with alternating colors, starting with &lsquo;<samp>O</samp>&rsquo;, 
+on the intersections &lsquo;<samp>*</samp>&rsquo;, &lsquo;<samp>A</samp>&rsquo;, &lsquo;<samp>B</samp>&rsquo;, and &lsquo;<samp>C</samp>&rsquo;. Then check
+whether the stone at &lsquo;<samp>D</samp>&rsquo; can be captured.&quot; I.e. play to this position
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">--------+
+........|
+........|
+...XX...|
+...OXO..|
+...OOXX.|
+....XO..|
+........|
+........|
+</pre></td></tr></table>
+
+<p>and call <code>attack()</code> to see whether the lower &lsquo;<samp>X</samp>&rsquo; stone can be
+captured.  This is not limited to ladders, but in this particular case the
+reading will of course involve a ladder. 
+</p>
+<p>The constraint diagram above with letters is how it looks in the &lsquo;<tt>.db</tt>&rsquo;
+file. The joseki compiler knows how to create these from labels in
+the SGF node. &lsquo;<tt>Cgoban</tt>&rsquo; has an option to create one letter labels,
+but this ought to be a common feature for SGF editors.
+</p>
+<p>Thus in order to implement this example in SGF, one would add labels
+to the four intersections and a comment:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">;oplay_attack(*,A,B,C,D)
+</pre></td></tr></table>
+
+<p>The appropriate constraint (autohelper macro) will then be added
+to the Joseki &lsquo;<tt>.db</tt>&rsquo; file.
+</p>
+<hr size="6">
+<a name="Corner-Matcher"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Ladders-in-Joseki" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Editing-Patterns" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Corner-Matcher-1"></a>
+<h2 class="section">9.18 Corner Matcher</h2>
+
+<a name="index-implementation-of-pattern-matching-1"></a>
+<a name="index-joseki-1"></a>
+<a name="index-corner-matcher"></a>
+
+<p>GNU Go uses a special matcher for joseki patterns.  It has certain constraints
+on the patterns it can match, but is much faster and takes far less space to
+store patterns than the standard matcher.
+</p>
+<p>Patterns used with corner matcher have to qualify the following conditions:
+</p>
+<ul>
+<li> They must be matchable only at a corner of the board (hence the name of
+the matcher).
+</li><li> They can consist only of &lsquo;<samp>O</samp>&rsquo;, &lsquo;<samp>X</samp>&rsquo; and &lsquo;<samp>.</samp>&rsquo; elements.
+</li><li> Of all pattern values (see section <a href="#Pattern-Values">Pattern Attributes</a>), corner matcher only
+support <code>shape(x)</code>.  This is not because the matcher cannot handle other
+values in principle, just they are currently not used in joseki databases.
+</li></ul>
+
+<p>Corner matcher was specifically designed for joseki patterns and they of
+course satisfy all the conditions above.  With some modifications corner
+matcher could be used for fuseki patterns as well, but fullboard matcher
+does its work just fine.
+</p>
+<p>The main idea of the matcher is very same to the one of DFA matcher
+(see section <a href="gnugo_10.html#Pattern-matching-with-DFA">Pattern matching with DFA</a>): check all available patterns at once,
+not a single pattern at a time.  A modified version of DFA matcher could be
+used for joseki pattern matching, but its database would be very large.
+Corner matcher capitalizes on the fact that there are relatively few
+stones in each such pattern.
+</p>
+<p>Corner pattern database is organized into a tree.  Nodes of the tree are
+called &ldquo;variations&rdquo;.  Variations represent certain sets of stones in a
+corner of the board.  Root variation corresponds to an empty corner and a
+step down the tree is equivalent to adding a stone to the corner.  Each
+variation has several properties:
+</p>
+<ul class="toc">
+<li>- stone position relative to the corner,
+</li><li>- a flag determining whether the stone color must be equal to the first
+matched stone color,
+</li><li>- number of stones in the corner area (see below) of the variation stone.
+</li></ul>
+
+<p>By corner area we define a rectangle which corners are the current corner of
+the board and the position of the stone (inclusive).  For instance, if the
+current board corner is A19 then corner area of a stone at C18 consists
+of A18, A19, B18, B19, C18 and C19.
+</p>
+<p>Variation which is a direct child of the root variation matches if there
+is any stone at the variation position and the stone is alone in its
+corner area.
+</p>
+<p>Variation at a deeper level of the tree matches if there is a stone of
+specified color in variation position and the number of stones in its
+corner area is equal to the number specified in variation structure.
+</p>
+<p>When a certain variation matches, all its children has to be checked
+recursively for a match.
+</p>
+<p>All leaf variations and some inner ones have patterns attached to them.
+For a pattern to match, it is required that its <em>parent</em> variation
+matches.  In addition, it is checked that pattern is being matched for
+the appropriate color (using its variation &ldquo;stone color&rdquo; field) and
+that the number of stones in the area where the pattern is being matched
+is indeed equal to the number of stones in the pattern.  The &ldquo;stone
+position&rdquo; property of the pattern variation determines the move suggested
+by the pattern.
+</p>
+<p>Consider this joseki pattern which has four stones:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">------+
+......|
+......|
+.O*...|
+.XXO..|
+......|
+......|
+</pre></td></tr></table>
+
+<p>To encode it for the corner matcher, we have to use five variations,
+each next being a child of previous:
+</p>
+<table>
+<tr><td>Tree level</td><td>Position</td><td>Color</td><td>Number of stones</td></tr>
+<tr><td>1</td><td>R16</td><td>&ldquo;same&rdquo;</td><td>1</td></tr>
+<tr><td>2</td><td>P17</td><td>&ldquo;same&rdquo;</td><td>1</td></tr>
+<tr><td>3</td><td>Q16</td><td>&ldquo;other&rdquo;</td><td>2</td></tr>
+<tr><td>4</td><td>P16</td><td>&ldquo;other&rdquo;</td><td>4</td></tr>
+<tr><td>5</td><td>Q17</td><td>&ldquo;same&rdquo;</td><td>1</td></tr>
+</table>
+
+<p>The fifth variation should have an attached pattern.  Note that the stone
+color for the fifth variation is &ldquo;same&rdquo; because the first matched stone
+for this pattern is &lsquo;<samp>O</samp>&rsquo; which stands for the stones of the player
+to whom moves are being suggested with &lsquo;<samp>*</samp>&rsquo;.
+</p>
+<p>The tree consists of all variations for all patterns combined together.
+Variations for each patterns are sorted to allow very quick tree branch
+rejection and at the same time keep the database small enough.  More
+details can be found in comments in file &lsquo;<tt>mkpat.c</tt>&rsquo;
+</p>
+<p>Corner matcher resides in &lsquo;<tt>matchpat.c</tt>&rsquo; in two functions:
+<code>corner_matchpat()</code> and <code>do_corner_matchpat()</code>.  The former computes
+<code>num_stones[]</code> array which holds number of stones in corner areas of
+different intersections of the board for all possible transformations.
+<code>corner_matchpat()</code> also matches top-level variations.
+<code>do_corner_matchpat()</code> is responsible for recursive matching on the
+variation tree and calling callback function upon pattern match.
+</p>
+<p>Tree-like database for corner matcher is generated by <code>mkpat</code> program.
+Database generator consists of several functions, most important are:
+<code>corner_best_element()</code>, <code>corner_variation_new()</code>,
+<code>corner_follow_variation()</code> and <code>corner_add_pattern()</code>.
+</p>
+<hr size="6">
+<a name="Editing-Patterns"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Corner-Matcher" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Patterns" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Emacs-Mode-for-Editing-Patterns"></a>
+<h2 class="section">9.19 Emacs Mode for Editing Patterns</h2>
+
+<a name="index-editing-patterns"></a>
+<a name="index-editing-pattern-database"></a>
+
+<p>If you use GNU Emacs (XEmacs might work too), you can try a special
+mode for editing GNU Go pattern databases.  The mode resides in
+&lsquo;<tt>patterns/gnugo-db.el</tt>&rsquo;.
+</p>
+<p>Copy the file to &lsquo;<tt>emacs/site-lisp</tt>&rsquo; directory.  You can then load
+the mode with <code>(require 'gnugo-db)</code>.  It makes sense to put this
+line into your configuration file (&lsquo;<tt>~/.emacs</tt>&rsquo;).  You can either
+use <code>gnugo-db-mode</code> command to switch to pattern editing mode,
+or use the following code snippet to make Emacs do this automatically
+upon opening a file with &lsquo;<tt>.db</tt>&rsquo; suffix:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">	(setq auto-mode-alist
+	      (append
+	       auto-mode-alist
+	       '((&quot;\\.db\\'&quot; . gnugo-db-mode))))
+</pre></td></tr></table>
+
+<p>Pattern editing mode provides the following features:
+</p>
+<ul class="toc">
+<li>-
+highlighting of keywords (<code>Pattern</code>, <code>goal_elements</code> and
+<code>callback_data</code>) and comments,
+
+</li><li>-
+making paragraphs equal to patterns (<kbd>M-h</kbd>, <kbd>M-{</kbd>, <kbd>M-}</kbd>
+and others operate on patterns),
+
+</li><li>-
+commands for pattern creation with automatic name selection (<kbd>C-c
+C-p</kbd>) and copying main diagram to constraint diagram (<kbd>C-c C-c</kbd>),
+
+</li><li>-
+automated indentation of constraints and side comments (pattern
+descriptions).
+</li></ul>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_10.html#DFA" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

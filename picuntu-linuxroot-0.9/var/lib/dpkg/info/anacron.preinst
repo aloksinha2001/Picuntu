@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/init.d/anacron" ] && [ ! -L "/etc/init.d/anacron" ]; then
+		if [ "`md5sum \"/etc/init.d/anacron\" | sed -e \"s/ .*//\"`" != \
+		     "`dpkg-query -W -f='${Conffiles}' anacron | sed -n -e \"\\\\' /etc/init.d/anacron '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			echo "Obsolete conffile /etc/init.d/anacron has been modified by you, renaming to .dpkg-bak"
+			mv -f "/etc/init.d/anacron" "/etc/init.d/anacron.dpkg-bak"
+		else
+			rm -f "/etc/init.d/anacron"
+		fi
+	fi
+fi
+# End automatically added section

@@ -1,0 +1,8 @@
+Document: dvd+rw-tools
+Title: DVD+RW Tools Manual
+Author: Andy Polyakov
+Section: File Management
+
+Format: HTML
+Index: /usr/share/doc/dvd+rw-tools/index.html
+Files: /usr/share/doc/dvd+rw-tools/*.html

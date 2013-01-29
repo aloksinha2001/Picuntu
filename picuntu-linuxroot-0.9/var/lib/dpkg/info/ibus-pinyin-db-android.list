@@ -1,0 +1,10 @@
+/.
+/usr
+/usr/share
+/usr/share/ibus-pinyin
+/usr/share/ibus-pinyin/db
+/usr/share/ibus-pinyin/db/android.db
+/usr/share/doc
+/usr/share/doc/ibus-pinyin-db-android
+/usr/share/doc/ibus-pinyin-db-android/copyright
+/usr/share/doc/ibus-pinyin-db-android/changelog.Debian.gz

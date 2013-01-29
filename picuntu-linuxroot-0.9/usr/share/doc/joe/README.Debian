@@ -1,0 +1,43 @@
+Joe's Own Editor Debian package
+-------------------------------
+
+Inclusion of configuration files
+--------------------------------
+
+Previously it was impossible to use a .joerc file without copying the entire
+set of defaults. Now there exists an ':include' statement which allows for
+the inclusion of other configuration files along with the one being read.
+In other words, put a ":include /etc/joe/joerc" at the end of one's ~/.joerc
+file and above that change only what you need.
+
+Back quotes or backticks (`)
+----------------------------
+
+The back quote character has a special meaning in joe, it is an escape
+character which invokes a special mode where the user can enter a
+three-digit ASCII code for non-printing characters.
+
+Locales with non-ASCII characters
+---------------------------------
+
+In older versions of joe, it was necessary to use the -asis mode in order
+to see non-ASCII characters. This is no longer necessary because there is
+proper locale support now. Simply export the LANG environment variable
+and set it to your language, and joe will follow that.
+
+More information
+----------------
+
+For further information about joe please see:
+
+  * joe manual page, joe(1)
+  * copying policy,
+	/usr/share/doc/joe/copyright
+  * changelog for Debian package,
+	/usr/share/doc/joe/changelog.Debian.gz
+  * joe's README:
+	/usr/share/doc/joe/README.gz
+  * any other files in /usr/share/doc/joe directory.
+
+ -- Michael Meskes <meskes@informatik.rwth-aachen.de>  Tue Jan  9 10:28:53 MET 1996
+    Josip Rodin <joy-packages@debian.org>  Pon Tra  3 01:55:49 CEST 2006

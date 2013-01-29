@@ -1,0 +1,19 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "configure" ]; then
+	# Upstart cannot be restarted without losing all of its state, so
+	# umountroot will run 'telinit u' on reboot if this file exists
+	# (NOTE: Borrowed from libc6.postinst)
+	touch /var/run/init.upgraded
+fi
+
+# Automatically added by dh_makeshlibs
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+# End automatically added section
+
+
+exit 0

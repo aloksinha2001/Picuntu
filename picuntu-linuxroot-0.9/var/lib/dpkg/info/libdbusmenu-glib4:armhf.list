@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libdbusmenu-glib.so.4.0.12
+/usr/share
+/usr/share/doc
+/usr/share/doc/libdbusmenu-glib4
+/usr/share/doc/libdbusmenu-glib4/AUTHORS
+/usr/share/doc/libdbusmenu-glib4/NEWS.gz
+/usr/share/doc/libdbusmenu-glib4/changelog.Debian.gz
+/usr/share/doc/libdbusmenu-glib4/copyright
+/usr/share/doc/libdbusmenu-glib4/README
+/usr/lib/arm-linux-gnueabihf/libdbusmenu-glib.so.4

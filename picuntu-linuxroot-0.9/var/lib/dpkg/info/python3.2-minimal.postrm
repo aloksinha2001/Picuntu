@@ -1,0 +1,29 @@
+#! /bin/sh -e
+
+if [ "$1" = "remove" ]; then
+
+    (find /usr/lib/python3.2 -name '*.py[co]' | xargs rm -f {}) 2>/dev/null || true
+
+    for d in `find /usr/lib/python3.2 -depth -type d -empty 2> /dev/null`; do \
+        while rmdir $d 2> /dev/null; do d=`dirname $d`; done; \
+    done
+
+    if [ -f /var/lib/python/python3.2_installed ]; then
+	rm -f /var/lib/python/python3.2_installed
+	rmdir --ignore-fail-on-non-empty /var/lib/python 2>/dev/null
+    fi
+
+    rmdir --parents /usr/local/lib/python3.2 2>/dev/null || true
+fi
+
+if [ "$1" = "purge" ]; then
+    for d in `find /usr/lib/python3.2 -depth -type d -empty 2> /dev/null`; do \
+        while rmdir $d 2> /dev/null; do d=`dirname $d`; done; \
+    done
+    rm -f /etc/python3.2/site.py /etc/python3.2/sitecustomize.py
+    rmdir --ignore-fail-on-non-empty /etc/python3.2 2>/dev/null
+fi
+
+
+
+exit 0

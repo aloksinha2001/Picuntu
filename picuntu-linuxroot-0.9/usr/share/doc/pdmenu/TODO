@@ -1,0 +1,23 @@
+Yet to be done:
+	* A menu file editor, to make it easy for you to set up your own 
+		menus.
+	* Break out a general widget library.
+	* Scrollbars on menus.
+	* Autodetect if terminal supports color
+	* Handle BS characters properly, so man pages can be displayed in 
+		windows. This would be nasty to do, and the benefit is 
+		small...
+	* There are some ugly loops in DoMenu_Up and DoMenu_Down that could 
+		be eliminated by careful programming.
+	* Support arrow keys, etc in inputbox.
+	* SIGSTP handler, so ^Z suspends (when not in -q mode)
+	* Possible: add an immediate command that takes another command that
+	  normally only appears in a menu as its parameter and runs it 
+	  immediatly. ie, immediate:remove:::menuid
+	* Add an option for a help text for each command in the menu,
+          displayed on help line. (Defaults to on, but can be turned off for
+          slow terminals.)
+	* Use checker's garbage collector to find all leaks.
+	* Rewrite RunShow. There has to be a better way.
+	* When esc is hit while editing something, back out only one edit
+	  step, instead of going all the way back to the menu.

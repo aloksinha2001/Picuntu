@@ -1,0 +1,501 @@
+ACTION!="add|change", GOTO="media_player_end"
+# catch MTP devices
+ENV{DEVTYPE}=="usb_device", GOTO="media_player_start"
+
+# catch UMS devices
+SUBSYSTEM!="block", GOTO="media_player_end"
+SUBSYSTEMS=="usb", GOTO="media_player_start"
+GOTO="media_player_end"
+
+LABEL="media_player_start"
+
+# 6600i
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0295" , ENV{ID_MEDIA_PLAYER}="nokia_6600i"
+# U6
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5133" , ENV{ID_MEDIA_PLAYER}="samsung_u6"
+# Sansa Clip+
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74d1|74d0" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-clip-plus"
+# YP-F2R
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5051" , ENV{ID_MEDIA_PLAYER}="samsung_yp-f2r"
+ATTRS{idVendor}=="1011" , ATTRS{idProduct}=="0001" , ENV{ID_MEDIA_PLAYER}="mobile-media_0x0001"
+# Walkman NWZ-S750 Series
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="04cc" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-s750"
+ATTRS{idVendor}=="045a" , ATTRS{idProduct}=="5042" , ENV{ID_MEDIA_PLAYER}="sonicblue_0x5042"
+# MP-130
+ATTRS{idVendor}=="1332" , ATTRS{idProduct}=="1325" , ENV{ID_MEDIA_PLAYER}="jens-of-sweeden_mp-130"
+# Network Walkman
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="01fb" , ENV{ID_MEDIA_PLAYER}="sony_network-walkman"
+# YP-U4
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5092" , ENV{ID_MEDIA_PLAYER}="samsung_yp-u4"
+# W660i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0a3" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w660i"
+# YP-T9
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5055" , ENV{ID_MEDIA_PLAYER}="samsung_yp-t9"
+# 6303
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="01b1" , ENV{ID_MEDIA_PLAYER}="nokia_6303"
+# XPERIA X1
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c1f|0b1f" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x1"
+# H320, H340
+ATTRS{idVendor}=="1006" , ATTRS{idProduct}=="3003" , ENV{ID_MEDIA_PLAYER}="iriver_h320_h340"
+ATTRS{vendor}=="[sS][oO][nN][yY]*" , ATTRS{model}=="*PSP*" , ENV{ID_MEDIA_PLAYER}="sony_psp"
+# H100A
+ATTRS{idVendor}=="069b" , ATTRS{idProduct}=="0761" , ENV{ID_MEDIA_PLAYER}="rca_h100a"
+# MuVo V200
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="4129" , ENV{ID_MEDIA_PLAYER}="creative_muvo-v200"
+# YP-S3
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5090" , ENV{ID_MEDIA_PLAYER}="samsung_yp-s3"
+# Sansa e200 Series
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7421" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-e200-series"
+# Sansa e100 Series
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7302" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-e100-series"
+# Coby
+ATTRS{idVendor}=="0402" , ATTRS{idProduct}=="5667" , ENV{ID_MEDIA_PLAYER}="coby_mpc843_mpc853"
+# GoGear RaGa (SA1942/02)
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="204e" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa1942"
+# Meizu M6 MiniPlayer
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5a0f" , ENV{ID_MEDIA_PLAYER}="samsung_meizu-m6-miniplayer"
+# iAUDIO X5
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0510" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-x5"
+# Vivaz
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e133" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_vivaz"
+# GoGear SA1330
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="0165" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa1330"
+# Yepp YP-ST5
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5021" , ENV{ID_MEDIA_PLAYER}="samsung_yepp-yp-st5"
+# iGP 100
+ATTRS{idVendor}=="1006" , ATTRS{idProduct}=="2001" , ENV{ID_MEDIA_PLAYER}="sony_igp-100"
+# Dream/ADP1/G1/Magic/Tattoo
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c01|0c02" , ENV{ID_MEDIA_PLAYER}="htc_dream_adp1_g1_magic_tattoo"
+# Touchpad
+ATTRS{idVendor}=="0830" , ATTRS{idProduct}=="8074|8072" , ENV{ID_MEDIA_PLAYER}="hp_touchpad"
+# MP3 Player
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="8038" , ENV{ID_MEDIA_PLAYER}="jetflash_0x8038"
+# TH1100A
+ATTRS{idVendor}=="069b" , ATTRS{idProduct}=="0778" , ENV{ID_MEDIA_PLAYER}="lyra_th1100a"
+# MP-120
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="82d4" , ENV{ID_MEDIA_PLAYER}="jens-of-sweeden_mp-120"
+# 6110 Navigator
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0471" , ENV{ID_MEDIA_PLAYER}="nokia_6110"
+# GMini 400m A404
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1109|1300" , ENV{ID_MEDIA_PLAYER}="archos_0x1109_0x1300"
+# W200
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e090" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w200"
+# YP-J70
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5032" , ENV{ID_MEDIA_PLAYER}="samsung_yp-j70"
+# Snap
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c5f" , ENV{ID_MEDIA_PLAYER}="htc_snap"
+# K810i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0a1" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k810i"
+# V640i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0af" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_v640i"
+# Coby
+ATTRS{idVendor}=="1e74" , ATTRS{idProduct}=="2211" , ENV{ID_MEDIA_PLAYER}="coby_mp705-4g"
+# Zen Nano Plus
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="4139" , ENV{ID_MEDIA_PLAYER}="creative_zen-nano-plus"
+# iAUDIO 9
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0910" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-9"
+# P1i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e092" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_p1i"
+# Pre 3
+ATTRS{idVendor}=="0830" , ATTRS{idProduct}=="8054|8052" , ENV{ID_MEDIA_PLAYER}="hp_pre3"
+# Sansa Clip Zip
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74e5" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-clip-zip"
+# W910i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e076" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w910i"
+# Walkman NWZ-S638F
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="038e" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-s638f"
+# iAUDIO E2
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0681" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-e2"
+ATTRS{model}=="*[iI][tT][uU][nN][eE][sS]*" , ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="4810" , ENV{ID_MEDIA_PLAYER}="motorola_itunes-phone"
+# Adam
+ATTRS{idVendor}=="0955" , ATTRS{idProduct}=="7100" , ENV{ID_MEDIA_PLAYER}="notion-ink_adam"
+# i.Beat cebrax fx
+ATTRS{idVendor}=="0738" , ATTRS{idProduct}=="1738" , ENV{ID_MEDIA_PLAYER}="trekstor_i.beat-cebrax-fx"
+# K750i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="d016" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k750i"
+# Sansa Clip
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7433" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-clip"
+# K850i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e075" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k850i"
+# GoGear Raga
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="20e3" , ENV{ID_MEDIA_PLAYER}="philips_gogear-raga"
+# SIRIUS alpha
+ATTRS{idVendor}=="10a9" , ATTRS{idProduct}=="6021" , ENV{ID_MEDIA_PLAYER}="pantech_sirius-alpha"
+# XS 100
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1205" , ENV{ID_MEDIA_PLAYER}="archos_xs-100"
+# A43 IT
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1417" , ENV{ID_MEDIA_PLAYER}="archos_a43"
+# Digital Live250
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="80e0" , ENV{ID_MEDIA_PLAYER}="jetflash_digital-live250"
+# K800i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e039" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k800i"
+# 5800 XpressMusic
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0156" , ENV{ID_MEDIA_PLAYER}="nokia_5800"
+# W580i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="d089|e089" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w580i"
+# E71
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="00aa" , ENV{ID_MEDIA_PLAYER}="nokia_e71"
+# Music Player
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="8004" , ENV{ID_MEDIA_PLAYER}="jetflash_0x8004"
+# Droid 2
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="42a4" , ENV{ID_MEDIA_PLAYER}="motorola_droid-2"
+# N9
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0518" , ENV{ID_MEDIA_PLAYER}="nokia_n9"
+# W300i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e053" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w300i"
+# Walkman Video MP3 NWZ-xxxx
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="035b|035c" , ENV{ID_MEDIA_PLAYER}="sony_0x035b_0x035c"
+# Sansa Fuze V2
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74c3" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-fuze-v2"
+# Droid/Milestone
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="41d9|41db" , ENV{ID_MEDIA_PLAYER}="motorola_droid_milestone"
+# YP-S5
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="508c" , ENV{ID_MEDIA_PLAYER}="samsung_yp-s5"
+# YP-T10
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="508a" , ENV{ID_MEDIA_PLAYER}="samsung_yp-t10"
+# 5310 XpressMusic
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="006a|006c" , ENV{ID_MEDIA_PLAYER}="nokia_5310"
+# GT S8000 Jet
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="4005" , ENV{ID_MEDIA_PLAYER}="samsung_gt-s8000-jet"
+# C902
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0d4" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_c902"
+# GoGear RaGa (SA2RGA)
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="20b4" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa2rga"
+ATTRS{idVendor}=="0d7d" , ATTRS{idProduct}=="1651" , ENV{ID_MEDIA_PLAYER}="peak_0x1651"
+# 5 Tablet
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1330" , ENV{ID_MEDIA_PLAYER}="archos_5"
+# ALBA MP3128D6
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="8305" , ENV{ID_MEDIA_PLAYER}="jetflash_alba-mp3128d6"
+# U5
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5121" , ENV{ID_MEDIA_PLAYER}="samsung_u5"
+# iAUDIO 7
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0751" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-7"
+# J3
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0920" , ENV{ID_MEDIA_PLAYER}="cowon_j3"
+# Mini Player M6
+ATTRS{idVendor}=="0492" , ATTRS{idProduct}=="0140" , ENV{ID_MEDIA_PLAYER}="meizu-mini_player_m6"
+# W800i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="d028" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w800i"
+# Nook
+ATTRS{idVendor}=="2080" , ATTRS{idProduct}=="0001|0002|0002" , ENV{ID_MEDIA_PLAYER}="barnes-and-noble_nook"
+# YP-P2
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5082" , ENV{ID_MEDIA_PLAYER}="samsung_yp-p2"
+# N97
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="026a" , ENV{ID_MEDIA_PLAYER}="nokia_n97"
+# TS-300
+ATTRS{idVendor}=="10c7" , ATTRS{idProduct}=="c000" , ENV{ID_MEDIA_PLAYER}="touchstone_ts-300"
+# Coby
+ATTRS{idVendor}=="1e74" , ATTRS{idProduct}=="2211" , ENV{ID_MEDIA_PLAYER}="coby_mp705-8g"
+# MuVo NX, MuVo2, MuVo TX, MuVo TX FM, Zen Micro,NOMAD Jukebox Zen Xtra, MuVo N200 (MuVo Micro), Zen Micro, Zen Touch
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="4115|4116|4117|4120|411e|4128|412b|4130|4131" , ENV{ID_MEDIA_PLAYER}="creative_0x4115_0x4116_0x4117_0x4120_0x411e_0x4128_0x412b_0x4130"
+# GoGear SA3125
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="084a" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa3125"
+# 6120
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="002d" , ENV{ID_MEDIA_PLAYER}="nokia_6120"
+# T.Sonic 520
+ATTRS{idVendor}=="0402" , ATTRS{idProduct}=="5661" , ENV{ID_MEDIA_PLAYER}="transcend_t.sonic-520"
+# Series 60 phones
+ATTRS{model}=="S60" , ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="*" , ENV{ID_MEDIA_PLAYER}="nokia_series-60-phones"
+# iAUDIO U2
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0600" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-u2"
+# Zen MX
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="201f" , ENV{ID_MEDIA_PLAYER}="creative_zen-mx"
+# Galaxy S2
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="6860|685e|685b" , ENV{ID_MEDIA_PLAYER}="samsung_galaxy-s2"
+# Walkman NWZ-135F
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="036e" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-135f"
+# vibez
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="842a" , ENV{ID_MEDIA_PLAYER}="trekstor_vibez"
+# Liquid
+ATTRS{idVendor}=="0502" , ATTRS{idProduct}=="3202|3203|3317" , ENV{ID_MEDIA_PLAYER}="acer_liquid"
+# 5300
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="04b9" , ENV{ID_MEDIA_PLAYER}="nokia_5300"
+# K610i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="d046|e046" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k610i"
+# Xperia X8
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="3149|2149" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x8"
+# iAUDIO X5, M5, F2, 7
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0510|0520|0710|0730|0750" , ENV{ID_MEDIA_PLAYER}="cowon_0x0510_0x0520_0x0710_0x0730_0x0750"
+# W810i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e042" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w810i"
+# W302i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0c8" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w302i"
+# W950i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="d037" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w950i"
+# Yepp YP-P3
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5119" , ENV{ID_MEDIA_PLAYER}="samsung_yepp-yp-p3"
+# Rio Carbon
+ATTRS{idVendor}=="045a" , ATTRS{idProduct}=="5224" , ENV{ID_MEDIA_PLAYER}="sonicblue_rio-carbon"
+# Rio Karma
+ATTRS{idVendor}=="045a" , ATTRS{idProduct}=="5210" , ENV{ID_MEDIA_PLAYER}="sonicblue_rio-karma"
+# YP-T7F
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="503d" , ENV{ID_MEDIA_PLAYER}="samsung_yp-t7f"
+# W705
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e105" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w705"
+# Galaxy Reality
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="68aa" , ENV{ID_MEDIA_PLAYER}="samsung_reality"
+# Key
+ATTRS{idVendor}=="0402" , ATTRS{idProduct}=="7108" , ENV{ID_MEDIA_PLAYER}="archos_key"
+# Xperia Play
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e15d" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-play"
+# CLIQ/DEXT
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="2d67" , ENV{ID_MEDIA_PLAYER}="motorola_cliq"
+# Music Player
+ATTRS{idVendor}=="0402" , ATTRS{idProduct}=="5661|5663" , ENV{ID_MEDIA_PLAYER}="ali_0x5661-0x5667"
+# S10
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1023" , ENV{ID_MEDIA_PLAYER}="iriver_s10"
+# Galaxy
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="6602|6603|6640|681c|681d|685b|6877" , ENV{ID_MEDIA_PLAYER}="samsung_galaxy"
+# Xperia mini
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e167" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-mini"
+# Walkman NWZ-A800 Series
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="0325" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-a800"
+# T60
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1034" , ENV{ID_MEDIA_PLAYER}="iriver_t60"
+# iAUDIO M3
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0500" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-m3"
+# Walkman NWD-B105
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="0317" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwd-b105"
+# S9
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0900" , ENV{ID_MEDIA_PLAYER}="cowon_s9"
+ATTRS{idVendor}=="1718" , ATTRS{idProduct}=="1013" , ENV{ID_MEDIA_PLAYER}="nexia-1013"
+# iPods with video
+ATTRS{idVendor}=="05ac" , ATTRS{idProduct}=="1209|1261|1262|1263|1265|1266|1223|1224|1225|1231|1255|1242|1243|1245|1246|1290|1292|1294|1297|1291|1293|1296|1299|129e|129a" , ENV{ID_MEDIA_PLAYER}="apple_video-ipod"
+# RD1072, RD2212, MC2021C, TH1501
+ATTRS{idVendor}=="069b" , ATTRS{idProduct}=="0713|0718|0756|0767" , ENV{ID_MEDIA_PLAYER}="rca_0x0713_0x0718_0x0756_0x0767"
+# Walkman NWZ-E443
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="03fd" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-e443"
+# Sansa View
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74b1" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-view"
+# Sansa m200 Series V4
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7431" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-m200-series-v4"
+# YP-T7
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5027" , ENV{ID_MEDIA_PLAYER}="samsung_yp-t7"
+# i1
+ATTRS{idVendor}=="0c44" , ATTRS{idProduct}=="41d9" , ENV{ID_MEDIA_PLAYER}="motorola_i1"
+# 6700
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0199" , ENV{ID_MEDIA_PLAYER}="nokia_6700"
+# N95
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="006d" , ENV{ID_MEDIA_PLAYER}="nokia_n95"
+# iAUDIO G3, 5
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0601|0602|0604" , ENV{ID_MEDIA_PLAYER}="cowon_0x0601_0x0602_0x0604"
+# GoGear Mix
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="2070" , ENV{ID_MEDIA_PLAYER}="philips_gogear-mix"
+# Music Mediatouch
+ATTRS{idVendor}=="071b" , ATTRS{idProduct}=="32bb" , ENV{ID_MEDIA_PLAYER}="dane-elec_music-mediatouch"
+# N950
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="03d1" , ENV{ID_MEDIA_PLAYER}="nokia_n950"
+# Sansa c250
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7451" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-c250"
+# Zen X-Fi 2
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="2020" , ENV{ID_MEDIA_PLAYER}="creative_zen-x-fi-2"
+# GoGear SA52XX
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="2022" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa52xx"
+# Droid X
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="4285" , ENV{ID_MEDIA_PLAYER}="motorola_droid-x"
+# Xperia X10
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="312e|d12e|e12e" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x10"
+# Kindle
+ATTRS{idVendor}=="1949" , ATTRS{idProduct}=="0001|0002|0003|0004" , ENV{ID_MEDIA_PLAYER}="amazon_kindle"
+ATTRS{vendor}=="*Apple*" , ATTRS{model}=="*iPod*" , ENV{ID_MEDIA_PLAYER}="apple_ipod"
+ATTRS{idVendor}=="0f9c" , ATTRS{idProduct}=="9111" , ENV{ID_MEDIA_PLAYER}="q-be_0x9111"
+# IS01
+ATTRS{idVendor}=="04dd" , ATTRS{idProduct}=="9337" , ENV{ID_MEDIA_PLAYER}="sharp-is01"
+# iFP 100 UMS, 300 UMS, 500 UMS (supports application/ogg only after firmware upgrade), N10 UMS
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1101|1103|1105|1111" , ENV{ID_MEDIA_PLAYER}="iriver_0x1101_0x1103_0x1105_0x1111"
+ATTRS{product}=="Rockbox media player" , ATTRS{manufacturer}=="Rockbox.org" , ENV{ID_MEDIA_PLAYER}="rockbox"
+# iAUDIO U3
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0700" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-u3"
+# Pulse
+ATTRS{idVendor}=="12d1" , ATTRS{idProduct}=="1501" , ENV{ID_MEDIA_PLAYER}="huawei_pulse"
+# Xperia X10 mini
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="3137|2137|612e" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x10-mini"
+# Zen Style 300
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="2016" , ENV{ID_MEDIA_PLAYER}="creative_zen-style-300"
+# Phone
+ATTRS{idVendor}=="05c6" , ATTRS{idProduct}=="1000" , ENV{ID_MEDIA_PLAYER}="qualcomm_0x05c6_0x1000"
+# K320i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e072" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_k320i"
+# PDP9512FM
+ATTRS{idVendor}=="069b" , ATTRS{idProduct}=="076b" , ENV{ID_MEDIA_PLAYER}="thomson_pdp9512fm"
+# Ally/Optimus One/Vortex
+ATTRS{idVendor}=="1004" , ATTRS{idProduct}=="618e|618f|61c6" , ENV{ID_MEDIA_PLAYER}="lg_ally_optimus-one_vortex"
+# DS-2 voice recorder
+ATTRS{idVendor}=="07b4" , ATTRS{idProduct}=="020e" , ENV{ID_MEDIA_PLAYER}="olympus_ds-2"
+# Xperia X10 mini pro
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="3138|2138" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x10-mini-pro"
+# GoGear Vibe
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="20b6" , ENV{ID_MEDIA_PLAYER}="philips_gogear-vibe"
+# MuVo V100
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="200c" , ENV{ID_MEDIA_PLAYER}="creative_muvo-v100"
+# GoGear Aria
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="2076" , ENV{ID_MEDIA_PLAYER}="philips_gogear-aria"
+# 32 IT
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1416" , ENV{ID_MEDIA_PLAYER}="archos_32-it"
+# U8120
+ATTRS{idVendor}=="12d1" , ATTRS{idProduct}=="1035" , ENV{ID_MEDIA_PLAYER}="huawei_u8120"
+# YP-F1
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="502b" , ENV{ID_MEDIA_PLAYER}="samsung_yp-f1"
+# Optimus S
+ATTRS{idVendor}=="1004" , ATTRS{idProduct}=="61cc" , ENV{ID_MEDIA_PLAYER}="lg_optimus-s"
+# W995
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e112" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w995"
+# T30
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1019|1023" , ENV{ID_MEDIA_PLAYER}="iriver_t30"
+# Yepp YP-K3
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5080" , ENV{ID_MEDIA_PLAYER}="samsung_yepp-yp-k3"
+# YP-MT6V
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5026" , ENV{ID_MEDIA_PLAYER}="samsung_yp-mt6v"
+# Zen Stone Plus
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="4155" , ENV{ID_MEDIA_PLAYER}="creative_zen-stone-plus"
+# V630i
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e043" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_v630i"
+# Prē
+ATTRS{idVendor}=="0830" , ATTRS{idProduct}=="8004|8002" , ENV{ID_MEDIA_PLAYER}="palm_pre"
+# Android A60
+ATTRS{idVendor}=="19d2" , ATTRS{idProduct}=="ffe2" , ENV{ID_MEDIA_PLAYER}="micromax_a60"
+# T7 Volcano
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1043" , ENV{ID_MEDIA_PLAYER}="iriver_t7-volcano"
+# Walkman NWZ-S760 Series
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="05a8" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-s760"
+# Nexus One
+ATTRS{idVendor}=="18d1" , ATTRS{idProduct}=="4e11|4e12" , ENV{ID_MEDIA_PLAYER}="google_nexus-one"
+# T10 1G, T20 UMS, T30 UMS, T10 UMS,iFP 700/800/900/1000 UMS, H10 20GB/50GB UMS
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1013|1014|1018|1020|1107|1108|1109|1110|2001|2002" , ENV{ID_MEDIA_PLAYER}="iriver_0x1013_0x1014_0x1018_0x1020_0x1107_0x1108_0x1109_0x1110_0x2001_0x2002"
+# 6300
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="04fa" , ENV{ID_MEDIA_PLAYER}="nokia_6300"
+# Zen Stone
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="4154" , ENV{ID_MEDIA_PLAYER}="creative_zen-stone"
+# YP-Z5
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5041" , ENV{ID_MEDIA_PLAYER}="samsung_yp-z5"
+# Mobile phone
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="6601" , ENV{ID_MEDIA_PLAYER}="samsung_0x6601-phones"
+# Walkman NWZ-E355
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="04cb" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-e355"
+# i.Beat Blaxx
+ATTRS{idVendor}=="1890" , ATTRS{idProduct}=="0210" , ENV{ID_MEDIA_PLAYER}="trekstor_i.beat-blaxx"
+# MegaStick-1 Flash Stick
+ATTRS{idVendor}=="1462" , ATTRS{idProduct}=="5512" , ENV{ID_MEDIA_PLAYER}="msi-megastick-1_flash_stick"
+# 770, N800, N810
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0431|04c3|0096" , ENV{ID_MEDIA_PLAYER}="nokia_0x0431_0x04c3_0x0096"
+# Hiptop/Sidekick 3
+ATTRS{idVendor}=="0da0" , ATTRS{idProduct}=="1001" , ENV{ID_MEDIA_PLAYER}="danger_hiptop_sidekick"
+# 6730
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="023a" , ENV{ID_MEDIA_PLAYER}="nokia_6730"
+# Galaxy Ace/Gio
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="689e" , ENV{ID_MEDIA_PLAYER}="samsung_galaxy-ace_gio"
+# M20
+ATTRS{idVendor}=="1890" , ATTRS{idProduct}=="0001" , ENV{ID_MEDIA_PLAYER}="m-cody_m20"
+# i.Beat Rock
+ATTRS{idVendor}=="1671" , ATTRS{idProduct}=="1632" , ENV{ID_MEDIA_PLAYER}="trekstor_i.beat-rock"
+# Touch HD
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c25" , ENV{ID_MEDIA_PLAYER}="htc_touch-hd"
+# Yepp YP-35
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5010" , ENV{ID_MEDIA_PLAYER}="samsung_yepp-yp-35"
+# Zen Nano
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="412c" , ENV{ID_MEDIA_PLAYER}="creative_zen-nano"
+# SV-MP31V
+ATTRS{idVendor}=="04da" , ATTRS{idProduct}=="3701" , ENV{ID_MEDIA_PLAYER}="panasonic_sv-mp31v"
+# Maxfield MAX-SIN TOUCH
+ATTRS{idVendor}=="1890" , ATTRS{idProduct}=="0110" , ENV{ID_MEDIA_PLAYER}="maxfield_max-sin-touch"
+ATTRS{model}=="*Motorola Phone (V3i)*" , ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="4810" , ENV{ID_MEDIA_PLAYER}="motorola_v3i"
+# iHP-100,115 / HP-120,140
+ATTRS{idVendor}=="1006" , ATTRS{idProduct}=="3001|3002" , ENV{ID_MEDIA_PLAYER}="iriver_0x3001_0x3002"
+# YP-U1
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="503b" , ENV{ID_MEDIA_PLAYER}="samsung_yp-u1"
+# Xperia Arc/X12
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e14f|614f" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-x12"
+# Incredible
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c9e" , ENV{ID_MEDIA_PLAYER}="htc_incredible"
+# GoGear SA1100
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="0163" , ENV{ID_MEDIA_PLAYER}="philips_gogear-sa1100"
+# Yepp YP-M1
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5123" , ENV{ID_MEDIA_PLAYER}="samsung_yepp-yp-m1"
+# Diamond
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c13" , ENV{ID_MEDIA_PLAYER}="htc_diamond"
+# D2
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0800" , ENV{ID_MEDIA_PLAYER}="cowon_d2"
+# KC910 Renoir
+ATTRS{idVendor}=="1004" , ATTRS{idProduct}=="a400" , ENV{ID_MEDIA_PLAYER}="lg_kc910-renoir"
+# W595
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0f3" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_w595"
+# YP-U2
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5050" , ENV{ID_MEDIA_PLAYER}="samsung_yp-u2"
+# Media Player
+ATTRS{idVendor}=="10d6" , ATTRS{idProduct}=="1100|1101" , ENV{ID_MEDIA_PLAYER}="actions-semiconductor_0x1100_0x1101"
+# Coby
+ATTRS{idVendor}=="1e74" , ATTRS{idProduct}=="2211" , ENV{ID_MEDIA_PLAYER}="coby_mp300"
+# Sansa e200 Series V2
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7423" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-e200-series-v2"
+# YP-S2
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="5095" , ENV{ID_MEDIA_PLAYER}="samsung_yp-s2"
+# NS-8V24
+ATTRS{idVendor}=="19ff" , ATTRS{idProduct}=="0308" , ENV{ID_MEDIA_PLAYER}="insignia_ns-8v24"
+# Android phone
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0ff9|0c99|0ca2|0c87|0c8d|0c97" , ENV{ID_MEDIA_PLAYER}="htc_desire_hero_evo-4g_legend"
+# Nexus S
+ATTRS{idVendor}=="18d1" , ATTRS{idProduct}=="4e21|4e22" , ENV{ID_MEDIA_PLAYER}="google_nexus-s"
+# Blackberry
+ATTRS{idVendor}=="0fca" , ATTRS{idProduct}=="0001|0004|0006|0008|8001|8004|8007" , ENV{ID_MEDIA_PLAYER}="rim_blackberry"
+# YP-Q2
+ATTRS{idVendor}=="04e8" , ATTRS{idProduct}=="511c" , ENV{ID_MEDIA_PLAYER}="samsung_yp-q2"
+# GoGear Opus
+ATTRS{idVendor}=="0471" , ATTRS{idProduct}=="2079" , ENV{ID_MEDIA_PLAYER}="philips_gogear-opus"
+# W880i/890i Walkman Phone
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e068|e0b3" , ENV{ID_MEDIA_PLAYER}="sony_0xe068_0xe0b3"
+# Sansa Fuze
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74c1" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-fuze"
+# C905
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e0ef" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_c905"
+# i.Beat Jess
+ATTRS{idVendor}=="0835" , ATTRS{idProduct}=="2835" , ENV{ID_MEDIA_PLAYER}="trekstor_i.beat-jess"
+# 5 IMT
+ATTRS{idVendor}=="0e79" , ATTRS{idProduct}=="1332" , ENV{ID_MEDIA_PLAYER}="archos_5imt"
+# MP-375SD
+ATTRS{idVendor}=="0402" , ATTRS{idProduct}=="5668" , ENV{ID_MEDIA_PLAYER}="teac_mp-375sd"
+# N900
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="01c7" , ENV{ID_MEDIA_PLAYER}="nokia_n900"
+# Music Player
+ATTRS{idVendor}=="066f" , ATTRS{idProduct}=="8000|8008|8206|821f|829c|82e0|835d" , ENV{ID_MEDIA_PLAYER}="jetflash_0x8000_0x8008_0x8206_0x821f_0x829c_0x82e0_0x835d"
+# Sansa Clip V2
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7435" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-clip-v2"
+# iAUDIO
+ATTRS{idVendor}=="0e21" , ATTRS{idProduct}=="0760" , ENV{ID_MEDIA_PLAYER}="cowon_iaudio-u5_g2"
+# Zen X-Fi Style
+ATTRS{idVendor}=="041e" , ATTRS{idProduct}=="200a" , ENV{ID_MEDIA_PLAYER}="creative_zen-x-fi-style"
+# C7-00
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="03c0" , ENV{ID_MEDIA_PLAYER}="nokia_c7-00"
+# Atrix
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="7086" , ENV{ID_MEDIA_PLAYER}="motorola_atrix"
+# DMP-100
+ATTRS{idVendor}=="0dda" , ATTRS{idProduct}=="0302" , ENV{ID_MEDIA_PLAYER}="hama_dmp-100"
+# Walkman NWZ-S500 Series
+ATTRS{idVendor}=="054c" , ATTRS{idProduct}=="03fe" , ENV{ID_MEDIA_PLAYER}="sony_walkman-nwz-s500"
+# Sansa m200 Series
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="7401" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-m200-series"
+# Ideos
+ATTRS{idVendor}=="12d1" , ATTRS{idProduct}=="1037|1038" , ENV{ID_MEDIA_PLAYER}="huawei_ideos"
+# Xperia mini pro
+ATTRS{idVendor}=="0fce" , ATTRS{idProduct}=="e166|6166" , ENV{ID_MEDIA_PLAYER}="sony-ericsson_xperia-mini-pro"
+# LifeTouch Note
+ATTRS{idVendor}=="0409" , ATTRS{idProduct}=="0300|0301" , ENV{ID_MEDIA_PLAYER}="nec_lifetouch-note"
+# Media Player
+ATTRS{idVendor}=="071b" , ATTRS{idProduct}=="3203" , ENV{ID_MEDIA_PLAYER}="domain-technologies_0x3203"
+# Mobile phone
+ATTRS{idVendor}=="1004" , ATTRS{idProduct}=="6018" , ENV{ID_MEDIA_PLAYER}="lg_0x6018"
+# ROKR e2 Memory Card mode
+ATTRS{idVendor}=="22b8" , ATTRS{idProduct}=="608d" , ENV{ID_MEDIA_PLAYER}="motorola_rokr-e2"
+# E30
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1067" , ENV{ID_MEDIA_PLAYER}="iriver_e30"
+# E100
+ATTRS{idVendor}=="4102" , ATTRS{idProduct}=="1041" , ENV{ID_MEDIA_PLAYER}="iriver_e100"
+# Sansa Fuze+
+ATTRS{idVendor}=="0781" , ATTRS{idProduct}=="74e0" , ENV{ID_MEDIA_PLAYER}="sandisk_sansa-fuze-plus"
+# IS03
+ATTRS{idVendor}=="04dd" , ATTRS{idProduct}=="939a" , ENV{ID_MEDIA_PLAYER}="sharp-is03"
+# N91
+ATTRS{idVendor}=="0421" , ATTRS{idProduct}=="0444" , ENV{ID_MEDIA_PLAYER}="nokia_n91"
+# Vision
+ATTRS{idVendor}=="0bb4" , ATTRS{idProduct}=="0c94" , ENV{ID_MEDIA_PLAYER}="htc_vision"
+
+LABEL="media_player_end"

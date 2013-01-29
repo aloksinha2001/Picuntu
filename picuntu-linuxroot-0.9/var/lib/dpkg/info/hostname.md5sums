@@ -1,0 +1,8 @@
+f3d667eac2430c26b377d62552fd1938  bin/dnsdomainname
+f3d667eac2430c26b377d62552fd1938  bin/domainname
+baa74769c7e3342e0f112fbdb4cc05fb  bin/hostname
+f3d667eac2430c26b377d62552fd1938  bin/nisdomainname
+f3d667eac2430c26b377d62552fd1938  bin/ypdomainname
+c86b2af6ae0a98a99bda4d655d256c5e  usr/share/doc/hostname/changelog.gz
+460b6a1df2db2b5e80f05a44ec21c62f  usr/share/doc/hostname/copyright
+b2bf8ff7a7fecd7a2d6f8ed116ba72e0  usr/share/man/man1/hostname.1.gz

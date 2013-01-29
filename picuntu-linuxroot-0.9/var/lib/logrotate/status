@@ -1,0 +1,21 @@
+logrotate state -- version 2
+"/var/log/syslog" 2013-1-10
+"/var/log/dpkg.log" 2013-1-5
+"/var/log/auth.log" 2013-1-7
+"/var/log/apt/term.log" 2013-1-5
+"/var/log/ppp-connect-errors" 2013-1-10
+"/var/log/apt/history.log" 2013-1-5
+"/var/log/alternatives.log" 2013-1-10
+"/var/log/debug" 2013-1-10
+"/var/log/mail.log" 2012-10-5
+"/var/log/kern.log" 2013-1-7
+"/var/log/wtmp" 2013-1-10
+"/var/log/daemon.log" 2013-1-10
+"/var/log/mail.warn" 2013-1-10
+"/var/log/btmp" 2013-1-10
+"/var/log/lpr.log" 2013-1-10
+"/var/log/mail.err" 2012-10-5
+"/var/log/user.log" 2013-1-10
+"/var/log/mail.info" 2013-1-10
+"/var/log/cron.log" 2013-1-10
+"/var/log/messages" 2013-1-10

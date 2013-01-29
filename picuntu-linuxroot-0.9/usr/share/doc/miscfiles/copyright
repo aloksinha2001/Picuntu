@@ -1,0 +1,95 @@
+This package was initially debianized by Herbert Xu herbert@debian.org on
+Mon, 10 Feb 1997 21:44:40 +1100.
+
+It was downloaded from ftp://prep.ai.mit.edu/.
+
+Copyright:
+
+The Unicode data file license is Unicode-License.  The other files are
+either public domain, or copyrighted by the Free Software Foundation
+and distributed under the GPL.
+
+The GPL can be found at /usr/share/common-licenses/GPL on Debian systems.
+
+
+GNU miscfiles NEWS   8 July 1996
+
+Copyright (C) 2001 Free Software Foundation, Inc.
+See the end for copying conditions.
+
+Please send GNU miscfiles bug reports to bug-gnu-utils@prep.ai.mit.edu.
+
+----------------------------------------------------------------------
+Copyright information:
+
+Copyright (C) 2001 Free Software Foundation, Inc.
+
+   Permission is granted to anyone to make or distribute verbatim copies
+   of this document as received, in any medium, provided that the
+   copyright notice and this permission notice are preserved,
+   thus giving the recipient permission to redistribute in turn.
+
+   Permission is granted to distribute modified versions
+   of this document, or of portions of it,
+   under the above conditions, provided also that they
+   carry prominent notices stating who last changed them.
+
+----------------------------------------------------------------------
+
+
+UNICODE, INC. LICENSE AGREEMENT - DATA FILES AND SOFTWARE
+
+Unicode Data Files include all data files under the directories
+http://www.unicode.org/Public/ and
+http://www.unicode.org/reports/. Unicode Software includes any source
+code under the directories http://www.unicode.org/Public/ and
+http://www.unicode.org/reports/.
+
+NOTICE TO USER: Carefully read the following legal agreement. BY
+DOWNLOADING, INSTALLING, COPYING OR OTHERWISE USING UNICODE INC.'S
+DATA FILES ("DATA FILES"), AND/OR SOFTWARE ("SOFTWARE"), YOU
+UNEQUIVOCALLY ACCEPT, AND AGREE TO BE BOUND BY, ALL OF THE TERMS AND
+CONDITIONS OF THIS AGREEMENT. IF YOU DO NOT AGREE, DO NOT DOWNLOAD,
+INSTALL, COPY, DISTRIBUTE OR USE THE DATA FILES OR SOFTWARE.
+
+COPYRIGHT AND PERMISSION NOTICE
+
+Copyright © 1991-2004 Unicode, Inc. All rights reserved. Distributed
+under the Terms of Use in http://www.unicode.org/copyright.html.
+
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of the Unicode data files and associated documentation (the
+"Data Files") or Unicode software and associated documentation (the
+"Software") to deal in the Data Files or Software without restriction,
+including without limitation the rights to use, copy, modify, merge,
+publish, distribute, and/or sell copies of the Data Files or Software,
+and to permit persons to whom the Data Files or Software are furnished
+to do so, provided that (a) the above copyright notice(s) and this
+permission notice appear in all copies of the Data Files or Software,
+v(b) both the above copyright notice(s) and this permission notice
+appear in associated documentation, and (c) there is clear notice in
+each modified Data File or in the Software as well as in the
+documentation associated with the Data File(s) or Software that the
+data or software has been modified.
+
+THE DATA FILES AND SOFTWARE ARE PROVIDED "AS IS", WITHOUT WARRANTY OF
+ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT OF THIRD PARTY RIGHTS. IN NO EVENT SHALL THE COPYRIGHT
+HOLDER OR HOLDERS INCLUDED IN THIS NOTICE BE LIABLE FOR ANY CLAIM, OR
+ANY SPECIAL INDIRECT OR CONSEQUENTIAL DAMAGES, OR ANY DAMAGES
+WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT
+OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THE DATA FILES OR
+SOFTWARE.
+
+Except as contained in this notice, the name of a copyright holder
+shall not be used in advertising or otherwise to promote the sale, use
+or other dealings in these Data Files or Software without prior
+written authorization of the copyright holder.
+
+
+
+Thomas Bushnell, BSG <tb@debian.org> is the current maintainer for
+Debian GNU/Linux.
+

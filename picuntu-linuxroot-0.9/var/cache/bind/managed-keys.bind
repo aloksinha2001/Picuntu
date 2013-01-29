@@ -1,0 +1,19 @@
+$ORIGIN .
+$TTL 0	; 0 seconds
+@			IN SOA	. . (
+				2          ; serial
+				0          ; refresh (0 seconds)
+				0          ; retry (0 seconds)
+				0          ; expire (0 seconds)
+				0          ; minimum (0 seconds)
+				)
+			KEYDATA	20121213161047 20121212161047 19700101000000 257 3 8 (
+				AwEAAagAIKlVZrpC6Ia7gEzahOR+9W29euxhJhVVLOyQ
+				bSEW0O8gcCjFFVQUTf6v58fLjwBd0YI0EzrAcQqBGCzh
+				/RStIoO8g0NfnfL2MTJRkxoXbfDaUeVPQuYEhg37NZWA
+				JQ9VnMVDxP/VHL496M/QZxkjf5/Efucp2gaDX6RS6CXp
+				oY68LsvPVjR0ZSwzz1apAzvN9dlzEheX7ICJBBtuA6G3
+				LQpzW5hOA2hzCTMjJPJ8LbqF6dsV6DoBQzgul0sGIcGO
+				Yl7OyQdXfZ57relSQageu+ipAdTTJ25AsRTAoub8ONGc
+				LmqrAmRLKBP1dfwhYB4N7knNnulqQxA+Uk1ihz0=
+				) ; key id = 19036

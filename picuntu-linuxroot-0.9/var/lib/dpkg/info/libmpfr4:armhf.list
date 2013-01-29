@@ -1,0 +1,17 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libmpfr.so.4.1.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libmpfr4
+/usr/share/doc/libmpfr4/TODO.gz
+/usr/share/doc/libmpfr4/changelog.Debian.gz
+/usr/share/doc/libmpfr4/copyright
+/usr/share/doc/libmpfr4/README
+/usr/share/doc/libmpfr4/BUGS
+/usr/share/doc/libmpfr4/AUTHORS
+/usr/share/doc/libmpfr4/README.Debian
+/usr/share/doc/libmpfr4/NEWS.gz
+/usr/lib/arm-linux-gnueabihf/libmpfr.so.4

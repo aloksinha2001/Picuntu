@@ -1,0 +1,48 @@
+lease {
+  interface "wlan0";
+  fixed-address 192.168.1.70;
+  option subnet-mask 255.255.255.0;
+  option dhcp-lease-time 86400;
+  option routers 192.168.1.1;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 192.168.1.1;
+  option domain-name-servers 192.168.1.1;
+  option dhcp-renewal-time 43200;
+  option dhcp-rebinding-time 75600;
+  option broadcast-address 192.168.1.255;
+  option host-name "picuntu";
+  option fqdn.encoded false;
+  option fqdn.hostname "picuntu";
+  option fqdn.fqdn "picuntu";
+  option fqdn.no-client-update true;
+  option fqdn.server-update true;
+  option fqdn.rcode1 255;
+  option fqdn.rcode2 255;
+  renew 5 2013/01/11 10:00:40;
+  rebind 5 2013/01/11 20:09:59;
+  expire 5 2013/01/11 23:09:59;
+}
+lease {
+  interface "wlan0";
+  fixed-address 192.168.1.70;
+  option subnet-mask 255.255.255.0;
+  option dhcp-lease-time 86400;
+  option routers 192.168.1.1;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 192.168.1.1;
+  option domain-name-servers 192.168.1.1;
+  option dhcp-renewal-time 43200;
+  option dhcp-rebinding-time 75600;
+  option broadcast-address 192.168.1.255;
+  option host-name "picuntu";
+  option fqdn.encoded false;
+  option fqdn.hostname "picuntu";
+  option fqdn.fqdn "picuntu";
+  option fqdn.no-client-update true;
+  option fqdn.server-update true;
+  option fqdn.rcode1 255;
+  option fqdn.rcode2 255;
+  renew 4 2013/01/10 23:18:13;
+  rebind 4 2013/01/10 23:18:13;
+  expire 4 2013/01/10 23:18:13;
+}

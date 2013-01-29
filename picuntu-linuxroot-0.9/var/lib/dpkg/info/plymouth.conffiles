@@ -1,0 +1,5 @@
+/etc/init/plymouth-upstart-bridge.conf
+/etc/init/plymouth.conf
+/etc/init/plymouth-log.conf
+/etc/init/plymouth-splash.conf
+/etc/init/plymouth-stop.conf

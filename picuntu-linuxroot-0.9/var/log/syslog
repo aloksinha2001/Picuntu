@@ -1,0 +1,18 @@
+Jan 10 23:15:11 picuntu rsyslogd: [origin software="rsyslogd" swVersion="5.8.6" x-pid="310" x-info="http://www.rsyslog.com"] rsyslogd was HUPed
+Jan 10 23:15:11 picuntu anacron[687]: Job `cron.daily' terminated (mailing output)
+Jan 10 23:15:11 picuntu anacron[687]: Can't find sendmail at /usr/sbin/sendmail, not mailing output
+Jan 10 23:15:12 picuntu anacron[687]: Normal exit (1 job run)
+Jan 10 23:16:16 picuntu ntpd[2004]: ntpd 4.2.6p3@1.2290-o Mon Aug 20 22:57:34 UTC 2012 (1)
+Jan 10 23:16:16 picuntu ntpd[2005]: proto: precision = 0.916 usec
+Jan 10 23:16:16 picuntu ntpd[2005]: ntp_io: estimated max descriptors: 1024, initial socket boundary: 16
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen and drop on 0 v4wildcard 0.0.0.0 UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen and drop on 1 v6wildcard :: UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen normally on 2 lo 127.0.0.1 UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen normally on 3 wlan0 192.168.1.70 UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen normally on 4 wlan0 fe80::292:c3ff:fec0:bc13 UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: Listen normally on 5 lo ::1 UDP 123
+Jan 10 23:16:16 picuntu ntpd[2005]: peers refreshed
+Jan 10 23:16:16 picuntu ntpd[2005]: Listening on routing socket on fd #22 for interface updates
+Jan 10 23:17:02 picuntu CRON[2352]: (root) CMD (   cd / && run-parts --report /etc/cron.hourly)
+Jan 10 23:18:12 picuntu kernel: Kernel logging (proc) stopped.
+Jan 10 23:18:12 picuntu rsyslogd: [origin software="rsyslogd" swVersion="5.8.6" x-pid="310" x-info="http://www.rsyslog.com"] exiting on signal 15.

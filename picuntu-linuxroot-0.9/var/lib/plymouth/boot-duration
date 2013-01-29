@@ -1,0 +1,15 @@
+0.102:plymouth-splash
+0.115:avahi-daemon
+0.147:upstart-socket-bridge
+0.184:udevtrigger
+0.185:udevmonitor
+0.232:networking
+0.996:tty4
+0.996:tty5
+0.997:tty2
+0.997:tty3
+0.997:dmesg
+0.997:tty6
+0.997:anacron
+0.997:cron
+0.999:tty1

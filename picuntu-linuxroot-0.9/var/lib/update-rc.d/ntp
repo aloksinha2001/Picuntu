@@ -1,0 +1,1 @@
+update-rc.d ntp start 23 2 3 4 5 . stop 77 1 .

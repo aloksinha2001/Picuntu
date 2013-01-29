@@ -1,0 +1,30 @@
+#!/usr/bin/pdmenu
+
+# picuntu-da-server - 0.9
+# Release date: 20-Dec-12
+#   Read the readme file for instructions
+#
+# Copyright Alok Sinha - asinha@g8.net
+# Released under GPL V2
+
+# Seting up color scheme.
+color:desktop:white:brightblue
+color:title:red:red
+color:base:white:red
+color:shadow:black:black
+color:menu:black:brightcyan
+color:selbar:white:black
+color:menuhot:yellow
+color:unselmenu:gray:white
+
+preproc: if [ -f /tmp/picuntu.debug ]; then /usr/bin/logger "PICUNTU: PDMENU initialised in debug mode."; fi
+
+# ** Main menu
+menu:home:  Configure Hostname :Welcome to Picuntu: Picuntu 0.9: 'q' or 'Esc' to go back
+				show:  ...---=== Welcome to Picuntu Configurator ===---... ::
+				nop:
+				exec: Show current Hostna_me:display:/bin/hostname
+				exec: Change your _Hostname:edit,display:clear;hostname ~HOST:~ ; newhost=`hostname`; oldhost=`cat /etc/hostname`; sed -i 's/'$oldhost'/'$newhost'/' /etc/hosts; echo `hostname` > /etc/hostname; echo "New hostname: `/bin/hostname`"
+        nop
+	        exit: Ne_xt...
+        

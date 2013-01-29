@@ -1,0 +1,691 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 15. The Board Library</title>
+
+<meta name="description" content="GNU Go Documentation: 15. The Board Library">
+<meta name="keywords" content="GNU Go Documentation: 15. The Board Library">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Libboard"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_14.html#Final-Remarks" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Board-Data-Structures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Board-Library"></a>
+<h1 class="chapter">15. The Board Library</h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Board-Data-Structures">15.1 Board Data structures</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      Board Data Structures
+</td></tr>
+<tr><td align="left" valign="top"><a href="#The-Board-Array">15.2 The Board Array</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">	       One-dimensional board array
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Incremental-Board">15.3 Incremental Board data structures</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">	  	Incremental board data structures
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Some-Board-Functions">15.4 Some Board Functions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">      	Explanation of some board functions
+</td></tr>
+</table>
+
+<p>The foundation of the GNU Go engine is a library of very efficient
+routines for handling go boards.  This board library, called
+&lsquo;<tt>libboard</tt>&rsquo;, can be used for those programs that only need a
+basic go board but no AI capability. One such program is
+&lsquo;<tt>patterns/joseki.c</tt>&rsquo;, which compiles joseki pattern
+databases from SGF files.
+</p>
+<p>If you want to use the board library in your own program, you need all
+the .c-files listed under libboard_SOURCES in engine/Makefile.am, and
+the files in the directories sgf/ and utils/. Then you should include
+engine/board.h in your code.
+</p>
+<p>The library consists of the following files:
+</p>
+<ul>
+<li> &lsquo;<tt>board.h</tt>&rsquo;
+<blockquote><p>The public interface to the board library.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>board.c</tt>&rsquo;
+<blockquote><p>The basic board code. It uses incremental algorithms for keeping track
+of strings and liberties on the go board.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>boardlib.c</tt>&rsquo;
+<blockquote><p>This contains all global variable of the board library.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>hash.c</tt>&rsquo;
+<blockquote><p>Code for hashing go positions.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>sgffile.c</tt>&rsquo;
+<blockquote><p>Implementation of output file in SGF format.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>printutils.c</tt>&rsquo;
+<blockquote><p>Utilities for printing go boards and other things.
+</p></blockquote>
+
+</li></ul>
+
+<p>To use the board library, you must include &lsquo;<tt>liberty.h</tt>&rsquo; just like
+when you use the whole engine, but of course you cannot use all the
+functions declared in it, i.e. the functions that are part of the
+engine, but not part of the board library.  You must link your
+application with <code>libboard.a</code>.
+</p>
+<hr size="6">
+<a name="Board-Data-Structures"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Libboard" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-Board-Array" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Board-Data-structures"></a>
+<h2 class="section">15.1 Board Data structures</h2>
+
+<p>The basic data structures of the board correspond tightly to the
+<code>board_state</code> struct described in See section <a href="gnugo_17.html#The-Board-State">The board_state struct</a>. They are all
+stored in global variables for efficiency reasons, the most important of which
+are:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+int           board_size;
+Intersection  board[MAXSIZE];
+int           board_ko_pos;
+
+float         komi;
+int           white_captured;
+int           black_captured;
+
+Hash_data     hashdata;
+</pre></td></tr></table>
+
+<p>The description of the <code>Position</code> struct is applicable to these
+variables also, so we won&rsquo;t duplicate it here.  All these variables are
+globals for performance reasons.  Behind these variables, there are a
+number of other private data structures.  These implement incremental
+handling of strings, liberties and other properties 
+(see section <a href="#Incremental-Board">Incremental Board data structures</a>). The variable <code>hashdata</code> contains information
+about the hash value for the current position (see section <a href="gnugo_11.html#Hashing">Hashing of Positions</a>).
+</p>
+<p>These variables should never be manipulated directly, since they are
+only the front end for the incremental machinery. They can be read, but
+should only be written by using the functions described in the next
+section. If you write directly to them, the incremental data structures
+will become out of sync with each other, and a crash is the likely
+result. 
+</p>
+<hr size="6">
+<a name="The-Board-Array"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Board-Data-Structures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Incremental-Board" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Board-Array-1"></a>
+<h2 class="section">15.2 The Board Array</h2>
+
+<p>GNU Go represents the board in a one-dimensional array called
+<code>board</code>. For some purposes a two dimensional indexing of the
+board by parameters <code>(i,j)</code> might be used.
+</p>
+<p>The <code>board</code> array includes out-of-board markers around the
+board. To make the relation to the old two-dimensional board
+representation clear, this figure shows how the 1D indices correspond
+to the 2D indices when MAX_BOARD is 7.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  j  -1   0   1   2   3   4   5   6
+i +----------------------------------
+-1|   0   1   2   3   4   5   6   7
+ 0|   8   9  10  11  12  13  14  15
+ 1|  16  17  18  19  20  21  22  23
+ 2|  24  25  26  27  28  29  30  31
+ 3|  32  33  34  35  36  37  38  39
+ 4|  40  41  42  43  44  45  46  47
+ 5|  48  49  50  51  52  53  54  55
+ 6|  56  57  58  59  60  61  62  63
+ 7|  64  65  66  67  68  69  70  71  72
+</pre></td></tr></table>
+
+<p>To convert between a 1D index <code>pos</code> and a 2D index <code>(i,j)</code>,
+the macros <code>POS</code>, <code>I</code>, and <code>J</code> are provided, defined as
+below:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#define POS(i, j)    ((MAX_BOARD + 2) + (i) * (MAX_BOARD + 1) + (j))
+#define I(pos)       ((pos) / (MAX_BOARD + 1) - 1)
+#define J(pos)       ((pos) % (MAX_BOARD + 1) - 1)
+</pre></td></tr></table>
+
+<p>All 1D indices not corresponding to points on the board have the out
+of board marker value <code>GRAY</code>. Thus if <code>board_size</code> and
+<code>MAX_BOARD</code> both are 7, this looks like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  j  -1   0   1   2   3   4   5   6
+i +----------------------------------
+-1|   #   #   #   #   #   #   #   #
+ 0|   #   .   .   .   .   .   .   .
+ 1|   #   .   .   .   .   .   .   .
+ 2|   #   .   .   .   .   .   .   .
+ 3|   #   .   .   .   .   .   .   .
+ 4|   #   .   .   .   .   .   .   .
+ 5|   #   .   .   .   .   .   .   .
+ 6|   #   .   .   .   .   .   .   .
+ 7|   #   #   #   #   #   #   #   #   #
+</pre></td></tr></table>
+
+<p>The indices marked &lsquo;<samp>#</samp>&rsquo; have value <code>GRAY</code>.
+If <code>MAX_BOARD</code> is 7 and <code>board_size</code> is only 5:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  j  -1   0   1   2   3   4   5   6
+i +----------------------------------
+-1|   #   #   #   #   #   #   #   #
+ 0|   #   .   .   .   .   .   #   #
+ 1|   #   .   .   .   .   .   #   #
+ 2|   #   .   .   .   .   .   #   #
+ 3|   #   .   .   .   .   .   #   #
+ 4|   #   .   .   .   .   .   #   #
+ 5|   #   #   #   #   #   #   #   #
+ 6|   #   #   #   #   #   #   #   #
+ 7|   #   #   #   #   #   #   #   #   #
+</pre></td></tr></table>
+
+<p>Navigation on the board is done by the <code>SOUTH</code>, <code>WEST</code>,
+<code>NORTH</code>, and <code>EAST</code> macros,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#define NS           (MAX_BOARD + 1)
+#define WE           1
+#define SOUTH(pos)   ((pos) + NS)
+#define WEST(pos)    ((pos) - 1)
+#define NORTH(pos)   ((pos) - NS)
+#define EAST(pos)    ((pos) + 1)
+</pre></td></tr></table>
+
+<p>There are also shorthand macros <code>SW</code>, <code>NW</code>, <code>NE</code>,
+<code>SE</code>, <code>SS</code>, <code>WW</code>, <code>NN</code>, <code>EE</code> for two step
+movements.
+</p>
+<p>Any movement from a point on the board to an adjacent or diagonal
+vertex is guaranteed to produce a valid index into the board array, and
+the color found is GRAY if it is not on the board. To do explicit tests
+for out of board there are two macros
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#define ON_BOARD(pos) (board[pos] != GRAY)
+#define ON_BOARD1(pos) (((unsigned) (pos) &lt; BOARDSIZE) &amp;&amp; board[pos] != GRAY)
+</pre></td></tr></table>
+
+<p>where the first one should be used in the algorithms and the second
+one is useful for assertion tests.
+</p>
+<p>The advantage of a one-dimensional board array is that it gives a
+significant performance advantage. We need only one variable to determine
+a board position, which means that many functions need less arguments. Also,
+often one computation is sufficient for 1D-coordinate where we would need
+two with two 2D-coordinates: If we, for example, want to have the
+coordinate of the upper right of <code>pos</code>, we can do this with
+<code>NORTH(EAST(pos))</code> instead of <code>(i+1, j-1)</code>.
+</p>
+<p><strong>Important</strong>: The 2D coordinate <code>(-1,-1)</code>, which is used for
+pass and sometimes to indicate no point, maps to the 1D coordinate
+<code>0</code>, not to <code>-1</code>. Instead of a plain <code>0</code>, use one of the
+macros <code>NO_MOVE</code> or <code>PASS_MOVE</code>.
+</p>
+<p>A loop over multiple directions is straightforwardly written:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  for (k = 0; k &lt; 4; k++) {
+    int d = delta[k];
+    do_something(pos + d);
+  }
+</pre></td></tr></table>
+
+<p>The following constants are useful for loops over the entire board and
+allocation of arrays with a 1-1 mapping to the board.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">#define BOARDSIZE    ((MAX_BOARD + 2) * (MAX_BOARD + 1) + 1)
+#define BOARDMIN     (MAX_BOARD + 2)
+#define BOARDMAX     (MAX_BOARD + 1) * (MAX_BOARD + 1)
+</pre></td></tr></table>
+
+<p><code>BOARDSIZE</code> is the actual size of the 1D board array,
+<code>BOARDMIN</code> is the first index corresponding to a point on the
+board, and <code>BOARDMAX</code> is one larger than the last index corresponding to
+a point on the board. 
+</p>
+<p>Often one wants to traverse the board, carrying out some function
+at every vertex. Here are two possible ways of doing this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  int m, n;
+  for (m = 0; m &lt; board_size; m++)
+    for (n = 0; n &lt; board_size; n++) {
+      do_something(POS(m, n));
+    }
+</pre></td></tr></table>
+
+<p>Or:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  int pos;
+  for (pos = BOARDMIN; pos &lt; BOARDMAX; pos++) {
+    if (ON_BOARD(pos))
+      do_something(pos);
+  }
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Incremental-Board"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#The-Board-Array" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Some-Board-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Incremental-Board-data-structures"></a>
+<h2 class="section">15.3 Incremental Board data structures</h2>
+
+<p>In addition to the global board state, the algorithms in &lsquo;<tt>board.c</tt>&rsquo;
+implement a method of incremental updates that keeps track of the
+following information for each string:
+</p>
+<ul>
+<li> The color of the string.
+</li><li> Number of stones in the string.
+</li><li> Origin of the string, i.e. a canonical reference point, defined
+to be the stone with smallest 1D board coordinate.
+</li><li> A list of the stones in the string.
+</li><li> Number of liberties.
+</li><li> A list of the liberties. If there are too many liberties the list is
+truncated.
+</li><li> The number of neighbor strings.
+</li><li> A list of the neighbor strings.
+</li></ul>
+
+<p>The basic data structure is
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">struct string_data {
+  int color;                       /* Color of string, BLACK or WHITE */
+  int size;                        /* Number of stones in string. */
+  int origin;                      /* Coordinates of &quot;origin&quot;, i.e. */
+                                   /* &quot;upper left&quot; stone. */
+  int liberties;                   /* Number of liberties. */
+  int libs[MAX_LIBERTIES];         /* Coordinates of liberties. */
+  int neighbors;                   /* Number of neighbor strings */
+  int neighborlist[MAXCHAIN];      /* List of neighbor string numbers. */
+  int mark;                        /* General purpose mark. */
+};
+
+struct string_data string[MAX_STRINGS];
+</pre></td></tr></table>
+
+<p>It should be clear that almost all information is stored in the
+<code>string</code> array. To get a mapping from the board coordinates to the
+<code>string</code> array we have
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">static int string_number[BOARDMAX];
+</pre></td></tr></table>
+
+<p>which contains indices into the <code>string</code> array. This information is only
+valid at nonempty vertices, however, so it is necessary to first
+verify that <code>board[pos] != EMPTY</code>.
+</p>
+<p>The <code>string_data</code> structure does not include an array of the stone
+coordinates. This information is stored in a separate array:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">static int next_stone[BOARDMAX];
+</pre></td></tr></table>
+
+<p>This array implements cyclic linked lists of stones. Each vertex
+contains a pointer to another (possibly the same) vertex. Starting at
+an arbitrary stone on the board, following these pointers should
+traverse the entire string in an arbitrary order before coming back to
+the starting point. As for the &rsquo;string_number&rsquo; array, this information
+is invalid at empty points on the board. This data structure has the
+good properties of requiring fixed space (regardless of the number of
+strings) and making it easy to add a new stone or join two strings.
+</p>
+<p>Additionally the code makes use of some work variables:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">static int ml[BOARDMAX];
+static int liberty_mark;
+static int string_mark;
+static int next_string;
+static int strings_initialized = 0;
+</pre></td></tr></table>
+
+<p>The <code>ml</code> array and <code>liberty_mark</code> are used to &quot;mark&quot; liberties on
+the board, e.g. to avoid counting the same liberty twice. The convention is
+that if <code>ml[pos]</code> has the same value as <code>liberty_mark</code>, then
+<code>pos</code> is marked. To clear all marks it suffices to increase the value
+of <code>liberty_mark</code>, since it is never allowed to decrease.
+</p>
+<p>The same relation holds between the <code>mark</code> field of the <code>string_data</code>
+structure and <code>string_mark</code>. Of course these are used for marking
+individual strings.
+</p>
+<p><code>next_string</code> gives the number of the next available entry in the
+<code>string</code> array. Then <code>strings_initialized</code> is set to one when
+all data structures are known to be up to date. Given an arbitrary board
+position in the &lsquo;<samp>board</samp>&rsquo; array, this is done by calling
+<code>incremental_board_init()</code>. It is not necessary to call this
+function explicitly since any other function that needs the information
+does this if it has not been done.
+</p>
+<p>The interesting part of the code is the incremental update of the data
+structures when a stone is played and subsequently removed. To
+understand the strategies involved in adding a stone it is necessary
+to first know how undoing a move works. The idea is that as soon as
+some piece of information is about to be changed, the old value is
+pushed onto a stack which stores the value and its address. The stack
+is built from the following structures:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">struct change_stack_entry {
+  int *address;
+  int value;
+};
+
+struct change_stack_entry change_stack[STACK_SIZE];
+int change_stack_index;
+</pre></td></tr></table>
+
+<p>and manipulated with the macros
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">BEGIN_CHANGE_RECORD()
+PUSH_VALUE(v)
+POP_MOVE()
+</pre></td></tr></table>
+
+<p>Calling <code>BEGIN_CHANGE_RECORD()</code> stores a null pointer in the address
+field to indicate the start of changes for a new move. As mentioned
+earlier <code>PUSH_VALUE()</code> stores a value and its corresponding address.
+Assuming that all changed information has been duly pushed onto the
+stack, undoing the move is only a matter of calling <code>POP_MOVE()</code>,
+which simply assigns the values to the addresses in the reverse order
+until the null pointer is reached. This description is slightly
+simplified because this stack can only store &rsquo;int&rsquo; values and we need
+to also store changes to the board. Thus we have two parallel stacks
+where one stores <code>int</code> values and the other one stores
+<code>Intersection</code> values.
+</p>
+<p>When a new stone is played on the board, first captured opponent
+strings, if any, are removed. In this step we have to push the board
+values and the <code>next_stone</code> pointers for the removed stones, and
+update the liberties and neighbor lists for the neighbors of the
+removed strings. We do not have to push all information in the
+&rsquo;string&rsquo; entries of the removed strings however. As we do not reuse
+the entries they will remain intact until the move is pushed and they
+are back in use.
+</p>
+<p>After this we put down the new stone and get three distinct cases:
+</p>
+<ol>
+<li> The new stone is isolated, i.e. it has no friendly neighbor.
+</li><li> The new stone has exactly one friendly neighbor.
+</li><li> The new stone has at least two friendly neighbors.
+</li></ol>
+
+<p>The first case is easiest. Then we create a new string by using the
+number given by <code>next_string</code> and increasing this variable. The string
+will have size one, <code>next_stone</code> points directly back on itself, the
+liberties can be found by looking for empty points in the four
+directions, possible neighbor strings are found in the same way, and
+those need also to remove one liberty and add one neighbor.
+</p>
+<p>In the second case we do not create a new string but extend the
+neighbor with the new stone. This involves linking the new stone into
+the cyclic chain, if needed moving the origin, and updating liberties
+and neighbors. Liberty and neighbor information also needs updating
+for the neighbors of the new stone.
+</p>
+<p>In the third case finally, we need to join already existing strings.
+In order not to have to store excessive amounts of information, we
+create a new string for the new stone and let it assimilate the
+neighbor strings. Thus all information about those can simply be left
+around in the &rsquo;string&rsquo; array, exactly as for removed strings. Here it
+becomes a little more complex to keep track of liberties and neighbors
+since those may have been shared by more than one of the joined
+strings. Making good use of marks it all becomes rather
+straightforward anyway.
+</p>
+<p>The often used construction
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">    pos = FIRST_STONE(s);
+    do {
+        ...
+        pos = NEXT_STONE(pos);
+    } while (!BACK_TO_FIRST_STONE(s, pos));
+</pre></td></tr></table>
+
+<p>traverses the stones of the string with number &lsquo;<samp>s</samp>&rsquo; exactly once,
+with <code>pos</code> holding the coordinates. In general <code>pos</code> is
+used as board coordinate and &lsquo;<samp>s</samp>&rsquo; as an index into the
+<code>string</code> array or sometimes a pointer to an entry in the
+<code>string</code> array.
+</p>
+<hr size="6">
+<a name="Some-Board-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Incremental-Board" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Libboard" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Some-Board-Functions-1"></a>
+<h2 class="section">15.4 Some Board Functions</h2>
+
+<p><strong>Reading</strong>, often called <strong>search</strong> in computer game
+theory, is a fundamental process in GNU Go. This is the process
+of generating hypothetical future boards in order to determine
+the answer to some question, for example &quot;can these stones live.&quot;
+Since these are hypothetical future positions, it is important
+to be able to undo them, ultimately returning to the present
+board. Thus a move stack is maintained during reading. When
+a move is tried, by the function <code>trymove</code>, or its
+variant <code>tryko</code>. This function pushes the current board
+on the stack and plays a move. The stack pointer <code>stackp</code>,
+which keeps track of the position, is incremented. The function
+<code>popgo()</code> pops the move stack, decrementing <code>stackp</code> and
+undoing the last move made.
+</p>
+<p>Every successful <code>trymove()</code> must be matched with a <code>popgo()</code>.
+Thus the correct way of using this function is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+  if (trymove(pos, color, ... )) {
+       ...    [potentially lots of code here]
+       popgo();
+  }   
+
+</pre></td></tr></table>
+
+
+<p>In case the move is a ko capture, the legality of the capture is subject to
+the komaster scheme (see section <a href="gnugo_11.html#Ko">Ko Handling</a>).
+</p>
+<ul>
+<li> <code>int trymove(int pos, int color, const char *message)</code>
+<a name="index-trymove-1"></a>
+<blockquote><p>Returns true if <code>(pos)</code> is a legal move for <code>color</code>. In that
+case, it pushes the board on the stack and makes the move, incrementing
+<code>stackp</code>. If the reading code is recording reading variations (as
+with &lsquo;<samp>--decide-string</samp>&rsquo; or with &lsquo;<samp>-o</samp>&rsquo;), the string
+<code>*message</code> will be inserted in the SGF file as a comment. The
+comment will also refer to the string at <code>str</code> if this is not
+<code>0</code>. The value of <code>str</code> can be NO_MOVE if it is not needed but
+otherwise the location of <code>str</code> is included in the comment.
+</p></blockquote>
+</li><li> <code>int tryko(int pos, int color, const char *message)</code>
+<a name="index-tryko"></a>
+<blockquote><p><code>tryko()</code> pushes the position onto the stack, and makes a move
+<code>pos</code> of <code>color</code>. The move is allowed even if it is an
+illegal ko capture. It is to be imagined that <code>color</code> has made an
+intervening ko threat which was answered and now the continuation is to
+be explored. Return 1 if the move is legal with the above
+caveat. Returns zero if it is not legal because of suicide.
+</p></blockquote>
+
+</li><li> <code>void popgo()</code>
+<a name="index-popgo-1"></a>
+<blockquote><p>Pops the move stack. This function must (eventually) be called after a
+succesful <code>trymove</code> or <code>tryko</code> to restore the board
+position. It undoes all the changes done by the call to
+<code>trymove/tryko</code> and leaves the board in the same state as it was
+before the call.
+</p>
+<p><strong>NOTE</strong>: If <code>trymove/tryko</code> returns <code>0</code>, i.e. the tried
+move was not legal, you must <strong>not</strong> call <code>popgo</code>.
+</p></blockquote>
+
+</li><li> <code>int komaster_trymove(int pos, int color, const char *message, int str, int *is_conditional_ko, int consider_conditional_ko)</code>
+<a name="index-komaster_005ftrymove"></a>
+<blockquote><p>Variation of <code>trymove</code>/<code>tryko</code> where ko captures (both
+conditional and unconditional) must follow a komaster scheme
+(see section <a href="gnugo_11.html#Ko">Ko Handling</a>).
+</p></blockquote>
+
+</li></ul>
+
+<p>As you see, <code>trymove()</code> plays a move which can be easily
+retracted (with <code>popgo()</code>) and it is call thousands of
+times per actual game move as GNU Go analyzes the board position.
+By contrast the function <code>play_move()</code> plays a move which
+is intended to be permanent, though it is still possible to
+undo it if, for example, the opponent retracts a move.
+</p>
+<ul>
+<li> <code>void play_move(int pos, int color)</code>
+<a name="index-play_005fmove"></a>
+<blockquote><p>Play a move. If you want to test for legality you should first call
+<code>is_legal()</code>. This function strictly follows the algorithm: 
+</p><ol>
+<li> Place a stone of given color on the board.
+</li><li> If there are any adjacent opponent strings without liberties,
+remove them and increase the prisoner count. 
+</li><li> If the newly placed stone is part of a string without liberties,
+remove it and increase the prisoner count.
+</li></ol>
+<p>In spite of the name &ldquo;permanent move&rdquo;, this move can (usually) be
+unplayed by <code>undo_move()</code>, but it is significantly more costly than
+unplaying a temporary move. There are limitations on the available
+move history, so under certain circumstances the move may not be
+possible to unplay at a later time.
+</p></blockquote>
+</li><li> <code>int undo_move(int n)</code>
+<a name="index-undo_005fmove"></a>
+<blockquote><p>Undo &lsquo;<samp>n</samp>&rsquo; permanent moves. Returns 1 if successful and 0 if it fails.
+If &lsquo;<samp>n</samp>&rsquo; moves cannot be undone, no move is undone.
+</p></blockquote>
+</li></ul>
+
+<p>Other board functions are documented in See section <a href="gnugo_18.html#Board-Utilities">Board Utilities</a>.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,39 @@
+[cmdline]
+0=OA
+1=[M 8
+2=
+
+[Dir Hist New Right Panel]
+0=/
+1=/etc/NetworkManager/system-connections
+2=/etc/NetworkManager
+3=/etc/X11
+4=/etc/alternatives
+5=/etc/apache2
+6=/etc/avahi/services
+7=/etc/avahi
+8=/etc/calendar
+9=/etc/dhcp
+10=/etc/ifplugd/action.d
+11=/etc/ifplugd
+12=/etc
+13=/etc/init
+14=/home/ubuntu
+15=/root
+
+[Dir Hist New Left Panel]
+0=/etc/network/run
+1=/etc/network
+2=/
+3=/etc/init.d
+4=/etc
+5=/etc/init
+6=/home/ubuntu/.cache
+7=/home/ubuntu
+8=/home/ubuntu/.gconf
+9=/home/ubuntu/.gconf/apps
+10=/home/ubuntu/.gconf/apps/blueman
+11=/home/ubuntu/.gconf/apps/blueman/plugins
+12=/root/.cache
+13=/root/.config
+14=/root

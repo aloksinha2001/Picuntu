@@ -1,0 +1,15 @@
+Jan 10 23:10:01 picuntu sshd[286]: Received signal 15; terminating.
+Jan 10 23:10:01 picuntu sshd[621]: Server listening on 0.0.0.0 port 22.
+Jan 10 23:10:01 picuntu sshd[621]: Server listening on :: port 22.
+Jan 10 23:10:17 picuntu login[692]: pam_unix(login:session): session opened for user root by LOGIN(uid=0)
+Jan 10 23:10:17 picuntu login[715]: ROOT LOGIN  on '/dev/tty1'
+Jan 10 23:11:58 picuntu sshd[747]: Accepted password for root from 192.168.1.112 port 44370 ssh2
+Jan 10 23:11:58 picuntu sshd[747]: pam_unix(sshd:session): session opened for user root by (uid=0)
+Jan 10 23:16:16 picuntu groupadd[1948]: group added to /etc/group: name=ntp, GID=115
+Jan 10 23:16:16 picuntu groupadd[1948]: group added to /etc/gshadow: name=ntp
+Jan 10 23:16:16 picuntu groupadd[1948]: new group: name=ntp, GID=115
+Jan 10 23:16:16 picuntu useradd[1952]: new user: name=ntp, UID=108, GID=115, home=/home/ntp, shell=/bin/false
+Jan 10 23:16:16 picuntu usermod[1957]: change user 'ntp' password
+Jan 10 23:16:16 picuntu chage[1962]: changed password expiry for ntp
+Jan 10 23:17:02 picuntu CRON[2351]: pam_unix(cron:session): session opened for user root by (uid=0)
+Jan 10 23:17:02 picuntu CRON[2351]: pam_unix(cron:session): session closed for user root

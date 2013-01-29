@@ -1,0 +1,7 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/rsyslog" ] && [ "$1" = remove ]; then
+	invoke-rc.d rsyslog stop || exit $?
+fi
+# End automatically added section

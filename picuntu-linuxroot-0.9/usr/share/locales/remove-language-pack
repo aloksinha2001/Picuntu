@@ -1,0 +1,26 @@
+#!/bin/sh -e
+
+if [ -z "$1" ]; then
+    echo "Usage: $0 <language code> <class> [<version>]"
+    exit 0
+fi
+
+# remove binary locales
+# do nothing for gnome/kde
+if [ -z "$2" ]; then
+    # do not remove locales if we merely remove language-support-* without
+    # removing language-pack-*
+    if [ ! -e /var/lib/locales/supported.d/$1 ]; then
+	if [ -e /usr/lib/locale/locale-archive ]; then
+	    for l in $(localedef --list-archive|grep "^$1[._@]"); do
+		localedef --delete-from-archive "$l"
+	    done
+	else
+	    rm -rf /usr/lib/locale/$1 /usr/lib/locale/$1[._@]*
+	fi
+
+    fi
+fi
+
+# ensure that .desktop caches are up to date
+dpkg-trigger gmenucache || true

@@ -1,0 +1,307 @@
+Package: boinc-nvidia-cuda
+Description-md5: ddf1889572134aee037d999ee62f484a
+Description-en: metapackage for CUDA-savvy BOINC client and manager
+ The Berkeley Open Infrastructure for Network Computing (BOINC) is a
+ software platform for distributed computing: several initiatives of
+ various scientific disciplines all compete for the idle time of
+ desktop computers. The developers' web site at the University of
+ Berkeley serves as a common portal to the otherwise independently run
+ projects.
+ .
+ Regular users (rightously) often find it an unbearable nuissance to
+ care for the exact configuration of BOINC for CUDA-savvy graphics
+ cards. This package adds a series of dependencies from the non-free
+ section to the regular boinc package. This also meant this binary
+ package to be redistributed in the contrib section of Debian.
+
+Package: flashplugin-installer
+Description-md5: a03e9ebc20ce82c05567d088e79bf750
+Description-en: Adobe Flash Player plugin installer
+ Downloads and Installs the Adobe Flash Player plugin. The Adobe Flash Player
+ plugin supports playing of media and other dynamic content online.
+ .
+ The Adobe Flash Player plugin will work with a range of web-browsers including,
+ limited to:
+  * Firefox
+  * Chromium
+  * SeaMonkey
+  * Iceweasel
+  * Iceape
+  * Galeon
+  * Epiphany
+  * Konqueror
+ .
+ WARNING: Installing this Ubuntu package causes the Adobe Flash Player plugin to
+ be downloaded from the Adobe web site. The distribution license of the
+ Adobe Flash Player plugin is available at www.adobe.com. Installing this
+ Ubuntu package implies that you have accepted the terms of that license.
+
+Package: libmyth-0.25-0
+Description-md5: 6233f3ed93adc17b7f228bed7bd3b300
+Description-en: Common library code for MythTV and add-on modules (runtime)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains a shared library, libmyth, which is used by various
+ components in the system.
+
+Package: libmyth-dev
+Description-md5: cdf4db9954271d33355a9e9377695b78
+Description-en: Common library code for MythTV and add-on modules (development)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains files needed for developing applications which use
+ libmyth (such as the various add-ons for MythTV)
+
+Package: libmyth-python
+Description-md5: 99e5b7fdac675ed6cfb57a0a42eb8400
+Description-en: A python library to access some MythTV features
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains files needed for some python MythTV add-ons.
+
+Package: libmythtv-perl
+Description-md5: 47f252d2997e94bf2a23b14c005706fe
+Description-en: A PERL library to access some MythTV features
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains files needed for some PERL MythTV add-ons like
+ nuvexport or mythrename.pl.
+
+Package: mytharchive
+Description-md5: e5e7e6b2e6a78544ce0f8630283b7970
+Description-en: create and burn DVD's from MythTV - binary file
+ MythArchive is a plugin for MythTV that lets you create DVDs from your
+ recorded shows, files and any video files available on your
+ system. It can also archive recordings in a proprietary format that
+ archives not only the file but also all the associated metadata like title,
+ description and cut list information which will mean you can create backups
+ of myth recordings which can later be restored or it will also allow you to
+ move recordings between myth systems without losing any of the metadata. It
+ is a complete rewrite of the old MythBurn bash scripts, now using python,
+ and the mythfrontend UI plugin.
+
+Package: mythbrowser
+Description-md5: 778c569445bd55a1342d53b833894a61
+Description-en: A web browser for MythTV
+ Mythbrowser is a standards compliant web browser plugin for MythTV built
+ on top of Webkit.
+
+Package: mythgallery
+Description-md5: fec0a2ce379068f827fb4f32126d4bd8
+Description-en: Image gallery/slideshow add-on module for MythTV
+ MythGallery allows you to visually browse a directory tree containing image
+ files. It can display any image file format supported by Qt, and supports
+ image rotation and simple slideshows.
+
+Package: mythgame
+Description-md5: 651467626e6c8fb63c90ba608648de17
+Description-en: Emulator & PC Game frontend module for MythTV
+ MythGame can be used as a frontend to start any emulator that your host OS
+ runs.
+
+Package: mythmusic
+Description-md5: 934232dd58c42a6e29a6f5e799fd49b5
+Description-en: Music add-on module for MythTV
+ MythMusic provides a digital audio jukebox integrated with MythTV. It
+ supports Ogg Vorbis, FLAC and MP3 streams, displays visualizations, and can
+ also encode new Ogg Vorbis or FLAC streams from audio CDs using a CD-ROM
+ drive.
+
+Package: mythnetvision
+Description-md5: 45c60f5031add4d5409d92f660906d0d
+Description-en: A Internet Video Player plugin for MythTV
+ MythNetvision is a plugin designed to make adding Internet video sources to
+ MythTV fun and easy. MythNetvision consists of two components:
+ - a search screen
+ - a site/RSS browser screen.
+ When installed, MythNetvision appears on the Media Library screen as the
+ options "Search Internet Video" and "Browse Internet Video."
+
+Package: mythnews
+Description-md5: 4768e7f8feaf7629b36031e4fccbb33b
+Description-en: An RSS feed news reader module for MythTV
+ MythNews will fetch RSS feeds for you to read.
+
+Package: mythplugins
+Description-md5: 0696eb742b526df2cc968b97eaf51c2f
+Description-en: Metapackage package for MythTV plugins
+ This meta-package will install all available MythTV plugins.
+
+Package: mythtv
+Description-md5: a07ce4e68f64b7be3dc1eabe20cfb822
+Description-en: A personal video recorder application (client and server)
+ MythTV implements the following PVR features, and more, with a
+ unified graphical interface:
+ .
+  - Basic 'live-tv' functionality. Pause/Fast Forward/Rewind "live" TV.
+  - Video compression using RTjpeg or MPEG-4
+  - Program listing retrieval using XMLTV
+  - Themable, semi-transparent on-screen display
+  - Electronic program guide
+  - Scheduled recording of TV programs
+  - Resolution of conflicts between scheduled recordings
+  - Basic video editing
+ .
+ http://www.mythtv.org/
+ .
+ This package will install a complete MythTV client/server environment on a
+ single system.  If you are intended on using this as your only MythTV machine,
+ and this machine is already configured as a desktop, this package will get you
+ up and running switfly.
+ .
+ If you are intended on installing this on a standalone/non-desktop machine,
+ you should look into the metapackages available:
+ mythtv-backend-master (backend with a local database)
+ mythtv-backend (backend needing a remote database)
+
+Package: mythtv-backend
+Description-md5: b0c2dc11f48f5be52a50ec181f3d5109
+Description-en: A personal video recorder application (server)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains only the server software, which provides video and
+ audio capture and encoding services. In order to be useful, it requires a
+ mythtv-frontend installation, either on the same system or one reachable
+ via the network.
+ .
+ A database is also required. The mythtv-database package must be installed,
+ either on the same system, or one reachable via the network.
+ .
+ For a complete installation of all MythTV components, install the 'mythtv'
+ package.
+
+Package: mythtv-backend-master
+Description-md5: 15418a8fc285e4bfbc2fc2b519a118fd
+Description-en: Metapackage to setup and configure a "Master Backend" profile of MythTV.
+ This meta-package will install and configure all necessary packages for this
+ machine to behave as a "Master" Backend for a mythtv network.  This package
+ is intended to be installed on the machine that will behave as the first
+ (and possibly only) backend for the network.  Typically, this package will be
+ installed on a server rather then a desktop. It makes no sense to install it
+ on anything but the first backend machine on the network.
+
+Package: mythtv-common
+Description-md5: 9b0f0c7db2469a475fea68b417099898
+Description-en: A personal video recorder application (common data)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains infrastructure needed by both the client and the
+ server.
+
+Package: mythtv-database
+Description-md5: dd06002fc680d8ca1b30d73491183d51
+Description-en: A personal video recorder application (database)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package sets up a MySQL database for use by MythTV. It should be
+ installed on the system where the MySQL server resides.
+
+Package: mythtv-dbg
+Description-md5: b75efe12f9262ea1392215c42915eaab
+Description-en: Debug symbols for mythtv packages
+ This package provides all debug symbols for mythtv packages since ddebs
+ don't appear to always do the right thing.
+
+Package: mythtv-doc
+Description-md5: fd631a093f62384996f3bef856e18c7e
+Description-en: A personal video recorder application (documentation)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains documentation, including the MythTV HOWTO.
+
+Package: mythtv-frontend
+Description-md5: d64b43121a804d22ffff974211339f08
+Description-en: A personal video recorder application (client)
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains only the client software, which provides a front-end
+ for playback and configuration. It requires access to a mythtv-backend
+ installation, either on the same system or one reachable via the network.
+ .
+ A database is also required. The mythtv-database package must be installed,
+ either on the same system, or one reachable via the network.
+ .
+ For a complete installation of all MythTV components, install the 'mythtv'
+ package.
+
+Package: mythtv-theme-mythbuntu
+Description-md5: dcafbe0ddc60ef9d4cd6528e6172ed6d
+Description-en: The mythbuntu MythTV Theme
+ This package provides the mythbuntu theme for MythTV.
+
+Package: mythtv-transcode-utils
+Description-md5: 7e2f8e36412922b733817418892a44e3
+Description-en: Utilities used for transcoding MythTV tasks
+ Some utilities are applicable for both a frontend or a backend machine.
+ This package provides utilities that can be used on both without
+ requiring an entire backend to be installed.
+
+Package: mythweather
+Description-md5: 0ee3d1458b56866d56ec87dc37b10bef
+Description-en: Weather add-on module for MythTV
+ MythWeather displays current and forecast weather information within
+ MythTV.
+
+Package: mythweb
+Description-md5: 61dcb33693d887e60efd1242bb775a3f
+Description-en: Web interface add-on module for MythTV
+ MythWeb provides a web interface which can be used to view listings,
+ schedule recordings, delete recordings, and search for programs. It can
+ also browse mythmusic's music database, and may eventually support playing
+ music streams as well.
+
+Package: mythzoneminder
+Description-md5: 8d9d41b817bbe7c1bae729f6473e40c3
+Description-en: view status and display footage recorded with zoneminder
+ MythZoneMinder interfaces with Zoneminder, a CCTV solution.
+ You can view the status of ZoneMinder and watch live camera shots and
+ recorded surveillance footage.
+
+Package: php-mythtv
+Description-md5: cc74af3e7f32031e0ca3aeeac2981c9b
+Description-en: PHP Bindings for MythTV
+ MythTV provides a unified graphical interface for recording and viewing
+ television programs. Refer to the mythtv package for more information.
+ .
+ This package contains files needed for using PHP based applications that
+ connect to MythTV backends.
+
+Package: transcode
+Description-md5: cd4d718c8ee93ddc1511cad4a86d6f14
+Description-en: Text console video-stream processing tool
+ Transcode is a text console video-stream processing tool. It supports
+ elementary video and audio frame transformations. Some example modules are
+ included to enable import of MPEG-1/2, Digital Video, and other formats. It
+ also includes export modules for writing to AVI files with DivX, OpenDivX,
+ XviD, Digital Video or other codecs. Direct DVD transcoding is also supported.
+ A set of tools is available to extract and decode the sources into raw
+ video/audio streams for import and to enable post-processing of AVI files.
+
+Package: transcode-doc
+Description-md5: d68c617738c311615d8753cab6a9fe40
+Description-en: Text console video-stream processing tool (documentation)
+ Transcode is a text console video-stream processing tool. It supports
+ elementary video and audio frame transformations. Some example modules are
+ included to enable import of MPEG-1/2, Digital Video, and other formats. It
+ also includes export modules for writing to AVI files with DivX, OpenDivX,
+ XviD, Digital Video or other codecs. Direct DVD transcoding is also supported.
+ A set of tools is available to extract and decode the sources into raw
+ video/audio streams for import and to enable post-processing of AVI files.
+ .
+ This package contains the documentation.
+
+Package: flashplugin-downloader
+Description-md5: 66ea91f4e504085408ea841953dc65d0
+Description-en: Adobe Flash Player plugin installer (transitional package)
+ This package is a transitional package that can safely be removed after you installed
+ flashplugin-installer.
+

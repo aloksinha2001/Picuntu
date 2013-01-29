@@ -1,0 +1,17 @@
+#!/bin/sh -e
+# Automatically added by installdeb-wordlist
+case "$1" in remove|deconfigure)
+  /usr/sbin/remove-default-wordlist miscfiles
+  if [ -e /usr/share/debconf/confmodule ] ; then
+    . /usr/share/debconf/confmodule
+    db_purge
+  fi
+esac
+
+# End automatically added section
+# Automatically added by dh_installdebconf
+if [ "$1" = purge -a -e /usr/share/debconf/confmodule ]; then
+	. /usr/share/debconf/confmodule
+	db_purge
+fi
+# End automatically added section

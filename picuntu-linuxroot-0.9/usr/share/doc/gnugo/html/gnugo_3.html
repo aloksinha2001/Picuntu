@@ -1,0 +1,1183 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 3. Using GNU Go</title>
+
+<meta name="description" content="GNU Go Documentation: 3. Using GNU Go">
+<meta name="keywords" content="GNU Go Documentation: 3. Using GNU Go">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="User-Guide"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_2.html#Macintosh" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Documentation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_2.html#Installation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Using-GNU-Go"></a>
+<h1 class="chapter">3. Using GNU Go</h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Documentation">3.1 Getting Documentation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#CGoban">3.2 Running GNU Go via CGoban</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Running GNU Go with CGoban
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Other-Clients">3.3 Other Clients</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Ascii">3.4 Ascii Interface</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    The Ascii Interface
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Emacs">3.5 GNU Go mode in Emacs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#GMP-and-GTP">3.6 The Go Modem Protocol and Go Text Protocol</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Tournaments">3.7 Computer Go Tournaments</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Computer Tournaments
+</td></tr>
+<tr><td align="left" valign="top"><a href="#SGF-Support">3.8 Smart Game Format</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              The Smart Game Format
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Invoking-GNU-Go">3.9 Invoking GNU Go: Command line options</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          Command line options
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Documentation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#User-Guide" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#CGoban" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<a name="Getting-Documentation"></a>
+<h2 class="section">3.1 Getting Documentation</h2>
+
+<p>You can obtain a printed copy of the manual by running <code>make
+gnugo.pdf</code> in the &lsquo;<tt>doc/</tt>&rsquo;directory, then printing the resulting file. The
+manual contains a great deal of information about the algorithms of GNU Go.
+</p>
+<p>On platforms supporting info documentation, you can usually
+install the manual by executing &lsquo;make install&rsquo; (running as
+root) from the &lsquo;<tt>doc/</tt>&rsquo; directory. This will create a file
+called &lsquo;<tt>gnugo.info</tt>&rsquo; (and a few others) and copy them into
+a system directory such as &lsquo;<tt>/usr/local/share/info</tt>&rsquo;. You
+may then add them to your info directory tree with the command
+<code>install-info --info-file=[path to gnugo.info] --info-dir=[path to dir]</code>.
+The info documentation can be read conveniently from within Emacs by executing
+the command <code>Control-h i</code>.
+</p>
+<p>Documentation in &lsquo;<tt>doc/</tt>&rsquo; consists of a man page &lsquo;<tt>gnugo.6</tt>&rsquo;, the 
+info files &lsquo;<tt>gnugo.info</tt>&rsquo;, &lsquo;<tt>gnugo.info-1</tt>&rsquo;, ... and the 
+Texinfo files from which the info files are built. The Texinfo
+documentation contains this User&rsquo;s Guide and extensive information
+about the algorithms of GNU Go, for developers.
+</p>
+<p>If you want a typeset copy of the Texinfo documentation, you can
+<code>make gnugo.dvi</code>, <code>make gnugo.ps</code>, or <code>make
+gnugo.pdf</code> in the &lsquo;<tt>doc/</tt>&rsquo; directory. (<code>make gnugo.pdf</code> only
+works after you have converted all .eps-files in the doc/ directory to
+.pdf files, e.g. with the utility epstopdf.)
+</p>
+<p>You can make an HTML version with the command <code>makeinfo --html
+gnugo.texi</code>. If you have <code>texi2html</code>, better HTML documentation
+may be obtained by <code>make gnugo.html</code> in the &lsquo;<tt>doc/</tt>&rsquo;
+directory.
+</p>
+<p>User documentation can be obtained by running <code>gnugo --help</code> 
+or <code>man gnugo</code> from any terminal, or from the Texinfo
+documentation.
+</p>
+<p>Documentation for developers is in the Texinfo documentation, and in comments
+throughout the source. Contact us at <a href="mailto:gnugo@gnu.org">gnugo@gnu.org</a> if you are
+interested in helping to develop this program.
+</p>
+<hr size="6">
+<a name="CGoban"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Documentation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Other-Clients" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Running-GNU-Go-via-CGoban"></a>
+<h2 class="section">3.2 Running GNU Go via CGoban</h2>
+<a name="index-CGoban"></a>
+
+<p>There are two different programs called CGoban, both written by
+William Shubert. In this documentation, CGoban means CGoban 1.x,
+the older program. You should get a copy with version number 1.12 
+or higher.
+</p>
+<p>CGoban is an extremely nice way to run GNU Go. CGoban provides a
+beautiful graphic user interface under X Window System.
+</p>
+<p>Start CGoban. When the CGoban Control panel comes up, select &ldquo;Go
+Modem&rdquo;. You will get the Go Modem Protocol Setup. Choose one (or
+both) of the players to be &ldquo;Program,&rdquo; and fill out the box with the
+path to &lsquo;<tt>gnugo</tt>&rsquo;. After clicking OK, you get the Game Setup
+window.  Choose &ldquo;Rules Set&rdquo; to be Japanese (otherwise handicaps
+won&rsquo;t work).  Set the board size and handicap if you want.
+</p>
+<p>If you want to play with a komi, you should bear in mind that
+the GMP does not have any provision for communicating the komi.
+Because of this misfeature, unless you set the komi at the command
+line GNU Go will have to guess it. It assumes the komi is 5.5 for
+even games, 0.5 for handicap games. If this is not what you want,
+you can specify the komi at the command line with the
+&lsquo;<samp>--komi</samp>&rsquo; option, in the Go Modem Protocol Setup window.
+You have to set the komi again in the Game Setup window, which
+comes up next.
+</p>
+<p>Click OK and you are ready to go.
+</p>
+<p>In the Go Modem Protocol Setup window, when you specify the path to
+GNU Go, you can give it command line options, such as &lsquo;<samp>--quiet</samp>&rsquo; to
+suppress most messages. Since the Go Modem Protocol preempts standard
+I/O other messages are sent to stderr, even if they are not error
+messages. These will appear in the terminal from which you started
+CGoban.
+</p>
+<hr size="6">
+<a name="Other-Clients"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#CGoban" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Ascii" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Other-Clients-1"></a>
+<h2 class="section">3.3 Other Clients</h2>
+<a name="index-jago"></a>
+<a name="index-quarry"></a>
+<a name="index-qGo"></a>
+
+<p>In addition to CGoban (see section <a href="#CGoban">Running GNU Go via CGoban</a>) there are a number of
+other good clients that are capable of running GNU Go. Here
+are the ones that we are aware of that are Free Software. This
+list is part of a larger list of free Go programs that is maintained
+at <a href="http://www.gnu.org/software/gnugo/free_go_software.html">http://www.gnu.org/software/gnugo/free_go_software.html</a>.
+</p>
+<ul>
+<li> Quarry (<a href="http://home.gna.org/quarry/">http://home.gna.org/quarry/</a>) is a GPL&rsquo;d
+client that supports GTP.  Works under GNU/Linux and requires
+GTK+ 2.x and librsvg 2.5.  Supports GNU Go as well as other
+engines.  Can play not only Go, but also a few other board
+games.
+</li><li> qGo (<a href="http://sourceforge.net/projects/qgo/">http://sourceforge.net/projects/qgo/</a>) is a
+full featured Client for playing on the servers, SGF viewing/editing,
+and GNU Go client written in C++ for GNU/Linux, Windows and Mac OS X.
+Can play One Color Go. Licensed GPL and QPL.
+</li><li> ccGo (<a href="http://ccdw.org/~cjj/prog/ccgo/">http://ccdw.org/~cjj/prog/ccgo/</a>) is a GPL&rsquo;d client
+written in C++ capable of playing with GNU Go, or on IGS.
+</li><li> RubyGo (<a href="http://rubygo.rubyforge.org/">http://rubygo.rubyforge.org/</a>) is a GPL&rsquo;d
+client by J.-F. Menon for IGS written in the scripting language Ruby.
+RubyGo is capable of playing with GNU Go using the GTP.
+</li><li> Dingoui (<a href="http://dingoui.sourceforge.net/">http://dingoui.sourceforge.net/</a>) is a free
+GMP client written in GTK+ which can run GNU Go.
+</li><li> Jago (<a href="http://www.rene-grothmann.de/jago/">http://www.rene-grothmann.de/jago/</a>)
+is a GPL&rsquo;d Java client which works for both Microsoft Windows
+and X Window System.
+</li><li> Sente Software&rsquo;s FreeGoban 
+(<a href="http://www.sente.ch/software/goban/freegoban.html">http://www.sente.ch/software/goban/freegoban.html</a>) is a
+well-liked user interface for GNU Go (and potentially other
+programs) distributed under the GPL.
+</li><li>  Mac GNU Go (<a href="http://www1.u-netsurf.ne.jp/~future/HTML/macgnugo.html">http://www1.u-netsurf.ne.jp/~future/HTML/macgnugo.html</a>) is a front end for GNU Go 3.2 with both
+English and Japanese versions. License is GPL.
+</li><li> Quickiego (<a href="http://www.geocities.com/secretmojo/QuickieGo/">http://www.geocities.com/secretmojo/QuickieGo/</a>) 
+is a Mac interface to GNU Go 2.6.
+</li><li> Gogui (<a href="http://sourceforge.net/projects/gogui/">http://sourceforge.net/projects/gogui/</a>) from
+Markus Enzenberger is a Java workbench that allows you to play
+with a gtp (<a href="http://www.lysator.liu.se/~gunnar/gtp">http://www.lysator.liu.se/~gunnar/gtp</a>)
+engine such as GNU Go. Licence is GPL. Gogui does not 
+support gmp or play on servers but is potentially very useful for programmers
+working on GNU Go or other engines.
+</li></ul>
+
+<hr size="6">
+<a name="Ascii"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Other-Clients" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Emacs" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Ascii-Interface"></a>
+<h2 class="section">3.4 Ascii Interface</h2>
+<a name="index-ascii-interface"></a>
+
+<p>Even if you do not have any client program, you can play with GNU Go
+using its default Ascii interface. Simply type <code>gnugo</code>
+at the command line, and GNU Go will draw a board. Typing
+<code>help</code> will give a list of options. At the end of the
+game, pass twice, and GNU Go will prompt you through the
+counting. You and GNU Go must agree on the dead groups&mdash;you
+can toggle the status of groups to be removed, and when you
+are done, GNU Go will report the score.
+</p>
+<p>You can save the game at any point using the <code>save <var>filename</var></code>
+command. You can reload the game from the resulting SGF file with
+the command <code>gnugo -l <var>filename</var> --mode ascii</code>. Reloading
+games is not supported when playing with CGoban. However you can
+use CGoban to save a file, then reload it in ascii mode.
+</p>
+<p>You may play games with a time limit against GNU Go in
+ascii mode. For this, the Canadian time control system
+is used. (See <a href="http://en.wikipedia.org/wiki/Byoyomi">http://en.wikipedia.org/wiki/Byoyomi</a>
+and <a href="http://senseis.xmp.net/?CanadianByoyomi">http://senseis.xmp.net/?CanadianByoyomi</a>.)
+That is, you have a main time to be followed by byo-yomi
+periods. After the main time is exhausted you have a certain
+number of moves to be made in a certain number of seconds.
+(see section <a href="#Invoking-GNU-Go">Invoking GNU Go: Command line options</a>)
+</p>
+<hr size="6">
+<a name="Emacs"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Ascii" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#GMP-and-GTP" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="GNU-Go-mode-in-Emacs"></a>
+<h2 class="section">3.5 GNU Go mode in Emacs</h2>
+<a name="index-emacs-mode"></a>
+
+<p>You can run GNU Go from Emacs. This has the advantage 
+that you place the stones using the cursor arrow keys
+or with the mouse, and you can have a nice graphical display of the board
+within emacs.
+</p>
+<p>You will need the file &lsquo;<tt>interface/gnugo.el</tt>&rsquo;. There is
+a version of this distributed with GNU Go but it only
+works with Emacs 21. Most Emacsen are Emacs 22 however.
+Therefore you should get the latest version of
+gnugo.el by Thien-Thi Nguyen, which you can find at
+<a href="http://www.gnuvola.org/software/j/gnugo/">http://www.gnuvola.org/software/j/gnugo/</a> or
+<a href="http://www.emacswiki.org/emacs/gnugo.el">http://www.emacswiki.org/emacs/gnugo.el</a>.
+</p>
+<p>You will also need some xpm files for the graphical
+display. You can either use those distributed by
+Thien-Thi Nguyen (at the first URL above) or those
+distributed with GNU Go, either the file
+&lsquo;<tt>interface/gnugo-xpms.el</tt>&rsquo; or (for high resolution
+displays) &lsquo;<tt>interface/gnugo-big-xpms.el</tt>&rsquo;.
+</p>
+<p>Load the file &lsquo;<tt>interface/gnugo.el</tt>&rsquo; and 
+&lsquo;<tt>interface/gnugo-xpms.el</tt>&rsquo;. You may do this using the 
+Emacs <code>M-x load-file</code> command.
+</p>
+<p>When you start a game with <code>M-x gnugo</code>,
+you will first see an ascii board. However typing &lsquo;i&rsquo;
+toggles a graphical board display which is very nice.
+This is a pleasant way to play GNU Go. You may get
+help by typing <code>C-x m</code>.
+</p>
+<hr size="6">
+<a name="GMP-and-GTP"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Emacs" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Tournaments" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Go-Modem-Protocol-and-Go-Text-Protocol"></a>
+<h2 class="section">3.6 The Go Modem Protocol and Go Text Protocol</h2>
+<a name="index-GMP"></a>
+<a name="index-GTP"></a>
+<a name="index-The-Go-Modem-Protocol-and-Go-Text-Protocol"></a>
+
+<p>The Go Modem Protocol (GMP) was developed by Bruce Wilcox with input from
+David Fotland, Anders Kierulf and others, according to the history in
+<a href="http://www.britgo.org/tech/gmp.html">http://www.britgo.org/tech/gmp.html</a>.
+</p>
+<p>Any Go program <em>should</em> support this protocol since it is a
+standard. Since CGoban supports this protocol, the user interface for
+any Go program can be done entirely through CGoban. The programmer can
+concentrate on the real issues without worrying about drawing stones,
+resizing the board and other distracting issues.
+</p>
+<p>GNU Go 3.0 introduced a new protocol, the Go Text Protocol
+(see section <a href="gnugo_19.html#GTP">The Go Text Protocol</a>) which we hope can serve the functions currently 
+used by the GMP. The GTP is becoming increasingly adopted by
+other programs as a method of interprocess communication,
+both by computer programs and by clients. Still the GMP is 
+widely used in tournaments.
+</p>
+<hr size="6">
+<a name="Tournaments"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#GMP-and-GTP" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SGF-Support" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<a name="Computer-Go-Tournaments"></a>
+<h2 class="section">3.7 Computer Go Tournaments</h2>
+
+<p>Computer Tournaments currently use the Go Modem Protocol.
+The current method followed in such tournaments is to connect
+the serial ports of the two computers by a &ldquo;null modem&rdquo; cable.
+If you are running GNU/Linux it is convenient to use CGoban.
+If your program is black, set it up in the Go Modem Protocol
+Setup window as usual. For White, select &ldquo;Device&rdquo; and set
+the device to &lsquo;<tt>/dev/cua0</tt>&rsquo; if your serial port is COM1
+and &lsquo;<tt>/dev/cua1</tt>&rsquo; if the port is COM2.
+</p>
+<hr size="6">
+<a name="SGF-Support"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Tournaments" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Smart-Game-Format"></a>
+<h2 class="section">3.8 Smart Game Format</h2>
+<a name="index-SGF-_0028Smart-Game-Format_0029"></a>
+<a name="index-Smart-Game-Format"></a>
+
+<p>The Smart Game Format (SGF), is the standard format for storing Go games. 
+GNU Go supports both reading and writing SGF files. The SGF specification
+(FF[4]) is at:
+<a href="http://www.red-bean.com/sgf/">http://www.red-bean.com/sgf/</a>
+</p>
+<hr size="6">
+<a name="Invoking-GNU-Go"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SGF-Support" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Some-basic-options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Invoking-GNU-Go_003a-Command-line-options"></a>
+<h2 class="section">3.9 Invoking GNU Go: Command line options</h2>
+<a name="index-command-line-options"></a>
+<a name="index-invoking-GNU-Go"></a>
+
+<hr size="6">
+<a name="Some-basic-options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Monte-Carlo-Options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.1 Some basic options</h3>
+<ul>
+<li> &lsquo;<samp>--help</samp>&rsquo;, &lsquo;<samp>-h</samp>&rsquo;
+<blockquote><p>Print a help message describing the options. This will also
+tell you the defaults of various parameters, most importantly
+the level and cache size. The default values of these
+parameters can be set before compiling by <code>configure</code>.
+If you forget the defaults you can find out using &lsquo;<samp>--help</samp>&rsquo;.
+</p></blockquote>
+</li><li> &lsquo;<samp>--boardsize <var>size</var></samp>&rsquo;
+<blockquote><p>Set the board size
+</p></blockquote>
+</li><li> &lsquo;<samp>--komi <var>num</var></samp>&rsquo;
+<blockquote><p>Set the komi
+</p></blockquote>
+</li><li> &lsquo;<samp>--level <var>level</var></samp>&rsquo;
+<a name="index-level-of-play"></a>
+<blockquote><p>GNU Go can play with different strengths and speeds. Level 10
+is the default. Decreasing the level will make GNU Go faster
+but less accurate in its reading.
+</p></blockquote>
+</li><li> &lsquo;<samp>--quiet</samp>&rsquo;, &lsquo;<samp>--silent</samp>&rsquo;
+<blockquote><p>Don&rsquo;t print copyright and other messages. Messages specifically
+requested by other command line options, such as &lsquo;<samp>--trace</samp>&rsquo;,
+are not supressed.
+</p></blockquote>
+</li><li> &lsquo;<samp>-l</samp>&rsquo;, &lsquo;<samp>--infile <var>filename</var></samp>&rsquo;
+<blockquote><p>Load the named SGF file. GNU Go will generate a move for
+the player who is about to move. If you want to override this
+and generate a move for the other player you may add the
+option &lsquo;<samp>--color <var>&lt;color&gt;</var></samp>&rsquo; where <var>&lt;color&gt;</var> is
+<code>black</code> or <code>white</code>.
+</p></blockquote>
+</li><li> &lsquo;<samp>-L</samp>&rsquo;, &lsquo;<samp>--until <var>move</var></samp>&rsquo;
+<blockquote><p>Stop loading just before the indicated move is played. <var>move</var> can
+be either the move number or location.
+</p></blockquote>
+</li><li> &lsquo;<samp>-o</samp>&rsquo;, &lsquo;<samp>--outfile <var>filename</var></samp>&rsquo;
+<blockquote><p>Write sgf output to file
+</p></blockquote>
+</li><li> &lsquo;<samp>-O</samp>&rsquo;, &lsquo;<samp>--output-flags <var>flags</var></samp>&rsquo;
+<blockquote><p>Add useful information to the sgf file. Flags can be &rsquo;d&rsquo;, &rsquo;v&rsquo; or
+both (i.e. &rsquo;dv&rsquo;). If &rsquo;d&rsquo; is specified, dead and critical dragons
+are marked in the sgf file. If &rsquo;v&rsquo; is specified, move valuations
+around the board are indicated.
+</p></blockquote>
+</li><li> &lsquo;<samp>--mode <var>mode</var></samp>&rsquo; 
+<blockquote><p>Force the playing mode (&rsquo;ascii&rsquo;, &rsquo;emacs,&rsquo; &rsquo;gmp&rsquo; or &rsquo;gtp&rsquo;). The default is
+ASCII, but if no terminal is detected GMP (Go Modem Protocol) will be
+assumed. In practice this is usually what you want, so you may never
+need this option.
+</p></blockquote>
+</li><li> &lsquo;<samp>--resign-allowed</samp>&rsquo;
+<blockquote><p>GNU Go will resign games if this option is enabled. This is the default unless
+you build the engine with the configure option
+&lsquo;<samp>--disable-resignation-allowed</samp>&rsquo;. Unfortunately
+the Go Modem Protocol has no provision for passing a resignation,
+so this option has no effect in GMP mode.
+</p></blockquote>
+</li><li> &lsquo;<samp>--never-resign</samp>&rsquo;
+<blockquote><p>GNU Go will not resign games.
+</p></blockquote>
+</li><li> &lsquo;<samp>--resign-allowed</samp>&rsquo;
+<blockquote><p>GNU Go will resign lost games. This is the default.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Monte-Carlo-Options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Some-basic-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Other-general-options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.2 Monte Carlo Options</h3>
+
+<p>GNU Go can play Monte Carlo Go on a 9x9 board.  (Not
+available for larger boards.) It makes quite a strong
+engine. Here are the command line options.
+</p>
+<ul>
+<li> &lsquo;<samp>--monte-carlo</samp>&rsquo;
+<blockquote><p>Use Monte Carlo move generation (9x9 or smaller).
+</p></blockquote>
+</li><li> &lsquo;<samp>--mc-games-per-level &lt;number&gt;</samp>&rsquo;
+<blockquote><p>Number of Monte Carlo simulations per level. Default 8000.
+Thus at level 10, GNU Go simulates 80,000 games in order
+to generate a move.
+</p></blockquote>
+</li><li> &lsquo;<samp>--mc-list-patterns</samp>&rsquo;
+<blockquote><p>list names of builtin Monte Carlo patterns
+</p></blockquote>
+</li><li> &lsquo;<samp>--mc-patterns &lt;name&gt;</samp>&rsquo;
+<blockquote><p>Choose a built in Monte Carlo pattern database. The
+argument can be &lsquo;<tt>mc_mogo_classic</tt>&rsquo;, &lsquo;<tt>mc_montegnu_classic</tt>&rsquo;
+or &lsquo;<tt>mc_uniform</tt>&rsquo;.
+</p></blockquote>
+</li><li> &lsquo;<samp>--mc-load-patterns &lt;filename&gt;</samp>&rsquo;
+<blockquote><p>read Monte Carlo patterns from file
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Other-general-options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Monte-Carlo-Options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Other-options-affecting-strength-and-speed" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.3 Other general options</h3>
+<ul>
+<li> &lsquo;<samp>-M</samp>&rsquo;, &lsquo;<samp>--cache-size <var>megs</var></samp>&rsquo; 
+<blockquote><a name="index-cache_002dsize"></a>
+<a name="index-cache"></a>
+<p>Memory in megabytes used for caching of read results. The default size
+is 8 unless you configure gnugo with the command <code>configure
+--enable-cache-size=<var>size</var></code> before compiling to make <var>size</var> the
+default (see section <a href="gnugo_2.html#Installation">Installation</a>). GNU Go stores results of its reading
+calculations in a hash table (see section <a href="gnugo_11.html#Hashing">Hashing of Positions</a>). If the hash table is
+filled, it is emptied and the reading continues, but some reading may
+have to be repeated that was done earlier, so a larger cache size will
+make GNU Go run faster, provided the cache is not so large that swapping
+occurs. Swapping may be detected on GNU/Linux machines using the program
+<code>top</code>. However, if you have ample memory or if performance seems
+to be a problem you may want to increase the size of the cache using
+this option.
+</p></blockquote>
+</li><li> &lsquo;<samp>--chinese-rules</samp>&rsquo;
+<blockquote><p>Use Chinese rules. This means that the Chinese or Area Counting is
+followed. It may affect the score of the game by one point in even
+games, more if there is a handicap (since in Chinese Counting the
+handicap stones count for Black) or if either player passes during the
+game.
+</p></blockquote>
+</li><li> &lsquo;<samp>--japanese-rules</samp>&rsquo; 
+<blockquote><p>Use Japanese Rules. This is the default unless you specify
+&lsquo;<samp>--enable-chinese-rules</samp>&rsquo; as a configure option.
+</p></blockquote>
+</li><li> &lsquo;<samp>--play-out-aftermath</samp>&rsquo; 
+</li><li> &lsquo;<samp>--capture-all-dead</samp>&rsquo; 
+<blockquote><p>These options cause GNU Go to play out moves that are usually left
+unplayed after the end of the game. Such moves lose points under
+Japanese rules but not Chinese rules.  With
+&lsquo;<samp>--play-out-aftermath</samp>&rsquo;, GNU Go may play inside its
+territory in order to reach a position where it considers every
+group demonstrably alive or dead. The option
+&lsquo;<samp>--capture-all-dead</samp>&rsquo; causes GNU Go to play inside its own
+territory to remove dead stones.
+</p></blockquote>
+</li><li> &lsquo;<samp>--forbid-suicide</samp>&rsquo; 
+<blockquote><p>Do not allow suicide moves (playing a stone so that it ends up without
+liberties and is therefore immediately removed). This is the default.
+</p></blockquote>
+</li><li> &lsquo;<samp>--allow-suicide</samp>&rsquo; 
+<blockquote><p>Allow suicide moves, except single-stone suicide. The latter would not
+change the board at all and pass should be used instead.
+</p></blockquote>
+</li><li> &lsquo;<samp>--allow-all-suicide</samp>&rsquo; 
+<blockquote><p>Allow suicide moves, including single-stone suicide. This is only
+interesting in exceptional cases. Normally the
+&lsquo;<samp>--allow-suicide</samp>&rsquo; option should be used instead.
+</p></blockquote>
+</li><li> &lsquo;<samp>--simple-ko</samp>&rsquo; 
+<blockquote><p>Do not allow an immediate recapture of a ko so that the previous
+position is recreated. Repetition of earlier positions than that are
+allowed. This is default.
+</p></blockquote>
+</li><li> &lsquo;<samp>--no-ko</samp>&rsquo; 
+<blockquote><p>Allow all kinds of board repetition.
+</p></blockquote>
+</li><li> &lsquo;<samp>--positional-superko</samp>&rsquo; 
+<blockquote><p>Forbid repetition of any earlier board position. This only applies to
+moves on the board; passing is always allowed.
+</p></blockquote>
+</li><li> &lsquo;<samp>--situational-superko</samp>&rsquo; 
+<blockquote><p>Forbid repetition of any earlier board position with the same player
+to move. This only applies to moves on the board; passing is always
+allowed.
+</p></blockquote>
+</li><li> &lsquo;<samp>--copyright</samp>&rsquo;: Display the copyright notice
+</li><li> &lsquo;<samp>--version</samp>&rsquo; or &lsquo;<samp>-v</samp>&rsquo;: Print the version number
+</li><li> &lsquo;<samp>--printsgf <var>filename</var></samp>&rsquo;: 
+<blockquote><p>Create an SGF file containing a diagram of the board. Useful with 
+&lsquo;<samp>-l</samp>&rsquo; and &lsquo;<samp>-L</samp>&rsquo; to create a diagram of the board from
+another sgf file. Illegal moves are indicated with the private
+<code>IL</code> property.  This property is not used in the FF4 SGF
+specification, so we are free to preempt it.
+</p></blockquote>
+</li><li> &lsquo;<samp>--options</samp>&rsquo;
+<blockquote><p>Print which experimental configure options were compiled into the program
+(see section <a href="gnugo_2.html#Other-Options">Other Options</a>).
+</p></blockquote>
+</li><li> &lsquo;<samp>--orientation <var>n</var></samp>&rsquo;
+<blockquote><p>Combine with &lsquo;<samp>-l</samp>&rsquo;. The Go board can be oriented in 8 different
+ways, counting reflections and rotations of the position; this option
+selects an orientation (default 0). The parameter &lsquo;<samp>n</samp>&rsquo; is an integer
+between 0 and 7.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Other-options-affecting-strength-and-speed"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Other-general-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Ascii-mode-options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.4 Other options affecting strength and speed</h3>
+
+<ul>
+<li> &lsquo;<samp>--level <var>amount</var></samp>&rsquo;
+<a name="index-level"></a>
+<blockquote><p>The higher the level, the deeper GNU Go reads. Level 10 is the default.
+If GNU Go plays too slowly on your machine, you may want to decrease it.
+</p></blockquote>
+</li></ul>
+
+<p>This single parameter &lsquo;<samp>--level</samp>&rsquo; is the best way of
+choosing whether to play stronger or faster. It controls
+a host of other parameters which may themselves be set
+individually at the command line.  The default values of
+these parameters may be found by running <code>gnugo --help</code>. 
+</p>
+<p>Unless you are working on the program you probably don&rsquo;t
+need the remaining options in this category. Instead,
+just adjust the single variable &lsquo;<samp>--level</samp>&rsquo;. The
+following options are of use to developers tuning the
+program for performance and accuracy. For completeness,
+here they are.
+</p>
+<ul>
+<li> &lsquo;<samp>-D</samp>&rsquo;, &lsquo;<samp>--depth <var>depth</var></samp>&rsquo;
+<a name="index-depth"></a>
+<blockquote><p>Deep reading cutoff. When reading beyond this depth (default 16) GNU
+Go assumes that any string which can obtain 3 liberties is alive. Thus
+GNU Go can read ladders to an arbitrary depth, but will miss other
+types of capturing moves.
+</p></blockquote>
+</li><li> &lsquo;<samp>-B</samp>&rsquo;, &lsquo;<samp>--backfill-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>Deep reading cutoff. Beyond this depth (default 12) GNU Go will no 
+longer try backfilling moves in its reading.
+</p></blockquote>
+</li><li> &lsquo;<samp>--backfill2-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>Another depth controlling how deeply GNU Go looks for backfilling
+moves. The moves tried below <code>backfill2_depth</code> are generally more obscure
+and time intensive than those controlled by <code>backfill_depth</code>, so this
+parameter has a lower default.
+</p></blockquote>
+</li><li> &lsquo;<samp>-F</samp>&rsquo;, &lsquo;<samp>--fourlib-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>Deep reading cutoff. When reading beyond this depth (default 7) GNU
+Go assumes that any string which can obtain 4 liberties is alive.
+</p></blockquote>
+</li><li> &lsquo;<samp>-K</samp>&rsquo;, &lsquo;<samp>--ko-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>Deep reading cutoff. Beyond this depth (default 8) GNU Go no longer
+tries very hard to analyze kos.
+</p></blockquote>
+</li><li> &lsquo;<samp>--branch-depth <var>depth</var></samp>&rsquo; 
+<blockquote><p>This sets the <code>branch_depth</code>, typically a little below the
+<code>depth</code>. Between <code>branch_depth</code> and <code>depth</code>,
+attacks on strings with 3 liberties are considered but branching
+is inhibited, so fewer variations are considered.  Below this
+depth (default 13), GNU Go still tries to attack strings with only
+3 liberties, but only tries one move at each node.
+</p></blockquote>
+</li><li> &lsquo;<samp>--break-chain-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>Set the <code>break_chain_depth</code>. Beyond this depth, GNU Go abandons
+some attempts to defend groups by trying to capture part of the surrounding
+chain.
+</p></blockquote>
+</li><li> &lsquo;<samp>--aa-depth <var>depth</var></samp>&rsquo;
+<blockquote><p>The reading function <code>atari_atari</code> looks for combinations beginning
+with a series of ataris, and culminating with some string having an
+unexpected change in status (e.g. alive to dead or critical). This
+command line optio sets the parameter <code>aa_depth</code> which determines
+how deeply this function looks for combinations.
+</p></blockquote>
+</li><li> &lsquo;<samp>--superstring-depth</samp>&rsquo;
+<blockquote><p>A superstring (see section <a href="gnugo_11.html#Superstrings">Superstrings</a>) is an amalgamation of
+tightly strings. Sometimes the best way to attack or defend a
+string is by attacking or defending an element of the superstring.
+Such tactics are tried below <code>superstring_depth</code> and this
+command line option allows this parameter to be set.
+</p></blockquote>
+</li></ul>
+
+<p>The preceeding options are documented with the reading code
+(see section <a href="gnugo_11.html#Reading-Basics">Reading Basics</a>).
+</p>
+<ul>
+<li> &lsquo;<samp>--owl-branch</samp>&rsquo; Below this depth Owl only considers
+one move. Default 8.
+</li><li> &lsquo;<samp>--owl-reading</samp>&rsquo; Below this depth Owl assumes the
+dragon has escaped.  Default 20.
+</li><li> &lsquo;<samp>--owl-node-limit</samp>&rsquo;
+<blockquote><p>If the number of variations exceeds this limit, Owl assumes the dragon can
+make life. Default 1000. We caution the user that increasing
+<code>owl_node_limit</code> does not necessarily increase the strength of the
+program.
+</p></blockquote>
+</li><li> &lsquo;<samp>--owl-node-limit <var>n</var></samp>&rsquo;
+<blockquote><p>If the number of variations exceeds this limit, Owl assumes the dragon can
+make life. Default 1000.  We caution the user that increasing
+<code>owl_node_limit</code> does not necessarily increase the strength of the
+program.  
+</p></blockquote>
+</li><li> &lsquo;<samp>--owl-distrust <var>n</var></samp>&rsquo;
+<blockquote><p>Below this limit some owl reading is truncated.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Ascii-mode-options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Other-options-affecting-strength-and-speed" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Development-options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.5 Ascii mode options</h3>
+<a name="index-ascii-mode"></a>
+
+<ul>
+<li> &lsquo;<samp>--color <var>color</var></samp>&rsquo;
+<blockquote><p>Choose your color (&rsquo;black&rsquo; or &rsquo;white&rsquo;).
+</p></blockquote>
+</li><li> &lsquo;<samp>--handicap <var>number</var></samp>&rsquo;
+<blockquote><p>Choose the number of handicap stones (0&ndash;9)
+</p></blockquote>
+</li></ul>
+
+<p>For more information about the following clock options see See section <a href="#Ascii">Ascii Interface</a>.
+</p>
+<ul>
+<li> &lsquo;<samp>--clock <var>seconds</var></samp>&rsquo;
+<blockquote><p>Initialize the timer.
+</p></blockquote>
+</li><li> &lsquo;<samp>--byo-time <var>seconds</var></samp>&rsquo;
+<blockquote><p>Number of seconds per (Canadian) byo-yomi period
+</p></blockquote>
+</li><li> &lsquo;<samp>--byo-period <var>stones</var></samp>&rsquo;
+<blockquote><p>Number of stones per (Canadian) byo-yomi period
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Development-options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Ascii-mode-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Experimental-options" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.6 Development options</h3>
+
+<ul>
+<li> &lsquo;<samp>--replay <var>color</var></samp>&rsquo; 
+<blockquote><p>Replay all moves in a game for either or both colors. If used with the
+&lsquo;<samp>-o</samp>&rsquo; option the game record is annotated with move values. This
+option requires &lsquo;<samp>-l <var>filename</var></samp>&rsquo;. The color can be:
+</p><ul>
+<li> white: replay white moves only
+</li><li> black: replay black moves only
+</li><li> both: replay all moves
+</li></ul>
+<p>When the move found by genmove differs from the move in the sgf
+file the values of both moves are reported thus:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Move 13 (white): GNU Go plays C6 (20.60) - Game move F4 (20.60) 
+</pre></td></tr></table>
+
+<p>This option is useful if one wants to confirm that a change such as a
+speedup or other optimization has not affected the behavior of the
+engine. Note that when several moves have the same top value (or
+nearly equal) the move generated is not deterministic (though it can be
+made deterministic by starting with the same random seed). Thus a few
+deviations from the move in the sgf file are to be expected. Only if the
+two reported values differ should we conclude that the engine plays
+differently from the engine which generated the sgf file.
+See section <a href="gnugo_20.html#Regression">Regression testing</a>.
+</p></blockquote>
+</li><li> &lsquo;<samp>-a</samp>&rsquo;, &lsquo;<samp>--allpats</samp>&rsquo;
+<blockquote><p>Test all patterns, even those smaller in value than the largest move
+found so far. This should never affect GNU Go&rsquo;s final move, and it
+will make it run slower. However this can be very useful when &quot;tuning&quot;
+GNU Go. It causes both the traces and the output file (&lsquo;<samp>-o</samp>&rsquo;) to
+be more informative.
+</p></blockquote>
+</li><li> &lsquo;<samp>-T</samp>&rsquo;, &lsquo;<samp>--printboard</samp>&rsquo;: colored display of dragons.
+<blockquote><p>Use rxvt, xterm or Linux Console. (see section <a href="gnugo_5.html#Colored-Display">Colored Display</a>)
+</p></blockquote>
+</li><li> &lsquo;<samp>--showtime</samp>&rsquo;
+<blockquote><p>Print timing information to stderr.
+</p></blockquote>
+</li><li> &lsquo;<samp>-E</samp>&rsquo;, &lsquo;<samp>--printeyes</samp>&rsquo;: colored display of eye spaces
+<blockquote><p>Use rxvt, xterm or Linux Console. (see section <a href="gnugo_5.html#Colored-Display">Colored Display</a>)
+</p></blockquote>
+</li><li> &lsquo;<samp>-d</samp>&rsquo;, &lsquo;<samp>--debug <var>level</var></samp>&rsquo;
+<blockquote><p>Produce debugging output. The debug level is given in hexadecimal, using the
+bits defined in the following table from &lsquo;<tt>engine/gnugo.h</tt>&rsquo;. A list of
+these may be produced using &lsquo;<samp>--debug-flags</samp>&rsquo;. Here they are in
+hexadecimal:
+</p>
+<a name="index-debugging-options"></a>
+<table><tr><td>&nbsp;</td><td><pre class="example">  DEBUG_INFLUENCE             0x0001
+  DEBUG_EYES                  0x0002
+  DEBUG_OWL                   0x0004
+  DEBUG_ESCAPE                0x0008
+  DEBUG_MATCHER               0x0010
+  DEBUG_DRAGONS               0x0020
+  DEBUG_SEMEAI                0x0040
+  DEBUG_LOADSGF               0x0080
+  DEBUG_HELPER                0x0100
+  DEBUG_READING               0x0200
+  DEBUG_WORMS                 0x0400
+  DEBUG_MOVE_REASONS          0x0800
+  DEBUG_OWL_PERFORMANCE       0x1000
+  DEBUG_LIFE                  0x2000
+  DEBUG_FILLLIB               0x4000
+  DEBUG_READING_PERFORMANCE   0x8000
+  DEBUG_SCORING               0x010000
+  DEBUG_AFTERMATH             0x020000
+  DEBUG_ATARI_ATARI           0x040000
+  DEBUG_READING_CACHE         0x080000
+  DEBUG_TERRITORY             0x100000
+  DEBUG_OWL_PERSISTENT_CACHE  0X200000
+  DEBUG_TOP_MOVES             0x400000
+  DEBUG_MISCELLANEOUS         0x800000
+  DEBUG_ORACLE_STREAM         0x1000000
+</pre></td></tr></table>
+
+<p>These debug flags are additive. If you want to turn on both
+dragon and worm debugging you can use &lsquo;<samp>-d0x420</samp>&rsquo;.
+</p></blockquote>
+</li><li> &lsquo;<samp>--debug-flags</samp>&rsquo;
+<blockquote><p>Print the list of debug flags
+</p></blockquote>
+</li><li> &lsquo;<samp>-w</samp>&rsquo;, &lsquo;<samp>--worms</samp>&rsquo;
+<blockquote><p>Print more information about worm data.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m</samp>&rsquo;, &lsquo;<samp>--moyo <var>level</var></samp>&rsquo; 
+<blockquote><p>moyo debugging, show moyo board. The <var>level</var> is fully
+documented elsewhere (see section <a href="gnugo_13.html#Influential-Display">Colored display and debugging of influence</a>).
+</p></blockquote>
+</li><li> &lsquo;<samp>-b</samp>&rsquo;, &lsquo;<samp>--benchmark <var>number</var></samp>&rsquo; 
+<blockquote><p>benchmarking mode - can be used with &lsquo;<samp>-l</samp>&rsquo;. Causes GNU Go to play itself
+repeatedly, seeding the start of the game with a few random moves. This method
+of testing the program is largely superceded by use of the <code>twogtp</code>
+program.
+</p></blockquote>
+</li><li> &lsquo;<samp>-S</samp>&rsquo;, &lsquo;<samp>--statistics</samp>&rsquo;
+<blockquote><p>Print statistics (for debugging purposes).
+</p></blockquote>
+</li><li> &lsquo;<samp>-t</samp>&rsquo;, &lsquo;<samp>--trace</samp>&rsquo;
+<blockquote><p>Print debugging information. Use twice for more detail.
+</p></blockquote>
+</li><li> &lsquo;<samp>-r</samp>&rsquo;, &lsquo;<samp>--seed <var>seed</var></samp>&rsquo;
+<blockquote><p>Set random number seed. This can be used to guarantee that GNU Go will make
+the same decisions on multiple runs through the same game. If <code>seed</code> is
+zero, GNU Go will play a different game each time.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-string <var>location</var></samp>&rsquo;
+<blockquote><p>Invoke the tactical reading code (see section <a href="gnugo_11.html#Tactical-Reading">Tactical reading</a> to decide
+whether the string at <var>location</var> can be captured, and if so, whether it
+can be defended. If used with &lsquo;<samp>-o</samp>&rsquo;, this will produce a variation tree
+in SGF.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-owl <var>location</var></samp>&rsquo;
+<blockquote><p>Invoke the owl code (see section <a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>) to decide whether the dragon at
+<var>location</var> can be captured, and whether it can be defended. If used with
+&lsquo;<samp>-o</samp>&rsquo;, this will produce a variation tree in SGF.  
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-connection <var>location1</var>/<var>location2</var></samp>&rsquo;
+<blockquote><p>Decide whether dragons at <var>location1</var> and <var>location2</var> can be connected.
+Useful in connection with &lsquo;<samp>-o</samp>&rsquo; to write the variations to an SGF file.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-dragon-data <var>location</var></samp>&rsquo;
+<blockquote><p>Print complete information about the status of the dragon at <var>location</var>.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-semeai <var>location1</var>/<var>location2</var></samp>&rsquo;
+<blockquote><p>At <var>location1</var> and <var>location2</var> are adjacent dragons of the
+opposite color. Neither is aliveby itself, and their fate (alive,
+dead or seki) depends on the outcome of a semeai (capturing race).
+Decide what happens.  Useful in connection with &lsquo;<samp>-o</samp>&rsquo; to
+write the variations to an SGF file.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-tactical-semeai <var>location1</var>/<var>location2</var></samp>&rsquo;
+<blockquote><p>Similar to &lsquo;<samp>--decide-semeai</samp>&rsquo;, except that moves proposed by the
+owl code are not considered.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-position</samp>&rsquo;
+<blockquote><p>Try to attack and defend every dragon with dragon.escape&lt;6. If
+used with &lsquo;<samp>-o</samp>&rsquo;, writes the variations to an sgf file.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-eye <var>location</var></samp>&rsquo;
+<blockquote><p>Evaluates the eyespace at <var>location</var> and prints a report. You can get
+more information by adding &lsquo;<samp>-d0x02</samp>&rsquo; to the command line. 
+(see section <a href="gnugo_8.html#Eye-Local-Game-Values">Eye Local Game Values</a>.)
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-surrounded <var>location</var></samp>&rsquo;
+<blockquote><p>A dragon is <em>surrounded</em> if it is contained in the convex hull of
+its unfriendly neighbor dragons. This does not mean that it cannot escape,
+but it is often a good indicator that the dragon is under attack. This
+option draws the convex hull of the neighbor dragons and decides whether
+the dragon at <var>location</var> is surrounded.
+</p></blockquote>
+</li><li> &lsquo;<samp>--decide-combination</samp>&rsquo;
+<blockquote><p>Calls the function <code>atari_atari</code> to decide whether there
+exist combinations on the board.
+</p></blockquote>
+</li><li> &lsquo;<samp>--score <var>method</var></samp>&rsquo;
+<blockquote><p>Requires &lsquo;<samp>-l</samp>&rsquo; to specify which game to score and &lsquo;<samp>-L</samp>&rsquo; if
+you want to score anywhere else than at the end of the game record.
+<var>method</var> can be &quot;estimate&quot;, &quot;finish&quot;, or &quot;aftermath&quot;. &quot;finish&quot; and
+&quot;aftermath&quot; are appropriate when the game is complete, or nearly so, and
+both try to supply an accurate final score. Notice that if the game is
+not already finished it will be played out, which may take quite a long
+time if the game is far from complete. The &quot;estimate&quot; method may be used
+to get a quick estimate during the middle of the game. Any of these
+options may be combined with &lsquo;<samp>--chinese-rules</samp>&rsquo; if you want to use
+Chinese (Area) counting.
+</p>
+<p>If the option &lsquo;<samp>-o <var>outputfilename</var></samp>&rsquo; is provided, the result
+will also be written as a comment in the output file. For the &quot;finish&quot;
+and &quot;aftermath&quot; scoring algorithms, the selfplayed moves completing the
+game are also stored.
+</p>
+<ul>
+<li> finish
+<blockquote><p>Finish the game by selfplaying until two passes, then determine the
+status of all stones and compute territory.
+</p></blockquote>
+</li><li> aftermath
+<blockquote><p>Finish the game by selfplaying until two passes, then accurately
+determine status of all stones by playing out the &quot;aftermath&quot;, i.e.
+playing on until all stones except ones involved in seki have become
+either unconditionally (in the strongest sense) alive or unconditionally
+dead (or captured). Slower than &lsquo;<samp>--score finish</samp>&rsquo;, and while these
+algorithms usually agree, if they differ, &lsquo;<samp>--score aftermath</samp>&rsquo; is
+most likely to be correct.
+</p></blockquote>
+</li></ul>
+</blockquote>
+</li><li> <code>--score aftermath --capture-all-dead --chinese-rules</code>
+<blockquote><p>This combination mandates <strong>Tromp-Taylor</strong> scoring. The
+Tromp-Taylor ruleset requires the game to be played out until
+all dead stones are removed, then uses area (Chinese) scoring.
+The option &lsquo;<samp>--capture-all-dead</samp>&rsquo; requires the aftermath
+code to finish capturing all dead stones.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Experimental-options"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Development-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Invoking-GNU-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">3.9.7 Experimental options</h3>
+
+<p>Most of these are available as configure options and are
+described in <a href="gnugo_2.html#Other-Options">Other Options</a>.
+</p>
+<ul>
+<li> &lsquo;<samp>--options</samp>&rsquo;
+<blockquote><p>Print which experimental configure options were compiled into the program.
+</p></blockquote>
+</li><li> &lsquo;<samp>--with-break-in</samp>&rsquo;
+</li><li> &lsquo;<samp>--without-break-in</samp>&rsquo;
+<blockquote><p>Use or do not use the experimental break-in code. This option
+has no effect at level 9 or below. The break in code is enabled
+by default at level 10, and the only difference between levels
+9 and level 10 is that the break in code is disabled at level 9.
+</p></blockquote>
+</li><li> &lsquo;<samp>--cosmic-gnugo</samp>&rsquo;
+<blockquote><p>Use center oriented influence.
+</p></blockquote>
+</li><li> &lsquo;<samp>--nofusekidb</samp>&rsquo;
+<blockquote><p>Turn off the fuseki database.
+</p></blockquote>
+</li><li> &lsquo;<samp>--nofuseki</samp>&rsquo;
+<blockquote><p>Turn off fuseki moves entirely
+</p></blockquote>
+</li><li> &lsquo;<samp>--nojosekidb</samp>&rsquo;
+<blockquote><p>Turn off the joseki database.
+</p></blockquote>
+</li><li> &lsquo;<samp>--mirror</samp>&rsquo;
+<blockquote><p>Try to play mirror go.
+</p></blockquote>
+</li><li> &lsquo;<samp>--mirror-limit <var>n</var></samp>&rsquo;
+<blockquote><p>Stop mirroring when <var>n</var> stones are on the board.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_4.html#Overview" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

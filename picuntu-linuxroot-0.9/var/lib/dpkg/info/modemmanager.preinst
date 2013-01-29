@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/init.d/modemmanager" ] && [ ! -L "/etc/init.d/modemmanager" ]; then
+		if [ "`md5sum \"/etc/init.d/modemmanager\" | sed -e \"s/ .*//\"`" != \
+		     "`dpkg-query -W -f='${Conffiles}' modemmanager | sed -n -e \"\\\\' /etc/init.d/modemmanager '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			echo "Obsolete conffile /etc/init.d/modemmanager has been modified by you, renaming to .dpkg-bak"
+			mv -f "/etc/init.d/modemmanager" "/etc/init.d/modemmanager.dpkg-bak"
+		else
+			rm -f "/etc/init.d/modemmanager"
+		fi
+	fi
+fi
+# End automatically added section

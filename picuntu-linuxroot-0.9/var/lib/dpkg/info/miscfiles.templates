@@ -1,0 +1,8 @@
+Template: shared/packages-wordlist
+Type: text
+Description:
+
+Template: miscfiles/languages
+Type: text
+Default: english (Webster's Second International English wordlist)
+Description:

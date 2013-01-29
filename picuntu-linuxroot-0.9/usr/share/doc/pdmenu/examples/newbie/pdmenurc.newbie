@@ -1,0 +1,263 @@
+#!/usr/bin/pdmenu
+
+# Note that the above bang-path isn't required, but it lets you run this
+# file directly as a sort of pdmenu script.
+
+# this pdmenurc file is adapted from the default /etc/pdmenurc and
+# other example files, and is put together with the newbie linux user
+# in mind; i'm trying to provide him/her with as many tools as
+# possible.  it was originally constructed for a couple who were given
+# a 386 by a friend.  with linux and pdmenu, i was able to turn it
+# into a respectible internet machine.
+#
+# please read the comments for suggestions of ways you may
+# make it useful to your new unix user, and send any feedback to
+# jeff.covey@pobox.com
+
+# Set a pleasing color scheme.
+color:desktop:white:blue
+color:title:yellow:red
+color:base:yellow:red
+
+# Define the main menu.
+# Note the use of the preproc command to put the hostname in the menu title.
+preproc:echo menu:main:`whoami`@`hostname`\'s menu
+	show:_Internet menu...::internet
+	show:_Edit files...::file-editing
+
+# uncomment this if your users need to use the floppy drive, and look
+# at the menu for this below.  this setup uses sudo, which you'll have
+# to install and configure as well.
+#	show:Use a _floppy disk...::floppy
+
+	show:System _Tools...::system-tools
+
+# if you want your user(s) to have access to the command line,
+# uncomment the next line.
+#	exec:Drop to a _shell::echo "When you're done, type 'exit' to return to the menu.";/bin/sh -login
+
+# Autodetect if rpm is available, and if so, enable the redhat menu.
+preproc:\
+	if rpm >/dev/null 2>/dev/null ; then \
+		echo "show:_Redhat menu...::redhat" ; \
+	fi
+	show:_Help!::help
+	nop
+
+# if you have some games installed, you could make a menu item for
+# them here.  i make entries for a number of bsd games below.
+#	show:Play a game...::games
+
+# check that the path to fortune is correct here
+	exec:Give a random quote:display:/usr/games/fortune
+	exec:Display the time:display:date
+	nop
+
+# if your user(s) should be able to shutdown or reboot the system,
+# uncomment this line and the menu below, and configure sudo.
+#	show:Shutdown the computer...::shutdown
+	exit:E_xit
+
+# This is a submenu.
+menu:internet:Internet Programs
+# if you're connecting with a modem, uncomment these once you've
+# configured ppp
+#	exec:Connect to the internet::/usr/bin/sudo /usr/sbin/ppp-on
+#	exec:Disconnect from the internet::/usr/bin/sudo /usr/sbin/ppp-off
+#	show:Am I connected?...::modem-status
+#	nop
+	
+# if this is a system that dials in to a server to retrieve mail, you
+# may want to set your user(s) up with fetchmail and uncomment the
+# next line.
+#	exec:_Download Mail:pause:echo "fetching mail...";fetchmail
+# in my case, pine was their login shell on the isp, so i was able to
+# just use the following line instead.
+#	exec:Read/write _Mail/Newsgroups::rlogin -l foo bar.com
+#	exec:Read _Newsgroups::tin -r
+	exec:Surf the _Web::lynx
+	exec:_Internet Relay Chat::irc
+# if it's a home computer, this probably isn't much use to them, but
+# uncomment it if you have a use for it.
+#  	group:_Talk to other users online
+# 		exec::makemenu: \
+# 			echo "menu:talk:Select the user you want to talk to"; \
+# 			for u in `users`; do \
+# 				echo "exec:$u::talk $u"; \
+# 			done
+# 		show:::talk
+# 		remove:::talk
+#  	endgroup
+	exec:_Telnet:edit,pause:telnet ~Telnet to where?:~
+	exec:_Finger:edit,display:finger ~Enter address to finger:~
+	exec:_Ping:edit,pause:echo "Press Ctrl-c to stop pinging"\
+		;ping ~Ping what server?:~
+	nop
+	exec:Minicom::minicom
+	nop
+	exit:_Main menu...
+
+#modem-status - uncomment this if they're using a modem
+# menu:modem-status:Modem status
+# uncomment the next line to let your user(s) check the status of the
+# modem.  this assumes your modem is on /dev/modem.
+# 	exec:Am I _connected?:display:/usr/lib/pdmenu/modem-check
+# 	exec:_Display system messages:display:echo "Recent system messages:";\
+# 		tail /var/log/messages
+# 	nop
+# 	exit:_Back...
+
+#system tools
+menu:system-tools:System Tools
+	exec:_See how much disk space is free:display:echo \
+		"Free space on filesystems:"; df
+	exec:_Who's online?:display:echo "These users are online:";w
+	exec:_Display system messages:display:echo "Recent system messages:";\
+		tail /var/log/messages
+	exec:_Change your password:pause:passwd
+	nop
+	exit:_Main menu...
+
+#floppy handling
+# menu:floppy:Use a floppy disk
+# 	exec:_Mount a dos/windows floppy:pause:mount /a && \
+# 		echo "Floppy disk mounted on /a"; \
+# 		echo "Don't forget to unmount it when you're done with it!"
+# 	exec:_Unmount a floppy:pause:umount /a && \
+# 		echo "Floppy disk unmounted from /a"
+# 	show:_Format (erase) a dos/windows floppy...::floppy-format
+# 	nop
+# 	exit:_Main menu...
+
+#formatting floppies
+# menu:floppy-format:This will erase everything on your floppy!:This will erase everything on your floppy!
+# 	exec:_Format (erase) a dos/windows floppy:pause:sudo fdformat /dev/fd0H1440 && \
+# 		sudo /sbin/mkfs -t msdos /dev/fd0 && \
+# 		echo "Floppy successfully formatted."
+# 	exit:_Don't format the floppy
+
+#file editing
+menu:file-editing:Edit Files
+	exec:Edit a _new file::pico
+	# Note that this checks in several places for editdir.pl, 
+	# so this will work before and after pdmenu is actually installed
+	# on the system.
+	group:Edit an _existing file
+		exec::makemenu: ( \
+			../editdir.pl `pwd` "" edit-existing || \
+			examples/editdir.pl `pwd` "" edit-existing || \
+			${datarootdir}/pdmenu/editdir.pl `pwd` "" edit-existing \
+			) 2>/dev/null
+		show:::edit-existing
+		remove:::edit-existing
+	endgroup
+	nop
+# i highly recommend installing the gnu midnight commander for your
+# user(s) and uncommenting the next line.  alternately, it shouldn't
+# be too hard to make pdmenu menu items that are front-ends for "rm",
+# "cp", "mkdir", and friends, if anyone feels like doing it.
+#	exec:_Manage your files::mc
+#	nop
+	exit:_Main menu...
+
+#games menu
+# menu:games:Games
+# 	show:Adventure games...::adventure-games
+# 	show:Card games...::card-games
+# 	show:Board games...::board-games
+# 	exec:Hangman::/usr/games/hangman
+# 	exec:Bog::bog
+# 	exec:Hunt the Wumpus::/usr/games/wumpus
+# 	exec:Make anagrams:edit,pause:agm ~Word(s) from which to make anagrams:~ | more
+# 	nop
+# 	exit:_Main menu...
+
+#adventure games menu
+# menu:adventure-games:Adventure Games
+# 	exec:Adventure:pause:/usr/games/advent
+# 	exec:Battlestar:pause:/usr/games/battlestar
+# 	exec:The Golden Baton:pause:/usr/games/scottfree 1_baton
+# 	exec:The Time Machine:pause:/usr/games/scottfree 2_timemachine
+# 	exec:Arrows of Death, Part One:pause:/usr/games/scottfree 3_arrow1
+# 	exec:Arrows of Death, Part Two:pause:/usr/games/scottfree 4_arrow2
+# 	exec:Escape from Pulsar 7:pause:/usr/games/scottfree 5_pulsar7
+# 	exec:Circus:pause:/usr/games/scottfree 6_circus
+# 	exec:Feasibility Experiment:pause:/usr/games/scottfree 7_feasibility
+# 	exec:Wizard of Akyrz:pause:/usr/games/scottfree 8_akyrz
+# 	exec:Perseus and Andromeda:pause:/usr/games/scottfree 9_perseus
+# 	exec:Ten Little Indians:pause:/usr/games/scottfree A_tenlittleindians
+# 	exec:Waxworks:pause:/usr/games/scottfree B_waxworks
+# 	exec:Paranoia::/usr/games/paranoia
+# 	nop
+# 	exit:_Back...
+
+#card games menu
+# menu:card-games:Card Games
+# 	exec:Cribbage::/usr/games/cribbage
+# 	exec:Canfield::/usr/games/canfield
+# 	exec:Go fish::/usr/games/fish
+# 	nop
+# 	exit:_Main menu...
+
+#board games
+# menu:board-games:Board Games:Board Games
+# 	exec:Yahtzee::/usr/games/yahtzee
+# 	exec:Backgammon::/usr/games/backgammon
+# 	exec:Monopoly::/usr/games/monop
+# 	nop
+# 	exit:_Main menu...
+
+#help menu
+menu:help:Help
+# if you want to make yourself available to your user(s) if he/she
+# gets stuck, uncomment the next line and add your email address to
+# it.
+#	exec:_Send a message to your system administrator::pine foo@bar
+# i used lyx to create a linux sgml manual for them, then printed it
+# out in postscript format, and also generated it as html with a menu
+# item for it here.
+#	exec:Read the mushskeet manual::lynx /usr/local/lib/mushskeet-manual/mushskeet-manual.html
+	exec:Help on _using this menu system::man pdmenu
+	exec:Read a _Man Page:edit:man ~Read the manual page for what command?:~
+# i used emacs for info because i've never gotten the keys to work
+# correctly in the stand-alone info program; you may have better
+# luck.  if you do uncomment the line below, be nice and add a line to
+# /usr/share/info/dir explaining that they need to hit C-x C-c to exit
+# emacs.
+#	exec:Use the _info documentation system::emacs-nox -e info
+# if you have the howtos installed, uncomment the next line.	
+#	exec:Read the _Howtos::lynx /usr/share/doc/HTML/ldp/HOWTO-INDEX.html
+	nop
+	exit:_Main menu...
+
+#redhat menu
+menu:redhat:Redhat
+	group:Get _info about an installed package
+		exec::makemenu: \
+			echo "menu:rpm-info:Select the package about which you want info"; \
+			for p in `rpm -qa`; do \
+				echo "exec:$p:display:rpm -qi $p"; \
+			done
+		show:::rpm-info
+		remove:::rpm-info
+	endgroup
+	group:_List the files that belong to an installed package
+	exec::makemenu: \
+			echo "menu:rpm-file-list:Select the package for which you want to list the files"; \
+			for p in `rpm -qa`; do \
+				echo "exec:$p:display:rpm -ql $p"; \
+			done
+		show:::rpm-file-list
+		remove:::rpm-file-list
+	endgroup
+	exec:List which package a _command belongs to:edit,display:/usr/lib/pdmenu/rpm-info-on-command ~What command?:~
+	exec:List which package a _file belongs to:edit,display:rpm -qif ~What file?:~ 2> /dev/null
+	nop
+	exit:_Main menu...
+
+#shutdown menu
+# menu:shutdown:Shutdown the computer
+# 	exec:_Shutdown the computer::/usr/bin/sudo /sbin/shutdown -h now
+# 	exec:_Reboot the computer::/usr/bin/sudo /sbin/shutdown -r now
+# 	nop
+# 	exit:_Main menu...

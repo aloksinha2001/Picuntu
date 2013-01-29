@@ -1,0 +1,1449 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 13. Influence Function</title>
+
+<meta name="description" content="GNU Go Documentation: 13. Influence Function">
+<meta name="keywords" content="GNU Go Documentation: 13. Influence Function">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Influence"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_12.html#Combinations" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influential-Concepts" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_12.html#Pattern-Based-Reading" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Influence-Function"></a>
+<h1 class="chapter">13. Influence Function</h1>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Influential-Concepts">13.1 Conceptual Outline of Influence</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Territory-and-Moyo">13.2 Territory, Moyo and Area</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Influence-Usage">13.3 Where influence gets used in the engine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Influence-and-Territory">13.4 Influence and Territory</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Territorial-Details">13.5 Details of the Territory Valuation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#The-Influence-Core">13.6 The Core of the Influence Function</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#The-Influence-Algorithm">13.7 The Influence Algorithm</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     The algorithm of <code>accumlate_influence()</code>
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Permeability">13.8 Permeability</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Escape">13.9 Escape</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Break-Ins">13.10 Break Ins</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Surrounded-Dragons">13.11 Surrounded Dragons</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Influential-Patterns">13.12 Patterns used by the Influence module</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Influential-Display">13.13 Colored display and debugging of influence</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Influence-Tuning">13.14 Influence Tuning with <code>view.pike</code></a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Influence tuning with view.pike
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Influential-Concepts"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influence" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Territory-and-Moyo" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Conceptual-Outline-of-Influence"></a>
+<h2 class="section">13.1 Conceptual Outline of Influence</h2>
+
+<p>We define call stones <em>lively</em> if they cannot be tactically
+attacked, or if they have a tactical defense and belong to the player
+whose turn it is. Similarly, stones that cannot be strategically attacked
+(in the sense of the life-and-death analysis), or that have a strategical
+defense and belong to the player to move, are called <em>alive</em>.
+If we want to use the influence function before deciding the strategical
+status, all lively stones count as alive.
+</p>
+<p>Every alive stone on the board works as an influence source, with
+influence of its color radiating outwards in all directions. The
+strength of the influence declines exponentially with the distance
+from the source.
+</p>
+<p>Influence can only flow unhindered if the board is empty, however. All
+lively stones (regardless of color) act as influence barriers, as do
+connections between enemy stones that can&rsquo;t be broken through. For
+example the one space jump counts as a barrier unless either of the
+stones can be captured. Notice that it doesn&rsquo;t matter much if the
+connection between the two stones can be broken, since in that case
+there would come influence from both directions anyway.
+</p>
+<p>From the influence of both colors we compute a territorial value between
+-1.0 and +1.0 for each intersection, which can be seen as the likely hood
+of it becoming territory for either color.
+</p>
+<p>In order to avoid finding bogus territory, we add extra influence
+sources at places where an invasion can be launched, e.g. at 3-3 under
+a handicap stone, in the middle of wide edge extensions and in the
+center of large open spaces anywhere. Similarly we add extra influence
+sources where intrusions can be made into what otherwise looks as
+solid territory, e.g. monkey jumps. These intrusions depend on whose
+turn we assume it to be.
+</p>
+<p>All these extra influence sources, as well as connections, are controlled
+by a pattern database, which consists of the two files patterns/influence.db
+and patterns/barriers.db. The details are explained in
+<a href="#Influential-Patterns">Patterns used by the Influence module</a>.
+</p>
+<hr size="6">
+<a name="Territory-and-Moyo"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influential-Concepts" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence-Usage" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Territory_002c-Moyo-and-Area"></a>
+<h2 class="section">13.2 Territory, Moyo and Area</h2>
+<a name="index-territory"></a>
+<a name="index-moyo"></a>
+<a name="index-area"></a>
+
+<p>Using the influence code, empty regions of the board are partitioned
+in three ways. A vertex may be described as White or Black&rsquo;s 
+<em>territory</em>, <em>moyo</em> or <em>area</em>. The functions
+<code>whose_territory()</code>, <code>whose_moyo()</code> and <code>whose_area()</code>
+will return a color, or EMPTY if it belongs to one player or the
+other in one of these classifications.
+</p>
+<ul>
+<li> Territory
+<blockquote><p>Those parts of the board which are expected to materialize
+as actual points for one player or the other at the end of
+the game are considered <em>territory</em>.
+</p></blockquote>
+</li><li> Moyo
+<blockquote><p>Those parts of the board which are either already territory or more generally
+places where a territory can easily materialize if the opponent neglects to
+reduce are considered <em>moyo</em>.
+<em>moyo</em>.
+</p></blockquote>
+</li><li> Area
+<blockquote><p>Those parts of the board where one player or the other has a
+stronger influence than his opponent are considered <em>area</em>.
+</p></blockquote>
+</li></ul>
+
+<p>Generally territory is moyo and moyo is area. To get a feeling
+for these concepts, load an sgf file in a middle game position
+with the option &lsquo;<samp>-m 0x0180</samp>&rsquo; and examine the resulting
+diagrams (see section <a href="#Influential-Display">Colored display and debugging of influence</a>).
+</p>
+<hr size="6">
+<a name="Influence-Usage"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Territory-and-Moyo" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence-and-Territory" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Where-influence-gets-used-in-the-engine"></a>
+<h2 class="section">13.3 Where influence gets used in the engine</h2>
+
+<p>The information obtained from the influence computation is used in a variety
+of places in the engine, and the influence module is called several times
+in the process of the move generation. The details of the influence
+computation vary according to the needs of the calling function.
+</p>
+<p>After GNU Go has decided about the tactical stability of strings, the
+influence module gets called the first time. Here all lively stones act
+as an influence source of default strength 100. The result is stored in
+the variables <code>initial_influence</code> and <code>initial_opposite_influence</code>,
+and it is used as an important information for guessing the strength of
+dragons. For example, a dragon that is part of a moyo of size 25 is
+immediately considered alive.  For dragons with a smaller moyo size, a
+life-and-death analysis will be done by the owl code (see <a href="gnugo_12.html#Pattern-Based-Reading">Pattern Based Reading</a>). A dragon with a moyo size of only 5 will be considered weak, even
+if the owl code has decided that it cannot be killed.
+</p>
+<p>As a tool for both the owl code and the strength estimate of dragons,
+an &quot;escape&quot; influence gets computed for each dragon (see section <a href="#Escape">Escape</a>).
+</p>
+<p>Once all dragons have been evaluated, the influence module is called again
+and the variables <code>initial_influence</code> and
+<code>initial_opposite_influence</code> get overwritten. Of course, the dragon
+status&rsquo;, which are available now, are taken into account. Stones belonging
+to a dead dragon will not serve as an influence source, and the strengths of
+other stones get adjusted according to the strength of their respective
+dragon.
+</p>
+<p>The result of this run is the most important tool for move evaluation. All
+helper functions of patterns as explained in <a href="gnugo_9.html#Patterns">The Pattern Code</a> that
+refer to influence results (e. g. <code>olib(*)</code> etc.) actually use these
+results. Further, <code>initial_influence</code> serves as the reference for
+computing the territorial value of a move. That is, from the influence
+strengths stored in <code>initial_influence</code>, a territory value is
+assigned to each intersection. This value is supposed to estimate the
+likelyhood that this intersection will become white or black territory.
+</p>
+<p>Then, for each move that gets considered in the function <code>value_moves</code>,
+the influence module is called again via the function
+<code>compute_move_influence</code> to assess the likely territorial balance after
+this move, and the result is compared with the state before that move.
+</p>
+<p>An additional influence computation is done in order to compute the followup
+value of a move. Some explainations are in <a href="#Territorial-Details">Details of the Territory Valuation</a>.
+</p>
+<p>Some of the public functions from &lsquo;<tt>influence.c</tt>&rsquo; which are used
+throughout the engine are listed in <a href="gnugo_18.html#Influence-Utilities">Utilities from &lsquo;<tt>engine/influence.c</tt>&rsquo;</a>.
+</p>
+<hr size="6">
+<a name="Influence-and-Territory"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influence-Usage" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Territorial-Details" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Influence-and-Territory-1"></a>
+<h2 class="section">13.4 Influence and Territory</h2>
+
+<p>In this section we consider how the influence function is used to
+estimate territory in the function <code>estimate_territorial_value()</code>.
+</p>
+<p>A move like &lsquo;<samp>*</samp>&rsquo; by &lsquo;<samp>O</samp>&rsquo; below is worth one point:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">OXXX.
+OX.XX
+O*a.X
+OX.XX
+OXXX.
+</pre></td></tr></table>
+
+<p>This is evaluated by the influence function in the following way:
+We first assign territory under the assumption that X moves first in all
+local positions in the original position;  then we reassing territory,
+again under the assumption that &lsquo;<samp>X</samp>&rsquo; moves first in all local positions,
+but after we let &lsquo;<samp>O</samp>&rsquo; make the move at &lsquo;<samp>*</samp>&rsquo;. These two
+territory assignments are compared and the difference gives the
+territorial value of the move.
+</p>
+<p>Technically, the assumption that &lsquo;<samp>X</samp>&rsquo; plays first everywhere is
+implemented via an asymmetric pattern database in <code>barriers.db</code>.
+What exactly is a safe connection that stops hostile influence from
+passing through is different for &lsquo;<samp>O</samp>&rsquo; and &lsquo;<samp>X</samp>&rsquo;; of course such a
+connection has to be tighter for stones with color &lsquo;<samp>O</samp>&rsquo;. Also,
+additional intrusion influence sources are added for &lsquo;<samp>X</samp>&rsquo; in places
+where &lsquo;<samp>X</samp>&rsquo; stones have natural followup moves.
+</p>
+<p>In this specific example above, the asymmetry (before any move has been made)
+would turn out as follows: If &lsquo;<samp>X</samp>&rsquo; is in turn to move, the white influence
+would get stopped by a barrier at &lsquo;<samp>*</samp>&rsquo;, leaving 4 points of territory
+for &lsquo;<samp>X</samp>&rsquo;.  However, if &lsquo;<samp>O</samp>&rsquo; was next to move, then a followup move
+for the white stones at the left would be assumed in the form of an extra
+(&quot;intrusion&quot;) influence source at &lsquo;<samp>*</samp>&rsquo;. This would get stopped at
+&lsquo;<samp>a</samp>&rsquo;, leaving three points of territory.
+</p>
+<p>Returning to the valuation of a move by &lsquo;<samp>O</samp>&rsquo; at &lsquo;<samp>*</samp>&rsquo;, we get a
+value of 1 for the move at &lsquo;<samp>*</samp>&rsquo;.
+However, of course this move is sente once it is worth playing, and should
+therefore (in miai counting) be awarded an effective value of 2. Hence we
+need to recognize the followup value of a move. GNU Go 3.0 took care of
+this by using patterns in <code>patterns.db</code> that enforced an explicit
+followup value. Versions from 3.2 on instead compute a seperate followup
+influence to each move considered. In the above example, an intrusion source
+will be added at &lsquo;<samp>a</samp>&rsquo; as a followup move to &lsquo;<samp>*</samp>&rsquo;. This destroys all of
+Black&rsquo;s territory and hence gives a followup value of 3.
+</p>
+<p>The pattern based followup value are still needed at some places, however.
+</p>
+<p>To give another example, consider this position where we want to
+estimate the value of an &lsquo;<samp>O</samp>&rsquo; move at &lsquo;<samp>*</samp>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">OOOXXX
+..OX..
+..OX..
+...*..
+------
+</pre></td></tr></table>
+
+<p>Before the move we assume &lsquo;<samp>X</samp>&rsquo; moves first in the local position (and
+that &lsquo;<samp>O</samp>&rsquo; has to connect), which gives territory like this (lower case
+letter identify territory for each player):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">OOOXXX
+ooOXxx
+o.OXxx
+o...xx
+------
+</pre></td></tr></table>
+
+<p>Then we let &lsquo;<samp>O</samp>&rsquo; make the move at &lsquo;<samp>*</samp>&rsquo; and assume
+&lsquo;<samp>X</samp>&rsquo; moves first again next.  The territory then becomes (&lsquo;<samp>X</samp>&rsquo;
+is also assumed to have to connect):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">OOOXXX
+ooOXxx
+ooOX.x
+oo.O.x
+------
+</pre></td></tr></table>
+
+<p>We see that this makes a difference in territory of 4, which is what
+influence_delta_territory() should report. Then again, we have followup
+value, and here also a reverse followup value. The reverse followup value,
+which in this case will be so high that the move is treated as reverse
+sente, is added by an explicit pattern. Other sources for followup or
+reverse followup values are threats to capture a rescue a string of stones.
+See the code and comments in the function <code>value_move_reaons</code> for how
+followup and reverse followup values are used to adjust the effective 
+move value.
+</p>
+<p>To give an example of territorial value where something is captured,
+consider the &lsquo;<samp>O</samp>&rsquo; move at &lsquo;<samp>*</samp>&rsquo; here,
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XXXXXXXO
+X.OOOOXO
+X.O..O*O
+--------
+</pre></td></tr></table>
+
+<p>As before we first let the influence function determine territory
+assuming X moves first, i.e. with a captured group:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XXXXXXXO
+XxyyyyXO
+Xxyxxy.O
+--------
+</pre></td></tr></table>
+
+<p>Here &lsquo;<samp>y</samp>&rsquo; indicates &lsquo;<samp>X</samp>&rsquo; territory + captured stone,
+i.e. these count for two points. After the &lsquo;<samp>O</samp>&rsquo; move at &lsquo;<samp>*</samp>&rsquo; we
+instead get
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XXXXXXXO
+X.OOOOXO
+X.OooOOO
+--------
+</pre></td></tr></table>
+
+<p>and we see that &lsquo;<samp>X</samp>&rsquo; has 16 territory fewer and &lsquo;<samp>O</samp>&rsquo;
+has two territory more, for a total difference of 18 points.
+</p>
+<p>That the influence function counts the value of captured stones was
+introduced in GNU Go 3.2. Previously this was instead done using the
+effective_size heuristic. The effective size is the number of
+stones plus the surrounding empty spaces which are closer to
+this string or dragon than to any other stones. Here the &lsquo;<samp>O</samp>&rsquo;
+string would thus have effective size 6 (number of stones) + 2
+(interior eye) + 2*0.5 (the two empty vertices to the left of
+the string, split half each with the surrounding X string) +
+1*0.33 (the connection point, split between three strings) =
+9.33. As noted this value was doubled, giving 18.67 which is
+reasonably close to the correct value of 18. The effective size
+heuristic is still used in certain parts of the move valuation
+where we can&rsquo;t easily get a more accurate value from the
+influence function (e. g. attacks depending on a ko, attack threats).
+</p>
+<p>Note that this section only describes the territorial valuation of a move.
+Apart from that, GNU Go uses various heuristics in assigning a strategical
+value (weakening and strengthening of other stones on the board) to a move.
+Also, the influence function isn&rsquo;t quite as well tuned as the examples above
+may seem to claim. But it should give a fairly good idea of how the design
+is intended.
+</p>
+<p>Another matter is that so far we have only considered the change in secure
+territory. GNU Go 3.2 and later versions use a revised heuristic, which
+is explained in the next section, to assign probable territory to each
+player.
+</p>
+<hr size="6">
+<a name="Territorial-Details"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influence-and-Territory" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-Influence-Core" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Details-of-the-Territory-Valuation"></a>
+<h2 class="section">13.5 Details of the Territory Valuation</h2>
+
+<p>This section explains how GNU Go assigns a territorial value to an
+intersection once the white and black influence have been computed.
+The intention is that an intersection that has a chance of xx% of
+becoming white territory is counted as 0.xx points of territory for
+white, and similar for black.
+</p>
+<p>The algorithm in the function <code>new_value_territory</code> goes roughly
+as follows:
+</p>
+<p>If <code>wi</code> is the white influence at a point, and <code>bi</code> the black
+influence, then <code> value = ( (wi-bi)/ (wi+bi) )^3</code> (positive values
+indicates likley white territory, negative stand for black territory)
+turns out to be very simple first guess that is still far off, but
+reasonable enough to be useful.
+</p>
+<p>This value is then suspect a number of corrections. Assume that this first
+guess resulted in a positive value.
+</p>
+<p>If both <code>bi</code> and <code>wi</code> are small, it gets reduced. What exactly is
+&quot;small&quot; depends on whether the intersection is close to a corner or an edge
+of the board, since it is easier to claim territory in the corner than in
+the center.
+</p>
+<p>Then the value at each intersection is degraded to the minimum value of
+its neighbors. This can be seen as a second implementation of the proverb
+saying that there is no territory in the center of the board. This step
+substantially reduces the size of spheres of territory that are open at
+several sides.
+</p>
+<p>Finally, there are a number of patterns that explicitly forbid GNU Go to
+count territory at some intersections. This is used e. g. for false eyes that
+will eventually have to be filled in. Also, points for prisoners are added.
+</p>
+<p>To fine tune this scheme, some revisions have been made to the influence
+computations that are relevant for territorial evaluation. This includes
+a reduced default attenuation and some revised pattern handling.
+</p>
+<hr size="6">
+<a name="The-Influence-Core"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Territorial-Details" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-Influence-Algorithm" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Core-of-the-Influence-Function"></a>
+<h2 class="section">13.6 The Core of the Influence Function</h2>
+
+<p>The basic influence radiation process can efficiently be implemented
+as a breadth first search for adjacent and more distant points, using
+a queue structure.
+</p>
+<p>Influence barriers can be found by pattern matching, assisted by
+reading through constraints and/or helpers. Wall structures, invasion
+points and intrusion points can be found by pattern matching as well.
+</p>
+<p>When influence is computed, the basic idea is that there are a number
+of influence sources on the board, whose contributions are summed to
+produce the influence values. For the time being we can assume that
+the living stones on the board are the influence sources, although
+this is not the whole story.
+</p>
+<p>The function <code>compute_influence()</code> contains a loop over the
+board, and for each influence source on the board, the function
+<code>accumulate_influence()</code> is called. This is the core of the
+influence function. Before we get into the details, this is how
+the influence field from a single isolated influence source of
+strength 100 turns out (with an attenuation of 3.0):
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  0  0  0  0  0  0  0  0  0  0  0
+  0  0  0  0  1  1  1  0  0  0  0
+  0  0  0  1  2  3  2  1  0  0  0
+  0  0  1  3  5 11  5  3  1  0  0
+  0  1  2  5 16 33 16  5  2  1  0
+  0  1  3 11 33  X 33 11  3  1  0
+  0  1  2  5 16 33 16  5  2  1  0
+  0  0  1  3  5 11  5  3  1  0  0
+  0  0  0  1  2  3  2  1  0  0  0
+  0  0  0  0  1  1  1  0  0  0  0
+  0  0  0  0  0  0  0  0  0  0  0
+</pre></td></tr></table>
+
+<p>These values are in reality floating point numbers but have been
+rounded down to the nearest integer for presentation. This means that
+the influence field does not stop when the numbers become zeroes.
+</p>
+<p>Internally <code>accumulate_influence()</code> starts at the influence source and
+spreads influence outwards by means of a breadth first propagation,
+implemented in the form of a queue. The order of propagation and the
+condition that influence only is spread outwards guarantee that no
+intersection is visited more than once and that the process
+terminates. In the example above, the intersections are visited in the
+following order:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  +  +  +  +  +  +  +  +  +  +  +
+  + 78 68 66 64 63 65 67 69 79  +
+  + 62 46 38 36 35 37 39 47 75  +
+  + 60 34 22 16 15 17 23 43 73  +
+  + 58 32 14  6  3  7 19 41 71  +
+  + 56 30 12  2  0  4 18 40 70  +
+  + 57 31 13  5  1  8 20 42 72  +
+  + 59 33 21 10  9 11 24 44 74  +
+  + 61 45 28 26 25 27 29 48 76  +
+  + 77 54 52 50 49 51 53 55 80  +
+  +  +  +  +  +  +  +  +  +  +  +
+</pre></td></tr></table>
+
+<p>The visitation of intersections continues in the same way on the
+intersections marked &rsquo;&lsquo;<samp>+</samp>&rsquo; and further outwards. In a real
+position there will be stones and tight connections stopping the
+influence from spreading to certain intersections. This will
+disrupt the diagram above, but the main property of the
+propagation still remains, i.e. no intersection is visited more
+than once and after being visited no more influence will be
+propagated to the intersection.
+</p>
+<hr size="6">
+<a name="The-Influence-Algorithm"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#The-Influence-Core" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Permeability" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-Influence-Algorithm-1"></a>
+<h2 class="section">13.7 The Influence Algorithm</h2>
+
+<p>Let <code>(m, n)</code> be the coordinates of the influence source and
+<code>(i, j)</code> the coordinates of a an intersection being visited
+during propagation, using the same notation as in the
+<code>accumulate_influence()</code> function.  Influence is now propagated to
+its eight closest neighbors, including the diagonal ones,
+according to the follow scheme:
+</p>
+<p>For each of the eight directions <code>(di, dj)</code>, do:
+</p>
+<ol>
+<li> 
+Compute the scalar product <code>di*(i-m) + dj*(j-n)</code>
+between the vectors <code>(di,dj)</code> and <code>(i,j) - (m,n)</code>
+</li><li> If this is negative or zero, the direction is not outwards and
+we continue with the next direction. The exception is when we
+are visiting the influence source, i.e. the first intersection,
+when we spread influence in all directions anyway.
+</li><li> If <code>(i+di, j+dj)</code> is outside the board or occupied we
+also continue with the next direction.
+</li><li> Let S be the strength of the influence at <code>(i, j)</code>. The influence
+propagated to <code>(i+di, j+dj)</code> from this intersection is given by
+<code>P*(1/A)*D*S</code>, where the three different kinds of damping are:
+
+<ul>
+<li> The permeability &lsquo;<samp>P</samp>&rsquo;, which is a property of the board
+intersections. Normally this is one, i.e. unrestricted
+propagation, but to stop propagation through e.g. one step
+jumps, the permeability is set to zero at such intersections
+through pattern matching. This is further discussed below.
+</li><li> The attenuation &lsquo;<samp>A</samp>&rsquo;, which is a property of the influence
+source and different in different directions. By default this has the
+value 3 except diagonally where the number is twice as much. By
+modifying the attenuation value it is possible to obtain influence
+sources with a larger or a smaller effective range.
+</li><li> The directional damping &lsquo;<samp>D</samp>&rsquo;, which is the squared cosine of the
+angle between <code>(di,dj)</code> and <code>(i,j) - (m,n)</code>. The idea is to
+stop influence from &quot;bending&quot; around an interfering stone and
+get a continuous behavior at the right angle cutoff. The
+choice of the squared cosine for this purpose is rather
+arbitrary, but has the advantage that it can be expressed as a
+rational function of &lsquo;<samp>m</samp>&rsquo;, &lsquo;<samp>n</samp>&rsquo;, &lsquo;<samp>i</samp>&rsquo;, &lsquo;<samp>j</samp>&rsquo;,
+&lsquo;<samp>di</samp>&rsquo;, and &lsquo;<samp>dj</samp>&rsquo;, without involving any trigonometric or
+square root computations. When we are visiting the influence
+source we let by convention this factor be one.
+</li></ul>
+</li></ol>
+
+<p>Influence is typically contributed from up to three neighbors
+&quot;between&quot; this intersection and the influence source. These values are
+simply added together. As pointed out before, all contributions will
+automatically have been made before the intersection itself is
+visited.
+</p>
+<p>When the total influence for the whole board is computed by
+<code>compute_influence()</code>, <code>accumulate_influence()</code> is
+called once for each influence source. These invocations are
+totally independent and the influence contributions from the
+different sources are added together.
+</p>
+<hr size="6">
+<a name="Permeability"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#The-Influence-Algorithm" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Escape" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Permeability-1"></a>
+<h2 class="section">13.8 Permeability</h2>
+
+<p>The permeability at the different points is initially one at all empty
+intersections and zero at occupied intersections. To get a useful
+influence function we need to modify this, however. Consider the
+following position:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">|......
+|OOOO..
+|...O..
+|...a.X   ('a' empty intersection)
+|...O..
+|...OOO
+|.....O
++------
+</pre></td></tr></table>
+
+<p>The corner is of course secure territory for &lsquo;<samp>O</samp>&rsquo; and clearly
+the &lsquo;<samp>X</samp>&rsquo; stone has negligible effect inside this position. To
+stop &lsquo;<samp>X</samp>&rsquo; influence from leaking into the corner we use pattern
+matching (pattern Barrier1/Barrier2 in &lsquo;<tt>barriers.db</tt>&rsquo;) to modify the
+permeability for &lsquo;<samp>X</samp>&rsquo; at this intersection to zero. &lsquo;<samp>O</samp>&rsquo; can still
+spread influence through this connection.
+</p>
+<p>Another case that needs to be mentioned is how the permeability
+damping is computed for diagonal influence radiation. For horizontal
+and vertical radiation we just use the permeability (for the relevant
+color) at the intersection we are radiating from. In the diagonal case
+we additionally multiply with the maximum permeability at the two
+intersections we are trying to squeeze between. The reason for this
+can be found in the diagram below:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">|...X    |...X    
+|OO..    |Oda.
+|..O.    |.bc.
+|..O.    |..O.
++----    +----
+</pre></td></tr></table>
+
+<p>We don&rsquo;t want &lsquo;<samp>X</samp>&rsquo; influence to be spread from &lsquo;<samp>a</samp>&rsquo; to
+&lsquo;<samp>b</samp>&rsquo;, and since the permeability at both c and d is zero, the
+rule above stops this.
+</p>
+<hr size="6">
+<a name="Escape"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Permeability" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Break-Ins" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Escape-1"></a>
+<h2 class="section">13.9 Escape</h2>
+
+<p>One application of the influence code is in computing the
+<code>dragon.escape_route</code> field. This is computed by the function
+<code>compute_escape()</code> as follows.  First, every intersection is
+assigned an escape value, ranging between 0 and 4, depending on
+the influence value of the opposite color.
+</p>
+<p>The <code>escape_route</code> field is modified by the code in &lsquo;<tt>surround.c</tt>&rsquo;
+(see section <a href="#Surrounded-Dragons">Surrounded Dragons</a>). It is divided by two for weakly surrounded
+dragons, and set to zero for surrounded ones.
+</p>
+<p>In addition to assiging an escape value to empty vertices,
+we also assign an escape value to friendly dragons. This
+value can range from 0 to 6 depending on the status of 
+the dragon, with live dragons having value 6.
+</p>
+<p>Then we sum the values of the resulting influence escape values
+over the intersections (including friendly dragons) at distance 4,
+that is, over those intersections which can be joined to the
+dragon by a path of length 4 (and no shorter path) not passing
+adjacent to any unfriendly dragon. In the following example, we
+sum the influence escape value over the four vertices labelled
+&rsquo;4&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   
+   . . . . . . . . .    . . . . . . . . .
+   . . . . . X . . O    . . . . . X . . O
+   . . X . . . . . O    . . X . 2 . 4 . O
+   X . . . . . . . .    X . . 1 1 2 3 4 .
+   X O . O . . . . O    X O 1 O 1 2 3 4 O
+   X O . O . . . . .    X O 1 O 1 . 4 . .
+   X O . . . X . O O    X O 1 . . X . . O
+   . . . X . . . . .    . 1 . X . . . . .
+   X . . . . X . . .    X . . . . X . . .
+   . . . . . . . . .    . . . . . . . . .
+
+</pre></td></tr></table>
+
+<p>Since the dragon is trying to reach safety, the reader might
+wonder why <code>compute_influence()</code> is called with the opposite
+color of the dragon contemplating escape.  To explain this point,
+we first remind the reader why there is a color parameter to
+<code>compute_influence()</code>. Consider the following example position:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">
+     ...XX...
+     OOO..OOO
+     O......O
+     O......O
+     --------
+
+</pre></td></tr></table>
+
+<p>Whether the bottom will become O territory depends on who is in turn
+to play. This is implemented with the help of patterns in barriers.db,
+so that X influence is allowed to leak into the bottom if X is in turn
+to move but not if O is. There are also &ldquo;invade&rdquo; patterns which add
+influence sources in sufficiently open parts of the board which are
+handled differently depending on who is in turn to move.
+</p>
+<p>In order to decide the territorial value of an O move in the third
+line gap above, influence is first computed in the original position
+with the opponent (i.e. X) in turn to move. Then the O stone is played
+to give:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+     ...XX...
+     OOO.OOOO
+     O......O
+     O......O
+     --------
+
+</pre></td></tr></table>
+
+<p>Now influence is computed once more, also this time with X in turn to
+move. The difference in territory (as computed from the influence
+values) gives the territorial value of the move.
+</p>
+<p>Exactly how influence is computed for use in the escape route
+estimation is all ad hoc. But it makes sense to assume the opponent
+color in turn to move so that the escape possibilities aren&rsquo;t
+overestimated. After we have made a move in the escape direction
+it is after all the opponent&rsquo;s turn.
+</p>
+<p>The current escape route mechanism seems good enough to be useful
+but is not completely reliable. Mostly it seems to err on the side of
+being too optimistic.
+</p>
+<hr size="6">
+<a name="Break-Ins"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Escape" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Surrounded-Dragons" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Break-Ins-1"></a>
+<h2 class="section">13.10 Break Ins</h2>
+
+<p>The code in &lsquo;<tt>breakin.c</tt>&rsquo; break-ins into territories that require
+deeper tactical reading and are thus impossible to detect for the
+influence module. It gets run after the influence module and revises
+its territory valuations.
+</p>
+<p>The break-in code makes use of two public functions in &lsquo;<tt>readconnect.c</tt>&rsquo;,
+</p>
+<ul>
+<li> int break_in(int str, const char goal[BOARDMAX], int *move)
+<a name="index-break_005fin"></a>
+<blockquote><p>Returns WIN if <code>str</code> can connect to the area <code>goal[]</code> (which may or
+may not contain stones), if the string&rsquo;s owner gets the first move.
+</p></blockquote>
+</li><li> int block_off(int str, const char goal[BOARDMAX], int *move)
+<a name="index-block_005foff"></a>
+<blockquote><p>Returns WIN if <code>str</code> cannot connect to the area <code>goal[]</code> (which may
+or may not contain stones), if the other color moves first.
+</p></blockquote>
+</li></ul>
+
+<p>These functions are public front ends to their counterparts
+<code>recursive_break_in</code> and <code>recursive_block_off</code>, which
+call each other recursively.
+</p>
+<p>The procedure is as follows: We look at all big (&gt;= 10) territory regions
+as detected by the influence code. Using the computation of
+connection distances from readconnect.c, we compute all nearby vertices
+of this territory. We look for the closest safe stones belonging to
+the opponent. 
+</p>
+<p>For each such string <code>str</code> we call
+</p>
+<ul>
+<li> <code>break_in(str, territory)</code> if the opponent is assumed to be next to move,
+</li><li> <code>block_off(str, territory)</code> if the territory owner is next.
+</li></ul>
+
+<p>If the break in is successful resp. the blocking unsuccessful, we
+shrink the territory, and see whether the opponent can still break in.
+We repeat this until the territory is shrunk so much that the opponent
+can no longer reach it.
+</p>
+<p>To see the break in code in action run GNU Go on the file
+&lsquo;<tt>regression/games/break_in.sgf</tt>&rsquo; with the option <code>-d0x102000</code>. Among
+the traces you will find:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  Trying to break in from D7 to:
+E9 (1)  F9 (1)  G9 (1)  E8 (1)  F8 (1)  G8 (1)  
+H8 (1)  G7 (1)  H7 (1)  J7 (1)  H6 (1)  J6 (1)
+H5 (1)  J5 (1)  H4 (1)  J4 (1)  H3 (1)  J3 (1)
+H2 (1)  J2 (1)    
+block_off D7, result 0 PASS (355, 41952 nodes, 0.73 seconds)
+E9 (1)  F9 (1)  G9 (1)  E8 (1)  F8 (1)  G8 (1)
+H8 (1)  G7 (1)  H7 (1)  J7 (1)  H6 (1)  J6 (1)
+H5 (1)  J5 (1)  H4 (1)  J4 (1)  H3 (1)  J3 (1)
+H2 (1)  J2 (1)    
+B:F4 
+  Erasing territory at E8 -b.
+  Erasing territory at G3 -b.
+  Now trying to break to smaller goal:
+F9 (1)  G9 (1)  F8 (1)  G8 (1)  H8 (1)  G7 (1)
+H7 (1)  J7 (1)  H6 (1)  J6 (1)  H5 (1)  J5 (1)
+H4 (1)  J4 (1)  H3 (1)  J3 (1)  H2 (1)  J2 (1)    
+</pre></td></tr></table>
+
+<p>This means that the function <code>break_in</code> is called with the goal
+marked &rsquo;a&rsquo; in the following diagram. The code attempts to find out
+whether it is possible to connect into this area from the string
+at <code>D7</code>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   A B C D E F G H J
+ 9 . . . . a a a . . 9
+ 8 . . . . a a a a . 8
+ 7 . . . X O O a a a 7
+ 6 . . . X X X O a a 6
+ 5 . . . . + . . a a 5
+ 4 . . . X . . O a a 4
+ 3 . . . . X . . a a 3
+ 2 . . . . . . O a a 2
+ 1 . . . . . . . . . 1
+   A B C D E F G H J
+</pre></td></tr></table>
+
+<p>A breakin is found, so the goal is shrunk by removing
+<code>E9</code> and <code>J2</code>, then break_in is called again.
+</p>
+<p>In order to see what reading is actually done in order to
+do this break in, you may load GNU Go in gtp mode, then
+issue the commands:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">loadsgf break_in.sgf 
+= black
+
+start_sgftrace
+= 
+
+break_in D7 E9 F9 G9 E8 F8 G8 H8 G7 H7 J7 H6 J6 H5 J5 H4 J4 H3 J3 H2 J2
+= 1 E8
+
+finish_sgftrace vars.sgf
+= 
+
+start_sgftrace
+= 
+
+break_in D7 F9 G9 F8 G8 H8 G7 H7 J7 H6 J6 H5 J5 H4 J4 H3 J3 H2 J2
+= 1 G7
+
+finish_sgftrace vars1.sgf
+</pre></td></tr></table>
+
+<p>This will produce two sgf files containing the variations caused
+by these calls to the breakin code. The second file, &lsquo;<tt>vars1.sgf</tt>&rsquo;
+will contain quite a few variations.
+</p>
+<p>The break in code makes a list of break ins which are found.
+When it is finished, the function <code>add_expand_territory_move</code>
+is called for each break in, adding a move reason.
+</p>
+<p>The break in code is slow, and only changes a few moves by the engine
+per game. Nevertheless we believe that it contributes substantially
+to the strength of the program. The break in code is enabled by default 
+in GNU Go 3.6 at level 10, and disabled at level 9. In fact, this is the
+<strong>only</strong> difference between levels 9 and 10 in GNU Go 3.6.
+</p>
+<hr size="6">
+<a name="Surrounded-Dragons"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Break-Ins" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influential-Patterns" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Surrounded-Dragons-1"></a>
+<h2 class="section">13.11 Surrounded Dragons</h2>
+
+<p>When is a dragon surrounded?
+</p>
+<p>As has been pointed out by Bruce Wilcox, the geometric lines connecting groups
+of the opposite color are often important. It is very hard to prevent the
+escape of this &lsquo;<samp>O</samp>&rsquo; dragon:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">..........
+.....O....
+.X.......X
+.X...O...X
+..........
+..........
+----------
+</pre></td></tr></table>
+
+<p>On the other hand, this dragon is in grave danger:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">..........
+..........
+.X.......X
+.....O....
+.X.......X
+.X...O...X
+..........
+..........
+----------
+</pre></td></tr></table>
+
+<p>The difference between these two positions is that in the first, the &lsquo;<samp>O</samp>&rsquo;
+dragon crosses the line connecting the top two &lsquo;<samp>X</samp>&rsquo; stones.
+</p>
+<p>Code in &lsquo;<tt>surround.c</tt>&rsquo; implements a test for when a dragon is surrounded.
+The idea is to compute the convex hull of the <em>surround set</em>, that is,
+the set stones belonging to unfriendly neighbor dragons. If the dragon is
+contained within that hull. If it is, it is said to be <em>surrounded</em>.
+</p>
+<p>In practice this scheme is modified slightly. The implementation uses various
+algorithms to compute distances and hostile stones are discarded from the 
+surround set when a pair other hostile ones can be found which makes the
+considered one useless. For example, in the following position
+the bottom &lsquo;<samp>O</samp>&rsquo; stone would get discarded.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">O.X.O  
+.....
+.O.O.
+.....
+..O..
+</pre></td></tr></table>
+
+<p>Also, points are added to the surround set below stones on the
+second and third lines. This should account for the edge being a
+natural barrier.
+</p>
+<p>In order to compute distances between corners of the convex hull
+a sorting by angle algorithm has been implemented. If the distance
+between a pair enclosing stones is large, the surround status gets
+decreased to <code>WEAKLY_SURROUNDED</code>, or even 0 for very large ones.
+</p>
+<p>The sorting by angle must be explained. A small diagram will probably help :
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.O.O.
+O...O
+..X..
+O...O
+.O.O.
+</pre></td></tr></table>
+
+<p>The sorting algorithm will generate this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.4.5.
+3...6
+..X..
+2...7
+.1.8.
+</pre></td></tr></table>
+
+<p>That is, the points are sorted by ascending order of the measure of the
+angle S-G-O, where S is SOUTH, G the (approximated) gravity center of
+the goal, and O the position of the considered hostile stones.
+</p>
+<p>The necessity of such sorting appears when one tries to measure distances
+between enclosing stones without sorting them, just by using directly the
+existing left and right corners arrays. In some positions, the results will
+be inconsistent. Imagine, for example a position where for instance the points
+1,2,3,4,6 and 7 were in the left arrary, leaving only 5 and 8 in the right
+array. Because of the large distance between 5 and 8, the dragon would have
+declared weak surrounded or not surrounded at all. Such cases are rare but 
+frequent enough to require the angle sorting.
+</p>
+<p>The following position:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">O.X.O
+.....
+.O.O.
+</pre></td></tr></table>
+     
+
+<p>This is &quot;more&quot; surrounded than the following position:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">O.XXXXXX.O
+..........
+.O......O.
+</pre></td></tr></table>
+
+<p>In the second case, the surround status would be lowered to
+<code>WEAKLY_SURROUNDED</code>.
+</p>
+<p>The surround code is used to modify the escape_route field
+in the dragon2 data array. When a dragon is WEAKLY_SURROUNDED,
+the escape_route is divided by 2. If the dragon is SURROUNDED,
+escape_route is simply set to 0.
+</p>
+
+<hr size="6">
+<a name="Influential-Patterns"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Surrounded-Dragons" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influential-Display" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Patterns-used-by-the-Influence-module"></a>
+<h2 class="section">13.12 Patterns used by the Influence module</h2>
+
+<p>This section explains the details of the pattern databases used for
+the influence computation.
+</p>
+<p>First, we have the patterns in &lsquo;<tt>influence.db</tt>&rsquo;, which get matched
+symmetrically for both colors.
+</p>
+<ul>
+<li> &lsquo;<samp>E</samp>&rsquo;
+<blockquote><p>These patterns add extra influence sources close to some shapes like walls.
+This tries to reflect their extra strength. These patterns are not used
+in the influence computations relevant for territory valuations, but they
+are useful for getting a better estimate of strengths of groups.
+</p></blockquote>
+</li><li> &lsquo;<samp>I</samp>&rsquo;
+<blockquote><p>These patterns add extra influence sources at typical invasion points. 
+Usually they are of small strength. If they additionally have the class
+&lsquo;<samp>s</samp>&rsquo;, the extra influence source is added for both colors. Otherwise,
+only the player assumed to be next to move gets the benefit.
+</p></blockquote>
+</li></ul>
+
+
+<p>The patterns in &lsquo;<tt>barriers.db</tt>&rsquo; get matched only for &lsquo;<samp>O</samp>&rsquo;
+being the player next to move.
+</p>
+<ul>
+<li> &lsquo;<samp>A</samp>&rsquo;
+<blockquote><p>Connections between &lsquo;<samp>X</samp>&rsquo; stones that stop influence of &lsquo;<samp>O</samp>&rsquo;. They
+have to be tight enough that &lsquo;<samp>O</samp>&rsquo; cannot break through, even though
+he is allowed to move first.
+</p></blockquote>
+</li><li> &lsquo;<samp>D</samp>&rsquo;
+<blockquote><p>Connections between &lsquo;<samp>O</samp>&rsquo; stones that stop influence of &lsquo;<samp>X</samp>&rsquo;. The
+stones involved can be more loosely connected than those in &lsquo;<samp>A</samp>&rsquo;
+patterns.
+</p></blockquote>
+</li><li> &lsquo;<samp>B</samp>&rsquo;
+<blockquote><p>These indicate positions of followup moves for the &lsquo;<samp>O</samp>&rsquo; stone marked
+with &lsquo;<samp>Q</samp>&rsquo; in the pattern. They are used to reduce the territory e. g.
+where a monkey jump is possible. Also, they are used in the computation
+of the followup influence, if the &lsquo;<samp>Q</samp>&rsquo; stone was the move played
+(or a stone saved by the move played).
+</p></blockquote>
+</li><li> &lsquo;<samp>t</samp>&rsquo;
+<blockquote><p>These patterns indicate intersections where one color will not be able
+to get territory, for example in a false eye. The points are set with
+a call to the helper non_oterritory or non_xterritory in the action of
+the pattern.
+</p></blockquote>
+</li></ul>
+
+
+<p>The intrusion patterns (&lsquo;<samp>B</samp>&rsquo;) are more powerful than the description
+above might suggest. They can be very helpful in identifying weak shapes
+(by adding an intrusion source for the opponent where he can break through).
+A negative inference for this is that a single bad &lsquo;<samp>B</samp>&rsquo; pattern, e. g.
+one that has a wrong constraint, typically causes 5 to 10 <code>FAIL</code>s in
+the regression test suite.
+</p>
+<p>Influence Patterns can have autohelper constraints as usual. As for
+the constraint attributes, there are (additionally to the usual
+ones &lsquo;<samp>O</samp>&rsquo;, &lsquo;<samp>o</samp>&rsquo;, &lsquo;<samp>X</samp>&rsquo; and &lsquo;<samp>x</samp>&rsquo;),
+attributes &lsquo;<samp>Y</samp>&rsquo; and &lsquo;<samp>FY</samp>&rsquo;. A pattern marked with &lsquo;<samp>Y</samp>&rsquo; will
+only be used in the influence computations relevant for the territory
+valuation, while &lsquo;<samp>FY</samp>&rsquo; patterns only get used in the other influence
+computations.
+</p>
+<p>The action of an influence pattern is at the moment only used for
+non-territory patterns as mentioned above, and as a workaround for a
+problem with &lsquo;<samp>B</samp>&rsquo; patterns in the followup influence.
+</p>
+<p>To see why this workaround is necessary, consider the follwoing situation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+..XXX
+.a*.O
+.X.O.
+..XXO
+
+</pre></td></tr></table>
+
+<p>(Imagine that there is &lsquo;<samp>X</samp>&rsquo; territory on the left.)
+</p>
+<p>The move by &lsquo;<samp>O</samp>&rsquo; at &lsquo;<samp>*</samp>&rsquo; has a natural followup move at &lsquo;<samp>a</samp>&rsquo;.
+So, in the computation of the followup influence for &lsquo;<samp>*</samp>&rsquo;, there would
+be an extra influence source for &lsquo;<samp>O</samp>&rsquo; at &lsquo;<samp>a</samp>&rsquo; which would destroy
+a lot of black territory on the left. This would give a big followup value,
+and in effect the move &lsquo;<samp>*</samp>&rsquo; would be treated as sente. 
+</p>
+<p>But of course it is gote, since &lsquo;<samp>X</samp>&rsquo; will answer at &lsquo;<samp>a</samp>&rsquo;, which
+both stops the possible intrusion and  threatens to capture &lsquo;<samp>*</samp>&rsquo;. This
+situation is in fact quite common.
+</p>
+<p>Hence we need an additional constraint that can tell when an intrusion
+pattern can be used in followup influence. This is done by misusing the
+action line: An additional line
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt;return &lt;condition&gt;;
+</pre></td></tr></table>
+
+<p>gets added to the pattern. The <code>condition</code> should be true if the
+intrusion cannot be stopped in sente. In the above example, the relevant
+intrusion pattern will have an action line of the form
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&gt;return (!xplay_attack(a,b));
+</pre></td></tr></table>
+
+<p>where &lsquo;<samp>b</samp>&rsquo; refers to the stone at &lsquo;<samp>*</samp>&rsquo;. In fact, almost all 
+followup-specific constraints look similar to this.
+</p>
+
+<hr size="6">
+<a name="Influential-Display"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influential-Patterns" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence-Tuning" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Colored-display-and-debugging-of-influence"></a>
+<h2 class="section">13.13 Colored display and debugging of influence</h2>
+
+<p>There are various ways to obtain detailed information about the influence
+computations. Colored diagrams showing influence are possible from
+a colored xterm or rxvt window. 
+</p>
+<p>There are two options controlling when to generate diagrams:
+</p>
+<ul>
+<li> &lsquo;<samp>-m 0x08</samp>&rsquo; or &lsquo;<samp>-m 8</samp>&rsquo;
+<blockquote><p>Show diagrams for the initial influence computation. This is done
+twice, the first time before <code>make_dragons()</code> is run and the second time
+after. The difference is that dead dragons are taken into account the
+second time. Tactically captured worms are taken into account both
+times. 
+</p></blockquote>
+</li><li> &lsquo;<samp>--debug-influence <var>location</var></samp>&rsquo;
+<blockquote><p>Show influence diagrams after the move at the given location. An
+important limitation of this option is that it&rsquo;s only effective for
+moves that the move generation is considering.
+</p></blockquote>
+</li></ul>
+
+<p>The other options control which diagrams should be generated in these
+situations. You have to specify at least one of the options above and
+at least one of the options below to generate any output.
+</p>
+<p><strong>
+The options below must be combined with one of the two previous
+ones, or the diagram will not be printed. For example to print
+the influence diagram, you may combine 0x08 and 0x010, and use
+the option &lsquo;<samp>-m 0x018</samp>&rsquo;.</strong>
+</p>
+<ul>
+<li> &lsquo;<samp>-m 0x010</samp>&rsquo; or &lsquo;<samp>-m 16</samp>&rsquo;
+<blockquote><p>Show colored display of territory/moyo/area regions.
+</p><ul class="toc">
+<li>- territory: cyan
+</li><li>- moyo: yellow
+</li><li>- area: red
+</li></ul>
+<p>This feature is very useful to get an immediate impression of the influence
+regions as GNU Go sees them.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m 0x20</samp>&rsquo; or &lsquo;<samp>-m 32</samp>&rsquo;
+<blockquote><p>Show numerical influence values for white and black. These come in
+two separate diagrams, the first one for white, the second one for
+black. Notice that the influence values are represented by floats and
+thus have been rounded in these diagrams.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m 0x40</samp>&rsquo; or &lsquo;<samp>-m 64</samp>&rsquo;
+<blockquote><p>This generates two diagrams showing the permeability for black and white
+influence on the board.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m 0x80</samp>&rsquo; or &lsquo;<samp>-m 128</samp>&rsquo;
+<blockquote><p>This shows the strength of the influence sources for black and white 
+across the board. You will see sources at each lively stone (with strength
+depending on the strength of this stone), and sources contributed by
+patterns.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m 0x100</samp>&rsquo; or &lsquo;<samp>-m 256</samp>&rsquo;
+<blockquote><p>This shows the attenuation with which the influence sources spread
+influence across the board. Low attenuation indicates far-reaching
+influence sources.
+</p></blockquote>
+</li><li> &lsquo;<samp>-m 0x200</samp>&rsquo; or &lsquo;<samp>-m 512</samp>&rsquo;
+<blockquote><p>This shows the territory valuation of GNU Go. Each intersection is
+shown with a value between -1.0 and +1.0 (or -2 resp. +2 if there is
+a dead stone on this intersection). Positive values indicate territory
+for white. A value of -0.5 thus indicates a point where black has a
+50% chance of getting territory.
+</p></blockquote>
+</li></ul>
+
+<p>Finally, there is the debug option &lsquo;<samp>-d 0x1</samp>&rsquo; which turns on
+on <code>DEBUG_INFLUENCE</code>. This gives a message for each influence pattern
+that gets matched. Unfortunately, these are way too many messages making
+it tedious to navigate the output. However, if you discover an influence
+source with &lsquo;<samp>-m 0x80</samp>&rsquo; that looks wrong, the debug output can
+help you to quickly find out the responsible pattern.
+</p>
+<hr size="6">
+<a name="Influence-Tuning"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influential-Display" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Influence-Tuning-with-view_002epike"></a>
+<h2 class="section">13.14 Influence Tuning with <code>view.pike</code></h2>
+
+<p>A useful program in the regression directory is <code>view.pike</code>.
+To run it, you need Pike, which you may download from
+<a href="http://pike.ida.liu.se/">http://pike.ida.liu.se/</a>.
+</p>
+<p>The test case &lsquo;<tt>endgame:920</tt>&rsquo; fails in GNU Go 3.6. We will
+explain how to fix it.
+</p>
+<p>Start by firing up view.pike on testcase endgame:920, e.g. by running
+<code>pike view.pike endgame:920</code> in the regression directory.
+</p>
+<p>We see from the first view of move values that filling dame at P15 is
+valued highest with 0.17 points while the correct move at C4 is valued
+slightly lower with 0.16. The real problem is of course that C4 is
+worth a full point and thus should be valued about 1.0.
+</p>
+<p>Now click on C4 to get a list of move reasons and move valuation
+information. Everything looks okay except that change in territory is
+0.00 rather than 1.00 as it ought to be.
+</p>
+<p>We can confirm this by choosing the &ldquo;delta territory for...&rdquo; button
+and again clicking C4. Now B5 should have been marked as one point of
+change in territory, but it&rsquo;s not.
+</p>
+<p>Next step is to enter the influence debug tool. Press the &ldquo;influence&rdquo;
+button, followed by &ldquo;black influence, dragons known,&rdquo; and &ldquo;territory
+value.&rdquo; This shows the expected territory if black locally moves first
+everywhere (thus &ldquo;black influence&rdquo;). Here we can see that B5 is
+incorrectly considered as 1.0 points of white territory.
+</p>
+<p>We can compare this with the territory after a white move at C4 (still
+assuming that black locally moves first everywhere after that) by
+pressing &ldquo;after move influence for...&rdquo; and clicking C4. This looks
+identical, as expected since delta territory was 0, but here it is
+correct that B5 is 1.0 points of territory for white.
+</p>
+<p>The most straightforward solution to this problem is to add a
+non-territory pattern, saying that white can&rsquo;t get territory on B5 if
+black moves first. The nonterritory patterns are in &lsquo;<tt>barriers.db</tt>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Pattern Nonterritory56
+
+...
+X.O
+?O.
+
+:8,t
+
+eac
+XbO
+?Od
+
+;oplay_attack(a,b,c,d,d)
+
+&gt;non_xterritory(e);
+</pre></td></tr></table>
+
+<p>In these patterns it&rsquo;s always assumed that &lsquo;<samp>O</samp>&rsquo; moves first and thus it
+says that &lsquo;<samp>X</samp>&rsquo; can&rsquo;t get territory at <code>B5</code> (&lsquo;<samp>e</samp>&rsquo; in the
+pattern). Now we need to be a bit careful however since after &lsquo;<samp>O</samp>&rsquo; plays
+at &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>X</samp>&rsquo; cuts in at &lsquo;<samp>b</samp>&rsquo;, it may well happen that &lsquo;<samp>O</samp>&rsquo;
+needs to defend around &lsquo;<samp>d</samp>&rsquo;, allowing &lsquo;<samp>X</samp>&rsquo; to cut at &lsquo;<samp>c</samp>&rsquo;, possibly
+making the nonterritory assumption invalid. It&rsquo;s difficult to do this entirely
+accurate, but the constraint above is fairly conservative and should guarantee
+that &lsquo;<samp>a</samp>&rsquo; is safe in most, although not all, cases.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_14.html#Monte-Carlo-Go" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

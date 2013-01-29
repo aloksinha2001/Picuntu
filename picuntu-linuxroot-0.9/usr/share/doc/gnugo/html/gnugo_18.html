@@ -1,0 +1,932 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 18. Utility Functions</title>
+
+<meta name="description" content="GNU Go Documentation: 18. Utility Functions">
+<meta name="keywords" content="GNU Go Documentation: 18. Utility Functions">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Utility-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_17.html#Functions-which-manipulate-a-Gameinfo" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#General-Utilities" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_17.html#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Utility-Functions-1"></a>
+<h1 class="chapter">18. Utility Functions</h1>
+
+<p>In this Chapter, we document some of the utilities which may be
+called from the GNU Go engine.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#General-Utilities">18.1 General Utilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Utilities from &lsquo;<tt>engine/utils.c</tt>&rsquo;
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Print-Utilities">18.2 Print Utilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Utilities from &lsquo;<tt>engine/printutils.c</tt>&rsquo;
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Board-Utilities">18.3 Board Utilities</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                Utilities from &lsquo;<tt>engine/board.c</tt>&rsquo;
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Influence-Utilities">18.4 Utilities from &lsquo;<tt>engine/influence.c</tt>&rsquo;</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="General-Utilities"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Utility-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Print-Utilities" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="General-Utilities-1"></a>
+<h2 class="section">18.1 General Utilities</h2>
+
+<p>Utility functions from &lsquo;<tt>engine/utils.c</tt>&rsquo;. Many of these
+functions underlie autohelper functions (see section <a href="gnugo_9.html#Autohelper-Functions">Autohelper Functions</a>).
+</p>
+
+<ul>
+<li> <code>void change_dragon_status(int dr, int status)</code>
+<a name="index-change_005fdragon_005fstatus"></a>
+<blockquote><p>Change the status of all the stones in the dragon at <code>dr</code>.
+</p></blockquote>
+</li><li> <code>int defend_against(int move, int color, int apos)</code>
+<a name="index-defend_005fagainst"></a>
+<blockquote><p>Check whether a move at <code>move</code> stops the enemy from playing at (apos).
+</p></blockquote>
+</li><li> <code>int cut_possible(int pos, int color)</code>
+<blockquote><p>Returns true if <code>color</code> can cut at <code>pos</code>, or if connection through
+<code>pos</code> is inhibited. This information is collected by <code>find_cuts()</code>,
+using the B patterns in the connections database.
+</p></blockquote>
+</li><li> <code>int does_attack(int move, int str)</code>
+<a name="index-does_005fattack"></a>
+<blockquote><p>returns true if the move at <code>move</code> attacks <code>str</code>. This means that it captures
+the string, and that <code>str</code> is not already dead.  
+</p></blockquote>
+</li><li> <code>int does_defend(int move, int str)</code>
+<a name="index-does_005fdefend"></a>
+<blockquote><p><code>does_defend(move, str)</code> returns true if the move at <code>move</code>
+defends <code>str</code>. This means that it defends the string, and that
+<code>str</code> can be captured if no defense is made.
+</p></blockquote>
+</li><li> <code>int somewhere(int color, int last_move, ...)</code>
+<a name="index-somewhere"></a>
+<blockquote><p>Example: <code>somewhere(WHITE, 2, apos, bpos, cpos)</code>.
+Returns true if one of the vertices listed satisfies
+<code>board[pos]==color</code>. Here num_moves is the number of moves minus one.
+If the check is true the dragon is not allowed to be dead. This
+check is only valid if <code>stackp==0</code>.
+</p></blockquote>
+</li><li> <code>int visible_along_edge(int color, int apos, int bpos)</code>
+<blockquote><p>Search along the edge for the first visible stone. Start at apos
+and move in the direction of bpos. Return 1 if the first visible
+stone is of the given color. It is required that apos and bpos are
+at the same distance from the edge.
+</p></blockquote>
+</li><li> <code>int test_symmetry_after_move(int move, int color, int strict)</code>
+<a name="index-test_005fsymmetry_005fafter_005fmove"></a>
+<blockquote><p>Is the board symmetric (or rather antisymmetric) with respect to
+mirroring in tengen after a specific move has been played? If the
+move is PASS_MOVE, check the current board.
+If strict is set we require that each stone is matched by a stone
+of the opposite color at the mirrored vertex. Otherwise we only
+require that each stone is matched by a stone of either color.
+</p></blockquote>
+</li><li> <code>int play_break_through_n(int color, int num_moves, ...)</code>
+<a name="index-play_005fbreak_005fthrough_005fn"></a>
+<blockquote><p>The function <code>play_break_through_n()</code> plays a sequence of moves,
+alternating between the players and starting with color. After
+having played through the sequence, the three last coordinate pairs
+gives a position to be analyzed by <code>break_through()</code>, to see whether
+either color has managed to enclose some stones and/or connected
+his own stones. If any of the three last positions is empty, it&rsquo;s
+assumed that the enclosure has failed, as well as the attempt to
+connect. If one or more of the moves to play turns out to be illegal for
+some reason, the rest of the sequence is played anyway, and
+<code>break_through()</code> is called as if nothing special happened.
+Like <code>break_through()</code>, this function returns 1 if the attempt to
+break through was succesful and 2 if it only managed to cut
+through.
+</p></blockquote>
+</li><li> <code>int play_attack_defend_n(int color, int do_attack, int num_moves, ...)</code>
+</li><li> <code>int play_attack_defend2_n(int color, int do_attack, int num_moves, ...)</code>
+<a name="index-play_005fattack_005fdefend2_005fn"></a>
+<a name="index-play_005fattack_005fdefend_005fn"></a>
+<blockquote><p>The function <code>play_attack_defend_n()</code> plays a sequence of moves,
+alternating between the players and starting with <code>color</code>. After
+having played through the sequence, the last coordinate pair gives
+a target to attack or defend, depending on the value of do_attack.
+If there is no stone present to attack or defend, it is assumed
+that it has already been captured. If one or more of the moves to
+play turns out to be illegal for some reason, the rest of the
+sequence is played anyway, and attack/defense is tested as if
+nothing special happened. Conversely, 
+<code>play_attack_defend2_n()</code> plays a sequence of moves,
+alternating between the players and starting with <code>color</code>. After
+having played through the sequence, the two last coordinate pairs
+give two targets to simultaneously attack or defend, depending on
+the value of do_attack. If there is no stone present to attack or
+defend, it is assumed that it has already been captured. If one or
+more of the moves to play turns out to be illegal for some reason,
+the rest of the sequence is played anyway, and attack/defense is
+tested as if nothing special happened.  A typical use of these functions is to
+set up a ladder in an autohelper and see whether it works or not.  
+</p></blockquote>
+</li><li> <code>int play_connect_n(int color, int do_connect, int num_moves, ...)</code>
+<a name="index-play_005fconnect_005fn"></a>
+<blockquote><p>Plays a sequence of moves, alternating between the players and starting
+with <code>color</code>. After having played through the sequence, the two last
+coordinates give two targets that should be connected or disconnected,
+depending on the value of do_connect. If there is no stone present to
+connect or disconnect, it is assumed that the connection has failed. If
+one or more of the moves to play turns out to be illegal for some
+reason, the rest of the sequence is played anyway, and
+connection/disconnection is tested as if nothing special happened.
+Ultimately the connection is decided by the functions 
+<code>string_connect</code> and <code>disconnect</code> (see section <a href="gnugo_11.html#Connection-Reading">Connection Reading</a>).
+</p></blockquote>
+</li><li> <code>void set_depth_values(int level)</code>
+<a name="index-set_005fdepth_005fvalues"></a>
+<blockquote><p>It is assumed in reading a ladder if <code>stackp &gt;= depth</code> that
+as soon as a bounding stone is in atari, the string is safe.
+Similar uses are made of the other depth parameters such
+as <code>backfill_depth</code> and so forth. In short, simplifying
+assumptions are made when <code>stackp</code> is large. Unfortunately any such
+scheme invites the &ldquo;horizon effect,&rdquo; in which a stalling move is perceived
+as a win, by pushing the refutation past the &ldquo;horizon&rdquo;&mdash;the value of
+<code>stackp</code> in which the reading assumptions are relaxed. To avoid the depth
+it is sometimes necessary to increase the depth parameters. This
+function can be used to set the various reading depth parameters. If
+<code>mandated_depth_value</code> is not -1 that value is used; otherwise the depth
+values are set as a function of level. The parameter
+<code>mandated_depth_value</code> can be set at the command line to force a
+particular value of depth; normally it is -1.
+</p></blockquote>
+</li><li> <code>void modify_depth_values(int n)</code>
+<a name="index-modify_005fdepth_005fvalues"></a>
+<blockquote><p>Modify the various tactical reading depth parameters. This is
+typically used to avoid horizon effects. By temporarily increasing
+the depth values when trying some move, one can avoid that an
+irrelevant move seems effective just because the reading hits a
+depth limit earlier than it did when reading only on relevant
+moves.
+</p></blockquote>
+</li><li> <code>void increase_depth_values(void)</code>
+<a name="index-increase_005fdepth_005fvalues"></a>
+<blockquote><p><code>modify_depth_values(1)</code>.
+</p></blockquote>
+</li><li> <code>void decrease_depth_values(void)</code>
+<a name="index-decrease_005fdepth_005fvalues"></a>
+<blockquote><p><code>modify_depth_values(-1)</code>.
+</p></blockquote>
+</li><li> <code>void restore_depth_values()</code>
+<a name="index-restore_005fdepth_005fvalues"></a>
+<blockquote><p>Sets <code>depth</code> and so forth to their saved values.
+</p></blockquote>
+</li><li> <code>void set_temporary_depth_values(int d, int b, int b2, int bc, int ss, int br, int f, int k)</code>
+<blockquote><p>Explicitly set the depth values. This function is currently never
+called.
+</p></blockquote>
+</li><li> <code>int confirm_safety(int move, int color, int *defense_point, char safe_stones[BOARDMAX])</code>
+<a name="index-confirm_005fsafety"></a>
+<blockquote><p>Check that the move at color doesn&rsquo;t involve any kind of blunder,
+regardless of size.
+</p></blockquote>
+</li><li> <code>float blunder_size(int move, int color, int *defense_point, char safe_stones[BOARDMAX])</code>
+<a name="index-blunder_005fsize"></a>
+<blockquote><p>This function will detect some blunders. If the move reduces the number of
+liberties of an adjacent friendly string, there is a danger that the move
+could backfire, so the function checks that no friendly worm which was
+formerly not attackable becomes attackable, and it checks that no opposing
+worm which was not defendable becomes defendable.  It returns the estimated
+size of the blunder, or 0.0 if nothing bad has happened.  The array
+<code>safe_stones[]</code> contains the stones that are supposedly safe after
+<code>move</code>. It may be <code>NULL</code>. For use when called from
+<code>fill_liberty()</code>, this function may optionally return a point of defense,
+which, if taken, will presumably make the move at <code>move</code> safe on a
+subsequent turn.
+</p></blockquote>
+</li><li> <code>int double_atari(int move, int color, float *value, char safe_stones[BOARDMAX])</code>
+<a name="index-double_005fatari"></a>
+<blockquote><p>Returns true if a move by (color) fits the following shape:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">    X*        (O=color)
+    OX
+</pre></td></tr></table>
+<p>capturing one of the two &lsquo;<samp>X</samp>&rsquo; strings. The name is a slight misnomer since
+this includes attacks which are not necessarily double ataris, though the
+common double atari is the most important special case. If <code>safe_stones
+!= NULL</code>, then only attacks on stones marked as safe are tried. The value of
+the double atari attack is returned in value (unless value is <code>NULL</code>),
+and the attacked stones are marked unsafe.
+</p></blockquote>
+</li><li> <code>void unconditional_life(int unconditional_territory[BOARDMAX], int color)</code>
+<a name="index-unconditional_005flife-1"></a>
+<blockquote><p>Find those worms of the given color that can never be captured, even if the
+opponent is allowed an arbitrary number of consecutive moves. The coordinates
+of the origins of these worms are written to the worm arrays and the number of
+non-capturable worms is returned.  The algorithm is to cycle through the worms
+until none remains or no more can be captured. A worm is removed when it is
+found to be capturable, by letting the opponent try to play on all its
+liberties. If the attack fails, the moves are undone. When no more worm can be
+removed in this way, the remaining ones are unconditionally alive.  After
+this, unconditionally dead opponent worms and unconditional territory are
+identified. To find these, we continue from the position obtained at the end
+of the previous operation (only unconditionally alive strings remain for
+color) with the following steps:
+</p>
+<ol>
+<li> Play opponent stones on all liberties of the unconditionally
+alive strings except where illegal. (That the move order may
+determine exactly which liberties can be played legally is not
+important. Just pick an arbitrary order).
+</li><li>
+Recursively extend opponent strings in atari, except where this
+would be suicide.
+</li><li>
+Play an opponent stone anywhere it can get two empty
+neighbors. (I.e. split big eyes into small ones).
+</li><li>
+an opponent stone anywhere it can get one empty
+neighbor. (I.e. reduce two space eyes to one space eyes.)
+Remaining opponent strings in atari and remaining liberties of the
+unconditionally alive strings constitute the unconditional
+territory.
+Opponent strings from the initial position placed on
+unconditional territory are unconditionally dead.
+On return, <code>unconditional_territory[][]</code> is 1 where color has
+unconditionally alive stones, 2 where it has unconditional
+territory, and 0 otherwise.
+</li></ol>
+</blockquote>
+</li><li> <code>void who_wins(int color, FILE *outfile)</code>
+<blockquote><p>Score the game and determine the winner
+</p></blockquote>
+</li><li> <code>void find_superstring(int str, int *num_stones, int *stones)</code>
+<a name="index-find_005fsuperstring"></a>
+<a name="index-superstring"></a>
+<blockquote><p>Find the stones of an extended string, where the extensions are
+through the following kinds of connections:
+</p><ol>
+<li> Solid connections (just like ordinary string).
+<table><tr><td>&nbsp;</td><td><pre class="example">    OO
+</pre></td></tr></table>
+</li><li> Diagonal connection or one space jump through an intersection
+where an opponent move would be suicide or self-atari.
+<table><tr><td>&nbsp;</td><td><pre class="example">    ...
+    O.O
+    XOX
+    X.X
+</pre></td></tr></table>
+</li><li>
+Bamboo joint.
+<table><tr><td>&nbsp;</td><td><pre class="example">    OO
+    ..
+    OO
+</pre></td></tr></table>
+</li><li> Diagonal connection where both adjacent intersections are empty.
+<table><tr><td>&nbsp;</td><td><pre class="example">    .O
+    O.
+</pre></td></tr></table>
+</li><li> Connection through adjacent or diagonal tactically captured stones.
+Connections of this type are omitted when the superstring code is
+called from reading.c, but included when the superstring code is
+called from owl.c
+</li></ol>
+</blockquote>
+</li><li> <code>void find_superstring_liberties(int str, int *num_libs, int *libs, int liberty_cap)</code>
+<a name="index-find_005fsuperstring_005fliberties"></a>
+<blockquote><p>This function computes the superstring at <code>str</code> as described above, but
+omitting connections of type 5. Then it constructs a list of liberties of the
+superstring which are not already liberties of <code>str</code>.  If
+<code>liberty_cap</code> is nonzero, only liberties of substrings of the superstring
+which have fewer than <code>liberty_cap</code> liberties are generated.
+</p></blockquote>
+</li><li> <code>void find_proper_superstring_liberties(int str, int *num_libs, int *libs, int liberty_cap)</code>
+<a name="index-find_005fproper_005fsuperstring_005fliberties"></a>
+<blockquote><p>This function is the same as find_superstring_liberties, but it omits those
+liberties of the string <code>str</code>, presumably since those have already been
+treated elsewhere.  If <code>liberty_cap</code> is nonzero, only liberties of
+substrings of the superstring which have at most <code>liberty_cap</code> liberties
+are generated.
+</p></blockquote>
+</li><li> <code>void find_superstring_stones_and_liberties(int str, int *num_stones, int *stones, int *num_libs, int *libs, int liberty_cap)</code>
+<a name="index-find_005fsuperstring_005fstones_005fand_005fliberties"></a>
+<blockquote><p>This function computes the superstring at <code>str</code> as described above,
+but omitting connections of type 5. Then it constructs a list of
+liberties of the superstring which are not already liberties of
+<code>str</code>. If liberty_cap is nonzero, only liberties of substrings of the
+superstring which have fewer than liberty_cap liberties are
+generated.
+</p></blockquote>
+</li><li> <code>void superstring_chainlinks(int str, int *num_adj, int adjs[MAXCHAIN], int liberty_cap)</code>
+<a name="index-superstring_005fchainlinks"></a>
+<blockquote><p>analogous to chainlinks, this function finds boundary chains of the
+superstring at <code>str</code>, including those which are boundary chains of
+<code>str</code> itself. If <code>liberty_cap != 0</code>, only those boundary chains with
+<code>&lt;= liberty_cap</code> liberties are reported.
+</p></blockquote>
+</li><li> <code>void proper_superstring_chainlinks(int str, int *num_adj, int adjs[MAXCHAIN], int liberty_cap)</code>
+<a name="index-proper_005fsuperstring_005fchainlingks"></a>
+<blockquote><p>analogous to chainlinks, this function finds boundary chains of the
+superstring at <code>str</code>, omitting those which are boundary chains of
+<code>str</code> itself. If <code>liberty_cap != 0</code>, only those boundary chains with
+<code>&lt;= liberty_cap</code> liberties are reported.
+</p></blockquote>
+</li><li> <code>void start_timer(int n)</code>
+<a name="index-start_005ftimer"></a>
+<a name="index-timers"></a>
+<blockquote><p>Start a timer. GNU Go has four internal timers available for
+assessing the time spent on various tasks.
+</p></blockquote>
+</li><li> <code>double time_report(int n, const char *occupation, int move, double mintime)</code>
+<a name="index-time_005freport"></a>
+<blockquote><p>Report time spent and restart the timer. Make no report if elapsed
+time is less than mintime.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Print-Utilities"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#General-Utilities" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Board-Utilities" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Print-Utilities-1"></a>
+<h2 class="section">18.2 Print Utilities</h2>
+<a name="index-formatted-printing"></a>
+
+<p>Functions in &lsquo;<tt>engine/printutils.c</tt>&rsquo; do formatted printing similar to
+<code>printf</code> and its allies.  The following formats are recognized:
+</p>
+<ul>
+<li> <code>%c</code>, <code>%d</code>, <code>%f</code>, <code>%s</code>, <code>%x</code>
+<blockquote><p>These have their usual meaning in formatted output, printing
+a character, integer, float, string or hexadecimal, respectively.
+</p></blockquote>
+</li><li> <code>%o</code>
+<blockquote><p>&lsquo;Outdent.&rsquo; Normally output is indented by <code>2*stackp</code> spaces,
+so that the depth can be seen at a glance in traces. At the
+beginning of a format, this <code>%o</code> inhibits the indentation.
+</p></blockquote>
+</li><li> <code>%H</code>
+<blockquote><p>Print a hashvalue.
+</p></blockquote>
+</li><li> <code>%C</code>
+<blockquote><p>Print a color as a string.
+</p></blockquote>
+</li><li> <code>%m</code>, <code>%2m</code> (synonyms)
+<blockquote><p>Takes 2 integers and writes a move, using the two dimensional
+board representation (see section <a href="gnugo_15.html#The-Board-Array">The Board Array</a>)
+</p></blockquote>
+</li><li> <code>%1m</code>
+<blockquote><p>Takes 1 integers and writes a move, using the one dimensional
+board representation (see section <a href="gnugo_15.html#The-Board-Array">The Board Array</a>)
+</p></blockquote>
+</li></ul>
+
+<p>We list the non statically declared functions in &lsquo;<tt>printutils.c</tt>&rsquo;.
+</p>
+<ul>
+<li> <code>void gfprintf(FILE *outfile, const char *fmt, ...)</code>
+<a name="index-gfprintf"></a>
+<blockquote><p>Formatted output to &lsquo;<tt>outfile</tt>&rsquo;.
+</p></blockquote>
+</li><li> <code>int gprintf(const char *fmt, ...)</code>
+<a name="index-gprintf"></a>
+<blockquote><p>Formatted output to stderr. Always returns 1 to allow use in short-circuit
+logical expressions.
+</p></blockquote>
+</li><li> <code>int mprintf(const char *fmt, ...)</code>
+<a name="index-mprintf"></a>
+<blockquote><p>Formatted output to stdout. 
+</p></blockquote>
+</li><li> <code>DEBUG(level, fmt, args...)</code>
+<a name="index-DEBUG"></a>
+<blockquote><p>If <code>level &amp; debug</code>, do formatted output to stderr. Otherwise, ignore.
+</p></blockquote>
+</li><li> <code>void abortgo(const char *file, int line, const char *msg, int pos)</code>
+<a name="index-abortgo"></a>
+<blockquote><p>Print debugging output in an error situation, then exit.
+</p></blockquote>
+</li><li> <code>const char * color_to_string(int color)</code>
+<a name="index-color_005fto_005fstring"></a>
+<blockquote><p>Convert a color value to a string
+</p></blockquote>
+</li><li> <code>const char * location_to_string(int pos)</code>
+<a name="index-location_005fto_005fstring"></a>
+<blockquote><p>Convert a location to a string
+</p></blockquote>
+</li><li> <code>void location_to_buffer(int pos, char *buf)</code>
+<a name="index-location_005fto_005fbuffer"></a>
+<blockquote><p>Convert a location to a string, writing to a buffer.
+</p></blockquote>
+</li><li> <code>int string_to_location(int boardsize, char *str, int *m, int *n)</code>
+<a name="index-string_005fto_005flocation"></a>
+<blockquote><p>Get the <code>(m, n)</code> coordinates in the standard GNU Go coordinate system
+from the string <code>str</code>.  This means that &lsquo;<samp>m</samp>&rsquo; is the nth row from the
+top and &lsquo;<samp>n</samp>&rsquo; is the column. Both coordinates are between 0 and
+<code>boardsize-1</code>, inclusive. Return 1 if ok, otherwise return 0;
+</p></blockquote>
+</li><li> <code>int is_hoshi_point(int m, int n)</code>
+<a name="index-is_005fhoshi_005fpoint"></a>
+True if the coordinate is a hoshi point.
+</li><li> <code>void draw_letter_coordinates(FILE *outfile)</code>
+<a name="index-draw_005fletter_005fcoordinates"></a>
+Print a line with coordinate letters above the board.
+</li><li> <code>void simple_showboard(FILE *outfile)</code>
+<a name="index-simple_005fshowboard"></a>
+<blockquote><p>Bare bones version of <code>showboard(0)</code>. No fancy options, no hint of
+color, and you can choose where to write it.
+</p></blockquote>
+</li></ul>
+
+<p>The following functions are in &lsquo;<tt>showbord.c</tt>&rsquo;. Not all public
+functions in that file are listed here.
+</p>
+<ul>
+<li> <code>void showboard(int xo)</code>
+<a name="index-showboard"></a>
+<blockquote><p>Show go board.
+</p><table><tr><td>&nbsp;</td><td><pre class="example">xo=0:      black and white XO board for ascii game
+xo=1:      colored dragon display
+xo=2:      colored eye display
+xo=3:      colored owl display
+xo=4:      colored matcher status display
+</pre></td></tr></table>
+</blockquote>
+</li><li> <code>const char * status_to_string(int status)</code>
+<a name="index-status_005fto_005fstring"></a>
+<blockquote><p>Convert a status value to a string.
+</p></blockquote>
+</li><li> <code>const char * safety_to_string(int status)</code>
+<a name="index-safety_005fto_005fstring"></a>
+<blockquote><p>Convert a safety value to a string.
+</p></blockquote>
+</li><li> <code>const char * result_to_string(int result)</code>
+<a name="index-result_005fto_005fstring"></a>
+<blockquote><p>Convert a read result to a string
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Board-Utilities"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Print-Utilities" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Influence-Utilities" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Board-Utilities-1"></a>
+<h2 class="section">18.3 Board Utilities</h2>
+
+<p>The functions documented in this section are from &lsquo;<tt>board.c</tt>&rsquo;. Other
+functions in &lsquo;<tt>board.c</tt>&rsquo; are described in See section <a href="gnugo_15.html#Some-Board-Functions">Some Board Functions</a>.
+</p>
+<ul>
+<li> <code>void store_board(struct board_state *state)</code>
+<a name="index-store_005fboard"></a>
+<blockquote><p>Save board state.
+</p></blockquote>
+</li><li> <code>void restore_board(struct board_state *state)</code>
+<a name="index-restore_005fboard"></a>
+<blockquote><p>Restore a saved board state.
+</p></blockquote>
+</li><li> <code>void clear_board(void)</code>
+<a name="index-clear_005fboard"></a>
+<blockquote><p>Clear the internal board.
+</p></blockquote>
+</li><li> <code>void dump_stack(void)</code>
+<a name="index-dump_005fstack"></a>
+<blockquote><p>for use under GDB prints the move stack.
+</p></blockquote>
+</li><li> <code>void add_stone(int pos, int color)</code>
+<a name="index-add_005fstone"></a>
+<blockquote><p>Place a stone on the board and update the board_hash. This operation
+destroys all move history.
+</p></blockquote>
+</li><li> <code>void remove_stone(int pos)</code>
+<a name="index-remove_005fstone"></a>
+<blockquote><p>Remove a stone from the board and update the board_hash. This
+operation destroys the move history.
+</p></blockquote>
+</li><li> <code>int is_pass(int pos)</code>
+<a name="index-is_005fpass"></a>
+<blockquote><p>Test if the move is a pass or not.  Return 1 if it is.
+</p></blockquote>
+</li><li> <code>int  is_legal(int pos, int color)</code>
+<a name="index-is_005flegal-1"></a>
+<blockquote><p>Determines whether the move <code>color</code> at <code>pos</code> is legal.
+</p></blockquote>
+</li><li> <code>int  is_suicide(int pos, int color)</code>
+<a name="index-is_005fsuicide"></a>
+<blockquote><p>Determines whether the move <code>color</code> at <code>pos</code> would be a suicide.
+This is the case if
+</p><ol>
+<li> There is no neighboring empty intersection.
+</li><li> There is no neighboring opponent string with exactly one liberty.
+</li><li> There is no neighboring friendly string with more than one liberty.
+</li></ol>
+</blockquote>
+</li><li> <code>int is_illegal_ko_capture(int pos, int color)</code>
+<a name="index-is_005fillegal_005fko_005fcapture"></a>
+<blockquote><p>Determines whether the move <code>color</code> at <code>pos</code> would be an illegal ko
+capture.
+</p></blockquote>
+</li><li> <code>int is_edge_vertex(int pos)</code>
+<a name="index-is_005fedge_005fvertex"></a>
+<blockquote><p>Determine whether vertex is on the edge.
+</p></blockquote>
+</li><li> <code>int edge_distance(int pos)</code>
+<a name="index-edge_005fdistance"></a>
+<blockquote><p>Distance to the edge.
+</p></blockquote>
+</li><li> <code>int is_corner_vertex(int pos)</code>
+<a name="index-is_005fcorner_005fvertex"></a>
+<blockquote><p>Determine whether vertex is a corner.
+</p></blockquote>
+</li><li> <code>int get_komaster()</code>
+<a name="index-get_005fkomaster"></a>
+</li><li> <code>int get_kom_pos()</code>
+<a name="index-get_005fkom_005fpos"></a>
+<blockquote><p>Public functions to access the variable <code>komaster</code> and <code>kom_pos</code>,
+which are static in &lsquo;<tt>board.c</tt>&rsquo;.
+</p></blockquote>
+</li></ul>
+
+<p>Next we come to <code>countlib()</code> and its allies, which
+address the problem of determining how many liberties a
+string has. Although <code>countlib()</code> addresses this
+basic question, other functions can often get the needed
+information more quickly, so there are a number of
+different functions in this family.
+</p>
+<ul>
+<li> <code>int countlib(int str)</code>
+<a name="index-countlib"></a>
+<blockquote><p>Count the number of liberties of the string at <code>pos</code>. There
+must be a stone at this location.
+</p></blockquote>
+</li><li> <code>int findlib(int str, int maxlib, int *libs)</code>
+<a name="index-findlib"></a>
+<blockquote><p>Find the liberties of the string at <code>str</code>. This location must not be
+empty. The locations of up to maxlib liberties are written into
+<code>libs[]</code>. The full number of liberties is returned.  If you want the
+locations of all liberties, whatever their number, you should pass
+<code>MAXLIBS</code> as the value for <code>maxlib</code> and allocate space for
+<code>libs[]</code> accordingly.
+</p></blockquote>
+</li><li> <code>int fastlib(int pos, int color, int ignore_captures)</code>
+<a name="index-fastlib"></a>
+<blockquote><p>Count the liberties a stone of the given color would get if played
+at <code>pos</code>. The intent of this function is to be as fast as possible, not
+necessarily complete. But if it returns a positive value (meaning
+it has succeeded), the value is guaranteed to be correct. Captures are ignored
+based if the <code>ignore_captures</code> field is nonzero. The location <code>pos</code>
+must be empty.  The function fails if there are more than two neighbor strings
+of the same color.  In this case, the return value is -1.  Captures are
+handled in a very limited way, so if ignore_capture is 0, and a capture is
+required, it will often return -1.
+</p></blockquote>
+</li><li> <code>int approxlib(int pos, int color, int maxlib, int *libs)</code>
+<a name="index-approxlib"></a>
+<blockquote><p>Find the liberties a stone of the given color would get if played at
+<code>pos</code>, ignoring possible captures of opponent stones.  The location
+<code>pos</code> must be empty. If <code>libs != NULL</code>, the locations of up to
+<code>maxlib</code> liberties are written into <code>libs[]</code>. The counting of
+liberties may or may not be halted when <code>maxlib</code> is reached. The number
+of liberties found is returned, which may be less than the total number of
+liberties if <code>maxlib</code> is small. If you want the number or the locations
+of all liberties, however many they are, you should pass <code>MAXLIBS</code> as the
+value for maxlib and allocate space for <code>libs[]</code> accordingly.
+</p></blockquote>
+</li><li> <code>int accuratelib(int pos, int color, int maxlib, int *libs)</code>
+<a name="index-accuratelib"></a>
+<blockquote><p>Find the liberties a stone of the given color would get if played at
+<code>pos</code>. This function takes into consideration all captures. Its return
+value is exact in that sense it counts all the liberties, unless <code>maxlib</code>
+allows it to stop earlier. The location <code>pos</code> must be empty. If
+<code>libs != NULL</code>, the locations of up to <code>maxlib</code> liberties are
+written into <code>libs[]</code>. The counting of liberties may or may not be halted
+when <code>maxlib</code> is reached. The number of found liberties is returned.
+This function guarantees that liberties which are not results of captures come
+first in <code>libs[]</code> array. To find whether all the liberties starting from
+a given one are results of captures, one may use <code>if (board[libs[k]] !=
+EMPTY)</code> construction.  If you want the number or the locations of all
+liberties, however many they are, you should pass <code>MAXLIBS</code> as the value
+for <code>maxlib</code> and allocate space for <code>libs[]</code> accordingly.
+</p></blockquote>
+</li></ul>
+
+<p>Next we have some general utility functions.
+</p>
+<ul>
+<li> <code>int count_common_libs(int str1, int str2)</code>
+<a name="index-count_005fcommon_005flibs"></a>
+<blockquote><p>Find the number of common liberties of the two strings.
+</p></blockquote>
+</li><li> <code>int find_common_libs(int str1, int str2, int maxlib, int *libs)</code>
+<a name="index-find_005fcommon_005flibs"></a>
+<blockquote><p>Find the common liberties of the two strings. The locations of up to
+<code>maxlib</code> common liberties are written into <code>libs[]</code>.  The full
+number of common liberties is returned.  If you want the locations of all
+common liberties, whatever their number, you should pass <code>MAXLIBS</code> as the
+value for <code>maxlib</code> and allocate space for <code>libs[]</code> accordingly.
+</p></blockquote>
+</li><li> <code>int have_common_lib(int str1, int str2, int *lib)</code>
+<a name="index-have_005fcommon_005flib"></a>
+<blockquote><p>Determine whether two strings have at least one common liberty.
+If they do and <code>lib != NULL</code>, one common liberty is returned in 
+<code>*lib</code>.
+</p></blockquote>
+</li><li> <code>int countstones(int str)</code>
+<a name="index-countstones"></a>
+<blockquote><p>Report the number of stones in a string.
+</p></blockquote>
+</li><li> <code>int findstones(int str, int maxstones, int *stones)</code>
+<a name="index-findstones"></a>
+<blockquote><p>Find the stones of the string at <code>str</code>. The location must not be
+empty. The locations of up to maxstones stones are written into
+<code>stones[]</code>. The full number of stones is returned.
+</p></blockquote>
+</li><li> <code>int  chainlinks(int str, int adj[MAXCHAIN])</code>
+<a name="index-chainlinks"></a>
+<blockquote><p>This very useful function returns (in the <code>adj</code> array) the chains
+surrounding the string at <code>str</code>. The number of chains is returned.
+</p></blockquote>
+</li><li> <code>int chainlinks2(int str, int adj[MAXCHAIN], int lib)</code>
+<a name="index-chainlinks2"></a>
+<blockquote><p>Returns (in <code>adj</code> array) those chains surrounding the string at
+<code>str</code>, which has exactly <code>lib</code> liberties. The number of such chains
+is returned.
+</p></blockquote>
+</li><li> <code>int chainlinks3(int str, int adj[MAXCHAIN], int lib)</code>
+<a name="index-chainlinks3"></a>
+<blockquote><p>Returns (in <code>adj</code> array) the chains surrounding
+the string at <code>str</code>, which have less or equal <code>lib</code> liberties.
+The number of such chains is returned.
+</p></blockquote>
+</li><li> <code>int extended_chainlinks(int str, int adj[MAXCHAIN], int both_colors)</code>
+<a name="index-extended_005fchainlinks"></a>
+<blockquote><p>Returns (in the <code>adj</code> array) the opponent strings being directly adjacent
+to <code>str</code> or having a common liberty with <code>str</code>. The number of such
+strings is returned.  If the both_colors parameter is true, also own strings
+sharing a liberty are returned.
+</p></blockquote>
+</li><li> <code>int find_origin(int str)</code>
+<a name="index-find_005forigin"></a>
+<blockquote><p>Find the origin of a string, i.e. the point with the smallest 1D board
+coordinate. The idea is to have a canonical reference point for a
+string.
+</p></blockquote>
+</li><li> <code>int is_self_atari(int pos, int color)</code>
+<a name="index-is_005fself_005fatari"></a>
+<blockquote><p>Determine whether a move by color at <code>pos</code> would be a self atari,
+i.e. whether it would get more than one liberty. This function
+returns true also for the case of a suicide move.
+</p></blockquote>
+</li><li> <code>int liberty_of_string(int pos, int str)</code>
+<a name="index-liberty_005fof_005fstring"></a>
+<blockquote><p>Returns true if <code>pos</code> is a liberty of the string at <code>str</code>.
+</p></blockquote>
+</li><li> <code>int second_order_liberty_of_string(int pos, int str)</code>
+<a name="index-second_005forder_005fliberty_005fof_005fstring"></a>
+<blockquote><p>Returns true if <code>pos</code> is a second order liberty of the string at str.
+</p></blockquote>
+</li><li> <code>int neighbor_of_string(int pos, int str)</code>
+<a name="index-neighbor_005fof_005fstring"></a>
+<blockquote><p>Returns true if <code>pos</code> is adjacent to the string at <code>str</code>.
+</p></blockquote>
+</li><li> <code>int has_neighbor(int pos, int color)</code>
+<a name="index-has_005fneighbor"></a>
+<blockquote><p>Returns true if <code>pos</code> has a neighbor of <code>color</code>.
+</p></blockquote>
+</li><li> <code>int same_string(int str1, int str2)</code>
+<a name="index-same_005fstring"></a>
+<blockquote><p>Returns true if <code>str1</code> and <code>str2</code> belong to the same string.
+</p></blockquote>
+</li><li> <code>int adjacent_strings(int str1, int str2)</code>
+<a name="index-adjacent_005fstrings"></a>
+<blockquote><p>Returns true if the strings at <code>str1</code> and <code>str2</code> are adjacent.
+</p></blockquote>
+</li><li> <code>int is_ko(int pos, int color, int *ko_pos)</code>
+<a name="index-is_005fko"></a>
+<blockquote><p>Return true if the move <code>pos</code> by <code>color</code> is a ko capture
+(whether capture is legal on this move or not). If so,
+and if <code>ko_pos</code> is not a <code>NULL</code> pointer, then
+<code>*ko_pos</code> returns the location of the captured ko stone.
+If the move is not a ko capture, <code>*ko_pos</code> is set to 0.
+A move is a ko capture if and only if
+</p><ol>
+<li> All neighbors are opponent stones.
+</li><li> The number of captured stones is exactly one.
+</li></ol>
+</blockquote>
+</li><li> <code>int is_ko_point(int pos)</code>
+<a name="index-is_005fko_005fpoint"></a>
+<blockquote><p>Return true if <code>pos</code> is either a stone, which if captured would give
+ko, or if <code>pos</code> is an empty intersection adjacent to a ko stone.
+</p></blockquote>
+</li><li> <code>int does_capture_something(int pos, int color)</code>
+<a name="index-does_005fcapture_005fsomething"></a>
+<blockquote><p>Returns 1 if at least one string is captured when color plays at <code>pos</code>.
+</p></blockquote>
+</li><li> <code>void mark_string(int str, char mx[BOARDMAX], char mark)</code>
+<a name="index-mark_005fstring"></a>
+<blockquote><p>For each stone in the string at pos, set <code>mx</code> to value mark. If
+some of the stones in the string are marked prior to calling this
+function, only the connected unmarked stones starting from pos
+are guaranteed to become marked. The rest of the string may or may
+not become marked. (In the current implementation, it will.)
+</p></blockquote>
+</li><li> <code>int move_in_stack(int pos, int cutoff)</code>
+<a name="index-move_005fin_005fstack"></a>
+<blockquote><p>Returns true if at least one move has been played at pos
+at deeper than level <code>cutoff</code> in the reading tree.
+</p></blockquote>
+</li><li> <code>int stones_on_board(int color)</code>
+<a name="index-stones_005fon_005fboard"></a>
+<blockquote><p>Return the number of stones of the indicated color(s) on the board.
+This only counts stones in the permanent position, not stones placed
+by <code>trymove()</code> or <code>tryko()</code>. Use 
+<code>stones_on_board(BLACK | WHITE)</code> to get
+the total number of stones on the board.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Influence-Utilities"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Board-Utilities" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Utility-Functions" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Utilities-from-engine_002finfluence_002ec"></a>
+<h2 class="section">18.4 Utilities from &lsquo;<tt>engine/influence.c</tt>&rsquo;</h2>
+
+<p>We will only list here a portion of the public functions in <code>influence.c</code>.
+The influence code is invoked through the function <code>compute_influence</code>
+(see section <a href="gnugo_13.html#Influence-Usage">Where influence gets used in the engine</a>). It is invoked as follows.
+</p>
+<ul>
+<li> <code>void compute_influence(int color, const char safe_stones[BOARDMAX], const float strength[BOARDMAX], struct influence_data *q, int move, const char *trace_message)</code>
+<a name="index-compute_005finfluence"></a>
+<blockquote><p>Compute the influence values for both colors.
+The caller must
+</p><ul class="toc">
+<li>- set up the <code>board[]</code> state
+</li><li>- mark safe stones with <code>INFLUENCE_SAFE_STONE</code>, dead stones with 0
+</li><li>- mark stones newly saved by a move with <code>INFLUENCE_SAVED_STONE</code>
+(this is relevant if the influence_data *q is reused to compute
+a followup value for this move).
+</li></ul>
+<p>Results will be stored in q.
+<code>move</code> has no effects except toggling debugging. Set it to -1
+for no debug output at all (otherwise it will be controlled by
+the &lsquo;<samp>-m</samp>&rsquo; command line option). It is assumed that <code>color</code> is in turn to move. (This affects the
+barrier patterns (class A, D) and intrusions (class B)). Color
+</p></blockquote>
+</li></ul>
+
+<p>Other functions in &lsquo;<tt>influence.c</tt>&rsquo; are of the nature of utilities
+which may be useful throughout the engine. We list the most useful
+ones here.
+</p>
+<ul>
+<li> <code>void influence_mark_non_territory(int pos, int color)</code>
+<a name="index-influence_005fmark_005fnon_005fterritory"></a>
+<blockquote><p>Called from actions for &lsquo;<samp>t</samp>&rsquo; patterns in &lsquo;<tt>barriers.db</tt>&rsquo;.
+Marks <code>pos</code> as not being territory for <code>color</code>.
+</p></blockquote>
+</li><li> <code>int whose_territory(const struct influence_data *q, int pos)</code>
+<a name="index-whose_005fterritory"></a>
+<blockquote><p>Return the color of the territory at <code>pos</code>. If it&rsquo;s territory for
+neither color, <code>EMPTY</code> is returned.
+</p></blockquote>
+</li><li> <code>int whose_moyo(const struct influence_data *q, int pos)</code>
+<a name="index-whose_005fmoyo"></a>
+<blockquote><p>Return the color who has a moyo at <code>pos</code>. If neither color has a
+moyo there, <code>EMPTY</code> is returned. The definition of moyo in terms of the
+influences is totally ad hoc.
+</p></blockquote>
+</li><li> <code>int whose_area(const struct influence_data *q, int pos)</code>
+<a name="index-whose_005farea"></a>
+<blockquote><p>Return the color who has dominating influence (&ldquo;area&rdquo;) at <code>pos</code>.
+If neither color dominates the influence there, EMPTY is returned.
+The definition of area in terms of the influences is totally ad hoc.
+</p></blockquote>
+</li></ul>
+
+
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Utility-Functions" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

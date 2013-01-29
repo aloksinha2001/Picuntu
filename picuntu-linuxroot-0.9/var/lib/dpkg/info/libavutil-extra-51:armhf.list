@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/neon
+/usr/lib/arm-linux-gnueabihf/neon/vfp
+/usr/lib/arm-linux-gnueabihf/neon/vfp/libavutil.so.51.22.1
+/usr/lib/arm-linux-gnueabihf/libavutil.so.51.22.1
+/usr/share
+/usr/share/doc
+/usr/share/doc/libavutil-extra-51
+/usr/share/doc/libavutil-extra-51/changelog.Debian.gz
+/usr/share/doc/libavutil-extra-51/copyright
+/usr/share/doc/libavutil-extra-51/README.Debian.gz
+/usr/lib/arm-linux-gnueabihf/libavutil.so.51
+/usr/lib/arm-linux-gnueabihf/neon/vfp/libavutil.so.51

@@ -1,0 +1,15 @@
+#!/usr/bin/pdmenu
+#
+# A menu of system monitoring commands.
+# Note that all the commands in here should be commands that can safely 
+# be run as root without letting the user get a shell or perform any other 
+# mischief.
+#
+
+menu:main:System Monitor Menu:
+	exec:_Log monitor::tail -f /var/log/messages
+	exec:_Statnet::statnet
+	# Note: run top in secure mode!
+	exec:_Top::top s
+	exec:_Watch who's logged on::watch -n 1 w
+	exec:_Procinfo::procinfo -f

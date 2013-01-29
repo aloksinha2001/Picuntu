@@ -1,0 +1,48 @@
+Newsgroups: comp.os.linux.announce
+Subject: Pdmenu 1.2.30 - simple text mode menu system
+Followup-to: comp.os.linux.misc
+
+Pdmenu is a menu system for Unix. It is designed to be easy to use,
+and is suitable for a login shell for inexperienced users, or it can
+just be run at the command line as a handy menu program.
+
+Pdmenu features color support and, GPM mouse support at the Linux
+console. It compiles on Linux and a variety of other Unix's.
+
+I was prompted to write Pdmenu when I took a look at a shell script 
+that used dialog to generate similar menus. The shell script was 
+huge, complicated, and ugly, and had to be modified manually to add 
+anything to the menu. I hope that Pdmenu is better. :-)
+
+For more info, including source code and packages for Debian and 
+Red Hat visit Pdmenu's home page at:
+		http://kitenet.net/~joey/code/pdmenu/
+
+I have just released Pdmenu 1.2.30. The biggest change in this new version
+of Pdmenu is that it no longer has hard coded limits of any sort. Now you
+can load up any number of menus of any length.
+
+Other changes since Pdmenu version 1.0.0 include:
+
+* Much nicer looking shadows under windows.
+* Menus that are not active now change to a different color and lose
+  some decorations. (The old behavior can be re-enabled with the
+  --retro command line parameter.)
+* Added a --lowbit command line parameter, which forces pdmenu to not use
+  high bit ascii line drawing characters.
+* Added --menu= option to jump to a submenu on startup.
+* Added --unpark option, which lets the cursor move to the selected line
+  on a menu, to make pdmenu more friendly to speech generation software.
+* Introduced a new easy to understand long form for the flags to the exec
+  command.
+* Added group commands. These are menu items that execute more than one
+  pdmenu command when selected. For example, you could make a group command
+  that runs a program, pops up a submenu, and when the submenu closes, exits
+  pdmenu.
+* If you run pdmenu in a xterm, and resize the xterm, pdmenu will immediately
+  resize now.
+* Fixed a large number of buffer overflows and memory leaks and other bugs.
+* Portability fixes for building on other Unix's.
+* Added several contributed example pdmenurc files to showcase some of the
+  capabilities of pdmenu.
+* Optimizations.

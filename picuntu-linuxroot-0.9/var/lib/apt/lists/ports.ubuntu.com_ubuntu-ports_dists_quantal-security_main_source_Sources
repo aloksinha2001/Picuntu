@@ -1,0 +1,1785 @@
+Package: apache2
+Binary: apache2.2-common, apache2.2-bin, apache2-mpm-worker, apache2-mpm-prefork, apache2-mpm-event, apache2-mpm-itk, apache2-utils, apache2-suexec, apache2-suexec-custom, apache2, apache2-doc, apache2-prefork-dev, apache2-threaded-dev, apache2-dbg
+Version: 2.2.22-6ubuntu2.1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Build-Depends: debhelper (>= 8.9.7~), lsb-release, libaprutil1-dev (>= 1.3.4), libapr1-dev, openssl, libpcre3-dev, mawk, zlib1g-dev, libssl-dev (>= 0.9.8m), sharutils, libcap-dev [linux-any], autoconf, autotools-dev, hardening-wrapper
+Build-Conflicts: autoconf2.13
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/a/apache2
+Files:
+ 92189eab653b3cba3495474d08eaca54 3017 apache2_2.2.22-6ubuntu2.1.dsc
+ d77fa5af23df96a8af68ea8114fa6ce1 7200529 apache2_2.2.22.orig.tar.gz
+ 91b40a529bc078b7a228c466cf6b1750 198925 apache2_2.2.22-6ubuntu2.1.debian.tar.gz
+Uploaders: Stefan Fritsch <sf@debian.org>, Steinar H. Gunderson <sesse@debian.org>, Arno Töll <arno@debian.org>
+Homepage: http://httpd.apache.org/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-apache/apache2.git
+Vcs-Git: git://git.debian.org/git/pkg-apache/apache2.git
+Package-List: 
+ apache2 deb httpd optional
+ apache2-dbg deb debug extra
+ apache2-doc deb doc optional
+ apache2-mpm-event deb httpd optional
+ apache2-mpm-itk deb httpd extra
+ apache2-mpm-prefork deb httpd optional
+ apache2-mpm-worker deb httpd optional
+ apache2-prefork-dev deb httpd extra
+ apache2-suexec deb httpd optional
+ apache2-suexec-custom deb httpd extra
+ apache2-threaded-dev deb httpd extra
+ apache2-utils deb httpd optional
+ apache2.2-bin deb httpd optional
+ apache2.2-common deb httpd optional
+Checksums-Sha1:
+ 95cc2b08c4521e8ca291f7b38d775f4b52831f8e 3017 apache2_2.2.22-6ubuntu2.1.dsc
+ bf3bbfda967ac900348e697f26fe86b25695efe9 7200529 apache2_2.2.22.orig.tar.gz
+ 65294ff5a7c16ec3b80648992233ea312aa0407b 198925 apache2_2.2.22-6ubuntu2.1.debian.tar.gz
+Checksums-Sha256:
+ a5ae770c4ad34cc78bc499bf8139bf3e488ed744313e91cd1adfdd297bce33ab 3017 apache2_2.2.22-6ubuntu2.1.dsc
+ 74c1ffffefe1a502339b004ad6488fbd858eb425a05968cd67c05695dbc0fe7c 7200529 apache2_2.2.22.orig.tar.gz
+ 7a409aa0ef3cc6d8e037e0da826078f295dd220acb0a067f88833163e7402e41 198925 apache2_2.2.22-6ubuntu2.1.debian.tar.gz
+
+Package: apt
+Binary: apt, libapt-pkg4.12, libapt-inst1.5, apt-doc, libapt-pkg-dev, libapt-pkg-doc, apt-utils, apt-transport-https
+Version: 0.9.7.5ubuntu5.2
+Priority: important
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: APT Development Team <deity@lists.debian.org>
+Build-Depends: dpkg-dev (>= 1.15.8), debhelper (>= 8.1.3~), libdb-dev, gettext:any (>= 0.12), libcurl4-gnutls-dev (>= 7.19.0), zlib1g-dev, libbz2-dev, xsltproc, docbook-xsl, docbook-xml, po4a (>= 0.34-2), autotools-dev, autoconf, automake
+Build-Depends-Indep: doxygen, debiandoc-sgml
+Build-Conflicts: autoconf2.13, automake1.4
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (native)
+Directory: pool/main/a/apt
+Files:
+ 22ae6a039aa07e3163c2ff0f4873f4f4 2431 apt_0.9.7.5ubuntu5.2.dsc
+ 571d5b1804701bfd36f044d12a8abfad 3393915 apt_0.9.7.5ubuntu5.2.tar.gz
+Uploaders: Michael Vogt <mvo@debian.org>, Otavio Salvador <otavio@debian.org>, Christian Perrier <bubulle@debian.org>, Daniel Burrows <dburrows@debian.org>, Julian Andres Klode <jak@debian.org>
+Vcs-Browser: http://code.launchpad.net/apt/quantal
+Vcs-Bzr: lp:~ubuntu-core-dev/apt/quantal
+Package-List: 
+ apt deb admin important
+ apt-doc deb doc optional
+ apt-transport-https deb admin optional
+ apt-utils deb admin important
+ libapt-inst1.5 deb libs important
+ libapt-pkg-dev deb libdevel optional
+ libapt-pkg-doc deb doc optional
+ libapt-pkg4.12 deb libs important
+Checksums-Sha1:
+ afe67b7bfe4c573f7f5f2ae740202375876f554d 2431 apt_0.9.7.5ubuntu5.2.dsc
+ 99f9c6d0e691e1a01cbfbab8ef6b57dff1cbfc90 3393915 apt_0.9.7.5ubuntu5.2.tar.gz
+Checksums-Sha256:
+ 49874bc3dae09a38b387495f331fb135356544244891f1feee6845c315c739c4 2431 apt_0.9.7.5ubuntu5.2.dsc
+ c70682817ec68b455f4c0c3288d5858b4eaabdfbdca42147ae2d3e0536cb7adb 3393915 apt_0.9.7.5ubuntu5.2.tar.gz
+
+Package: bind9
+Binary: bind9, bind9utils, bind9-doc, host, bind9-host, libbind-dev, libbind9-80, libdns81, libisc83, liblwres80, libisccc80, libisccfg82, dnsutils, lwresd
+Version: 1:9.8.1.dfsg.P1-4.2ubuntu3.1
+Priority: standard
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Build-Depends: libkrb5-dev, debhelper (>= 5), libssl-dev, libtool, bison, libdb-dev (>> 4.6), libldap2-dev, libxml2-dev, libcap2-dev [!kfreebsd-i386 !kfreebsd-amd64 !hurd-i386], hardening-wrapper, libgeoip-dev (>= 1.4.6.dfsg-5), dpkg-dev (>= 1.15.5)
+Build-Conflicts: libdb4.2-dev
+Architecture: any all
+Standards-Version: 3.7.3.0
+Format: 1.0
+Directory: pool/main/b/bind9
+Files:
+ cdde195a284f365ce8416ed22b80915a 2713 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.dsc
+ 954393b25e722c2dbb3d731e9e0cc6cf 7031042 bind9_9.8.1.dfsg.P1.orig.tar.gz
+ 78a1d4563880eec039ee79be3af547b7 508609 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.diff.gz
+Uploaders: Bdale Garbee <bdale@gag.com>
+Vcs-Browser: http://git.debian.org/?p=users/lamont/bind9.git
+Vcs-Git: git://git.debian.org/~lamont/bind9.git
+Package-List: 
+ bind9 deb net optional
+ bind9-doc deb doc optional
+ bind9-host deb net standard
+ bind9utils deb net optional
+ dnsutils deb net standard
+ host deb net standard
+ libbind-dev deb libdevel optional
+ libbind9-80 deb libs standard
+ libdns81 deb libs standard
+ libisc83 deb libs standard
+ libisccc80 deb libs optional
+ libisccfg82 deb libs optional
+ liblwres80 deb libs standard
+ lwresd deb net optional
+Checksums-Sha1:
+ 98a51f5495e59a6231079c360bff14f9d1a301b2 2713 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.dsc
+ 13a353d03fb497d50b6e190dba49f8497cb28362 7031042 bind9_9.8.1.dfsg.P1.orig.tar.gz
+ 079658901b1eaa290fa1c3ac4fb99cd994128c03 508609 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.diff.gz
+Checksums-Sha256:
+ ecbb85b2182d26e43a83caf5a4f6bc3008a611d442d0b2edc55089cb5456c817 2713 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.dsc
+ 71789f861cf05db618bdb43627e949f6145ed6e03c6631bf6d281568b829367e 7031042 bind9_9.8.1.dfsg.P1.orig.tar.gz
+ 2d21ba1b6058fc768558532ea1e4e8ecce90fd9d16e62e0586a8d1c45de7143b 508609 bind9_9.8.1.dfsg.P1-4.2ubuntu3.1.diff.gz
+
+Package: cups
+Binary: libcups2, libcupsimage2, libcupscgi1, libcupsmime1, libcupsppdc1, cups, cups-client, libcups2-dev, libcupsimage2-dev, libcupscgi1-dev, libcupsmime1-dev, libcupsppdc1-dev, cups-bsd, cups-common, cups-ppdc, cups-dbg, cupsddk
+Version: 1.6.1-0ubuntu11.3
+Priority: optional
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian CUPS Maintainers <pkg-cups-devel@lists.alioth.debian.org>
+Build-Depends: cdbs (>= 0.4.93~), debhelper (>= 8.1.3~), dpkg-dev (>= 1.16.1~), patch, autoconf, automake, libtool, autotools-dev, pkg-config, ghostscript (>= 9.02~), libavahi-client-dev, libavahi-common-dev, libavahi-compat-libdnssd-dev, libdbus-1-dev, libfontconfig1-dev, libfreetype6-dev, libgnutls-dev, libijs-dev, libjpeg-dev, libldap2-dev, libkrb5-dev, libpam0g-dev, libpaper-dev, libpng-dev | libpng12-dev, libslp-dev, libtiff-dev, libusb-1.0-0-dev [!hurd-any], po4a (>= 0.31~), po-debconf, poppler-utils, sharutils, zlib1g-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/c/cups
+Files:
+ 5dd2efc6b6593380b37dda89bebe1aaf 3422 cups_1.6.1-0ubuntu11.3.dsc
+ 87ade07e3d1efd03c9c3add949cf9c00 8218340 cups_1.6.1.orig.tar.bz2
+ f474ada771a156b731ed0e90adcd3688 425929 cups_1.6.1-0ubuntu11.3.debian.tar.gz
+Uploaders:  Masayuki Hatta (mhatta) <mhatta@debian.org>, Till Kamppeter <till.kamppeter@gmail.com>, Roger Leigh <rleigh@debian.org>, Jeff Licquia <licquia@debian.org>, Kenshi Muto <kmuto@debian.org>, Martin Pitt <mpitt@debian.org>
+Homepage: http://www.cups.org
+Vcs-Browser: http://bzr.debian.org/loggerhead/pkg-cups/cups/debian-trunk/
+Vcs-Bzr: http://bzr.debian.org/pkg-cups/cups/debian-trunk/
+Package-List: 
+ cups deb net optional
+ cups-bsd deb net extra
+ cups-client deb net optional
+ cups-common deb net optional
+ cups-dbg deb debug extra
+ cups-ppdc deb utils optional
+ cupsddk deb oldlibs extra
+ libcups2 deb libs optional
+ libcups2-dev deb libdevel optional
+ libcupscgi1 deb libs optional
+ libcupscgi1-dev deb libdevel optional
+ libcupsimage2 deb libs optional
+ libcupsimage2-dev deb libdevel optional
+ libcupsmime1 deb libs optional
+ libcupsmime1-dev deb libdevel optional
+ libcupsppdc1 deb libs optional
+ libcupsppdc1-dev deb libdevel optional
+Checksums-Sha1:
+ 3efa280e97685617e35f10efbb20913d41a5141a 3422 cups_1.6.1-0ubuntu11.3.dsc
+ cf10a0fd7f5b02f61c087bf44c1df20b34f888e0 8218340 cups_1.6.1.orig.tar.bz2
+ c5d15828c5aab07a14ea5c4d57a6d0c5fd920c5e 425929 cups_1.6.1-0ubuntu11.3.debian.tar.gz
+Checksums-Sha256:
+ c48a7d768af87de7ce1436b4463bbc14d36fef66c135a99494a14a7b1dc48b9a 3422 cups_1.6.1-0ubuntu11.3.dsc
+ 5842ab1144e653160fe667ee78b932ee036b054c0c2d20533d19e309149a7790 8218340 cups_1.6.1.orig.tar.bz2
+ 6615a5214792c2bd0956eb2beed0d5f92f3f4ae428b56415737c4ce880caf3f1 425929 cups_1.6.1-0ubuntu11.3.debian.tar.gz
+
+Package: exim4
+Binary: exim4-base, exim4-config, exim4-daemon-light, exim4, exim4-daemon-heavy, exim4-daemon-custom, eximon4, exim4-dbg, exim4-daemon-light-dbg, exim4-daemon-heavy-dbg, exim4-daemon-custom-dbg, exim4-dev
+Version: 4.80-3ubuntu1.1
+Priority: optional
+Section: mail
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Exim4 Maintainers <pkg-exim4-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 7.0.15), po-debconf, docbook-xsl, xsltproc, lynx-cur | lynx, docbook-xml, libpcre3-dev, libldap2-dev, libpam0g-dev, libident-dev, libdb5.1-dev, libxmu-dev, libxt-dev, libxext-dev, libx11-dev, libxaw7-dev, libpq-dev, libmysqlclient-dev | libmysqlclient15-dev, libsqlite3-dev, libperl-dev, libgnutls-dev, libsasl2-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/e/exim4
+Files:
+ eb7a42c9d76880454d717d3a934a76cf 2912 exim4_4.80-3ubuntu1.1.dsc
+ de93a242e9e148de28d67056e5c1b34f 1649827 exim4_4.80.orig.tar.bz2
+ ed08a56c7e6aa5b2d06da845258210e9 574367 exim4_4.80-3ubuntu1.1.debian.tar.gz
+Uploaders: Andreas Metzler <ametzler@debian.org>,Marc Haber <mh+debian-packages@zugschlus.de>
+Homepage: http://www.exim.org/
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-exim4/exim/trunk/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-exim4/exim/trunk
+Package-List: 
+ exim4 deb mail standard
+ exim4-base deb mail standard
+ exim4-config deb mail standard
+ exim4-daemon-custom deb mail optional
+ exim4-daemon-custom-dbg deb debug extra
+ exim4-daemon-heavy deb mail optional
+ exim4-daemon-heavy-dbg deb debug extra
+ exim4-daemon-light deb mail standard
+ exim4-daemon-light-dbg deb debug extra
+ exim4-dbg deb debug extra
+ exim4-dev deb mail extra
+ eximon4 deb mail optional
+Checksums-Sha1:
+ d2d4301960201e288f787494336ff27e3f10a70c 2912 exim4_4.80-3ubuntu1.1.dsc
+ ba9b78b9dfab48f45409ab7c1c94ad085347899d 1649827 exim4_4.80.orig.tar.bz2
+ 93b2d546ac74585af1fdef173041dbb2c5a55d8f 574367 exim4_4.80-3ubuntu1.1.debian.tar.gz
+Checksums-Sha256:
+ d5c69355c88cb8bec5c2db9b8c327fbcaed35339391f0ce2f515a2bf00ba6b6f 2912 exim4_4.80-3ubuntu1.1.dsc
+ 787b6defd37fa75311737bcfc42e9e2b2cc62c5d027eed35bb7d800b2d9a0984 1649827 exim4_4.80.orig.tar.bz2
+ e101c62baa52871743f4afec87ca454f7f4e7db36097fce9c7d2750e6f1d4449 574367 exim4_4.80-3ubuntu1.1.debian.tar.gz
+
+Package: firefox
+Binary: firefox, firefox-gnome-support, firefox-dbg, firefox-dev, firefox-mozsymbols, firefox-globalmenu, firefox-locale-af, firefox-locale-ar, firefox-locale-as, firefox-locale-ast, firefox-locale-be, firefox-locale-bg, firefox-locale-bn, firefox-locale-br, firefox-locale-bs, firefox-locale-ca, firefox-locale-cs, firefox-locale-csb, firefox-locale-cy, firefox-locale-da, firefox-locale-de, firefox-locale-el, firefox-locale-en, firefox-locale-eo, firefox-locale-es, firefox-locale-et, firefox-locale-eu, firefox-locale-fa, firefox-locale-fi, firefox-locale-fr, firefox-locale-fy, firefox-locale-ga, firefox-locale-gd, firefox-locale-gl, firefox-locale-gu, firefox-locale-he, firefox-locale-hi, firefox-locale-hr, firefox-locale-hu, firefox-locale-hy, firefox-locale-id, firefox-locale-is, firefox-locale-it, firefox-locale-ja, firefox-locale-ka, firefox-locale-kk, firefox-locale-km, firefox-locale-kn, firefox-locale-ko, firefox-locale-ku, firefox-locale-lg, firefox-locale-lt,
+ firefox-locale-lv, firefox-locale-mai, firefox-locale-mk, firefox-locale-ml, firefox-locale-mn, firefox-locale-mr, firefox-locale-nb, firefox-locale-nl, firefox-locale-nn, firefox-locale-nso, firefox-locale-oc, firefox-locale-or, firefox-locale-pa, firefox-locale-pl, firefox-locale-pt, firefox-locale-ro, firefox-locale-ru, firefox-locale-si, firefox-locale-sk, firefox-locale-sl, firefox-locale-sq, firefox-locale-sr, firefox-locale-sv, firefox-locale-sw, firefox-locale-ta, firefox-locale-te, firefox-locale-th, firefox-locale-tr, firefox-locale-uk, firefox-locale-vi, firefox-locale-zh-hans, firefox-locale-zh-hant,
+ firefox-locale-zu
+Version: 18.0+build1-0ubuntu0.12.10.3
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: cdbs, locales, debhelper (>= 7), m4, autotools-dev, autoconf2.13, quilt, zip, libx11-dev, libxt-dev, libxext-dev, libgtk2.0-dev (>= 2.14), libglib2.0-dev (>= 2.18), libpango1.0-dev (>= 1.14.0), libfontconfig1-dev, libfreetype6-dev (>= 2.0.1), libgconf2-dev (>= 1.2.1), libgnomeui-dev (>= 2.2.0), libstartup-notification0-dev, libasound2-dev, libcurl4-openssl-dev, libdbus-glib-1-dev (>= 0.60), hardening-wrapper, lsb-release, libiw-dev, mesa-common-dev, libnotify-dev (>= 0.4), libxrender-dev, yasm-1 (>= 1.1) | yasm (>= 1.1), xvfb, libdbusmenu-gtk-dev, unzip, dbus-x11, libxml-simple-perl, libjson-perl
+Architecture: any
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/f/firefox
+Files:
+ cb5db0a4f21c59595cfbd553cd3667db 6739 firefox_18.0+build1-0ubuntu0.12.10.3.dsc
+ 4eee8eca82550e9b0b0c607070420390 107691819 firefox_18.0+build1.orig.tar.bz2
+ c75d5431d12b5ad9de8d48c8e92b6dd9 271835 firefox_18.0+build1-0ubuntu0.12.10.3.debian.tar.gz
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/firefox/firefox.head
+Package-List: 
+ firefox deb web optional
+ firefox-dbg deb debug extra
+ firefox-dev deb devel extra
+ firefox-globalmenu deb web optional
+ firefox-gnome-support deb gnome optional
+ firefox-locale-af deb web optional
+ firefox-locale-ar deb web optional
+ firefox-locale-as deb web optional
+ firefox-locale-ast deb web optional
+ firefox-locale-be deb web optional
+ firefox-locale-bg deb web optional
+ firefox-locale-bn deb web optional
+ firefox-locale-br deb web optional
+ firefox-locale-bs deb web optional
+ firefox-locale-ca deb web optional
+ firefox-locale-cs deb web optional
+ firefox-locale-csb deb web optional
+ firefox-locale-cy deb web optional
+ firefox-locale-da deb web optional
+ firefox-locale-de deb web optional
+ firefox-locale-el deb web optional
+ firefox-locale-en deb web optional
+ firefox-locale-eo deb web optional
+ firefox-locale-es deb web optional
+ firefox-locale-et deb web optional
+ firefox-locale-eu deb web optional
+ firefox-locale-fa deb web optional
+ firefox-locale-fi deb web optional
+ firefox-locale-fr deb web optional
+ firefox-locale-fy deb web optional
+ firefox-locale-ga deb web optional
+ firefox-locale-gd deb web optional
+ firefox-locale-gl deb web optional
+ firefox-locale-gu deb web optional
+ firefox-locale-he deb web optional
+ firefox-locale-hi deb web optional
+ firefox-locale-hr deb web optional
+ firefox-locale-hu deb web optional
+ firefox-locale-hy deb web optional
+ firefox-locale-id deb web optional
+ firefox-locale-is deb web optional
+ firefox-locale-it deb web optional
+ firefox-locale-ja deb web optional
+ firefox-locale-ka deb web optional
+ firefox-locale-kk deb web optional
+ firefox-locale-km deb web optional
+ firefox-locale-kn deb web optional
+ firefox-locale-ko deb web optional
+ firefox-locale-ku deb web optional
+ firefox-locale-lg deb web optional
+ firefox-locale-lt deb web optional
+ firefox-locale-lv deb web optional
+ firefox-locale-mai deb web optional
+ firefox-locale-mk deb web optional
+ firefox-locale-ml deb web optional
+ firefox-locale-mn deb web optional
+ firefox-locale-mr deb web optional
+ firefox-locale-nb deb web optional
+ firefox-locale-nl deb web optional
+ firefox-locale-nn deb web optional
+ firefox-locale-nso deb web optional
+ firefox-locale-oc deb web optional
+ firefox-locale-or deb web optional
+ firefox-locale-pa deb web optional
+ firefox-locale-pl deb web optional
+ firefox-locale-pt deb web optional
+ firefox-locale-ro deb web optional
+ firefox-locale-ru deb web optional
+ firefox-locale-si deb web optional
+ firefox-locale-sk deb web optional
+ firefox-locale-sl deb web optional
+ firefox-locale-sq deb web optional
+ firefox-locale-sr deb web optional
+ firefox-locale-sv deb web optional
+ firefox-locale-sw deb web optional
+ firefox-locale-ta deb web optional
+ firefox-locale-te deb web optional
+ firefox-locale-th deb web optional
+ firefox-locale-tr deb web optional
+ firefox-locale-uk deb web optional
+ firefox-locale-vi deb web optional
+ firefox-locale-zh-hans deb web optional
+ firefox-locale-zh-hant deb web optional
+ firefox-locale-zu deb web optional
+ firefox-mozsymbols deb debug extra
+Checksums-Sha1:
+ 22e0d11437557b00ffbd58f19fd14095f8daff67 6739 firefox_18.0+build1-0ubuntu0.12.10.3.dsc
+ 38f23a4eac435987d56444f63cb5449e5615372a 107691819 firefox_18.0+build1.orig.tar.bz2
+ c74617a352ccc171f88c2b121b465d1b26020e9e 271835 firefox_18.0+build1-0ubuntu0.12.10.3.debian.tar.gz
+Checksums-Sha256:
+ 280f2d4694dbf9c434e13cbd0e0410b5c02f37fe0565a8a682d3c6d3a3e0fd78 6739 firefox_18.0+build1-0ubuntu0.12.10.3.dsc
+ 4269141b3b1a89bfb27d242349e9142deea50dbdd7c3e4863256fed88e4b8d63 107691819 firefox_18.0+build1.orig.tar.bz2
+ 90ea86b798e481f15bc5aab429db2d623637ff750da165d60745dc9f775abd0e 271835 firefox_18.0+build1-0ubuntu0.12.10.3.debian.tar.gz
+
+Package: gimp
+Binary: libgimp2.0, gimp, gimp-data, libgimp2.0-dev, libgimp2.0-doc, gimp-dbg
+Version: 2.8.2-1ubuntu1.1
+Priority: optional
+Section: graphics
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Ari Pollak <ari@debian.org>
+Build-Depends: debhelper (>= 8), cdbs (>= 0.4.97), autotools-dev, gettext, gnome-pkg-tools, gtk-doc-tools (>= 1.0), intltool (>= 0.40.1), iso-codes, libaa1-dev, libart-2.0-dev, libasound2-dev (>= 1.0.0) [linux-any], libatk1.0-dev (>= 2.2.0), libbabl-dev (>= 0.1.10), libbz2-dev, libcairo2-dev (>= 1.10.2), libcurl4-gnutls-dev (>= 7.15.1), libdbus-glib-1-dev (>= 0.70), libexif-dev (>= 0.6.15), libfreetype6-dev (>= 2.2), libfontconfig1-dev (>= 2.2.0), libglib2.0-dev (>= 2.30.2), libglib2.0-doc, libgegl-dev (>= 0.2.0), libgtk2.0-dev (>= 2.24.10), libgtk2.0-doc, libgdk-pixbuf2.0-dev (>= 2.24.1), libgdk-pixbuf2.0-doc, libgs-dev, libgudev-1.0-dev (>= 167) [linux-any], libice-dev, libjasper-dev, libjpeg-dev, liblcms1-dev (>= 1.16) | liblcms-dev, libmng-dev, libpango1.0-dev (>= 1.29.4), libpng-dev, libpoppler-glib-dev (>= 0.12.4), librsvg2-dev (>= 2.14.0), libsm-dev, libtiff-dev, libwebkitgtk-dev (>= 1.6.1), libwmf-dev (>= 0.2.8), libx11-dev, libxcursor-dev, libxmu-dev, libxpm-dev, libxt-dev, zlib1g-dev, patchutils, python-dev (>= 2.6.6-3), python-gtk2-dev (>= 2.10.4), xsltproc
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/g/gimp
+Files:
+ 87eacbef81002f3634c7f376e536c926 3232 gimp_2.8.2-1ubuntu1.1.dsc
+ b542138820ca3a41cbd63fc331907955 20161424 gimp_2.8.2.orig.tar.bz2
+ 200caaf7e80f90363188727cfcabbd1d 50137 gimp_2.8.2-1ubuntu1.1.debian.tar.gz
+Uploaders: Jordi Mallach <jordi@debian.org>
+Homepage: http://www.gimp.org/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=collab-maint/gimp.git
+Vcs-Git: git://anonscm.debian.org/collab-maint/gimp.git
+Package-List: 
+ gimp deb graphics optional
+ gimp-data deb graphics optional
+ gimp-dbg deb debug extra
+ libgimp2.0 deb libs optional
+ libgimp2.0-dev deb libdevel optional
+ libgimp2.0-doc deb doc optional
+Checksums-Sha1:
+ 43da4a96c5fb86e58b326189bf9f4bd1c639f80d 3232 gimp_2.8.2-1ubuntu1.1.dsc
+ 64ad90cedc5e8e348310b6eb6b7821ec110c0886 20161424 gimp_2.8.2.orig.tar.bz2
+ bd6feb172f7be1da294cd6c06a438a33c91eadff 50137 gimp_2.8.2-1ubuntu1.1.debian.tar.gz
+Checksums-Sha256:
+ b1cb6099e081a7d3a34a9a94e859bc9618e3e21bf0058556d0f712b63b8fb428 3232 gimp_2.8.2-1ubuntu1.1.dsc
+ 0cd1a7e67e132ead810e16e31ff929394c83fcf841e4a295c45d6f3829601ad9 20161424 gimp_2.8.2.orig.tar.bz2
+ fa7808fc3182507eaf8ece1787763ca32c154e01adffd44ef30193a6b150678f 50137 gimp_2.8.2-1ubuntu1.1.debian.tar.gz
+
+Package: glance
+Binary: python-glance, glance, python-glance-doc, glance-common, glance-api, glance-registry, glance-client
+Version: 2012.2-0ubuntu2.3
+Priority: extra
+Section: net
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Build-Depends: debhelper (>= 7.0.50), python-all (>= 2.6), python-all-dev (>= 2.6.6-3~), sqlite3
+Build-Depends-Indep: python-setuptools, python-sphinx, python-sqlalchemy-ext | python-sqlalchemy (<< 0.6.3-2), python-nose, python-mox, python-webob, python-routes, python-eventlet, python-pastedeploy, python-paste, python-migrate, python-argparse, python-httplib2 (>= 0.6.0), python-swift, python-boto, python-crypto, python-kombu, python-dateutil, python-requests, python-keystone, python-iso8601, python-jsonschema, python-swiftclient, python-glanceclient, python-xattr, curl, pep8, python-chardet
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/g/glance
+Files:
+ 8038c2510e8fc9c918e789d89c6e5fbf 2768 glance_2012.2-0ubuntu2.3.dsc
+ 0dbcc0e232f75d2ce6a8889733d0b2a9 632955 glance_2012.2.orig.tar.gz
+ a19052639ee4825eb21989ec4a705c6d 17214 glance_2012.2-0ubuntu2.3.debian.tar.gz
+Homepage: http://launchpad.net/glance
+Vcs-Browser: http://bazaar.launchpad.net/~ubuntu-server-dev/glance/essex/files
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-server-dev/glance/essex
+Package-List: 
+ glance deb python extra
+ glance-api deb python extra
+ glance-client deb python extra
+ glance-common deb python extra
+ glance-registry deb python extra
+ python-glance deb python extra
+ python-glance-doc deb doc extra
+Checksums-Sha1:
+ e12ec36498a5ab72191b9b6ca3adeae48b7e8750 2768 glance_2012.2-0ubuntu2.3.dsc
+ 81bec60027a99787f190556aba69a15ff1f29c35 632955 glance_2012.2.orig.tar.gz
+ f9cfe07f3bab8d718acb27e035ecd82e566eb048 17214 glance_2012.2-0ubuntu2.3.debian.tar.gz
+Checksums-Sha256:
+ 46ebc09c1a177289b51059e2a698259b778aaacbdad068e87343dfa46cce69dd 2768 glance_2012.2-0ubuntu2.3.dsc
+ 10f7ffaa1465a747a1f935bef7941334f47b62c8ede99d49fd002c8b4fed2cfc 632955 glance_2012.2.orig.tar.gz
+ 59e0cd84a7b0cb60dd0f49eb66cb3c9e89346ab26ea40cf80e9237e502c33a02 17214 glance_2012.2-0ubuntu2.3.debian.tar.gz
+Python-Version: >= 2.6
+
+Package: gnupg
+Binary: gnupg, gnupg-curl, gpgv, gnupg-udeb, gpgv-udeb
+Version: 1.4.11-3ubuntu4.1
+Priority: important
+Section: utils
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuPG-Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Build-Depends: debhelper (>> 7), libz-dev, libldap2-dev, libbz2-dev, libusb-dev [!hurd-i386], libreadline-dev, file, gettext, dpatch, libcurl4-gnutls-dev
+Architecture: any
+Standards-Version: 3.9.1
+Format: 1.0
+Directory: pool/main/g/gnupg
+Files:
+ c3b10743d83d1ac154d096b89d3f85c1 2342 gnupg_1.4.11-3ubuntu4.1.dsc
+ 8fb66227dcd10d87585d7241db158302 4713877 gnupg_1.4.11.orig.tar.gz
+ cdc6b09b5213ba4327b9f19682b8f51e 41027 gnupg_1.4.11-3ubuntu4.1.diff.gz
+Uploaders: Sune Vuorela <debian@pusling.com>, Daniel Leidert (dale) <daniel.leidert@wgdd.de>, Thijs Kinkhorst <thijs@debian.org>
+Homepage: http://www.gnupg.org
+Vcs-Browser: http://svn.debian.org/wsvn/pkg-gnupg/gnupg/
+Vcs-Svn: svn://svn.debian.org/svn/pkg-gnupg/gnupg/trunk/
+Package-List: 
+ gnupg deb utils important
+ gnupg-curl deb utils optional
+ gnupg-udeb udeb debian-installer extra
+ gpgv deb utils important
+ gpgv-udeb udeb debian-installer extra
+Checksums-Sha1:
+ 0de9b018cb1a986c21e7e2fbcb40516a4599929d 2342 gnupg_1.4.11-3ubuntu4.1.dsc
+ bffb0c60b2e702980f7148ee3a060f29adc82331 4713877 gnupg_1.4.11.orig.tar.gz
+ 4f12fe99eb8fa6c1b6a1221cbca86ef87adaf9c1 41027 gnupg_1.4.11-3ubuntu4.1.diff.gz
+Checksums-Sha256:
+ bd3a973bd23b5e608e80c424593ad6bd168935230c9e83399db866acd8e1d023 2342 gnupg_1.4.11-3ubuntu4.1.dsc
+ 55d457b55029c60eec571c2e739f3c0e639d411863b58a12178cdc63834036d7 4713877 gnupg_1.4.11.orig.tar.gz
+ 92fdb29532534a1d2dfb7fe6a09238fbc339a20275ef1967608a9c56393bfd19 41027 gnupg_1.4.11-3ubuntu4.1.diff.gz
+
+Package: gnupg2
+Binary: gnupg-agent, gpgsm, gnupg2
+Version: 2.0.17-2ubuntu3.1
+Priority: optional
+Section: utils
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Eric Dorland <eric@debian.org>
+Build-Depends: debhelper (>= 8), dh-autoreconf, autopoint, gettext, zlib1g-dev | libz-dev, libldap2-dev, file, libbz2-dev, libgpg-error-dev (>= 1.7), libassuan-dev (>= 2.0), libgcrypt11-dev (>= 1.4.0), libksba-dev (>= 1.0.7), libpth-dev, libusb-dev, texinfo, transfig, ghostscript, libreadline-dev, libcurl4-gnutls-dev, hardening-wrapper
+Architecture: any
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/g/gnupg2
+Files:
+ a56163a1091b681935edaef95e6301c6 2310 gnupg2_2.0.17-2ubuntu3.1.dsc
+ 123af099740fd159c73a0352a274ec81 3997356 gnupg2_2.0.17.orig.tar.bz2
+ e39f5d59d03b50d43d895baba19c4ffa 19263 gnupg2_2.0.17-2ubuntu3.1.debian.tar.bz2
+Homepage: http://www.gnupg.org/
+Package-List: 
+ gnupg-agent deb utils optional
+ gnupg2 deb utils optional
+ gpgsm deb utils optional
+Checksums-Sha1:
+ f94e29e3891c77d9a3ab96b009ec9a88e1d4c923 2310 gnupg2_2.0.17-2ubuntu3.1.dsc
+ 41ef5460417ca0a1131fc730849fe3afd49ad2de 3997356 gnupg2_2.0.17.orig.tar.bz2
+ 904e842e229695fc0bad88d1f3790d6145a0465c 19263 gnupg2_2.0.17-2ubuntu3.1.debian.tar.bz2
+Checksums-Sha256:
+ 7003d264c36b6b85da9f461bba7560a6c2df3b34d4c9f203e233d7ee67d4491b 2310 gnupg2_2.0.17-2ubuntu3.1.dsc
+ ea649d5ecb2f97cc8d81c5796c6ad8d7d8581f9554241c39d2b11ab12139eea6 3997356 gnupg2_2.0.17.orig.tar.bz2
+ 439ecdaecb1b393e79233a0553254feb186dd65b619b3c565af166be28d11cf9 19263 gnupg2_2.0.17-2ubuntu3.1.debian.tar.bz2
+Debian-Vcs-Browser: http://git.debian.org/?p=users/eric/gnupg2.git
+Debian-Vcs-Git: git://git.debian.org/~eric/gnupg2.git
+
+Package: hv-kvp-daemon-init
+Binary: hv-kvp-daemon-init
+Version: 0.3ubuntu4~12.10.0
+Priority: extra
+Section: admin
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Ben Howard <ben.howard@canonical.com>
+Build-Depends: debhelper (>= 8.0.0), python
+Architecture: any
+Standards-Version: 3.9.3
+Format: 3.0 (native)
+Directory: pool/main/h/hv-kvp-daemon-init
+Files:
+ 42d14bab989634da5304855d50c1f306 986 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.dsc
+ 4676fe124dd41293fa96d08074c81dc1 5506 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.tar.gz
+Homepage: http://cloud.ubuntu.com
+Package-List: 
+ hv-kvp-daemon-init deb admin extra
+Checksums-Sha1:
+ f8213beec43b00639aec5c838ebb09d56e18c335 986 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.dsc
+ e816dc3fe188585d42aa6f20ff4ce4e242e4cb3c 5506 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.tar.gz
+Checksums-Sha256:
+ 59503a71a92aeae6f424ba9493433ebb15952454605729bef7fbd067e8a5b68d 986 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.dsc
+ 72c1f72e79b6ee12c86ddd94af3186260d3a3d503fede47f3ed3e5a3316ff5ea 5506 hv-kvp-daemon-init_0.3ubuntu4~12.10.0.tar.gz
+
+Package: icedtea-web
+Binary: icedtea-netx, icedtea6-plugin, icedtea-plugin, icedtea-netx-common, icedtea-6-plugin, icedtea-7-plugin
+Version: 1.3-1ubuntu1.1
+Priority: extra
+Section: java
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Build-Depends: debhelper (>= 5), firefox-dev, openjdk-7-jdk, zip, lsb-release, libgtk2.0-dev, pkg-config, default-jre-headless
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/i/icedtea-web
+Files:
+ 4d359565cf11d7f3461c132a37a85fc8 2425 icedtea-web_1.3-1ubuntu1.1.dsc
+ a19661c0b31725fbf0e5e31303ac74fa 987785 icedtea-web_1.3.orig.tar.gz
+ 51c6e9aa131fd7d3d7ced1371cbe2941 17365 icedtea-web_1.3-1ubuntu1.1.debian.tar.gz
+Uploaders: Matthias Klose <doko@ubuntu.com>, Damien Raude-Morvan <drazzib@debian.org>
+Homepage: http://icedtea.classpath.org/wiki/IcedTea-Web
+Vcs-Browser: https://code.launchpad.net/~openjdk/openjdk/icedtea-web
+Vcs-Bzr: http://bazaar.launchpad.net/~openjdk/openjdk/icedtea-web
+Package-List: 
+ icedtea-6-plugin deb web extra
+ icedtea-7-plugin deb web extra
+ icedtea-netx deb java extra
+ icedtea-netx-common deb java extra
+ icedtea-plugin deb web extra
+ icedtea6-plugin deb web extra
+Checksums-Sha1:
+ f5e928662a7d854b9968c389930f7fd79e28f78e 2425 icedtea-web_1.3-1ubuntu1.1.dsc
+ 348f5484daf06edeaa615ecf3045d4ce85c81452 987785 icedtea-web_1.3.orig.tar.gz
+ db3a7c3c64b4cb4f511447c2f1a4b587bbad64bc 17365 icedtea-web_1.3-1ubuntu1.1.debian.tar.gz
+Checksums-Sha256:
+ 79e702c1b395cc78278278c9b41e8d149f4fe922dbb9a3c99e0a9865ce4f8b9d 2425 icedtea-web_1.3-1ubuntu1.1.dsc
+ d46ec10700732cea103da2aae64ff01e717cb1281b83e1797ce48cc53280b49f 987785 icedtea-web_1.3.orig.tar.gz
+ e8675540be20d6116026769940177f371edae1c2635295e8492ec7976704cba6 17365 icedtea-web_1.3-1ubuntu1.1.debian.tar.gz
+
+Package: keystone
+Binary: python-keystone, keystone, keystone-doc
+Version: 2012.2-0ubuntu1.2
+Priority: extra
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Monty Taylor <mordred@inaugust.com>
+Build-Depends: debhelper (>= 7.0.50), pep8, pylint, python-all (>= 2.6), python-all-dev (>= 2.6.6-3~) | python-support, python-eventlet, python-keystoneclient, python-ldap, python-lxml, python-memcache, python-migrate, python-mox, python-nose, python-nova, python-pam, python-passlib, python-paste, python-pastedeploy, python-prettytable, python-routes, python-sphinx, python-sqlalchemy, python-swift, python-unittest2, python-webob, python-webtest, python-iso8601
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/k/keystone
+Files:
+ 973e0b4bcea5c1f3fe256f6e5f677a58 2487 keystone_2012.2-0ubuntu1.2.dsc
+ 84788ba2ae09a7019d6474204a2f25bf 547438 keystone_2012.2.orig.tar.gz
+ f3b6ca8af83cbb8cef75d8f5c8c7aa62 26785 keystone_2012.2-0ubuntu1.2.debian.tar.gz
+Uploaders: Soren Hansen <soren@ubuntu.com>
+Homepage: http://launchpad.net/keystone
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-server-dev/keystone/essex
+Package-List: 
+ keystone deb python extra
+ keystone-doc deb doc extra
+ python-keystone deb python extra
+Checksums-Sha1:
+ d354311fa8cf83ec5276cbe5da158514ccbca5a2 2487 keystone_2012.2-0ubuntu1.2.dsc
+ 0608c596c602c4c4d0bf6117e53f4dfcb6ea984b 547438 keystone_2012.2.orig.tar.gz
+ 9899858398cf7524d91c45cef8af9a3bc5d0bd37 26785 keystone_2012.2-0ubuntu1.2.debian.tar.gz
+Checksums-Sha256:
+ b4d4874d4d3bb048b18d1277f1174747893a85e042265fea5a188277d95b7ac9 2487 keystone_2012.2-0ubuntu1.2.dsc
+ 1aed5911c00ebffea28cffbc4793921fb2a9c000e9bb967326b7db751c7281cc 547438 keystone_2012.2.orig.tar.gz
+ 1af19e03db2c160664283f2609a9e54812907df57f82a0009e6533ab216367ab 26785 keystone_2012.2-0ubuntu1.2.debian.tar.gz
+Python-Version: >= 2.6
+
+Package: libav
+Binary: libav-tools, ffmpeg, ffmpeg-dbg, libav-dbg, ffmpeg-doc, libav-doc, libavutil51, libavcodec53, libavdevice53, libavformat53, libavfilter2, libpostproc52, libswscale2, libavutil-dev, libavcodec-dev, libavdevice-dev, libavformat-dev, libavfilter-dev, libpostproc-dev, libswscale-dev, libav-source
+Version: 6:0.8.4-0ubuntu0.12.10.1
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian multimedia packages maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 8.1.3~), libasound2-dev [linux-any], libbz2-dev, libcdio-cdda-dev, libcdio-dev, libcdio-paranoia-dev, libdc1394-22-dev [linux-any], libfreetype6-dev, libgnutls-dev, libgsm1-dev, libimlib2-dev, libjack-dev, libpulse-dev, libraw1394-dev [linux-any], libschroedinger-dev, libsdl1.2-dev, libspeex-dev, libtheora-dev (>> 0.0.0.alpha4), libtiff5-dev | libtiff-dev, libva-dev [!hurd-any], libvdpau-dev, libvorbis-dev, libvpx-dev, libx11-dev, libxext-dev, libxfixes-dev, libxvmc-dev, texi2html, yasm [any-amd64 any-i386], zlib1g-dev
+Build-Depends-Indep: doxygen
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/liba/libav
+Files:
+ 7fe358f623598fed9e162c8d9869e1ca 3784 libav_0.8.4-0ubuntu0.12.10.1.dsc
+ b6b4f930d387039c2e920a51e97a977e 5449993 libav_0.8.4.orig.tar.gz
+ ef21e6ce1c22734a74691356ca2dbaec 46553 libav_0.8.4-0ubuntu0.12.10.1.debian.tar.gz
+Uploaders:  Sam Hocevar (Debian packages) <sam+deb@zoy.org>, Loïc Minier <lool@debian.org>, Reinhard Tartler <siretart@tauware.de>, Fabian Greffrath <fabian+debian@greffrath.com>, Andres Mejia <amejia@debian.org>, Jonas Smedegaard <dr@jones.dk>
+Dm-Upload-Allowed: yes
+Homepage: http://libav.org/
+Vcs-Browser: http://git.debian.org/?p=pkg-multimedia/libav.git;a=summary
+Vcs-Git: git://git.debian.org/git/pkg-multimedia/libav.git
+Package-List: 
+ ffmpeg deb oldlibs extra
+ ffmpeg-dbg deb oldlibs extra
+ ffmpeg-doc deb oldlibs extra
+ libav-dbg deb debug extra
+ libav-doc deb doc optional
+ libav-source deb devel optional
+ libav-tools deb video optional
+ libavcodec-dev deb libdevel optional
+ libavcodec53 deb libs optional
+ libavdevice-dev deb libdevel optional
+ libavdevice53 deb libs optional
+ libavfilter-dev deb libdevel optional
+ libavfilter2 deb libs optional
+ libavformat-dev deb libdevel optional
+ libavformat53 deb libs optional
+ libavutil-dev deb libdevel optional
+ libavutil51 deb libs optional
+ libpostproc-dev deb libdevel optional
+ libpostproc52 deb libs optional
+ libswscale-dev deb libdevel optional
+ libswscale2 deb libs optional
+Checksums-Sha1:
+ 0a14858d2be3679c05ad5c8b7de76b71865d991d 3784 libav_0.8.4-0ubuntu0.12.10.1.dsc
+ 050043f36de55b1a716645f959112d65246ede0f 5449993 libav_0.8.4.orig.tar.gz
+ 31826702ba7b73c19b8b84cf13cca85724216ee4 46553 libav_0.8.4-0ubuntu0.12.10.1.debian.tar.gz
+Checksums-Sha256:
+ 85efe2062d109986772717e0dae0967ef47e929720812644106f951678120a50 3784 libav_0.8.4-0ubuntu0.12.10.1.dsc
+ 5127e415334f0a09059c6bb44b759d714c7a85b0fe757747ed31643e88d4cf42 5449993 libav_0.8.4.orig.tar.gz
+ 8b440f47edf442c861cd3045a58f94c3783d7a359e4da3b8df5abe04b44f18f4 46553 libav_0.8.4-0ubuntu0.12.10.1.debian.tar.gz
+
+Package: libssh
+Binary: libssh-4, libssh-dev, libssh-dbg, libssh-doc
+Version: 0.5.2-1ubuntu0.12.10.1
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Laurent Bigonville <bigon@debian.org>
+Build-Depends: cdbs (>= 0.4.93~), debhelper (>= 8.1.3~), cmake (>= 2.6), libssl-dev, libz-dev
+Build-Depends-Indep: doxygen
+Architecture: any all
+Standards-Version: 3.9.2
+Format: 3.0 (quilt)
+Directory: pool/main/libs/libssh
+Files:
+ f57c5291a1aefd3bc2e8be95a42b411e 2166 libssh_0.5.2-1ubuntu0.12.10.1.dsc
+ 38b67c48af7a9204660a3e08f97ceba6 317336 libssh_0.5.2.orig.tar.gz
+ a57196c343aeaefccffd9519b25791bf 12222 libssh_0.5.2-1ubuntu0.12.10.1.debian.tar.gz
+Homepage: http://www.libssh.org/
+Vcs-Browser: http://git.debian.org/?p=collab-maint/libssh.git
+Vcs-Git: git://git.debian.org/git/collab-maint/libssh.git
+Package-List: 
+ libssh-4 deb libs optional
+ libssh-dbg deb debug extra
+ libssh-dev deb libdevel optional
+ libssh-doc deb doc optional
+Checksums-Sha1:
+ ad36851fc832bba83ca34ada0e58d66d887027b1 2166 libssh_0.5.2-1ubuntu0.12.10.1.dsc
+ 4bf36d4052bd0c948e05bbf3b0cd0da8684ac00e 317336 libssh_0.5.2.orig.tar.gz
+ 840e03bde1985debe0785a0b314b0b5a41aa1d4a 12222 libssh_0.5.2-1ubuntu0.12.10.1.debian.tar.gz
+Checksums-Sha256:
+ 9717d55a1db817ecb2ed34e0180874cd7b2d6001a8c2023e9c428c1af278b94d 2166 libssh_0.5.2-1ubuntu0.12.10.1.dsc
+ 41e8b9c1af077544625e8b398582f101dacc3b8457fee1811a724ca4245ab227 317336 libssh_0.5.2.orig.tar.gz
+ f51847652b187318055b37aef86e3b130042a6c707ee14a04c75e5663f087ffd 12222 libssh_0.5.2-1ubuntu0.12.10.1.debian.tar.gz
+
+Package: libunity-webapps
+Binary: libunity-webapps-dev, libunity-webapps0, unity-webapps-service, gir1.2-unity-webapps-0.2, libunity-webapps-doc
+Version: 2.4.1-0ubuntu3.2
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Desktop Team <ubuntu-desktop@lists.ubuntu.com>
+Build-Depends: debhelper (>= 9), autotools-dev, libglib2.0-dev, libnotify-dev, libunity-dev (>= 4.0.6+bzr106), libgirepository1.0-dev, gobject-introspection, gir1.2-glib-2.0, libsqlite3-dev, libtelepathy-glib-dev, libwnck-3-dev, gtk-doc-tools, libsoup2.4-dev, libjson-glib-dev, libdbusmenu-gtk3-dev, dh-autoreconf, hicolor-icon-theme, humanity-icon-theme, xvfb, dbus-test-runner, gnome-common, libpackagekit-glib2-dev, libpolkit-gobject-1-dev, libmessaging-menu-dev, libgeoclue-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/libu/libunity-webapps
+Files:
+ 010e86074853245c680cb79b0c1cc963 2563 libunity-webapps_2.4.1-0ubuntu3.2.dsc
+ 77879e13a84c15ea42981a4f217baad7 184945 libunity-webapps_2.4.1.orig.tar.gz
+ caf414da9aaf2559baa8cc71d5d9c1ca 9663 libunity-webapps_2.4.1-0ubuntu3.2.debian.tar.gz
+Homepage: https://launchpad.net/libunity-webapps
+Package-List: 
+ gir1.2-unity-webapps-0.2 deb introspection optional
+ libunity-webapps-dev deb libdevel optional
+ libunity-webapps-doc deb doc optional
+ libunity-webapps0 deb libs optional
+ unity-webapps-service deb gnome optional
+Checksums-Sha1:
+ ff88ea4388faecb215990024a7743324207e78d9 2563 libunity-webapps_2.4.1-0ubuntu3.2.dsc
+ 49efee0b6328d5ccd2cd655078a19d906a74beb8 184945 libunity-webapps_2.4.1.orig.tar.gz
+ 5171247a28a2ba92be2c423854bc39c1fff72dd1 9663 libunity-webapps_2.4.1-0ubuntu3.2.debian.tar.gz
+Checksums-Sha256:
+ 8f68768fda1b80156a2f844764d793112acf79ff706b660f135492012c9ece52 2563 libunity-webapps_2.4.1-0ubuntu3.2.dsc
+ 66cc02d0808edb1223ee4e0a59f423789035ddd8292efafb360c901641b6c53f 184945 libunity-webapps_2.4.1.orig.tar.gz
+ b4ad7c0c2612b5c1523ebf7bae19f8281b180ede078a786adf741e2d733626cc 9663 libunity-webapps_2.4.1-0ubuntu3.2.debian.tar.gz
+
+Package: libxml2
+Binary: libxml2, libxml2-utils, libxml2-utils-dbg, libxml2-dev, libxml2-dbg, libxml2-doc, python-libxml2, python-libxml2-dbg, libxml2-udeb
+Version: 2.8.0+dfsg1-5ubuntu2.1
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 9), perl, dh-autoreconf, autotools-dev, binutils (>= 2.14.90.0.7), python-all-dev (>= 2.6.6-3~), python-all-dbg, zlib1g-dev | libz-dev, liblzma-dev, libreadline-dev | libreadline6-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/libx/libxml2
+Files:
+ 878a7a745b3fec3b69abbc23d3408840 2334 libxml2_2.8.0+dfsg1-5ubuntu2.1.dsc
+ 008920f545a36da4eca363d0c1a0ffee 3554683 libxml2_2.8.0+dfsg1.orig.tar.gz
+ c02b6a94287bcddb86af5c92c3128e68 33299 libxml2_2.8.0+dfsg1-5ubuntu2.1.debian.tar.gz
+Uploaders: Aron Xu <aron@debian.org>, YunQiang Su <wzssyqa@gmail.com>
+Homepage: http://xmlsoft.org/
+Vcs-Browser: http://git.debian.org/?p=debian-xml-sgml/libxml2.git
+Vcs-Git: git://git.debian.org/debian-xml-sgml/libxml2.git
+Package-List: 
+ libxml2 deb libs standard
+ libxml2-dbg deb debug extra
+ libxml2-dev deb libdevel optional
+ libxml2-doc deb doc optional
+ libxml2-udeb udeb debian-installer optional
+ libxml2-utils deb text optional
+ libxml2-utils-dbg deb debug extra
+ python-libxml2 deb python optional
+ python-libxml2-dbg deb debug extra
+Checksums-Sha1:
+ a092021bba7f11d3a5e065162b8b8a56e7d2bc2c 2334 libxml2_2.8.0+dfsg1-5ubuntu2.1.dsc
+ fcc1bca14d2c7dd73c71556cf0a223a73bd92305 3554683 libxml2_2.8.0+dfsg1.orig.tar.gz
+ 04366beab3609d3d4a7b2dd51866759ce7121c34 33299 libxml2_2.8.0+dfsg1-5ubuntu2.1.debian.tar.gz
+Checksums-Sha256:
+ 1a67e4acba27899597108539efc0c655d4c6db19c3ee771039d0e24abd24cc5b 2334 libxml2_2.8.0+dfsg1-5ubuntu2.1.dsc
+ 46f339843967e861e81f8427373ff2a3d0a8cb608022dea16aa1d345ddcee338 3554683 libxml2_2.8.0+dfsg1.orig.tar.gz
+ 905d0a598ca1c9f50d212a92c61a05ccf14723b045eae74144147d1c3bba4391 33299 libxml2_2.8.0+dfsg1-5ubuntu2.1.debian.tar.gz
+Testsuite: autopkgtest
+
+Package: linux
+Binary: linux-source-3.5.0, linux-doc, linux-tools-common, linux-headers-3.5.0-21, linux-libc-dev, linux-tools-3.5.0-21, linux-image-3.5.0-21-generic, linux-image-extra-3.5.0-21-generic, linux-headers-3.5.0-21-generic, linux-image-3.5.0-21-generic-dbgsym, linux-image-3.5.0-21-highbank, linux-image-extra-3.5.0-21-highbank, linux-headers-3.5.0-21-highbank, linux-image-3.5.0-21-highbank-dbgsym, linux-image-3.5.0-21-omap, linux-image-extra-3.5.0-21-omap, linux-headers-3.5.0-21-omap, linux-image-3.5.0-21-omap-dbgsym, linux-image-3.5.0-21-powerpc64-smp, linux-image-extra-3.5.0-21-powerpc64-smp, linux-headers-3.5.0-21-powerpc64-smp, linux-image-3.5.0-21-powerpc64-smp-dbgsym, linux-image-3.5.0-21-powerpc-smp, linux-image-extra-3.5.0-21-powerpc-smp, linux-headers-3.5.0-21-powerpc-smp, linux-image-3.5.0-21-powerpc-smp-dbgsym, kernel-image-3.5.0-21-generic-di, nic-modules-3.5.0-21-generic-di, nic-shared-modules-3.5.0-21-generic-di, serial-modules-3.5.0-21-generic-di,
+ ppp-modules-3.5.0-21-generic-di, pata-modules-3.5.0-21-generic-di, firewire-core-modules-3.5.0-21-generic-di, scsi-modules-3.5.0-21-generic-di, plip-modules-3.5.0-21-generic-di, floppy-modules-3.5.0-21-generic-di, fat-modules-3.5.0-21-generic-di, nfs-modules-3.5.0-21-generic-di, md-modules-3.5.0-21-generic-di, multipath-modules-3.5.0-21-generic-di, usb-modules-3.5.0-21-generic-di, pcmcia-storage-modules-3.5.0-21-generic-di, fb-modules-3.5.0-21-generic-di, input-modules-3.5.0-21-generic-di, mouse-modules-3.5.0-21-generic-di, irda-modules-3.5.0-21-generic-di, parport-modules-3.5.0-21-generic-di, nic-pcmcia-modules-3.5.0-21-generic-di, pcmcia-modules-3.5.0-21-generic-di, nic-usb-modules-3.5.0-21-generic-di, sata-modules-3.5.0-21-generic-di, crypto-modules-3.5.0-21-generic-di, squashfs-modules-3.5.0-21-generic-di, speakup-modules-3.5.0-21-generic-di, virtio-modules-3.5.0-21-generic-di, fs-core-modules-3.5.0-21-generic-di, fs-secondary-modules-3.5.0-21-generic-di,
+ storage-core-modules-3.5.0-21-generic-di, block-modules-3.5.0-21-generic-di, message-modules-3.5.0-21-generic-di, vlan-modules-3.5.0-21-generic-di,
+ ipmi-modules-3.5.0-21-generic-di
+Version: 3.5.0-21.32
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 5), cpio, module-init-tools, kernel-wedge (>= 2.24ubuntu1), makedumpfile [amd64 i386], device-tree-compiler [powerpc], libelf-dev, libnewt-dev, binutils-dev, rsync, libdw-dev, dpkg (>= 1.16.0~ubuntu4), util-linux, pkg-config, flex, bison
+Build-Depends-Indep: xmlto, docbook-utils, ghostscript, transfig, bzip2, sharutils, asciidoc
+Build-Conflicts: findutils (= 4.4.1-1ubuntu1)
+Architecture: all i386 amd64 powerpc ppc64 armel armhf
+Standards-Version: 3.8.4.0
+Format: 1.0
+Directory: pool/main/l/linux
+Files:
+ b31bc90fd82311c0a35460e10be311c9 7944 linux_3.5.0-21.32.dsc
+ 83dbbf2c25e61d3b5b8aaf7101dafd92 102283735 linux_3.5.0.orig.tar.gz
+ 6ba975ab279ac674f930da2f091cd5a6 3701156 linux_3.5.0-21.32.diff.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-quantal.git
+Package-List: 
+ block-modules-3.5.0-21-generic-di udeb debian-installer standard
+ crypto-modules-3.5.0-21-generic-di udeb debian-installer extra
+ fat-modules-3.5.0-21-generic-di udeb debian-installer standard
+ fb-modules-3.5.0-21-generic-di udeb debian-installer standard
+ firewire-core-modules-3.5.0-21-generic-di udeb debian-installer standard
+ floppy-modules-3.5.0-21-generic-di udeb debian-installer standard
+ fs-core-modules-3.5.0-21-generic-di udeb debian-installer standard
+ fs-secondary-modules-3.5.0-21-generic-di udeb debian-installer standard
+ input-modules-3.5.0-21-generic-di udeb debian-installer standard
+ ipmi-modules-3.5.0-21-generic-di udeb debian-installer standard
+ irda-modules-3.5.0-21-generic-di udeb debian-installer standard
+ kernel-image-3.5.0-21-generic-di udeb debian-installer extra
+ linux-doc deb doc optional
+ linux-headers-3.5.0-21 deb devel optional
+ linux-headers-3.5.0-21-generic deb devel optional
+ linux-headers-3.5.0-21-highbank deb devel optional
+ linux-headers-3.5.0-21-omap deb devel optional
+ linux-headers-3.5.0-21-powerpc-smp deb devel optional
+ linux-headers-3.5.0-21-powerpc64-smp deb devel optional
+ linux-image-3.5.0-21-generic deb kernel optional
+ linux-image-3.5.0-21-generic-dbgsym deb devel optional
+ linux-image-3.5.0-21-highbank deb kernel optional
+ linux-image-3.5.0-21-highbank-dbgsym deb devel optional
+ linux-image-3.5.0-21-omap deb kernel optional
+ linux-image-3.5.0-21-omap-dbgsym deb devel optional
+ linux-image-3.5.0-21-powerpc-smp deb kernel optional
+ linux-image-3.5.0-21-powerpc-smp-dbgsym deb devel optional
+ linux-image-3.5.0-21-powerpc64-smp deb kernel optional
+ linux-image-3.5.0-21-powerpc64-smp-dbgsym deb devel optional
+ linux-image-extra-3.5.0-21-generic deb kernel optional
+ linux-image-extra-3.5.0-21-highbank deb kernel optional
+ linux-image-extra-3.5.0-21-omap deb kernel optional
+ linux-image-extra-3.5.0-21-powerpc-smp deb kernel optional
+ linux-image-extra-3.5.0-21-powerpc64-smp deb kernel optional
+ linux-libc-dev deb devel optional
+ linux-source-3.5.0 deb devel optional
+ linux-tools-3.5.0-21 deb devel optional
+ linux-tools-common deb kernel optional
+ md-modules-3.5.0-21-generic-di udeb debian-installer standard
+ message-modules-3.5.0-21-generic-di udeb debian-installer standard
+ mouse-modules-3.5.0-21-generic-di udeb debian-installer extra
+ multipath-modules-3.5.0-21-generic-di udeb debian-installer extra
+ nfs-modules-3.5.0-21-generic-di udeb debian-installer standard
+ nic-modules-3.5.0-21-generic-di udeb debian-installer standard
+ nic-pcmcia-modules-3.5.0-21-generic-di udeb debian-installer standard
+ nic-shared-modules-3.5.0-21-generic-di udeb debian-installer standard
+ nic-usb-modules-3.5.0-21-generic-di udeb debian-installer standard
+ parport-modules-3.5.0-21-generic-di udeb debian-installer standard
+ pata-modules-3.5.0-21-generic-di udeb debian-installer standard
+ pcmcia-modules-3.5.0-21-generic-di udeb debian-installer standard
+ pcmcia-storage-modules-3.5.0-21-generic-di udeb debian-installer standard
+ plip-modules-3.5.0-21-generic-di udeb debian-installer standard
+ ppp-modules-3.5.0-21-generic-di udeb debian-installer standard
+ sata-modules-3.5.0-21-generic-di udeb debian-installer standard
+ scsi-modules-3.5.0-21-generic-di udeb debian-installer standard
+ serial-modules-3.5.0-21-generic-di udeb debian-installer standard
+ speakup-modules-3.5.0-21-generic-di udeb debian-installer extra
+ squashfs-modules-3.5.0-21-generic-di udeb debian-installer extra
+ storage-core-modules-3.5.0-21-generic-di udeb debian-installer standard
+ usb-modules-3.5.0-21-generic-di udeb debian-installer standard
+ virtio-modules-3.5.0-21-generic-di udeb debian-installer standard
+ vlan-modules-3.5.0-21-generic-di udeb debian-installer extra
+Checksums-Sha1:
+ 03805d5108fec98b7691e68b4e777432105d604e 7944 linux_3.5.0-21.32.dsc
+ 737dc47661d4889861d83ace1705321950de9a55 102283735 linux_3.5.0.orig.tar.gz
+ 53bc73030bdf77e8bc93c4eabeb775f77e7f0476 3701156 linux_3.5.0-21.32.diff.gz
+Checksums-Sha256:
+ 935e987699204ad1fb437b0aca80b772e230581f2f61e94226c1666ef5504767 7944 linux_3.5.0-21.32.dsc
+ d12d4b8baf39a8122ab253c3b55676ab2e40a078ded1691b551650fd63e3cd9b 102283735 linux_3.5.0.orig.tar.gz
+ a7b4c7b6c492ffe59b9ad282f7d9c6f4e54ddbbb16ece6a4a96df8258fafa24b 3701156 linux_3.5.0-21.32.diff.gz
+
+Package: linux-armadaxp
+Binary: linux-headers-3.5.0-1606, linux-armadaxp-libc-dev, linux-armadaxp-tools-3.5.0-1606, linux-image-3.5.0-1606-armadaxp, linux-headers-3.5.0-1606-armadaxp, linux-image-3.5.0-1606-armadaxp-dbgsym, kernel-image-3.5.0-1606-armadaxp-di, nic-modules-3.5.0-1606-armadaxp-di, nic-shared-modules-3.5.0-1606-armadaxp-di, ppp-modules-3.5.0-1606-armadaxp-di, scsi-modules-3.5.0-1606-armadaxp-di, plip-modules-3.5.0-1606-armadaxp-di, md-modules-3.5.0-1606-armadaxp-di, usb-modules-3.5.0-1606-armadaxp-di, input-modules-3.5.0-1606-armadaxp-di, irda-modules-3.5.0-1606-armadaxp-di, parport-modules-3.5.0-1606-armadaxp-di, nic-usb-modules-3.5.0-1606-armadaxp-di, crypto-modules-3.5.0-1606-armadaxp-di, squashfs-modules-3.5.0-1606-armadaxp-di, fs-core-modules-3.5.0-1606-armadaxp-di, fs-secondary-modules-3.5.0-1606-armadaxp-di, storage-core-modules-3.5.0-1606-armadaxp-di, block-modules-3.5.0-1606-armadaxp-di
+Version: 3.5.0-1606.8
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 5), cpio, module-init-tools, kernel-wedge (>= 2.24ubuntu1), makedumpfile [amd64 i386], device-tree-compiler [powerpc], libelf-dev, binutils-dev, rsync, libdw-dev, dpkg (>= 1.16.0~ubuntu4), util-linux
+Build-Depends-Indep: xmlto, docbook-utils, ghostscript, transfig, bzip2, sharutils, asciidoc
+Build-Conflicts: findutils (= 4.4.1-1ubuntu1)
+Architecture: armhf
+Standards-Version: 3.8.4.0
+Format: 1.0
+Directory: pool/main/l/linux-armadaxp
+Files:
+ 631a0d2ab0e0d9f2b2f5b8d4ac6a87f9 4280 linux-armadaxp_3.5.0-1606.8.dsc
+ 089ca196ddc7853ebc74a956da562af8 110069137 linux-armadaxp_3.5.0-1606.8.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-precise.git
+Package-List: 
+ block-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ crypto-modules-3.5.0-1606-armadaxp-di udeb debian-installer extra
+ fs-core-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ fs-secondary-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ input-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ irda-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ kernel-image-3.5.0-1606-armadaxp-di udeb debian-installer extra
+ linux-armadaxp-libc-dev deb devel optional
+ linux-armadaxp-tools-3.5.0-1606 deb devel optional
+ linux-headers-3.5.0-1606 deb devel optional
+ linux-headers-3.5.0-1606-armadaxp deb devel optional
+ linux-image-3.5.0-1606-armadaxp deb admin optional
+ linux-image-3.5.0-1606-armadaxp-dbgsym deb devel optional
+ md-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ nic-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ nic-shared-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ nic-usb-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ parport-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ plip-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ ppp-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ scsi-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ squashfs-modules-3.5.0-1606-armadaxp-di udeb debian-installer extra
+ storage-core-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+ usb-modules-3.5.0-1606-armadaxp-di udeb debian-installer standard
+Checksums-Sha1:
+ 013e3a7ce1d2c1dde904507ef2221e629aa35041 4280 linux-armadaxp_3.5.0-1606.8.dsc
+ 17757cd61022c514d5626a5adacdc30cfed0002c 110069137 linux-armadaxp_3.5.0-1606.8.tar.gz
+Checksums-Sha256:
+ fb90ac2faa60505d67010573c83e47cadaf21c969c363220afc1de667e2a2ac6 4280 linux-armadaxp_3.5.0-1606.8.dsc
+ 047b49578dc4f5c94af4da43a68135937f9e097d881410f97292bdffb9771ad6 110069137 linux-armadaxp_3.5.0-1606.8.tar.gz
+
+Package: linux-backports-modules-3.5.0
+Binary: linux-headers-lbm-3.5.0-21, linux-headers-lbm-3.5.0-21-generic, linux-backports-modules-cw-3.6-3.5.0-21-generic, linux-backports-modules-hv-3.5.0-21-generic
+Version: 3.5.0-21.7
+Priority: optional
+Section: admin
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 3), module-init-tools, coreutils, git-core, kernel-wedge (>= 2.24ubuntu1), linux-source-3.5.0, linux-headers-3.5.0-21-generic [i386 amd64]
+Architecture: all i386 amd64
+Standards-Version: 3.6.1
+Format: 1.0
+Directory: pool/main/l/linux-backports-modules-3.5.0
+Files:
+ 5692508ae4b1b71cfd21026f518b2ba0 2082 linux-backports-modules-3.5.0_3.5.0-21.7.dsc
+ d413b278043881f32e4f96c18848e7ef 6094411 linux-backports-modules-3.5.0_3.5.0-21.7.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-quantal-lbm.git
+Package-List: 
+ linux-backports-modules-cw-3.6-3.5.0-21-generic deb admin optional
+ linux-backports-modules-hv-3.5.0-21-generic deb admin optional
+ linux-headers-lbm-3.5.0-21 deb devel optional
+ linux-headers-lbm-3.5.0-21-generic deb devel optional
+Checksums-Sha1:
+ bb20c5552f5ce735e3be880cb9ea8eedebf79f5e 2082 linux-backports-modules-3.5.0_3.5.0-21.7.dsc
+ d2528c47833293cdac495854a9bc51b075a2b268 6094411 linux-backports-modules-3.5.0_3.5.0-21.7.tar.gz
+Checksums-Sha256:
+ a64ceb5159c3ec8093362f66b80a4105fea762ea3698bf4a765017418cbb9135 2082 linux-backports-modules-3.5.0_3.5.0-21.7.dsc
+ eeb76d24a6698be4e06f9364a589ab684175b4e7ea4179fa5dc8a3f511d77aab 6094411 linux-backports-modules-3.5.0_3.5.0-21.7.tar.gz
+
+Package: linux-meta
+Binary: linux, linux-source, linux-image, linux-crashdump, linux-tools, linux-headers-generic, linux-image-generic, linux-generic, linux-backports-modules-headers-quantal-generic, linux-backports-modules-cw-3.6-quantal-generic, linux-backports-modules-hv-quantal-generic, linux-headers-generic-pae, linux-image-generic-pae, linux-generic-pae, linux-headers-highbank, linux-image-highbank, linux-highbank, linux-headers-omap, linux-image-omap, linux-omap, linux-headers-powerpc-smp, linux-image-powerpc-smp, linux-powerpc-smp, linux-headers-powerpc64-smp, linux-image-powerpc64-smp, linux-powerpc64-smp, linux-headers-server, linux-image-server, linux-server, linux-signed-image-generic, linux-signed-generic, linux-headers-virtual, linux-image-virtual, linux-virtual, linux-image-extra-virtual, linux-backports-modules-hv-quantal-virtual
+Version: 3.5.0.21.27
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: dpkg (>= 1.13.19), debhelper (>= 5), gawk
+Architecture: i386 amd64 all armel armhf powerpc
+Standards-Version: 3.6.1
+Format: 1.0
+Directory: pool/main/l/linux-meta
+Files:
+ d47aa466b7da333bd11615f136731826 4076 linux-meta_3.5.0.21.27.dsc
+ d8dd530dbcbb4c78a62e489324e183d2 10740 linux-meta_3.5.0.21.27.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-quantal-meta.git
+Package-List: 
+ linux deb metapackages optional
+ linux-backports-modules-cw-3.6-quantal-generic deb devel optional
+ linux-backports-modules-headers-quantal-generic deb devel optional
+ linux-backports-modules-hv-quantal-generic deb devel optional
+ linux-backports-modules-hv-quantal-virtual deb devel optional
+ linux-crashdump deb devel optional
+ linux-generic deb metapackages optional
+ linux-generic-pae deb metapackages optional
+ linux-headers-generic deb metapackages optional
+ linux-headers-generic-pae deb metapackages optional
+ linux-headers-highbank deb metapackages optional
+ linux-headers-omap deb metapackages optional
+ linux-headers-powerpc-smp deb metapackages optional
+ linux-headers-powerpc64-smp deb metapackages optional
+ linux-headers-server deb metapackages optional
+ linux-headers-virtual deb metapackages optional
+ linux-highbank deb metapackages optional
+ linux-image deb metapackages optional
+ linux-image-extra-virtual deb metapackages optional
+ linux-image-generic deb metapackages optional
+ linux-image-generic-pae deb metapackages optional
+ linux-image-highbank deb metapackages optional
+ linux-image-omap deb metapackages optional
+ linux-image-powerpc-smp deb metapackages optional
+ linux-image-powerpc64-smp deb metapackages optional
+ linux-image-server deb metapackages optional
+ linux-image-virtual deb metapackages optional
+ linux-omap deb metapackages optional
+ linux-powerpc-smp deb metapackages optional
+ linux-powerpc64-smp deb metapackages optional
+ linux-server deb metapackages optional
+ linux-signed-generic deb metapackages optional
+ linux-signed-image-generic deb metapackages optional
+ linux-source deb devel optional
+ linux-tools deb metapackages optional
+ linux-virtual deb metapackages optional
+Checksums-Sha1:
+ 9e11d4ad6ba2f924af37efb6610cd93a0bd1fd68 4076 linux-meta_3.5.0.21.27.dsc
+ 6779ca9198056f9165619973fc1f66afd1301827 10740 linux-meta_3.5.0.21.27.tar.gz
+Checksums-Sha256:
+ 8d407f5b2c464be4b7682b761056bf1ebaa28ab9e51ce5458f4a7964a3b540b8 4076 linux-meta_3.5.0.21.27.dsc
+ 6673e1293581a84786112230585156b6531b3a298d32c0787541c19bed88cd22 10740 linux-meta_3.5.0.21.27.tar.gz
+
+Package: linux-meta-armadaxp
+Binary: linux-headers-armadaxp, linux-image-armadaxp, linux-armadaxp
+Version: 3.5.0.1606.9
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: dpkg (>= 1.13.19), debhelper (>= 5), gawk
+Architecture: armhf
+Standards-Version: 3.6.1
+Format: 1.0
+Directory: pool/main/l/linux-meta-armadaxp
+Files:
+ a82f8d1942dc266c61e2d093d4a31e5b 1074 linux-meta-armadaxp_3.5.0.1606.9.dsc
+ 88d76e740c70e30898f4f270017798d2 3046 linux-meta-armadaxp_3.5.0.1606.9.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-maverick-meta.git
+Package-List: 
+ linux-armadaxp deb kernel optional
+ linux-headers-armadaxp deb devel optional
+ linux-image-armadaxp deb kernel optional
+Checksums-Sha1:
+ 230cc43bb5ad2aef523eeef745cc60df20cda2cb 1074 linux-meta-armadaxp_3.5.0.1606.9.dsc
+ ea0e0f4d30c998595b7455876c72ba4c5e475680 3046 linux-meta-armadaxp_3.5.0.1606.9.tar.gz
+Checksums-Sha256:
+ a061f67576489f30787f090db8621c8a0111b64b325f3a26bfd2564708bbbc94 1074 linux-meta-armadaxp_3.5.0.1606.9.dsc
+ b2da71d5c0cc06cd789922274e26ac2a44ca42c84fad1ab34db81c5b3472c25f 3046 linux-meta-armadaxp_3.5.0.1606.9.tar.gz
+
+Package: linux-meta-ti-omap4
+Binary: linux-tools-omap4, linux-headers-omap4, linux-image-omap4, linux-omap4
+Version: 3.5.0.216.17
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: dpkg (>= 1.13.19), debhelper (>= 5), gawk
+Architecture: armhf
+Standards-Version: 3.6.1
+Format: 1.0
+Directory: pool/main/l/linux-meta-ti-omap4
+Files:
+ c066cb99601970573017a0e87de4d749 1122 linux-meta-ti-omap4_3.5.0.216.17.dsc
+ f9cfe67ba354560c843fa7e097f5c6bb 3055 linux-meta-ti-omap4_3.5.0.216.17.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-precise-meta.git ti-omap4
+Package-List: 
+ linux-headers-omap4 deb devel optional
+ linux-image-omap4 deb kernel optional
+ linux-omap4 deb kernel optional
+ linux-tools-omap4 deb kernel optional
+Checksums-Sha1:
+ 086caa6a545e7bf043d272e8cfb387529087f4eb 1122 linux-meta-ti-omap4_3.5.0.216.17.dsc
+ ae39de86ae1db3c8a4e0f6ebdc1d3e8a072b0ab1 3055 linux-meta-ti-omap4_3.5.0.216.17.tar.gz
+Checksums-Sha256:
+ c04d168b2dbf1e834443312d33bffb4ab1580db888836c0892a6bac778ee29c4 1122 linux-meta-ti-omap4_3.5.0.216.17.dsc
+ 3969cb1207e038c6ab4c581f06d900bf4f16fbd5952cdaaa7d71e978b57e761a 3055 linux-meta-ti-omap4_3.5.0.216.17.tar.gz
+
+Package: linux-signed
+Binary: linux-signed-image-3.5.0-21-generic, kernel-signed-image-3.5.0-21-generic-di
+Version: 3.5.0-21.32
+Priority: optional
+Section: utils
+Maintainer: Canonical Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 9), lsb-release, python3, python3-apt, linux-image-3.5.0-21-generic (>= 3.5.0-21.32)
+Architecture: linux-amd64
+Standards-Version: 3.9.3
+Format: 3.0 (native)
+Directory: pool/main/l/linux-signed
+Files:
+ 3e853086d50c271797d272249565ff68 1699 linux-signed_3.5.0-21.32.dsc
+ 1e3f5c12430c5145fd72441f47249836 4293 linux-signed_3.5.0-21.32.tar.gz
+Package-List: 
+ kernel-signed-image-3.5.0-21-generic-di udeb debian-installer extra
+ linux-signed-image-3.5.0-21-generic deb utils optional
+Checksums-Sha1:
+ 6f7de8da17f67391bfc351b029e0966f0455642d 1699 linux-signed_3.5.0-21.32.dsc
+ e675b07680f8f7b3bf84d25b208bf0d704787edf 4293 linux-signed_3.5.0-21.32.tar.gz
+Checksums-Sha256:
+ 81d42d6b2a4559bba5ef66fe1e17a182ad0159c78efe6541fa7797abc7f3d56a 1699 linux-signed_3.5.0-21.32.dsc
+ 54c5022c64ee773c7af6d328bc570fd1e99bdc517d76b551dea240113f2f9c84 4293 linux-signed_3.5.0-21.32.tar.gz
+
+Package: linux-ti-omap4
+Binary: linux-headers-3.5.0-216, linux-ti-omap4-tools-3.5.0-216, linux-image-3.5.0-216-omap4, linux-headers-3.5.0-216-omap4, linux-image-3.5.0-216-omap4-dbgsym
+Version: 3.5.0-216.23
+Priority: optional
+Section: devel
+Maintainer: Ubuntu Kernel Team <kernel-team@lists.ubuntu.com>
+Build-Depends: debhelper (>= 5), cpio, module-init-tools, kernel-wedge (>= 2.24ubuntu1), makedumpfile [amd64 i386], device-tree-compiler [powerpc], libelf-dev, binutils-dev, rsync, libdw-dev, flex, bison
+Build-Depends-Indep: xmlto, docbook-utils, ghostscript, transfig, bzip2, sharutils, asciidoc
+Build-Conflicts: findutils (= 4.4.1-1ubuntu1)
+Architecture: armhf
+Standards-Version: 3.8.4.0
+Format: 1.0
+Directory: pool/main/l/linux-ti-omap4
+Files:
+ f26ccb511a01d894fe1694a40d0f077e 1865 linux-ti-omap4_3.5.0-216.23.dsc
+ 32d76aa3d7412fd63630ede0e30fc7c3 108868819 linux-ti-omap4_3.5.0-216.23.tar.gz
+Vcs-Git: http://kernel.ubuntu.com/git-repos/ubuntu/ubuntu-maverick.git
+Package-List: 
+ linux-headers-3.5.0-216 deb devel optional
+ linux-headers-3.5.0-216-omap4 deb devel optional
+ linux-image-3.5.0-216-omap4 deb kernel optional
+ linux-image-3.5.0-216-omap4-dbgsym deb devel optional
+ linux-ti-omap4-tools-3.5.0-216 deb devel optional
+Checksums-Sha1:
+ 6e7a116f1028a846a999c2062160a0e0e091c39a 1865 linux-ti-omap4_3.5.0-216.23.dsc
+ 07e28b2757e5f4c632b9ce7f35a1a5d3f24f038d 108868819 linux-ti-omap4_3.5.0-216.23.tar.gz
+Checksums-Sha256:
+ 0270617c9d623e53b80420fd237cf17fa56f244e3a3b88f75c6dbe49273c6d50 1865 linux-ti-omap4_3.5.0-216.23.dsc
+ 062be52543a7467e1447099273b14b1364d8977d935f2a717f3d12de6a492366 108868819 linux-ti-omap4_3.5.0-216.23.tar.gz
+
+Package: lynx-cur
+Binary: lynx-cur, lynx-cur-wrapper, lynx
+Version: 2.8.8dev.12-2ubuntu0.1
+Priority: extra
+Section: web
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Atsuhito KOHDA <kohda@debian.org>
+Build-Depends: debhelper (>= 7), quilt, libncursesw5-dev, libbz2-dev, zlib1g-dev, gettext, libgnutls-dev, sharutils, telnet, openssh-client, libbsd-dev, libidn11-dev
+Architecture: any all
+Standards-Version: 3.8.2
+Format: 1.0
+Directory: pool/main/l/lynx-cur
+Files:
+ 884fd757a18bb58b3d8772396babcca4 2045 lynx-cur_2.8.8dev.12-2ubuntu0.1.dsc
+ 8f5881b378d5fba7eeec5db66ccfeb98 3518191 lynx-cur_2.8.8dev.12.orig.tar.gz
+ 66405aedadae422051c3741c960602c3 32230 lynx-cur_2.8.8dev.12-2ubuntu0.1.diff.gz
+Homepage: http://lynx.isc.org/
+Package-List: 
+ lynx deb oldlibs extra
+ lynx-cur deb web extra
+ lynx-cur-wrapper deb oldlibs extra
+Checksums-Sha1:
+ dae72cee122fe06a702353e9da490d9a59500dea 2045 lynx-cur_2.8.8dev.12-2ubuntu0.1.dsc
+ d9cb802a7acf480c75059da8d7bfb1f101183125 3518191 lynx-cur_2.8.8dev.12.orig.tar.gz
+ fc678b1e83703db67a343a0a41cf8962be8aa8ca 32230 lynx-cur_2.8.8dev.12-2ubuntu0.1.diff.gz
+Checksums-Sha256:
+ 01a1a18e6428aef9f0ebea778c1495f2a3acd4e135c022588227f6aa67262720 2045 lynx-cur_2.8.8dev.12-2ubuntu0.1.dsc
+ e64b4017bd038bc70bd09f4abb89447b4ae912491f9581111c02e1c0e3657fea 3518191 lynx-cur_2.8.8dev.12.orig.tar.gz
+ 0c128e9c5acc3a9c294200523b555adb645b0299f7ca958b8788ba365895cf3c 32230 lynx-cur_2.8.8dev.12-2ubuntu0.1.diff.gz
+
+Package: moin
+Binary: python-moinmoin
+Version: 1.9.3-1ubuntu3.1
+Priority: optional
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jonas Smedegaard <dr@jones.dk>
+Build-Depends: devscripts (>= 2.10.7~), dh-buildinfo, python, debhelper (>= 6), unzip, zip, cdbs (>= 0.4.72~)
+Architecture: all
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/m/moin
+Files:
+ b4f909cacf81c229b9689d3187616711 2003 moin_1.9.3-1ubuntu3.1.dsc
+ b22c15446e9fabda180fc88b21635184 30514897 moin_1.9.3.orig.tar.gz
+ 8f7e9ba52615250418cfd87730ad1225 129036 moin_1.9.3-1ubuntu3.1.debian.tar.gz
+Homepage: http://moinmo.in/
+Vcs-Browser: http://git.debian.org/?p=collab-maint/moin.git;a=summary
+Vcs-Git: git://git.debian.org/git/collab-maint/moin.git
+Package-List: 
+ python-moinmoin deb python optional
+Checksums-Sha1:
+ 4ca1af98d789d8f9069a3aabe71264403190e508 2003 moin_1.9.3-1ubuntu3.1.dsc
+ e019c2742f42d4d1f32b0f86f985ce938b821f1b 30514897 moin_1.9.3.orig.tar.gz
+ 7acf3ef6b6f1473b7c2b2ce9eb8623077597d510 129036 moin_1.9.3-1ubuntu3.1.debian.tar.gz
+Checksums-Sha256:
+ 0b5c97fc6d32287b6e432154a950dfd4a1db59a7be90b8ba09111a7b67cdb828 2003 moin_1.9.3-1ubuntu3.1.dsc
+ ec7d5bed863395f2b7b9935fbe5ccc51618b18720db2a91a1515faafa7f7e4f0 30514897 moin_1.9.3.orig.tar.gz
+ a595ba64619b9d2babffea12144becc177a013858d8919c1eee6adae4489f3ae 129036 moin_1.9.3-1ubuntu3.1.debian.tar.gz
+
+Package: munin
+Binary: munin-node, munin-plugins-core, munin-plugins-extra, munin-plugins-java, munin, munin-common, munin-async, munin-doc
+Version: 2.0.2-1ubuntu2.2
+Priority: optional
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Munin Debian Maintainers <packaging@munin-monitoring.org>
+Build-Depends: debhelper (>= 8), quilt
+Build-Depends-Indep: perl, htmldoc, html2text, default-jdk
+Architecture: all
+Standards-Version: 3.9.3
+Format: 1.0
+Directory: pool/main/m/munin
+Files:
+ f6e240cdfd6bc3869fd3b7248bc3aa63 2471 munin_2.0.2-1ubuntu2.2.dsc
+ 5020eaf323f08ec09600a0b07622861a 1305391 munin_2.0.2.orig.tar.gz
+ 321b7f5ed935601e903bbd43a83a347c 56791 munin_2.0.2-1ubuntu2.2.diff.gz
+Uploaders: Holger Levsen <holger@debian.org>, Stig Sandbeck Mathisen <ssm@debian.org>, Tom Feiner <feiner.tom@gmail.com>, Steve Schnepp <steve.schnepp@pwkf.org>
+Homepage: http://munin-monitoring.org
+Vcs-Browser: http://munin-monitoring.org/browser/
+Vcs-Svn: svn://munin-monitoring.org/munin/branches/debian/wheezy
+Package-List: 
+ munin deb net optional
+ munin-async deb net optional
+ munin-common deb net optional
+ munin-doc deb doc optional
+ munin-node deb net optional
+ munin-plugins-core deb net optional
+ munin-plugins-extra deb net optional
+ munin-plugins-java deb net optional
+Checksums-Sha1:
+ 82a452349a77ef5e61520ceb5b8fa7c7a8a26c74 2471 munin_2.0.2-1ubuntu2.2.dsc
+ d242906cd8a9e8b2661676fb8fe2ac547c2a6a23 1305391 munin_2.0.2.orig.tar.gz
+ ddfd66dac9b3c83a00cd45a5534f8430dec3ff30 56791 munin_2.0.2-1ubuntu2.2.diff.gz
+Checksums-Sha256:
+ 1e9856942caeea013977c309298773fc908e30247819e3a284626af8c86a4071 2471 munin_2.0.2-1ubuntu2.2.dsc
+ e8a5266a85cde8b89a97fb7463a56a7ac9c038035b952e36047b7d599bb9181b 1305391 munin_2.0.2.orig.tar.gz
+ f3c55011b7e7ecee29b3de1797d9f823cdc5920951a8ae0a4b67b31b615e3bfa 56791 munin_2.0.2-1ubuntu2.2.diff.gz
+
+Package: mysql-5.5
+Binary: libmysqlclient18, libmysqld-pic, libmysqld-dev, libmysqlclient-dev, mysql-common, mysql-client-core-5.5, mysql-client-5.5, mysql-server-core-5.5, mysql-server-5.5, mysql-server, mysql-client, mysql-testsuite, mysql-testsuite-5.5, mysql-source-5.5
+Version: 5.5.28-0ubuntu0.12.10.2
+Priority: optional
+Section: database
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Build-Depends: libtool (>= 1.4.2-7), procps | hurd, debhelper (>= 8.1.3~), file (>= 3.28), libncurses5-dev (>= 5.0-6), perl (>= 5.6.0), libwrap0-dev (>= 7.6-8.3), zlib1g-dev (>= 1:1.1.3-5), libreadline-dev, psmisc, po-debconf, chrpath, doxygen-latex, ghostscript, gawk, bison, lsb-release, hardening-wrapper, cmake, dh-apparmor, gcc-4.4 [any-i386], g++-4.4 [any-i386], libaio-dev [linux-any]
+Architecture: any all
+Standards-Version: 3.9.2
+Format: 3.0 (quilt)
+Directory: pool/main/m/mysql-5.5
+Files:
+ 9696faff47ec6a5786e74e8a4d9f7d1b 3101 mysql-5.5_5.5.28-0ubuntu0.12.10.2.dsc
+ f99ba775b827f07f23c1e1bf23316a1a 21489961 mysql-5.5_5.5.28.orig.tar.gz
+ 0c211964ea6e379076abf35c5839d437 301301 mysql-5.5_5.5.28-0ubuntu0.12.10.2.debian.tar.gz
+Uploaders: Norbert Tretkowski <norbert@tretkowski.de>, Clint Byrum <clint@ubuntu.com>
+Homepage: http://dev.mysql.com/
+Package-List: 
+ libmysqlclient-dev deb libdevel optional
+ libmysqlclient18 deb libs optional
+ libmysqld-dev deb libdevel optional
+ libmysqld-pic deb libdevel optional
+ mysql-client deb database optional
+ mysql-client-5.5 deb database optional
+ mysql-client-core-5.5 deb database optional
+ mysql-common deb database optional
+ mysql-server deb database optional
+ mysql-server-5.5 deb database optional
+ mysql-server-core-5.5 deb database optional
+ mysql-source-5.5 deb database optional
+ mysql-testsuite deb database optional
+ mysql-testsuite-5.5 deb database optional
+Checksums-Sha1:
+ acc75a2e79dffc623f5766e4e32a567b410f4b34 3101 mysql-5.5_5.5.28-0ubuntu0.12.10.2.dsc
+ 72b5b7424711a3eba130043d2a708cb3ab653ec0 21489961 mysql-5.5_5.5.28.orig.tar.gz
+ 2b9e63d1e10041ab1cf89ed0b9281440ef1def6b 301301 mysql-5.5_5.5.28-0ubuntu0.12.10.2.debian.tar.gz
+Checksums-Sha256:
+ 0587636130f88a1a563aeb2c79a642a40e88cc06b6c02efcc9d09f38b67b571b 3101 mysql-5.5_5.5.28-0ubuntu0.12.10.2.dsc
+ 8e0f0ea9041122dcc6f7fa01f669c5b452418b28388bf04313c13bb9404eaed3 21489961 mysql-5.5_5.5.28.orig.tar.gz
+ be4103cdbb362eab88413e60c50ce339a3a9595c669511e7a71cbb9400137fc0 301301 mysql-5.5_5.5.28-0ubuntu0.12.10.2.debian.tar.gz
+
+Package: nova
+Binary: python-nova, nova-common, nova-compute, nova-compute-lxc, nova-compute-uml, nova-compute-xen, nova-compute-qemu, nova-compute-kvm, nova-compute-xcp, nova-xcp-plugins, nova-xcp-network, nova-cert, nova-scheduler, nova-volume, nova-ajax-console-proxy, nova-novncproxy, nova-xvpvncproxy, nova-api, nova-network, nova-objectstore, nova-console, nova-consoleauth, nova-doc, nova-api-metadata, nova-api-os-compute, nova-api-os-volume, nova-api-ec2
+Version: 2012.2-0ubuntu5.2
+Priority: extra
+Section: net
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Build-Depends: debhelper (>= 7.0.50), python-all (>= 2.6), python-all-dev (>= 2.6.6-3~) | python-support
+Build-Depends-Indep: openssh-client, openssl, python-amqplib, python-boto, python-carrot, python-cheetah, python-cinderclient, python-crypto, python-daemon, python-distutils-extra, python-eventlet, python-feedparser, python-gflags, python-glance, python-glanceclient, python-iso8601, python-kombu, python-lockfile, python-lxml, python-migrate, python-mox, python-netaddr, python-nose, python-novaclient, python-paramiko, python-paste, python-pastedeploy (>= 1.5.0), python-quantumclient, python-routes, python-setuptools, python-setuptools-git, python-simplejson, python-sphinx (>> 1.0), python-sqlalchemy-ext (>= 0.7.8-1) | python-sqlalchemy (<< 0.6.3-2), python-suds, python-tempita, python-unittest2, python-webob, python-xattr
+Build-Conflicts: python-cjson
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/n/nova
+Files:
+ dc7961859c1934a6f65591b6b5105032 4106 nova_2012.2-0ubuntu5.2.dsc
+ 598760ce72f391d3bb6a6ea2c9218fcf 6212454 nova_2012.2.orig.tar.gz
+ e73fcf0190a077e1472f8d2f8857a5d9 46277 nova_2012.2-0ubuntu5.2.debian.tar.gz
+Uploaders: Soren Hansen <soren@ubuntu.com>, Thomas Goirand <zigo@debian.org>
+Homepage: http://launchpad.net/nova
+Vcs-Browser: http://bazaar.launchpad.net/~ubuntu-server-dev/nova/essex/debian/files
+Vcs-Bzr: http://bazaar.launchpad.net/~ubuntu-server-dev/nova/essex
+Package-List: 
+ nova-ajax-console-proxy deb net extra
+ nova-api deb net extra
+ nova-api-ec2 deb net extra
+ nova-api-metadata deb net extra
+ nova-api-os-compute deb net extra
+ nova-api-os-volume deb net extra
+ nova-cert deb net extra
+ nova-common deb net extra
+ nova-compute deb net extra
+ nova-compute-kvm deb net extra
+ nova-compute-lxc deb net extra
+ nova-compute-qemu deb net extra
+ nova-compute-uml deb net extra
+ nova-compute-xcp deb net extra
+ nova-compute-xen deb net extra
+ nova-console deb net extra
+ nova-consoleauth deb net extra
+ nova-doc deb doc extra
+ nova-network deb net extra
+ nova-novncproxy deb net extra
+ nova-objectstore deb net extra
+ nova-scheduler deb net extra
+ nova-volume deb net extra
+ nova-xcp-network deb net extra
+ nova-xcp-plugins deb net extra
+ nova-xvpvncproxy deb net extra
+ python-nova deb python extra
+Checksums-Sha1:
+ da91658ddf4e5625a4ee8e8f117038632c5adf4a 4106 nova_2012.2-0ubuntu5.2.dsc
+ a98fc81d05014286c2ecf08a68eabde6e6e5aa07 6212454 nova_2012.2.orig.tar.gz
+ d0df70e747a370ca55d2276fa3c435c07cbd806a 46277 nova_2012.2-0ubuntu5.2.debian.tar.gz
+Checksums-Sha256:
+ 47ceec4e239d031344b5d66cf8cda70b6c2b04469a55ae81b89bf0865cc895bb 4106 nova_2012.2-0ubuntu5.2.dsc
+ 5c6c71ff78255fa2ca94e6e4ea15522265d1d09ced4063658f0b2992a26ddafe 6212454 nova_2012.2.orig.tar.gz
+ 15ff724b552690de6a0f0874d909e86e4c279a04f5af9c78ee49bc3ed01c2c75 46277 nova_2012.2-0ubuntu5.2.debian.tar.gz
+
+Package: openjdk-7
+Binary: openjdk-7-jdk, openjdk-7-jre-headless, openjdk-7-jre, openjdk-7-jre-lib, openjdk-7-demo, openjdk-7-source, openjdk-7-doc, openjdk-7-dbg, icedtea-7-jre-cacao, icedtea-7-jre-jamvm, openjdk-7-jre-zero
+Version: 7u9-2.3.3-0ubuntu1~12.10.1
+Priority: optional
+Section: java
+Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Build-Depends: debhelper (>= 5), binutils-dev [armel armhf], m4, lsb-release, wget, zip, unzip, sharutils, gawk, cpio, pkg-config, procps, time, wdiff, fastjar (>= 2:0.96-0ubuntu2), autoconf, automake, autotools-dev, ant, ant-optional, libtool, g++-4.7, ecj-gcj [alpha amd64 armel armhf hppa i386 ia64 lpia powerpc powerpcspe ppc64 m68k mips mipsel sh4 sparc sparc64 s390 s390x kfreebsd-i386 kfreebsd-amd64], gcj-jdk [alpha amd64 armel armhf hppa i386 ia64 lpia powerpc powerpcspe ppc64 m68k mips mipsel sh4 sparc sparc64 s390 s390x kfreebsd-i386 kfreebsd-amd64], libxtst-dev, libxi-dev, libxt-dev, libxaw7-dev, libxrender-dev, libcups2-dev, libasound2-dev, liblcms2-dev, libfreetype6-dev (>= 2.2.1), libgtk2.0-dev, libxinerama-dev, xsltproc, librhino-java (>= 1.7R3~), fonts-ipafont-mincho, libffi-dev, zlib1g-dev, libattr1-dev, libpng-dev, libjpeg8-dev, libgif-dev, libpulse-dev (>= 0.9.12), libnss3-dev (>= 3.12.9+ckbi-1.82-0ubuntu4), mauve, xvfb, xauth, xfonts-base, libgl1-mesa-dri, metacity | twm, dbus-x11, x11-xkb-utils
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 1.0
+Directory: pool/main/o/openjdk-7
+Files:
+ 4436181d0bfc040519f4c51299d01990 3573 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.dsc
+ bee17e9299cf70118b5114e0416133f5 73679862 openjdk-7_7u9-2.3.3.orig.tar.gz
+ 2d59e37e3c7c53d38bfed44f54d8a7fc 181558 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.diff.gz
+Uploaders: Torsten Werner <twerner@debian.org>, Matthias Klose <doko@ubuntu.com>, Damien Raude-Morvan <drazzib@debian.org>
+Homepage: http://openjdk.java.net/
+Vcs-Browser: https://code.launchpad.net/~openjdk/openjdk/openjdk7
+Vcs-Bzr: http://bazaar.launchpad.net/~openjdk/openjdk/openjdk7
+Package-List: 
+ icedtea-7-jre-cacao deb java extra
+ icedtea-7-jre-jamvm deb java extra
+ openjdk-7-dbg deb debug extra
+ openjdk-7-demo deb java extra
+ openjdk-7-doc deb doc extra
+ openjdk-7-jdk deb java optional
+ openjdk-7-jre deb java optional
+ openjdk-7-jre-headless deb java optional
+ openjdk-7-jre-lib deb java optional
+ openjdk-7-jre-zero deb java extra
+ openjdk-7-source deb java extra
+Checksums-Sha1:
+ 6f9d26df29871970a1af2e6b155771031571268b 3573 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.dsc
+ c56668be90b999a290b05021cb4e603145776e43 73679862 openjdk-7_7u9-2.3.3.orig.tar.gz
+ e129a8342c581aa02ecc7a00356fa6c39f9cb74a 181558 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.diff.gz
+Checksums-Sha256:
+ 02ab4597a5e6c8d40f2282404ef02c911c8b7653286ec386a696da78d07851bd 3573 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.dsc
+ eaaa645392e1b00c424c2c7fdbce44fcc2027f141ad5f38240d6694bd896c024 73679862 openjdk-7_7u9-2.3.3.orig.tar.gz
+ 2eee0f8021c1f4786446ce4fa4feb015bf2002e9dc044e2c3f89ee6fd12cd82e 181558 openjdk-7_7u9-2.3.3-0ubuntu1~12.10.1.diff.gz
+
+Package: perl
+Binary: perl-base, libcgi-fast-perl, perl-doc, perl-modules, perl-debug, libperl5.14, libperl-dev, perl
+Version: 5.14.2-13ubuntu0.1
+Priority: required
+Section: perl
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Niko Tyni <ntyni@debian.org>
+Build-Depends: file, cpio (>= 2.6-5), libdb-dev, libgdbm-dev, netbase [!hurd-any], gcc (>= 4:4.2), procps [!hurd-any], zlib1g-dev | libz-dev, libbz2-dev, dpkg-dev (>= 1.16.0)
+Build-Conflicts: libfile-sharedir-perl, libterm-readline-gnu-perl (<< 1.17)
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/p/perl
+Files:
+ 98dddfce7bcb6b352253aa9be572f4c7 2136 perl_5.14.2-13ubuntu0.1.dsc
+ 04a4c5d3c1f9f19d77daff8e8cd19a26 13226972 perl_5.14.2.orig.tar.bz2
+ 2a6722abea66e126bd570df2f466f5e5 140535 perl_5.14.2-13ubuntu0.1.debian.tar.gz
+Uploaders: Dominic Hargreaves <dom@earth.li>
+Homepage: http://dev.perl.org/perl5/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=perl/perl.git
+Vcs-Git: git://anonscm.debian.org/perl/perl.git
+Package-List: 
+ libcgi-fast-perl deb perl optional
+ libperl-dev deb libdevel optional
+ libperl5.14 deb libs optional
+ perl deb perl standard
+ perl-base deb perl required
+ perl-debug deb debug extra
+ perl-doc deb doc optional
+ perl-modules deb perl standard
+Checksums-Sha1:
+ 241ec33a64ced23d85fac1e3f451d1ff731b93a9 2136 perl_5.14.2-13ubuntu0.1.dsc
+ e48d11c6fd1ee61985b475d7f261d774296a1367 13226972 perl_5.14.2.orig.tar.bz2
+ e396837f8dbda773f21523cc2b90d3b5c317042a 140535 perl_5.14.2-13ubuntu0.1.debian.tar.gz
+Checksums-Sha256:
+ f32f16202e61606476a05a491e041c4debf0ed7578a83b5092053016603890d4 2136 perl_5.14.2-13ubuntu0.1.dsc
+ c2a2362e8d1fdd2bfbfde801fcd78241f154c164f00fba76065ab8cc5c7b06cd 13226972 perl_5.14.2.orig.tar.bz2
+ 56abc642f6515148dc778b0131db71ba56daddba935b33225226d6b0aaf3760c 140535 perl_5.14.2-13ubuntu0.1.debian.tar.gz
+
+Package: python-django
+Binary: python-django, python-django-doc
+Version: 1.4.1-2ubuntu0.2
+Priority: optional
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Chris Lamb <lamby@debian.org>
+Build-Depends: debhelper (>= 7.0.50), python (>= 2.6.6-3~), python-sphinx (>= 1.0.8), locales (>= 0)
+Build-Depends-Indep: libjs-jquery
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-django
+Files:
+ 536a3aecc75936b21d6485e8bee526bb 2307 python-django_1.4.1-2ubuntu0.2.dsc
+ e345268dacff12876ae4e45de0a61b7d 7656756 python-django_1.4.1.orig.tar.gz
+ ce393725cc6686aa13f8b1fb0914638f 25173 python-django_1.4.1-2ubuntu0.2.debian.tar.gz
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>, Raphaël Hertzog <hertzog@debian.org>
+Homepage: http://www.djangoproject.com/
+Vcs-Browser: http://svn.debian.org/viewsvn/python-modules/packages/python-django/trunk/
+Vcs-Svn: svn://svn.debian.org/python-modules/packages/python-django/trunk/
+Package-List: 
+ python-django deb python optional
+ python-django-doc deb doc optional
+Checksums-Sha1:
+ 23476e63c617c7c113fd12f1e3367de4bb179f72 2307 python-django_1.4.1-2ubuntu0.2.dsc
+ 992e0e9c6c3b9167b29946bfe3956406fc747ef4 7656756 python-django_1.4.1.orig.tar.gz
+ c84d6b42e380176901b67e62d159f623ad9c4259 25173 python-django_1.4.1-2ubuntu0.2.debian.tar.gz
+Checksums-Sha256:
+ c8925ed6dcba0e346a7fd84ed1db2b43271e1f265d9255fcef9b5dd5667ce371 2307 python-django_1.4.1-2ubuntu0.2.dsc
+ 4d8d20eba350d3d29613cc5a6302d5c23730c7f9e150985bc58b3175b755409b 7656756 python-django_1.4.1.orig.tar.gz
+ 899ee90183148a684b6e46a5ffcc5b88ba05946193d247730c66b37f7af8675b 25173 python-django_1.4.1-2ubuntu0.2.debian.tar.gz
+
+Package: python-keyring
+Binary: python-keyring, python3-keyring
+Version: 0.9.2-1ubuntu0.2
+Priority: optional
+Section: python
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Carl Chenet <chaica@debian.org>
+Build-Depends: debhelper (>= 7.0.50~), python-all (>= 2.6.6-3), python-setuptools, python3-all, python3-setuptools, unzip
+Architecture: all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/p/python-keyring
+Files:
+ d84a922cfabd681d96b7135d65253ab6 2261 python-keyring_0.9.2-1ubuntu0.2.dsc
+ 0980b7544cf92ff39bffbf18519672f9 31557 python-keyring_0.9.2.orig.tar.gz
+ 640a86533223adc9bd4b42d7f1a9739e 8383 python-keyring_0.9.2-1ubuntu0.2.debian.tar.gz
+Uploaders: Debian Python Modules Team <python-modules-team@lists.alioth.debian.org>
+Homepage: http://home.python-keyring.org/
+Vcs-Browser: http://svn.debian.org/wsvn/python-modules/packages/python-keyring/trunk/
+Vcs-Svn: svn://svn.debian.org/svn/python-modules/packages/python-keyring/trunk/
+Package-List: 
+ python-keyring deb python optional
+ python3-keyring deb python optional
+Checksums-Sha1:
+ 426d6d7d3233203e107d0a2768a6aa1774b4b124 2261 python-keyring_0.9.2-1ubuntu0.2.dsc
+ 469d5e1507a9d7d9b6ca508552948e9884ee99eb 31557 python-keyring_0.9.2.orig.tar.gz
+ 8b4d99d8c81da1dee0309807663e0371d5be0744 8383 python-keyring_0.9.2-1ubuntu0.2.debian.tar.gz
+Checksums-Sha256:
+ 17fa0684f40ad5cb3ed6d53c3e6df5cbee39e707222ce604ddc140e0f4c3f909 2261 python-keyring_0.9.2-1ubuntu0.2.dsc
+ 58e1cd4f23d8b59c5da8285a89ef9946a5b42cba7b03a117844e5b6be0a538e3 31557 python-keyring_0.9.2.orig.tar.gz
+ 818374597cde394563081a046de5d9a943c081abe5200c1eb99172378a07c76d 8383 python-keyring_0.9.2-1ubuntu0.2.debian.tar.gz
+
+Package: python3.2
+Binary: python3.2, python3.2-minimal, libpython3.2, python3.2-examples, python3.2-dev, idle-python3.2, python3.2-doc, python3.2-dbg, python3.2-udeb
+Version: 3.2.3-6ubuntu3.1
+Priority: important
+Section: python
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Matthias Klose <doko@debian.org>
+Build-Depends: debhelper (>= 5.0.51~), quilt, autoconf, libreadline-dev, libncursesw5-dev (>= 5.3), zlib1g-dev, libdb-dev, libgdbm-dev, tk8.5-dev, blt-dev (>= 2.4z), libssl-dev, sharutils, libbz2-dev, libexpat1-dev, libbluetooth-dev [linux-any], locales [!armel !avr32 !hppa !ia64 !mipsel], libsqlite3-dev, libffi-dev (>= 3.0.5), mime-support, libgpm2 [linux-any], netbase, lsb-release, bzip2, gdb, python, xvfb, xauth
+Build-Depends-Indep: python-sphinx
+Build-Conflicts: autoconf2.13
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 1.0
+Directory: pool/main/p/python3.2
+Files:
+ a0f60fa0bcf901e189922704676e1c2e 2784 python3.2_3.2.3-6ubuntu3.1.dsc
+ f62e7515e445b72126a50a9aa4283511 12854910 python3.2_3.2.3.orig.tar.gz
+ 915f199841b032b8a2543412147f69a7 663113 python3.2_3.2.3-6ubuntu3.1.diff.gz
+Vcs-Browser: https://code.launchpad.net/~doko/python/pkg3.2-debian
+Vcs-Bzr: http://bazaar.launchpad.net/~doko/python/pkg3.2-debian
+Package-List: 
+ idle-python3.2 deb python optional
+ libpython3.2 deb libs optional
+ python3.2 deb python optional
+ python3.2-dbg deb debug extra
+ python3.2-dev deb python optional
+ python3.2-doc deb doc optional
+ python3.2-examples deb python optional
+ python3.2-minimal deb python optional
+ python3.2-udeb udeb debian-installer optional
+Checksums-Sha1:
+ 204e467f3ecd30b0ceb4265460c5ccab371f59ae 2784 python3.2_3.2.3-6ubuntu3.1.dsc
+ c68c6812e534f3e0171d929fc22558b292853b76 12854910 python3.2_3.2.3.orig.tar.gz
+ f9d342dc5d1be7bc33e24f84120179466ebb393f 663113 python3.2_3.2.3-6ubuntu3.1.diff.gz
+Checksums-Sha256:
+ c896b4c65645cde8ddcddc474c1dead5cba543767db325625460ae1f991c9eff 2784 python3.2_3.2.3-6ubuntu3.1.dsc
+ 33b0b651d3dbbc9cac02f2941db4996c8e96dfa1ead6ad21ab3706578746a15e 12854910 python3.2_3.2.3.orig.tar.gz
+ 435c7a36724521f22a12e53c9e079b8a33311f74c57e03f50bfd4c83bd9967e3 663113 python3.2_3.2.3-6ubuntu3.1.diff.gz
+
+Package: remote-login-service
+Binary: remote-login-service
+Version: 1.0.0-0ubuntu1.1
+Priority: extra
+Section: misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: dbus-test-runner, debhelper (>= 9), intltool (>= 0.35.0), libdbus-1-dev, libdbustest1-dev, libgcrypt11-dev, libglib2.0-dev (>= 2.29.19), libjson-glib-dev, libnm-glib-dev, libsoup2.4-dev, python3
+Architecture: any
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/r/remote-login-service
+Files:
+ 218dfb9f7e4c5796cfc3dc666c5b1e45 2134 remote-login-service_1.0.0-0ubuntu1.1.dsc
+ 0a9cb9ddf3a8b376245f08ea44a20ccf 395314 remote-login-service_1.0.0.orig.tar.gz
+ a7928cfb629b70e55cdf1b6e42d4ad5a 3352 remote-login-service_1.0.0-0ubuntu1.1.debian.tar.gz
+Homepage: http://launchpad.net/remote-login-service/
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/remote-login-service/trunk
+Package-List: 
+ remote-login-service deb misc extra
+Checksums-Sha1:
+ e345cdb2892cd84003a3b20f7a8c89e350dd86f0 2134 remote-login-service_1.0.0-0ubuntu1.1.dsc
+ 95ba57596d21bc3ea99a8597a158371e7b8d7273 395314 remote-login-service_1.0.0.orig.tar.gz
+ 6d94a02eef31e0e0407727d79d9c02f2e293bd93 3352 remote-login-service_1.0.0-0ubuntu1.1.debian.tar.gz
+Checksums-Sha256:
+ 67ce4309e64c50eafae4336e644c7faef2bb9ec1be07cc604ac53f6137f17ab9 2134 remote-login-service_1.0.0-0ubuntu1.1.dsc
+ 4a5369fee168f264dc978fb63f0b82b9b6d83cc5859b32b74af5040ccce1c3bb 395314 remote-login-service_1.0.0.orig.tar.gz
+ bd593e7bb72a460ce70e7b4ca9ea8f184138d55e2e03395843418b32f33c0e24 3352 remote-login-service_1.0.0-0ubuntu1.1.debian.tar.gz
+
+Package: ruby1.8
+Binary: ruby1.8, libruby1.8, libruby1.8-dbg, ruby1.8-dev, libtcltk-ruby1.8, ruby1.8-examples, ri1.8, ruby1.8-full
+Version: 1.8.7.358-4ubuntu0.1
+Priority: optional
+Section: interpreters
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Build-Depends: cdbs (>= 0.4.106), debhelper (>= 5), autotools-dev, autoconf, m4, quilt (>= 0.40), patch, bison, binutils (>= 2.14.90.0.7), libgdbm-dev, libncurses5-dev, libreadline-gplv2-dev, tcl-dev, tk-dev, zlib1g-dev, libssl-dev (>= 0.9.6b), file, coreutils, gcc-4.6
+Architecture: any all
+Standards-Version: 3.9.2
+Format: 3.0 (quilt)
+Directory: pool/main/r/ruby1.8
+Files:
+ 8daba2ede64ae710598bafc1070e5046 2643 ruby1.8_1.8.7.358-4ubuntu0.1.dsc
+ 26bd55358847459a7752acdbd33a535f 4895206 ruby1.8_1.8.7.358.orig.tar.gz
+ aa3d6bb9ee6ebc3372957dc673bba123 58868 ruby1.8_1.8.7.358-4ubuntu0.1.debian.tar.gz
+Uploaders: Daigo Moriwaki <daigo@debian.org>, Lucas Nussbaum <lucas@debian.org>, Antonio Terceiro <terceiro@debian.org>
+Homepage: http://www.ruby-lang.org/
+Vcs-Browser: http://git.debian.org/?p=collab-maint/ruby1.8.git;a=summary
+Vcs-Git: git://git.debian.org/collab-maint/ruby1.8.git
+Package-List: 
+ libruby1.8 deb libs optional
+ libruby1.8-dbg deb debug extra
+ libtcltk-ruby1.8 deb ruby optional
+ ri1.8 deb ruby optional
+ ruby1.8 deb ruby optional
+ ruby1.8-dev deb ruby optional
+ ruby1.8-examples deb ruby optional
+ ruby1.8-full deb ruby optional
+Checksums-Sha1:
+ 9de704d7c71b03b5841ba10db7d78e6541e5bbcc 2643 ruby1.8_1.8.7.358-4ubuntu0.1.dsc
+ a20a66ec6d7d7ce13b621941a0e0c8c5240b584a 4895206 ruby1.8_1.8.7.358.orig.tar.gz
+ 798c5142157ef39a2f98268c70a43e7fa6ed3c9c 58868 ruby1.8_1.8.7.358-4ubuntu0.1.debian.tar.gz
+Checksums-Sha256:
+ c301c4f82663b497575485aa0c61f01a60cf4870227d242c3c4d69114badac07 2643 ruby1.8_1.8.7.358-4ubuntu0.1.dsc
+ 9e0856d58830e08f1e38233947d859898ae09d4780cb1a502108e41308de33cb 4895206 ruby1.8_1.8.7.358.orig.tar.gz
+ 63e8cea22da6b25131f287d0d422324613d87bfa84e1e1a68eff7c3f2077da00 58868 ruby1.8_1.8.7.358-4ubuntu0.1.debian.tar.gz
+
+Package: ruby1.9.1
+Binary: ruby1.9.1, libruby1.9.1, libruby1.9.1-dbg, ruby1.9.1-dev, libtcltk-ruby1.9.1, ruby1.9.1-examples, ri1.9.1, ruby1.9.1-full, ruby1.9.3
+Version: 1.9.3.194-1ubuntu1.2
+Priority: optional
+Section: ruby
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Build-Depends: debhelper (>= 9.0), cdbs (>= 0.4.106), quilt, patch, autoconf, m4, bison, libgdbm-dev, libncursesw5-dev, libncurses5-dev, libreadline6-dev, tcl-dev, tk-dev, zlib1g-dev, libssl-dev, procps, file, libffi-dev, ruby1.8, libyaml-dev, openssl, chrpath, coreutils (>= 7.5-1)
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/r/ruby1.9.1
+Files:
+ 6dcf9ee0373b98f3d58b22105227f71d 2749 ruby1.9.1_1.9.3.194-1ubuntu1.2.dsc
+ bc0c715c69da4d1d8bd57069c19f6c0e 12432239 ruby1.9.1_1.9.3.194.orig.tar.gz
+ 1d2159ff283c662f46367700616a1c67 52886 ruby1.9.1_1.9.3.194-1ubuntu1.2.debian.tar.gz
+Uploaders: Daigo Moriwaki <daigo@debian.org>, Lucas Nussbaum <lucas@debian.org>, Antonio Terceiro <terceiro@debian.org>
+Homepage: http://www.ruby-lang.org/
+Vcs-Browser: http://git.debian.org/?p=collab-maint/ruby1.9.1.git;a=summary
+Vcs-Git: git://git.debian.org/collab-maint/ruby1.9.1.git
+Package-List: 
+ libruby1.9.1 deb libs optional
+ libruby1.9.1-dbg deb debug extra
+ libtcltk-ruby1.9.1 deb ruby optional
+ ri1.9.1 deb ruby optional
+ ruby1.9.1 deb ruby optional
+ ruby1.9.1-dev deb ruby optional
+ ruby1.9.1-examples deb ruby optional
+ ruby1.9.1-full deb ruby optional
+ ruby1.9.3 deb ruby optional
+Checksums-Sha1:
+ 992c5ba543f8020473a21173aa5a79ba87c1cf16 2749 ruby1.9.1_1.9.3.194-1ubuntu1.2.dsc
+ 31cf6bd981e4c929e5dc3bbdb341833eab1bd9f2 12432239 ruby1.9.1_1.9.3.194.orig.tar.gz
+ d3d6a4986175c986a2d9a6944833fd0d402caf4f 52886 ruby1.9.1_1.9.3.194-1ubuntu1.2.debian.tar.gz
+Checksums-Sha256:
+ 56d2afe323e64166daf145c7e20617f33bd640a5d6c03c129eac98274465a3df 2749 ruby1.9.1_1.9.3.194-1ubuntu1.2.dsc
+ 46e2fa80be7efed51bd9cdc529d1fe22ebc7567ee0f91db4ab855438cf4bd8bb 12432239 ruby1.9.1_1.9.3.194.orig.tar.gz
+ c0dab658725f646fccf61548b3169e1ee2ef513d9dab9b951063828a28feb12a 52886 ruby1.9.1_1.9.3.194-1ubuntu1.2.debian.tar.gz
+
+Package: thunderbird
+Binary: thunderbird, thunderbird-gnome-support, thunderbird-dev, thunderbird-dbg, thunderbird-mozsymbols, thunderbird-globalmenu, thunderbird-gnome-support-dbg, thunderbird-locale-bn-bd, thunderbird-locale-en-gb, thunderbird-locale-en-us, thunderbird-locale-es-ar, thunderbird-locale-es-es, thunderbird-locale-fy-nl, thunderbird-locale-ga-ie, thunderbird-locale-nb-no, thunderbird-locale-nn-no, thunderbird-locale-pa-in, thunderbird-locale-pt-br, thunderbird-locale-pt-pt, thunderbird-locale-sv-se, thunderbird-locale-ta-lk, thunderbird-locale-zh-cn, thunderbird-locale-zh-tw, thunderbird-locale-af, thunderbird-locale-ar, thunderbird-locale-ast, thunderbird-locale-be, thunderbird-locale-bg, thunderbird-locale-bn, thunderbird-locale-br, thunderbird-locale-ca, thunderbird-locale-cs, thunderbird-locale-da, thunderbird-locale-de, thunderbird-locale-el, thunderbird-locale-en, thunderbird-locale-es, thunderbird-locale-et, thunderbird-locale-eu, thunderbird-locale-fi,
+ thunderbird-locale-fr, thunderbird-locale-fy, thunderbird-locale-ga, thunderbird-locale-gd, thunderbird-locale-gl, thunderbird-locale-he, thunderbird-locale-hr, thunderbird-locale-hu, thunderbird-locale-hy, thunderbird-locale-id, thunderbird-locale-is, thunderbird-locale-it, thunderbird-locale-ja, thunderbird-locale-ka, thunderbird-locale-ko, thunderbird-locale-lt, thunderbird-locale-mk, thunderbird-locale-nb, thunderbird-locale-nl, thunderbird-locale-nn, thunderbird-locale-pa, thunderbird-locale-pl, thunderbird-locale-pt, thunderbird-locale-rm, thunderbird-locale-ro, thunderbird-locale-ru, thunderbird-locale-si, thunderbird-locale-sk, thunderbird-locale-sl, thunderbird-locale-sq, thunderbird-locale-sr, thunderbird-locale-sv, thunderbird-locale-ta, thunderbird-locale-tr, thunderbird-locale-uk, thunderbird-locale-vi, thunderbird-locale-zh-hans,
+ thunderbird-locale-zh-hant
+Version: 17.0.2+build1-0ubuntu0.12.10.1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: cdbs (>= 0.4.27), debhelper (>= 7), m4, autotools-dev, autoconf2.13, quilt, zip, libx11-dev, libxt-dev, libxext-dev, libgtk2.0-dev (>= 2.14), libglib2.0-dev (>= 2.18), libpango1.0-dev (>= 1.14.0), libfontconfig1-dev, libfreetype6-dev (>= 2.0.1), libgconf2-dev (>= 1.2.1), libgnomeui-dev (>= 2.2.0), libstartup-notification0-dev, libasound2-dev, libcurl4-openssl-dev, libdbus-glib-1-dev (>= 0.60), lsb-release, libiw-dev, mesa-common-dev, libnotify-dev, libxrender-dev, yasm-1 (>= 1.1) | yasm (>= 1.1), imagemagick, libdbusmenu-gtk-dev, docbook-to-man, libkrb5-dev, unzip
+Architecture: any all
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/t/thunderbird
+Files:
+ 035b472f262c23b2506cdcc007c8db25 7109 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.dsc
+ 23262f909428dae4c0ebe2f33a248144 122193563 thunderbird_17.0.2+build1.orig.tar.bz2
+ 7054b916faefec179f9e253b600d015a 308762 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.debian.tar.gz
+Vcs-Bzr: https://code.launchpad.net/~mozillateam/thunderbird/thunderbird.head
+Package-List: 
+ thunderbird deb mail optional
+ thunderbird-dbg deb debug extra
+ thunderbird-dev deb devel optional
+ thunderbird-globalmenu deb web optional
+ thunderbird-gnome-support deb gnome optional
+ thunderbird-gnome-support-dbg deb web optional
+ thunderbird-locale-af deb web optional
+ thunderbird-locale-ar deb web optional
+ thunderbird-locale-ast deb web optional
+ thunderbird-locale-be deb web optional
+ thunderbird-locale-bg deb web optional
+ thunderbird-locale-bn deb web optional
+ thunderbird-locale-bn-bd deb web optional
+ thunderbird-locale-br deb web optional
+ thunderbird-locale-ca deb web optional
+ thunderbird-locale-cs deb web optional
+ thunderbird-locale-da deb web optional
+ thunderbird-locale-de deb web optional
+ thunderbird-locale-el deb web optional
+ thunderbird-locale-en deb web optional
+ thunderbird-locale-en-gb deb web optional
+ thunderbird-locale-en-us deb web optional
+ thunderbird-locale-es deb web optional
+ thunderbird-locale-es-ar deb web optional
+ thunderbird-locale-es-es deb web optional
+ thunderbird-locale-et deb web optional
+ thunderbird-locale-eu deb web optional
+ thunderbird-locale-fi deb web optional
+ thunderbird-locale-fr deb web optional
+ thunderbird-locale-fy deb web optional
+ thunderbird-locale-fy-nl deb web optional
+ thunderbird-locale-ga deb web optional
+ thunderbird-locale-ga-ie deb web optional
+ thunderbird-locale-gd deb web optional
+ thunderbird-locale-gl deb web optional
+ thunderbird-locale-he deb web optional
+ thunderbird-locale-hr deb web optional
+ thunderbird-locale-hu deb web optional
+ thunderbird-locale-hy deb web optional
+ thunderbird-locale-id deb web optional
+ thunderbird-locale-is deb web optional
+ thunderbird-locale-it deb web optional
+ thunderbird-locale-ja deb web optional
+ thunderbird-locale-ka deb web optional
+ thunderbird-locale-ko deb web optional
+ thunderbird-locale-lt deb web optional
+ thunderbird-locale-mk deb web optional
+ thunderbird-locale-nb deb web optional
+ thunderbird-locale-nb-no deb web optional
+ thunderbird-locale-nl deb web optional
+ thunderbird-locale-nn deb web optional
+ thunderbird-locale-nn-no deb web optional
+ thunderbird-locale-pa deb web optional
+ thunderbird-locale-pa-in deb web optional
+ thunderbird-locale-pl deb web optional
+ thunderbird-locale-pt deb web optional
+ thunderbird-locale-pt-br deb web optional
+ thunderbird-locale-pt-pt deb web optional
+ thunderbird-locale-rm deb web optional
+ thunderbird-locale-ro deb web optional
+ thunderbird-locale-ru deb web optional
+ thunderbird-locale-si deb web optional
+ thunderbird-locale-sk deb web optional
+ thunderbird-locale-sl deb web optional
+ thunderbird-locale-sq deb web optional
+ thunderbird-locale-sr deb web optional
+ thunderbird-locale-sv deb web optional
+ thunderbird-locale-sv-se deb web optional
+ thunderbird-locale-ta deb web optional
+ thunderbird-locale-ta-lk deb web optional
+ thunderbird-locale-tr deb web optional
+ thunderbird-locale-uk deb web optional
+ thunderbird-locale-vi deb web optional
+ thunderbird-locale-zh-cn deb web optional
+ thunderbird-locale-zh-hans deb web optional
+ thunderbird-locale-zh-hant deb web optional
+ thunderbird-locale-zh-tw deb web optional
+ thunderbird-mozsymbols deb debug extra
+Checksums-Sha1:
+ 1ef02c6de6440e96f8f4fb322cb66dedb3f08d78 7109 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.dsc
+ 40f0a0e178af224bc35614e8f2c6bc650feeda3e 122193563 thunderbird_17.0.2+build1.orig.tar.bz2
+ 16809ba006877063c947a1cdb066a09b3bd82d33 308762 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.debian.tar.gz
+Checksums-Sha256:
+ 51abe92deb81872be3f95942d3c84657c17cd6dec05dc1284cbafa352f80a6a8 7109 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.dsc
+ f19cf8cf535eca3569c8b52e7db15d9ce89b35c9fefb14248c936ef0a73a1976 122193563 thunderbird_17.0.2+build1.orig.tar.bz2
+ 1402f55581ce540debdf4135378f1fc259dd7c1d0d4670d65c75bce01f855710 308762 thunderbird_17.0.2+build1-0ubuntu0.12.10.1.debian.tar.gz
+
+Package: tiff
+Binary: libtiff5, libtiffxx5, libtiff5-dev, libtiff5-alt-dev, libtiff-tools, libtiff-opengl, libtiff-doc
+Version: 4.0.2-1ubuntu2.1
+Priority: optional
+Section: libs
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jay Berkenbilt <qjb@debian.org>
+Build-Depends: cdbs (>= 0.4.106~), debhelper (>> 9), dpkg-dev (>= 1.16.1~), zlib1g-dev, libjpeg-dev, libxmu-dev, libglu1-mesa-dev, freeglut3-dev, libxi-dev, libjbig-dev, liblzma-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/t/tiff
+Files:
+ c49a7402ec952cd1d891153a07232ddb 2241 tiff_4.0.2-1ubuntu2.1.dsc
+ 04a08fa1e07e696e820a0c3f32465a13 2022814 tiff_4.0.2.orig.tar.gz
+ 43abae7ef74380d568c9911d07c92aee 15985 tiff_4.0.2-1ubuntu2.1.debian.tar.gz
+Homepage: http://libtiff.maptools.org
+Package-List: 
+ libtiff-doc deb doc optional
+ libtiff-opengl deb graphics optional
+ libtiff-tools deb graphics optional
+ libtiff5 deb libs optional
+ libtiff5-alt-dev deb libdevel optional
+ libtiff5-dev deb libdevel optional
+ libtiffxx5 deb libs optional
+Checksums-Sha1:
+ 7a017b0e0ab8b725f2f578baf40ffd521e7f9369 2241 tiff_4.0.2-1ubuntu2.1.dsc
+ d84b7b33a6cfb3d15ca386c8c16b05047f8b5352 2022814 tiff_4.0.2.orig.tar.gz
+ 175f148b1ad66a644fa80eb0da14cb9a499c51d9 15985 tiff_4.0.2-1ubuntu2.1.debian.tar.gz
+Checksums-Sha256:
+ 763c8425ebcd6aba32d9b8e713f9317606119eb700659bba85354f0770f0a5b4 2241 tiff_4.0.2-1ubuntu2.1.dsc
+ aa29f1f5bfe3f443c3eb4dac472ebde15adc8ff0464b83376f35e3b2fef935da 2022814 tiff_4.0.2.orig.tar.gz
+ 1687de4c22868f5c85890da2a0aec8e48742068d549da3eff698f5cd74a5b799 15985 tiff_4.0.2-1ubuntu2.1.debian.tar.gz
+
+Package: ubufox
+Binary: xul-ext-ubufox, ubufox
+Version: 2.6-0ubuntu0.12.10.1
+Priority: optional
+Section: web
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Build-Depends: debhelper (>= 7), cdbs, mozilla-devscripts (>= 0.22~)
+Architecture: all
+Standards-Version: 3.9.1
+Format: 3.0 (quilt)
+Directory: pool/main/u/ubufox
+Files:
+ bb1d1b216b9a299a18445e7555285645 1487 ubufox_2.6-0ubuntu0.12.10.1.dsc
+ 34e9046ee6f2785b159535e0b177d011 92160 ubufox_2.6.orig.tar.gz
+ 4c0fe9efc7123ba51f1e41791ecc68ee 12702 ubufox_2.6-0ubuntu0.12.10.1.debian.tar.gz
+Homepage: https://launchpad.net/ubufox
+Package-List: 
+ ubufox deb web optional
+ xul-ext-ubufox deb web optional
+Checksums-Sha1:
+ d125d400eb45e1b1c8106b506105b8f951182707 1487 ubufox_2.6-0ubuntu0.12.10.1.dsc
+ 81515a7f5fca1380e9b83e52c01314f0a92f7105 92160 ubufox_2.6.orig.tar.gz
+ c66f6991490a8be6cda7570f020acbff6819ad5a 12702 ubufox_2.6-0ubuntu0.12.10.1.debian.tar.gz
+Checksums-Sha256:
+ b76bb045ec8656b4568ec83fb8d660991d46f6545d238c04fa1e6f9afd79c7f3 1487 ubufox_2.6-0ubuntu0.12.10.1.dsc
+ 2bbfadb162ab687c6ddc62697c51f6835211dbbb6a97cdeac7c5c84d9eed6957 92160 ubufox_2.6.orig.tar.gz
+ cd4c5c88aa12c253c985312a6fd5c4754d670edc8b90e72bcdd7a32d0e7f1c73 12702 ubufox_2.6-0ubuntu0.12.10.1.debian.tar.gz
+
+Package: unity-firefox-extension
+Binary: xul-ext-unity, libufe-xidgetter0
+Version: 2.4.1-0ubuntu1.2
+Priority: optional
+Section: web
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: debhelper (>= 8.0.0), mozilla-devscripts, zip, gir1.2-unity-webapps-0.2 (>= 1.8.0+r699), libunity-webapps-dev, xsltproc, dh-autoreconf, dh-translations, libgtk2.0-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/main/u/unity-firefox-extension
+Files:
+ 7d6e7b1de7b8ad8130091964b2119987 2202 unity-firefox-extension_2.4.1-0ubuntu1.2.dsc
+ 429f00dd1fd5d65f4cd46def596a32c5 74759 unity-firefox-extension_2.4.1.orig.tar.gz
+ 2fe15afc9b4e42935a66cd33b213eb5f 5729 unity-firefox-extension_2.4.1-0ubuntu1.2.debian.tar.gz
+Homepage: https://launchpad.net/unity-firefox-extension
+Vcs-Bzr: https://code.launchpad.net/~ubuntu-desktop/unity-firefox-extension/ubuntu
+Package-List: 
+ libufe-xidgetter0 deb libs optional
+ xul-ext-unity deb web optional
+Checksums-Sha1:
+ 74b8b21f46c92b1d3b144269404a169311519c4c 2202 unity-firefox-extension_2.4.1-0ubuntu1.2.dsc
+ 5220ad9a284822bf2d2648411efaeb1adaf91b57 74759 unity-firefox-extension_2.4.1.orig.tar.gz
+ e8b5f94d30de3b26213c6379825c09463d827b1f 5729 unity-firefox-extension_2.4.1-0ubuntu1.2.debian.tar.gz
+Checksums-Sha256:
+ b74cb9004ea12f8fa4ded122433601d9c7042cf75378f8ae2b0a05b5d3cdedc2 2202 unity-firefox-extension_2.4.1-0ubuntu1.2.dsc
+ 1797412af4844de3e4146c5214dc37e7728ea933b752cf1008cd6385827be9bc 74759 unity-firefox-extension_2.4.1.orig.tar.gz
+ cc92bc98873b52b356d997e6e79ef31cdfcf79fff57a59362b6ce5b769e7ccd8 5729 unity-firefox-extension_2.4.1-0ubuntu1.2.debian.tar.gz
+Testsuite: autopkgtest
+
+Package: xen
+Binary: xen-docs-4.1, libxen-4.1, libxenstore3.0, libxen-dev, xenstore-utils, libxen-ocaml, libxen-ocaml-dev, xen-utils-common, xen-utils-4.1, xen-hypervisor-4.1-amd64, xen-system-amd64, xen-hypervisor-4.1-i386, xen-system-i386
+Version: 4.1.3-3ubuntu1.2
+Priority: optional
+Section: kernel
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Build-Depends: debhelper (>> 7), dpkg-dev (>= 1.16.0~), lsb-release, python-dev, bcc, gcc-multilib, e2fslibs-dev, iasl, ipxe, libaio-dev, libgnutls-dev, liblzma-dev, libncurses5-dev, libpci-dev, pkg-config, uuid-dev, zlib1g-dev, ocaml-nox, dh-ocaml, ocaml-findlib
+Build-Depends-Indep: graphviz, ghostscript, texlive-fonts-recommended, texlive-font-utils, texlive-latex-recommended
+Architecture: all amd64 i386
+Standards-Version: 3.9.2
+Format: 3.0 (quilt)
+Directory: pool/main/x/xen
+Files:
+ 02dbe1510047ff9c022324953d600795 3139 xen_4.1.3-3ubuntu1.2.dsc
+ 36d5351afd2dc7abb43045f60d2aac7b 3152416 xen_4.1.3.orig-qemu.tar.gz
+ 38525db033a944ccd424c54f124e9a60 6612060 xen_4.1.3.orig.tar.gz
+ 28900625b2e4ece98a424ccadbeaf02a 138102 xen_4.1.3-3ubuntu1.2.debian.tar.gz
+Uploaders: Guido Trotter <ultrotter@debian.org>, Bastian Blank <waldi@debian.org>
+Package-List: 
+ libxen-4.1 deb libs optional
+ libxen-dev deb libdevel optional
+ libxen-ocaml deb ocaml optional
+ libxen-ocaml-dev deb ocaml optional
+ libxenstore3.0 deb libs optional
+ xen-docs-4.1 deb doc optional
+ xen-hypervisor-4.1-amd64 deb kernel optional
+ xen-hypervisor-4.1-i386 deb kernel optional
+ xen-system-amd64 deb kernel optional
+ xen-system-i386 deb kernel optional
+ xen-utils-4.1 deb kernel optional
+ xen-utils-common deb kernel optional
+ xenstore-utils deb admin optional
+Checksums-Sha1:
+ 0afa42995191b6f880a6d1cdedcbfe0e2e843867 3139 xen_4.1.3-3ubuntu1.2.dsc
+ f9845688d47233a103917d59d50db212018f76fe 3152416 xen_4.1.3.orig-qemu.tar.gz
+ a2a707a70d70a7a22e42a2ad069043b90136d601 6612060 xen_4.1.3.orig.tar.gz
+ 59b5cf401d3278f44cc80a7e0385c2b75dc89f5d 138102 xen_4.1.3-3ubuntu1.2.debian.tar.gz
+Checksums-Sha256:
+ dcd8f83ccaa0559afc066096b29aa2514fc2a6d048d446a1cd0c3cd1c2af3455 3139 xen_4.1.3-3ubuntu1.2.dsc
+ ea6f65c64e8163f030e3e800e28faf074a74d8039a68db9b34f2b176933b515e 3152416 xen_4.1.3.orig-qemu.tar.gz
+ 620794ee60d22deac19e54923fddf0925d3f4f48f9a117feed8ca859fb836172 6612060 xen_4.1.3.orig.tar.gz
+ 0d5df450cf8577fae34faaaa422eded8f0566a100772a2634367fba0b2b7521e 138102 xen_4.1.3-3ubuntu1.2.debian.tar.gz
+Python-Version: current
+

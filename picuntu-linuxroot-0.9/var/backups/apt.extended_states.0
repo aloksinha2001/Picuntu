@@ -1,0 +1,356 @@
+Package: libpipeline1
+Architecture: armhf
+Auto-Installed: 1
+
+Package: bsdmainutils
+Architecture: armhf
+Auto-Installed: 1
+
+Package: liblxc0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libapparmor1
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libcap2
+Architecture: armhf
+Auto-Installed: 0
+
+Package: bridge-utils
+Architecture: armhf
+Auto-Installed: 0
+
+Package: distro-info
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libcap2-bin
+Architecture: armhf
+Auto-Installed: 0
+
+Package: distro-info-data
+Architecture: armhf
+Auto-Installed: 0
+
+Package: rsync
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libpam-cap
+Architecture: armhf
+Auto-Installed: 0
+
+Package: cgroup-lite
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libglapi-mesa
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libpeas-common
+Architecture: armhf
+Auto-Installed: 0
+
+Package: plymouth-theme-ubuntu-text
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libpth20
+Architecture: armhf
+Auto-Installed: 0
+
+Package: bind9-host
+Architecture: armhf
+Auto-Installed: 1
+
+Package: avahi-daemon
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libdbusmenu-glib4
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libavahi-common-data
+Architecture: armhf
+Auto-Installed: 1
+
+Package: install-info
+Architecture: armhf
+Auto-Installed: 1
+
+Package: liblircclient0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: dvd+rw-tools
+Architecture: armhf
+Auto-Installed: 0
+
+Package: protobuf-compiler
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libieee1284-3
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libpcap0.8
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libdns81
+Architecture: armhf
+Auto-Installed: 1
+
+Package: dosfstools
+Architecture: armhf
+Auto-Installed: 1
+
+Package: gvfs-bin
+Architecture: armhf
+Auto-Installed: 0
+
+Package: gvfs-common
+Architecture: armhf
+Auto-Installed: 1
+
+Package: psmisc
+Architecture: armhf
+Auto-Installed: 1
+
+Package: rhythmbox-data
+Architecture: armhf
+Auto-Installed: 0
+
+Package: avahi-utils
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libisccc80
+Architecture: armhf
+Auto-Installed: 1
+
+Package: geoip-database
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libnss-mdns
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libdatrie1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libgles2-mesa
+Architecture: armhf
+Auto-Installed: 0
+
+Package: powermgmt-base
+Architecture: armhf
+Auto-Installed: 1
+
+Package: liblwres80
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libprotobuf7
+Architecture: armhf
+Auto-Installed: 1
+
+Package: dictionaries-common
+Architecture: armhf
+Auto-Installed: 1
+
+Package: alsa-utils
+Architecture: armhf
+Auto-Installed: 1
+
+Package: dconf-service
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libgmime-2.6-0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: usb-modeswitch-data
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libbind9-80
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libsamplerate0
+Architecture: armhf
+Auto-Installed: 1
+
+Package: growisofs
+Architecture: armhf
+Auto-Installed: 1
+
+Package: media-player-info
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libglib2.0-data
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libasound2
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libgpg-error0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: ppp
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libmessaging-menu0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libsync-menu1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: usb-modeswitch
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libasyncns0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libdconf1
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libgeoip1
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libdaemon0
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libwnck-3-common
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libisccfg82
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libio-pty-perl
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libavahi-client3
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libclone-perl
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libgpgme11
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libsgutils2-2
+Architecture: armhf
+Auto-Installed: 0
+
+Package: dconf-gsettings-backend
+Architecture: armhf
+Auto-Installed: 1
+
+Package: linux-sound-base
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libjte1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: miscfiles
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libnm-gtk-common
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libopenvg1-mesa
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libisc83
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libavahi-common3
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libzeitgeist-1.0-1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libprotoc7
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libnatpmp1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libavahi-core7
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libopenobex1
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libgdata-common
+Architecture: armhf
+Auto-Installed: 0
+
+Package: libpci3
+Architecture: armhf
+Auto-Installed: 1
+
+Package: pciutils
+Architecture: armhf
+Auto-Installed: 1
+
+Package: ncurses-term
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libidn11
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libgudev-1.0-0
+Architecture: armhf
+Auto-Installed: 1
+
+Package: libsqlite3-0
+Architecture: armhf
+Auto-Installed: 1
+
+Package: python2.7
+Architecture: armhf
+Auto-Installed: 1
+

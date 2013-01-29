@@ -1,0 +1,37 @@
+#!/bin/sh
+
+set -e
+
+rm_if_matches_md5sum() {
+    F="$1"
+    M="$2"
+    if [ -e "$F" ]; then
+        md5=$(md5sum "$F" | cut -f 1 -d\ )
+        if [ "$md5" = "$M" ]; then
+	    rm "$F"
+        fi
+    fi
+}
+
+
+case "$1" in
+  install|upgrade)
+      # older versions did not ship 00-header/10-help-text as conffiles but
+      # newer do, because the content changed this triggers a conffile prompt
+      # now. by removing the file (if unmodified) we avoid this prompt and
+      # dpkg will re-create it
+      if dpkg --compare-versions "$2" le-nl 5.0.0ubuntu24
+      then
+          rm_if_matches_md5sum /etc/update-motd.d/00-header 656757ce8765f38ff18b4d3fe813e4ad
+          rm_if_matches_md5sum /etc/update-motd.d/10-help-text 63efa9c5c55b4fc59f59087e9139ab1d
+          rm_if_matches_md5sum /etc/update-motd.d/99-footer 8d373afe69555c9e5f16bd634af00a0c
+      elif dpkg --compare-versions "$2" le-nl "6.4ubuntu4"; then
+          rm_if_matches_md5sum "/etc/update-motd.d/00-header" "4241925109d5d9fc869f20143dbd4054"
+          rm_if_matches_md5sum "/etc/update-motd.d/10-help-text" "918a1e4bc361b759adff1fabbcd8fb8f"
+      elif dpkg --compare-versions "$2" le-nl "6.5ubuntu11"; then
+          rm_if_matches_md5sum "/etc/os-release" f8186963c93529f30f62095d35d44138
+          rm_if_matches_md5sum "/etc/os-release" f528f92199aadbee067e3a24d4b1077a
+          rm_if_matches_md5sum "/etc/os-release" 0cacc849efc99ac03921a892ca9e0db1
+      fi
+  ;;
+esac

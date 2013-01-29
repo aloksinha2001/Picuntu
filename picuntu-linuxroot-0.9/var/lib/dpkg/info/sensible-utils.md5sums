@@ -1,0 +1,15 @@
+bbccb390fe7fa589c0ecb35f1426ed5b  usr/bin/sensible-pager
+4d726d5fea14257bfc90f8a8b5b409ab  usr/bin/select-editor
+bb64e952de310d2d39a223c91cddf752  usr/bin/sensible-editor
+02b7995c5717958b5e900a3094912b1b  usr/bin/sensible-browser
+19d43732fbe50ffbf510e2315e81d895  usr/share/doc/sensible-utils/copyright
+69cff1fc97eb4a7a519da807c99c7020  usr/share/doc/sensible-utils/changelog.gz
+a333ba2de386d088199d3caad23abcc4  usr/share/man/man1/select-editor.1.gz
+abe834a444fb0434e0894b757e87b587  usr/share/man/man1/sensible-editor.1.gz
+b6a2d6f5afcfed370daa1397586dbfc5  usr/share/man/pl/man1/sensible-editor.1.gz
+aadf8cd7623d82b249c70041f1930a3a  usr/share/man/it/man1/sensible-editor.1.gz
+826aab59a2a49d3ec38c17285ee19e52  usr/share/man/ja/man1/sensible-editor.1.gz
+30d69670d7ace80fbea4f14060939176  usr/share/man/de/man1/sensible-editor.1.gz
+f7c6e929796fa9b8c31c9bc46bf8744e  usr/share/man/fr/man1/sensible-editor.1.gz
+4c1e5ccde137eb274541af521d59199b  usr/share/man/es/man1/sensible-editor.1.gz
+2d9a8b41bbd3d86812e66e53428a9bed  usr/lib/mime/packages/sensible-utils

@@ -1,0 +1,13 @@
+d62a562433e8229cd39defa4ea06815f  bin/mountpoint
+e42e5f054d94c63c0b769c525ec8a5e3  etc/init.d/skeleton
+83905a7b2e91f3b5cb2edfe1ea186ab1  lib/init/splash-functions-base
+ac5ea5365b406d943771be78e11a4358  lib/init/vars.sh
+982a8ab75a85d43e66b4c883c27bfddd  sbin/fsck.nfs
+f28336a2575ed8bf8c359814dc581567  usr/share/doc/initscripts/README.Debian
+0ffeeda1b62c9233d6621bc45e93eaf9  usr/share/doc/initscripts/copyright
+b7a245effc9b74779523b294646e9b24  usr/share/initscripts/default.rcS
+3cac737822cbede477461e3c2982fd13  usr/share/lintian/overrides/initscripts
+fbbedcec73204b6f8ad31ce40c446088  usr/share/man/man1/mountpoint.1.gz
+9b40dd2f601a971ff2ff9a1b3dbad2f6  usr/share/man/man5/halt.5.gz
+6e9d8cecc042f26235d12e095d47f192  usr/share/man/man5/rcS.5.gz
+a9a4afb2d26656ab1255417643a0318d  usr/share/man/man8/fsck.nfs.8.gz

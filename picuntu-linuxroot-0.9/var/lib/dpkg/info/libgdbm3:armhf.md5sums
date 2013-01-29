@@ -1,0 +1,6 @@
+a295ea3fe4698b70fbf483273186fc87  usr/lib/arm-linux-gnueabihf/libgdbm_compat.so.3.0.0
+280c3603ba46980e6dad7c4b45ffcd23  usr/lib/arm-linux-gnueabihf/libgdbm.so.3.0.0
+7efccf8ad7e7930becee59aac5d68ee4  usr/share/info/gdbm.info.gz
+361bf9ff0e5053d409c9c47008f50b09  usr/share/doc/libgdbm3/changelog.Debian.gz
+41f90e57592b65e9b9658df6002db711  usr/share/doc/libgdbm3/copyright
+ebfde4718ecff4bda8d8a87a9ef939d0  usr/share/man/man3/gdbm.3.gz

@@ -1,0 +1,959 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 6. Move generation</title>
+
+<meta name="description" content="GNU Go Documentation: 6. Move generation">
+<meta name="keywords" content="GNU Go Documentation: 6. Move generation">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Move-Generation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_5.html#Eye-Space-Display" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-generation-Intro" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Move-generation"></a>
+<h1 class="chapter">6. Move generation</h1>
+
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Move-generation-Intro">6.1 Introduction</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Move-Reasons">6.2 Generation of move reasons</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Move-Reason-Details">6.3 Detailed Descriptions of various Move Reasons</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">		Detailed Descriptions of Move Reasons
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Valuation">6.4 Valuation of suggested moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> 			Valuating the moves
+</td></tr>
+<tr><td align="left" valign="top"><a href="#End-Game">6.5 End Game</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">			Endgame move generation
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Move-generation-Intro"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Generation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reasons" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Introduction-1"></a>
+<h2 class="section">6.1 Introduction</h2>
+
+<p>GNU Go 3.0 introduced a move generation scheme substantially different
+from earlier versions. In particular, it was different from the method of move
+generation in GNU Go 2.6.
+</p>
+<p>In the old scheme, various move generators suggested different moves with
+attached values. The highest such value then decided the move. There were two
+important drawbacks with this scheme:
+</p>
+<ul>
+<li> 
+Efficient multipurpose moves could only be found by patterns which
+explicitly looked for certain combinations, such as a simultaneous
+connection and cut. There was also no good way to e.g. choose among
+several attacking moves.
+
+</li><li>
+The absolute move values were increasingly becoming harder to tune with
+the increasing number of patterns. They were also fairly subjective and
+the tuning could easily break in unexpected ways when something changed,
+e.g. the worm valuation.
+</li></ul>
+
+<p>The basic idea of the new move generation scheme is that the various
+move generators suggest reasons for moves, e.g. that a move captures
+something or connects two strings, and so on. When all reasons for the
+different moves have been found, the valuation starts. The primary
+advantages are
+</p>
+<ul>
+<li>
+The move reasons are objective, in contrast to the move values in
+the old scheme. Anyone can verify whether a suggested move reason is
+correct.
+
+</li><li>
+The centralized move valuation makes tuning easier. It also allows
+for style dependent tuning, e.g. how much to value influence
+compared to territory. Another possibility is to increase the value
+of safe moves in a winning position.
+</li></ul>
+
+
+<hr size="6">
+<a name="Move-Reasons"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-generation-Intro" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Generation-of-move-reasons"></a>
+<h2 class="section">6.2 Generation of move reasons</h2>
+<a name="index-move-reasons-1"></a>
+
+<p>Each move generator suggests a number of moves.  It justifies each move
+suggestion with one or move <em>move reasons</em>.  These move reasons
+are collected at each intersection where the moves are suggested for
+later valuation. Here is a partial list of of move reasons considered by GNU
+Go. (The complete list may be found in &lsquo;<tt>move_reasons.h</tt>&rsquo;.)
+</p>
+<dl compact="compact">
+<dt> <code>ATTACK_MOVE</code></dt>
+<dt> <code>DEFEND_MOVE</code></dt>
+<dd><p>Attack or defend a worm.
+</p></dd>
+<dt> <code>ATTACK_THREAT_MOVE</code></dt>
+<dt> <code>DEFEND_THREAT_MOVE</code></dt>
+<dd><p>Threaten to attack or defend a worm.
+</p></dd>
+<dt> <code>EITHER_MOVE</code></dt>
+<dd><p>A move that either achieves one goal or another (at the moment this only
+used for attacks on worms).
+</p></dd>
+<dt> <code>ALL_MOVE</code></dt>
+<dd><p>At the moment this is used for a move that defends two worms threatened
+by a double attack.
+</p></dd>
+<dt> <code>CONNECT_MOVE</code></dt>
+<dt> <code>CUT_MOVE</code></dt>
+<dd><p>Connect or cut two worms.
+</p></dd>
+<dt> <code>ANTISUJI_MOVE</code></dt>
+<dd><p>Declare an antisuji or forbidden move.
+</p></dd>
+<dt> <code>SEMEAI_MOVE</code></dt>
+<dt> <code>SEMEAI_THREAT</code></dt>
+<dd><p>Win or threaten to win a semeai.
+</p></dd>
+<dt> <code>EXPAND_TERRITORY_MOVE</code></dt>
+<dt> <code>EXPAND_MOYO_MOVE</code></dt>
+<dd><p>Move expanding our territory/moyo. These reasons are at the moment
+treated identically.
+</p></dd>
+<dt> <code>VITAL_EYE_MOVE</code></dt>
+<dd><p>A vital point for life and death.
+</p></dd>
+<dt> <code>STRATEGIC_ATTACK_MOVE</code></dt>
+<dt> <code>STRATEGIC_DEFEND_MOVE</code></dt>
+<dd><p>Moves added by &rsquo;a&rsquo; and &rsquo;d&rsquo; class patterns (see section <a href="gnugo_9.html#Pattern-Classification">Pattern Attributes</a>)
+which (perhaps intangibly) attack or defend a dragon.
+</p></dd>
+<dt> <code>OWL_ATTACK_MOVE</code></dt>
+<dt> <code>OWL_DEFEND_MOVE</code></dt>
+<dd><p>An owl attack or defense move.
+</p></dd>
+<dt> <code>OWL_ATTACK_THREAT</code></dt>
+<dt> <code>OWL_DEFEND_THREAT</code></dt>
+<dd><p>A threat to owl attack or defend a group.
+</p></dd>
+<dt> <code>OWL_PREVENT_THREAT</code></dt>
+<dd><p>A move to remove an owl threat.
+</p></dd>
+<dt> <code>UNCERTAIN_OWL_ATTACK</code></dt>
+<dt> <code>UNCERTAIN_OWL_DEFENSE</code></dt>
+<dd><p>An uncertain owl attack or defense. This means that the owl code could
+not decide the outcome, because the owl node limit was reached.
+</p></dd>
+<dt> <code>MY_ATARI_ATARI_MOVE</code></dt>
+<dd><p>A move that starts a chain of ataris, eventually leading to a
+capture.
+</p></dd>
+<dt> <code>YOUR_ATARI_ATARI_MOVE</code></dt>
+<dd><p>A move that if played by the opponent starts a chain of ataris for the
+opponent, leading to capture, which is also a safe move for us. Preemptively
+playing such a move almost always defends the threat.
+</p></dd>
+</dl>
+
+<p>The attack and defend move types can have a suffix to denote moves whose
+result depends on a ko, e.g. <code>OWL_ATTACK_MOVE_GOOD_KO</code>. Here
+<code>..._GOOD_KO</code> and <code>..._BAD_KO</code> correspond to <code>KO_A</code> and
+<code>KO_B</code> as explained in <a href="gnugo_11.html#Ko">Ko Handling</a>.
+See &lsquo;<tt>engine/move_reasons.h</tt>&rsquo; for the full of move reasons.
+</p>
+<p><strong>NOTICE:</strong> Some of these are reasons for <strong>not</strong> playing a move.
+</p>
+<p>More detailed discussion of these move reasons will be found in the
+next section.
+</p>
+<hr size="6">
+<a name="Move-Reason-Details"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Reasons" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Attack-and-Defense" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Detailed-Descriptions-of-various-Move-Reasons"></a>
+<h2 class="section">6.3 Detailed Descriptions of various Move Reasons</h2>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Attack-and-Defense">6.3.1 Attacking and defending moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Worm Attack and Defense
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Threats-to-Attack-or-Defend">6.3.2 Threats to Attack or Defend</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    Worm Threats
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Multi-Attack-or-Defense">6.3.3 Multiple attack or defense moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        Combined Attacks and Defenses
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Cutting-and-Connecting">6.3.4 Cutting and connecting moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Cutting and Connecting moves
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Semeai">6.3.5 Semeai winning moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Making-eyes">6.3.6 Making or destroying eyes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                    Vital eye moves
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Antisuji-moves">6.3.7 Antisuji moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Never play these!
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Territorial-moves">6.3.8 Territorial moves</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">              Block or expand territory
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Owl-attack-and-defense">6.3.9 Attacking and Defending Dragons</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">         Owl Attack and Defense
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Combination-Attacks">6.3.10 Combination Attacks</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">            Coordinated threats such as double ataris
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Attack-and-Defense"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Threats-to-Attack-or-Defend" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Attacking-and-defending-moves"></a>
+<h3 class="subsection">6.3.1 Attacking and defending moves</h3>
+
+<p>A move which tactically captures a worm is called an <em>attack move</em> and a
+move which saves a worm from being tactically captured is called a
+<em>defense move</em>. It is understood that a defense move can only exist if
+the worm can be captured, and that a worm without defense only is
+attacked by moves that decrease the liberty count or perform necessary
+backfilling.
+</p>
+<p>It is important that all moves which attack or defend a certain string
+are found, so that the move generation can make an informed choice
+about how to perform a capture, or find moves which capture and/or
+defend several worms.
+</p>
+<p>Attacking and defending moves are first found in <code>make_worms</code> while it
+evaluates the tactical status of all worms, although this step only
+gives one attack and defense (if any) move per worm. Immediately
+after, still in <code>make_worms</code>, all liberties of the attacked worms are
+tested for additional attack and defense moves. More indirect moves
+are found by <code>find_attack_patterns</code> and <code>find_defense_patterns</code>,
+which match the A (attack) and D (defense) class patterns in
+&lsquo;<tt>patterns/attack.db</tt>&rsquo; and &lsquo;<tt>patterns/defense.db</tt>&rsquo; As a final step, all
+moves which fill some purpose at all are tested whether they additionally
+attacks or defends some worm. (Only unstable worms are analyzed.)
+</p>
+<hr size="6">
+<a name="Threats-to-Attack-or-Defend"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Attack-and-Defense" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Multi-Attack-or-Defense" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Threats-to-Attack-or-Defend-1"></a>
+<h3 class="subsection">6.3.2 Threats to Attack or Defend</h3>
+
+<p>A threat to attack a worm, but where the worm can be defended is used as
+a secondary move reason.  This move reason can enhance the value of a
+move so that it becomes sente.  A threatening move without any other
+justification can also be used as a ko threat.  The same is true for a
+move that threatens defense of a worm, but where the worm can still be
+captured if the attacker doesn&rsquo;t tenuki.
+</p>
+<p>Threats found by the owl code are called <strong>owl threats</strong> and they
+have their own owl reasons.
+</p>
+<hr size="6">
+<a name="Multi-Attack-or-Defense"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Threats-to-Attack-or-Defend" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Cutting-and-Connecting" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Multiple-attack-or-defense-moves"></a>
+<h3 class="subsection">6.3.3 Multiple attack or defense moves</h3>
+
+<p>Sometimes a move attacks at least one of a number of worms or
+simultaneously defends all of several worms. These moves are noted
+by their own move reasons.
+</p>
+<hr size="6">
+<a name="Cutting-and-Connecting"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Multi-Attack-or-Defense" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Semeai" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Cutting-and-connecting-moves"></a>
+<h3 class="subsection">6.3.4 Cutting and connecting moves</h3>
+
+<p>Moves which connect two distinct dragons are called <code>connecting moves</code>.
+Moves which prevent such connections are called <em>cutting moves</em>. Cutting
+and connecting moves are primarily found by pattern matching, the <code>C</code>
+and <code>B</code> class patterns.
+</p>
+<p>A second source of cutting and connecting moves comes from the attack
+and defense of cutting stones. A move which attacks a worm
+automatically counts as a connecting move if there are multiple
+dragons adjacent to the attacked worm. Similarly a defending move
+counts as a cutting move. The action taken when a pattern of
+this type is found is to induce a connect or cut move reason.
+</p>
+<p>When a cut or connect move reason is registered, the involved dragons
+are of course stored. Thus the same move may cut and/or connect
+several pairs of dragons.
+</p>
+<hr size="6">
+<a name="Semeai"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Cutting-and-Connecting" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Making-eyes" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Semeai-winning-moves"></a>
+<h3 class="subsection">6.3.5 Semeai winning moves</h3>
+
+<p>A move which is necessary to win a capturing race is called a <em>semeai
+move</em>. These are similar to attacking moves, except that they involve
+the simultaneous attack of one worm and the defense of another. As for
+attack and defense moves, it&rsquo;s important that all moves which win a
+semeai are found, so an informed choice can be made between them.
+</p>
+<p>Semeai move reasons should be set by the semeai module. However this
+has not been implemented yet. One might also wish to list moves
+which increase the lead in a semeai race (removes ko threats) for use
+as secondary move reasons. Analogously if we are behind in the race.
+</p>
+<hr size="6">
+<a name="Making-eyes"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Semeai" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Antisuji-moves" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Making-or-destroying-eyes"></a>
+<h3 class="subsection">6.3.6 Making or destroying eyes</h3>
+
+<p>A move which makes a difference in the number of eyes produced from an
+eye space is called an <em>eye move</em>. It&rsquo;s not necessary that the eye is
+critical for the life and death of the dragon in question, although it
+will be valued substantially higher if this is the case. As usual it&rsquo;s
+important to find all moves that change the eye count.
+</p>
+<p>(This is part of what eye_finder was doing. Currently it only finds
+one vital point for each unstable eye space.)
+</p>
+<hr size="6">
+<a name="Antisuji-moves"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Making-eyes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Territorial-moves" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Antisuji-moves-1"></a>
+<h3 class="subsection">6.3.7 Antisuji moves</h3>
+
+<p>Moves which are locally inferior or for some other reason must not be
+played are called <em>antisuji moves</em>. These moves are generated by pattern
+matching. Care must be taken with this move reason as the move under
+no circumstances will be played.
+</p>
+<hr size="6">
+<a name="Territorial-moves"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Antisuji-moves" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Owl-attack-and-defense" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Territorial-moves-1"></a>
+<h3 class="subsection">6.3.8 Territorial moves</h3>
+
+<p>Any move that increases territory gets a move reason. This is the expand
+territory move reason. That move reason is added by the &lsquo;<samp>e</samp>&rsquo;
+patterns in &lsquo;<tt>patterns/patterns.db</tt>&rsquo;. Similarly the &lsquo;<samp>E</samp>&rsquo; patterns
+attempt to generate or mitigate a moyo, which is a region of influence
+not yet secure territory, yet valuable. Such a pattern sets the &ldquo;expand
+moyo&rdquo; move reason.
+</p>
+<hr size="6">
+<a name="Owl-attack-and-defense"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Territorial-moves" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Combination-Attacks" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Attacking-and-Defending-Dragons"></a>
+<h3 class="subsection">6.3.9 Attacking and Defending Dragons</h3>
+<a name="index-owl_005freasons-1"></a>
+
+<p>Just as the tactical reading code tries to determine when a worm
+can be attacked or defended, the owl code tries to determine
+when a dragon can get two eyes and live. The function <code>owl_reasons()</code>
+generates the corresponding move reasons.
+</p>
+<p>The owl attack and owl defense move reasons are self explanatory.
+</p>
+<p>The owl attack threat reason is generated if owl attack on an
+opponent&rsquo;s dragon fails but the owl code determines that the
+dragon can be killed with two consecutive moves. The killing
+moves are stored in <code>dragon[pos].owl_attack_point</code>
+and <code>dragon[pos].owl_second_attack_point</code>.
+</p>
+<p>Similarly if a friendly dragon is dead but two moves can revive it,
+an owl defense threat move reason is generated.
+</p>
+<p>The prevent threat reasons are similar but with the colors
+reversed: if the opponent has an attack threat move then a
+move which removes the threat gets a prevent threat move
+reason.
+</p>
+<p>The owl uncertain move reasons are generated when the owl
+code runs out of nodes. In order to prevent the owl code from
+running too long, a cap is put on the number of nodes one owl
+read can generate. If this is exceeded, the reading is cut
+short and the result is cached as usual, but marked uncertain.
+In this case an owl uncertain move reason may be generated.
+For example, if the owl code finds the dragon alive but is
+unsure, a move to defend may still be generated.
+</p>
+<hr size="6">
+<a name="Combination-Attacks"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Owl-attack-and-defense" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Reason-Details" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Combination-Attacks-1"></a>
+<h3 class="subsection">6.3.10 Combination Attacks</h3>
+<a name="index-atari_005fatari-1"></a>
+
+<p>The function <code>atari_atari</code> tries to find a sequence of ataris
+culminating in an unexpected change of status of any opponent string,
+from <code>ALIVE</code> to <code>CRITICAL</code>. Once such a sequence of ataris
+is found, it tries to shorten it by rejecting irrelevant moves.
+</p>
+<hr size="6">
+<a name="Valuation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Combination-Attacks" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Territorial-value" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Valuation-of-suggested-moves"></a>
+<h2 class="section">6.4 Valuation of suggested moves</h2>
+<a name="index-value_005fmove_005freasons_0028_0029"></a>
+
+<p>At the end of the move generation process, the function
+<code>value_move_reasons()</code> tries to assign values to the
+moves for the purpose of selecting the best move. The
+single purpose of the move valuation is to try to rank
+the moves so that the best move gets the highest
+score. In principle these values could be arbitrary,
+but in order to make it easier to evaluate how well the
+valuation performs, not to mention simplify the tuning,
+we try to assign values which are consistent with the
+usual methods of counting used by human Go players,
+as explained for example in <em>The Endgame</em> by Ogawa
+and Davies.
+</p>
+<p>Moves are valued with respect to four different criteria. These are
+</p>
+<ul>
+<li> territorial value
+</li><li> strategical value
+</li><li> shape value,
+</li><li> secondary value. 
+</li></ul>
+
+<p>All of these are floats and should be measured in terms of actual
+points.
+</p>
+<p>The territorial value is the total change of expected territory caused
+by this move. This includes changes in the status of groups if the move
+is an attack or a defense move.
+</p>
+<p>Beginning with GNU Go 3.0, the influence function plays an important role
+in estimating territory (see section <a href="gnugo_13.html#Influence-and-Territory">Influence and Territory</a>). It is used
+to make a guess at each intersection how likely it is that it will become
+black or white territory. The territorial value sums up the changes
+in these valuations.
+</p>
+<p>Strategical value is a measure of the effect the move has on the
+safety of all groups on the board. Typically cutting and connecting
+moves have their main value here. Also edge extensions, enclosing
+moves and moves towards the center have high strategical value. The
+strategical value should be the sum of a fraction of the territorial
+value of the involved dragons. The fraction is determined by the
+change in safety of the dragon.
+</p>
+<p>Shape value is a purely local shape analysis. An
+important role of this measure is to offset mistakes made by the
+estimation of territorial values. In open positions it&rsquo;s
+often worth sacrificing a few points of (apparent) immediate profit to
+make good shape. Shape value is implemented by pattern matching, the
+Shape patterns.
+</p>
+<p>Secondary value is given for move reasons which by themselves are not
+sufficient to play the move. One example is to reduce the number of
+eyes for a dragon that has several or to attack a defenseless worm.
+</p>
+<p>When all these values have been computed, they are summed, possibly
+weighted (secondary value should definitely have a small weight), into
+a final move value. This value is used to decide the move.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Territorial-value">6.4.1 Territorial Value</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">		  How much territory does a move gain
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Strategical-value">6.4.2 Strategical Value</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">             Strategical gains from a move
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Shape-factor">6.4.3 Shape Factor</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">		  Local shape
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Minimum-Value">6.4.4 Minimum Value</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Minimum value
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Secondary-Value">6.4.5 Secondary Value</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               Other, more indirect, gains from a move
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Threats-and-Followup-Value">6.4.6 Threats and Followup Value</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">    Valuation of attack and defense threats
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Territorial-value"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Valuation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Strategical-value" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Territorial-Value"></a>
+<h3 class="subsection">6.4.1 Territorial Value</h3>
+<a name="index-estimate_005fterritorial_005fvalue"></a>
+
+<p>The algorithm for computing territorial value is in the function
+<code>estimate_territorial_value</code>. As the name suggests, it seeks
+to estimate the change in territory.
+</p>
+<p>It considers all groups that are changed from alive to death or vice-versa
+due to this move. Also, it makes an assumption whether the move should be
+considered safe. If so, the influence module is called:  The function
+<code>influence_delta_territory</code> estimates the territorial effect of
+both the stone played and of the changes of group status&rsquo;.
+</p>
+<p>The result returned by the influence module is subject to a number of
+corrections. This is because some move reasons cannot be evaluated by a
+single call to the influence function, such as moves depending on a ko.
+</p>
+<hr size="6">
+<a name="Strategical-value"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Territorial-value" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Shape-factor" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Strategical-Value"></a>
+<h3 class="subsection">6.4.2 Strategical Value</h3>
+
+<p>Strategical defense or attack reasons are assigned to any move
+which matches a pattern of type &lsquo;<samp>a</samp>&rsquo; or &lsquo;<samp>d</samp>&rsquo;. These are
+moves which in some (often intangible) way tend to help
+strengthen or weaken a dragon. Of course strengthening a
+dragon which is already alive should not be given much value,
+but when the move reason is generated it is not necessary
+to check its status or safety. This is done later, during
+the valuation phase.
+</p>
+<hr size="6">
+<a name="Shape-factor"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Strategical-value" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Minimum-Value" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Shape-Factor"></a>
+<h3 class="subsection">6.4.3 Shape Factor</h3>
+
+<p>In the value field of a pattern (see section <a href="gnugo_9.html#Pattern-Values">Pattern Attributes</a>) one may
+specify a shape value. 
+</p>
+<p>This is used to compute the shape factor, which multiplies the
+score of a move. We take the largest positive contribution to
+shape and add 1 for each additional positive contribution
+found.  Then we take the largest negative contribution to
+shape, and add 1 for each additional negative contribution. The
+resulting number is raised to the power 1.05 to obtain the
+shape factor.
+</p>
+<p>The rationale behind this complicated scheme is that every
+shape point is very significant. If two shape contributions
+with values (say) 5 and 3 are found, the second contribution
+should be devalued to 1. Otherwise the engine is too difficult
+to tune since finding multiple contributions to shape can cause
+significant overvaluing of a move.
+</p>
+<hr size="6">
+<a name="Minimum-Value"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Shape-factor" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Secondary-Value" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Minimum-Value-1"></a>
+<h3 class="subsection">6.4.4 Minimum Value</h3>
+
+<p>A pattern may assign a minimum (and sometimes also a maximum) 
+value. For example the Joseki patterns have values which are
+prescribed in this way, or ones with a <code>value</code> field.
+One prefers not to use this approach but in practice it is
+sometimes needed.
+</p>
+<p>In the fuseki, there are often several moves with identical minimum
+value. GNU Go chooses randomly between such moves, which ensures
+some indeterminacy of GNU Go&rsquo;s play. Later in the game, GNU Go&rsquo;s
+genuine valuation of such a move is used as a secondary criterion.
+</p>
+<hr size="6">
+<a name="Secondary-Value"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Minimum-Value" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Threats-and-Followup-Value" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Secondary-Value-1"></a>
+<h3 class="subsection">6.4.5 Secondary Value</h3>
+
+<p>Secondary move reasons are weighed very slightly. Such a move
+can tip the scales if all other factors are equal.
+</p>
+<hr size="6">
+<a name="Threats-and-Followup-Value"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Secondary-Value" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#End-Game" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Valuation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Threats-and-Followup-Value-1"></a>
+<h3 class="subsection">6.4.6 Threats and Followup Value</h3>
+
+<p>Followup value refers to value which may acrue if we get two
+moves in a row in a local area. It is assigned for moves that threaten
+to attack or defend a worm or dragon. Also, since GNU Go 3.2 the influence
+module makes an assessment of the possible purely territorial followup
+moves.  In cases where these two heuristics are not sufficient we
+add patterns with a <code>followup_value</code> autohelper macro.
+</p>
+<p>Usually, the followup value gives only a small contribution; e.g. if
+it the followup value is very large, then GNU Go treats the move as sente by
+doubling its value.  However, if the largest move on the board is a ko
+which we cannot legally take, then such a move becomes attractive as a ko
+threat and the full followup value is taken into account.
+</p>
+<hr size="6">
+<a name="End-Game"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Threats-and-Followup-Value" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generation" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="End-Game-1"></a>
+<h2 class="section">6.5 End Game</h2>
+
+<p>Endgame moves are generated just like any other move by GNU Go. In fact,
+the concept of endgame does not exist explicitly, but if the largest
+move initially found is worth 6 points or less, an extra set of patterns
+in &lsquo;<tt>endgame.db</tt>&rsquo; is matched and the move valuation is redone.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Generation" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

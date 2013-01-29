@@ -1,0 +1,16 @@
+/.
+/usr
+/usr/share
+/usr/share/man
+/usr/share/man/man2
+/usr/share/man/man2/aa_getcon.2.gz
+/usr/share/man/man2/aa_change_profile.2.gz
+/usr/share/man/man2/aa_find_mountpoint.2.gz
+/usr/share/man/man2/aa_change_hat.2.gz
+/usr/share/doc
+/usr/share/doc/libapparmor1
+/usr/share/doc/libapparmor1/copyright
+/usr/share/doc/libapparmor1/changelog.Debian.gz
+/usr/lib
+/usr/lib/libapparmor.so.1.0.2
+/usr/lib/libapparmor.so.1

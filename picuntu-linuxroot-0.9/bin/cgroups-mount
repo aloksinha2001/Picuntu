@@ -1,0 +1,40 @@
+#!/bin/sh
+# Copyright 2011 Canonical, Inc
+# Author: Serge Hallyn <serge.hallyn@canonical.com>
+
+set -e
+
+# For simplicity this script provides no flexibility
+
+# If /sys/fs/cgroup is mounted, we don't run again
+if [ -n "`grep /sys/fs/cgroup /proc/mounts`" ]; then
+	exit 0
+fi
+
+# If cgroup is mounted by fstab, don't run
+# Don't get too smart - bail on any uncommented entry with 'cgroup' in it
+if grep -v '^#' /etc/fstab | grep -q cgroup; then
+	echo "cgroups mounted from fstab, not mounting /sys/fs/cgroup"
+	exit 0
+fi
+
+# Some sites mount cgroups themselves.  Don't run in that case
+if grep -q cgroup /proc/mounts; then
+	echo "cgroups mounted (non-standard) according to /proc/mounts"
+	exit 0
+fi
+
+# kernel provides cgroups?
+if [ ! -e /proc/cgroups ]; then
+	exit 0
+fi
+
+mount -t tmpfs -o uid=0,gid=0,mode=0755 cgroup /sys/fs/cgroup
+
+# get list of cgroup controllers
+for d in `sed -e '1d;s/\([^\t]\)\t.*$/\1/' /proc/cgroups`; do
+	mkdir /sys/fs/cgroup/$d
+	mount -n -t cgroup -o $d cgroup /sys/fs/cgroup/$d
+done
+
+exit 0

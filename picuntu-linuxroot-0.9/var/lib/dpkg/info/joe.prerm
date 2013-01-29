@@ -1,0 +1,9 @@
+#!/bin/sh -e
+
+if [ "$1" != "upgrade" ]; then
+  update-alternatives --remove editor /usr/bin/joe
+  update-alternatives --remove editor /usr/bin/jmacs
+  update-alternatives --remove editor /usr/bin/jstar
+  update-alternatives --remove editor /usr/bin/jpico
+  update-alternatives --remove editor /usr/bin/rjoe
+fi

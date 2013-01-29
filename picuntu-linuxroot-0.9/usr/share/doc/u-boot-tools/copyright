@@ -1,0 +1,732 @@
+This is the Debian prepackaged version of Das U-Boot
+with lots of features.
+
+This package was put together by Clint Adams <schizo@debian.org>
+with sources obtained from:
+  ftp://ftp.denx.de/pub/u-boot/
+
+u-boot took over some packaging bits from uboot-mkimage which was copyright
+Joey Hess <joeyh@debian.org> and Marc Singer <elf@debian.org> and from
+uboot-envtools which was copyright Per Andersson <avtobiff@gmail.com>.
+
+The following copyright and license apply to this software:
+
+Copyright © 2000-2009 Wolfgang Denk, DENX Software Engineering, wd@denx.de.
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License as
+published by the Free Software Foundation; either version 2 of
+the License, or (at your option) any later version.
+
+The full text of the GNU GPL may be found on your Debian system
+in /usr/share/common-licenses.
+
+
+Some of the files distributed in the source package are
+(C) Copyright 2009 Industrie Dial Face S.p.A.
+Copyright (C) Motorola, 2003.
+Copyright (C) 1999 David A. Hinds.
+Copyright (c) Marc A. Viredaz, 1998
+Copyright (c) 2003 Josef Baumgartner
+Copyright (c) 2000 Broadcom
+Copyright (c) 2001 Broadcom
+Copyright (C) 1998,1999 Cygnus Solutions
+Copyright 1996, 97, 99, 2002, 03 Ralf Baechle
+(C)Copyright 1997-1998 DAVICOM Semiconductor,Inc.
+Copyright 1997-2002 ELTEC Elektronik AG
+(C) Copyright 1999, by Curt McDowell, 08-06-99, Broadcom Corp.
+(C) Copyright 1999 Gregory P. Smith
+(C) Copyright 1999, Greg Ungerer (gerg@snapgear.com)
+(C) Copyright 1999 Johannes Erdfelt
+(C) Copyright 1999 Linus Torvalds
+(C) Copyright 1999 Randy Dunlap
+(C) Copyright 1999 Roman Weissgaerber <weissg@vienna.at>
+(C) Copyright 1999 Silicon Graphics, Inc.
+(C) Copyright 2000-2001 David Brownell <dbrownell@users.sourceforge.net>
+(C) Copyright 2000-2002 David Brownell
+(C) Copyright 2000, Lineo Inc. (www.lineo.com)
+(C) Copyright 2000 Sysgo Real-Time Solutions, GmbH <www.elinos.com>
+(C) Copyright 2001 Denis Peter, MPL AG Switzerland
+(C) Copyright 2001 ELTEC Elektronik AG
+(C) Copyright 2001, James Dougherty, 07/18/01, Broadcom Corp.
+(C) Copyright 2001, Stuart Hughes, Lineo Inc, stuarth@lineo.com
+(C) Copyright 2001 Sysgo Real-Time Solutions, GmbH <www.elinos.com>
+(C) Copyright 2002, 2003 Motorola Inc.
+(c) Copyright 2002-2004 Xilinx Inc.
+(C) Copyright 2002 Denis Peter, MPL AG Switzerland
+(C) Copyright 2002 ELTEC Elektronik AG
+(C) Copyright 2002 Gary Jennejohn, DENX Software Engineering, <garyj@denx.de>
+(C) Copyright 2002 Jun Gu <jung@artesyncp.com>
+(C) Copyright 2002,Motorola Inc.
+(C) Copyright 2002 Scott McNutt <smcnutt@artesyncp.com>
+(C) Copyright 2002 SIXNET, dge@sixnetio.com.
+(C) Copyright 2002 Wolfgang Grandegger <wg@denx.de>
+(c) Copyright 2002 Xilinx Inc.
+(C) Copyright 2003-2004 Arabella Software Ltd.
+(C) Copyright 2003-2005 Arabella Software Ltd.
+(C) Copyright 2003, ARM Ltd.
+(C) Copyright 2003, Dan Malek, Embedded Edge, LLC.  <dan@embeddededge.com>
+(C) Copyright 2003 Embedded Edge, LLC
+(C) Copyright 2003 Intracom S.A.
+(C) Copyright 2003 Intrinsyc Software
+(C) Copyright 2003 Josef Baumgartner <josef.baumgartner@telex.de>
+(C) Copyright 2003, Li-Pro.Net <www.li-pro.net>
+(C) Copyright 2003  Martin Winistoerfer, martinwinistoerfer@gmx.ch.
+(C) Copyright 2003 Motorola Inc.
+(C) Copyright 2003 Pengutronix e.K.
+(C) Copyright 2003 Picture Elements, Inc.
+(C) Copyright 2003, Psyent Corporation <www.psyent.com>
+(C) Copyright 2003 Sandburst Corporation
+(C) Copyright 2003 Stefan Roese, stefan.roese@esd-electronics.com
+(C) Copyright 2003 Sysgo Real-Time Solutions, AG <www.elinos.com>
+(C) Copyright 2003;  Tundra Semiconductor Corp.
+(C) Copyright 2003 Wolfgang Grandegger <wg@denx.de>
+(C) Copyright 2004-2005, Greg Ungerer <greg.ungerer@opengear.com>
+(C) Copyright 2004-2006 Atmel Corporation
+(C) Copyright 2004-2008 Freescale Semiconductor, Inc.
+(C) Copyright 2004-2008 Texas Instruments, <www.ti.com>
+(C) Copyright 2004 Ales Jindra <jindra@2n.cz>
+(C) Copyright 2004, ARM Ltd.
+(C) Copyright 2004 Atmark Techno, Inc.
+(C) Copyright 2004 by FS Forth-Systeme GmbH.
+(C) Copyright 2004 eslab.whut.edu.cn
+(C) Copyright 2004, Freescale, Inc
+(C) Copyright 2004 Freescale Semiconductor.
+(C) Copyright 2004 Intracom S.A.
+(C) Copyright 2004, Li-Pro.Net <www.li-pro.net>
+(C) Copyright 2004 Paul Reynolds <PaulReynolds@lhsolutions.com>
+(C) Copyright 2004, Psyent Corporation <www.psyent.com>
+(C) Copyright 2004 Sandburst Corporation
+(C) Copyright 2004, Shlomo Kut <skut@vyyo.com>
+(C) Copyright 2004 Tundra Semiconductor Corp.
+(C) Copyright 2004 Wind River Systems Inc <www.windriver.com>.
+(C) Copyright 2005-2007 Netstal Maschinen AG
+(C) Copyright 2005-2008 Netstal Maschinen AG
+(C) Copyright 2005-2008 Samsung Electronics
+(C) Copyright 2005-2009 BuS Elektronik GmbH & Co.KG <esw@bus-elektonik.de>
+(C) Copyright 2005-2009 Netstal Maschinen AG
+(C) Copyright 2005-2009 Samsung Electronics
+(C) Copyright 2005 2N TELEKOMUNIKACE, Ladislav Michl
+(C) Copyright 2005 BuS Elektronik GmbH & Co.KG <esw@bus-elektonik.de>
+(C) Copyright 2005 Embedded Alley Solutions, Inc.
+(C) Copyright 2005 Freescale Semiconductor, Inc.
+(C) Copyright 2005 Ladislav Michl <michl@2n.cz>
+(C) Copyright 2005 Netstal Maschinen AG
+(C) Copyright 2005, Psyent Corporation <www.psyent.com>
+(C) Copyright 2005 REA Elektronik GmbH <www.rea.de>
+(C) Copyright 2005 Rowel Atienza <rowel@diwalabs.com>
+(C) Copyright 2006, 2007 Detlev Zundel, dzu@denx.de
+(C) Copyright 2006-2007 Freescale Semiconductor, Inc.
+(C) Copyright 2006 ATMEL Rousset, Lacressonniere Nicolas
+(C) Copyright 2006 Detlev Zundel, dzu@denx.de
+(C) Copyright 2006 Embedded Artists AB <www.embeddedartists.com>
+(C) Copyright 2006 Eukrea Electromatique <www.eukrea.com>
+(C) Copyright 2006;  Freescale Semiconductor Corp.
+(C) Copyright 2006, Imagos S.a.s <www.imagos.it>
+(C) Copyright 2006 Lab X Technologies <zachary.landau@labxtechnologies.com>
+(C) Copyright 2006 OpenMoko, Inc.
+(C) Copyright 2007-2008 Netstal Maschinen AG
+(C) Copyright 2007,2008 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+(C) Copyright 2007-2008 Semihalf
+(C) Copyright 2007-2008 Semihalf, Rafal Jaworowski <raj@semihalf.com>
+(C) Copyright 2007-2009 Michal Simek
+(C) Copyright 2007 by OpenMoko, Inc.
+(C) Copyright 2007 Freescale Semiconductor, Inc.
+(C) Copyright 2007 Gary Jennejohn <garyj@denx.de>
+(C) Copyright 2007 Markus Kappeler <markus.kappeler@objectxp.com>
+(C) Copyright 2007 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+(C) Copyright 2007 OpenMoko, Inc.
+(C) Copyright 2007 Pengutronix, Juergen Beisert <j.beisert@pengutronix.de>
+(C) Copyright 2007 Pengutronix, Sascha Hauer <s.hauer@pengutronix.de>
+(C) Copyright 2007 Schindler Lift Inc.
+(C) Copyright 2007 STMicroelectronics, <www.st.com>
+(C) Copyright 2007 Wind River Systems Inc <www.windriver.com>.
+(C) Copyright 2007 Yoshihiro Shimoda <shimoda.yoshihiro@renesas.com>
+(C) Copyright 2008, 2009 Andreas Pfefferle,
+(C) Copyright 2008,2009 Eric Jarrige <eric.jarrige@armadeus.org>
+(C) Copyright 2008-2009 Freescale Semiconductor, Inc.
+(C) Copyright 2008-2009 Stefan Roese <sr@denx.de>, DENX Software Engineering
+(C) Copyright 2008 Applied Micro Circuits Corporation
+(C) Copyright 2008 Armadeus Systems nc
+(C) Copyright 2008 Atmel Corporation
+(C) Copyright 2008 by Harald Welte <laforge@openmoko.org>
+(C) Copyright 2008, Daniel Hellström, daniel@gaisler.com
+(C) Copyright 2008 Dmitry Rakhchev, EmCraft Systems, rda@emcraft.com
+(C) Copyright 2008 Eric Jarrige <eric.jarrige@armadeus.org>
+(C) Copyright 2008, Excito Elektronik i Skåne AB
+(C) Copyright 2008 Freescale Semiconductor
+(C) Copyright 2008 Ilya Yanok, EmCraft Systems, yanok@emcraft.com
+(C) Copyright 2008 Magnus Lilja <lilja.magnus@gmail.com>
+(C) Copyright 2008, Michael Trimarchi <trimarchimichael@yahoo.it>
+(C) Copyright 2008 Michal Simek <monstr@monstr.eu>
+(c) Copyright 2008 Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>
+(c) Copyright 2008 Renesas Solutions Corp.
+(C) Copyright 2008 Semihalf
+(C) Copyright 2008 Sergey Lapin <slapin@ossfans.org>
+(C) Copyright 2008 Stefan Roese <sr@denx.de>, DENX Software Engineering
+(C) Copyright 2008, Texas Instruments, Inc. http://www.ti.com/
+(C) Copyright 2008 Wolfgang Grandegger <wg@denx.de>
+(C) Copyright 2009 Alessandro Rubini <rubini@unipv.it>
+(C) Copyright 2009 Atin Malaviya (atin.malaviya@gmail.com)
+(C) Copyright 2009 CJSC "NII STT", Russia, Smolensk
+(C) Copyright 2009, DAVE Srl <www.dave.eu>
+(C) Copyright 2009 Detlev Zundel,
+(C) Copyright 2009 Faraday Technology
+(C) Copyright 2009 Freescale Semiconductor, Inc.
+(C) Copyright 2009 Ilya Yanok, Emcraft Systems Ltd <yanok@emcraft.com>
+(C) Copyright 2009 Industrie Dial Face S.p.A.
+(C) Copyright 2009 Magnus Lilja <lilja.magnus@gmail.com>
+(C) Copyright 2009 Marco Stornelli <marco.stornelli@gmail.com>
+(C) Copyright 2009 mGine co.
+(C) Copyright 2009 Reinhard Arlt, reinhard.arlt@esd-electronics.com
+(C) Copyright 2009 Samsung Electronics
+(C) Copyright 2009 Semihalf, Grzegorz Bernacki
+(C) Copyright 2009 Stefan Roese <sr@denx.de>
+(C) Copyright 2010, Chris Zhang <chris@seamicro.com>
+(C) Copyright Andreas Gal 1999
+(C) Copyright David Brownell 2000 (kernel hotplug, usb_device_id)
+(C) Copyright Deti Fliegl 1999 (new USB architecture)
+(C) Copyright Gregory P. Smith 1999
+(C) Copyright Johannes Erdfelt 1999-2001
+(C) Copyright Linus Torvalds 1999
+(C) Copyright Motorola, Inc., 2000
+(C) Copyright Randy Dunlap 2000
+(C) Copyright Sheldon Instruments, Inc. 2008
+(C) Copyright Yggdrasil Computing, Inc. 2000
+Copyright 1992, Linus Torvalds.
+Copyright 1994, 1995, 2000 Neil Russell.
+Copyright 1994 - 2000 Neil Russell.
+Copyright 1995, Russell King.
+Copyright 1996 Roman Zippel
+Copyright 1998-2001 by Donald Becker.
+Copyright 1999-2000 D. Jeff Dionne, <jeff@uclinux.org>
+Copyright 1999 Advanced Micro Devices, Inc.
+Copyright 1999 D. Jeff Dionne <jeff@uclinux.org>
+Copyright 2000-2001 Lineo, Inc. D. Jeff Dionne <jeff@lineo.ca>
+Copyright 2000,2001 MontaVista Software Inc.
+Copyright 2000-2002 by Hans Reiser, licensing governed by reiserfs/README
+Copyright 2000 Paolo Scaffardi
+Copyright 2000 Roland Borde
+Copyright 2001-2005, Intel Corporation.
+Copyright © 2001-2007 Red Hat, Inc. and others
+Copyright 2001 Embedded Planet.  All rights reserved.
+Copyright 2001 MontaVista Software Inc.
+Copyright 2002 Arcturus Networks Inc. MaTed <mated@sympatico.ca>
+Copyright 2002 Etinsys Inc.
+Copyright 2002, GALILEO TECHNOLOGY, LTD.		       *
+Copyright 2002 Mind NV
+Copyright 2002 MontaVista Software Inc.
+Copyright 2002 SYSGO Real-Time Solutions GmbH
+Copyright 2003-2004 Jeff Garzik
+Copyright 2003-2004 Red Hat, Inc.  All rights reserved.
+Copyright 2003-2008 Analog Devices Inc.
+Copyright 2003 AMIRIX Systems Inc.
+Copyright 2003 Bas Vermeulen <bas@buyways.nl>,
+Copyright 2003 by FS Forth-Systeme GmbH.
+Copyright 2003 Metrowerks - for Blackfin
+Copyright 2003 Metrowerks/Motorola
+Copyright 2003 Motorola,Inc.
+Copyright 2004-2009 Analog Devices Inc.
+Copyright 2004-2009 Freescale Semiconductor.
+Copyright © 2004  Ferenc Havasi <havasi@inf.u-szeged.hu>,
+Copyright 2004 Karen Spearel
+Copyright 2004 Picture Elements, Inc.
+Copyright 2005 Alessandro Zummo
+Copyright 2005 ETIN SYSTEMS Co.,Ltd.
+Copyright 2005, Seagate Technology LLC
+Copyright 2006,2009-2010 Freescale Semiconductor, Inc.
+Copyright 2006 Applied Micro Circuits Corporation
+Copyright 2006 IBM
+Copyright 2007-2008 Freescale Semiconductor, Inc.
+Copyright 2007,2008 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Copyright 2007,2009 Wind River Systems, Inc. <www.windriver.com>
+Copyright 2007, Embedded Specialties, Inc.
+Copyright 2008-2009 Stefan Roese <sr@denx.de>, DENX Software Engineering
+Copyright 2008-2010 Freescale Semiconductor, Inc.
+Copyright 2008 (C) Bryan O'Donoghue
+Copyright 2008 Extreme Engineering Solutions, Inc.
+Copyright 2008 Matrix Vision GmbH
+Copyright 2008 Mentor Graphics Corporation
+Copyright 2008, Network Appliance Inc.
+Copyright 2008 Qstreams Networks, Inc.
+Copyright 2008 Sascha Hauer, kernel@pengutronix.de
+Copyright 2008 Silicon Turnkey Express, Inc.
+Copyright 2009 Analog Devices Inc.
+Copyright 2009 CJSC "NII STT", http://www.niistt.ru/
+Copyright 2009(C) Marvell International Ltd. and its affiliates
+Copyright 2009 Dirk Behme, dirk.behme@googlemail.com
+Copyright 2009 Extreme Engineering Solutions, Inc.
+Copyright 2009 Freescale Semiconductor, Inc
+Copyright 2009 Ilya Yanok, <yanok@emcraft.com>
+Copyright 2009: Marvell Technology Group Ltd.
+Copyright 2009, Matthias Fuchs <matthias.fuchs@esd.eu>
+Copyright 2009, Robin Getz <rgetz@blackfin.uclinux.org>
+Copyright 2009 Semihalf.
+Copyright 2010, Renato Andreola <renato.andreola@imagos.it>
+Copyright (C) 1985 MIPS Computer Systems, Inc.
+Copyright (C) 1989, 1991 Free Software Foundation, Inc.
+Copyright (C) 1990 - 1992, 1999 Silicon Graphics, Inc.
+Copyright (C) 1990, 1999 by Silicon Graphics, Inc.
+Copyright (C) 1991, 1992  Linus Torvalds
+Copyright (C) 1991,1996-1999,2001,2004,2007 Free Software Foundation, Inc.
+Copyright (C) 1991-2004 SciTech Software, Inc.
+Copyright (C) 1991-2004 SciTech Software, Inc. All rights reserved.
+Copyright (C) 1992, 1997 Free Software Foundation, Inc.
+Copyright (C) 1993, 1996, 2001, 2002 Free Software Foundation, Inc.
+Copyright (C) 1993        Hamish Macdonald
+Copyright (c) 1993 Herb Peyerl (hpeyerl@novatel.ca)
+Copyright (C) 1994, 1995, 1996, 1997, 2000, 2001 by Ralf Baechle
+Copyright (C) 1994, 1995, 1996, 1999 by Ralf Baechle
+Copyright (C) 1994, 1995, 1996 by Ralf Baechle
+Copyright (C) 1994, 1995 Waldorf GmbH
+Copyright (C) 1994 - 2000 Ralf Baechle
+Copyright (C) 1994 David S. Miller (davem@caip.rutgers.edu)
+Copyright (C) 1994 Hamish Macdonald
+Copyright (C) 1994 Waldorf GMBH
+Copyright (C) 1995, 1996, 1997, 1998, 1999, 2001, 2002, 2003 Ralf Baechle
+Copyright (C) 1995, 1996, 1997, 1999, 2000 Free Software Foundation, Inc.
+Copyright (C) 1995-1996 Gary Thomas (gdt@linuxppc.org)
+Copyright (C) 1995-1998 Mark Adler
+Copyright (C) 1995, 1999 Silicon Graphics
+Copyright (C) 1995-2002 Russell King
+Copyright (C) 1995-2005 Jean-loup Gailly.
+Copyright (C) 1995-2005 Jean-loup Gailly and Mark Adler
+Copyright (C) 1995-2005 Mark Adler
+Copyright (C) 1995 David S. Miller (davem@caip.rutgers.edu)
+Copyright (C) 1995 Hamish Macdonald
+Copyright (C) 1996,1998 Jakub Jelinek (jj@sunsite.mff.cuni.cz)
+Copyright (C) 1996, 1999, 2001 David S. Miller (davem@redhat.com)
+Copyright (C) 1996-1999 SciTech Software, Inc.
+Copyright (C) 1996-2002 Julian R Seward.  All rights reserved.
+Copyright (C) 1996-2002 Markus Franz Xaver Johannes Oberhumer
+Copyright (C) 1996-2005 Markus F.X.J. Oberhumer <markus@oberhumer.com>
+Copyright (C) 1996 by Erik Stahlman (ES)
+Copyright (C) 1996 by Paul M. Antoine
+Copyright (C) 1996 Larry Ewing (lewing@isc.tamu.edu)
+Copyright (C) 1996 Paul Mackerras.
+Copyright (C) 1996 Paul M. Antoine
+Copyright (C) 1997, 1999, 2001, 06 by Ralf Baechle
+Copyright (C) 1997-1999 Russel King
+Copyright (c) 1997 Dan Malek (dmalek@jlc.net)
+Copyright (C) 1997  Sten Wang
+Copyright (C) 1998, 1999, 2000, 2001, 2002 Red Hat, Inc.
+Copyright (C) 1998, 1999 D. Jeff Dionne     <jeff@uclinux.org>
+Copyright (C) 1998,2001 M-Systems Flash Disk Pioneers Ltd.
+Copyright (C) 1998  Dan Malek <dmalek@jlc.net>
+Copyright (C) 1998  D. Jeff Dionne <jeff@ryeham.ee.ryerson.ca>,
+Copyright (C) 1998 Gabriel Paubert.
+Copyright (c) 1998 Harald Koerfgen
+Copyright (C) 1998       Kenneth Albanowski <kjahds@kjahds.com>
+Copyright (C) 1999 2000 2001 Erik Mouw (J.A.K.Mouw@its.tudelft.nl)
+Copyright (C) 1999 2000 2001 Jan-Derk bakker (J.D.Bakker@its.tudelft.nl)
+Copyright (C) 1999, 2000  Niibe Yutaka
+Copyright (C) 1999, 2000  Niibe Yutaka  &  Kaz Kojima
+Copyright (C) 1999, 2000 Silicon Graphics, Inc.
+Copyright(c) 1999 - 2002 Intel Corporation. All rights reserved.
+Copyright (C) 1999-2003 David Woodhouse <dwmw2@infradead.org> et al.
+Copyright (C) 1999-2005 Igor Pavlov
+Copyright (C) 1999 ARM Limited.
+Copyright (C) 1999 Ben Williamson <benw@pobox.com>
+Copyright (C) 1999 by Silicon Graphics, Inc.
+Copyright (C) 1999 David Mosberger-Tang <davidm@hpl.hp.com>
+Copyright (C) 1999 Egbert Eich
+Copyright (C) 1999 Hewlett-Packard Co
+Copyright (C) 1999 Linus Torvalds
+Copyright (C) 1999 Machine Vision Holdings, Inc.
+Copyright (C) 1999  Magnus Damm <kieraypc01.p.y.kie.era.ericsson.se>
+Copyright (c) 1999 Nicolas Pitre <nico@visuaide.com>
+Copyright (C) 1999 Niibe Yutaka
+Copyright (C) 1999 Russell King.
+Copyright (C) 1999 Silicon Graphics, Inc.
+Copyright (C) 1999       Vladimir Gurevich  <vgurevic@cisco.com>
+Copyright (C) 2000, 07 MIPS Technologies, Inc.
+Copyright (c) 2000, 2001, 2002 Lineo
+Copyright(c) 2000-2001 Broadcom Corporation.
+Copyright (c) 2000,2001 Epson Research and Development, Inc.
+Copyright (C) 2000,2001  Larry Doolittle  <larry@doolittle.boa.org>
+Copyright (C) 2000, 2001 NETsilicon, Inc.
+Copyright (C) 2000, 2001 Red Hat, Inc.
+Copyright (C) 2000, 2001 WireSpeed Communications Corporation
+Copyright (c) 2000-2002 Dave Ellis, SIXNET, dge@sixnetio.com
+Copyright (C) 2000, 2002  Maciej W. Rozycki
+Copyright (C) 2000-2002 Russell King
+Copyright (C) 2000-2002 Transmeta Corporation
+Copyright (C) 2000-2004 Steven J. Hill (sjhill@realitydiluted.com)
+Copyright (C) 2000-2005 Corelatus AB
+Copyright (c) 2000 by Silicon Graphics, Inc.
+Copyright (c) 2000 David Woodhouse <dwmw2@infradead.org>
+Copyright (C) 2000 Deep Blue Solutions Ltd.
+Copyright (C) 2000 FSMLabs, Inc.
+Copyright (C) 2000 MIPS Technologies, Inc.
+Copyright (c) 2000 MontaVista Software, Inc.   Dan Malek (dmalek@jlc.net)
+Copyright (c) 2000 MontaVista Software, Inc (source@mvista.com)
+Copyright (C) 2000	Murray Jensen <Murray.Jensen@cmst.csiro.au>
+Copyright (C) 2000 Netgem S.A.
+Copyright (C) 2000 NETsilicon, Inc.
+Copyright (c) 2000 Philip Edelbrock <phil@stimpy.netroedge.com>
+Copyright (C) 2000 Red Hat, Inc.
+Copyright (C) 2000 Silicon Graphics, Inc.
+Copyright (C) 2000 Steven J. Hill (sjhill@realitydiluted.com)
+Copyright (c) 2000 William L. Pitts and W. Gerald Hicks
+Copyright (C) 2000 WireSpeed Communications Corporation
+Copyright (C) 2001,02  Miles Bader <miles@gnu.org>
+Copyright (C) 2001,02  NEC Corporation
+Copyright(c)	2001-2002 Arcturus Networks Inc. <www.arcturusnetworks.com>
+Copyright (C) 2001, 2002 ETC s.r.o.
+Copyright (C) 2001,2002  Miles Bader <miles@gnu.org>
+Copyright (C) 2001,2002  NEC Corporation
+Copyright (C) 2001-2003  Christophe Devine
+Copyright (C) 2001-2003 David Woodhouse <dwmw2@infradead.org>
+Copyright (C) 2001-2004  BUFFALO INC.
+Copyright (c) 2001, Advent Networks, Inc.
+Copyright (c) 2001	Alex Züpke <azu@sysgo.de>
+Copyright (C) 2001 ARM Limited
+Copyright (C) 2001 Entity Cyber, Inc.
+Copyright (C) 2001 Entity Cyber, Inc.
+Copyright (C) 2001  Erik Mouw (J.A.K.Mouw@its.tudelft.nl)
+Copyright (C) 2001 Erik Mouw (J.A.K.Mouw@its.tudelft.nl)
+Copyright (c) 2001 Gerd Mennchen <Gerd.Mennchen@icn.siemens.de>
+Copyright (c) 2001 Hewlett Packard
+Copyright (C) 2001, James Dougherty, jfd@cs.stanford.edu
+Copyright (C) 2001  Josh Huber <huber@mclx.com>
+Copyright (c) 2001	Marius Gröger <mag@sysgo.de>
+Copyright (C) 2001  Miles Bader <miles@gnu.org>
+Copyright (C) 2001 MIPS Technologies, Inc.
+Copyright (c) 2001 Navin Boppuri / Prashant Patel
+Copyright (C) 2001  NEC Corporation
+Copyright (C) 2001 Peter Bergner.
+Copyright (C) 2001 Red Hat, Inc.
+Copyright (C) 2001 RidgeRun, Inc. (http://www.ridgerun.com)
+Copyright (C) 2001 Samsung Electronics by chc, 010406
+Copyright (C) 2001, Software Center, Motorola China.
+Copyright (C) 2001 Standard Microsystems Corporation (SMSC)
+Copyright (C) 2001	Sysgo Real-Time Solutions, GmbH <www.elinos.com>
+Copyright(c)	2001	Tony Z. Kou	<tonyko@arcturusnetworks.com>
+Copyright (c) 2001 William L. Pitts
+Copyright (C) 2002-2003 Greg Ungerer <gerg@snapgear.com>
+Copyright(c) 2002,2003 Motorola Inc.
+Copyright (c) 2002, 2003 Omicron Ceti AB, Daniel Engström <denaiel@omicron.se>
+Copyright (C) 2002-2003 SnapGear Inc
+Copyright (C) 2002-2007 Aleph One Ltd.
+Copyright (c) 2002-2007 Analog Devices Inc.
+Copyright (c) 2002	Alex Züpke <azu@sysgo.de>
+Copyright (C) 2002 Andrew Lunn
+Copyright (C) 2002 Daniel Engström, Omicron Ceti AB, daniel@omicron.se.
+Copyright (C) 2002 ETC s.r.o.
+Copyright (c) 2002	Gary Jennejohn <garyj@denx.de>
+Copyright (C) 2002 Gary Thomas
+Copyright (c) 2002, Infineon Technologies.
+Copyright (C) 2002 Intel Corporation.
+Copyright (C) 2002 James F. Dougherty (jfd@broadcom.com)
+Copyright (C) 2002	Kyle Harris <kharris@nexus-tech.net>
+Copyright (C) 2002  Maciej W. Rozycki
+Copyright (c) 2002	Omicron Ceti AB, Daniel Engström <denaiel@omicron.se>
+Copyright (C) 2002 Paul Mundt
+Copyright (C) 2002 rabeeh@galileo.co.il
+Copyright (C) 2002 RidgeRun, Inc.
+Copyright (C) 2002 Samsung Electronics SW.LEE  <hitchcar@sec.samsung.com>
+Copyright (C) 2002 Scott McNutt <smcnutt@artesyncp.com>
+Copyright (c) 2002	Stephan Linz <linz@mazet.de>, <linz@li-pro.net>
+Copyright (C) 2002 Thomas Gleixner (tglx@linutronix.de)
+Copyright (c) 2003/06, Courage Co., Ltd.
+Copyright (C) 2003-2004 Arabella Software Ltd.
+Copyright (C) 2003, 2004  Free Software Foundation, Inc.
+Copyright (C) 2003-2004, Greg Ungerer (gerg@snapgear.com)
+Copyright (C) 2003, 2004  Maciej W. Rozycki
+Copyright (C) 2003-2005 Arabella Software Ltd.
+Copyright (C) 2003-2005 Nokia Corporation
+Copyright (C) 2003-2006  Christophe Devine
+Copyright (C) 2003 Aleph One Ltd.
+Copyright (C) 2003 Arabella Software Ltd.
+Copyright (C) 2003 ATMEL
+Copyright (c) 2003	Bas Vermeulen <bas@buyways.nl>,
+Copyright (C) 2003 Bernardo Innocenti <bernie@develer.com>
+Copyright (C) 2003 Cirrus Logic, Inc
+Copyright (c) 2003 Denis Peter, MPL AG Switzerland, d.petr@mpl.ch.
+Copyright (C) 2003 ETC s.r.o.
+Copyright (C) 2003 IMMS gGmbH <www.imms.de>
+Copyright (C) 2003       John Williams <jwilliams@itee.uq.edu.au>
+Copyright (C) 2003     John Williams <jwilliams@itee.uq.edu.au>
+Copyright (C) 2003  John Williams <jwilliams@itee.uq.edu.au>
+Copyright (C) 2003	John Williams (jwilliams@itee.uq.edu.au)
+Copyright (c) 2003 Josef Baumgartner <josef.baumgartner@telex.de>
+Copyright (C) 2003	Josef Baumgartner <josef.baumgartner@telex.de>
+Copyright (C) 2003 Kai-Uwe Bloem,
+Copyright (C) 2003	Kai-Uwe Bloem <kai-uwe.bloem@auerswald.de>
+Copyright (C) 2003 Konrad Eisele <eiselekd@web.de>
+Copyright (c) 2003	Kshitij <kshitij@ti.com>
+Copyright (C) 2003	Kyle Harris <kharris@nexus-tech.net>
+Copyright (C) 2003  Manuel Novoa III  <mjn3@codepoet.org>
+Copyright (C) 2003 Martin Krause, TQ-Systems GmbH, martin.krause@tqs.de
+Copyright (C) 2003  Martin Winistoerfer, martinwinistoerfer@gmx.ch.
+Copyright (c) 2003  Masami Komiya <mkomiya@sonare.it>
+Copyright (c) 2003  Metrowerks/Motorola
+Copyright(c) 2003	Metrowerks	<mwaddel@metrowerks.com>
+Copyright (C) 2003 Montavista Software, Inc
+Copyright (C) 2003 Motorola Inc.
+Copyright (c) 2003	Richard Woodruff <r-woodruff2@ti.com>
+Copyright (C) 2003	Robert Schwebel <r.schwebel@pengutronix.de>
+Copyright (C) 2003 SAN People
+Copyright (c) 2003 Texas Instruments
+Copyright (c) 2003	Thomas.Lange@corelatus.se
+Copyright (C) 2003 Travis B. Sawyer <travis.sawyer@sandburst.com>
+Copyright (C) 2004-2005 Arabella Software Ltd.
+Copyright (c) 2004-2005, Greg Ungerer <greg.ungerer@opengear.com>
+Copyright (c) 2004-2005 Sergey Lyubka <valenok@gmail.com>
+Copyright (C) 2004-2006 Atmel Corporation
+Copyright (C) 2004-2007 ARM Limited.
+Copyright (C) 2004-2008 Arthur Shipkowski (art@videon-central.com)
+Copyright (c) 2004-2008 Texas Instruments
+Copyright (C) 2004-2009 Analog Devices Inc.
+Copyright (C) 2004-2009 Freescale Semiconductor, Inc.
+Copyright (C) 2004 Arabella Software Ltd.
+Copyright (C) 2004 by FS Forth-Systeme GmbH.
+Copyright (c) 2004	Cucy Systems (http://www.cucy.com)
+Copyright (C) 2004 David Brownell
+Copyright (C) 2004  Gaisler Research AB
+Copyright (C) 2004 Gary Jennejohn garyj@denx.de
+Copyright (C) 2004 IMMS gGmbH <www.imms.de>
+Copyright (C) 2004 Lothar Wassmann
+Copyright (C) 2004 MPC-Data Limited. (http://www.mpc-data.co.uk)
+Copyright (C) 2004 Nokia Corporation
+Copyright (C) 2004 Patrik Kluba,
+Copyright (C) 2004 PaulReynolds@lhsolutions.com
+Copyright (c) 2004 Picture Elements, Inc.
+Copyright (C) 2004 Psion Teklogix
+Copyright (C) 2004 Ray Lehtiniemi
+Copyright (C) 2004 Sascha Hauer, Synertronixx GmbH
+Copyright (C) 2004 Stefan Holst <mail@s-holst.de>
+Copyright (C) 2004 Sylvain Munaut <tnt@246tNt.com>
+Copyright (c) 2004	Texas Instruments <r-woodruff2@ti.com>
+Copyright (C) 2004 Thomas Gleixner (tglx@linutronix.de)
+Copyright (c) 2004 TsiChung Liew (Tsi-Chung.Liew@freescale.com)
+Copyright (C) 2005-2006 Atmel Corporation
+Copyright (c) 2005-2006 Gianluigi Tiesi <sherpya@netfarm.it>
+Copyright (c) 2005-2007 Samsung Electronics
+Copyright (C) 2005-2008 Arthur Shipkowski (art@videon-central.com)
+Copyright (C) 2005-2008 Atmel Corporation
+Copyright(c) 2005-2008 Samsung Electronics
+Copyright (c) 2005-2009 Analog Devices Inc.
+Copyright (c) 2005, 2009 Freescale Semiconductor, Inc
+Copyright (C) 2005-2009 Samsung Electronics
+Copyright (C) 2005 Arabella Software Ltd.
+Copyright (C) 2005 Bas Vermeulen, BuyWays BV <bas@buyways.nl>
+Copyright (c) 2005 Ben Gardner <bgardner@wabtec.com>
+Copyright (C) 2005 by Videon Central, Inc.
+Copyright (c) 2005 Cisco Systems.  All rights reserved.
+Copyright (C) 2005 David Brownell
+Copyright (c) 2005 Freescale Semiconductor, Inc.
+Copyright (C) 2005 HP Labs
+Copyright (C) 2005 Ivan Kokshaysky
+Copyright (c) 2005 MontaVista Software, Inc.
+Copyright (C) 2005 Olav Kongas <ok@artecdesign.ee>
+Copyright (C) 2005 Sandburst Corporation
+Copyright (C) 2005 Texas Instruments.
+Copyright (C) 2005 Videon Central, Inc.
+Copyright (C) 2005 Wind River Systems
+Copyright (C) 2006-2007 Eurotech S.p.A. <info@eurotech.it>
+Copyright (C) 2006-2007 Rodolfo Giometti <giometti@linux.it>
+Copyright (C) 2006, 2007 University of Szeged, Hungary
+Copyright (c) 2006-2007 Wind River Systems, Inc.
+Copyright (c) 2006-2008 Analog Devices Inc.
+Copyright (C) 2006, 2008 Atmel Corporation
+Copyright (c) 2006-2008 Freescale Semiconductor
+opyright (c) 2006, 2008 Junio C Hamano
+Copyright (C) 2006-2008 Nokia Corporation
+Copyright (c) 2006-2008 Syed Mohammed Khasim <x0khasim@ti.com>
+Copyright (c) 2006-2009 Analog Devices Inc.
+Copyright (c) 2006-2009 Freescale Semiconductor, Inc.
+Copyright (C) 2006 Aaron Gage, Ocean Optics Inc.
+Copyright (c) 2006 Ben Warren, Qstreams Networks Inc.
+Copyright (C) 2006 Bryan O'Donoghue, CodeHermit
+Copyright (C) 2006 by Weiss-Electronic GmbH.
+Copyright (C) 2006 CodeHermit.
+Copyright (C) 2006 David Gibson, IBM Corporation.
+Copyright (C) 2006 Dominic Rath <Dominic.Rath@gmx.de>
+Copyright (C) 2006  Embedded Artists AB (www.embeddedartists.com)
+Copyright (C) 2006 Embedded Planet, LLC.
+Copyright (C) 2006 Freescale Semiconductor, Inc.
+Copyright (C) 2006 Free Software Foundation, Inc.
+Copyright (C) 2006 Micronas GmbH
+Copyright (C) 2006 Mihai Georgian <u-boot@linuxnotincluded.org.uk>
+Copyright (C) 2006 Pavel Pisa, PiKRON <ppisa@pikron.com>
+Copyright (C) 2006 Texas Instruments
+Copyright (c) 2006 Thomas Gleixner <tglx@linutronix.de>
+Copyright (c) 2006 Wind River Systems, Inc.
+Copyright (c) 2007-2008 Analog Devices Inc.
+Copyright (C) 2007-2008 Freescale Semiconductor, Inc.
+Copyright (C) 2007-2008 Industrie Dial Face S.p.A.
+Copyright (c) 2007-2008, Juniper Networks, Inc.
+Copyright (C) 2007, 2008 Nobobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Copyright (c) 2007-2009 Analog Devices Inc.
+Copyright (C) 2007-2009  Freescale Semiconductor, Inc.
+Copyright (C) 2007-2009 Industrie Dial Face S.p.A.
+Copyright (C) 2007-2009 Texas Instruments, Inc.
+Copyright (C) 2007 Andrew Victor
+Copyright (C) 2007 Atmel Corporation
+Copyright (c) 2007 Carlos Munoz <carlos@kenati.com>
+Copyright (C) 2007 Daniel Hellstrom <daniel@gaisler.com>
+Copyright (C) 2007 Eurotech S.p.A. <info@eurotech.it>
+Copyright (C) 2007 Freescale Semiconductor, Inc.
+Copyright (C) 2007 Gerald Van Baren, Custom IDEAS, vanbaren@cideas.com
+Copyright (C) 2007, Guennadi Liakhovetski <lg@denx.de>
+Copyright (C) 2007 Kenati Technologies, Inc.
+Copyright (C) 2007 Lead Tech Design <www.leadtechdesign.com>
+Copyright (C) 2007 Logic Product Development, Inc.
+Copyright (C) 2007 MontaVista Software, Inc.
+Copyright (C) 2007 Nobuhiro Iwamatsu <iwamatsu@nigauri.org>
+Copyright (C) 2007 Pengutronix,
+Copyright (C) 2007 Ralf Baechle (ralf@linux-mips.org)
+Copyright (C) 2007 Rodolfo Giometti <giometti@linux.it>
+Copyright (c) 2007	Samsung Electronics
+Copyright (C) 2007 Sascha Hauer, Pengutronix
+Copyright (C) 2007 Semihalf
+Copyright (C) 2007 Sergey Kubushyn <ksi@koi8.net>
+Copyright (C) 2007 Stelian Pop <stelian.pop@leadtechdesign.com>
+Copyright (C) 2007 Yoshihiro Shimoda <shimoda.yoshihiro@renesas.com>
+Copyright (c) 2008-2009 Analog Devices Inc.
+Copyright (C) 2008,2009 Eric Jarrige <jorasse@users.sourceforge.net>
+Copyright (c) 2008, 2009 esd gmbh Hannover Germany
+Copyright (c) 2008-2009 I-SYST.
+Copyright (C) 2008-2009  MontaVista Software, Inc.
+Copyright (C) 2008-2009 Samsung Electronics
+Copyright (c) 2008 Analog Devices Inc.
+Copyright (C) 2008 Arthur Shipkowski (art@videon-central.com)
+Copyright (C) 2008 Atmel Corporation
+Copyright (C) 2008 by Texas Instruments
+Copyright (C) 2008 Daniel Hellstrom (daniel@gaisler.com)
+Copyright (C) 2008 Dave S.r.l. <www.dave.eu>
+Copyright (c) 2008 Eric Jarrige <eric.jarrige@armadeus.org>
+Copyright (c) 2008 Excito Elektronik i Skåne AB
+Copyright (c) 2008 Freescale Semiconductor, Inc.
+Copyright (C) 2008, Guennadi Liakhovetski <lg@denx.de>
+Copyright (C) 2008 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
+Copyright (C) 2008 Kim B. Heino
+Copyright (C) 2008 Lyrtech <www.lyrtech.com>
+Copyright (c) 2008, Michael Trimarchi <trimarchimichael@yahoo.it>
+Copyright (C) 2008 Miromico AG
+Copyright (C) 2008 MontaVista Software, Inc.
+Copyright (C) 2008 Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>
+Copyright (C) 2008 Nokia Corporation
+Copyright (c) 2008 Nuovation System Designs, LLC
+Copyright (C) 2008 Philip Balister, OpenSDR <philip@opensdr.com>
+Copyright (c) 2008 Pieter Voorthuijsen <pieter.voorthuijsen@prodrive.nl>
+Copyright (C) 2008 Renaud CERRATO r.cerrato@til-technologies.fr
+Copyright (C) 2008 Renesas Solutions Corp.
+Copyright (C) 2008 Ronetix Ilko Iliev (www.ronetix.at)
+Copyright (C) 2008 RuggedCom, Inc.
+Copyright (C) 2008 Samsung Electronics
+Copyright (C) 2008 Sascha Hauer, Pengutronix <s.hauer@pengutronix.de>
+Copyright (C) 2008 Texas Instruments, Inc <www.ti.com>
+Copyright (C) 2008 Vivek Kutal      <vivek.kutal@azingo.com>
+Copyright (c) 2008 Yoshihiro Shimoda <shimoda.yoshihiro@renesas.com>
+Copyright (C) 2008 Yusuke Goda <goda.yusuke@renesas.com>
+Copyright (C) 2009, 2010 Matthias Kaehlcke <matthias@kaehlcke.net>
+Copyright (C) 2009 Alessandro Rubini
+Copyright (c) 2009 Analog Devices Inc.
+Copyright (C) 2009 BuS Elektronik GmbH & Co. KG
+Copyright (C) 2009 David Brownell
+Copyright (C) 2009, Emcraft Systems, Ilya Yanok <yanok@emcraft.com>
+Copyright (c) 2009 esd gmbh hannover germany.
+Copyright (C) 2009 Freescale Semiconductor, Inc.
+Copyright (C) 2009, Ilya Yanok, Emcraft Systems, <yanok@emcraft.com>
+Copyright (C) 2009 Jean-Christophe PLAGNIOL-VILLARD <plagnioj@jcrosoft.com>
+Copyright (C) 2009 Jens Scharsig (js_at_ng@scharsoft.de)
+Copyright (C) 2009 Matthias Kaehlcke <matthias@kaehlcke.net>
+Copyright (c) 2009  MontaVista Software, Inc.
+Copyright (C) 2009 Nick Thompson, GE Fanuc Ltd, <nick.thompson@gefanuc.com>
+Copyright (C) 2009 Nobuhiro Iwamatsu <iwamatsu.nobuhiro@renesas.com>
+Copyright (C) 2009 Renesas Solutions Corp.
+Copyright (c) 2009 Robin Getz <rgetz@blackfin.uclinux.org>
+Copyright (c) 2009 Samsung Electronics
+Copyright (C) 2009 Texas Instruments Incorporated - http://www.ti.com/
+Copyright (c) 2009 Wind River Systems, Inc.
+Copyright (C) 2010, 2009 Matthias Kaehlcke <matthias@kaehlcke.net>
+Copyright (C) Archway Digital Solutions.
+Copyright (C) ARM Limited 1998.
+Copyright (C) Excito Elektronik i Skåne AB
+Copyright (C) Freescale Semiconductor, Inc. 2006-2009.
+Copyright (c) International Business Machines Corp., 2006
+Copyright (C) Linux Networx. 2002
+Copyright (C) Matrix Vision GmbH 2008
+Copyright (c) Nokia Corporation, 2006, 2007
+Copyright (C) 2001, Russ Dill
+Copyright (c) Orbacom Systems, Inc <www.orbacom.com>
+Copyright (C) Procsys.
+Copyright (C) Samsung Electronics, 2009
+Copyright (C) SAN People
+Copyright (C) Sheldon Instruments, Inc. 2008
+Copyright Freescale Semiconductor, Inc. 2004, 2006, 2008.
+Copyright - Galileo technology.
+Copyright MontaVista Software Incorporated, 2000
+Copyright Motorola, Inc. 1993, 1994
+Copyright Motrola 1999
+Copyright Rob Taylor, Flying Pig Systems Ltd. 2000.
+Copyright Torsten Duwe <duwe@informatik.uni-erlangen.de> 1993
+Copyright Wind River Systems, Inc., 1984-2003
+(C) Copyright 2006 Eric Benard
+Copyright Motorola 1984 (!).
+Copyright (C) Motorola, 2003.
+Copyright (c) 1998 by Michael Barr
+Josh Huber, (C) Copyright 2001 Mission Critical Linux, Inc.
+(C) Copyright 2004 Gary Jennejohn
+(C) Copyright 2005 Eric Benard
+Copyright (c) 1999 Dan Malek (dmalek@jlc.net).
+Copyright (C) Motorola, 2001, present.
+Copyright (C) 2009 Red Hat
+Roel Loeffen, (C) Copyright 2006 Prodrive B.V.
+Copyright (C) Motorola, 2003.
+Copyright (C) 2004-2005 Barco Control Rooms
+Copyright (C) 2000 by Lineo, Inc., and
+Copyright (C) Motorola, 2003.
+Copyright (c) 1992, 1993 The Regents of the University of California.
+
+The aggregate work is under the terms of the GNU GPL though many
+of these files are under a 3-clause BSD license:
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+1. Redistributions of source code must retain the above copyright
+   notice, this list of conditions and the following disclaimer.
+2. Redistributions in binary form must reproduce the above copyright
+   notice, this list of conditions and the following disclaimer in the
+   documentation and/or other materials provided with the distribution.
+3. Neither the name of the University nor the names of its contributors
+   may be used to endorse or promote products derived from this software
+   without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+SUCH DAMAGE.
+
+Some are under the zlib license:
+
+  This software is provided 'as-is', without any express or implied
+  warranty.  In no event will the authors be held liable for any damages
+  arising from the use of this software.
+
+  Permission is granted to anyone to use this software for any purpose,
+  including commercial applications, and to alter it and redistribute it
+  freely, subject to the following restrictions:
+
+  1. The origin of this software must not be misrepresented; you must not
+     claim that you wrote the original software. If you use this software
+     in a product, an acknowledgment in the product documentation would be
+     appreciated but is not required.
+  2. Altered source versions must be plainly marked as such, and must not be
+     misrepresented as being the original software.
+  3. This notice may not be removed or altered from any source distribution.
+
+
+Some files (mostly yaffs2) are distributed under the GNU LGPL v2 or later
+or the GNU LGPL v2.1 or later, both of which can be found in
+/usr/share/common-licenses on your Debian system.

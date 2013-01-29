@@ -1,0 +1,1287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 8. Eyes and Half Eyes</title>
+
+<meta name="description" content="GNU Go Documentation: 8. Eyes and Half Eyes">
+<meta name="keywords" content="GNU Go Documentation: 8. Eyes and Half Eyes">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Eyes"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_7.html#Dragons-in-Color" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Local-Games" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_7.html#Worms-and-Dragons" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Eyes-and-Half-Eyes"></a>
+<h1 class="chapter">8. Eyes and Half Eyes</h1>
+
+<p>The purpose of this Chapter is to describe the algorithm used in
+GNU Go to determine eyes.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Local-Games">8.1 Local games</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Space">8.2 Eye spaces</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Eye space
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Space-as-Local-Game">8.3 The eyespace as local game</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">     Eye space as local game
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Example">8.4 An example</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Graphs">8.5 Graphs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                      Underlying graphs
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Shape">8.6 Eye shape analysis</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                   Pattern matching
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Local-Game-Values">8.7 Eye Local Game Values</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">       Pattern matching
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Topology">8.8 Topology of Half Eyes and False Eyes</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                False eyes and half eyes
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Topology-with-Ko">8.9 Eye Topology with Ko</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">        False eyes and half eyes with ko
+</td></tr>
+<tr><td align="left" valign="top"><a href="#False-Margins">8.10 False Margins</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">               False margins
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Eye-Functions">8.11 Functions in &lsquo;<tt>optics.c</tt>&rsquo;</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="Local-Games"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eyes" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Space" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Local-games"></a>
+<h2 class="section">8.1 Local games</h2>
+
+<p>The fundamental paradigm of combinatorial game theory is that games
+can be added and in fact form a group. If &lsquo;<samp>G</samp>&rsquo; and &lsquo;<samp>H</samp>&rsquo; are
+games, then &lsquo;<samp>G+H</samp>&rsquo; is a game in which each player on his turn
+has the option of playing in either move. We say that the game
+&lsquo;<samp>G+H</samp>&rsquo; is the sum of the local games &lsquo;<samp>G</samp>&rsquo; and &lsquo;<samp>H</samp>&rsquo;.
+</p>
+<p>Each connected eyespace of a dragon affords a local game which yields
+a local game tree. The score of this local game is the number of eyes
+it yields. Usually if the players take turns and make optimal moves,
+the end scores will differ by 0 or 1. In this case, the local game may
+be represented by a single number, which is an integer or half
+integer. Thus if &lsquo;<samp>n(O)</samp>&rsquo; is the score if &lsquo;<samp>O</samp>&rsquo; moves first,
+both players alternate (no passes) and make alternate moves, and
+similarly &lsquo;<samp>n(X)</samp>&rsquo;, the game can be represented by
+&lsquo;<samp>{n(O)|n(X)}</samp>&rsquo;. Thus {1|1} is an eye, {2|1} is an eye plus a
+half eye, etc.
+</p>
+<p>The exceptional game {2|0} can occur, though rarely. We call
+an eyespace yielding this local game a CHIMERA.  The dragon
+is alive if any of the local games ends up with a score of 2
+or more, so {2|1} is not different from {3|1}. Thus {3|1} is
+NOT a chimera. 
+</p>
+<p>Here is an example of a chimera:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XXXXX
+XOOOX
+XO.OOX
+XX..OX
+XXOOXX
+XXXXX
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Eye-Space"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Local-Games" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Space-as-Local-Game" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Eye-spaces"></a>
+<h2 class="section">8.2 Eye spaces</h2>
+
+<p>In order that each eyespace be assignable to a dragon,
+it is necessary that all the dragons surrounding it
+be amalgamated (see section <a href="gnugo_7.html#Amalgamation">Amalgamation</a>). This is the
+function of <code>dragon_eye()</code>.
+</p>
+<p>An EYE SPACE for a black dragon is a collection of vertices
+adjacent to a dragon which may not yet be completely closed off,
+but which can potentially become eyespace. If an open eye space is
+sufficiently large, it will yield two eyes. Vertices at the edge
+of the eye space (adjacent to empty vertices outside the eye space)
+are called MARGINAL.
+</p>
+<p>Here is an example from a game:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ |. X . X X . . X O X O 
+ |X . . . . . X X O O O
+ |O X X X X . . X O O O
+ |O O O O X . O X O O O
+ |. . . . O O O O X X O
+ |X O . X X X . . X O O
+ |X O O O O O O O X X O
+ |. X X O . O X O . . X
+ |X . . X . X X X X X X
+ |O X X O X . X O O X O
+
+</pre></td></tr></table>
+
+<p>Here the &lsquo;<samp>O</samp>&rsquo; dragon which is surrounded in the center has open
+eye space. In the middle of this open eye space are three
+dead &lsquo;<samp>X</samp>&rsquo; stones. This space is large enough that O cannot be
+killed. We can abstract the properties of this eye shape as follows.
+Marking certain vertices as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ |- X - X X - - X O X O 
+ |X - - - - - X X O O O
+ |O X X X X - - X O O O
+ |O O O O X - O X O O O
+ |! . . . O O O O X X O
+ |X O . X X X . ! X O O
+ |X O O O O O O O X X O
+ |- X X O - O X O - - X
+ |X - - X - X X X X X X
+ |O X X O X - X O O X O
+
+</pre></td></tr></table>
+
+<p>the shape in question has the form:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+!...
+  .XXX.!
+
+</pre></td></tr></table>
+
+<p>The marginal vertices are marked with an exclamation point (&lsquo;<samp>!</samp>&rsquo;).
+The captured &lsquo;<samp>X</samp>&rsquo; stones inside the eyespace are naturally marked &lsquo;<samp>X</samp>&rsquo;.
+</p>
+<p>The precise algorithm by which the eye spaces are determined is
+somewhat complex. Documentation of this algorithm is in the
+comments in the source to the function <code>make_domains()</code> in
+&lsquo;<tt>optics.c</tt>&rsquo;.
+</p>
+<p>The eyespaces can be conveniently displayed using a colored 
+ascii diagram by running <code>gnugo -E</code>.
+</p>
+<hr size="6">
+<a name="Eye-Space-as-Local-Game"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Space" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Example" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-eyespace-as-local-game"></a>
+<h2 class="section">8.3 The eyespace as local game</h2>
+
+<p>In the abstraction, an eyespace consists of a set of vertices
+labelled:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+!  .  X
+
+</pre></td></tr></table>
+
+<p>Tables of many eyespaces are found in the database
+&lsquo;<tt>patterns/eyes.db</tt>&rsquo;. Each of these may be thought of as a local
+game. The result of this game is listed after the eyespace in the form
+<code>:max,min</code>, where <code>max</code> is the number of eyes the pattern
+yields if &lsquo;<samp>O</samp>&rsquo; moves first, while <code>min</code> is the number of eyes
+the pattern yields if &lsquo;<samp>X</samp>&rsquo; moves first. The player who owns the eye
+space is denoted &lsquo;<samp>O</samp>&rsquo; throughout this discussion. Since three eyes
+are no better than two, there is no attempt to decide whether the space
+yields two eyes or three, so max never exceeds 2. Patterns with min&gt;1
+are omitted from the table.
+</p>
+<p>For example, we have:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Pattern 548
+
+ x
+xX.!
+
+:0111
+
+</pre></td></tr></table>
+
+<p>Here notation is as above, except that &lsquo;<samp>x</samp>&rsquo; means &lsquo;<samp>X</samp>&rsquo; or 
+<code>EMPTY</code>.  The result of the pattern is not different if &lsquo;<samp>X</samp>&rsquo; has
+stones at these vertices or not.
+</p>
+<p>We may abstract the local game as follows. The two players &lsquo;<samp>O</samp>&rsquo;
+and &lsquo;<samp>X</samp>&rsquo; take turns moving, or either may pass.
+</p>
+<p>RULE 1: &lsquo;<samp>O</samp>&rsquo; for his move may remove any vertex marked &lsquo;<samp>!</samp>&rsquo;
+or marked &lsquo;<samp>.</samp>&rsquo;.
+</p>
+<p>RULE 2: &lsquo;<samp>X</samp>&rsquo; for his move may replace a &lsquo;<samp>.</samp>&rsquo; by an &lsquo;<samp>X</samp>&rsquo;. 
+</p>
+<p>RULE 3: &lsquo;<samp>X</samp>&rsquo; may remove a &lsquo;<samp>!</samp>&rsquo;. In this case, each &lsquo;<samp>.</samp>&rsquo;
+adjacent to the &lsquo;<samp>!</samp>&rsquo; which is removed becomes a &lsquo;<samp>!</samp>&rsquo; . If an
+&lsquo;<samp>X</samp>&rsquo; adjoins the &lsquo;<samp>!</samp>&rsquo; which is removed, then that &lsquo;<samp>X</samp>&rsquo;
+and any which are connected to it are also removed. Any &lsquo;<samp>.</samp>&rsquo; which
+are adjacent to the removed &lsquo;<samp>X</samp>&rsquo;&rsquo;s then become &lsquo;<samp>.</samp>&rsquo;.
+</p>
+<p>Thus if &lsquo;<samp>O</samp>&rsquo; moves first he can transform the eyeshape in
+the above example to:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"> ...            or      !...
+  .XXX.!                  .XXX.
+</pre></td></tr></table>
+
+<p>However if &lsquo;<samp>X</samp>&rsquo; moves he may remove the &lsquo;<samp>!</samp>&rsquo; and the &lsquo;<samp>.</samp>&rsquo;s
+adjacent to the &lsquo;<samp>!</samp>&rsquo; become &lsquo;<samp>!</samp>&rsquo; themselves. Thus if &lsquo;<samp>X</samp>&rsquo;
+moves first he may transform the eyeshape to:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"> !..           or    !..
+  .XXX.!              .XXX!
+</pre></td></tr></table>
+
+<p>NOTE: A nuance which is that after the &lsquo;<samp>X:1</samp>&rsquo;, &lsquo;<samp>O:2</samp>&rsquo;
+exchange below, &lsquo;<samp>O</samp>&rsquo; is threatening to capture three X stones,
+hence has a half eye to the left of 2.  This is subtle, and there are
+other such subtleties which our abstraction will not capture. Some of
+these at least can be dealt with by a refinements of the scheme, but
+we will content ourselves for the time being with a simplified model.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+ |- X - X X - - X O X O 
+ |X - - - - - X X O O O
+ |O X X X X - - X O O O
+ |O O O O X - O X O O O
+ |1 2 . . O O O O X X O
+ |X O . X X X . 3 X O O
+ |X O O O O O O O X X O
+ |- X X O - O X O - - X
+ |X - - X - X X X X X X
+ |O X X O X - X O O X O
+
+</pre></td></tr></table>
+
+<p>We will not attempt to characterize the terminal states
+of the local game (some of which could be seki) or
+the scoring. 
+</p>
+<hr size="6">
+<a name="Eye-Example"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Space-as-Local-Game" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Graphs" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="An-example"></a>
+<h2 class="section">8.4 An example</h2>
+
+<p>Here is a local game which yields exactly one
+eye, no matter who moves first:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+!
+...
+...!
+
+</pre></td></tr></table>
+
+<p>Here are some variations, assuming &lsquo;<samp>O</samp>&rsquo; moves first.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">!        (start position)
+...
+...!
+</pre><pre class="example">
+
+</pre><pre class="example">...      (after &lsquo;<samp>O</samp>&rsquo;'s move)
+...!
+</pre><pre class="example">
+
+</pre><pre class="example">... 
+..!
+</pre><pre class="example">
+
+</pre><pre class="example">... 
+..
+</pre><pre class="example">
+
+</pre><pre class="example">.X.       (nakade)
+..
+</pre></td></tr></table>
+
+<p>Here is another variation:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+</pre><pre class="example">!         (start)
+...
+...!
+</pre><pre class="example">
+
+</pre><pre class="example">!         (after &lsquo;<samp>O</samp>&rsquo;'s move)
+. .
+...!
+</pre><pre class="example">
+
+</pre><pre class="example">!         (after &lsquo;<samp>X</samp>&rsquo;'s move)
+. .
+..X!
+</pre><pre class="example">
+
+</pre><pre class="example">. .
+..X!
+</pre><pre class="example">
+
+</pre><pre class="example">. !
+.!
+</pre></td></tr></table>
+
+
+<hr size="6">
+<a name="Graphs"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Example" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Shape" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Graphs-1"></a>
+<h2 class="section">8.5 Graphs</h2>
+
+<p>It is a useful observation that the local game associated
+with an eyespace depends only on the underlying graph, which
+as a set consists of the set of vertices, in which two elements
+are connected by an edge if and only if they are adjacent on
+the Go board. For example the two eye shapes:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+..
+ ..
+
+and
+
+....
+
+</pre></td></tr></table>
+
+<p>though distinct in shape have isomorphic graphs, and consequently
+they are isomorphic as local games. This reduces the number of
+eyeshapes in the database &lsquo;<tt>patterns/eyes.db</tt>&rsquo;.
+</p>
+<p>A further simplification is obtained through our treatment of
+half eyes and false eyes. Such patterns are identified by the
+topological analysis (see section <a href="#Eye-Topology">Topology of Half Eyes and False Eyes</a>).
+</p>
+<p>A half eye is isomorphic to the pattern <code>(!.)</code> . To see this,
+consider the following two eye shapes:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XOOOOOO
+X.....O
+XOOOOOO
+
+</pre><pre class="example">and:
+</pre><pre class="example">
+XXOOOOO
+XOa...O
+XbOOOOO
+XXXXXXX
+
+</pre></td></tr></table>
+
+<p>These are equivalent eyeshapes, with isomorphic local games {2|1}.
+The first has shape:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+!....
+
+</pre></td></tr></table>
+
+<p>The second eyeshape has a half eye at &lsquo;<samp>a</samp>&rsquo; which is taken when &lsquo;<samp>O</samp>&rsquo; 
+or &lsquo;<samp>X</samp>&rsquo; plays at &lsquo;<samp>b</samp>&rsquo;. This is found by the topological
+criterion (see section <a href="#Eye-Topology">Topology of Half Eyes and False Eyes</a>).
+</p>
+<p>The graph of the eye_shape, ostensibly &lsquo;<samp>....</samp>&rsquo; is modified by replacing
+the left &lsquo;<samp>.</samp>&rsquo; by &lsquo;<samp>!.</samp>&rsquo; during graph matching.
+</p>
+
+<p>A false eye is isomorphic to the pattern <code>(!)</code> . To see this,
+consider the following eye shape:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+XXXOOOOOO
+X.Oa....O
+XXXOOOOOO
+
+</pre></td></tr></table>
+
+<p>This is equivalent to the two previous eyeshapes, with an isomorphic
+local game {2|1}.
+</p>
+<p>This eyeshape has a false eye at &lsquo;<samp>a</samp>&rsquo;. This is also found by the
+topological criterion.
+</p>
+<p>The graph of the eye_shape, ostensibly &lsquo;<samp>.....</samp>&rsquo; is modified by replacing
+the left &lsquo;<samp>.</samp>&rsquo; by &lsquo;<samp>!</samp>&rsquo;. This is made directly in the eye data,
+not only during graph matching.
+</p>
+<hr size="6">
+<a name="Eye-Shape"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Graphs" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Local-Game-Values" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Eye-shape-analysis"></a>
+<h2 class="section">8.6 Eye shape analysis</h2>
+
+<p>The patterns in &lsquo;<tt>patterns/eyes.db</tt>&rsquo; are compiled into graphs
+represented essentially by arrays in &lsquo;<tt>patterns/eyes.c</tt>&rsquo;.
+</p>
+<p>Each actual eye space as it occurs on the board is also
+compiled into a graph. Half eyes are handled as follows.
+Referring to the example 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">XXOOOOO
+XOa...O
+XbOOOOO
+XXXXXX
+</pre></td></tr></table>
+
+<p>repeated from the preceding discussion, the vertex at &lsquo;<samp>b</samp>&rsquo; is
+added to the eyespace as a marginal vertex. The adjacency
+condition in the graph is a macro (in &lsquo;<tt>optics.c</tt>&rsquo;): two
+vertices are adjacent if they are physically adjacent, 
+or if one is a half eye and the other is its key point.
+</p>
+<p>In <code>recognize_eyes()</code>, each such graph arising from an actual eyespace is
+matched against the graphs in &lsquo;<tt>eyes.c</tt>&rsquo;.  If a match is found, the
+result of the local game is known. If a graph cannot be matched, its
+local game is assumed to be {2|2}.
+</p>
+<hr size="6">
+<a name="Eye-Local-Game-Values"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Shape" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Topology" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Eye-Local-Game-Values-1"></a>
+<h2 class="section">8.7 Eye Local Game Values</h2>
+
+<p>The game values in &lsquo;<tt>eyes.db</tt>&rsquo; are given in a simplified scheme which is
+flexible enough to represent most possibilities in a useful way.
+</p>
+<p>The colon line below the pattern gives the eye value of the matched
+eye shape. This consists of four digits, each of which is the number
+of eyes obtained during the following conditions:
+</p>
+<ol>
+<li> The attacker moves first and is allowed yet another move because
+the defender plays tenuki.
+</li><li> The attacker moves first and the defender responds locally.
+</li><li> The defender moves first and the attacker responds locally.
+</li><li> The defender moves first and is allowed yet another move because
+the attacker plays tenuki.
+</li></ol>
+
+<p>The first case does <strong>not</strong> necessarily mean that the attacker is
+allowed two consecutive moves. This is explained with an example
+later.
+</p>
+<p>Also, since two eyes suffice to live, all higher numbers also count
+as two.
+</p>
+<p>The following 15 cases are of interest:
+</p>
+<ul>
+<li> 0000 0 eyes.
+</li><li> 0001 0 eyes, but the defender can threaten to make one eye.
+</li><li> 0002 0 eyes, but the defender can threaten to make two eyes.
+</li><li> 0011 1/2 eye, 1 eye if defender moves first, 0 eyes if attacker does.
+</li><li> 0012 3/4 eyes, 3/2 eyes if defender moves first, 0 eyes if attacker does.
+</li><li> 0022 1* eye, 2 eyes if defender moves first, 0 eyes if attacker does.
+</li><li> 0111 1 eye, attacker can threaten to destroy the eye.
+</li><li> 0112 1 eye, attacker can threaten to destroy the eye, defender can threaten to make another eye.
+</li><li> 0122 5/4 eyes, 2 eyes if defender moves first, 1/2 eye if attacker does.
+</li><li> 0222 2 eyes, attacker can threaten to destroy both.
+</li><li> 1111 1 eye.
+</li><li> 1112 1 eye, defender can threaten to make another eye.
+</li><li> 1122 3/2 eyes, 2 eyes if defender moves first, 1 eye if attacker does.
+</li><li> 1222 2 eyes, attacker can threaten to destroy one eye.
+</li><li> 2222 2 eyes.
+</li></ul>
+
+<p>The 3/4, 5/4, and 1* eye values are the same as in Howard Landman&rsquo;s paper
+Eyespace Values in Go. Attack and defense points are only marked in
+the patterns when they have definite effects on the eye value,
+i.e. pure threats are not marked.
+</p>
+<p>Examples of all different cases can be found among the patterns in
+this file. Some of them might be slightly counterintuitive, so we
+explain one important case here. Consider
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Pattern 6141
+
+ X
+XX.@x
+
+:1122
+</pre></td></tr></table>
+
+<p>which e.g. matches in this position:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.OOOXXX
+OOXOXOO
+OXXba.O
+OOOOOOO
+</pre></td></tr></table>
+
+<p>Now it may look like &lsquo;<samp>X</samp>&rsquo; could take away both eyes by playing &lsquo;<samp>a</samp>&rsquo;
+followed by &lsquo;<samp>b</samp>&rsquo;, giving 0122 as eye value. This is where the subtlety
+of the definition of the first digit in the eye value comes into
+play. It does not say that the attacker is allowed two consecutive
+moves but only that he is allowed to play &quot;another move&quot;. The
+crucial property of this shape is that when &lsquo;<samp>X</samp>&rsquo; plays at a to destroy
+(at least) one eye, &lsquo;<samp>O</samp>&rsquo; can answer at &lsquo;<samp>b</samp>&rsquo;, giving:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+.OOOXXX
+OO.OXOO
+O.cOX.O
+OOOOOOO
+
+</pre></td></tr></table>
+
+<p>Now &lsquo;<samp>X</samp>&rsquo; has to continue at &lsquo;<samp>c</samp>&rsquo; in order to keep &lsquo;<samp>O</samp>&rsquo;
+at one eye. After this &lsquo;<samp>O</samp>&rsquo; plays tenuki and &lsquo;<samp>X</samp>&rsquo; cannot
+destroy the remaining eye by another move. Thus the eye value is
+indeed 1122.
+</p>
+<p>As a final note, some of the eye values indicating a threat depend
+on suicide to be allowed, e.g.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+Pattern 301
+ 
+X.X
+
+:1222
+
+</pre></td></tr></table>
+
+<p>We always assume suicide to be allowed in this database. It is easy
+enough to sort out such moves at a higher level when suicide is
+disallowed.
+</p>
+<hr size="6">
+<a name="Eye-Topology"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Local-Game-Values" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Topology-with-Ko" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Topology-of-Half-Eyes-and-False-Eyes"></a>
+<h2 class="section">8.8 Topology of Half Eyes and False Eyes</h2>
+
+<p>A HALF EYE is a pattern where an eye may or may not materialize,
+depending on who moves first. Here is a half eye for <code>O</code>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+   OOXX
+   O.O.
+   OO.X
+
+</pre></td></tr></table>
+
+<p>A FALSE EYE is an eye vertex which cannot become a proper eye. Here are
+two examples of false eyes for <code>O</code>:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+   OOX         OOX
+   O.O         O.OO
+   XOO         OOX
+
+</pre></td></tr></table>
+
+<p>We describe now the topological algorithm used to find half eyes
+and false eyes. In this section we ignore the possibility of ko.
+</p>
+<p>False eyes and half eyes can locally be characterized by the status of
+the diagonal intersections from an eye space. For each diagonal
+intersection, which is not within the eye space, there are three
+distinct possibilities:
+</p>
+<ul>
+<li> occupied by an enemy (<code>X</code>) stone, which cannot be captured.
+</li><li> either empty and <code>X</code> can safely play there, or occupied
+   by an <code>X</code> stone that can both be attacked and defended.
+</li><li> occupied by an <code>O</code> stone, an <code>X</code> stone that can be attacked
+   but not defended, or it&rsquo;s empty and <code>X</code> cannot safely play there.
+</li></ul>
+
+<p>We give the first possibility a value of two, the second a value of
+one, and the last a value of zero. Summing the values for the diagonal
+intersections, we have the following criteria:
+</p>
+<ul>
+<li> sum &gt;= 4: false eye
+</li><li> sum == 3: half eye
+</li><li> sum &lt;= 2: proper eye
+</li></ul>
+
+<p>If the eye space is on the edge, the numbers above should be decreased
+by 2. An alternative approach is to award diagonal points which are
+outside the board a value of 1. To obtain an exact equivalence we must
+however give value 0 to the points diagonally off the corners, i.e.
+the points with both coordinates out of bounds.
+</p>
+<p>The algorithm to find all topologically false eyes and half eyes is:
+</p>
+<p>For all eye space points with at most one neighbor in the eye space,
+evaluate the status of the diagonal intersections according to the
+criteria above and classify the point from the sum of the values.
+</p>
+<hr size="6">
+<a name="Eye-Topology-with-Ko"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Topology" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#False-Margins" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Eye-Topology-with-Ko-1"></a>
+<h2 class="section">8.9 Eye Topology with Ko</h2>
+
+
+<p>This section extends the topological eye analysis to handle ko. We
+distinguish between a ko in favor of &lsquo;<samp>O</samp>&rsquo; and one in favor of &lsquo;<samp>X</samp>&rsquo;:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">.?O?   good for O
+OO.O
+O.O?
+XOX.
+.X..
+
+</pre><pre class="example">.?O?   good for X
+OO.O
+OXO?
+X.X.
+.X..
+</pre></td></tr></table>
+
+<p>Preliminarily we give the former the symbolic diagonal value <code>a</code>
+and the latter the diagonal value <code>b</code>. We should clearly have
+<code>0 &lt; a &lt; 1 &lt; b &lt; 2</code>. Letting <code>e</code> be the topological eye value
+(still the sum of the four diagonal values), we want to have the
+following properties:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">e &lt;= 2     - proper eye
+2 &lt; e &lt; 3  - worse than proper eye, better than half eye
+e = 3      - half eye
+3 &lt; e &lt; 4  - worse than half eye, better than false eye
+e &gt;= 4     - false eye
+</pre></td></tr></table>
+
+<p>In order to determine the appropriate values of <code>a</code> and <code>b</code> we
+analyze the typical cases of ko contingent topological eyes:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">      .X..      (slightly) better than proper eye
+(a)   ..OO          e &lt; 2
+      OO.O
+      O.OO      e = 1 + a
+      XOX.
+      .X..
+
+</pre><pre class="example">
+</pre><pre class="example">      .X..      better than half eye, worse than proper eye
+(a')  ..OO      2 &lt; e &lt; 3
+      OO.O
+      OXOO      e = 1 + b
+      X.X.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X..      better than half eye, worse than proper eye
+(b)   .XOO      2 &lt; e &lt; 3
+      OO.O
+      O.OO      e = 2 + a
+      XOX.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X..      better than false eye, worse than half eye
+(b')  .XOO      3 &lt; e &lt; 4
+      OO.O
+      OXOO      e = 2 + b
+      X.X.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X..
+      XOX.      (slightly) better than proper eye
+(c)   O.OO          e &lt; 2
+      OO.O
+      O.OO      e = 2a
+      XOX.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X..
+      XOX.      proper eye, some aji
+(c')  O.OO      e ~ 2
+      OO.O
+      OXOO      e = a + b
+      X.X.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X..
+      X.X.      better than half eye, worse than proper eye
+(c'') OXOO      2 &lt; e &lt; 3
+      OO.O
+      OXOO      e = 2b
+      X.X.
+      .X..
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      XOX..     better than half eye, worse than proper eye
+(d)   O.O.X     2 &lt; e &lt; 3
+      OO.O.
+      O.OO.     e = 1 + 2a
+      XOX..
+      .X...
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      XOX..     half eye, some aji
+(d')  O.O.X     e ~ 3
+      OO.O.
+      OXOO.     e = 1 + a + b
+      X.X..
+      .X...
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      X.X..     better than false eye, worse than half eye
+(d'') OXO.X     3 &lt; e &lt; 4
+      OO.O.
+      OXOO.     e = 1 + 2b
+      X.X..
+      .X...
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      XOX..     better than false eye, worse than half eye
+(e)   O.OXX     3 &lt; e &lt; 4
+      OO.O.
+      O.OO.     e =  2 + 2a
+      XOX..
+      .X...
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      XOX..     false eye, some aji
+(e')  O.OXX     e ~ 4
+      OO.O.
+      OXOO.     e = 2 + a + b
+      X.X..
+      .X...
+
+</pre><pre class="example">      
+</pre><pre class="example">      .X...
+      X.X..     (slightly) worse than false eye
+(e'') OXOXX     4 &lt; e
+      OO.O.
+      OXOO.     e = 2 + 2b
+      X.X..
+      .X...
+
+</pre></td></tr></table>
+     
+
+<p>It may seem obvious that we should use
+</p><table><tr><td>&nbsp;</td><td><pre class="example">(i)   a=1/2, b=3/2
+</pre></td></tr></table>
+<p>but this turns out to have some drawbacks. These can be solved by
+using either of
+</p><table><tr><td>&nbsp;</td><td><pre class="example">(ii)  a=2/3, b=4/3
+(iii) a=3/4, b=5/4
+(iv)  a=4/5, b=6/5
+
+</pre></td></tr></table>
+
+<p>Summarizing the analysis above we have the following table for the
+four different choices of <code>a</code> and <code>b</code>.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">case    symbolic        a=1/2   a=2/3   a=3/4   a=4/5   desired
+        value           b=3/2   b=4/3   b=5/4   b=6/5   interval
+(a)     1+a             1.5     1.67    1.75    1.8         e &lt; 2
+(a')    1+b             2.5     2.33    2.25    2.2     2 &lt; e &lt; 3
+(b)     2+a             2.5     2.67    2.75    2.8     2 &lt; e &lt; 3
+(b')    2+b             3.5     3.33    3.25    3.2     3 &lt; e &lt; 4
+(c)     2a              1       1.33    1.5     1.6         e &lt; 2
+(c')    a+b             2       2       2       2           e ~ 2
+(c'')   2b              3       2.67    2.5     2.4     2 &lt; e &lt; 3
+(d)     1+2a            2       2.33    2.5     2.6     2 &lt; e &lt; 3
+(d')    1+a+b           3       3       3       3           e ~ 3
+(d'')   1+2b            4       3.67    3.5     3.4     3 &lt; e &lt; 4
+(e)     2+2a            3       3.33    3.5     3.6     3 &lt; e &lt; 4
+(e')    2+a+b           4       4       4       4           e ~ 4
+(e'')   2+2b            5       4.67    4.5     4.4     4 &lt; e
+
+</pre></td></tr></table>
+
+<p>We can notice that (i) fails for the cases (c&rdquo;), (d), (d&rdquo;), and (e).
+The other three choices get all values in the correct intervals. The
+main distinction between them is the relative ordering of (c&rdquo;) and (d)
+(or analogously (d&rdquo;) and (e)). If we do a more detailed analysis of
+these we can see that in both cases &lsquo;<samp>O</samp>&rsquo; can secure the eye
+unconditionally if he moves first while &lsquo;<samp>X</samp>&rsquo; can falsify it with ko
+if he moves first. The difference is that in (c&rdquo;), &lsquo;<samp>X</samp>&rsquo; has to make
+the first ko threat, while in (d), O has to make the first ko threat.
+Thus (c&rdquo;) is better for O and ought to have a smaller topological eye
+value than (d). This gives an indication that (iv) is the better choice.
+</p>
+<p>We can notice that any value of <code>a</code>, <code>b</code> satisfying
+<code>a+b=2</code> and <code>3/4&lt;a&lt;1</code> would have the same qualities as choice
+(iv) according to the analysis above. One interesting choice is
+<code>a=7/8, b=9/8</code> since these allow exact computations with floating
+point values having a binary mantissa. The latter property is shared by
+<code>a=3/4</code> and <code>a=1/2</code>.
+</p>
+<p>When there are three kos around the same eyespace, things become
+more complex. This case is, however, rare enough that we ignore it.
+</p>
+
+<hr size="6">
+<a name="False-Margins"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eye-Topology-with-Ko" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eye-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="False-Margins-1"></a>
+<h2 class="section">8.10 False Margins</h2>
+
+<p>The following situation is rare but special enough to warrant separate
+attention:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   OOOOXX
+   OXaX..
+   ------
+</pre></td></tr></table>
+
+<p>Here &lsquo;<samp>a</samp>&rsquo; may be characterized by the fact that it is adjacent
+to O&rsquo;s eyespace, and it is also adjacent to an X group which cannot
+be attacked, but that an X move at &rsquo;a&rsquo; results in a string with only
+one liberty. We call this a <em>false margin</em>. 
+</p>
+<p>For the purpose of the eye code, O&rsquo;s eyespace should be parsed
+as <code>(X)</code>, not <code>(X!)</code>.
+</p>
+<hr size="6">
+<a name="Eye-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#False-Margins" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Eyes" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Functions-in-optics_002ec"></a>
+<h2 class="section">8.11 Functions in &lsquo;<tt>optics.c</tt>&rsquo;</h2>
+
+<p>The public function <code>make_domains()</code> calls the function
+<code>make_primary_domains()</code> which is static in &lsquo;<tt>optics.c</tt>&rsquo;. It&rsquo;s purpose
+is to compute the domains of influence of each color, used in determining eye
+shapes. <strong>Note</strong>: the term influence as used here is distinct from the
+influence in influence.c.
+</p>
+<p>For this algorithm the strings which are not lively are invisible. Ignoring
+these, the algorithm assigns friendly influence to
+</p>
+<ol>
+<li> every vertex which is occupied by a (lively) friendly stone, 
+</li><li> every empty vertex adjoining a (lively) friendly stone,
+</li><li> every empty vertex for which two adjoining vertices (not
+on the first line) in the (usually 8) surrounding ones have friendly
+influence, with two CAVEATS explained below.
+</li></ol>
+
+<p>Thus in the following diagram, &lsquo;<samp>e</samp>&rsquo; would be assigned friendly influence
+if &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo; have friendly influence, or &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>d</samp>&rsquo;. It
+is not sufficent for &lsquo;<samp>b</samp>&rsquo; and &lsquo;<samp>d</samp>&rsquo; to have friendly influence, because
+they are not adjoining.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">       uabc
+        def
+        ghi
+</pre></td></tr></table>
+
+<p>The constraint that the two adjoining vertices not lie on the first
+line prevents influence from leaking under a stone on the third line.
+</p>
+<p>The first CAVEAT alluded to above is that even if &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo; have
+friendly influence, this does not cause &lsquo;<samp>e</samp>&rsquo; to have friendly influence if
+there is a lively opponent stone at &lsquo;<samp>d</samp>&rsquo;. This constraint prevents
+influence from leaking past knight&rsquo;s move extensions.
+</p>
+<p>The second CAVEAT is that even if &lsquo;<samp>a</samp>&rsquo; and &lsquo;<samp>b</samp>&rsquo; have friendly influence
+this does not cause &lsquo;<samp>e</samp>&rsquo; to have influence if there are lively opponent
+stones at &lsquo;<samp>u</samp>&rsquo; and at &lsquo;<samp>c</samp>&rsquo;. This prevents influence from leaking past
+nikken tobis (two space jumps).  
+</p>
+<p>The corner vertices are handled slightly different.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">   +---
+   |ab
+   |cd
+</pre></td></tr></table>
+
+<p>We get friendly influence at &lsquo;<samp>a</samp>&rsquo; if we have friendly influence
+at &lsquo;<samp>b</samp>&rsquo; or &lsquo;<samp>c</samp>&rsquo; and no lively unfriendly stone at &lsquo;<samp>b</samp>&rsquo;, &lsquo;<samp>c</samp>&rsquo;
+or &lsquo;<samp>d</samp>&rsquo;.
+</p>
+<p>Here are the public functions in &lsquo;<tt>optics.c</tt>&rsquo;, except some simple
+access functions used by autohelpers. The statically declared functions
+are documented in the source code.
+</p>
+<ul>
+<li> <code>void make_domains(struct eye_data b_eye[BOARDMAX], struct eye_data w_eye[BOARDMAX], int owl_call)</code>
+<a name="index-make_005fdomains-1"></a>
+<blockquote><p>This function is called from <code>make_dragons()</code> and from
+<code>owl_determine_life()</code>. It marks the black and white domains
+(eyeshape regions) and collects some statistics about each one.
+</p></blockquote>
+</li><li> <code>void partition_eyespaces(struct eye_data eye[BOARDMAX], int color)</code>
+<a name="index-partition_005feyespaces"></a>
+<blockquote><p>Find connected eyespace components and compute relevant statistics.
+</p></blockquote>
+</li><li> <code>void propagate_eye(int origin, struct eye_data eye[BOARDMAX])</code>
+<a name="index-propagate_005feye"></a>
+<blockquote><p>propagate_eye(origin) copies the data at the (origin) to the
+rest of the eye (invariant fields only).
+</p></blockquote>
+</li><li> <code>int find_eye_dragons(int origin, struct eye_data eye[BOARDMAX], int eye_color, int dragons[], int max_dragons)</code>
+<a name="index-find_005feye_005fdragons"></a>
+<blockquote><p>Find the dragon or dragons surrounding an eye space. Up to
+max_dragons dragons adjacent to the eye space are added to
+the dragon array, and the number of dragons found is returned.
+</p></blockquote>
+</li><li> <code>void compute_eyes(int pos, struct eyevalue *value, int *attack_point, int *defense_point, struct eye_data eye[BOARDMAX], struct half_eye_data heye[BOARDMAX], int add_moves)</code>
+<a name="index-compute_005feyes"></a>
+<blockquote><p>Given an eyespace with origin <code>pos</code>, this function computes the
+minimum and maximum numbers of eyes the space can yield. If max and
+min are different, then vital points of attack and defense are also
+generated. If <code>add_moves == 1</code>, this function may add a move_reason for
+<code>color</code> at a vital point which is found by the function. If 
+<code>add_moves == 0</code>, set <code>color = EMPTY.</code>
+</p></blockquote>
+</li><li> <code>void compute_eyes_pessimistic(int pos, struct eyevalue *value, int *pessimistic_min, int *attack_point, int *defense_point, struct eye_data eye[BOARDMAX], struct half_eye_data heye[BOARDMAX])</code>
+<a name="index-compute_005feyes_005fpessimistic"></a>
+<blockquote><p>This function works like <code>compute_eyes()</code>, except that it also gives
+a pessimistic view of the chances to make eyes. Since it is intended
+to be used from the owl code, the option to add move reasons has
+been removed.
+</p></blockquote>
+</li><li> <code>void add_false_eye(int pos, struct eye_data eye[BOARDMAX], struct half_eye_data heye[BOARDMAX])</code>
+<a name="index-add_005ffalse_005feye"></a>
+<blockquote><p>turns a proper eyespace into a margin. 
+</p></blockquote>
+</li><li> <code>int is_eye_space(int pos)</code>
+</li><li> <code>int is_proper_eye_space(int pos)</code>
+<a name="index-is_005fproper_005feye_005fspace"></a>
+<a name="index-is_005feye_005fspace"></a>
+<blockquote><p>These functions are used from constraints to identify eye spaces,
+primarily for late endgame moves.
+</p></blockquote>
+</li><li> <code>int max_eye_value(int pos)</code>
+<a name="index-max_005feye_005fvalue"></a>
+<blockquote><p>Return the maximum number of eyes that can be obtained from the
+eyespace at <code>(i, j)</code>. This is most useful in order to determine
+whether the eyespace can be assumed to produce any territory at
+all.
+</p></blockquote>
+</li><li> <code>int is_marginal_eye_space(int pos)</code>
+</li><li> <code>int is_halfeye(struct half_eye_data heye[BOARDMAX], int pos)</code>
+</li><li> <code>int is_false_eye(struct half_eye_data heye[BOARDMAX], int pos)</code>
+<a name="index-is_005fmarginal_005feye_005fspace"></a>
+<a name="index-is_005fhalfeye"></a>
+<a name="index-is_005ffalse_005feye"></a>
+<blockquote><p>These functions simply return information about an eyeshape that
+has already been analyzed. (They do no real work.)
+</p></blockquote>
+</li><li> <code>void find_half_and_false_eyes(int color, struct eye_data eye[BOARDMAX], struct half_eye_data heye[BOARDMAX], int find_mask[BOARDMAX])</code>
+<a name="index-find_005fhalf_005fand_005ffalse_005feyes"></a>
+<blockquote><p>Find topological half eyes and false eyes by analyzing the
+diagonal intersections, as described in the Texinfo
+documentation (Eyes/Eye Topology).
+</p></blockquote>
+</li><li> <code>float topological_eye(int pos, int color, struct eye_data my_eye[BOARDMAX],struct half_eye_data heye[BOARDMAX])</code>
+<a name="index-topological_005feye"></a>
+<blockquote><p>See Texinfo documentation (Eyes:Eye Topology). Returns:
+</p><ul>
+<li> 2 or less if <code>pos</code> is a proper eye for <code>color</code>;
+</li><li> between 2 and 3 if the eye can be made false only by ko
+</li><li> 3 if <code>pos</code> is a half eye;
+</li><li> between 3 and 4 if the eye can be made real only by ko
+</li><li> 4 or more if <code>pos</code> is a false eye.
+</li></ul>
+<p>Attack and defense points for control of the diagonals are stored
+in the <code>heye[]</code> array.
+<code>my_eye</code> is the eye space information with respect to <code>color</code>.
+</p></blockquote>
+</li><li> <code>int obvious_false_eye(int pos, int color)</code>
+<a name="index-obvious_005ffalse_005feye"></a>
+<blockquote><p>Conservative relative of <code>topological_eye()</code>. Essentially the same
+algorithm is used, but only tactically safe opponent strings on
+diagonals are considered. This may underestimate the false/half eye
+status, but it should never be overestimated.
+</p></blockquote>
+</li><li> <code>void set_eyevalue(struct eyevalue *e, int a, int b, int c, int d)</code>
+<a name="index-set_005feyevalue"></a>
+<blockquote><p><b>set parameters into the <code>struct eyevalue</code> as follows:</b> (see section <a href="#Eye-Local-Game-Values">Eye Local Game Values</a>):
+</p><table><tr><td>&nbsp;</td><td><pre class="example">struct eyevalue { /* number of eyes if: */
+  unsigned char a; /* attacker plays first twice */
+  unsigned char b; /* attacker plays first */
+  unsigned char c; /* defender plays first */
+  unsigned char d; /* defender plays first twice */
+};
+</pre></td></tr></table>
+</blockquote>
+</li><li> <code>int min_eye_threat(struct eyevalue *e)</code>
+<a name="index-min_005feye_005fthreat"></a>
+<blockquote><p>Number of eyes if attacker plays first twice (the threat of the first
+move by attacker).
+</p></blockquote>
+</li><li> <code>int min_eyes(struct eyevalue *e)</code>
+<a name="index-min_005feyes"></a>
+<blockquote><p>Number of eyes if attacker plays first followed by alternating play. 
+</p></blockquote>
+</li><li> <code>int max_eyes(struct eyevalue *e)</code>
+<a name="index-max_005feyes"></a>
+<blockquote><p>Number of eyes if defender plays first followed by alternating play. 
+</p></blockquote>
+</li><li> <code>int max_eye_threat(struct eyevalue *e)</code>
+<a name="index-max_005feye_005fthreat"></a>
+<blockquote><p>Number of eyes if defender plays first twice (the threat of the first
+move by defender).
+</p></blockquote>
+</li><li> <code>void add_eyevalues(struct eyevalue *e1, struct eyevalue *e2, struct eyevalue *sum)</code>
+<a name="index-add_005feyevalues"></a>
+<blockquote><p>Add the eyevalues <code>*e1</code> and <code>*e2</code>, leaving the result in *sum. It is
+safe to let <code>sum</code> be the same as <code>e1</code> or <code>e2</code>.
+</p></blockquote>
+</li><li> <code>char * eyevalue_to_string(struct eyevalue *e)</code>
+<a name="index-eyevalue_005fto_005fstring"></a>
+<blockquote><p>Produces a string containing the eyevalue. <strong>Note</strong>: the result string is
+stored in a statically allocated buffer which will be overwritten the next
+time this function is called.
+</p></blockquote>
+</li><li> <code>void test_eyeshape(int eyesize, int *eye_vertices)</code>
+<a name="index-test_005feyeshape"></a>
+/* Test whether the optics code evaluates an eyeshape consistently. */
+</li><li> <code>int analyze_eyegraph(const char *coded_eyegraph, struct eyevalue *value, char *analyzed_eyegraph)</code>
+<a name="index-analyze_005feyegraph"></a>
+<blockquote><p>Analyze an eye graph to determine the eye value and vital moves.
+The eye graph is given by a string which is encoded with &lsquo;<samp>%</samp>&rsquo; for
+newlines and &lsquo;<samp>O</samp>&rsquo; for spaces. E.g., the eye graph
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  !
+ .X
+!...
+</pre></td></tr></table>
+	
+<p>is encoded as <code>OO!%O.X%!...</code>. (The encoding is needed for the GTP
+interface to this function.) The result is an eye value and a (nonencoded)
+pattern showing the vital moves, using the same notation as eyes.db. In the
+example above we would get the eye value 0112 and the graph (showing ko threat
+moves)
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">  &nbsp; 
+ .X  
+!.*.
+</pre></td></tr></table>
+
+<p>If the eye graph cannot be realized, 0 is returned, 1 otherwise.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Eyes" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

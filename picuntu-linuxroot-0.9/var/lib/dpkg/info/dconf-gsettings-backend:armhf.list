@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/gio
+/usr/lib/arm-linux-gnueabihf/gio/modules
+/usr/lib/arm-linux-gnueabihf/gio/modules/libdconfsettings.so
+/usr/share
+/usr/share/doc
+/usr/share/doc/dconf-gsettings-backend
+/usr/share/doc/dconf-gsettings-backend/copyright
+/usr/share/doc/dconf-gsettings-backend/changelog.Debian.gz
+/usr/share/doc/dconf-gsettings-backend/README
+/usr/share/doc/dconf-gsettings-backend/NEWS.gz

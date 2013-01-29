@@ -1,0 +1,29 @@
+Package: nvidia-graphics-drivers-experimental-310
+Binary: nvidia-experimental-310, nvidia-experimental-310-dev
+Version: 310.14-0ubuntu1
+Priority: optional
+Section: restricted/misc
+Maintainer: Ubuntu Core Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Build-Depends: debhelper (>= 6.0.7~), sed (>> 3.0), libxext6, bzip2, xserver-xorg-dev (>= 2:1.4), execstack, cdbs, libc6, libxvmc1, dh-modaliases, libxv1
+Architecture: i386 amd64 lpia
+Standards-Version: 3.8.0
+Format: 1.0
+Directory: pool/restricted/n/nvidia-graphics-drivers-experimental-310
+Files:
+ e79f0346d97d2af6eb324dc91a668995 1680 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.dsc
+ 494f020b4e0860bb56dffc36d7efd6ca 99730654 nvidia-graphics-drivers-experimental-310_310.14.orig.tar.gz
+ 8e823fa342a57bd44df2bf96f47b530b 131837 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.diff.gz
+Vcs-Browser: http://github.com/tseliot/nvidia-graphics-drivers
+Vcs-Git: git://github.com/tseliot/nvidia-graphics-drivers.git
+Package-List: 
+ nvidia-experimental-310 deb restricted/misc optional
+ nvidia-experimental-310-dev deb restricted/misc optional
+Checksums-Sha1:
+ 837d8391a6b0070017382fa708d27490f95b2611 1680 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.dsc
+ 6b97ff053e2dde0f17552fc8ec4b7aed3bd8d05d 99730654 nvidia-graphics-drivers-experimental-310_310.14.orig.tar.gz
+ be31831f8a11d18589a5d40d291a9dea14accd15 131837 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.diff.gz
+Checksums-Sha256:
+ f752cebfd0149b9cee5ef5aae9beecb152b6843f15a7a1e64bda375b55c9bd84 1680 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.dsc
+ d9c5fcc02cd15a57aca6ac9e7c9bf26829a9fa4a771cdfda96c43030a0d3da38 99730654 nvidia-graphics-drivers-experimental-310_310.14.orig.tar.gz
+ b698b4990f7e745a76db9a36f86ae50cb3bbd5ecec451bf50be53075906014fb 131837 nvidia-graphics-drivers-experimental-310_310.14-0ubuntu1.diff.gz
+

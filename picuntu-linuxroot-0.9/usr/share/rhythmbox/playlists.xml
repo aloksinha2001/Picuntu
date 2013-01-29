@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rhythmdb-playlists>
+  <playlist type="automatic" sort-key="FirstSeen" sort-direction="1" limit-time="0" limit-size="0" limit-count="0">
+    <name>Recently Added</name>
+    <name xml:lang="af">Onlangs bygevoeg</name>
+    <name xml:lang="ar">المُضافة حديثًا</name>
+    <name xml:lang="as">শেহতীয়াভাবে যোগ কৰা</name>
+    <name xml:lang="be">Нядаўна дададзеныя</name>
+    <name xml:lang="be@latin">Niadaŭna dadadzienyja</name>
+    <name xml:lang="bg">Последно добавени</name>
+    <name xml:lang="bn_IN">সম্প্রতি সংযোজিত</name>
+    <name xml:lang="br">Nevez-ouzhpennet</name>
+    <name xml:lang="ca">Afegides recentment</name>
+    <name xml:lang="ca@valencia">Afegides recentment</name>
+    <name xml:lang="cs">Nedávno přidané</name>
+    <name xml:lang="da">Tilføjet for nyligt</name>
+    <name xml:lang="de">Zuletzt hinzugefügt</name>
+    <name xml:lang="dz">འཕྲལ་ཁ་སྐོང་བརྐྱབ་ཡོདཔ་</name>
+    <name xml:lang="el">Πρόσφατα προστεθέντα</name>
+    <name xml:lang="en_CA">Recently Added</name>
+    <name xml:lang="en_GB">Recently Added</name>
+    <name xml:lang="eo">Antaŭnelonge aldonitaj</name>
+    <name xml:lang="es">Añadidos recientemente</name>
+    <name xml:lang="et">Hiljuti lisatud</name>
+    <name xml:lang="eu">Duela gutxi gehituta</name>
+    <name xml:lang="fi">Viimeksi lisätyt</name>
+    <name xml:lang="fr">Récemment ajouté</name>
+    <name xml:lang="ga">Curtha Leis le Déanaí</name>
+    <name xml:lang="gl">Engadidos recentemente</name>
+    <name xml:lang="gu">તાજેતરમાં ઉમેરાયેલ</name>
+    <name xml:lang="he">נוספו לאחרונה</name>
+    <name xml:lang="hi">हाल में जोड़ा गया</name>
+    <name xml:lang="hu">Legutóbb hozzáadott</name>
+    <name xml:lang="id">Baru Saja Ditambahkan</name>
+    <name xml:lang="it">Aggiunti di recente</name>
+    <name xml:lang="ja">最近追加したもの</name>
+    <name xml:lang="kn">ಇತ್ತೀಚೆಗೆ ಸೇರಿಸಲಾಗಿದ್ದು</name>
+    <name xml:lang="ko">최근에 더해진 순으로</name>
+    <name xml:lang="lt">Neseniai pridėta</name>
+    <name xml:lang="lv">Nesen pievienotās</name>
+    <name xml:lang="mk">Додадени неодамна</name>
+    <name xml:lang="mr">अलिकडील समाविष्टीत</name>
+    <name xml:lang="nb">Sist lagt til</name>
+    <name xml:lang="ne">हालै थपिएको</name>
+    <name xml:lang="nl">Recentelijk toegevoegd</name>
+    <name xml:lang="nn">Nyleg lagt til</name>
+    <name xml:lang="pa">ਤਾਜ਼ਾ ਸ਼ਾਮਲ ਕੀਤੇ</name>
+    <name xml:lang="pl">Ostatnio dodane</name>
+    <name xml:lang="ps">اوسني زيات شوي</name>
+    <name xml:lang="pt">Adicionados Recentemente</name>
+    <name xml:lang="pt_BR">Adicionado recentemente</name>
+    <name xml:lang="ro">Adăugate recent</name>
+    <name xml:lang="ru">Недавно добавленные</name>
+    <name xml:lang="sk">Nedávno pridané</name>
+    <name xml:lang="sl">Nedavno dodano</name>
+    <name xml:lang="sr">Скоро додате</name>
+    <name xml:lang="sr@latin">Skoro dodate</name>
+    <name xml:lang="sv">Senast tillagda</name>
+    <name xml:lang="ta">சமீபத்தில் சேர்க்கப்பட்டது</name>
+    <name xml:lang="te">ఇటీవల జతచేసినవి</name>
+    <name xml:lang="th">เพิ่มล่าสุด</name>
+    <name xml:lang="tr">Son Eklenenler</name>
+    <name xml:lang="uk">Нещодавно долучені</name>
+    <name xml:lang="vi">Mới thêm</name>
+    <name xml:lang="zh_CN">最近新加</name>
+    <name xml:lang="zh_HK">最近加入</name>
+    <name xml:lang="zh_TW">最近加入</name>
+    <conjunction>
+      <equals prop="type">song</equals>
+      <subquery>
+        <conjunction>
+          <current-time-within prop="first-seen">604800</current-time-within>
+        </conjunction>
+      </subquery>
+    </conjunction>
+  </playlist>
+  <playlist type="automatic" sort-key="LastPlayed" sort-direction="1" limit-time="0" limit-size="0" limit-count="0">
+    <name>Recently Played</name>
+    <name xml:lang="af">Onlangs gespeel</name>
+    <name xml:lang="ar">المُشغلّة حديثًا</name>
+    <name xml:lang="as">শেহতীয়াকে বজোৱা</name>
+    <name xml:lang="be">Нядаўна гучаўшыя</name>
+    <name xml:lang="be@latin">Niadaŭna vykananyja</name>
+    <name xml:lang="bg">Наскоро изпълнявани</name>
+    <name xml:lang="bn_IN">সম্প্রতি সঞ্চালিত</name>
+    <name xml:lang="br">Nevez-sonet</name>
+    <name xml:lang="ca">Reproduïdes recentment</name>
+    <name xml:lang="ca@valencia">Reproduïdes recentment</name>
+    <name xml:lang="cs">Nedávno přehrané</name>
+    <name xml:lang="da">Afspillet for nyligt</name>
+    <name xml:lang="de">Zuletzt gespielt</name>
+    <name xml:lang="dz">འཕྲལ་གཏང་ཡོདཔ་</name>
+    <name xml:lang="el">Πρόσφατα αναπαραχθέντα</name>
+    <name xml:lang="en_CA">Recently Played</name>
+    <name xml:lang="en_GB">Recently Played</name>
+    <name xml:lang="eo">Antaŭnelonge luditaj</name>
+    <name xml:lang="es">Reproducidos recientemente</name>
+    <name xml:lang="et">Hiljuti kuulatud</name>
+    <name xml:lang="eu">Duela gutxi erreproduzitua</name>
+    <name xml:lang="fi">Viimeksi soitetut</name>
+    <name xml:lang="fr">Récemment lu</name>
+    <name xml:lang="ga">Seinnte le Déanaí</name>
+    <name xml:lang="gl">Reproducidos recentemente</name>
+    <name xml:lang="gu">તાજેતરમાં વગાડેલ</name>
+    <name xml:lang="he">נוגנו לאחרונה</name>
+    <name xml:lang="hi">हाल में बजाया गया</name>
+    <name xml:lang="hu">Legutóbb lejátszott</name>
+    <name xml:lang="id">Baru Saja Diputar</name>
+    <name xml:lang="it">Ascoltati di recente</name>
+    <name xml:lang="ja">最近再生したもの</name>
+    <name xml:lang="kn">ಇತ್ತೀಚೆಗೆ ಚಲಾಯಿಸಲಾಗಿದ್ದು</name>
+    <name xml:lang="ko">최근에 연주된 순으로</name>
+    <name xml:lang="lt">Neseniai klausyta</name>
+    <name xml:lang="lv">Nesen atskaņotās</name>
+    <name xml:lang="mk">Пуштени неодамна</name>
+    <name xml:lang="mr">अलिकडील चालवलेले</name>
+    <name xml:lang="nb">Sist spilt</name>
+    <name xml:lang="ne">हालै प्ले गरिएको</name>
+    <name xml:lang="nl">Recentelijk beluisterd</name>
+    <name xml:lang="nn">Nyleg spela</name>
+    <name xml:lang="pa">ਤਾਜ਼ਾ ਚਲਾਏ</name>
+    <name xml:lang="pl">Ostatnio odtwarzane</name>
+    <name xml:lang="ps">اوسني غږول شوي</name>
+    <name xml:lang="pt">Tocados Recentemente</name>
+    <name xml:lang="pt_BR">Reproduzido recentemente</name>
+    <name xml:lang="ro">Ascultate recent</name>
+    <name xml:lang="ru">Недавно прослушанные</name>
+    <name xml:lang="sk">Naposledy prehrávané</name>
+    <name xml:lang="sl">Nedavno predvajano</name>
+    <name xml:lang="sr">Последње слушане</name>
+    <name xml:lang="sr@latin">Poslednje slušane</name>
+    <name xml:lang="sv">Senast spelade</name>
+    <name xml:lang="ta">சமீபத்தில் இயக்கப்பட்டது</name>
+    <name xml:lang="te">ఇటీవల ఆడించినవి</name>
+    <name xml:lang="th">เล่นล่าสุด</name>
+    <name xml:lang="tr">Son Çalınanlar</name>
+    <name xml:lang="uk">Нещодавно відтворені</name>
+    <name xml:lang="vi">Mới phát</name>
+    <name xml:lang="zh_CN">最近播放</name>
+    <name xml:lang="zh_HK">最近播放</name>
+    <name xml:lang="zh_TW">最近播放</name>
+    <conjunction>
+      <equals prop="type">song</equals>
+      <subquery>
+        <conjunction>
+          <current-time-within prop="last-played">604800</current-time-within>
+        </conjunction>
+      </subquery>
+    </conjunction>
+  </playlist>
+  <playlist type="automatic" sort-key="Rating" sort-direction="1" limit-time="0" limit-size="0" limit-count="0">
+    <name>My Top Rated</name>
+    <name xml:lang="af">Boaan die ranglys</name>
+    <name xml:lang="ar">الأعلى تقييمًا</name>
+    <name xml:lang="as">মোৰ ট'প ৰেটেড</name>
+    <name xml:lang="be">Самыя рэйтынгавыя</name>
+    <name xml:lang="be@latin">Z najbolšym ratingam</name>
+    <name xml:lang="bg">Лично най-високо оценени</name>
+    <name xml:lang="br">Ma zonioù gwellañ</name>
+    <name xml:lang="ca">Les millor puntuades</name>
+    <name xml:lang="ca@valencia">Les millor puntuades</name>
+    <name xml:lang="cs">Nejlépe hodnocené</name>
+    <name xml:lang="da">Mine favoritter</name>
+    <name xml:lang="de">Beste Bewertung</name>
+    <name xml:lang="dz">ངེས་ཀྱི་གོང་ཚད་དྲག་ཤོས།</name>
+    <name xml:lang="el">Κορυφαία βαθμολογημένα από μένα</name>
+    <name xml:lang="en_CA">My Top Rated</name>
+    <name xml:lang="en_GB">My Top Rated</name>
+    <name xml:lang="eo">Miaj preferataj</name>
+    <name xml:lang="es">Mis mejores puntuados</name>
+    <name xml:lang="et">Kõrgelt hinnatud</name>
+    <name xml:lang="eu">Gogokoenak</name>
+    <name xml:lang="fi">Parhaiten arvostellut</name>
+    <name xml:lang="fr">Mon top</name>
+    <name xml:lang="ga">Mo Mheastacháin is Airde</name>
+    <name xml:lang="gl">Os meus mellores puntuados</name>
+    <name xml:lang="gu">મારો ઊંચો ગુણોત્તર</name>
+    <name xml:lang="he">המדורגים הכי גבוהים שלי</name>
+    <name xml:lang="hi">मेरा टॉप रेटेड</name>
+    <name xml:lang="hu">Legjobb értékelés</name>
+    <name xml:lang="id">Pilihanku</name>
+    <name xml:lang="it">Miglior giudizio</name>
+    <name xml:lang="ja">トップ10</name>
+    <name xml:lang="kn">ನಾನು ಅತ್ಯುತ್ತಮವೆಂದು ರೇಟ್ ಮಾಡಿದವುಗಳು</name>
+    <name xml:lang="ko">내가 매긴 점수 순으로</name>
+    <name xml:lang="lt">Geriausiai mano įvertinti</name>
+    <name xml:lang="lv">Augstāk novērtētās</name>
+    <name xml:lang="mk">Мои омилени</name>
+    <name xml:lang="mr">माझे उच्च गुणोत्तर</name>
+    <name xml:lang="nb">Mine mest populære</name>
+    <name xml:lang="ne">मेरो माथिल्लो दर</name>
+    <name xml:lang="nl">Hoogst gewaardeerd</name>
+    <name xml:lang="nn">Mine mest populære</name>
+    <name xml:lang="pa">ਮੇਰੇ ਟਾਪ ਰੇਟ</name>
+    <name xml:lang="pl">Moje najlepiej oceniane</name>
+    <name xml:lang="ps">زما جګ کچول شوي</name>
+    <name xml:lang="pt">Meus Melhores Classificados</name>
+    <name xml:lang="pt_BR">Minhas preferidas</name>
+    <name xml:lang="ro">Preferatele mele</name>
+    <name xml:lang="ru">Любимые композиции</name>
+    <name xml:lang="sk">Moje najobľúbenejšie</name>
+    <name xml:lang="sl">Moje najboljše ocenjeno</name>
+    <name xml:lang="sr">Најбоље оцењене</name>
+    <name xml:lang="sr@latin">Najbolje ocenjene</name>
+    <name xml:lang="sv">Mina högst rankade</name>
+    <name xml:lang="ta">எனது அதிக மதிப்பீடு</name>
+    <name xml:lang="te">నేను బాగా రేటుయిచ్చినవి</name>
+    <name xml:lang="th">คะแนนสูงสุด</name>
+    <name xml:lang="tr">En İyiler</name>
+    <name xml:lang="uk">Мої улюблені композиції</name>
+    <name xml:lang="vi">Điểm cao</name>
+    <name xml:lang="zh_CN">评级最高</name>
+    <name xml:lang="zh_HK">最高評價</name>
+    <name xml:lang="zh_TW">最高評價</name>
+    <conjunction>
+      <equals prop="type">song</equals>
+      <subquery>
+        <conjunction>
+          <greater prop="rating">4.000000</greater>
+        </conjunction>
+      </subquery>
+    </conjunction>
+  </playlist>
+</rhythmdb-playlists>

@@ -1,0 +1,24 @@
+Package: nvidia-experimental-310
+Description-md5: 6dc5cebbb8081f5194e1e2ed7ddbe3cb
+Description-en: Experimental NVIDIA binary Xorg driver, kernel module and VDPAU library
+ 3D-accelerated proprietary graphics driver for NVIDIA cards. May be
+ required for some newly released 3D software and games.
+ .
+ WARNING: This is an unstable beta driver.  This package is intended for
+ testers and early adopters, and not recommended for production hardware.
+ .
+ Release Notes:
+ https://plus.google.com/u/0/118125769023950376556/posts/bHW91CsG4bP
+ .
+ See /usr/share/doc/nvidia-experimental-310/README.txt.gz for a complete list
+ of supported GPUs and PCIIDs
+
+Package: nvidia-experimental-310-dev
+Description-md5: ef3b76d980ecacaf3116114549ba70ca
+Description-en: NVIDIA binary Xorg driver development files
+ This package contains the NVIDIA binary Xorg driver
+ development files.
+ .
+ For more information on this source package visit NVIDIA's homepage
+ at http://www.nvidia.com/ .
+

@@ -1,0 +1,16 @@
+#!/bin/sh
+set -e
+# Automatically added by dh_installinit
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/init.d/dbus" ] && [ ! -L "/etc/init.d/dbus" ]; then
+		if [ "`md5sum \"/etc/init.d/dbus\" | sed -e \"s/ .*//\"`" != \
+		     "`dpkg-query -W -f='${Conffiles}' dbus | sed -n -e \"\\\\' /etc/init.d/dbus '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			echo "Obsolete conffile /etc/init.d/dbus has been modified by you, renaming to .dpkg-bak"
+			mv -f "/etc/init.d/dbus" "/etc/init.d/dbus.dpkg-bak"
+		else
+			rm -f "/etc/init.d/dbus"
+		fi
+	fi
+fi
+# End automatically added section

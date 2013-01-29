@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg7384" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="16" width="16" version="1.1" xmlns:cc="http://creativecommons.org/ns#" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <metadata id="metadata14">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <title id="title9167">Moblin Icon Theme</title>
+ <g id="g3919">
+  <path id="rect3877-3" style="color:#000000;fill:none" d="m0 0.00049591h16v16h-16v-16z"/>
+  <g id="g3890">
+   <path id="rect2824" style="block-progression:tb;text-indent:0;color:#000000;text-transform:none;fill:#babdb6" d="m4 0c-1.6447 0-3 1.3553-3 3v10c0 1.6447 1.3553 3 3 3h7c1.6447 0 3-1.3553 3-3v-10c0-1.6447-1.355-3-3-3h-7zm0 2h7c0.5713 0 1 0.4287 1 1v10c0 0.5713-0.4287 1-1 1h-7c-0.5713 0-1-0.429-1-1v-10c0-0.5713 0.4287-1 1-1z"/>
+   <path id="path3809" style="block-progression:tb;text-indent:0;color:#000000;text-transform:none;fill:#babdb6" d="m7.5 2.9905c-1.9271 0-3.5 1.5729-3.5 3.5s1.5729 3.5 3.5 3.5 3.5-1.5729 3.5-3.5-1.5729-3.5-3.5-3.5zm0 1c1.3866 0 2.5 1.1134 2.5 2.5s-1.1134 2.5-2.5 2.5-2.5-1.1134-2.5-2.5 1.1134-2.5 2.5-2.5z"/>
+   <path id="path2826-1-5-0-1-0-6" style="color:#000000;fill:#babdb6" transform="matrix(0.5 0 0 0.5 3.5 3.0002)" d="m11 7.0005c0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3 3 1.3431 3 3z"/>
+   <path id="path2826-1-5-0-1-0-6-5" style="color:#000000;fill:#babdb6" transform="matrix(0.5 0 0 0.5 5.5 8.0002)" d="m11 7.0005c0 1.6569-1.3431 3-3 3s-3-1.3431-3-3 1.3431-3 3-3 3 1.3431 3 3z"/>
+   <path id="rect3877" style="opacity:.25;color:#000000;fill:#babdb6" d="m4 11h2v2h-2v-2z"/>
+  </g>
+ </g>
+</svg>

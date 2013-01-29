@@ -1,0 +1,2 @@
+?package(pdmenu):needs="text" section="Applications/Shells" \
+	title="Pdmenu" command="pdmenu"

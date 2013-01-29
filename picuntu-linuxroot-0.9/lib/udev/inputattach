@@ -1,0 +1,10 @@
+#!/bin/sh -e
+#
+# udev script for inputattach
+
+(
+	. /lib/udev/hotplug.functions
+	wait_for_file /usr/bin/inputattach
+	exec /usr/bin/inputattach $*
+) &
+

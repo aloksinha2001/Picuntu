@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 14. Monte Carlo Go</title>
+
+<meta name="description" content="GNU Go Documentation: 14. Monte Carlo Go">
+<meta name="keywords" content="GNU Go Documentation: 14. Monte Carlo Go">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Monte-Carlo-Go"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_13.html#Influence-Tuning" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Final-Remarks" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_13.html#Influence" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_15.html#Libboard" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Monte-Carlo-Go-1"></a>
+<h1 class="chapter">14. Monte Carlo Go</h1>
+<a name="index-Monte-Carlo-Go"></a>
+<a name="index-UCT-algorithm"></a>
+<p>In Monte Carlo Go the engine plays random games to the
+end, generating moves from a pattern database within
+the context of the algorithm UCT (upper confidence
+bounds applied to trees).  This algorithm allowed the
+program MoGo (<a href="http://www.lri.fr/~gelly/MoGo.htm">http://www.lri.fr/~gelly/MoGo.htm</a>, 
+to become the first computer program to defeat a
+professional while taking a 9 stone handicap
+(<a href="http://senseis.xmp.net/?MoGo">http://senseis.xmp.net/?MoGo</a>).
+</p>
+<p>GNU Go 3.8 can play 9x9 Go with the option
+&lsquo;<samp>--monte-carlo</samp>&rsquo; using the UCT algorithm.
+For command line options, see See section <a href="gnugo_3.html#Invoking-GNU-Go">Invoking GNU Go: Command line options</a>.
+</p>
+<p>During reading, the engine makes incremental updates
+of local 3x3 neighborhood, suicide status, self-atari
+status, and number of stones captured, for each move.
+</p>
+<p>GNU Go&rsquo;s simulations (Monte Carlo games) are pattern generated.
+The random playout move generation is distributed
+strictly proportional to move values computed by table
+lookup from a local context consisting of 3x3
+neighborhood, opponent suicide status, own and
+opponent self-atari status, number of stones captured
+by own and opponent move, and closeness to the
+previous move. Let&rsquo;s call this local context simply &quot;a
+pattern&quot; and the table &quot;pattern values&quot; or simply
+&quot;patterns&quot;.
+</p>
+<p>There are three built-in databases that you can select
+using the option &lsquo;<samp>--mc-patterns &lt;name&gt;</samp>&rsquo;, where
+&lsquo;<samp>&lt;name&gt;</samp>&rsquo; is one of
+</p>
+<ul>
+<li> <code>mc_montegnu_classic</code>
+</li><li> <code>mc_mogo_classic</code>
+</li><li> <code>mc_uniform</code>
+</li></ul>
+
+<p>The first of these is an approximation of the previous random move
+generation algorithm. The <code>mogo_classic</code> pattern values is an
+approximation of the simulation policy used by early versions of MoGo,
+as published in the report <a href="http://hal.inria.fr/inria-00117266">odification of UCT with Patterns in Monte-Carlo Go</a>
+RR-6062, by Sylvain Gelly, Yizao Wang, Rémi Munos, and
+Olivier Teytaud. The uniform pattern values is the so
+called &quot;light&quot; playout which chooses uniformly between
+all legal moves except single point proper eyes.
+</p>
+<p>If you&rsquo;re not satisfied with these you can also tune your own
+pattern values with a pattern database file and load it at runtime
+with &lsquo;<samp>--mc-load-patterns &lt;name&gt;</samp>&rsquo; adding your own
+pattern database.
+</p>
+<p>Let&rsquo;s start with the uniform pattern values. Those are defined by the
+file &lsquo;<tt>patterns/mc_uniform.db</tt>&rsquo;, which looks like this:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+oOo
+O*O
+oO?
+
+:0
+
+oOo
+O*O
+---
+
+:0
+
+|Oo
+|*O
++--
+
+:0
+</pre></td></tr></table>
+
+<p>Patterns are always exactly 3x3 in size with the move at the center
+point. The symbols are the usual for GNU Go pattern databases:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">* move
+O own stone (i.e. the same color as the color to move)
+o own stone or empty
+X opponent stone
+x opponent stone or empty
+? own stone, opponent stone, or empty
+| vertical edge
+- horizontal edge
++ corner
+</pre></td></tr></table>
+
+<p>There&rsquo;s also a new symbol:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">% own stone, opponent stone, empty, or edge
+</pre></td></tr></table>
+
+<p>After the pattern comes a line starting with a colon. In all these
+patterns it says that the pattern has a move value of 0, i.e. must not
+be played. Unmatched patterns have a default value of 1. When all move
+values are zero for both players, the playout will stop. Including the
+three patterns above is important because otherwise the playouts would
+be likely to go on indefinitely, or as it actually happens be
+terminated at a hard-coded limit of 600 moves. Also place these
+patterns at the top of the database because when multiple patterns
+match, the first one is used, regardless of the values.
+</p>
+<p>When using only these patterns you will probably notice that it plays
+rather heavy, trying hard to be solidly connected. This is because
+uniform playouts are badly biased with a high probability of non-solid
+connections being cut apart. To counter this you could try a pattern
+like
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">?X?
+O*O
+x.?
+
+:20,near
+</pre></td></tr></table>
+
+<p>to increase the probability that the one-point jump is reinforced when
+threatened. Here we added the property &quot;near&quot;, which means that the
+pattern only applies if the previous move was played &quot;near&quot; this move.
+Primarily &quot;near&quot; means within the surrounding 3x3 neighborhood but it
+also includes certain cases of liberties of low-liberty strings
+adjacent to the previous move, e.g. the move to extend out of an atari
+created by the previous move. You have to read the source to find out
+the exact rules for nearness.
+</p>
+<p>We could also be even more specific and say
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">?X?
+O*O
+x.?
+
+:20,near,osafe,xsafe
+</pre></td></tr></table>
+
+<p>to exclude the cases where this move is a self atari (osafe) or would
+be a self-atari for the opponent (xsafe).
+</p>
+<p>It may also be interesting to see the effect of capturing stones. A
+catch-all pattern for captures would be
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">?X%
+?*%
+%%%
+
+:10,ocap1,osafe
+:20,ocap2
+:30,ocap3
+</pre></td></tr></table>
+
+<p>where we have used multiple colon lines to specify different move
+values depending on the number of captured stones; value 10 for a
+single captured stone, value 20 for two captured stones, and value 30
+for three or more captured stones. Here we also excluded self-atari
+moves in the case of 1 captured stone in order to avoid getting stuck
+in triple-ko in the playouts (there&rsquo;s no superko detection in the
+playouts).
+</p>
+<p>The full set of pattern properties is as follows:
+</p>
+<dl compact="compact">
+<dt> <code>near</code>
+<a name="index-near"></a>
+</dt>
+<dd><p>The move is &quot;near&quot; the previous move.
+</p>
+</dd>
+<dt> <code>far</code>
+<a name="index-far"></a>
+</dt>
+<dd><p>The move is not &quot;near&quot; the previous move.
+</p>
+</dd>
+<dt> <code>osafe</code>
+<a name="index-osafe"></a>
+</dt>
+<dd><p>The move is not a self-atari.
+</p>
+</dd>
+<dt> <code>ounsafe</code>
+<a name="index-ounsafe"></a>
+</dt>
+<dd><p>The move is a self-atari.
+</p>
+</dd>
+<dt> <code>xsafe</code>
+<a name="index-xsafe"></a>
+</dt>
+<dd><p>The move would not be a self-atari for the opponent.
+</p>
+</dd>
+<dt> <code>xunsafe</code>
+<a name="index-xunsafe"></a>
+</dt>
+<dd><p>The move would be a self-atari for the opponent.
+</p>
+</dd>
+<dt> <code>xsuicide</code>
+<a name="index-xsuicide"></a>
+</dt>
+<dd><p>The move would be suicide for the opponent
+</p>
+</dd>
+<dt> <code>xnosuicide</code>
+<a name="index-xnosuicide"></a>
+</dt>
+<dd><p>The move would not be suicide for the opponent.
+</p>
+</dd>
+<dt> <code>ocap0</code>
+<a name="index-ocap0"></a>
+</dt>
+<dd><p>The move captures zero stones.
+</p>
+</dd>
+<dt> <code>ocap1</code>
+<a name="index-ocap1"></a>
+</dt>
+<dd><p>The move captures one stone.
+</p>
+</dd>
+<dt> <code>ocap2</code>
+<a name="index-ocap2"></a>
+</dt>
+<dd><p>The move captures two stones.
+</p>
+</dd>
+<dt> <code>ocap3</code>
+<a name="index-ocap3"></a>
+</dt>
+<dd><p>The move captures three or more stones.
+</p>
+</dd>
+<dt> <code>ocap1+</code>
+<a name="index-ocap1_002b"></a>
+</dt>
+<dd><p>The move captures one or more stones.
+</p>
+</dd>
+<dt> <code>ocap1-</code>
+<a name="index-ocap1_002d"></a>
+</dt>
+<dd><p>The move captures at most one stone.
+</p>
+</dd>
+<dt> <code>ocap2+</code>
+<a name="index-ocap2_002b"></a>
+</dt>
+<dd><p>The move captures two or more stones.
+</p>
+</dd>
+<dt> <code>ocap2-</code>
+<a name="index-ocap2_002d"></a>
+</dt>
+<dd><p>The move captures at most two stones.
+</p>
+</dd>
+<dt> <code>xcap0</code>
+<a name="index-xcap0"></a>
+</dt>
+<dd><p>An opponent move would capture zero stones.
+</p>
+</dd>
+<dt> <code>xcap1</code>
+<a name="index-xcap1"></a>
+</dt>
+<dd><p>An opponent move would capture one stone.
+</p>
+</dd>
+<dt> <code>xcap2</code>
+<a name="index-xcap2"></a>
+</dt>
+<dd><p>An opponent move would capture two stones.
+</p>
+</dd>
+<dt> <code>xcap3</code>
+<a name="index-xcap3"></a>
+</dt>
+<dd><p>An opponent move would capture three or more stones.
+</p>
+</dd>
+<dt> <code>xcap1+</code>
+<a name="index-xcap1_002b"></a>
+</dt>
+<dd><p>An opponent move would capture one or more stones.
+</p>
+</dd>
+<dt> <code>xcap1-</code>
+<a name="index-xcap1_002d"></a>
+</dt>
+<dd><p>An opponent move would capture at most one stone.
+</p>
+</dd>
+<dt> <code>xcap2+</code>
+<a name="index-xcap2_002b"></a>
+</dt>
+<dd><p>An opponent move would capture two or more stones.
+</p>
+</dd>
+<dt> <code>xcap2-</code>
+<a name="index-xcap2_002d"></a>
+</dt>
+<dd><p>An opponent move would capture at most two stones.
+</p></dd>
+</dl>
+
+<p>These can be combined arbitrarily but all must be satisfied for the
+pattern to take effect. If contradictory properties are combined, the
+pattern will never match.
+</p>
+<hr size="6">
+<a name="Final-Remarks"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Monte-Carlo-Go" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_15.html#Libboard" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Monte-Carlo-Go" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Monte-Carlo-Go" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_15.html#Libboard" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">14.0.1 Final Remarks</h3>
+
+<ul>
+<li>  Move values are unsigned 32-bit integers. To avoid overflow in
+computations it is highly recommended to keep the values below
+10000000 or so.
+</li><li> There is no speed penalty for having lots of patterns in the
+database. The average time per move is approximately constant
+(slightly dependent on how often stones are captured or become low
+on liberties) and the time per game mostly depends on the average
+game length.
+</li><li> For more complex pattern databases, see
+&lsquo;<tt>patterns/mc_montegnu_classic.db</tt>&rsquo; and &lsquo;<tt>patterns/mc_mogo_classic.db</tt>&rsquo;.
+</li></ul>
+
+<p>Nobody really knows how to tune the random playouts to get as strong
+engine as possible. Please play with this and report any interesting
+findings, especially if you&rsquo;re able to make it substantially stronger
+than the &lsquo;<tt>montegnu_classic</tt>&rsquo; patterns.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Monte-Carlo-Go" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_15.html#Libboard" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

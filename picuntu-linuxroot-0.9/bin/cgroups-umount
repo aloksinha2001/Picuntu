@@ -1,0 +1,27 @@
+#!/bin/sh
+# Copyright 2011 Canonical, Inc
+# Author: Serge Hallyn <serge.hallyn@canonical.com>
+
+set -e
+
+# We don't care to move tasks around gratuitously - just umount
+# the cgroups
+
+# If /sys/fs/cgroup is not mounted, we don't bother
+if [ -z "`grep /sys/fs/cgroup /proc/mounts`" ]; then
+	exit 0
+fi
+
+# Don't try to get too smart, just optimistically try to umount all
+# that we think we mounted
+if [ ! -d /sys/fs/cgroup ]; then
+	exit 0
+fi
+cd /sys/fs/cgroup
+for d in `sed -e '1d;s/\([^\t]\)\t.*$/\1/' /proc/cgroups`; do
+	[ -d $d ] && umount $d || true
+done
+
+cd ..
+umount /sys/fs/cgroup || true
+exit 0

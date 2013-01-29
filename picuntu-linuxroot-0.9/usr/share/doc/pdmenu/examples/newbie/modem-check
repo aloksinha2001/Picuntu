@@ -1,0 +1,6 @@
+#! /bin/sh
+if [ -f /var/lock/LCK..modem ] 2> /dev/null; then
+    echo "Yes, your modem seems to be in use."
+else
+    echo "No, your modem appears to be disconnected."
+fi

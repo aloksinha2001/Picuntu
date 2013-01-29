@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libportaudio.so.2.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libportaudio2
+/usr/share/doc/libportaudio2/changelog.Debian.gz
+/usr/share/doc/libportaudio2/copyright
+/usr/lib/arm-linux-gnueabihf/libportaudio.so.2

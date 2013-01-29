@@ -1,0 +1,405 @@
+[base]
+desc: various drivers in the Linux kernel
+longdesc:
+ various drivers in the Linux kernel. This is a collection of firmware blobs
+ which are not individually large enough to warrant a standalone package
+replaces: firmware-linux (<< 0.19)
+conflicts: firmware-linux (<< 0.19)
+files:
+ 3com/typhoon.bin
+ advansys/3550.bin
+ advansys/38C0800.bin
+ advansys/38C1600.bin
+ advansys/mcode.bin
+ agere_ap_fw.bin
+ agere_sta_fw.bin
+ cxgb3/ael2005_opt_edc.bin
+ cxgb3/ael2005_twx_edc.bin
+ cxgb3/ael2020_twx_edc.bin
+ cxgb3/t3b_psram-1.1.0.bin
+ cxgb3/t3c_psram-1.1.0.bin
+ cxgb3/t3fw-7.4.0.bin
+ cxgb3/t3fw-7.10.0.bin
+ cxgb4/t4fw.bin
+ cxgb4/t4fw-1.4.16.0.bin
+ dabusb/bitstream.bin
+ dabusb/firmware.fw
+ dvb-fe-xc5000-1.6.114.fw
+ dvb-usb-dib0700-1.20.fw
+ e100/d101m_ucode.bin
+ e100/d101s_ucode.bin
+ e100/d102e_ucode.bin
+ kaweth/new_code.bin
+ kaweth/new_code_fix.bin
+ kaweth/trigger_code.bin
+ kaweth/trigger_code_fix.bin
+ matrox/g200_warp.fw
+ matrox/g400_warp.fw
+ mts_cdma.fw
+ mts_edge.fw
+ mts_gsm.fw
+ r128/r128_cce.bin
+ radeon/BARTS_mc.bin
+ radeon/BARTS_me.bin
+ radeon/BARTS_pfp.bin
+ radeon/BTC_rlc.bin
+ radeon/CAICOS_mc.bin
+ radeon/CAICOS_me.bin
+ radeon/CAICOS_pfp.bin
+ radeon/CAYMAN_mc.bin
+ radeon/CAYMAN_me.bin
+ radeon/CAYMAN_pfp.bin
+ radeon/CAYMAN_rlc.bin
+ radeon/CEDAR_me.bin
+ radeon/CEDAR_pfp.bin
+ radeon/CEDAR_rlc.bin
+ radeon/CYPRESS_me.bin
+ radeon/CYPRESS_pfp.bin
+ radeon/CYPRESS_rlc.bin
+ radeon/JUNIPER_me.bin
+ radeon/JUNIPER_pfp.bin
+ radeon/JUNIPER_rlc.bin
+ radeon/PALM_me.bin
+ radeon/PALM_pfp.bin
+ radeon/R100_cp.bin
+ radeon/R200_cp.bin
+ radeon/R300_cp.bin
+ radeon/R420_cp.bin
+ radeon/R520_cp.bin
+ radeon/R600_me.bin
+ radeon/R600_pfp.bin
+ radeon/R600_rlc.bin
+ radeon/R700_rlc.bin
+ radeon/REDWOOD_me.bin
+ radeon/REDWOOD_pfp.bin
+ radeon/REDWOOD_rlc.bin
+ radeon/RS600_cp.bin
+ radeon/RS690_cp.bin
+ radeon/RS780_me.bin
+ radeon/RS780_pfp.bin
+ radeon/RV610_me.bin
+ radeon/RV610_pfp.bin
+ radeon/RV620_me.bin
+ radeon/RV620_pfp.bin
+ radeon/RV630_me.bin
+ radeon/RV630_pfp.bin
+ radeon/RV635_me.bin
+ radeon/RV635_pfp.bin
+ radeon/RV670_me.bin
+ radeon/RV670_pfp.bin
+ radeon/RV710_me.bin
+ radeon/RV710_pfp.bin
+ radeon/RV730_me.bin
+ radeon/RV730_pfp.bin
+ radeon/RV770_me.bin
+ radeon/RV770_pfp.bin
+ radeon/SUMO_me.bin
+ radeon/SUMO_pfp.bin
+ radeon/SUMO_rlc.bin
+ radeon/SUMO2_me.bin
+ radeon/SUMO2_pfp.bin
+ radeon/TURKS_mc.bin
+ radeon/TURKS_me.bin
+ radeon/TURKS_pfp.bin
+ tehuti/bdx.bin
+ tigon/tg3_tso.bin
+ tigon/tg3.bin
+ tigon/tg3_tso5.bin
+ vntwusb.fw
+support: initramfs-tools
+uri: http://git.kernel.org/?p=linux/kernel/git/firmware/linux-firmware.git
+
+[3com/typhoon.bin_base]
+desc: 3Com Typhoon firmware
+version: 03.001.008
+
+[advansys/3550.bin_base]
+desc: AdvanSys ASC-3550 firmware
+
+[advansys/38C0800.bin_base]
+desc: AdvanSys ASC-38C0800 firmware
+
+[advansys/38C1600.bin_base]
+desc: AdvanSys ASC-38C1600 firmware
+
+[advansys/mcode.bin_base]
+desc: AdvanSys SCSI controller microcode
+
+[agere_ap_fw.bin_base]
+desc: Agere/Prism/Symbol Orinoco firmware (AP mode)
+version: 9.48 Hermes I
+
+[agere_sta_fw.bin_base]
+desc: Agere/Prism/Symbol Orinoco firmware (STA mode)
+version: 9.48 Hermes I
+
+[cxgb3/ael2005_opt_edc.bin_base]
+desc: Chelsio T3 optical EDC firmware (AEL2005 PHY)
+
+[cxgb3/ael2005_twx_edc.bin_base]
+desc: Chelsio T3 twinax EDC firmware (AEL2005 PHY)
+
+[cxgb3/ael2020_twx_edc.bin_base]
+desc: Chelsio T3 twinax EDC firmware (AEL2020 PHY)
+
+[cxgb3/t3b_psram-1.1.0.bin_base]
+desc: Chelsio T3B protocol engine firmware
+version: 1.1.0
+
+[cxgb3/t3c_psram-1.1.0.bin_base]
+desc: Chelsio T3C protocol engine firmware
+version: 1.1.0
+
+[cxgb3/t3fw-7.4.0.bin_base]
+desc: Chelsio T3 main firmware
+version: 7.4.0
+
+[cxgb3/t3fw-7.10.0.bin_base]
+desc: Chelsio T3 main firmware
+version: 7.10.0
+
+[cxgb4/t4fw-1.4.16.0.bin_base]
+desc: Chelsio T4 firmware
+version: 1.4.16.0
+
+[dabusb/firmware.fw_base]
+desc: DAB-USB firmware
+
+[dabusb/bitstream.bin_base]
+desc: DAB-USB FPGA bitfile
+
+[dvb-fe-xc5000-1.6.114.fw_base]
+desc: Xceive 5000 tuner firmware
+version: 1.6.114
+
+[dvb-usb-dib0700-1.20.fw_base]
+desc: DiBcom dib0700 USB DVB bridge firmware
+version: 1.20
+
+[e100/d101m_ucode.bin_base]
+desc: Intel 82559 D101M microcode
+
+[e100/d101s_ucode.bin_base]
+desc: Intel 82559 D101S microcode
+
+[e100/d102e_ucode.bin_base]
+desc: Intel 82551-F and 82551-10 microcode
+
+[matrox/g200_warp.fw_base]
+desc: Matrox G200 WARP engine microcode
+
+[matrox/g400_warp.fw_base]
+desc: Matrox G400/G550 WARP engine microcode
+
+[mts_cdma.fw_base]
+desc: Multi-Tech USB CDMA modem firmware
+
+[mts_edge.fw_base]
+desc: Multi-Tech USB EDGE modem firmware
+
+[mts_gsm.fw_base]
+desc: Multi-Tech USB GPRS modem firmware
+
+[r128/r128_cce.bin_base]
+desc: Rage 128 CCE microcode
+
+[radeon/BARTS_mc.bin_base]
+desc: Radeon HD 6800-family MC microcode
+
+[radeon/BARTS_me.bin_base]
+desc: Radeon HD 6800-family ME microcode
+
+[radeon/BARTS_pfp.bin_base]
+desc: Radeon HD 6800-family PFP microcode
+
+[radeon/BTC_rlc.bin_base]
+desc: Radeon HD 6300/6500/6800-family RLC microcode
+
+[radeon/CAICOS_mc.bin_base]
+desc: Radeon HD 6300-family MC microcode
+
+[radeon/CAICOS_me.bin_base]
+desc: Radeon HD 6300-family ME microcode
+
+[radeon/CAICOS_pfp.bin_base]
+desc: Radeon HD 6300-family PFP microcode
+
+[radeon/CAYMAN_mc.bin_base]
+desc: Radeon HD 6900-family MC microcode
+
+[radeon/CAYMAN_me.bin_base]
+desc: Radeon HD 6900-family ME microcode
+
+[radeon/CAYMAN_pfp.bin_base]
+desc: Radeon HD 6900-family PFP microcode
+
+[radeon/CAYMAN_rlc.bin_base]
+desc: Radeon HD 6900-family RLC microcode
+
+[radeon/CEDAR_me.bin_base]
+desc: Radeon HD 5400-family ME microcode
+
+[radeon/CEDAR_pfp.bin_base]
+desc: Radeon HD 5400-family PFP microcode
+
+[radeon/CEDAR_rlc.bin_base]
+desc: Radeon HD 5400-family RLC microcode
+
+[radeon/CYPRESS_me.bin_base]
+desc: Radeon HD 5800/5900-family ME microcode
+
+[radeon/CYPRESS_pfp.bin_base]
+desc: Radeon HD 5800/5900-family PFP microcode
+
+[radeon/CYPRESS_rlc.bin_base]
+desc: Radeon HD 5800/5900-family RLC microcode
+
+[radeon/JUNIPER_me.bin_base]
+desc: Radeon HD 5700-family ME microcode
+
+[radeon/JUNIPER_pfp.bin_base]
+desc: Radeon HD 5700-family PFP microcode
+
+[radeon/JUNIPER_rlc.bin_base]
+desc: Radeon HD 5700-family RLC microcode
+
+[radeon/PALM_me.bin_base]
+desc: AMD Fusion C-series ME microcode
+
+[radeon/PALM_pfp.bin_base]
+desc: AMD Fusion C-series PFP microcode
+
+[radeon/R100_cp.bin_base]
+desc: Radeon R100-family CP microcode
+
+[radeon/R200_cp.bin_base]
+desc: Radeon R200-family CP microcode
+
+[radeon/R300_cp.bin_base]
+desc: Radeon R300-family CP microcode
+
+[radeon/R420_cp.bin_base]
+desc: Radeon R400-family CP microcode
+
+[radeon/R520_cp.bin_base]
+desc: Radeon R500-family CP microcode
+
+[radeon/R600_me.bin_base]
+desc: Radeon R600 ME microcode
+
+[radeon/R600_pfp.bin_base]
+desc: Radeon R600 PFP microcode
+
+[radeon/R600_rlc.bin_base]
+desc: Radeon R600-family RLC microcode
+
+[radeon/R700_rlc.bin_base]
+desc: Radeon R700-family RLC microcode
+
+[radeon/REDWOOD_me.bin_base]
+desc: Radeon HD 5500/5600-family ME microcode
+
+[radeon/REDWOOD_pfp.bin_base]
+desc: Radeon HD 5500/5600-family PFP microcode
+
+[radeon/REDWOOD_rlc.bin_base]
+desc: Radeon HD 5500/5600-family RLC microcode
+
+[radeon/RS600_cp.bin_base]
+desc: Radeon RS600 CP microcode
+
+[radeon/RS690_cp.bin_base]
+desc: Radeon RS690 CP microcode
+
+[radeon/RS780_me.bin_base]
+desc: Radeon RS780 ME microcode
+
+[radeon/RS780_pfp.bin_base]
+desc: Radeon RS780 PFP microcode
+
+[radeon/RV610_me.bin_base]
+desc: Radeon RV610 ME microcode
+
+[radeon/RV610_pfp.bin_base]
+desc: Radeon RV610 PFP microcode
+
+[radeon/RV620_me.bin_base]
+desc: Radeon RV620 ME microcode
+
+[radeon/RV620_pfp.bin_base]
+desc: Radeon RV620 PFP microcode
+
+[radeon/RV630_me.bin_base]
+desc: Radeon RV630 ME microcode
+
+[radeon/RV630_pfp.bin_base]
+desc: Radeon RV630 PFP microcode
+
+[radeon/RV635_me.bin_base]
+desc: Radeon RV635 ME microcode
+
+[radeon/RV635_pfp.bin_base]
+desc: Radeon RV635 PFP microcode
+
+[radeon/RV670_me.bin_base]
+desc: Radeon RV670 ME microcode
+
+[radeon/RV670_pfp.bin_base]
+desc: Radeon RV670 PFP microcode
+
+[radeon/RV710_me.bin_base]
+desc: Radeon RV710 ME microcode
+
+[radeon/RV710_pfp.bin_base]
+desc: Radeon RV710 PFP microcode
+
+[radeon/RV730_me.bin_base]
+desc: Radeon RV730 ME microcode
+
+[radeon/RV730_pfp.bin_base]
+desc: Radeon RV730 PFP microcode
+
+[radeon/RV770_me.bin_base]
+desc: Radeon RV770 ME microcode
+
+[radeon/RV770_pfp.bin_base]
+desc: Radeon RV770 PFP microcode
+
+[radeon/SUMO_me.bin_base]
+desc: AMD Fusion 'Brazos' family ME microcode
+
+[radeon/SUMO_pfp.bin_base]
+desc: AMD Fusion 'Brazos' family PFP microcode
+
+[radeon/SUMO_rlc.bin_base]
+desc: AMD Fusion RLC microcode
+
+[radeon/SUMO2_me.bin_base]
+desc: AMD Fusion 'Llano' family ME microcode
+
+[radeon/SUMO2_pfp.bin_base]
+desc: AMD Fusion 'Llano' family PFP microcode
+
+[radeon/TURKS_mc.bin_base]
+desc: Radeon HD 6500-family MC microcode
+
+[radeon/TURKS_me.bin_base]
+desc: Radeon HD 6500-family ME microcode
+
+[radeon/TURKS_pfp.bin_base]
+desc: Radeon HD 6500-family PFP microcode
+
+[tehuti/bdx.bin_base]
+desc: Tehuti network card firmware
+
+[tigon/tg3_tso.bin_base]
+desc: Broadcom BCM5703/BCM5704 TSO firmware
+
+[tigon/tg3.bin_base]
+desc: Broadcom BCM5701A0 firmware
+
+[tigon/tg3_tso5.bin_base]
+desc: Broadcom BCM5705 TSO firmware
+
+[vntwusb.fw_base]
+desc: VIA VT6656 firmware

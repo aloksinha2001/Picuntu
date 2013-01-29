@@ -1,0 +1,53 @@
+#!/usr/bin/pdmenu
+#
+# This pdmenurc shows off the more complicated things that can be done with
+# Pdmenu. If you get lost, see the pdmenurc(5) man page, or the simpler
+# pdmenurc files.
+
+# Define the main menu.
+# Note the use of the preproc command to put the hostname in the menu title.
+preproc:echo menu:main:`hostname` menu
+	# Let's display a list of files in the current directory. Let the
+	# user navigate around by hitting enter on subdirectories. Let them
+	# display a file simply by hitting enter on it.
+	# The showdir script can be in different places, depending on if
+	# pdmenu has been installed yet or not, which is why I try running
+	# it three different ways.
+	group:_File viewer
+		exec::makemenu: (\
+			./showdir.pl `pwd` "" show_directory || \
+			examples/showdir.pl `pwd` "" show_directory || \
+			${datarootdir}/pdmenu/showdir.pl `pwd` "" show_directory \
+			) 2>/dev/null
+		show:::show_directory
+		remove:::show_directory
+	endgroup
+	# Display a list of users who are logged in, and talk to the one that
+	# is selected.
+	group:_Talk to someone
+		exec::makemenu:\
+			echo "menu:talk:Talk to someone:Select who to talk to" ; \
+			for user in `users`; do \
+		  		echo "exec:Talk to _$user:pause:talk $user" ; \
+			done
+		show:::talk
+		remove:::talk
+	endgroup
+	show:_Torture test menu::torture
+	nop
+	exit:E_xit
+
+menu:torture:Torture Test Menu:Don't try this at home..
+	show:_Display this menu again::torture
+	show:_Display main menu again::main
+	group:_Add item to this menu
+		exec::makemenu,edit:\
+			echo "menu:torture:Torture Test Menu:Don't try this at home.."; \
+			echo "exec:~Menu Item Title:~:pause:~Menu Item Command:~"
+	endgroup
+	group:_Add item to the main menu
+		exec::makemenu,edit:\
+			echo menu:main:`hostname` menu ; \
+			echo "exec:~Menu Item Title:~:pause:~Menu Item Command:~"
+	endgroup
+	helptext:_Date in help text:command: echo -n "at the tone the time is "; date

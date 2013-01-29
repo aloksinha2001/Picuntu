@@ -1,0 +1,164 @@
+KURSOR
+^B      lewo
+^F      prawo
+^P      góra
+^N      dó³
+^Z      poprzednie s³owo
+^X      nastêpne s³owo
+
+SZUKAJ
+^KF     znajd¼ tekst
+^L      powtórz szukanie
+
+Przejd¼ do:
+^U      poprzedniego ekranu
+^V      nastêpnego ekranu
+^A      pocz±tku linii
+^E      koñca linii
+^KU     pocz±tku pliku
+^KV     koñca pliku
+^KL     do linii o numerze ...
+
+BLOK
+^KB     zaznacz pocz±tek bloku
+^KK     zaznacz koniec bloku
+^KM     przenie¶
+^KC     kopiuj
+^KW     zapisz do pliku
+^KY     skasuj
+^K/     przefilruj (przez program)
+
+SKASUJ
+^D      znak
+^Y      liniê
+^W      nastêpne s³owo
+^O      poprzednie s³owo
+^J      nastêpn± liniê
+^_      cofnij
+^^      powtórz
+
+Ró¿ne
+^KJ     sformatuj tekst
+^T      opcje
+^R      od¶wie¿
+^@      wstaw
+
+
+Sprawd¼ pisowniê
+^[N     s³owa
+^[L     pliku
+
+Zakoñcz
+^KX     zapisz
+^C      przerwij
+^KZ     pow³oka
+
+PLIK
+^KE     edytuj
+^KR     wstaw
+^KD     zapisz
+
+
+^KO     podziel okno na 2 czê¶ci
+^KG     powiêksz bie¿±ce okno
+^KN     przejd¼ do okna poni¿ej
+^C      zamknij bie¿±ce okno
+
+^KE     za³aduj plik do okna
+^KT     zmniejsz bie¿±ce okno
+^KP     przejd¼ do okna powy¿ej
+^KI     poka¿ wszystkie okna / jedno okno
+
+MAKRA
+^K[ 0-9 nagraj
+^K]     zakoñcz nagrywanie
+^K  0-9 wykonaj makro
+^K?     pytanie (???)
+^[D     poka¿ makro
+
+
+Ró¿ne
+^K SPACJA stan
+^K\     powtórz
+^[M     matematyka
+^KA     wycentruj liniê
+^[H     komunikat
+
+PRZEWIJANIE
+^[W     do góry
+^[Z     w dó³
+^K<  w lewo
+^K>  w prawo
+
+Pow³oka
+^K'     okno
+^[!     komenda
+
+
+CYTUJ
+`       CTRL-
+^\      META-
+
+
+Przejd¼ do
+^[B     do ^KB
+^[K     do ^KK
+
+SKASUJ
+^[Y     cofnij
+^[O     poprzedni± liniê
+
+Poszukiwanie przyrostowe
+^[R     w ty³
+^[S     do przodu
+
+Zak³adki
+^[ 0-9  przejd¼ do
+^[^[    ustaw
+
+Przejd¼ do
+^G      odpowiadaj±cego ( [ {
+^K-     poprzedniego miejsca
+^K=     nastêpnego miejsca
+^K;     zaznacza wyszukanie
+
+Wciêcie
+^K,     mniejsze
+^K.     wiêksze
+
+KOMPILOWANIE
+^[C     skompiluj i zanalizuj b³êdy
+^[E     zanalizuj b³êdy
+^[=     do nastêpnego b³êdu
+^[-     do poprzedniego b³êdu
+
+
+Specjalne sekwencje przeszukiwania:
+\^  \$  pasuje do pocz±tku/koñca linii
+\<  \>    pasuje do pocz±tku/koñca s³owa
+\c      pasuje do wywa¿onego wyra¿enia jêzyka C
+\[..]   pasuje do znaku z danego zbioru
+\+      pasuje do 0 lub wiêcej wyst±pieñ znaku podanego po tej sekwencji
+\?      pasuje do dowolnego pojedynczego znaku
+\*      pasuje do 0 lub wiêcej znaków
+\\      pasuje do \
+\n      pasuje do znaku koñca linii
+
+Specjalne sekwencje zamiany:
+\&  zamiana na tekst, który zosta³ dopasowany przez ³añcuch wyszukiwania
+\0 - 9  zamiana na tekst, który zosta³ dopasowany przez N-te wyst±pienie \*, \?, \c, \+, lub \[..]
+\\      zamiana na \
+\n      zamiana na znak koñca linii
+
+Klawisz TAB przy wyborze plików powoduje pokazanie menu nazw plików.
+Klawisze strza³ek góra/dó³ pozwalaj± na dostêp do historii wcze¶niej wpisanych nazw.
+Specjalne nazwy plików:
+ !komenda               przepu¶æ przez komendê pow³oki
+ >>plik                   dopisz do pliku
+ -                      czytaj/pisz z/do standartowego wej¶cia/wyj¶cia
+ plik,POCZATEK,ROZMIAR  czytaj/pisz do czê¶ci pliku/urz±dzenia
+        POCZATEK i ROZMIAR mo¿na podaæ w liczbach dziesiêtnych (255), ósemkowych (0377), lub szestnastkowych (0xFF)
+
+
+T³umaczenie: Marcin Owsiany <porridge@debian.org>
+(Z wersji 2.8)

@@ -1,0 +1,48 @@
+lease {
+  interface "usbnet0";
+  fixed-address 192.168.1.177;
+  option subnet-mask 255.255.255.0;
+  option dhcp-lease-time 86400;
+  option routers 192.168.1.1;
+  option dhcp-message-type 5;
+  option dhcp-server-identifier 192.168.1.1;
+  option domain-name-servers 192.168.1.1;
+  option dhcp-renewal-time 43200;
+  option dhcp-rebinding-time 75600;
+  option broadcast-address 192.168.1.255;
+  option host-name "rk3066dev";
+  option fqdn.encoded false;
+  option fqdn.hostname "rk3066dev";
+  option fqdn.fqdn "rk3066dev";
+  option fqdn.no-client-update true;
+  option fqdn.server-update true;
+  option fqdn.rcode1 255;
+  option fqdn.rcode2 255;
+  renew 4 1970/01/01 09:32:23;
+  rebind 4 1970/01/01 21:02:14;
+  expire 5 1970/01/02 00:02:14;
+}
+lease {
+  interface "usbnet1";
+  fixed-address 192.168.1.177;
+  option subnet-mask 255.255.255.0;
+  option routers 192.168.1.1;
+  option dhcp-lease-time 86400;
+  option dhcp-message-type 5;
+  option domain-name-servers 192.168.1.1;
+  option dhcp-server-identifier 192.168.1.1;
+  option dhcp-renewal-time 43200;
+  option broadcast-address 192.168.1.255;
+  option dhcp-rebinding-time 75600;
+  option host-name "rk3066dev";
+  option fqdn.encoded false;
+  option fqdn.hostname "rk3066dev";
+  option fqdn.fqdn "rk3066dev";
+  option fqdn.no-client-update true;
+  option fqdn.server-update true;
+  option fqdn.rcode1 255;
+  option fqdn.rcode2 255;
+  renew 4 1970/01/01 11:59:58;
+  rebind 4 1970/01/01 21:07:29;
+  expire 5 1970/01/02 00:07:29;
+}

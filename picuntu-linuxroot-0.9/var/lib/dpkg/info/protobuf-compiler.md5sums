@@ -1,0 +1,17 @@
+98e3bef4aeccd891312a38eabfec5972  usr/bin/protoc
+8163f70d635090bd99d193a0fbacbb8f  usr/share/doc/protobuf-compiler/CONTRIBUTORS.txt
+5ed1c0f7b9ab77b074b2ffb5bd00e653  usr/share/doc/protobuf-compiler/README.txt.gz
+4be774551100091d4a4b87274daa4894  usr/share/doc/protobuf-compiler/copyright
+9bd483793505d2e3fa809a7055584897  usr/share/doc/protobuf-compiler/editors/README.txt
+a875c4210e36b6c627ec8c49db7fffad  usr/share/doc/protobuf-compiler/editors/proto.vim
+ffd05b115941a126d192a048627303ee  usr/share/doc/protobuf-compiler/editors/protobuf-mode.el.gz
+2c8920d74ecbafeafaedb3f2ea819404  usr/share/doc/protobuf-compiler/examples/AddPerson.java
+b940657ece0fb9fb387145d82ea467f4  usr/share/doc/protobuf-compiler/examples/ListPeople.java
+ca44698a98165e173d8247ec96239ce0  usr/share/doc/protobuf-compiler/examples/Makefile
+4b0ef1589798b435669507476d1e464c  usr/share/doc/protobuf-compiler/examples/README.txt
+e110183e01074d0de23566d99655d499  usr/share/doc/protobuf-compiler/examples/add_person.cc
+ea0267adf2f2d7f430aa19d8c37a6901  usr/share/doc/protobuf-compiler/examples/add_person.py
+dfae09fb809c9dca627d38fbea9c1079  usr/share/doc/protobuf-compiler/examples/addressbook.proto
+d53c204875d2eb427e5695bf9677b617  usr/share/doc/protobuf-compiler/examples/list_people.cc
+60836e821463b069fdcde2594ca4c8cf  usr/share/doc/protobuf-compiler/examples/list_people.py
+494fc981e4be4a04253d1b3a68f6bd61  usr/share/man/man1/protoc.1.gz

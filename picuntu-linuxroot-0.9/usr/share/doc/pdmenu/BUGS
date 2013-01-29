@@ -1,0 +1,25 @@
+This is the first, yes, the first C program I ever wrote. if you're a 
+seasoned C programmer, and you're ROTFL over my code, please write me
+<joey@kitenet.net>, and give me a hand or just some constructive criticizm.
+
+If you want to report a bug, first visit the pdmenu web site
+(http://kitenet.net/~joey/code/pdmenu/) and check that the latest version of
+pdmenu has the bug. Most bug reports I get have already been fixed, and the
+bug reporter is just using an outdated pdmenu. Once you verify there is
+still a bug, mail <joey@kitenet.net>, describing how to reproduce the bug.
+Please tell me the versions of pdmenu, slang, and what operating system you
+are using, along with the pdmenurc file that caused the problem and any other
+pertinent information.
+
+Current known bugs:
+	I'm sure there are spelling errors throughout. Too bad.
+
+	Run a program that has the pause flag set. At the press any key to
+	continue prompt, resize the screen. The screen ends up sized wrong
+	when you get back to pdmenu.
+
+	In an rc file, a '\' on a line by itself with no continuation lines
+	just before it will not be stripped out.
+
+	When using pdmenurc.complex to view a file with tabs, ie, INSTALL, 
+	some lines are missing their last character.

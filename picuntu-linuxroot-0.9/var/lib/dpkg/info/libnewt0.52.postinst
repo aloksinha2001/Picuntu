@@ -1,0 +1,20 @@
+#!/bin/sh
+set -e
+
+# Automatically added by dh_makeshlibs
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+# End automatically added section
+
+
+case "$1" in
+    configure)
+	# These have been moved from /usr to /etc, clean up if necessary, drop these 2 lines after Natty
+	update-alternatives --remove newt-palette /usr/share/newt/palette.ubuntu 2>/dev/null || true
+	update-alternatives --remove newt-palette /usr/share/newt/palette 2>/dev/null || true
+	# Install alternatives
+	update-alternatives --install /etc/newt/palette newt-palette /etc/newt/palette.ubuntu 50
+	update-alternatives --install /etc/newt/palette newt-palette /etc/newt/palette.original 20
+        ;;
+esac

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = "remove" ]; then
+    avahi-autoipd --kill || true
+fi
+
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/dhcp3/dhclient-exit-hooks.d/zzz_avahi-autoipd /etc/dhcp/dhclient-exit-hooks.d/zzz_avahi-autoipd 0.6.25-3 avahi-autoipd -- "$@"
+# End automatically added section
+# Automatically added by dh_installdeb
+dpkg-maintscript-helper mv_conffile /etc/dhcp3/dhclient-enter-hooks.d/avahi-autoipd /etc/dhcp/dhclient-enter-hooks.d/avahi-autoipd 0.6.25-3 avahi-autoipd -- "$@"
+# End automatically added section
+
+

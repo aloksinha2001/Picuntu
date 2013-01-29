@@ -1,0 +1,8 @@
+/etc/security/namespace.init
+/etc/security/pam_env.conf
+/etc/security/time.conf
+/etc/security/namespace.conf
+/etc/security/sepermit.conf
+/etc/security/access.conf
+/etc/security/group.conf
+/etc/security/limits.conf

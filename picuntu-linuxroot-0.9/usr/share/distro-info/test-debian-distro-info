@@ -1,0 +1,184 @@
+#!/bin/sh
+
+# Copyright (C) 2012, Benjamin Drung <bdrung@debian.org>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+COMMAND="debian-distro-info"
+
+. "${0%/*}/shunit2-helper-functions.sh"
+
+testAlias() {
+    success "--alias sid" "unstable"
+    success "--date 2010-10-20 --alias squeeze" "testing"
+    success "--date 2011-11-20 --alias squeeze" "stable"
+    success "--alias whatever" "whatever"
+}
+
+testAll() {
+    local result="buzz
+rex
+bo
+hamm
+slink
+potato
+woody
+sarge
+etch
+lenny
+squeeze
+sid
+experimental"
+    local pattern=$(echo $result | sed "s/ /\\\\|/g")
+    success "--date 2007-07-07 --all | grep -w \"$pattern\"" "$result"
+    success "-a | grep -w \"$pattern\"" "$result"
+}
+
+testDevel() {
+    success "--date 2011-01-10 --devel" "sid"
+    success "-d --date=2002-01-10 --codename" "sid"
+}
+
+testOldstable() {
+    success "--oldstable --date=2011-01-10" "etch"
+    success "-c --date=2008-07-06 -o" "sarge"
+    # Compatibility with 0.2.2
+    success "--old --date=2011-01-10" "etch"
+}
+
+testStable() {
+    success "--date=2011-01-10 --stable" "lenny"
+    success "--date=2001-02-10 -s" "potato"
+}
+
+testSupported() {
+    local result="lenny
+squeeze
+sid
+experimental"
+    success "--date=2011-01-10 --supported" "$result"
+}
+
+testUnsupported() {
+    local result="buzz
+rex
+bo
+hamm
+slink
+potato
+woody
+sarge
+etch"
+    success "--date=2011-01-10 --unsupported" "$result"
+}
+
+testTesting() {
+    success "--date=2011-01-10 --testing" "squeeze"
+    success "-t --date=2010-01-10" "squeeze"
+}
+
+testFullname() {
+    success "--date=2011-01-10 --stable --fullname" 'Debian 5.0 "Lenny"'
+    success "--date=2011-01-10 -f --testing" 'Debian 6.0 "Squeeze"'
+}
+
+testRelease() {
+    success "--date=2011-01-10 -r --devel" "sid"
+    success "--date=2011-01-10 --testing --release" "6.0"
+    success "--date=2011-01-10 --release --stable" "5.0"
+}
+
+testCombinedShortform() {
+    success "-rd" "sid"
+}
+
+testReleaseDate() {
+    success "--date 2009-02-13 -o" "sarge"
+    success "--date 2009-02-13 -s" "etch"
+    success "--date 2009-02-13 -t" "lenny"
+    success "--date 2009-02-13 -d" "sid"
+    success "--date 2009-02-14 -o" "etch"
+    success "--date 2009-02-14 -s" "lenny"
+    success "--date 2009-02-14 -t" "squeeze"
+    success "--date 2009-02-14 -d" "sid"
+}
+
+testHelp() {
+    local help='Usage: debian-distro-info [options]
+
+Options:
+  -h  --help         show this help message and exit
+      --date=DATE    date for calculating the version (default: today)
+      --alias=DIST   print the alias (stable, testing, unstable) relative to
+                     the distribution codename passed as an argument
+  -a  --all          list all known versions
+  -d  --devel        latest development version
+  -o  --oldstable    latest oldstable version
+  -s  --stable       latest stable version
+      --supported    list of all supported stable versions
+  -t  --testing      current testing version
+      --unsupported  list of all unsupported stable versions
+  -c  --codename     print the codename (default)
+  -f  --fullname     print the full name
+  -r  --release      print the release version
+
+See debian-distro-info(1) for more info.'
+    success "--help" "$help"
+    success "-h" "$help"
+}
+
+testExactlyOne() {
+    local result='debian-distro-info: You have to select exactly one of --alias, --all, --devel, --oldstable, --stable, --supported, --testing, --unsupported.'
+    failure "" "$result"
+    failure "-ad" "$result"
+    failure "--alias foo -a" "$result"
+}
+
+testUnrecognizedOption() {
+    failure "--foo" "debian-distro-info: unrecognized option \`--foo'"
+    failure "-x" "debian-distro-info: unrecognized option \`-x'"
+    failure "--lts" "debian-distro-info: unrecognized option \`--lts'"
+}
+
+testUnrecognizedArguments() {
+    failure "bar" "debian-distro-info: unrecognized arguments: bar"
+    failure "baz -s foo" "debian-distro-info: unrecognized arguments: baz foo"
+}
+
+testMissingArgumentAlias() {
+    failure "--alias" "debian-distro-info: option \`--alias' requires an argument DIST"
+}
+
+testMissingArgumentDate() {
+    failure "--date" "debian-distro-info: option \`--date' requires an argument DATE"
+}
+
+testInvalidAlias() {
+    failure "--alias Sid" "debian-distro-info: invalid distribution codename \`Sid'"
+    failure "--alias wr0ng" "debian-distro-info: invalid distribution codename \`wr0ng'"
+}
+
+testInvalidDate() {
+    failure "--date fail -s" "debian-distro-info: invalid date \`fail'"
+    failure "--date=2010-02-30 -d" "debian-distro-info: invalid date \`2010-02-30'"
+}
+
+testMultipleAlias() {
+    failure "--alias a --alias b" "debian-distro-info: --alias requested multiple times."
+}
+
+testMultipleDates() {
+    failure "--date 2007-06-05 -s --date 2004-03-02" "debian-distro-info: Date specified multiple times."
+}
+
+. shunit2

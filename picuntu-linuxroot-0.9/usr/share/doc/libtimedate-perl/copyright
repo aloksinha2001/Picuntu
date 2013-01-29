@@ -1,0 +1,33 @@
+Format-Specification: http://svn.debian.org/wsvn/dep/web/deps/dep5.mdwn?op=file&rev=59
+Maintainer: Graham Barr <gbarr@pobox.com>
+Source: http://search.cpan.org/dist/TimeDate/
+Name: TimeDate
+
+Files: *
+Copyright: 1995-2009, Graham Barr <gbarr@pobox.com>
+License: Artistic or GPL-1+
+
+Files: debian/*
+Copyright: 2010, Jonathan Yu <jawnsy@cpan.org>
+ 1999-2009, Christian Hammers <ch@debian.org>
+ 2007, Joey Hess <joeyh@debian.org>
+ 1999, Raphael Hertzog <rhertzog@hrnet.fr>
+ 1997-1999, Christian Leutloff <leutloff@debian.org>
+License: Artistic or GPL-1+
+
+License: Artistic
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the Artistic License, which comes with Perl.
+ .
+ On Debian GNU/Linux systems, the complete text of the Artistic License
+ can be found in `/usr/share/common-licenses/Artistic'
+
+License: GPL-1+
+ This program is free software; you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation; either version 1, or (at your option)
+ any later version.
+ .
+ On Debian GNU/Linux systems, the complete text of the GNU General
+ Public License can be found in `/usr/share/common-licenses/GPL'
+

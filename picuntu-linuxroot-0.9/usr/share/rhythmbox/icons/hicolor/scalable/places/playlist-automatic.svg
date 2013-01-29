@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg id="svg5498" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns="http://www.w3.org/2000/svg" height="48" width="48" version="1.0" xmlns:cc="http://web.resource.org/cc/" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/">
+ <defs id="defs5500">
+  <linearGradient id="linearGradient2098" y2="39.999" gradientUnits="userSpaceOnUse" x2="25.058" y1="47.028" x1="25.058">
+   <stop id="stop3704" style="stop-opacity:0" offset="0"/>
+   <stop id="stop3710" offset=".5"/>
+   <stop id="stop3706" style="stop-opacity:0" offset="1"/>
+  </linearGradient>
+  <radialGradient id="radialGradient2096" xlink:href="#linearGradient3688" gradientUnits="userSpaceOnUse" cy="43.5" cx="4.993" gradientTransform="matrix(2.0038 0 0 1.4 -20.012 -104.4)" r="2.5"/>
+  <linearGradient id="linearGradient3688">
+   <stop id="stop3690" offset="0"/>
+   <stop id="stop3692" style="stop-opacity:0" offset="1"/>
+  </linearGradient>
+  <radialGradient id="radialGradient2094" xlink:href="#linearGradient3688" gradientUnits="userSpaceOnUse" cy="43.5" cx="4.993" gradientTransform="matrix(2.0038 0 0 1.4 27.988 -17.4)" r="2.5"/>
+  <radialGradient id="radialGradient6713" gradientUnits="userSpaceOnUse" cy="11.004" cx="12.388" gradientTransform="matrix(8.6416 -.0012540 0 10.204 -74.286 -78.533)" r="8">
+   <stop id="stop260" style="stop-color:#fafafa" offset="0"/>
+   <stop id="stop261" style="stop-color:#bbb" offset="1"/>
+  </radialGradient>
+  <linearGradient id="linearGradient11805" y2="13.631" gradientUnits="userSpaceOnUse" x2="14.009" gradientTransform="matrix(2.6923 0 0 2.8462 2.4615 1.2308)" y1="3.9005" x1="3.0272">
+   <stop id="stop15664" style="stop-color:#fff" offset="0"/>
+   <stop id="stop15666" style="stop-color:#f8f8f8" offset="1"/>
+  </linearGradient>
+ </defs>
+ <metadata id="metadata5503">
+  <rdf:RDF>
+   <cc:Work rdf:about="">
+    <dc:format>image/svg+xml</dc:format>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <g id="layer1">
+  <g id="g2043" style="opacity:.60870" transform="matrix(1.15 0 0 1 -3.6 -1)">
+   <g id="g2036">
+    <g id="g3712" style="opacity:.4" transform="matrix(1.0526 0 0 1.2857 -1.2632 -13.429)">
+     <rect id="rect2801" style="opacity:1;fill:url(#radialGradient2094)" height="7" width="5" y="40" x="38"/>
+     <rect id="rect3696" style="opacity:1;fill:url(#radialGradient2096)" transform="scale(-1)" height="7" width="5" y="-47" x="-10"/>
+     <rect id="rect3700" style="opacity:1;fill:url(#linearGradient2098)" height="7" width="28" y="40" x="10"/>
+    </g>
+   </g>
+  </g>
+  <rect id="rect5506" style="stroke-linejoin:round;stroke:#a0a0a0;fill:url(#radialGradient6713)" rx="1.2572" ry="1.2047" height="39" width="37" y="4.5" x="5.5"/>
+  <rect id="rect11851" style="opacity:.25;fill:#555753" rx="0" ry="0" height="10" width="38" y="14" x="5"/>
+  <path id="rect5525" style="opacity:.2;fill:#555753" d="m5 34h38v7.729c-0.06 1.211 0.06 2.228-2.458 2.271h-33.3c-1.3147 0-2.242-0.091-2.242-2.207v-7.793z"/>
+  <rect id="rect8485" style="opacity:.8;stroke-linejoin:round;stroke:url(#linearGradient11805);fill:none" rx=".19109" ry=".19109" height="37" width="35" y="5.5" x="6.5"/>
+  <path id="path4942" style="stroke:#75507b;stroke-linecap:round;stroke-width:2.4804;fill:none" d="m15.91 11.128a4.6404 5.3033 0 1 1 -9.2809 0 4.6404 5.3033 0 1 1 9.2809 0z" transform="matrix(1.724 0 0 1.5085 4.5714 6.2131)"/>
+  <rect id="rect5913" style="fill:#75507b" height="6" width="6" y="20" x="10"/>
+  <rect id="rect5915" style="fill:#75507b" height="6" width="5.4217" y="20" x="32.578"/>
+  <rect id="rect5917" style="fill:#75507b" height="5.1894" width="6" y="9" x="21"/>
+  <rect id="rect5919" style="fill:#75507b" height="5.598" width="6" y="31.402" x="21"/>
+  <rect id="rect5921" style="fill:#75507b" transform="matrix(.72761 .68599 -.72761 .68599 0 0)" height="4.4356" width="4.4356" y="-2.5243" x="20.072"/>
+  <rect id="rect5923" style="fill:#75507b" transform="matrix(.71934 .69466 -.71934 .69466 0 0)" height="4.3803" width="4.3803" y="-2.179" x="41.721"/>
+  <rect id="rect5925" style="fill:#75507b" transform="rotate(45)" height="4.4561" width="4.4561" y="-13.818" x="30.842"/>
+  <rect id="rect5927" style="fill:#75507b" transform="rotate(45)" height="4.3032" width="4.3032" y="7.9274" x="30.918"/>
+ </g>
+</svg>

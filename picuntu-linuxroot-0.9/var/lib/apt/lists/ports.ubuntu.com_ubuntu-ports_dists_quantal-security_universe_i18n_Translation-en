@@ -1,0 +1,1301 @@
+Package: apache2-mpm-itk
+Description-md5: 852c600a072cd8e2a37f461a6a0916ad
+Description-en: multiuser MPM for Apache 2.2
+ The ITK Multi-Processing Module (MPM) works in about the same way as the
+ classical "prefork" module (that is, without threads), except that it allows
+ you to constrain each individual vhost to a particular system user. This
+ allows you to run several different web sites on a single server without
+ worrying that they will be able to read each others' files. This is a
+ third-party MPM that is not included in the normal Apache httpd.
+ .
+ Please note that this MPM is somewhat less tested than the MPMs that come with
+ Apache itself.
+
+Package: apache2-suexec
+Description-md5: e83b330db3c94ec36f5e444e45447966
+Description-en: Standard suexec program for Apache 2 mod_suexec
+ Provides the standard suexec helper program for mod_suexec. This version is
+ compiled with document root /var/www and userdir suffix public_html. If you
+ need different settings, use the package apache2-suexec-custom.
+
+Package: apache2-suexec-custom
+Description-md5: a9c6f07a2dd1c93fd399fa41bfd36cee
+Description-en: Configurable suexec program for Apache 2 mod_suexec
+ Provides a customizable version of the suexec helper program for mod_suexec.
+ This is not the version from upstream, but can be configured with a
+ configuration file.
+ .
+ If you do not need non-standard document root or userdir settings, it is
+ recommended that you use the standard suexec helper program from the
+ apache2-suexec package instead.
+
+Package: bogofilter
+Description-md5: 968ec277af1658df73a6620e1ea6c7f7
+Description-en: fast Bayesian spam filter (dummy package)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+
+Package: bogofilter-bdb
+Description-md5: e83a0090bafdc792b6c35c6bc88649e4
+Description-en: fast Bayesian spam filter (Berkeley DB)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the bdb database backend.
+
+Package: bogofilter-common
+Description-md5: 2e806a17661e5d96bbb0a0121098a1e3
+Description-en: fast Bayesian spam filter (common files)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides files that are common for all database backends.
+
+Package: bogofilter-sqlite
+Description-md5: 6eb04a1cda23db8196381fcabb2bc183
+Description-en: fast Bayesian spam filter (sqlite)
+ This package implements a fast Bayesian spam filter along the lines suggested
+ by Paul Graham in his article "A Plan For Spam".
+ .
+ This version substantially improves on Paul's proposal by doing smarter
+ lexical analysis.  In particular, hostnames and IP addresses are retained
+ as recognition features rather than broken up. Various kinds of MTA
+ cruft such as dates and message-IDs are discarded so as not to bloat
+ the word lists.
+ .
+ This package provides the sqlite database backend.
+
+Package: cupsddk
+Description-md5: 9aadce16ef37b93d56befeaf3c431717
+Description-en: Common UNIX Printing System (transitional package)
+ This is a dummy package to ease transition to new package name.
+
+Package: enigmail
+Description-md5: 1f1e67ab816cad117d3c812e71e25f82
+Description-en: GPG support for Thunderbird and Debian Icedove
+ OpenPGP extension for Thunderbird. Enigmail allows users to access the
+ features provided by the popular GnuPG software from within Thunderbird.
+ .
+ Enigmail is capable of signing, authenticating, encrypting and decrypting
+ email. Additionally, it supports both the inline PGP format, as well as the
+ PGP/MIME format as described in RFC 3156.
+
+Package: firefox-mozsymbols
+Description-md5: 1398643ad4fb0f820933502f6bba9816
+Description-en: Safe and easy web browser from Mozilla - Breakpad symbols
+ Firefox delivers safe, easy web browsing. A familiar user interface,
+ enhanced security features including protection from online identity theft,
+ and integrated search let you get the most out of the web.
+ .
+ This package contains the Firefox symbols in a format expected by Mozilla's
+ Breakpad. Eventually this package should go away and the symbol upload be
+ implemented in soyuz (or other builders that build this package)
+
+Package: glance-client
+Description-md5: 51996298b1544ac6c05b4806e85d1d04
+Description-en: OpenStack Image Registry and Delivery Service - client
+ The Glance project provides an image registration, discovery and
+ delivery service. These services may be used as stand-along services, and
+ they may also be used by Nova to deliver images from object stores, such as
+ OpenStack's Swift service, to Nova's compute nodes.
+ .
+ This package contains the glance client.
+
+Package: gnupg-curl
+Description-md5: 55306a4e1e1fd63e577767c1b9f5161c
+Description-en: GNU privacy guard - a free PGP replacement (cURL)
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC 4880.
+ .
+ This package contains the keyserver helper tools built with libcurl,
+ which replace the ones in the gnupg package built with the "curl shim"
+ variant of gnupg. This package provides support for HKPS keyservers.
+ .
+ GnuPG does not use any patented algorithms. This means it cannot be
+ compatible with PGP2, because that uses IDEA (which is patented in
+ a number of countries).
+
+Package: gpgsm
+Description-md5: eaa08168026822f8656ab2343df90485
+Description-en: GNU privacy guard - S/MIME version
+ GnuPG is GNU's tool for secure communication and data storage.
+ It can be used to encrypt data and to create digital signatures.
+ It includes an advanced key management facility and is compliant
+ with the proposed OpenPGP Internet standard as described in RFC2440.
+ .
+ This package contains the gpgsm program. gpgsm is a tool to provide
+ digital encryption and signing services on X.509 certificates and the
+ CMS protocol. gpgsm includes complete certificate management.
+
+Package: host
+Description-md5: 3c0b6923194ef2929ab26358ef75c037
+Description-en: Transitional package
+ This dummy package is provided for a smooth transition from the previous
+ host package.  It may safely be removed after installation.
+
+Package: icedtea-6-jre-cacao
+Description-md5: 24efc2093c93b3e7670092d00aea59d9
+Description-en: Alternative JVM for OpenJDK, using Cacao
+ The package provides an alternative runtime using the Cacao VM and the
+ Cacao Just In Time Compiler (JIT).  This is a somewhat faster alternative
+ than the Zero port on architectures like alpha, armel, m68k, mips, mipsel,
+ powerpc and s390.
+ .
+ The VM is started with the option `-cacao'. See the README.Debian for details.
+
+Package: icedtea-6-jre-jamvm
+Description-md5: a3b67c2c3683232269f84a02ede3fd4b
+Description-en: Alternative JVM for OpenJDK, using JamVM
+ The package provides an alternative runtime using the JamVM.  This is a
+ somewhat faster alternative than the Zero port on architectures like armel,
+ mips, mipsel, powerpc.
+ .
+ The VM is started with the option `-jamvm'. See the README.Debian for details.
+
+Package: icedtea-6-plugin
+Description-md5: 73779ff36047046383e1c1bd3e13a884
+Description-en: web browser plugin based on OpenJDK and IcedTea to execute Java applets
+ IcedTeaPlugin is a web browser plugin to execute Java applets, supporting
+ LiveConnect/JavaScript. It is targeted for xulrunner-1.9 and compatible
+ browsers that support the NPAPI.
+
+Package: icedtea-7-jre-cacao
+Description-md5: 90155097d608216750af7e7b7d35c3ef
+Description-en: Transitional package for obsolete Cacao JVM for OpenJDK
+ Cacao support was removed for recent versions of OpenJDK 7.
+ .
+ This is a transitional package which can be safely removed.
+
+Package: icedtea6-plugin
+Description-md5: 6da6e3fbb572567cdab3a35a85e93560
+Description-en: web browser plugin to execute Java applets (dependency package)
+ IcedTeaPlugin is a web browser plugin to execute Java applets, supporting
+ LiveConnect/JavaScript. It is targeted for xulrunner-1.9 and compatible
+ browsers that support the NPAPI.
+ .
+ This is a dependency package, it can be safely removed after upgrade.
+
+Package: jabberd2
+Description-md5: e73b33867c7220d068eac469d8a52925
+Description-en: Jabber instant messenger server
+ Jabber is a free instant messaging server based on XMPP.
+ .
+ This package contains Jabberd 2, the next generation of the Jabberd
+ server. It has been rewritten from the ground up to be scalable,
+ architecturally sound, and to support the latest protocol extensions
+ coming out of the XSF.
+
+Package: libav-extra-dbg
+Description-md5: 4883fccf171ba58bee24c569eb7b0345
+Description-en: Debug symbols for Libav related packages
+ Libav is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains debug data of the Libav related shared libraries.
+ .
+ Most people will not need this package. Please install it to produce useful
+ stacktraces to help debugging the Libav library.
+
+Package: libav-source
+Description-md5: 8a0d2d245bbd6e55b0c9cffe1ec99b46
+Description-en: Patched Libav sources
+ Libav is a complete, cross-platform solution to decode, encode, record,
+ convert and stream audio and video.
+ .
+ This package contains a tarball the source file that were used to produce
+ this package, containing all modifications that have been applied inline.
+ .
+ This package is used as build-dependency for 'libav-extra', which provides
+ the "extra" variants of libav.
+
+Package: libavcodec-extra-53
+Description-md5: 7b88fa15fcd545bfd6b9075bf9b91b34
+Description-en: Libav codec library
+ This package contains the ffplay multimedia player, the ffserver streaming
+ server and the Libav audio and video encoder. They support most existing
+ file formats (AVI, MPEG, OGG, Matroska, ASF...) and encoding formats (MPEG,
+ DivX, MPEG4, AC3, DV...).
+ .
+ This is the codec library from Libav (both encoding and decoding).
+ .
+ This package is an enhancement to the regular libavcodec library package.
+ This package contains the following additional codecs.
+ .
+  * OpenCORE Adaptive Multi-Rate (AMR) Narrow-Band (Encoder/Decoder)
+  * OpenCORE Adaptive Multi-Rate (AMR) Wide-Band (Decoder)
+  * Android VisualOn AAC (Encoder)
+  * Android VisualOn Adaptive Multi-Rate (AMR) Wide-Band (Encoder)
+  * OpenCV filtering
+  * Dirac decoding support via libdirac
+  * MP3 encoding with liblame
+  * H.264 encoding via libx264
+  * MPEG4 Part 2 encoding via libxvidcore
+ .
+ Because this package links against libraries that are licensed
+ under Apache License 2.0, the resulting binaries are distributed under the
+ GPL version 3.
+
+Package: libavdevice-extra-53
+Description-md5: af166fdf0ec57c74e51c5f8737bb1eba
+Description-en: Libav device handling library
+ This is the device handling library from the Libav project.
+ .
+ This package contains a unrestricted version of the libavdevice shared
+ object that should only be used by Debian packages.
+
+Package: libavfilter-extra-2
+Description-md5: b2686f7be0d3b9195ef7fa148ec6a780
+Description-en: Libav video postprocessing library
+ This is the video postprocessing library from Libav.
+ .
+ This package contains a unrestricted version of the libavfilter shared
+ object that should only be used by Debian packages.
+
+Package: libavformat-extra-53
+Description-md5: 147ec950605579b653b3bc620121e812
+Description-en: Libav file format library
+ This is the demuxer library from the Libav project. It supports most
+ existing file formats (AVI, MPEG, OGG, Matroska, ASF...).
+ .
+ This package contains a unrestricted version of the libavformat shared
+ object that should only be used by Debian packages.
+
+Package: libavutil-extra-51
+Description-md5: 9e573cbf5ff963b51f5bdc8be20f8cbd
+Description-en: Libav utility library
+ This is the common utility library from the Libav project. It is required
+ by all other Libav libraries.
+ .
+ This package contains a unrestricted version of the libavutil shared
+ object that should only be used by Debian packages.
+
+Package: libmysqld-pic
+Description-md5: a6e7a6d26021d6ef468e70ec4ac81167
+Description-en: MySQL database development files
+ MySQL is a fast, stable and true multi-user, multi-threaded SQL database
+ server. SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MySQL are speed, robustness and
+ ease of use.
+ .
+ This package includes the -fPIC version of the embedded server library.
+
+Package: libpostproc-extra-52
+Description-md5: cb1314020471c45aa7130055342c1e68
+Description-en: Libav video postprocessing library
+ This is the video postprocessing library from the Libav project.
+ .
+ This package contains a unrestricted version of the libpostproc shared
+ object that should only be used by Debian packages.
+
+Package: libssl0.9.8
+Description-md5: 2e9416e72fb31714d9b26021a3ee7e85
+Description-en: SSL shared libraries
+ libssl and libcrypto shared libraries needed by programs like
+ apache-ssl, telnet-ssl and openssh.
+ .
+ It is part of the OpenSSL implementation of SSL.
+
+Package: libssl0.9.8-dbg
+Description-md5: fedfa89ced3aa67317f9dac7ba5308da
+Description-en: Symbol tables for libssl and libcrypto
+ This package is part of the OpenSSL implementation of SSL.
+
+Package: libswscale-extra-2
+Description-md5: 310aa629f3a920ec1f220d9db6daee76
+Description-en: Libav video scaling library
+ This is the video scaling library from the Libav project.
+ .
+ This package contains a unrestricted version of the libswscale shared
+ object that should only be used by Debian packages.
+
+Package: libtcltk-ruby1.8
+Description-md5: 48456af265ae8a515e66a74dc7be54c9
+Description-en: Tcl/Tk interface for Ruby 1.8
+ tcltklib is an extension library for Ruby 1.8.  It makes Ruby 1.8
+ programs to be able to use low level interface for the Tcl/Tk.
+
+Package: libtcltk-ruby1.9.1
+Description-md5: 62973a5602a348dfc7a9db8e5092abe9
+Description-en: Tcl/Tk interface for Ruby 1.9.1
+ tcltklib is an extension library for Ruby 1.9.1.  It makes Ruby 1.9.1
+ programs to be able to use low level interface for the Tcl/Tk.
+
+Package: libtiff-opengl
+Description-md5: 8b1debea0e0eac5de9dc7eb9a32524a2
+Description-en: TIFF manipulation and conversion tools
+ libtiff is a library providing support for the Tag Image File Format
+ (TIFF), a widely used format for storing image data.  This package
+ contains libtiff tools that depend upon opengl.  It complements the
+ libtiff-tools package, which contains the libtiff tools that don't
+ depend upon opengl.
+
+Package: libtiff4
+Description-md5: 88bc86aedf8a41857f8c5f15db8bbe3d
+Description-en: Tag Image File Format (TIFF) library (old version)
+ libtiff is a library providing support for the Tag Image File Format
+ (TIFF), a widely used format for storing image data.  This package
+ includes the shared library.
+
+Package: libtiff4-dev
+Description-md5: 1d420285d621c56c603af02df5cc9d76
+Description-en: Tag Image File Format (TIFF) library (old version), development files
+ libtiff is a library providing support for the Tag Image File Format
+ (TIFF), a widely used format for storing image data.  This package
+ includes the development files, static library, and header files.
+ .
+ These files are for the older 3.x version of the tiff libraries.  If
+ possible, try to use the libtiff-dev package (or libtiff5-dev)
+ package instead.
+
+Package: libtiffxx0c2
+Description-md5: 4fd8d2cbac51748003ded26ca83cac17
+Description-en: Tag Image File Format (TIFF) library (old version) -- C++ interface
+ libtiff is a library providing support for the Tag Image File Format
+ (TIFF), a widely used format for storing image data.  This package
+ includes the shared library for the experimental C++ interfaces.
+
+Package: linux-headers-3.5.0-21-lowlatency
+Description-md5: 85f5dd9da0d0ab52939a6cbddae68fd9
+Description-en: Linux kernel headers for version 3.5.0 on x86/x86_64
+ This package provides kernel header files for version 3.5.0 on
+ x86/x86_64.
+ .
+ This is for sites that want the latest kernel headers.  Please read
+ /usr/share/doc/linux-headers-3.5.0-21/debian.README.gz for details.
+
+Package: linux-headers-lowlatency
+Description-md5: b28bf5c7c758bfbbbd15e31ed4c78ed6
+Description-en: lowlatency Linux kernel headers
+ This package will always depend on the latest lowlatency kernel headers
+ available.
+
+Package: linux-image-3.5.0-21-lowlatency
+Description-md5: 38ef8499aebf3a5a643eeb5bf0942224
+Description-en: Linux kernel image for version 3.5.0 on x86/x86_64
+ This package contains the Linux kernel image for version 3.5.0 on
+ x86/x86_64.
+ .
+ Also includes the corresponding System.map file, the modules built by the
+ packager, and scripts that try to ensure that the system is not left in an
+ unbootable state after an update.
+ .
+ Supports Lowlatency processors.
+ .
+ Geared toward lowlatency desktop systems.
+ .
+ You likely do not want to install this package directly. Instead, install
+ the linux-lowlatency meta-package, which will ensure that upgrades work
+ correctly, and that supporting packages are also installed.
+
+Package: linux-image-lowlatency
+Description-md5: 81c6fc6425f7566aa856ff1be6d8b320
+Description-en: lowlatency Linux kernel image
+ This package will always depend on the latest lowlatency kernel image
+ available.
+
+Package: linux-lowlatency
+Description-md5: b52e19b8044c25aff9dce108f24e2ee9
+Description-en: Complete lowlatency Linux kernel
+ This package will always depend on the latest complete lowlatency Linux kernel
+ available.
+
+Package: lwresd
+Description-md5: 71f952026129db86d1ca118762b06ef2
+Description-en: Lightweight Resolver Daemon
+ lwresd is the daemon providing name lookup services to clients that use
+ the BIND 9 lightweight resolver library.  It is essentially a stripped-
+ down, caching-only name server that answers queries using the BIND 9
+ lightweight resolver protocol rather than the DNS protocol.
+
+Package: lynx-cur-wrapper
+Description-md5: cb5bf96b1082b91fa3c57f015993ee54
+Description-en: Wrapper for lynx-cur (transitional package)
+ This is a transitional package and can safely be removed; see the
+ lynx-cur package instead.
+
+Package: munin-async
+Description-md5: 390d7c71211032ea3977a22eb57cde62
+Description-en: network-wide graphing framework (async master/client)
+ Munin is a highly flexible and powerful solution used to create graphs of
+ virtually everything imaginable throughout your network, while still
+ maintaining a rattling ease of installation and configuration.
+ .
+ This package contains munin-async and munin-asyncd which can
+ be used for (optional) asynchronous operation of munin-update.
+ .
+ Munin is written in Perl, and relies heavily on Tobi Oetiker's excellent
+ RRDtool. To see a real example of Munin in action, you can follow a link
+ from <http://munin-monitoring.org/> to a live installation.
+
+Package: munin-plugins-java
+Description-md5: 072855de8e842c9eb4ce249c588de592
+Description-en: network-wide graphing framework (java plugins for node)
+ Munin is a highly flexible and powerful solution used to create graphs of
+ virtually everything imaginable throughout your network, while still
+ maintaining a rattling ease of installation and configuration.
+ .
+ This package contains the java based plugins that are used by munin-node to
+ monitor Java Management Extensions (JMX).
+ .
+ Munin is written in Perl, and relies heavily on Tobi Oetiker's excellent
+ RRDtool. To see a real example of Munin in action, you can follow a link
+ from <http://munin-monitoring.org/> to a live installation.
+
+Package: mysql-source-5.5
+Description-md5: 9bacc0267862ea6c169da6cfe76d3aef
+Description-en: MySQL source
+ MySQL is a fast, stable, and true multi-user, multi-threaded SQL database
+ server.  SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MySQL are speed, robustness and
+ ease of use.
+ .
+ This package includes the MySQL source code as configured before building.
+
+Package: mysql-testsuite
+Description-md5: a3c0fd28b808fa1a0d62a5bfb5ba8923
+Description-en: MySQL testsuite
+ This is an empty package that depends on the current "best" version of
+ mysql-testsuite (currently mysql-testsuite-5.5), as determined by the
+ MySQL maintainers.  Install this package if in doubt about which MySQL
+ version you want, as this is the one we consider to be in the best shape.
+
+Package: mysql-testsuite-5.5
+Description-md5: 3e88fc28903eb44dd0b2a0eb9f813181
+Description-en: MySQL testsuite
+ MySQL is a fast, stable, and true multi-user, multi-threaded SQL database
+ server.  SQL (Structured Query Language) is the most popular database query
+ language in the world. The main goals of MySQL are speed, robustness and
+ ease of use.
+ .
+ This package includes the MySQL testsuite.
+
+Package: nova-ajax-console-proxy
+Description-md5: 571664bc0008e44d5df6784807a6ecf0
+Description-en: OpenStack Compute - AJAX console proxy - transitional package
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package used to provide the AJAX proxy, which is now gone.
+
+Package: nova-api-ec2
+Description-md5: 0e9ce8f6a74cac1c566caae9b960a494
+Description-en: OpenStack Compute - EC2 API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the EC2 API.
+
+Package: nova-api-metadata
+Description-md5: ae9cd778d7894b1a89d138fe3587a7da
+Description-en: OpenStack Compute - metadata API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This package provides the metadata API backend for guest VMs.
+
+Package: nova-api-os-compute
+Description-md5: 32fe3c17415adfec970c371f4bdff9b6
+Description-en: OpenStack Compute - OpenStack Compute API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This package provides the OpenStack Compute API frontend.
+
+Package: nova-api-os-volume
+Description-md5: 113cdec8eb8fbd2d123accd10260705c
+Description-en: OpenStack Compute - OpenStack Volume API frontend
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ This package provides the OpenStack Volume API frontend.
+
+Package: nova-compute-qemu
+Description-md5: 46acbb1c9b077142e1930821f7a05aed
+Description-en: OpenStack Compute - compute node (QEmu)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using QEmu.
+
+Package: nova-compute-uml
+Description-md5: 2e1f1302cc5d8396d81672f231d5bb7c
+Description-en: OpenStack Compute - compute node (UserModeLinux)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using UserModeLinux.
+
+Package: nova-compute-xcp
+Description-md5: cd2b8dc37486d604d91ed6183d937465
+Description-en: OpenStack Compute - compute node (XCP)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using xcp
+
+Package: nova-compute-xen
+Description-md5: 8268c70ad765a6427d184e1c58a4472c
+Description-en: OpenStack Compute - compute node (Xen)
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ Install this package on your compute nodes if you're using Xen.
+
+Package: nova-console
+Description-md5: 095d3c39f30a44dd0768d8a869e4fa67
+Description-en: OpenStack Compute - Console
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the console server.  This enables the use of consoles
+ to be used along with XVP and XenServer.  It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+
+Package: nova-consoleauth
+Description-md5: 471ffbc52e68b19718599b8e938708d2
+Description-en: OpenStack Compute - Console Authenticator
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the authentication service for nova-console.  It grants
+ user requests for console access based on tokens in the identity service and
+ allows access to virtual consoles via a browser.
+
+Package: nova-novncproxy
+Description-md5: f71a025ccadd58aa7f26e66e99818fa8
+Description-en: OpenStack Compute - NoVNC proxy
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the VNC proxy. It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+
+Package: nova-xcp-network
+Description-md5: c098f07b818aec1687bd6347b404e5b5
+Description-en: OpenStack Compute network plugin for the Xen Cloud Platform
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package is to be installed on the server where you have installed your
+ master Xen API server (see the xcp-xapi package), so that nova can remotely
+ configure the network of your XCP servers.
+
+Package: nova-xcp-plugins
+Description-md5: 77e27c2a30cc03fc385be9dd5a21fa09
+Description-en: OpenStack Compute plugin for the Xen Cloud Platform
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package is to be installed on the server where you have installed your
+ master Xen API server (see the xcp-xapi package), so that nova-compute can
+ remotely control your XCP nodes and start VM instances.
+
+Package: nova-xvpvncproxy
+Description-md5: b3739b7ab9595f5c68b1c0e141861b74
+Description-en: OpenStack Compute - XVP VNC proxy
+ OpenStack is a reliable cloud infrastructure. Its mission is to produce
+ the ubiquitous cloud computing platform that will meet the needs of public
+ and private cloud providers regardless of size, by being simple to implement
+ and massively scalable.
+ .
+ OpenStack Compute, codenamed Nova, is a cloud computing fabric controller. In
+ addition to its "native" API (the OpenStack API), it also supports the Amazon
+ EC2 API.
+ .
+ Nova is intended to be modular and easy to extend and adapt. It supports many
+ different hypervisors (KVM and Xen to name a few), different database backends
+ (SQLite, MySQL, and PostgreSQL, for instance), different types of user
+ databases (LDAP or SQL), etc.
+ .
+ This package provides the VNC proxy. It is a publically reachable
+ component which proxies access to VNCs running on compute nodes.
+
+Package: openjdk-6-dbg
+Description-md5: 62cbbd2d3e6bc94279f18db4f735142b
+Description-en: Java runtime based on OpenJDK (debugging symbols)
+ OpenJDK is a development environment for building applications,
+ applets, and components using the Java programming language.
+ .
+ This package contains the debugging symbols.
+ .
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-demo
+Description-md5: c2a5624aa60e4de3025a249886fa82d7
+Description-en: Java runtime based on OpenJDK (demos and examples)
+ OpenJDK Java runtime
+ .
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-doc
+Description-md5: c1aebd5e8058a6cce0d5690571eddb7b
+Description-en: OpenJDK Development Kit (JDK) documentation
+ OpenJDK is a development environment for building applications,
+ applets, and components using the Java programming language.
+ .
+ This package contains the API documentation.
+ .
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jdk
+Description-md5: eaff50443f15582a8beb0901034b62cf
+Description-en: OpenJDK Development Kit (JDK)
+ OpenJDK is a development environment for building applications,
+ applets, and components using the Java programming language.
+ .
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jre
+Description-md5: 914d96407295e5ec532d2032973e96af
+Description-en: OpenJDK Java runtime, using Hotspot JIT
+ Full Java runtime environment - needed for executing Java GUI and Webstart
+ programs. Using Hotspot JIT.
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jre-headless
+Description-md5: c5ec89b1a6bac9cd86f6e61756d18fb9
+Description-en: OpenJDK Java runtime, using Hotspot JIT (headless)
+ Minimal Java runtime - needed for executing non GUI Java programs.
+ Using Hotspot JIT.
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jre-lib
+Description-md5: a996626aed77fd374bd7291146f8d6ee
+Description-en: OpenJDK Java runtime (architecture independent libraries)
+ OpenJDK Java runtime, using Hotspot JIT.
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jre-zero
+Description-md5: ca0db1fb38a237b982a1de5e6d632720
+Description-en: Alternative JVM for OpenJDK, using Zero/Shark
+ The package provides an alternative runtime using the Zero VM and the
+ Shark Just In Time Compiler (JIT).  Built on architectures in addition
+ to the Hotspot VM as a debugging aid for those architectures which don't
+ have a Hotspot VM.
+ .
+ The VM is started with the option `-zero'. See the README.Debian for details.
+
+Package: openjdk-6-source
+Description-md5: 328263bb6fbf81f04f5d459d67244ea0
+Description-en: OpenJDK Development Kit (JDK) source files
+ OpenJDK is a development environment for building applications,
+ applets, and components using the Java programming language.
+ .
+ This package contains the Java programming language source files
+ (src.zip) for all classes that make up the Java core API.
+ .
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-7-jre-zero
+Description-md5: ca0db1fb38a237b982a1de5e6d632720
+Description-en: Alternative JVM for OpenJDK, using Zero/Shark
+ The package provides an alternative runtime using the Zero VM and the
+ Shark Just In Time Compiler (JIT).  Built on architectures in addition
+ to the Hotspot VM as a debugging aid for those architectures which don't
+ have a Hotspot VM.
+ .
+ The VM is started with the option `-zero'. See the README.Debian for details.
+
+Package: owncloud
+Description-md5: 623eeebd85a23205a9be7087b586d047
+Description-en: cloud storage for files, music, contacts, calendars and many more
+ ownCloud gives you universal access to your files through a web interface
+ or WebDAV.  It also provides a platform to easily view & sync your
+ contacts, calendars and bookmarks across all your devices and enables
+ basic editing right on the web.
+
+Package: owncloud-mysql
+Description-md5: 54aa048a84736b16645a63d4972f9ce2
+Description-en: meta-package providing MySQL dependencies for ownCloud
+ This package provides MySQL dependencies for ownCloud, a cloud storage
+ application for files, music, contacts, calendars and many more.
+ .
+ Install this package if you wan to use a MySQL database with ownCloud.
+
+Package: owncloud-sqlite
+Description-md5: fe7fe6e1e2c955933d1477c41fcde4b9
+Description-en: meta-package providing SQLite dependencies for ownCloud
+ This package provides SQLite dependencies for ownCloud, a cloud storage
+ application for files, music, contacts, calendars and many more.
+ .
+ Install this package if you wan to use a SQLite database with ownCloud.
+
+Package: pgbouncer
+Description-md5: 01a8a881cdb553661c7e49106374895e
+Description-en: lightweight connection pooler for PostgreSQL
+ PgBouncer is a lightweight connection pooler for PostgreSQL providing the
+ following features:
+ .
+  * Several levels of brutality when rotating connections: session pooling,
+    transaction pooling, statement pooling.
+  * Low memory requirements.
+  * It is not tied to one backend server, the destination databases
+    can reside on different hosts.
+  * Supports online reconfiguration for most of the settings.
+  * Supports online restart/upgrade.
+
+Package: python3-keyring
+Description-md5: cdfa4e281f6f7c926a2a089541027f5c
+Description-en: store and access your passwords safely - Python 3 version of the package
+ The Python keyring library provides an easy way to access the system
+ keyring service (e.g Gnome-Keyring, KWallet) from Python.
+ it can be used in any application that needs safe password storage.
+ .
+ This is the Python 3 version of the package.
+
+Package: ri1.8
+Description-md5: 5e8f0f65cf968ef495a31458870804e0
+Description-en: Ruby Interactive reference (for Ruby 1.8)
+ ri is a command line tool that displays descriptions of built-in Ruby
+ methods, classes, and modules. For methods, it shows you the calling
+ sequence and a description. For classes and modules, it shows a
+ synopsis along with a list of the methods the class or module
+ implements.
+ .
+ This package provides the ri documentation for the Ruby 1.8 standard library.
+ The ri1.8 executable itself is in the ruby1.8 package.
+
+Package: ri1.9.1
+Description-md5: 981b190dbace3c4830f10345d1b59fe3
+Description-en: Ruby Interactive reference (for Ruby 1.9.1)
+ ri is a command line tool that displays descriptions of built-in Ruby
+ methods, classes, and modules. For methods, it shows you the calling
+ sequence and a description. For classes and modules, it shows a
+ synopsis along with a list of the methods the class or module
+ implements.
+ .
+ This package provides ri command and descriptions about Ruby 1.9.1.
+ This package provides the ri documentation for the Ruby 1.9.1 standard library.
+ The ri1.9.1 executable itself is in the ruby1.9.1 package.
+
+Package: ruby1.8-full
+Description-md5: cf5acbfe4fad5f89b4c0a264a8fb4566
+Description-en: Ruby 1.8 full installation
+ For many good reasons, the Ruby programming language is split in many
+ small different packages. Installing this package will make sure you have
+ all the packages that add up to a full Ruby installation, with the exception
+ of the Tcl/Tk bindings for Ruby, which are only recommended.
+
+Package: ruby1.9.1-full
+Description-md5: 504440781902afe6d8f91131f9a13760
+Description-en: Ruby 1.9.1 full installation
+ For many good reasons, the Ruby programming language is split in many
+ small different packages. Installing this package will make sure you have
+ all the packages that add up to a full Ruby installation, with the exception
+ of the Tcl/Tk bindings for Ruby, which are only recommended.
+ .
+ This package installs the dependencies for Ruby compatibility version 1.9.1
+ (currently Ruby 1.9.3).
+
+Package: ruby1.9.3
+Description-md5: aa611a7522ee6c493d69294af0dd1d4b
+Description-en: Interpreter of object-oriented scripting language Ruby, version 1.9.3
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ Ruby uses two parallel versioning schemes: the `Ruby library compatibility
+ version' (1.9.1 for this package), which is similar to a library SONAME, and
+ the `Ruby version' (1.9.3 for this package). Ruby packages in Debian are
+ named using the Ruby library compatibility version, which is sometimes
+ confusing for users who do not follow Ruby development closely. This package
+ depends on the ruby1.9.1 package, and provides compatibility symbolic links
+ from 1.9.3 executables and manual pages to their 1.9.1 counterparts.
+
+Package: thunderbird-mozsymbols
+Description-md5: ac1a6a5ccd00092e19efbf6f6f9538a0
+Description-en: Email, RSS and newsgroup client - Breakpad symbols
+ Thunderbird is a full-featured email, RSS and newsgroup client that makes
+ emailing safer, faster and easier than ever before. It supports different mail
+ accounts (POP, IMAP, Gmail), has a simple mail account setup wizard, one-
+ click address book, tabbed interface, an integrated learning spam filter,
+ advanced search and indexing capabilities, and offers easy organization
+ of mails with tagging and virtual folders. It also features unrivalled
+ extensibility.
+ .
+ This package contains the Firefox symbols in a format expected by Mozilla's
+ Breakpad. Eventually this package should go away and the symbol upload be
+ implemented in soyuz (or other builders that build this package)
+
+Package: ubufox
+Description-md5: 58b4596f8372b020607ef9cb2b32a594
+Description-en: transitional dummy package
+ This is a transitional dummy package to ease the migration
+ from the ubufox to the new xul-ext-ubufox package.
+ You can remove it safely.
+
+Package: unity-webapps-amazoncloudreader
+Description-md5: a6446476abda4cd278bd892ed76dfadf
+Description-en: Unity Webapp for AmazonCloudReader
+ AmazonCloudReader Webapp for Unity
+
+Package: unity-webapps-facebookapps
+Description-md5: d932a1b482dfbc1113fc13c3fad40e03
+Description-en: Unity Webapp for FacebookApps
+ FacebookApps Webapp for Unity
+
+Package: unity-webapps-librefm
+Description-md5: 06c9cfbdea5a085ae6a9f46d1dffcd5b
+Description-en: Unity Webapp for LibreFm
+ LibreFm Webapp for Unity
+
+Package: unity-webapps-pandora-com
+Description-md5: 67f16c35ae8066611356888920def080
+Description-en: Unity Webapp for pandora-com
+ pandora-com Webapp for Unity
+
+Package: virtualbox
+Description-md5: 30f96d22c1a6ca04db16bdc1e79ad965
+Description-en: x86 virtualization solution - base binaries
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the binaries for VirtualBox. Either the virtualbox-dkms
+ or the virtualbox-source package is also required in order to compile the
+ kernel modules needed for virtualbox. A graphical user interface for
+ VirtualBox is provided by the package virtualbox-qt.
+
+Package: virtualbox-dbg
+Description-md5: b271b8956187eca407d52354cf368938
+Description-en: x86 virtualization solution - debugging symbols
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the debugging symbols for VirtualBox.
+
+Package: virtualbox-dkms
+Description-md5: 4d42f0fe51c4a92f2aed5071f84524ae
+Description-en: x86 virtualization solution - kernel module sources for dkms
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the source code for the virtualbox kernel module to be
+ build with dkms. Kernel sources or headers are required to compile this
+ module.
+
+Package: virtualbox-fuse
+Description-md5: 2ceb020e632a81a18f883722967558cc
+Description-en: x86 virtualization solution - virtual filesystem
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides a FUSE-based VFS (Virtual FileSystem) to mount a
+ VirtualBox disk so all partitions can be loop-mounted.
+
+Package: virtualbox-guest-dkms
+Description-md5: e15ead9377a7f1e325ded819d3cfaf8b
+Description-en: x86 virtualization solution - guest addition module source for dkms
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the source code for the virtualbox guest addition kernel
+ modules to be build with dkms. Kernel sources or headers are required to
+ compile these modules.
+
+Package: virtualbox-guest-source
+Description-md5: fd60384a9f99f9f360a9dcc85b3fd6cc
+Description-en: x86 virtualization solution - guest addition module source
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the source code for the virtualbox guest addition kernel
+ modules. The virtualbox-guest-utils package is also required in order to
+ make use of these modules. Kernel sources or headers are required to compile
+ these modules.
+
+Package: virtualbox-guest-utils
+Description-md5: 0c420aa026ad03a572b15c6e38dbebf7
+Description-en: x86 virtualization solution - non-X11 guest utilities
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the non-X11 guest utilities for VirtualBox. These
+ utilities are meant to be run inside the virtual machine.
+ They provide closer integration and allow to share data through shared folders
+ between the host system and the virtual machine.
+
+Package: virtualbox-guest-x11
+Description-md5: 3487afde0b114ec7e205b11f1dd3f7a5
+Description-en: x86 virtualization solution - X11 guest utilities
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the X11 guest utilities for VirtualBox. These utilities
+ are meant to be run inside the virtual machine.
+ They provide closer integration and improve the interactive performance.
+
+Package: virtualbox-ose
+Description-md5: 22f6e6d8b13ad9150e23f6a5da2402b8
+Description-en: transitional package for virtualbox
+ This is a dummy transitional package for virtualbox and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-dbg
+Description-md5: 7b92ded25a694ce174fbd3b6721d3b6e
+Description-en: transitional package for virtualbox-dbg
+ This is a dummy transitional package for virtualbox-dbg and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-dkms
+Description-md5: bf98200362f25189b8b23b4ddb6346c6
+Description-en: transitional package for virtualbox-dkms
+ This is a dummy transitional package for virtualbox-dkms and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-fuse
+Description-md5: 7caeaf4c7507596d7c4419d66fb4182e
+Description-en: transitional package for virtualbox-fuse
+ This is a dummy transitional package for virtualbox-fuse and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-guest-dkms
+Description-md5: 766967028bc8b88b95e38f62285036c6
+Description-en: transitional package for virtualbox-guest-dkms
+ This is a dummy transitional package for virtualbox-guest-dkms and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-guest-source
+Description-md5: 80e9d2db29386374ad657c78377a181e
+Description-en: transitional package for virtualbox-guest-source
+ This is a dummy transitional package for virtualbox-guest-source and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-guest-utils
+Description-md5: ef6b431011825dc079daa9bb6d7f24c4
+Description-en: transitional package for virtualbox-guest-utils
+ This is a dummy transitional package for virtualbox-guest-utils and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-guest-x11
+Description-md5: 564410041a942d1b05fcecd3f88d9d45
+Description-en: transitional package for virtualbox-guest-x11
+ This is a dummy transitional package for virtualbox-guest-x11 and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-qt
+Description-md5: f66f285ae4da8c0e2167052f77fcd712
+Description-en: transitional package for virtualbox-qt
+ This is a dummy transitional package for virtualbox-qt and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-ose-source
+Description-md5: 96b920b3e995167cd343aa1af3b2f36f
+Description-en: transitional package for virtualbox-source
+ This is a dummy transitional package for virtualbox-source and can be
+ safely removed after the installation is complete.
+
+Package: virtualbox-qt
+Description-md5: 41ed29f36ba23b3ce0155f9a8efcff60
+Description-en: x86 virtualization solution - Qt based user interface
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the Qt based graphical user interface for VirtualBox.
+
+Package: virtualbox-source
+Description-md5: acc86918ad52775dbe11e2ad558ba197
+Description-en: x86 virtualization solution - kernel module source
+ VirtualBox is a free x86 virtualization solution allowing a wide range
+ of x86 operating systems such as Windows, DOS, BSD or Linux to run on a
+ Linux system.
+ .
+ This package provides the source code for the virtualbox kernel module.
+ The virtualbox package is also required in order to make use of these
+ modules. Kernel sources or headers are required to compile this module.
+
+Package: xen-docs-4.1
+Description-md5: 6cae9b51dadf4d0824b74e2b7ff1077f
+Description-en: Documentation for Xen
+ This package contains all the large documentation files for Xen.  This
+ includes a description interface (both the API, and a nice explanation of
+ how XEN works).
+
+Package: xen-hypervisor-4.1-amd64
+Description-md5: 30d22c56057f827a5cc3329925199782
+Description-en: Xen Hypervisor on AMD64
+ The hypervisor is the "core" for XEN itself.  It gets booted by the boot
+ loader and controls cpu and memory, sharing them between your
+ administrative domain (Domain 0) and the virtual guest systems.
+ .
+ In order to boot a XEN system along with this package you also need a
+ kernel specifically crafted to work as the Domain 0, mediating hardware
+ access for XEN itself.
+
+Package: xen-system-amd64
+Description-md5: f9a399da9b1f85d66b7c24b24d068efc
+Description-en: Xen System on AMD64 (meta-package)
+ This package depends on the latest Xen hypervisor for use on AMD64 and the
+ Xen utils.
+
+Package: xen-utils-4.1
+Description-md5: bd953dd4214727fe5759b05287bffcbe
+Description-en: XEN administrative tools
+ The userspace tools to manage a system virtualized through the XEN virtual
+ machine monitor.
+
+Package: xen-utils-common
+Description-md5: 8af52ba7dfa8ab5d2f2013a4e86ceb1e
+Description-en: Xen administrative tools - common files
+ The userspace tools to manage a system virtualized through the Xen virtual
+ machine monitor.
+
+Package: xenstore-utils
+Description-md5: cfed1da00b837e11d5cbc87fffd781d4
+Description-en: Xenstore utilities for Xen
+ This package contains the Xenstore utilities.
+
+Package: xul-ext-calendar-timezones
+Description-md5: c6a7c4c59ec49f7fac76a9225234f7f4
+Description-en: Calendar Extension for Thunderbird - Timezone data
+ Lighting is the Mozilla Calendar extension for Thunderbird, based
+ on Sunbird - the Mozilla Standalone Calendar application. It is tightly
+ integrated with Thunderbird, allowing it to easily perform email-related
+ calendaring tasks.
+ .
+ This package provides timezone data. It's an essential component if you want
+ to use all calendaring features.
+
+Package: xul-ext-gdata-provider
+Description-md5: f62489adb0c47d7399cead39c714c174
+Description-en: Calendar Extension for Thunderbird - Google Calendar support
+ Lighting is the Mozilla Calendar extension for Thunderbird, based
+ on Sunbird - the Mozilla Standalone Calendar application. It is tightly
+ integrated with Thunderbird, allowing it to easily perform email-related
+ calendaring tasks.
+ .
+ This package provides Google Calendar support. It's a recommended component
+ if you want to connect to your google calendar.
+
+Package: xul-ext-lightning
+Description-md5: a0293e147dba3d166b3727a30a6634a0
+Description-en: Calendar Extension for Thunderbird
+ Lighting is the Mozilla Calendar extension for Thunderbird, based
+ on Sunbird - the Mozilla Standalone Calendar application. It is tightly
+ integrated with Thunderbird, allowing it to easily perform email-related
+ calendaring tasks.
+
+Package: openjdk-6-jre
+Description-md5: 91d05a39b9f10650db7458e30c6b492b
+Description-en: OpenJDK Java runtime, using Hotspot Zero
+ Full Java runtime environment - needed for executing Java GUI and Webstart
+ programs. Using Hotspot Zero.
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: openjdk-6-jre-headless
+Description-md5: 66d576ba5edb414029e68aaa8b29d079
+Description-en: OpenJDK Java runtime, using Hotspot Zero (headless)
+ Minimal Java runtime - needed for executing non GUI Java programs.
+ Using Hotspot Zero.
+ The packages are built using the IcedTea build support and patches
+ from the IcedTea project.
+
+Package: linux-headers-lowlatency-pae
+Description-md5: 6af73404b873a966ac6255b05036407d
+Description-en: Transitional package
+ This package will always depend on linux-headers-lowlatency
+
+Package: linux-image-lowlatency-pae
+Description-md5: 6843cc37a69c40820f7d377dff479023
+Description-en: Transitional package
+ This package will always depend on linux-image-lowlatency
+
+Package: linux-lowlatency-pae
+Description-md5: 0aa935414a87ff9b660c4f39bab85ed9
+Description-en: Transitional package
+ This package will always depend on linux-lowlatency
+
+Package: xen-hypervisor-4.1-i386
+Description-md5: 829bcfa57e4b5d520b5b4e141e3e6476
+Description-en: Xen Hypervisor on i386
+ The hypervisor is the "core" for XEN itself.  It gets booted by the boot
+ loader and controls cpu and memory, sharing them between your
+ administrative domain (Domain 0) and the virtual guest systems.
+ .
+ In order to boot a XEN system along with this package you also need a
+ kernel specifically crafted to work as the Domain 0, mediating hardware
+ access for XEN itself.
+
+Package: xen-system-i386
+Description-md5: 299e8fd765fcedc2114cbce4ebd59691
+Description-en: Xen System on i386 (meta-package)
+ This package depends on the latest Xen hypervisor for use on i386 and the
+ Xen utils.
+

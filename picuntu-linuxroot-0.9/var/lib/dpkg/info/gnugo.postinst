@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ -x /usr/bin/update-menus ]
+then
+	update-menus
+fi
+
+# bugs #322785 and #580329
+if [ -h /usr/doc/gnugo ]
+then
+	rm -f /usr/doc/gnugo
+fi
+
+exit 0

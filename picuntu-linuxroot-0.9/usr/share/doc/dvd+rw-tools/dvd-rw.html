@@ -1,0 +1,285 @@
+<HTML>
+
+<HEAD>
+<BASE HREF="http://fy.chalmers.se/~appro/linux/DVD+RW/-RW/">
+<TITLE>DVD-R[W] for Linux</TITLE>
+<META NAME="keywords" CONTENT="dvd, rewritable, dvd-rw, dvd-r, linux">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+<LINK REL="icon" HREF="dvdforum.ico" TYPE="image/x-icon">
+<LINK REL="shortcut icon" HREF="dvdforum.ico" TYPE="image/x-icon">
+</HEAD>
+
+<BODY BGCOLOR="#C0C0C0" TEXT="#000000"
+      LINK="#0000D0" VLINK="#502090" ALINK="#FF0000">
+
+<H2>... as of version 5.0<SUP><IMG SRC="../linuxfund-tiny.gif" WIDTH=38
+HEIGHT=11 ALT="(*)"></SUP> <A HREF="../tools/">dvd+rw-tools</A> provide
+support even for <A HREF="http://www.dvdforum.org/">DVD-R[W]</A>
+recordings.</H2>
+
+<TABLE BORDER="0" WIDTH="95%" ALIGN="CENTER">
+<TR VALIGN="TOP" ALIGN="JUSTIFY">
+<TD><A HREF="http://www.linuxfund.org/"><IMG SRC="../linuxfund.gif"
+BORDER=0 ALT="(*)"></A>
+<TD><FONT SIZE="-1">Up to version 5.12 the support was classified as
+&quot;experimental,&quot; because it was based solely on user feedback.
+In time for 5.13 release <A
+HREF="http://www.linuxfund.org/">LinuxFund.org</A> has donated DVD-dash
+capable unit, which permits me to perform pre-release tests on site and
+thus renders the &quot;experimental&quot; status obsolete:-)</FONT></TR>
+</TABLE>
+
+<!--
+<P><HR>
+
+<H3><P ALIGN="justify"><IMG SRC="/icons/Disclaimer.gif"
+ALIGN="LEFT">This is a <I>preliminary</I> informational page! Note that
+the code currently available for public download does <I>not</I>
+support DVD-RW recording! For this [presumably short] moment the DVD-RW
+code is provided upon <A
+HREF="mailto:appro@fy.chalmers.se?subject=dvd+rw-tools-5.0%20test-drive">explicit
+request</A> only. Do state which unit do you have as well as other
+background information [such as DVD-ROM compatibility experience]! At
+this point I'd prefer to hear from Pioneer unit owners. If you don't
+get a reply [within couple of days or so], then the code is already
+being finalized and will be available for public download shortly.</H3>
+-->
+
+<P><HR>
+
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">How are dvd+rw-tools different from <A
+	HREF="ftp://ftp.berlios.de/pub/cdrecord/ProDVD/">cdrecord-ProDVD</A>?
+	When it comes to DVD-R[W] burning that is...</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD>DVD-R[W] specification defines following recording strategies:
+	<UL><LI>Disk-at-once;
+	    <LI>Incremental Sequential;
+	    <LI>Restricted Overwrite (DVD-RW only);
+	</UL>
+	<P ALIGN="justify">Now, cdrecord-ProDVD supports Disk-at-once
+	strategy only, while dvd+rw-tools all the <I>others</I>. That's
+	it<TT>:-)</TT></TR>
+</TABLE>
+
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">What is the difference between these recording
+	strategies? Which one is the one for me?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD><P ALIGN="justify">Disk-at-once is the one
+	<I>guaranteed</I> to provide <I>full</I> compatibility with
+	DVD-ROM/-Video. But apparently only as long as recording didn't
+	suffer from buffer underruns (see <A
+	HREF="../#plusvsminus">this paragraph on +RW page</A> for
+	technical details). DAO recordings are unappendable. Oh! It
+	should be explicitly noted that &quot;<I>full</I> compatibility
+	with DVD-Video&quot; doesn't really mean that DVD-R<B>W</B>
+	media recorded in this mode will be <I>universally</I>
+	playable! DVD-RW reportedly suffers from compatibility issues
+	very similar to DVD+RW. In other words these incompatibilities,
+	both -RW and +RW, have way more to do with low reflectivity of
+	these media, than with their logical formats.
+
+	<P ALIGN="justify">As for Incremental strategy [limited]
+	DVD-ROM/-Video compatibility is provided at single
+	packet/extent &quot;level.&quot; Good news are that growisofs
+	burns the whole filesystem image as a single extent, so that
+	you have all the rights to expect it to come out as compatible
+	as DAO recorded with [eventual] buffer underruns. Yes, buffer
+	underrun protection gets engaged, so that you don't have to
+	worry about how much <I>extra</I> load your system can sustain
+	during the burning process. In addition Incremental strategy
+	provides for <I>multiple sessions</I> and dvd+rw-tools do
+	utilize it. But you should keep in mind that very few DVD-ROM
+	players actually support DVD multi-sessioning! Even among those
+	explicitly supporting DVD-R most will play till the first
+	Border-out only.
+
+	<P ALIGN="justify">Restricted Overwrite (DVD-RW only) provides
+	for arbitrary overwrite (well, with certain restrictions:-),
+	meaning that it's possible to grow ISO9660 volumes <I>within a
+	&quot;single session,&quot;</I> in the very same way as with
+	DVD+RW (or -RAM/plain file for that matter). So that <I>if</I>
+	your DVD-ROM unit can play media recorded in this mode (it most
+	likely just does as long as it can play DVD-RW at all), but
+	doesn't support multi-sessioning, then this is the mode for you
+	(provided that you wish to add data at different occasions that
+	is). Buffer underrun protection is unconditionally on. As for
+	compatibility with DVD-ROM/-Video. Apparently user Data Zone is
+	equivalent to one recorded in DAO, but as if every 32KB block
+	has suffered from buffer underrun.
+
+	<P ALIGN="justify">Disk-at-once and Incremental recording
+	strategies are applicabe to DVD-R media and DVD-RW media in
+	Sequential mode. Restricted Overwrite strategy is applicable to
+	DVD-RW media explicitely formated for Restricted
+	Overwrite.</TR>
+</TABLE>
+
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">How do I switch between DVD-RW modes?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD><P ALIGN="justify">Initially blank DVD-RW media is in
+	Sequential mode. To format for Restricted Overwrite invoke
+	'<TT><NOBR>dvd+rw-format</NOBR> /dev/scd<FONT
+	COLOR="red">N</FONT></TT>'. <!--Unfortunately this might turn
+	out to be a lengthy procedure, it takes a whole hour to format
+	1x media<NOBR>:-(</NOBR> &quot;Might&quot; in the last sentence
+	means that even though dvd+rw-format attempts to invoke so
+	called Quick Format procedure, some units apparently choose to
+	perform full format anyway. On the bright side,--> Once the
+	media is formatted you don't have to reformat it to zap the
+	content, it's more than enough to simply write over the
+	existing data [with <TT>growisofs -Z ...</TT>]. <!--If your
+	unit supports truly Quick Format, it--> Your unit might report
+	some bogus media capacity (e.g. Pioneer DVR-x05 reports ~8GB or
+	178.5% of real capacity) right after initial format. It
+	apparently just does so till you burn some data on it, so don't
+	get fixated on this...
+
+	<P ALIGN="justify">To change [back] to Sequential mode [or to
+	reuse the media in Sequential mode for a new dataset] invoke
+	'<TT><NOBR>dvd+rw-format</NOBR> -blank /dev/scd<FONT
+	COLOR="red">N</FONT></TT>'. Unfortunately specification
+	requires <I>lengthy, an hour per 1x media,</I>
+	<TT>-blank=full</TT> procedure applied <!--(which is as lengthy
+	as full format)--> before you can reuse the media for
+	Incremental Sequential (but apparently not for Disk-at-once)
+	recording. I really fail to understand why does it have to be
+	that way, but that's the way it is. Period.</TR>
+</TABLE>
+
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">How do I burn?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD><P ALIGN="justify">For practical burning instructions see
+	the <A HREF="../#growisofs">growisofs paragraph</A> on +RW
+	page.</TR>
+</TABLE>
+
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">Any [other] caveats?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD><P ALIGN="justify">When burning DVD-R[W] growisofs
+	recognizes an extra command line option, namely
+	<TT>-speed=<FONT COLOR="red">X</FONT></TT>, which lets you
+	choose the burning speed. If you use brand-name media, you're
+	unlikely to have to use this option. Your unit will determine
+	optimal velocity automagically. But if you use no-name media,
+	<TT>-speed=1</TT> might turn out to be a must. Problem is that
+	some units reportedly fail to determine optimal speed for
+	no-name media and pick higher one, higher than media can stand,
+	which results in unplayable recording. This may vary from
+	firmware to firmware (Pioneer users should consult <A
+	HREF="http://www.pioneeraus.com.au/multimedia/dvd/dvd-r_writing_speed_cl.htm">this
+	page</A>).
+
+	<P ALIGN="justify">As for -speed option in more general sense.
+	You might find yourself in situation when media rated as 4x is
+	recorded at lower speed, even if you explicitly specify
+	-speed=4. This is because that particular brand is poorly
+	supported by your particular unit firmware. It's not an
+	application problem, as growisofs asks unit for list of
+	supported velocities for currently loaded media and picks
+	<I>closest</I> to one specified in command line. The list is
+	updated upon every media load and can be found in
+	<NOBR>dvd+rw-mediainfo</NOBR> output.
+
+	<P ALIGN="justify">Futhermore quoting <A
+	HREF="http://sony.storagesupport.com/dvdrw/mediainfo_na.htm">SONY
+	support page</A>: &quot;... some of discs on the market do not
+	meet the recognized quality and performance standards.&quot;
+	Question is how does it show? Apparently in bizarre ways...
+	DVD-RW media might [reportedly] perform as write-once or maybe
+	twice or three times. Blank/format procedure might appear
+	successful, but deferred failure is reported upon actual
+	recording attempt. It might be possible to blank the media in
+	one unit, but not in another one [of different brand]. DVD-R
+	recording might [reportedly] fail around 95% of advertised
+	capacity... Or recording might fail at start-up with
+	&quot;INCOMPATIBLE MEDIUM&quot; error code. At all these
+	occasions switching to another media brand [reportedly] helped.
+
+	<P ALIGN="justify">As for DVD-ROM/-Video compatibility of
+	Restricted Overwrite mode. Playability might be limited for
+	reasons <I>similar</I> to DVD+ lead-out issues (see from <A
+	HREF="../#compat">2nd paragraph</A>), when legacy unit is
+	tricked to calibration on virgin surface. In case you find
+	media recorded in this mode unplayable, attempt to
+	<OL>
+	<LI>fill it up with '<TT>growisofs <FONT COLOR="red">-M</FONT>
+	/dev/scd0<FONT COLOR="red">=/dev/zero</FONT></TT>', and if it
+	still remains unplayable attempt to;
+	<LI>re-record it &quot;sequentially.&quot;
+	</OL>
+	<P ALIGN="justify">In order to facilitate for the latter test
+	and be excused from wasting an hour on full blanking procedure,
+	growisofs version 5.6 implements rudimentary support for DVD-RW
+	DAO recordings (yes, for DVD-RW only). Recall that DAO
+	recordings come out unappendable, which goes so to say against
+	growisofs' spirit:-)
+
+	<P ALIGN="justify">As of version 5.6 growisofs no longer relies
+	on logical unit to do all the magic, but explicitly asks the
+	burner to perform OPC, Optimal Power Calibration, prior
+	recording. It seems that it's not necessarily a &quot;good
+	thing&trade;,&quot; as it's maintained that media profiles
+	pre-defined in unit firmware might be more optimal than those
+	obtained as result of auto-calibration. I explicitly check if
+	the unit returns any OPC descriptors in reply to <TT>READ DISC
+	INFORMATION</TT> command [assuming that if it does, then
+	pre-defined media profile is in effect], but it wasn't actually
+	observed to be a case so far. If anybody can elaborate on this
+	further, I appreciate a note...</TR>
+</TABLE>
+
+<!---
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">Why is the support classified as
+	<I>&quot;experimental&quot;</I>?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD><P ALIGN="justify">The sole reason why it's <B>still</B>
+	classified as &quot;experimental&quot; is that I don't have
+	DVD-R[W] capable unit in my disposal and can't perform
+	regression and other tests myself. The support is therefore
+	based on your feedback, which is the actual reason for
+	why...</TR>
+</TABLE>
+--->
+
+<!---
+<P><TABLE CELLPADDING=4>
+<TR VALIGN="top" ALIGN="justify">
+<TH>Q.	<TH ALIGN="left">I can't mount the media right after it's
+	burned. What did I do wrong?</TR>
+<TR VALIGN="top" ALIGN="justify">
+<TD>A.	<TD>Reload the media, i.e. eject and push the tray back, before
+	you draw the final conclusion...</TR>
+</TABLE>
+--->
+
+<P><HR>
+
+<!---
+<P ALIGN="justify">For practical burning instructions see the <A
+HREF="../#growisofs">growisofs paragraph</A>. Oh! When burning DVD-R[W]
+growisofs recognizes an extra command line option, namely
+<TT>-speed=<FONT COLOR="red">X</FONT></TT>, which lets you control the
+burning speed. If you use brand-name media, you're unlikely to have to
+use this option. Your unit will determine optimal velocity
+automagically. But if you use no-name media, <TT>-speed=1</TT> might
+turn out to be a must. Problem is that some units reportedly fail to
+determine optimal speed for no-name media and pick higher one, higher
+than media can stand, which results in unplayable recording.
+
+<P><HR>
+--->
+
+</BODY>
+</HTML>
