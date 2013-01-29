@@ -1,0 +1,76 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".SelectSourceActivity" >
+
+    <Button
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:clickable="false"
+        android:text="@string/next"
+        android:textColor="@android:color/white" />
+
+    <Button
+        android:id="@+id/prevButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:text="@string/prev"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="32dp"
+        android:text="@string/selectInstallationSource"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@android:color/white"
+        android:textSize="32sp" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/nextButton"
+        android:layout_below="@+id/textView1"
+        android:paddingLeft="30dp" >
+
+        <RadioButton
+            android:id="@+id/radioFromSdCard"
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:checked="false"
+            android:enabled="false"
+            android:text="@string/fromExternalSD"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+        <RadioButton
+            android:id="@+id/radioFromLan"
+            android:layout_width="wrap_content"
+            android:layout_height="89dp"
+            android:text="@string/fromLocalServer"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+        <RadioButton
+            android:id="@+id/radioFromWan"
+            android:layout_width="wrap_content"
+            android:layout_height="104dp"
+            android:enabled="false"
+            android:text="@string/fromInternet"
+            android:textColor="@android:color/white"
+            android:textSize="28sp" />
+
+    </RadioGroup>
+
+</RelativeLayout>
