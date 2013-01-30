@@ -1,10 +1,5 @@
-Team,
-
-We are looking forward to brining in the next version release for PicUntu - target estimate date is 31st Jan
-
-We would like to hear from folks, about things they want to see included - working... I have created the following two list for all to post in...
-
-Target:[b] TBD[/b]
+Target Date: 15-Mar-2013
+Target Ver: RC 3
 
 [b]Bug Fixes[/b]
 [indent]- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
