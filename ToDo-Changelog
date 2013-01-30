@@ -1,46 +1,40 @@
-Team,
+Target Date: 15-Mar-2013
+Target Ver: RC 3
 
-We are looking forward to brining in the next version release for PicUntu - target estimate date is 31st Jan
-
-We would like to hear from folks, about things they want to see included - working... I have created the following two list for all to post in...
-
-Target:[b] TBD[/b]
-
-[b]Bug Fixes[/b]
-[indent]- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
+Bug Fixes
+- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
 - To test, joomla  and make it non-interactive install
 - Suppress errors of wicd/nm-applet - when running together [done]
-[/indent]
 
-[b]Enhancements[/b]
-[indent]	- Picuntu does not have telnet !!! must include (almost a BUG !!)
+
+Enhancements
+	- Picuntu does not have telnet !!! must include (almost a BUG !!)
 	- Front-end to manager CPU clock freq
         - Issue 28: Front-end to manage several screen resolutions.
- [quote]I had the same problem. Then I found in the dmesg log file that "wlan0" was renamed to "wlan1". After changing all "wlan0" entries in the interfaces file to "wlan1" and restarted networking with "service networking restart" it worked instantly. :)[/quote]
+          (I had the same problem. Then I found in the dmesg log file that "wlan0" was renamed to "wlan1". After changing all "wlan0" entries in the interfaces file to "wlan1" and restarted networking with "service networking restart" it worked instantly. :) )
         - Need to include in network configurator the dummy network it sometimes make... so that users don't have to do this on their own. :)
         - Droidemote server to be installed at boot time, with xfce - Error - to be fixed
         - wireless-mode ad-hoc - to introduce the ability to do ad-hoc connection -by network configuration.
 
-[/indent]
 	
-[b]New modules[/b]
+New modules
 	- HF20F9 USB dongle -   DONE
 	- ftdi_sio - USB serial - DONE
 	- pl2303 - Prolific Technologies - DONE
         - Garmin Serial (??)  - DONE
         - UVC Cam modules (kermitas)
 
-[b]New Packages[/b]
-	- [u]Serial port managers[/u]
+New Packages
+	- Serial port managers
 		- ser2net - to divert data from serial to tcp port - DONE
 		- minicom, picocom
-	- [u]GPS device packages[/u]
+	- GPS device packages
 		- gpsd python-gps gpsdrive viking gpsd-clients libgps-dev libgtk2.0-dev glutg3-dev libcegui-mk2-dev libxmu-dev libsdl-dev libpcre3-dev libspeechd-dev libtiff-dev libdevil-dev build-essential subversion automake
         - Dropbox client (?)
 
 -----------------------------------
 
-[b]Documentation[/b]
+Documentation
         - Complete help for the various switches we have in Pre-picuntu and picuntu-da-server
         - Video
            - Pre-picuntu - Done by Arctablet - will need to revise for 2.3
@@ -50,7 +44,7 @@ Target:[b] TBD[/b]
            - Picuntu-da-server - 
 -----------------------------------
 
-[b]Wish List[/b]
+__Wish List__
    - MALI 400 support - (How could I forget !!)
    - Issue 27: bcm40183 - to make wifi work in MX series devices
    - oprofile compilation in kernel
@@ -60,14 +54,9 @@ Target:[b] TBD[/b]
 
 
 -----------------------------------
-[b]Distant wishlists[/b] (dreams ?)   :pardon: 
-  - Virtualbox/Wine/Vmware
+__Distant wishlists__ (dreams ?) 
+  - Virtualbox/Wine/Vmware - Openstack is showing a lot of promise... let's keep an eye out.
   - Driver WRAPPER - to mount windows drivers.
 
 
 -----------------------
-
-
-Anything else that you want to be added - keep posting it here... we can consolidate and combine our efforts here...
-
-Alok
