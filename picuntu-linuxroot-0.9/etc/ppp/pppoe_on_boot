@@ -1,0 +1,8 @@
+#!/bin/sh
+
+PATH=/usr/local/sbin:/usr/sbin:/sbin:/usr/local/bin:/usr/bin:/bin
+export PATH
+
+modprobe -q pppoe
+
+exec pppd call dsl-provider

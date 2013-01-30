@@ -1,0 +1,16 @@
+/.
+/lib
+/lib/arm-linux-gnueabihf
+/lib/arm-linux-gnueabihf/security
+/lib/arm-linux-gnueabihf/security/pam_xdg_support.so
+/usr
+/usr/share
+/usr/share/pam-configs
+/usr/share/pam-configs/xdg-support
+/usr/share/man
+/usr/share/man/man8
+/usr/share/man/man8/pam_xdg_support.8.gz
+/usr/share/doc
+/usr/share/doc/libpam-xdg-support
+/usr/share/doc/libpam-xdg-support/changelog.Debian.gz
+/usr/share/doc/libpam-xdg-support/copyright

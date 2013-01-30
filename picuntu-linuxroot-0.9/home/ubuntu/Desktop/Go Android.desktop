@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Go Android
+Comment=Click to launch android
+Exec=sudo /usr/local/goandroid
+Icon=gnome-do
+Path=/tmp
+Terminal=true
+StartupNotify=false

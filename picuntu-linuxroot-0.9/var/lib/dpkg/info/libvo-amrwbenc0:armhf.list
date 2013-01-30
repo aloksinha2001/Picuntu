@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libvo-amrwbenc0
+/usr/share/doc/libvo-amrwbenc0/copyright
+/usr/share/doc/libvo-amrwbenc0/changelog.Debian.gz
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libvo-amrwbenc.so.0.0.3
+/usr/lib/arm-linux-gnueabihf/libvo-amrwbenc.so.0

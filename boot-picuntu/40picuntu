@@ -1,0 +1,43 @@
+#!/system/bin/sh
+
+# Boot picuntu - 0.3
+# Release date: 12-Dec-12
+#   Read the readme file for instructions
+#
+
+# Copyright Alok Sinha - asinha@g8.net
+# Released under GPL V2
+
+# setting up the variables
+LOCN="/mnt/sdcard/picuntu"
+LOG="/mnt/sdcard/picuntu.log"
+FILE="/mnt/sdcard/picuntu/etc/picuntu-linux"
+# This is the most likely device, when you use Memory stick
+DEVC="/dev/block/sda1"
+# This is the likely device when you use SD card
+# DEVC="/dev/block/mmcblk0p1"
+
+# mounting the memory card
+umount $LOCN
+mkdir  $LOCN 
+/system/bin/mount -t ext4 $DEVC $LOCN
+
+#ls -la $FILE
+
+# Now checking if file exists
+if [ ! -f $FILE ]
+then 
+   # If does not exist, then log and boot into linux
+   echo "-------------------------------------" >> $LOG
+   date >>  $LOG
+   echo "File does not exist, staying in android" >> $LOG
+   echo "File does not exist, staying in android" 
+else
+   # If exist, then log and do nothing 
+   echo "-------------------------------------" >> $LOG
+   date >> $LOG
+   echo "File exists going into linux !!!. Bye." 
+   echo "File exists going into linux !!!. Bye." >> $LOG
+   reboot recovery 
+fi
+

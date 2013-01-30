@@ -1,0 +1,26 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = configure ] && dpkg --compare-versions "$2" lt 1.2.81; then
+	rm -f /var/lib/pdmenu/.pdmenurc_auto /var/lib/pdmenu/pdmenurc_auto	
+fi
+
+# Handle the two menu methods installed by hand.
+for inst in /etc/menu-methods/pdmenu-vc /etc/menu-methods/pdmenu-x11; do
+	if [ -x /usr/bin/update-menus ] && [ -f $inst ] ; then
+		chmod a+x $inst
+		# update-menus will be run below
+	fi
+done
+
+# Automatically added by dh_installmenu
+inst=/etc/menu-methods/pdmenu
+if [ -f $inst ]; then
+	chmod a+x $inst
+	if [ -x "`which update-menus 2>/dev/null`" ]; then
+		update-menus
+	fi
+fi
+# End automatically added section
+
+

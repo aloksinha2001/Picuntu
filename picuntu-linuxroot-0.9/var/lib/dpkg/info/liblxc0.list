@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/liblxc.so.0.8.0-rc1
+/usr/share
+/usr/share/doc
+/usr/share/doc/liblxc0
+/usr/share/doc/liblxc0/changelog.Debian.gz
+/usr/share/doc/liblxc0/copyright
+/usr/lib/arm-linux-gnueabihf/liblxc.so.0

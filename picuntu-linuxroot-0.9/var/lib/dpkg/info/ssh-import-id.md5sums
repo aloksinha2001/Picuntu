@@ -1,0 +1,4 @@
+af5e3f2723737d97a9e8c64ded3365ff  usr/bin/ssh-import-id
+6c471552a64c6177a32d71ba7161825a  usr/share/doc/ssh-import-id/changelog.Debian.gz
+2106f5e29d29ff43e7d0a6e27ee19a26  usr/share/doc/ssh-import-id/copyright
+f9e434e24fa755c2c1d733b88720fa82  usr/share/man/man1/ssh-import-id.1.gz

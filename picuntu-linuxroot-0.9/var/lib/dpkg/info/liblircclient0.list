@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/liblirc_client.so.0.2.1
+/usr/lib/liblirc_client.la
+/usr/share
+/usr/share/doc
+/usr/share/doc/liblircclient0
+/usr/share/doc/liblircclient0/changelog.Debian.gz
+/usr/share/doc/liblircclient0/copyright
+/usr/lib/liblirc_client.so.0

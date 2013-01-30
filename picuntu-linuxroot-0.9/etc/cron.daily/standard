@@ -1,0 +1,105 @@
+#!/bin/sh
+# /etc/cron.daily/standard: standard daily maintenance script
+# Written by Ian A. Murdock <imurdock@gnu.ai.mit.edu>
+# Modified by Ian Jackson <ijackson@nyx.cs.du.edu>
+# Modified by Steve Greenland <stevegr@debian.org>
+# Modified by Christian Kastner <debian@kvr.at>, based on a script submitted
+# to the BTS by Justin B. Rye <jbr@edlug.org.uk>
+
+# Start in the root filesystem, make SElinux happy
+cd /
+LOCKFILE=/var/lock/cron.daily
+LOFO=lost+found
+
+# When flock is available, avoid running more than once at a time 
+if `which flock >/dev/null`; then
+    exec 9> $LOCKFILE
+    if ! flock -x -n 9; then
+        cat <<EOF
+
+Unable to run /etc/cron.daily/standard because lockfile $LOCKFILE
+acquisition failed. This probably means that the previous day's
+instance is still running. Please check and correct if necessary.
+
+EOF
+        exit 1
+    fi
+fi
+
+# Don't continue if user wants to skip lost+found check
+if [ -f /etc/default/cron ]; then
+    . /etc/default/cron
+    [ "$CHECK_LOSTFOUND" = "no" ] && exit 0
+fi
+
+
+# Go through /etc/mtab, looking for filesystems with lost+found dirs
+while read DEV MTPT FSTYPE OPTS REST
+do
+    # Skip devices outside of /dev
+    echo "$DEV" | grep -q '^/dev/' || continue  
+
+    # Only check on FS where we might expect lost+found
+    echo "$FSTYPE" | grep -q -E '^(ext2|ext3|ext4|xfs)$' || continue
+
+    [ "$MTPT" = '/' ] && MTPT=""
+    # Replace spaces in the path (\040)
+    MTPT="`echo $MTPT | sed -e 's/\\040/ /g'`"
+
+    if [ ! -d "$MTPT/$LOFO" ]
+    then
+        # XFS does not necessarily have a lost+found dir
+        [ "$FSTYPE" = "xfs" ] && continue
+
+        # If we do not find the directory then it might
+        # be an issue with the mtab or with how we parse 
+        # the information
+        [ ! -d "$MTPT" ] && continue
+
+        MISSING="$MISSING\n$MTPT/$LOFO"
+    elif cd "$MTPT/$LOFO" 2> /dev/null
+    then
+        LIST=
+        for NAME in *
+        do
+            [ "$NAME" = '*' ] && break
+            LIST="$LIST\n\t$NAME"
+        done
+        [ -n "$LIST" ] || continue
+        CONTENTS="$CONTENTS\n$MTPT/$LOFO:$LIST"
+    else
+        echo "Can't access $MTPT/$LOFO"
+    fi
+done < /etc/mtab
+
+# Report findings if any
+if [ -n "$MISSING" ]
+then
+    cat <<EOF
+
+Some local file systems lack a $LOFO directory. This means if the
+file system is damaged and needs to be repaired, fsck will not have
+anywhere to put stray files for recovery. You should consider creating
+a $LOFO directory with mklost+found(8).
+
+The following $LOFO directories were not available:
+EOF
+    echo $MISSING
+fi
+
+if [ -n "$CONTENTS" ]
+then
+    cat <<EOF
+
+Items were found in $LOFO directories. This is probably the result
+of a crash or bad shutdown, or possibly of a disk problem. You should
+examine them to see if they contain important information, and either
+retrieve them from $LOFO or delete them.
+
+The following items were found:
+EOF
+    echo $CONTENTS
+fi
+
+# Remove lock file (releasing lock)
+rm -f $LOCKFILE

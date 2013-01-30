@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/python2.7
+/usr/lib/python2.7/config
+/usr/lib/libpython2.7.so.1.0
+/usr/share
+/usr/share/doc
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libpython2.7
+/usr/lib/python2.7/config/libpython2.7.so
+/usr/lib/libpython2.7.so.1
+/usr/share/doc/libpython2.7

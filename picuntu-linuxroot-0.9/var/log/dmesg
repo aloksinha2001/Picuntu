@@ -1,0 +1,561 @@
+[    0.000000] Initializing cgroup subsys cpuset
+[    0.000000] Initializing cgroup subsys cpu
+[    0.000000] Linux version 3.0.8+ (andrew@andrew-workstation) (gcc version 4.6.3 (Ubuntu/Linaro 4.6.3-1ubuntu5) ) #1 SMP PREEMPT Thu Nov 29 23:53:42 CET 2012
+[    0.000000] CPU: ARMv7 Processor [413fc090] revision 0 (ARMv7), cr=10c53c7d
+[    0.000000] CPU: VIPT nonaliasing data cache, VIPT aliasing instruction cache
+[    0.000000] Machine: RK30board
+[    0.000000] Ignoring tag cmdline (using the default kernel command line)
+[    0.000000] memory reserve: Memory(base:0x91800000 size:80M) reserved for <ion>
+[    0.000000] memory reserve: Memory(base:0x90000000 size:24M) reserved for <fb0>
+[    0.000000] memory reserve: Memory(base:0x8e800000 size:24M) reserved for <ipp buf>
+[    0.000000] memory reserve: Memory(base:0x8d000000 size:24M) reserved for <fb2>
+[    0.000000] memory reserve: Total reserved 152M
+[    0.000000] Memory policy: ECC disabled, Data cache writeback
+[    0.000000] bootconsole [earlycon0] enabled
+[    0.000000] CPU SRAM: copied sram code from c0bce000 to fef00100 - fef01fe0
+[    0.000000] CPU SRAM: copied sram data from c0bcfee0 to fef03000 - fef0385c
+[    0.000000] L310 cache controller enabled
+[    0.000000] l2x0: 16 ways, CACHE_ID 0x4100c0c8, AUX_CTRL 0x76050001, Cache size: 524288 B
+[    0.000000] DDR DEBUG: version 1.00 20120608 
+[    0.000000] DDR DEBUG: DDR3 Device
+[    0.000000] DDR DEBUG: 1 CS, ROW=15, Bank=8, COL=10, Total Capability=1024MB
+[    0.000000] DDR DEBUG: init success!!! freq=300MHz
+[    0.000000] DDR DEBUG: DTONE=0x1, DTERR=0x0, DTIERR=0x0, DTPASS=0x4, DGSL=1 extra clock, DGPS=0
+[    0.000000] DDR DEBUG: DTONE=0x1, DTERR=0x0, DTIERR=0x0, DTPASS=0x4, DGSL=1 extra clock, DGPS=0
+[    0.000000] DDR DEBUG: DTONE=0x1, DTERR=0x0, DTIERR=0x0, DTPASS=0x4, DGSL=1 extra clock, DGPS=0
+[    0.000000] DDR DEBUG: DTONE=0x1, DTERR=0x0, DTIERR=0x0, DTPASS=0x4, DGSL=1 extra clock, DGPS=0
+[    0.000000] DDR DEBUG: ZERR=0, ZDONE=0, ZPD=0x0, ZPU=0x0, OPD=0x0, OPU=0x0
+[    0.000000] DDR DEBUG: DRV Pull-Up=0xb, DRV Pull-Dwn=0xb
+[    0.000000] DDR DEBUG: ODT Pull-Up=0x2, ODT Pull-Dwn=0x2
+[    0.000000] rk30_iomux_init
+[    0.000000] Boot mode: 2 flag: 0xc3524203
+[    0.000000] On node 0 totalpages: 223232
+[    0.000000] free_area_init_node: node 0, pgdat c0bcd260, node_mem_map c1594000
+[    0.000000]   Normal zone: 1744 pages used for memmap
+[    0.000000]   Normal zone: 0 pages reserved
+[    0.000000]   Normal zone: 182576 pages, LIFO batch:31
+[    0.000000]   HighMem zone: 304 pages used for memmap
+[    0.000000]   HighMem zone: 38608 pages, LIFO batch:7
+[    0.000000] PERCPU: Embedded 7 pages/cpu @c1d9c000 s6912 r8192 d13568 u32768
+[    0.000000] pcpu-alloc: s6912 r8192 d13568 u32768 alloc=8*4096
+[    0.000000] pcpu-alloc: [0] 0 [0] 1 
+[    0.000000] Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 221184
+[    0.000000] Kernel command line: root=LABEL=linuxroot init=/sbin/init loglevel=8 rootfstype=ext4 rootwait mtdparts=rk29xxnand:0x00002000@0x00000000(parameter),0x00002000@0x00002000(misc),0x00004000@0x00004000(kernel),0x00008000@0x00008000(boot),0x00008000@0x00010000(recovery)
+[    0.000000] PID hash table entries: 4096 (order: 2, 16384 bytes)
+[    0.000000] Dentry cache hash table entries: 131072 (order: 7, 524288 bytes)
+[    0.000000] Inode-cache hash table entries: 65536 (order: 6, 262144 bytes)
+[    0.000000] allocated 4194304 bytes of page_cgroup
+[    0.000000] please try 'cgroup_disable=memory' option if you don't want memory cgroups
+[    0.000000] Memory: 720MB 152MB = 872MB total
+[    0.000000] Memory: 861752k/861752k available, 186824k reserved, 155648K highmem
+[    0.000000] Virtual kernel memory layout:
+[    0.000000]     vector  : 0xffff0000 - 0xffff1000   (   4 kB)
+[    0.000000]     fixmap  : 0xfff00000 - 0xfffe0000   ( 896 kB)
+[    0.000000]     DMA     : 0xffc00000 - 0xffe00000   (   2 MB)
+[    0.000000]     vmalloc : 0xf7000000 - 0xfe800000   ( 120 MB)
+[    0.000000]     lowmem  : 0xc0000000 - 0xf6800000   ( 872 MB)
+[    0.000000]     pkmap   : 0xbfe00000 - 0xc0000000   (   2 MB)
+[    0.000000]     modules : 0xbf000000 - 0xbfe00000   (  14 MB)
+[    0.000000]       .init : 0xc0408000 - 0xc05a3000   (1644 kB)
+[    0.000000]       .text : 0xc05a3000 - 0xc0b78e54   (5976 kB)
+[    0.000000]       .data : 0xc0b7a000 - 0xc0bcdd60   ( 336 kB)
+[    0.000000]        .bss : 0xc0bd1024 - 0xc1593b18   (9995 kB)
+[    0.000000] SLUB: Genslabs=13, HWalign=32, Order=0-3, MinObjects=0, CPUs=2, Nodes=1
+[    0.000000] Preemptible hierarchical RCU implementation.
+[    0.000000] NR_IRQS:416
+[    0.000000] rk30_gpio_init: 176 gpio irqs in 6 banks
+[    0.000000] sched_clock: 32 bits at 24MHz, resolution 41ns, wraps every 178956ms
+[    0.000000] Console: colour dummy device 80x30
+[    0.000000] console [tty0] enabled, bootconsole disabled
+[    0.010640] Calibrating delay loop (skipped) preset value.. 1631.46 BogoMIPS (lpj=8157341)
+[    0.010669] pid_max: default: 32768 minimum: 301
+[    0.010900] Mount-cache hash table entries: 512
+[    0.011499] Initializing cgroup subsys debug
+[    0.011521] Initializing cgroup subsys cpuacct
+[    0.011572] Initializing cgroup subsys memory
+[    0.011609] Initializing cgroup subsys devices
+[    0.011625] Initializing cgroup subsys freezer
+[    0.011639] Initializing cgroup subsys blkio
+[    0.011687] CPU: Testing write buffer coherency: ok
+[    0.011894] hw perfevents: enabled with ARMv7 Cortex-A9 PMU driver, 7 counters available
+[    0.102380] CPU1: Booted secondary processor
+[    0.102425] Brought up 2 CPUs
+[    0.102450] SMP: Total of 2 processors activated (3262.93 BogoMIPS).
+[    0.102835] devtmpfs: initialized
+[    0.110579] NET: Registered protocol family 16
+[    0.110628] last_log: 0xec8c0000 0xc0bd26c8
+[    0.211901] rk29sdk_wifi_bt_gpio_control_init: init finished
+[    0.211928] hw-breakpoint: found 6 breakpoint and 1 watchpoint registers.
+[    0.211947] hw-breakpoint: 1 breakpoint(s) reserved for watchpoint single-step.
+[    0.211978] hw-breakpoint: maximum watchpoint size is 4 bytes.
+[    0.224769] bio: create slab <bio-0> at 0
+[    0.225194] pwm_regulator_probe:n_voltages=17
+[    0.225329] pwm_regulator.0: driver initialized
+[    0.225634] SCSI subsystem initialized
+[    0.225813] usbcore: registered new interface driver usbfs
+[    0.225896] usbcore: registered new interface driver hub
+[    0.226015] usbcore: registered new device driver usb
+[    0.226260] rk30_i2c rk30_i2c.0: i2c-0: RK30 I2C adapter
+[    0.226426] rk30_i2c rk30_i2c.1: i2c-1: RK30 I2C adapter
+[    0.226570] rk30_i2c rk30_i2c.2: i2c-2: RK30 I2C adapter
+[    0.226684] rk30_i2c rk30_i2c.3: i2c-3: RK30 I2C adapter
+[    0.226808] rk30_i2c rk30_i2c.4: i2c-4: RK30 I2C adapter
+[    0.226929] rk30-adc rk30-adc: rk30 adc: driver initialized
+[    0.227152] Advanced Linux Sound Architecture Driver Version 1.0.24.
+[    0.227828] cfg80211: Calling CRDA to update world regulatory domain
+[    0.228542] rk fb probe ok!
+[    0.267320] tps65910_pre_init,line=64
+[    0.271351] TPS65910 Set default voltage.
+[    0.273758] tps65910_pre_init,line=255
+[    0.288422] tps65910_post_init,line=263
+[    0.288441] tps65910_post_init:g_pmic_type=2
+[    0.302663] tps65910_post_init set vio vcc_io=3300000mV end
+[    0.303915] tps65910_post_init set vpll vdd11=2500000mV end
+[    0.305156] tps65910_post_init set vdig2 vdd11=1100000mV end
+[    0.306391] tps65910_post_init set vaux33 vcc_tp=3300000mV end
+[    0.309277] tps65910_post_init set vdd1 vdd_cpu=1200000mV end
+[    0.312156] tps65910_post_init set vdd2 vcc_ddr=1200000mV end
+[    0.313395] tps65910_post_init set vdig1 vcc18_cif=1800000mV end
+[    0.314633] tps65910_post_init set vaux1 vcc25_hdmi=2500000mV end
+[    0.315869] tps65910_post_init set vaux2 vcca33=3300000mV end
+[    0.317106] tps65910_post_init set vdac vccio_wl=1800000mV end
+[    0.319039] tps65910_post_init set vmmc vcc28_cif=3300000mV end
+[    0.331877] tps65910_post_init set vdd_core=1100000mV end
+[    0.331997] tps65910_post_init,line=354 END
+[    0.332015] tps65910_i2c_probe:irq=324,irq_base=352,gpio_base=352
+[    0.342239] tps65910-rtc tps65910-rtc: rtc core: registered tps65910 as rtc0
+[    0.346103] tps65910_rtc_probe:ok
+[    0.346176] Switching to clocksource timer1
+[    0.346405] lcdc0:reg_phy_base = 0x1010c000,reg_vir_base:0xf701c000
+[    0.346513] lcdc0: dclk:148500000>>fps:60 rk30_load_screen for lcdc0 ok!
+[    0.351886] Switched to NOHz mode on CPU #0
+[    0.352489] Switched to NOHz mode on CPU #1
+[    0.391309] fb0:phy:90000000>>vir:f8000000>>len:0x1800000
+[    0.391489] lcdc0 wakeup from stanby
+[    0.391497] lcdc0 win1 open
+[    0.416010] Console: switching to colour frame buffer device 240x67
+[    0.448289] rk_fb_register>>>>>fb0
+[    0.448548] rk_fb_register>>>>>fb1
+[    0.448618] rk30 lcdc0 probe ok!
+[    0.455719] NET: Registered protocol family 2
+[    0.455941] IP route cache hash table entries: 32768 (order: 5, 131072 bytes)
+[    0.456353] rk30-hdmi rk30-hdmi: READ_PARSE_EDID
+[    0.456722] TCP established hash table entries: 131072 (order: 8, 1048576 bytes)
+[    0.458714] TCP bind hash table entries: 65536 (order: 7, 786432 bytes)
+[    0.459905] TCP: Hash tables configured (established 131072 bind 65536)
+[    0.460029] TCP reno registered
+[    0.460098] UDP hash table entries: 512 (order: 2, 16384 bytes)
+[    0.460236] UDP-Lite hash table entries: 512 (order: 2, 16384 bytes)
+[    0.460674] NET: Registered protocol family 1
+[    0.460937] RK29 Backlight Driver Initialized.
+[    0.476303] rk30-hdmi rk30-hdmi: [rk30_hdmi_read_edid] edid read error
+[    0.606260] rk30-hdmi rk30-hdmi: [rk30_hdmi_read_edid] edid read error
+[    0.716269] rk30-hdmi rk30-hdmi: [HDMI] read edid base block error
+[    0.716414] rk30-hdmi rk30-hdmi: warning: EDID error, assume sink as HDMI !!!!
+[    0.716549] rk30-hdmi rk30-hdmi: warning: no CEA video mode parsed from EDID !!!!
+[    0.716771] rk30-hdmi rk30-hdmi: SYSTEM_CONFIG
+[    0.716880] lcdc0: dclk:148500000>>fps:60 rk30_load_screen for lcdc0 ok!
+[    0.728794] rk30-hdmi rk30-hdmi: CONFIG_VIDEO
+[    1.086261] rk30-hdmi rk30-hdmi: CONFIG_AUDIO
+[    1.086473] rk30-hdmi rk30-hdmi: PLAY_BACK
+[    1.275958] rk30-tsadc rk30-tsadc: initialized
+[    1.277406] [BT_RFKILL]: ret=0x0
+[    1.277599] Loaded driver for PL330 DMAC-1 rk29-pl330
+[    1.277700] 	DBUFF-32x8bytes Num_Chans-6 Num_Peri-12 Num_Events-12
+[    1.277897] Loaded driver for PL330 DMAC-2 rk29-pl330
+[    1.277997] 	DBUFF-64x8bytes Num_Chans-7 Num_Peri-20 Num_Events-14
+[    1.289785] highmem bounce pool size: 64 pages
+[    1.294038] ashmem: initialized
+[    1.304415] fuse init (API version 7.16)
+[    1.308875] msgmni has been set to 1379
+[    1.313714] Block layer SCSI generic (bsg) driver version 0.4 loaded (major 253)
+[    1.317617] io scheduler noop registered
+[    1.321417] io scheduler deadline registered
+[    1.325250] io scheduler cfq registered (default)
+[    1.335635] rga: Driver loaded succesfully
+[    1.419829] rk_serial.0: ttyS0 at MMIO 0x10124000 (irq = 66) is a rk29_serial.0
+[    1.476253] rk_serial rk_serial.0: membase 0xf703c000
+[    1.479990] rk_serial.3: ttyS3 at MMIO 0x20068000 (irq = 69) is a rk29_serial.3
+[    1.526234] rk_serial rk_serial.3: membase 0xf7058000
+[    1.530392] Rockchip ion module(version: 1.0) is successfully loaded
+[    1.536391] loop: module loaded
+[    1.542711] Android kernel panic handler initialized (bind=kpanic)
+[    1.550262] PPP generic driver version 2.4.2
+[    1.557340] PPP Deflate Compression module registered
+[    1.563690] PPP BSD Compression module registered
+[    1.583614] PPP MPPE Compression module registered
+[    1.587756] NET: Registered protocol family 24
+[    1.591916] usbcore: registered new interface driver qf9700
+[    1.595910] usbcore: registered new interface driver sr9600
+[    1.599982] Initializing USB Mass Storage driver...
+[    1.604046] usbcore: registered new interface driver usb-storage
+[    1.608100] USB Mass Storage support registered.
+[    1.612162] usbcore: registered new interface driver usbserial
+[    1.616134] USB Serial support registered for generic
+[    1.620349] usbcore: registered new interface driver usbserial_generic
+[    1.624431] usbserial: USB Serial Driver core
+[    1.628587] USB Serial support registered for GSM modem (1-port)
+[    1.632621] usbcore: registered new interface driver option
+[    1.636769] option: v0.7.2:USB Driver for GSM modems
+[    1.641022] usb20_otg usb20_otg: base=0xf7080000
+[    1.645218] usb20_otg usb20_otg: dwc_otg_device=0xeb598240
+[    1.869599] DWC_OTG: ^^^^^^^^^^^^^^^^^^Host Mode
+[    1.873814] usb20_otg usb20_otg: DWC OTG Controller
+[    1.877988] usb20_otg usb20_otg: new USB bus registered, assigned bus number 1
+[    1.881998] usb20_otg usb20_otg: irq 48, io mem 0x00000000
+[    1.886153] DWC_OTG: Init: Port Power? op_state=1
+[    1.890244] DWC_OTG: Init: Power Port (0)
+[    1.894332] usb usb1: New USB device found, idVendor=1d6b, idProduct=0002
+[    1.898274] usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    1.902373] usb usb1: Product: DWC OTG Controller
+[    1.906464] usb usb1: Manufacturer: Linux 3.0.8+ dwc_otg_hcd
+[    1.910546] usb usb1: SerialNumber: usb20_otg
+[    1.915005] hub 1-0:1.0: USB hub found
+[    1.919130] hub 1-0:1.0: 1 port detected
+[    1.923490] DWC_OTG: host20_driver_probe host2.0 reg addr: 0x101c0000 remap:0xf7100000
+[    2.138059] DWC_OTG: ^^^^^^^^^^^^^^^^^^Host Mode
+[    2.142219] usb20_host usb20_host: DWC OTG Controller
+[    2.146211] usb20_host usb20_host: new USB bus registered, assigned bus number 2
+[    2.150371] usb20_host usb20_host: irq 49, io mem 0x00000000
+[    2.154493] DWC_OTG: Init: Port Power? op_state=1
+[    2.158629] DWC_OTG: Init: Power Port (0)
+[    2.162655] usb usb2: New USB device found, idVendor=1d6b, idProduct=0002
+[    2.166847] usb usb2: New USB device strings: Mfr=3, Product=2, SerialNumber=1
+[    2.171039] usb usb2: Product: DWC OTG Controller
+[    2.175249] usb usb2: Manufacturer: Linux 3.0.8+ host20_hcd
+[    2.179303] usb usb2: SerialNumber: usb20_host
+[    2.183977] hub 2-0:1.0: USB hub found
+[    2.188166] hub 2-0:1.0: 1 port detected
+[    2.192623] input: rk29-keypad as /devices/platform/rk29-keypad/input/input0
+[    2.197550] ++++++++remotectl_init
+[    2.201769] ++++++++remotectl_probe
+[    2.205913] remotectl probe j=0x0
+[    2.210116] remotectl probe j=0x1
+[    2.214094] input: rkxx-remotectl as /devices/platform/rkxx-remotectl/input/input1
+[    2.218721] using rtc device, tps65910, for alarms
+[    2.219354] lirc_dev: IR Remote Control driver registered, major 252 
+[    2.227611] IR NEC protocol handler initialized
+[    2.231587] IR RC5(x) protocol handler initialized
+[    2.235703] IR RC6 protocol handler initialized
+[    2.239812] IR JVC protocol handler initialized
+[    2.243854] IR Sony protocol handler initialized
+[    2.247747] IR RC5 (streamzap) protocol handler initialized
+[    2.251767] IR LIRC bridge handler initialized
+[    2.255754] Linux video capture interface: v2.00
+[    2.259833] usbcore: registered new interface driver uvcvideo
+[    2.263665] USB Video Class driver (v1.1.0)
+[    2.268412] device-mapper: uevent: version 1.0.3
+[    2.272854] device-mapper: ioctl: 4.20.0-ioctl (2011-02-02) initialised: dm-devel@redhat.com
+[    2.277249] cpuidle: using governor ladder
+[    2.281149] cpuidle: using governor menu
+[    2.306251] usb 1-1: new high speed USB device number 2 using usb20_otg
+[    2.350853] 
+[    2.350855] drivers/mmc/core/core.c...1827..  ===== mmc_rescan Begin....[mmc0]
+[    2.359134] .Line3796..The End of SDMMC-probe Ver.4.06 The last modify date is 2012-09-26.  [sd_mmc]
+[    2.363343] .Line3796..The End of SDMMC-probe Ver.4.06 The last modify date is 2012-09-26.  [sdio]
+[    2.367512] 
+[    2.367515] =================
+[    2.367517] mmc_rescan..1834..  ====find no SDMMC host. [mmc0]
+[    2.380900] usbcore: registered new interface driver usbhid
+[    2.384998] usbhid: USB HID core driver
+[    2.389107] 
+[    2.389110] drivers/mmc/core/core.c...1827..  ===== mmc_rescan Begin....[mmc1]
+[    2.397119] 
+[    2.397121] =================
+[    2.397124] mmc_rescan..1834..  ====find no SDMMC host. [mmc1]
+[    2.409887] logger: created 256K log 'log_main'
+[    2.414007] logger: created 256K log 'log_events'
+[    2.418403] logger: created 256K log 'log_radio'
+[    2.422590] logger: created 256K log 'log_system'
+[    2.427575] asoc: hdmi-audio-codec <-> rk29_i2s.0 mapping ok
+[    2.431980] ALSA device list:
+[    2.435915]   #0: ROCKCHIP HDMI
+[    2.439946] GACT probability NOT on
+[    2.443862] Mirror/redirect action on
+[    2.447609] u32 classifier
+[    2.451491]     Actions configured
+[    2.455332] Netfilter messages via NETLINK v0.30.
+[    2.459297] nf_conntrack version 0.5.0 (13464 buckets, 53856 max)
+[    2.463396] ctnetlink v0.93: registering with nfnetlink.
+[    2.467292] NF_TPROXY: Transparent proxy support initialized, version 4.1.0
+[    2.471187] NF_TPROXY: Copyright (c) 2006-2007 BalaBit IT Ltd.
+[    2.475490] xt_time: kernel timezone is -0000
+[    2.479442] ip_tables: (C) 2000-2006 Netfilter Core Team
+[    2.483477] arp_tables: (C) 2002 David S. Miller
+[    2.487451] TCP cubic registered
+[    2.491748] NET: Registered protocol family 10
+[    2.496173] Mobile IPv6
+[    2.500138] ip6_tables: (C) 2000-2006 Netfilter Core Team
+[    2.504132] IPv6 over IPv4 tunneling driver
+[    2.508715] NET: Registered protocol family 17
+[    2.512492] NET: Registered protocol family 15
+[    2.516531] Bridge firewalling registered
+[    2.520463] NET: Registered protocol family 35
+[    2.524504] VFP support v0.3: implementor 41 architecture 3 part 30 variant 9 rev 4
+[    2.524610] usb 1-1: New USB device found, idVendor=0bda, idProduct=8179
+[    2.524618] usb 1-1: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[    2.524625] usb 1-1: Product: 802.11n WLAN NIC
+[    2.524631] usb 1-1: Manufacturer: Realtek
+[    2.524636] usb 1-1: SerialNumber: 0092C3C0BC13
+[    2.552108] tps65910-rtc tps65910-rtc: setting system clock to 2013-01-10 23:09:48 UTC (1357859388)
+[    2.556399] usbcore: registered new interface driver snd-usb-audio
+[    2.560422] Warning: unable to open an initial console.
+[    2.564431] Freeing init memory: 1644K
+[    2.630918] udevd[77]: starting version 175
+[    2.736313] usb 2-1: new high speed USB device number 2 using usb20_host
+[    2.946972] usb 2-1: New USB device found, idVendor=1a40, idProduct=0101
+[    2.951047] usb 2-1: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+[    2.955084] usb 2-1: Product: USB 2.0 Hub
+[    2.961204] hub 2-1:1.0: USB hub found
+[    2.965439] hub 2-1:1.0: 4 ports detected
+[    3.246475] usb 2-1.2: new high speed USB device number 3 using usb20_host
+[    3.347112] usb 2-1.2: New USB device found, idVendor=0781, idProduct=5567
+[    3.351100] usb 2-1.2: New USB device strings: Mfr=1, Product=2, SerialNumber=3
+[    3.355076] usb 2-1.2: Product: Cruzer Blade
+[    3.360356] usb 2-1.2: Manufacturer: SanDisk
+[    3.366325] usb 2-1.2: SerialNumber: 4C532006630512101263
+[    3.374458] scsi0 : usb-storage 2-1.2:1.0
+[    3.456550] usb 2-1.3: new low speed USB device number 4 using usb20_host
+[    3.574324] usb 2-1.3: New USB device found, idVendor=04f2, idProduct=0963
+[    3.585956] usb 2-1.3: New USB device strings: Mfr=1, Product=2, SerialNumber=0
+[    3.597689] usb 2-1.3: Product: 2.4G Multimedia Wireless Kit
+[    3.609249] usb 2-1.3: Manufacturer: Chicony
+[    3.631570] input: Chicony 2.4G Multimedia Wireless Kit as /devices/platform/usb20_host/usb2/2-1/2-1.3/2-1.3:1.0/input/input2
+[    3.638054] generic-usb 0003:04F2:0963.0001: input: USB HID v1.11 Keyboard [Chicony 2.4G Multimedia Wireless Kit] on usb-usb20_host-1.3/input0
+[    3.660339] input: Chicony 2.4G Multimedia Wireless Kit as /devices/platform/usb20_host/usb2/2-1/2-1.3/2-1.3:1.1/input/input3
+[    3.665096] generic-usb 0003:04F2:0963.0002: input: USB HID v1.11 Mouse [Chicony 2.4G Multimedia Wireless Kit] on usb-usb20_host-1.3/input1
+[    3.746555] usb 2-1.4: new high speed USB device number 5 using usb20_host
+[    3.857589] usb 2-1.4: New USB device found, idVendor=1a40, idProduct=0101
+[    3.870749] usb 2-1.4: New USB device strings: Mfr=0, Product=1, SerialNumber=0
+[    3.884026] usb 2-1.4: Product: USB 2.0 Hub
+[    3.900523] hub 2-1.4:1.0: USB hub found
+[    3.911605] hub 2-1.4:1.0: 4 ports detected
+[    4.377662] scsi 0:0:0:0: Direct-Access     SanDisk  Cruzer Blade     1.26 PQ: 0 ANSI: 5
+[    4.393780] sd 0:0:0:0: [sda] 7821312 512-byte logical blocks: (4.00 GB/3.72 GiB)
+[    4.414133] sd 0:0:0:0: [sda] Write Protect is off
+[    4.423478] sd 0:0:0:0: [sda] Mode Sense: 43 00 00 00
+[    4.429790] sd 0:0:0:0: [sda] Write cache: disabled, read cache: enabled, doesn't support DPO or FUA
+[    4.439147]  sda: sda1
+[    4.450485] sd 0:0:0:0: [sda] Attached SCSI removable disk
+[    4.665634] EXT4-fs (sda1): mounted filesystem with ordered data mode. Opts: (null)
+[    5.326145] init: ureadahead main process (156) terminated with status 5
+[    5.383193] DWC_OTG: frame_number 0x1084, start 0x107f, complete: 1
+[    5.383546] DWC_OTG: frame_number 0x1084, start 0x107f, complete: 1
+[    5.492182] init: mounted-proc main process (162) terminated with status 1
+[    5.702774] EXT4-fs (sda1): re-mounted. Opts: (null)
+[    6.090163] init: Failed to spawn console-setup main process: unable to execute: No such file or directory
+[    6.265982] udevd[291]: starting version 175
+[    6.445185] rtl8188eu driver version=v4.1.2_4787.20120803
+[    6.445197] build time: Dec 24 2012 14:17:31
+[    6.445207] ##########rtw_suspend_lock_init ###########
+[    6.445352] register rtw_netdev_ops to netdev_ops
+[    6.445360] CHIP TYPE: RTL8188E
+[    6.445379] 
+[    6.445381] usb_endpoint_descriptor(0):
+[    6.445386] bLength=7
+[    6.445390] bDescriptorType=5
+[    6.445394] bEndpointAddress=81
+[    6.445399] wMaxPacketSize=512
+[    6.445402] bInterval=0
+[    6.445406] RT_usb_endpoint_is_bulk_in = 1
+[    6.445411] 
+[    6.445413] usb_endpoint_descriptor(1):
+[    6.445417] bLength=7
+[    6.445421] bDescriptorType=5
+[    6.445425] bEndpointAddress=2
+[    6.445429] wMaxPacketSize=512
+[    6.445433] bInterval=0
+[    6.445437] RT_usb_endpoint_is_bulk_out = 2
+[    6.445441] 
+[    6.445443] usb_endpoint_descriptor(2):
+[    6.445448] bLength=7
+[    6.445452] bDescriptorType=5
+[    6.445456] bEndpointAddress=3
+[    6.445460] wMaxPacketSize=512
+[    6.445463] bInterval=0
+[    6.445467] RT_usb_endpoint_is_bulk_out = 3
+[    6.445473] nr_endpoint=3, in_num=1, out_num=2
+[    6.445476] 
+[    6.445479] USB_SPEED_HIGH
+[    6.445841] Chip Version Info: CHIP_8188E_Normal_Chip_TSMC_A_CUT_1T1R_RomVer(0)
+[    6.445855] RF_Type is 3!!
+[    6.445863] _ConfigNormalChipOutEP_8188E OutEpQueueSel(0x05), OutEpNumber(2) 
+[    6.445963] EEPROM type is E-FUSE
+[    6.445968] ====> _ReadAdapterInfo8188EU
+[    6.446088] Boot from EFUSE, Autoload OK !
+[    6.591376] EEPROM ID=0x8129
+[    6.591385] VID = 0x0BDA, PID = 0x8179
+[    6.591391] Customer ID: 0x00, SubCustomer ID: 0xCD
+[    6.591400] Hal_ReadPowerSavingMode88E...bHWPwrPindetect(0)-bHWPowerdown(0) ,bSupportRemoteWakeup(0)
+[    6.591408] ### PS params=>  power_mgnt(0),usbss_enable(0) ###
+[    6.591422] ======= Path 0, Channel 0 =======
+[    6.591432] Index24G_CCK_Base[0][0] = 0x2d
+[    6.591438] Index24G_BW40_Base[0][0] = 0x2c
+[    6.591443] ======= Path 0, Channel 1 =======
+[    6.591448] Index24G_CCK_Base[0][1] = 0x2d
+[    6.591454] Index24G_BW40_Base[0][1] = 0x2c
+[    6.591459] ======= Path 0, Channel 2 =======
+[    6.591464] Index24G_CCK_Base[0][2] = 0x2d
+[    6.591469] Index24G_BW40_Base[0][2] = 0x2c
+[    6.591475] ======= Path 0, Channel 3 =======
+[    6.591480] Index24G_CCK_Base[0][3] = 0x2d
+[    6.591485] Index24G_BW40_Base[0][3] = 0x2c
+[    6.591490] ======= Path 0, Channel 4 =======
+[    6.591496] Index24G_CCK_Base[0][4] = 0x2d
+[    6.591501] Index24G_BW40_Base[0][4] = 0x2c
+[    6.591506] ======= Path 0, Channel 5 =======
+[    6.591512] Index24G_CCK_Base[0][5] = 0x2d
+[    6.591517] Index24G_BW40_Base[0][5] = 0x2c
+[    6.591522] ======= Path 0, Channel 6 =======
+[    6.591527] Index24G_CCK_Base[0][6] = 0x2d
+[    6.591533] Index24G_BW40_Base[0][6] = 0x2c
+[    6.591554] ======= Path 0, Channel 7 =======
+[    6.591560] Index24G_CCK_Base[0][7] = 0x2d
+[    6.591565] Index24G_BW40_Base[0][7] = 0x2c
+[    6.591570] ======= Path 0, Channel 8 =======
+[    6.591575] Index24G_CCK_Base[0][8] = 0x2d
+[    6.591581] Index24G_BW40_Base[0][8] = 0x2c
+[    6.591586] ======= Path 0, Channel 9 =======
+[    6.591591] Index24G_CCK_Base[0][9] = 0x2d
+[    6.591597] Index24G_BW40_Base[0][9] = 0x2c
+[    6.591602] ======= Path 0, Channel 10 =======
+[    6.591607] Index24G_CCK_Base[0][10] = 0x2d
+[    6.591613] Index24G_BW40_Base[0][10] = 0x2c
+[    6.591618] ======= Path 0, Channel 11 =======
+[    6.591623] Index24G_CCK_Base[0][11] = 0x2d
+[    6.591629] Index24G_BW40_Base[0][11] = 0x2c
+[    6.591634] ======= Path 0, Channel 12 =======
+[    6.591639] Index24G_CCK_Base[0][12] = 0x2d
+[    6.591645] Index24G_BW40_Base[0][12] = 0x2b
+[    6.591650] ======= Path 0, Channel 13 =======
+[    6.591656] Index24G_CCK_Base[0][13] = 0x2d
+[    6.591673] Index24G_BW40_Base[0][13] = 0x2b
+[    6.591678] ======= Path 0, Channel 14 =======
+[    6.591684] Index24G_CCK_Base[0][14] = 0x2d
+[    6.591689] Index24G_BW40_Base[0][14] = 0x2b
+[    6.591694] ======= TxCount 0 =======
+[    6.591699] CCK_24G_Diff[0][0]= 0
+[    6.591704] OFDM_24G_Diff[0][0]= 2
+[    6.591708] BW20_24G_Diff[0][0]= 2
+[    6.591713] BW40_24G_Diff[0][0]= 0
+[    6.591717] ======= TxCount 1 =======
+[    6.591722] CCK_24G_Diff[0][1]= -2
+[    6.591727] OFDM_24G_Diff[0][1]= -2
+[    6.591732] BW20_24G_Diff[0][1]= -2
+[    6.591736] BW40_24G_Diff[0][1]= -2
+[    6.591741] ======= TxCount 2 =======
+[    6.591746] CCK_24G_Diff[0][2]= -2
+[    6.591750] OFDM_24G_Diff[0][2]= -2
+[    6.591755] BW20_24G_Diff[0][2]= -2
+[    6.591760] BW40_24G_Diff[0][2]= -2
+[    6.591764] ======= TxCount 3 =======
+[    6.591769] CCK_24G_Diff[0][3]= -2
+[    6.591773] OFDM_24G_Diff[0][3]= -2
+[    6.591778] BW20_24G_Diff[0][3]= -2
+[    6.591783] BW40_24G_Diff[0][3]= -2
+[    6.591797] EEPROMRegulatory = 0x0
+[    6.591803] mlmepriv.ChannelPlan = 0x0a
+[    6.591807] EEPROM Customer ID: 0x 0
+[    6.591813] EEPROM : AntDivCfg = 0, TRxAntDivType = 3
+[    6.591818] Board Type: 0x 0
+[    6.591822] ThermalMeter = 0x1a
+[    6.591828] <==== _ReadAdapterInfo8188EU in 150 ms
+[    6.592610] rtw_register_early_suspend
+[    6.592652] rtw_macaddr_cfg MAC Address  = 00:92:c3:c0:bc:13
+[    6.592669] MAC Address from pnetdev->dev_addr= 00:92:c3:c0:bc:13
+[    6.593377] bDriverStopped:1, bSurpriseRemoved:0, bup:0, hw_init_completed:0
+[    6.593515] usbcore: registered new interface driver rtl8188eu
+[    8.607598] +871x_drv - drv_open, bup=0
+[    8.659476] rtl8188e_FirmwareDownload: fw_ver=4 fw_subver=0 sig=0x88e1
+[    8.680847] _FWFreeToGo: Checksum report OK! REG_MCUFWDL:0x00030004
+[    8.683971] _FWFreeToGo: Polling FW ready success!! REG_MCUFWDL:0x000300c6
+[    8.683982] Set RF Chip ID to RF_6052 and RF type to 1T1R.
+[    9.009824] pDM_Odm TxPowerTrackControl = 1
+[    9.222849] MAC Address from REG_MACID = 00:92:c3:c0:bc:13
+[    9.222857] rtl8188eu_hal_init in 610ms
+[    9.222865] MAC Address = 00:92:c3:c0:bc:13
+[    9.227637] -871x_drv - drv_open, bup=1
+[    9.228173] ADDRCONF(NETDEV_UP): wlan0: link is not ready
+[    9.229765] (2)871x_drv - drv_close, bup=1, hw_init_completed=1
+[    9.229778] -871x_drv - drv_close, bup=1
+[    9.231041] +871x_drv - drv_open, bup=1
+[    9.231063] -871x_drv - drv_open, bup=1
+[    9.231555] ADDRCONF(NETDEV_UP): wlan0: link is not ready
+[    9.232406] [rtw_wx_set_pmkid] IW_PMKSA_FLUSH!
+[    9.232428] set_mode = IW_MODE_INFRA
+[    9.233018] hw_var_set_opmode()-3434 mode = 2
+[    9.233226] =>rtw_wx_set_essid
+[    9.233236] ssid=g\xffffffc6isQ\xffffffffJ\xffffffec)\xffffffcd\xffffffba\xffffffab\xfffffff2\xfffffffb\xffffffe3F|\xffffffc2T\xfffffff8\x1b\xffffffe8\xffffffe7\xffffff8dvZ.c3\xffffff9f\xffffffc9\xffffff9a, len=32
+[    9.233247] Set SSID under fw_state=0x00000008
+[    9.233260] <=rtw_wx_set_essid, ret 0
+[    9.296762] [rtw_wx_set_pmkid] IW_PMKSA_FLUSH!
+[   10.556603] survey done event(10)
+[   10.556655] rtw_select_and_join_from_scanned_queue: return _FAIL(candidate == NULL)
+[   10.556702] try_to_join, but select scanning queue fail, to_roaming:0
+[   10.598375] wpa_set_auth_algs, AUTH_ALG_OPEN_SYSTEM
+[   10.598437] set_mode = IW_MODE_INFRA
+[   10.598546] 
+[   10.598555]  wpa_ie(length:22):
+[   10.598590] 0x30 0x14 0x01 0x00 0x00 0x0f 0xac 0x02 
+[   10.598624] 0x01 0x00 0x00 0x0f 0xac 0x02 0x01 0x00 
+[   10.598658] 0x00 0x0f 0xac 0x02 0x00 0x00 0x71 0xeb 
+[   10.598764] =>rtw_wx_set_essid
+[   10.598787] ssid=Alok_Yamuna, len=11
+[   10.598821] Set SSID under fw_state=0x00000008
+[   10.598872] [by_bssid:0][assoc_ssid:Alok_Yamuna][to_roaming:0] new candidate: Alok_Yamuna(00:25:9c:4d:60:48) rssi:-53
+[   10.598920] rtw_select_and_join_from_scanned_queue: candidate: Alok_Yamuna(00:25:9c:4d:60:48)
+[   10.598970] link to Broadcom AP
+[   10.599001] <=rtw_wx_set_essid, ret 0
+[   10.599073] Set BSSID under fw_state=0x00000088
+[   10.599634] hw_var_set_opmode()-3434 mode = 2
+[   10.697103] link to Broadcom AP
+[   10.697116] issue_deauth to 00:25:9c:4d:60:48
+[   10.697137] issue_auth
+[   10.702184] OnAuthClient
+[   10.702198] network.SupportedRates[0]=82
+[   10.702204] network.SupportedRates[1]=84
+[   10.702209] network.SupportedRates[2]=8B
+[   10.702214] network.SupportedRates[3]=96
+[   10.702219] network.SupportedRates[4]=24
+[   10.702224] network.SupportedRates[5]=30
+[   10.702229] network.SupportedRates[6]=48
+[   10.702234] network.SupportedRates[7]=6C
+[   10.702239] network.SupportedRates[8]=0C
+[   10.702244] network.SupportedRates[9]=12
+[   10.702249] network.SupportedRates[10]=18
+[   10.702254] network.SupportedRates[11]=60
+[   10.702260] bssrate_len = 12
+[   10.704742] OnAssocRsp
+[   10.704754] report_join_res(4)
+[   10.704761] rtw_joinbss_update_network
+[   10.704775] rtw_joinbss_update_stainfo
+[   10.704781] ### Set STA_(0) info
+[   10.704837] HW_VAR_BASIC_RATE: BrateCfg(0x15f)
+[   10.705361] ADDRCONF(NETDEV_CHANGE): wlan0: link becomes ready
+[   10.707602] WMM(0): 0, a42b
+[   10.707895] WMM(1): 0, a44f
+[   10.708085] WMM(2): 0, 5e4322
+[   10.708266] WMM(3): 0, 2f3222
+[   10.708273] HTOnAssocRsp
+[   10.708953] OnAssocRsp
+[   10.715888] UpdateHalRAMask8188EUsb => mac_id:0, networkType:0x03, mask:0x00000fff
+[   10.715893] 	 ==> rssi_level:0, rate_bitmap:0x00000ff5
+[   10.715903] ### MacID(0),Set Max Tx RPT MID(1)
+[   10.716000] ### rtl8188e_set_FwMediaStatus_cmd: MStatus=1 MACID=0 
+[   10.718389] rtl8188e_set_FwJoinBssReport_cmd mstatus(1)
+[   10.719254] SetFwRsvdPagePkt
+[   10.719290] SetFwRsvdPagePkt: Set RSVD page location to Fw
+[   10.720383] rtl8188e_set_FwJoinBssReport_cmd: 1 Download RSVD success! DLBcnCount:1, poll:1
+[   10.720881] Set RSVD page location to Fw.
+[   10.721018] =>mlmeext_joinbss_event_callback
+[   10.731497] 
+[   10.731503]  ~~~~stastakey:unicastkey
+[   10.731648] 
+[   10.731653]  ~~~~stastakey:groupkey
+[   10.731668] ==> rtw_set_key algorithm(2),keyid(2),key_mask(4)
+[   11.236633] UpdateHalRAMask8188EUsb => mac_id:0, networkType:0x03, mask:0x00000fff
+[   11.236654] 	 ==> rssi_level:1, rate_bitmap:0x00000f00
+[   13.231403] UpdateHalRAMask8188EUsb => mac_id:0, networkType:0x03, mask:0x00000fff
+[   13.231410] 	 ==> rssi_level:2, rate_bitmap:0x00000ff0
+[   20.746261] wlan0: no IPv6 routers present
+[   23.008858] rk30_lcdc_blank>>>>>0

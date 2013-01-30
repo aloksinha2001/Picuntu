@@ -1,0 +1,10 @@
+bcb73197661b0a3671b314184b77fd1f  usr/lib/pm-utils/power.d/anacron
+af39f6aa772a9e814042e026c9b81b13  usr/lib/pm-utils/sleep.d/95anacron
+5629bb3da66d0923e4453fee045d7cf0  usr/sbin/anacron
+a28852bca2e659d49c57af131eb3f21a  usr/share/doc/anacron/README.Debian
+e94a70812b135a3462ed1aed54cf10c8  usr/share/doc/anacron/README.gz
+c9a9003e644778e4dd08ff48d92573d3  usr/share/doc/anacron/TODO
+452739795ce2a0c09911de9a58b828f4  usr/share/doc/anacron/changelog.Debian.gz
+8f9c84a3bb121cbbe5b48e5fdaf216a6  usr/share/doc/anacron/copyright
+b46d006da7c6e89b27178c3467632520  usr/share/man/man5/anacrontab.5.gz
+db0f481e9d74c39ac935b35e88533626  usr/share/man/man8/anacron.8.gz

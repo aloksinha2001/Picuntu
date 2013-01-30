@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libvorbis.so.0.4.5
+/usr/share
+/usr/share/doc
+/usr/share/doc/libvorbis0a
+/usr/share/doc/libvorbis0a/copyright
+/usr/share/doc/libvorbis0a/changelog.Debian.gz
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/libvorbis0a
+/usr/lib/arm-linux-gnueabihf/libvorbis.so.0

@@ -1,0 +1,15 @@
+/.
+/usr
+/usr/bin
+/usr/bin/ssh-import-id
+/usr/share
+/usr/share/doc
+/usr/share/doc/ssh-import-id
+/usr/share/doc/ssh-import-id/copyright
+/usr/share/doc/ssh-import-id/changelog.Debian.gz
+/usr/share/man
+/usr/share/man/man1
+/usr/share/man/man1/ssh-import-id.1.gz
+/etc
+/etc/ssh
+/etc/ssh/ssh_import_id

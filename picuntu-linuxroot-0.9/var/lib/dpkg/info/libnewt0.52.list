@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libnewt0.52
+/usr/share/doc/libnewt0.52/changelog.Debian.gz
+/usr/share/doc/libnewt0.52/copyright
+/lib
+/lib/libnewt.so.0.52.11
+/etc
+/etc/newt
+/etc/newt/palette.original
+/etc/newt/palette.ubuntu
+/lib/libnewt.so.0.52

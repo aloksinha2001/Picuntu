@@ -1,0 +1,100 @@
+In the dfsg version, the following file has been changed, because
+it has a non dfsg-free copyright statement:
+
+  - data/GeoIP.dat
+
+I removed with the following sed line the non-free copyright statement:
+	$ sed 's/ All Rights Reserved//' -i data/GeoIP.dat
+
+
+I asked in an email the upstream author for permissions to change this
+non-free copyright statement, here is the full email conversation with
+all headers:
+
+<email>
+From - Wed Dec 12 08:11:48 2007
+X-Account-Key: account2
+X-UIDL: 12248
+X-Mozilla-Status: 0003
+X-Mozilla-Status2: 00000000
+X-Mozilla-Keys:
+Received: from [66.111.4.27] (helo=out3.smtp.messagingengine.com)
+	by mx17.web.de with esmtp (WEB.DE 4.108 #208)
+	id 1J2K89-0008Tg-00
+	for patrick.matthaei@web.de; Wed, 12 Dec 2007 06:27:37 +0100
+Received: from compute2.internal (compute2.internal [10.202.2.42])
+	by out1.messagingengine.com (Postfix) with ESMTP id 100087A30B
+	for <patrick.matthaei@web.de>; Wed, 12 Dec 2007 00:27:37 -0500 (EST)
+Received: from web8.messagingengine.com ([10.202.2.217])
+  by compute2.internal (MEProxy); Wed, 12 Dec 2007 00:27:37 -0500
+Received: by web8.messagingengine.com (Postfix, from userid 99)
+	id D8E2D45678; Wed, 12 Dec 2007 00:27:36 -0500 (EST)
+Message-Id: <1197437256.753.1226121721@webmail.messagingengine.com>
+X-Sasl-Enc: jcG8jm0Wg94jOEhqqVMpVPVfx77dHsqG3Dl2zxF3ZhOk 1197437256
+From: "Thomas J Mather" <tjmather@maxmind.com>
+To: =?ISO-8859-1?Q?Patrick=20Matth=E4i?= <patrick.matthaei@web.de>
+Content-Disposition: inline
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="ISO-8859-1"
+MIME-Version: 1.0
+X-Mailer: MessagingEngine.com Webmail Interface
+References: <47581B4E.3050405@maxmind.com>
+Subject: GeoIP.dat
+In-Reply-To: <47581B4E.3050405@maxmind.com>
+Date: Wed, 12 Dec 2007 00:27:36 -0500
+Sender: tjmather@maxmind.com
+
+Would you like us to remove the
+"All Rights Reserved." from the Copyright notice?
+
+That is replace:
+Copyright (C) 2003 MaxMind LLC  All Rights Reserved.
+
+With
+
+Copyright (C) 2007 MaxMind LLC
+
+-TJ
+-------- Original Message --------
+Subject: GeoIP.dat
+Date: Thu, 06 Dec 2007 16:55:33 +0100
+From: Patrick Matth=E4i <patrick.matthaei@web.de>
+Reply-To: patrick.matthaei@web.de
+Organization: http://www.Linux-Dev.org
+To: info@maxmind.com
+
+Hello Maxmind,
+
+I'm the new Debian package maintainer of GeoIP and I've got a copyright
+problem with it.
+
+As discussed in [1] geoip is normaly completly unsuiteable for the
+Debian pool (main and non-free), because of the following copyright
+header:
+* Copyright (C) 2003 MaxMind LLC  All Rights Reserved.
+I've found it in:
+geoip-1.3.17/data/GeoIP.dat
+geoip-1.3.17/libGeoIP/GeoIP.c
+geoip-1.3.17/libGeoIP/GeoIPCity.h
+
+This is an older version. In 1.4.3 it has been removed from libGeoIP/ -
+which is very good, but it's still at the end of the file
+data/GeoIP.dat. The problem is, that we're so not allowed to modify this
+file and ship this with a package. Could you please remove this one from
+the file, too?
+If not, I think I've no other choice as to remove this library from the
+Debian pool.
+
+[1]: http://lists.debian.org/debian-legal/2006/06/msg00093.html
+
+I hope we will found a good solution for it.
+
+--=20
+Mit freundlichem Gru=DF / With kind regards,
+Patrick Matth=E4i
+
+E-Mail: patrick.matthaei@web.de
+Homepage: http://www.Linux-Dev.org/
+</email>
+
+ -- Patrick Matthäi <pmatthaei@debian.org>  Wed, 19 Dec 2007 +0100

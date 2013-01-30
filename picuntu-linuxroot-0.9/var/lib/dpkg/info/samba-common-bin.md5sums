@@ -1,0 +1,14 @@
+1531dcd95561f45543419397d7256640  usr/bin/net.samba3
+6afab28c2c70657cff37a07eb9a21886  usr/bin/nmblookup.samba3
+55c7b6d1ea1ff2aa665ba630f3929d73  usr/bin/smbpasswd
+b1764d0cf68e19664f6e981de3eafa55  usr/bin/testparm.samba3
+535aba8361cbb868ec83ad281067885b  usr/share/apport/package-hooks/source_samba.py
+7a94a6c7500b0723e677231f97e5ee90  usr/share/doc/samba-common-bin/copyright
+3808009f4337224e651246aa687dd92c  usr/share/man/man1/nmblookup.samba3.1.gz
+70fcf2ad28cfb299cd3de818395e7aef  usr/share/man/man1/testparm.samba3.1.gz
+0013747a11c9f45541a2f84ef75e1701  usr/share/man/man5/lmhosts.5.gz
+03c1ec6e0514aeab184608ddb6c14335  usr/share/man/man5/smb.conf.5.gz
+0b22ff3666da0fb022570b34a54f0c20  usr/share/man/man5/smbpasswd.5.gz
+3e00c732d675efe9c619b226c890386d  usr/share/man/man7/samba.7.gz
+f491076a918885b7bd1c9ee2fe91b1c8  usr/share/man/man8/net.samba3.8.gz
+a2b7390304374fda22feca6f4416a99b  usr/share/man/man8/smbpasswd.8.gz

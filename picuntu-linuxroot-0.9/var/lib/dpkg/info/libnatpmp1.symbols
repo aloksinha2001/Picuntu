@@ -1,0 +1,12 @@
+libnatpmp.so.1 libnatpmp1 #MINVER#
+ closenatpmp@Base 20101211
+ getdefaultgateway@Base 20101211
+ getnatpmprequesttimeout@Base 20101211
+ initnatpmp@Base 20101211
+ readnatpmpresponse@Base 20101211
+ readnatpmpresponseorretry@Base 20101211
+ sendnatpmprequest@Base 20101211
+ sendnewportmappingrequest@Base 20101211
+ sendpendingrequest@Base 20101211
+ sendpublicaddressrequest@Base 20101211
+ strnatpmperr@Base 20101211

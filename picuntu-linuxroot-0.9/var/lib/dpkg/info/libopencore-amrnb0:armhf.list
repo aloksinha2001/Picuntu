@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libopencore-amrnb.so.0.0.3
+/usr/share
+/usr/share/doc
+/usr/share/doc/libopencore-amrnb0
+/usr/share/doc/libopencore-amrnb0/changelog.Debian.gz
+/usr/share/doc/libopencore-amrnb0/copyright
+/usr/lib/arm-linux-gnueabihf/libopencore-amrnb.so.0

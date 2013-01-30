@@ -1,0 +1,13 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libdconf.so.1.0.0
+/usr/share
+/usr/share/doc
+/usr/share/doc/libdconf1
+/usr/share/doc/libdconf1/changelog.Debian.gz
+/usr/share/doc/libdconf1/copyright
+/usr/share/doc/libdconf1/README
+/usr/share/doc/libdconf1/NEWS.gz
+/usr/lib/arm-linux-gnueabihf/libdconf.so.1

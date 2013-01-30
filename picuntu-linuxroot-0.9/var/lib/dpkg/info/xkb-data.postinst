@@ -1,0 +1,45 @@
+#!/bin/sh
+
+set -e
+
+# Source debconf library.
+. /usr/share/debconf/confmodule
+
+THIS_PACKAGE=xkb-data
+THIS_SCRIPT=postinst
+
+# Remove the xkb cache to make sure it gets regenerated
+if [ -d /var/lib/xkb/ ]; then
+  rm -f /var/lib/xkb/*.xkm 2>/dev/null
+fi
+
+case $1 in
+  configure)
+  if dpkg --compare-versions "$2" lt-nl 1.9; then
+    # dvorak-intl was renamed to dvorak-alt-intl in 1.9
+    # Transition users to the new layout name.
+    #
+    # We cannot guarantee that console-setup/keyboard-configuration's
+    # config script has either run or not run.  Thus, we need to update
+    # both the configuration files and debconf.
+    for CONFIGFILE in /etc/default/keyboard /etc/default/console-setup ; do
+      if [ -f $CONFIGFILE ]; then
+        sed -i -e "s|^ *XKBVARIANT=.*dvorak-intl.*|XKBVARIANT=\"dvorak-alt-intl\"|" \
+          $CONFIGFILE
+      fi
+    done
+    db_get keyboard_configuration/variantcode || true
+    if [ "$RET" = "dvorak-intl" ]; then
+      db_set keyboard-configuration/variantcode "dvorak-alt-intl"
+    fi
+    db_get console-setup/variantcode || true
+    if [ "$RET" = "dvorak-intl" ]; then
+        db_set console-setup/variantcode "dvorak-alt-intl"
+    fi
+  fi
+  ;;
+esac
+
+
+
+# vim:set ai et sw=2 ts=2 tw=80:

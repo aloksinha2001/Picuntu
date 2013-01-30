@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/mysql-common
+/usr/share/doc/mysql-common/copyright
+/usr/share/doc/mysql-common/changelog.Debian.gz
+/etc
+/etc/mysql
+/etc/mysql/my.cnf
+/etc/mysql/conf.d

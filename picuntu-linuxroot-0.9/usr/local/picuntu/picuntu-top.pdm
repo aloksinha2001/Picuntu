@@ -1,0 +1,300 @@
+#!/usr/bin/pdmenu
+
+# picuntu-da-server - 0.9
+# Release date: 31-Jan-13
+#   Read the readme file for instructions
+#
+# Copyright Alok Sinha - asinha@g8.net
+# Released under GPL V2
+
+
+# pdmenu script to install servers/desktop and other convenience tool for 
+# users, using picuntu
+
+# TODO setup Droidmote to be run as service
+# 
+
+# Seting up color scheme.
+color:desktop:white:brightblue
+color:title:red:red
+color:base:white:red
+color:shadow:black:black
+color:menu:black:brightcyan
+color:selbar:white:black
+color:menuhot:yellow
+color:unselmenu:gray:white
+preproc: if [ -f /tmp/picuntu.debug ]; then /usr/bin/logger "PICUNTU: PDMENU initialised in debug mode."; fi
+
+# ** Main menu
+menu:home:Main Menu:Welcome to Picuntu: Picuntu 0.9
+      show:  ...---=== Welcome to Picuntu Configurator ===---... ::
+		nop: 
+		nop:Installation type
+		nop:-------------------------------------
+		exec:   Apt-Upda_te::apt-get update; touch /tmp/picuntu.updated
+		exec:   Apt-Upg_rade::apt-get upgrade
+      nop
+		nop: Net related
+      nop:--------------------------------------
+		show:   _Network Configuration::network_conf
+		exec:   Check internet _status:display:((ping -w5 -c3 4.2.2.2 || ping -w5 -c3 google.com) > /dev/null 2>&1) && (touch /tmp/picuntu.net.is.working; echo \*\*\* Congratulations - Internet access is up. \*\*\*) || (rm -f /tmp/picuntu.net.is.working; echo \*\*\* Ooopsie !! Internet access is down. \;\( \*\*\*  && exit 1)
+		nop: 
+      nop:Miscellaneous
+      nop:--------------------------------------
+		show:   _User management::usr_menu
+		group:   Manage Ser_vices..
+		 	exec::makemenu: \
+			  echo "menu:make_svcs:Services:Select a service..."; \
+			  for I in `ls /etc/init.d/ | grep -iE "(apache2|bind9|webmin|mysql|mediatomb|sendmail|ntp|ssh)"`; do \
+			  echo "exec:_$I::export SERVICE=$I; pdmenu $home_dir/picuntu-top.pdm -c --menu=services"; \
+			  done
+			 show:::make_svcs
+			 remove:::make_svcs
+		endgroup
+		show:   _Handy utilities::tools
+		show:   Configure soun_D::sound_main
+		show:   About Pic_untu::picuntu
+		nop: 
+      exit:E_xit
+
+
+# *************** Check net menu
+menu:chk_net:Check Network:Network connection not found
+        show:  ...---=== Welcome to Picuntu Configurator ===---... ::
+		nop: 
+		nop:  .... ---- === #### Access to internet not found #### === ---- ....
+      nop:--------------------------------------
+      exec:   Check internet _status:display:((ping -w5 -c3 4.2.2.2 || ping -w5 -c3 google.com) > /dev/null 2>&1) && (touch /tmp/picuntu.net.is.working; echo \*\*\* Congratulations - Internet access is up. \*\*\*) || (rm -f /tmp/picuntu.net.is.working; echo \*\*\* Ooopsie !! Internet access is down. \;\( \*\*\*  && exit 1)
+		show:   _Network Configuration::network_conf
+		nop:  
+		exec:   Re_load this menu (required, if net connection now up)::pdmenu $home_dir/picuntu-top.pdm -c 
+      nop
+      exit:E_xit
+
+
+# ************* Network menu
+menu:network_conf:Network Configuration:Network Configuration: Configure your network. Picuntu is pretty much useless without a working internet connection.
+      exec:Ne_twork Configuration:disp: cat /etc/network/interfaces
+      nop:--------------------------------------
+		exec:   Show internet _status:display:((ping -w5 -c3 4.2.2.2 || ping -w5 -c3 google.com) > /dev/null 2>&1) && echo \*\*\* Congratulations - Internet access is up. \*\*\*; touch /tmp/picuntu.net.is.up || (echo \*\*\* Ooopsie !! Internet access is down. \;\( \*\*\*; rm -f /tmp/picuntu.net.is.up && exit 1)
+#		exec:   Show _Bridge status:disp:sudo brctl show
+		exec:   Show Hostna_me:display:/bin/hostname
+      exec:   Show _IP Address and Subnet:display:/sbin/ifconfig
+      exec:   Show _Routes:display:/sbin/route -n
+		exec:   Show _Nameservers:display:grep nameserver /etc/resolv.conf
+		exec:   Show visible Wi_fi:d:iwlist `cat /tmp/Card.picuntu` scan | grep "ESSID" | cut -d ":" -f2 | tr -d '"'
+		exec:   Detailed _Wifi Scan:d:iwlist `cat /tmp/Card.picuntu` scan
+      nop
+      nop:Configuration 
+      nop:--------------------------------------
+	 	show:   Scan and Config_ure::menu_iface
+	   nop:   Custom DHCP
+
+		exec:    Step _1- Select Iface:edit,display: AB="~Select interface:~ "; echo $AB > /tmp/Card.picuntu; echo "auto lo\niface lo inet loopback  \n\n\n\n" > /tmp/interfaces.new; echo "auto $AB\niface $AB inet dhcp" >>  /tmp/interfaces.new ; echo "Good, now complete the step 2 - Only if you have to configure Wifi, else restart network"
+
+		exec:    Step _2- (only if wifi):edit,display: WP="  wpa-ssid ~SSID (case sensitive):~\n  wpa-psk ~Wifi PSK Password (case sensitive):~ "; echo $WP >> /tmp/interfaces.new; cat /tmp/interfaces.new > /etc/network/interfaces; MS=`cat /etc/network/interfaces`; echo "This is what your network config looks like\n========\n$MS\n=========\nYou can now restart the network, or reconfigure. It will come into effect automatically on next boot"
+
+       nop:   Custom static
+       exec:    Step _1- Select Iface:edit,display: AB="~Select interface:~ "; echo $AB > /tmp/Card.picuntu; echo "auto lo\niface lo inet loopback  \n\n\n\n" > /tmp/interfaces.new; echo "auto $AB\niface $AB inet static" >>  /tmp/interfaces.new ; echo "Good, now complete the step 2 - Only if you have to configure Wifi, else skip to Step 3."
+       
+       exec:    Step _2- (only if wifi):edit,display: WP="  wpa-ssid ~SSID (case sensitive):~\n  wpa-psk ~Wifi PSK Password (case sensitive):~ "; echo $WP >> /tmp/interfaces.new; echo "Great, now complete the last step"
+       
+	   exec:    Step _3- Configure IP address:edit,display: IF="address ~New IP Address:~  \n     netmask ~netmask:255.255.255.0~ \n     gateway ~gateway:~ \n\n" ; echo $IF >> /tmp/interfaces.new; cat /tmp/interfaces.new > /etc/network/interfaces; rm -f /tmp/interfaces.new; MS=`cat /etc/network/interfaces`; echo "This is what your network config looks like\n========\n$MS\n=========\nYou can now restart the network, or reconfigure.  It will come into effect automatically on next boot"
+	   
+	  exec:   _Restart Networking:display:service networking restart; ifconfig
+      exec:   Change your _Hostname:edit:clear;hostname ~HOST:~ ; newhost=`hostname`; oldhost=`cat /etc/hostname`; sed -i 's/'$oldhost'/'$newhost'/' /etc/hosts; echo `hostname` > /etc/hostname
+      exec:   Add Default _Gateway:edit,pause:clear; GW="route add default gw ~Default Gateway:~"; route del default; `$GW`
+      exec:   _Add Route:edit,pause:clear;/sbin/route add -net ~Destination:~ netmask ~Subnet:~ gw ~Gateway:~
+      exec:   Remove Default Gate_way:edit,pause:clear;/sbin/route del default gw ~Default Gateway:~
+#		exec:   _Change static IP Address :edit,pause:clear; TP="ifconfig ~Device:usbnet0~  ~New IP Address:192.168.1.234~  netmask ~netmask:255.255.255.0~" ;`echo $TP`
+      exec:   Remove Rout_e:edit,pause:clear;/sbin/route del -net ~Destination:~ netmask ~Subnet:~ gw ~Gateway:~
+      exec:   _Change name server:edit,pause:clear; echo "# Entry by picuntu installer \nnameserver ~NS1:4.2.2.2~ \nnameserver ~NS2:~" > /etc/resolvconf/resolv.conf ; cp /etc/resolvconf/resolv.conf /etc/resolv.conf
+		nop:
+      nop:Net Diagnosis
+      nop:--------------------------------------
+      exec:   _Ping:edit,pause:clear;ping ~Address:~
+	   exec:   Sh_ow netstat:display:netstat -tuna
+		nop:
+      exit:_Quit
+
+
+# *********** Picuntu menu
+# Picuntu Menu
+menu:picuntu:= About Picuntu = : About Picuntu
+		exec:_ReadMe file:display:cat $home_dir/Readme.txt
+		exec:Picuntu _Development team:display:cat $home_dir/picuntu.team
+		exec:Picuntu _Version:display:cat $home_dir/picuntu.tiny
+      nop: 
+      exit:E_xit to Main menu...
+
+
+
+# *************** Other tools menu
+# Tools menu
+menu:tools:= Useful utilities system=:
+		show: Information utils
+		nop: -------------------------------------------------------------------------------
+		exec:    Show disk _Partitions (df):display:/bin/df -h
+		exec:    Show system _Load (w):display:/usr/bin/w
+		preproc: if [ -f /usr/bin/lsusb ]; then echo "exec:    Show connected _USB tools (lsusb):display: /usr/bin/lsusb"; fi
+		exec:    Show dmes_g (dmesg):display,pause:dmesg
+		preproc: if [ -f usr/sbin/lsof ]; then echo "exec:    Check _running servers (lsof -i):display:lsof -i | grep LISTEN"; fi
+		exec:    Show ls_mod:diplay:lsmod
+		show:    _Performance::performance
+		show: Action utils
+		nop: -------------------------------------------------------------------------------
+		exec:    Change your time _zone:clear;display:dpkg-reconfigure tzdata
+      exec:    Change your _Keyboard layout:edit,pause:clear;dpkg-reconfigure console-data
+		nop
+		exit: E_xit to Main menu
+
+
+# ----------------------------------------------------------------------
+menu:performance:Performance:Performance
+	preproc:if [ -f /tmp/picuntu.debug ]; then /usr/bin/logger "PICUNTU: Menu tools"; fi
+	preproc:if [ -f /usr/bin/atop ]; then echo "exec:_atop::sudo atop"; fi
+	preproc:if [ -f /usr/bin/htop ]; then echo "exec:Run _htop::sudo htop"; fi
+	exec:Run _top::top
+	nop
+	exit: E_xit to Main menu
+
+
+preproc:echo "menu:services:$SERVICE:Select"
+	exec:_Status:disp:/usr/sbin/service $SERVICE status
+	exec:_Start:p:/usr/sbin/service $SERVICE start
+	exec:_Stop:p:/usr/sbin/service $SERVICE stop
+	exec:_Restart:p:/usr/sbin/service $SERVICE restart
+	exec:_Help::man $SERVICE
+	exec:_Info:disp:cat /etc/init.d/$SERVICE | grep "#"
+	nop: 
+	nop: 
+	exit:E_xit to Main menu
+
+menu:sound_main:Sound Menu:Welcome to Picuntu Sound config : Picuntu sound config 0.9.1
+      show:  ...---=== Welcome to Picuntu Sound config ===---... ::
+		nop: 
+		nop:Installation type
+        nop:-------------------------------------
+
+		exec: _List sound devices :display:aplay -l
+		group: Configure Sound _Card..
+		 	exec::makemenu: \
+			  	echo "menu:make_snd_svcs:Select a sound card:Select a sound card to configure...Press Q or Esc to return to main menu"; \
+			   	aplay -l | grep card > /tmp/d;sed -i s/":"/" "/g /tmp/d;sed -i s/" "/"_"/g /tmp/d ; while read I ; do \
+ 	   			echo "exec:_$I::export SERVICE=$I; pdmenu $home_dir/picuntu-top.pdm -c --menu=snd_services"; \
+			  	done < /tmp/d
+			 show:::make_snd_svcs
+			 remove:::make_snd_svcs
+		 endgroup
+		exec: Set _Volume::alsamixer
+		exec: Test _Sound - wav::/usr/bin/aplay /usr/share/sounds/alsa/Front_Center.wav
+		preproc:if [ -f /usr/bin/espeak ]; then echo "exec: Synthesi_Ze sound::/usr/bin/espeak -ven+m3 -s150 \"Hello. Hello Picuntu. The sound is working\" 2&>1 "; fi
+		nop: 
+		nop: 
+  		exec:   Re_boot::clear;reboot
+		exit:   E_xit..
+	
+preproc:echo "menu:snd_services:$SERVICE:Select" 
+	exec:_Make changes to /etc/asound.conf:p:echo $SERVICE > /tmp/d;\
+		echo "defaults.pcm.card " `cat /tmp/d | cut -d "_" -f2` > /tmp/asound.conf ; \
+		echo "defaults.pcm.device " `cat /tmp/d | cut -d "," -f2 | cut -d "_" -f3` >> /tmp/asound.conf; \
+		echo "defaults.ctl.card " `cat /tmp/d | cut -d "_" -f2` >> /tmp/asound.conf; \
+		cat /tmp/asound.conf > /etc/asound.conf
+	exec:_Show /etc/asound.conf:display:cat /etc/asound.conf
+	nop: 
+	nop: 
+	exit:E_xit to Main menu
+
+
+menu:wconf:Wifi Menu:Wifi config : Select eth0 for wifi on UG802, wlan0 for wifi on MK808
+      show:  ...---=== Select Interface to configure ===---... ::
+		nop: 
+ 	   preproc:CRD=`cat /tmp/Card.picuntu`; if test "$CRD" = "eth0" ; then  echo "show: Wifi internal - _MK808 (eth0)::menu_iface"; else   echo "show: Wifi internal - _UG802 (wlan0)::menu_iface"; fi
+#		exec: Custom s_tatic LAN:edit,pause:IF="ifconfig ~Device:usbnet0~  ~New IP Address:192.168.1.234~  netmask ~netmask:255.255.255.0~" ;`echo $TP`
+#		exec: Custom static Wifi:edit,display: echo " " > /tmp/picuntu.scratchpad; IF="iface ~Interface:usbnet0~ inet static \n\n     wpa-ssid ~SSID:~\n\n  wpa-psk ~Wifi PSK Password:~  \n address ~New IP Address:~  \n     netmask ~netmask:255.255.255.0~ \n     gateway ~gateway:~ \n\n" ; echo $IF >> /tmp/picuntu.scratchpad; cat /tmp/pic > /tmp/interfaces.new; cat /tmp/picuntu.scratchpad >> /tmp/interfaces.new; cat /tmp/interfaces.new > /etc/network/interfaces; rm -f /tmp/pic; rm -f /tmp/scratchpad; rm -f /tmp/interfaces.new; service networking restart
+		nop:
+		exit:  E_xit..
+
+# -------------- Configure Access point
+menu:menu_iface:Configure internal Wifi: Select visible Access Point. 'q' or Esc to return. Go to main menu and return here for reload.
+		show:   ...---=== Select Access Point, then select dhcp or static to configure ===---... ::
+		nop:
+# 		preproc: iwlist `cat /tmp/Card.picuntu` scan | tr -d '"' | grep "ESSID" | cut -d ":" -f2  > /tmp/picuntu.scratch; sed -i s/'_'/'\\_'/g /tmp/picuntu.scratch
+ 		exec: Step _1- Select interface:edit,display: WP="~Select interface:~ "; echo $WP > /tmp/Card.picuntu; iwlist $WP scan 2>/tmp/iwscan.err; cat /tmp/iwscan.err
+		group: Step _2- Select Access Point
+		preproc: echo > /tmp/iwscan
+       exec::makemenu: \
+        	echo "menu:apsel:Access Point: These are the visible Access points. 'q' or Esc to return. Go to main menu and return here for reload."; \
+			WP=`cat /tmp/Card.picuntu`; if [ ! "$WP" ]; then WP="wlan0";fi ; iwlist $WP scan | tr -d '"' | grep "ESSID" | cut -d ":" -f2  > /tmp/picuntu.scratch; sed -i s/'_'/'\\_'/g /tmp/picuntu.scratch;	\
+			for u in `cat /tmp/picuntu.scratch`; do \
+				echo "exec:_$u::export WAP=$u; pdmenu $home_dir/picuntu-top.pdm  -c --menu=wap_conf"; \
+				done
+			show:::apsel
+			remove:::apsel
+      endgroup
+		nop:
+		exit:E_xit
+
+# ----------------------------- wap_Conf begins
+preproc:echo "menu:wap_conf:$WAP:Select"
+	# This line is for setting password and DHCP
+
+# Start new - leave current content out of picture
+#	preproc: IFCE=`cat /tmp/Card.picuntu`; awk -v pat="$IFCE" '$0 ~ pat {while(getline && $0 != ""){}}1' /etc/network/interfaces > /tmp/pic
+# TODO 
+	exec:  _DHCP client:edit,diplay:IFCE=`cat /tmp/Card.picuntu`;PAP="~Passphrase:~"; echo "" > /tmp/picuntu.scratchpad; echo "auto $IFCE" >> /tmp/picuntu.scratchpad; echo "iface  $IFCE inet dhcp" >> /tmp/picuntu.scratchpad; echo "      wpa-ssid $WAP" >> /tmp/picuntu.scratchpad; echo "      wpa-psk $PAP" >> /tmp/picuntu.scratchpad; echo "" >> /tmp/picuntu.scratchpad; echo "" >> /tmp/picuntu.scratchpad; cat /tmp/picuntu.scratchpad > /etc/network/interfaces; rm -f /tmp/picuntu.scratchpad; service networking restart 2>/tmp/err; ifconfig $IFCE up; ifconfig $IFCE
+
+
+	# This line is for setting password and static
+	# ToDo:
+		# Step 1: To Recover: AP=$WAP, IFCE;  To Collect: PSK, IP, nNask, Bcast
+		# Step 2: make /tmp/interfaces.new - with new format
+		# Step 3: Remove iface data /etc/network/interfaces
+		# Step 3: Add this information into the /etc/network/interfaces
+			#	iface eth0 inet static
+			#	address 192.168.1.50
+			#	network 192.168.1.0
+			#	netmask 255.255.255.0
+			#	gateway 192.168.1.254
+# Step 3:Creating /tmp/pic that does NOT have the iface data already
+#		preproc: IFCE=`cat /tmp/Card.picuntu`; awk -v pat="$IFCE" '$0 ~ pat {while(getline && $0 != ""){}}1' /etc/network/interfaces > /tmp/pic
+# Just start from fresh
+
+		exec:  Custom s_tatic:edit,display:IFCE=`cat /tmp/Card.picuntu`; echo "auto lo \niface lo inet loopback \n\n\n\n" > /tmp/picuntu.scratchpad; echo "auto $IFCE \niface $IFCE inet static" >> /tmp/picuntu.scratchpad; echo " wpa-ssid $WAP" >> /tmp/picuntu.scratchpad; IF="     wpa-psk ~Wifi PSK Password:~  \n address ~New IP Address:~  \n     netmask ~netmask:255.255.255.0~ \n     gateway ~gateway:~ \n\n" ; echo $IF >> /tmp/picuntu.scratchpad; cat /tmp/picuntu.scratchpad > /etc/network/interfaces; ifdown $IFCE 2>/tmp/err ; ifup $IFCE 2>/tmp/err; ifconfig $IFCE up; ifconfig $IFCE; 
+
+	#	exec:_Set Password:edit: awk -v pat="$IFACE_REM" '$0 ~ pat {while(getline && $0 != ""){}}1' $ETCIFACES; AP="~Passphrase:~"; echo "\n    wpa-ssid $WAP \n    wpa-psk  $AP"
+
+		nop: 
+		exit:E_xit to Main menu
+
+
+# ----------------------------------------------
+# Menu to manage users
+# Menu to manage users
+menu:usr_menu:Add or remove Users & Groups: Use this menu to create or delete new users. 'q' or 'Esc' or 'x' to go exit.
+	nop:
+	nop:
+	# Add here, login and password of the new user.
+	exec:_New user:edit:/usr/sbin/useradd -m ~USER:picuntu~ -p `openssl passwd -1 ~Password:~`;
+	exec:List _users:display:sort /etc/passwd
+	exec:List _groups:display:sort /etc/group
+	exec:_Add user to group:edit,pause:adduser ~USER:~ ~GROUP:~;
+	group:_Delete a user
+	 exec::makemenu: \
+	  	echo "menu:del_user:Select a user to delete: After DELETION must press 'q' then 'd' and Enter to reload list of users"; \
+	  	egrep -v "root|daemon|^bin|^sys|^syslog" /etc/passwd | sort | cut -d ":" -f1 > /tmp/d ; while read I ; do \
+ 		echo "exec: _$I::userdel -r $I"; pkill -28 pdmenu; \
+	  	done < /tmp/d
+	  show:::del_user
+	  remove:::del_user
+	endgroup
+   exec: Change Your _Password:pause:clear;passwd
+	exec: Change _Root password:pause:clear;sudo passwd root
+	#exec: _Add a user:edit,pause:clear;adduser ~adduser:picuntu~
+	exec: Remo_ve user:edit,pause:clear;userdel -r ~remuser:picuntu~	
+	nop:
+	exec: _sudo users:pause:sudo visudo
+	nop: 
+	nop: 
+	exit:Ne_xt...
+

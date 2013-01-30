@@ -1,0 +1,490 @@
+firmware-nonfree (0.36) unstable; urgency=low
+
+  * debian/control: Set Multi-Arch: foreign
+  * Update Chelsio T4 firmware to version 1.4.16.0
+  * Update to linux-support-3.2.0-2
+  * Add Chelsio T3 firmware version 7.10.0 (for Linux 2.6.36 onward)
+  * Add Intel Wireless 105, 135, 2200, 2230 firmware
+  * Update Intel Wireless 6030 firmware to version 18.168.6.1 (ABI 6)
+    (Closes: #658123, #675425)
+  * Remove Intel Wireless firmware not required by Linux 2.6.32, 3.2 or 3.3
+  * Update Broadcom NetXtreme II firmware for use with Linux 3.3
+    (Closes: #664762)
+    - Fixes iSCSI problems with some LeftHand targets
+  * Remove Broadcom NetXtreme II firmware not referenced by Linux 2.6.32,
+    3.2 or 3.3
+  * Update Realtek RTL8168E-3 and RTL8168F firmware to version 0.0.4
+    - Stability fixes
+  * Update QLogic QLA2300/ISP2312/SP202 and ISP2322/SP212 firmware to
+    version 3.03.28
+  * Update QLogic ISP2422/ISP2432[M]/SP222/SP232 and ISP2532 firmware to
+    version 5.06.05
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Tue, 12 Jun 2012 16:08:50 +0100
+
+firmware-nonfree (0.35) unstable; urgency=low
+
+  * Add version to firmware-libertas's conflict with libertas-firmware so
+    it can coexist with the current transitional package
+  * Add Realtek RTL8168F firmware for use with r8169 driver
+  * Update Realtek RTL8168E-3 firmware to version 0.0.3
+  * Replace Broadcom NetXtreme II 10Gb firmware version 6.2.9.0
+    (for Linux 3.0) with version 7.0.29.0 (for Linux 3.2)
+  * Update to linux-support-3.2.0-1
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Thu, 19 Jan 2012 03:24:38 +0000
+
+firmware-nonfree (0.34) unstable; urgency=low
+
+  [ Ben Hutchings ]
+  * Add Marvell Libertas 8xxx firmware, replacing libertas-firmware package
+    (Closes: #609856)
+  * Set the upstream homepage URL to the current gitweb page for
+    linux-firmware.git (except for ipw2x00, ivtv and qlogic packages)
+  * Replace Broadcom NetXtreme II 10Gb firmware versions 6.0.34.0
+    (for Linux 2.6.37) and 7.0.20.0 with versions 6.2.9.0 and 7.0.23.0
+    (for Linux 3.0 and 3.1)
+  * Update Chelsio T4 firmware to version 1.3.10.0
+  * Update Intel Wireless 6005 firmware to version 17.168.5.3 (Closes: #632701)
+    - Add "low temperature" support
+  * Update Realtek RTL8192SU/RTL8712U firmware to match vendor driver
+    version 2.6.6
+  * Add Realtek RTL8192DE firmware for use with rtl8192de driver
+  * Update Atheros AR3012 firmware
+    - Keep the same vendor and product ID after firmware is loaded
+
+  [ dann frazier ]
+  * Update netxen firmware to 4.0.579
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Wed, 02 Nov 2011 13:35:24 +0000
+
+firmware-nonfree (0.33) unstable; urgency=low
+
+  * Update to linux-support-3.0.0-1
+  * Add Atheros AR3012 firmware for use with ath3k
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Sun, 24 Jul 2011 16:29:32 +0200
+
+firmware-nonfree (0.32) unstable; urgency=low
+
+  * Update to linux-support-2.6.39-2
+  * Install Realtek RTL8192SE/RTL8191SE firmware for use with rtl8192se
+    (Really closes: #609784)
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Tue, 05 Jul 2011 05:56:42 +0100
+
+firmware-nonfree (0.31) unstable; urgency=low
+
+  * Add version 39.31.5.1 (ABI 5) of Intel Wireless 1000 firmware
+    (Closes: #627334)
+  * Update to version 9.221.4.1 (ABI 4) of Intel Wireless 6000 firmware
+    - Fixes microcode crash in some configurations (Closes: #626965)
+  * Add Realtek RTL8192SE/RTL8191SE firmware for use with rtl8192se
+    (Closes: #609784)
+  * Add Chelsio T4 firmware for use with cxgb4
+  * Add version 7.0.20.0 of Broadcom NetXtreme II 10Gb firmware for use
+    with bnx2x in Linux 3.1+
+  * Add AMD Fusion GPU firmware for use with radeon
+  * Update newer Atheros AR7010 and AR9271 firmware to version 1.3
+    (Closes: #631394)
+  * Add firmware-myricom package for use with the myri10ge driver
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Mon, 04 Jul 2011 05:43:08 +0100
+
+firmware-nonfree (0.30) unstable; urgency=low
+
+  [ Ben Hutchings ]
+  * Update to linux-support-2.6.38-2 (Closes: #620171)
+  * Make firmware-realtek trigger update-initramfs (Closes: #617645)
+  * Correct list of chips supported by brcm80211, thanks to Jani Reunanen
+  * Update Ralink RT2800-family firmware (Closes: #601416):
+    - Update firmware for RT2860 and other PCI and PCIe chips to version 34
+    - Update firmware for RT2870 and other USB chips to version 29
+      (Closes: #616017)
+  * Add firmware for HTC devices using Atheros AR7010 and AR9271
+  * Add new version of bnx2 firmware from Linux 2.6.39
+  * Remove bnx2 firmware not referenced by Linux 2.6.32, 2.6.38 or 2.6.39
+  * Update brcm80211 firmware to version 610.811
+    - Unspecified stability fixes
+  * Add Realtek RTL8192CU/RTL8188CU firmware for use with rtl8192cu,
+    thanks to Geoff Simmons (Closes: #625614)
+  * Add Realtek RTL8192CE/RTL8188CE firmware for use with rtl8192ce
+    (Closes: #613536)
+  * Add Realtek RTL8105E-1 and RTL8168E-1/2/3 firmware for use with r8169
+
+  [ dann frazier ]
+  * Update netxen firmware to 4.0.550
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Wed, 18 May 2011 05:19:49 +0100
+
+firmware-nonfree (0.29) unstable; urgency=low
+
+  * Update Atheros AR9271 firmware (ar9271.fw):
+    - Enable bluetooth coexistence
+    - Fix disconnection issue with WEP and TKIP noticed in some APs
+  * Add Intel Wireless 100 firmware
+  * Add new version of Intel Wireless 5000 firmware
+  * Add new versions of bnx2 firmware from Linux 2.6.38 (Closes: #615972)
+  * Add Radeon HD 'Northern Islands' 6300/6500/6800/6900-family firmware
+    for use with Linux 2.6.38
+  * Add AMD Fusion C-series GPU firmware for use with Linux 2.6.38
+  * Add VIA VT6656 firmware for use with vt6656 driver
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Sun, 06 Mar 2011 19:31:33 +0000
+
+firmware-nonfree (0.28) unstable; urgency=low
+
+  [ Ben Hutchings ]
+  * Add new versions of bnx2 firmware from Linux 2.6.37 (Closes: #598470)
+  * Remove bnx2 firmware versions not used by the driver in any suite
+  * Add new versions of bnx2x firmware from Linux 2.6.37
+  * Update intelwimax firmware from Linux 2.6.35
+  * Add firmware for devices supported by ar9170 and ath9k_htc to
+    firmware-atheros (Closes: #558740)
+  * Add Realtek RTL8111D/RTL8168D firmware to firmware-realtek
+    (Closes: #564628)
+  * Add Realtek RTL8192SU/RTL8712U firmware for use with r8712u to
+    firmware-realtek (Closes: #602450)
+  * Update Atheros AR3011 firmware (ath3k-1.fw):
+    - Fix EEPROM radio table issue and change PID to 3005
+  * Add Intel Wireless 6005 and 6030 firmware
+  * Add new version of Intel Wireless 6250 firmware
+
+  [ dann frazier ]
+  * Update netxen firmware to 4.0.534 (Closes: #606289)
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Tue, 04 Jan 2011 02:40:16 +0000
+
+firmware-nonfree (0.27) unstable; urgency=low
+
+  [ Ben Hutchings ]
+  * Correct version number for ipw2200 firmware
+  * Refer to index pages for ipw2100 and ipw2200 firmware
+  * Add bug presubj message directing users to report driver bugs against
+    the appropriate package
+  * Add firmware-brcm80211 binary package for use with the brcm80211 driver
+    (Closes: #597034)
+
+  [ dann frazier ]
+  * Add firmware-netxen binary package
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Sat, 18 Sep 2010 01:31:00 +0100
+
+firmware-nonfree (0.26) unstable; urgency=low
+
+  * Add Multi-Tech USB cellular modem firmware (Closes: #588097)
+  * Change file listing in linux-nonfree/LICENSE to follow draft DEP-5
+    for machine-readable copyright files
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Tue, 06 Jul 2010 00:36:32 +0100
+
+firmware-nonfree (0.25) unstable; urgency=low
+
+  * Update rtl8192su to version 902B (Closes: #581554)
+  * Add/update Ralink RT3070/RT3071/RT3072 firmware for use with Linux
+    2.6.34
+  * Add Radeon HD 'Evergreen' 5400/5500/5600/5700/5800-family firmware
+    for use with Linux 2.6.34
+  * Add firmware-atheros package containing Atheros AR3011 firmware for
+    use with the ath3k driver added in Linux 2.6.34
+  * Add Intel Wireless 6250 firmware (iwlwifi-6050-4.ucode)
+    (Closes: #585111)
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Fri, 11 Jun 2010 04:21:38 +0100
+
+firmware-nonfree (0.24) unstable; urgency=low
+
+  * Update to linux-support-2.6.32-5.
+  * Add firmware-realtek package containing:
+    - Realtek RTL8192E firmware for use with rtl8192e driver, thanks to
+      Geoff Simmons (Closes: #573950)
+    - Realtek RTL8192SU firmware for use with rtl8192su driver, thanks to
+      Stefan Lippers-Hollmann (Closes: #579694)
+  * Update iwlwifi-6000 to 9.193.4.1.
+  * Add copyright and licence text for radeon/R{6,7}00_rlc.bin to
+    firmware-linux-nonfree (Closes: #576104)
+  * Merge preinstallation license note and question (Closes: #574145)
+  * Bump standards to 3.8.4, no changes required.
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Mon, 03 May 2010 23:19:05 +0100
+
+firmware-nonfree (0.23) unstable; urgency=low
+
+  * Update firmware-qlogic description to specify supported chips as
+    named in pci-ids (Closes: #513140)
+  * Update hardware list in firmware-ralink description
+  * Correct some version numbers in firmware-ralink description
+  * Add Ralink RT3000E[D] firmware (rt3090.bin) for use with rt3090sta
+  * Update Ralink RT2800U[D] firmware (rt2870.bin) from Linux 2.6.32
+  * Add Radeon R600/R700-family RLC firmware for use with Linux 2.6.33
+    and Debian kernel package 2.6.32-10 (Closes: #565437)
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Thu, 04 Mar 2010 22:35:56 +0000
+
+firmware-nonfree (0.22) unstable; urgency=low
+
+  [ maximilian attems ]
+  * Add iwlwifi-1000-3.ucode.
+  * Add iwlwifi-6000-4.ucode.
+  
+  [ Ben Hutchings ]
+  * Update Radeon firmware for use with Linux 2.6.32 (Closes: #558023)
+  * Change URI for firmware-linux-nonfree to refer to David Woodhouse's
+    linux-firmware.git repository (Closes: #558033)
+  * Include names of all firmware files in package descriptions
+    (Closes: #553710)
+  * Do not include 'version unknown' in package descriptions
+  * Update Broadcom NetXtreme II firmware for use with Linux 2.6.32
+    (Closes: #560065)
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Thu, 17 Dec 2009 03:44:03 +0000
+
+firmware-nonfree (0.21) unstable; urgency=low
+
+  * Update to linux-support-2.6.31-1.
+  * Upload to unstable.
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Sun, 25 Oct 2009 18:44:41 +0000
+
+firmware-nonfree (0.20) experimental; urgency=low
+
+  [ Ben Hutchings ]
+  * firmware-linux-nonfree Replaces and Conflicts with old firmware-linux
+    (Closes: #551146)
+  * Update upstream URL for firmware-ralink (Closes: #551975)
+  * Add AdvanSys SCSI controller firmware for use with advansys driver
+    (Closes: #535922)
+  * Add firmware-intelwimax package, initially containing Intel WiMAX
+    Connection 2400 USB firmware for use with i2400m-usb driver
+    (Closes: #550917)
+  * Update description of firmware-bnx2 contents, thanks to
+    Geoff Simmons <gsimmons@gsimmons.org> (Closes: #536050)
+  * Include module/driver names in descriptions of all specific packages
+    (Closes: #510220)
+
+ -- Bastian Blank <waldi@debian.org>  Sat, 24 Oct 2009 22:16:37 +0200
+
+firmware-nonfree (0.19) experimental; urgency=low
+
+  [ dann frazier ]
+  * Correct 'Homepage' control data for firmware-bnx2 and firmware-bnx2x
+    (closes: #546899)
+
+  [ Ben Hutchings ]
+  * Make firmware-linux a metapackage and move previous contents to
+    firmware-linux-nonfree
+  * Add Agere/Prism/Symbol Orinoco firmware for use with orinoco driver
+  * Add Xceive 5000 tuner firmware for use with xc5000 driver
+  * Add DiBcom dib0700 USB DVB bridge firmware for use with
+    dvb-usb-dib0700 driver
+  * Update linux-support build-dep to 2.6.31-trunk
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Wed, 14 Oct 2009 03:25:41 +0100
+
+firmware-nonfree (0.18) unstable; urgency=low
+
+  [ maximilian attems ]
+  * Add iwlwifi-5000-2.ucode. (closes: #532207)
+  * Add iwlwifi-5150-2.ucode.
+  * Update iwlwifi-4945 to 228.61.2.24.
+  
+  [ Ben Hutchings ]
+  * Fix Matrox G200/G400/G550 firmware image format (closes: #531367)
+  * Add Broadcom Tigon3 firmware for use with tg3 driver (closes: 543233)
+  * Add QLogic IBA7220 serdes firmware for use with ip_iband driver
+  * Add Chelsio T3 firmware for use with cxgb3 driver
+  * Add Ralink RT3071/RT3072/RT3090 firmware for use with rt3070sta driver
+  * Update rt2870.bin
+
+ -- Bastian Blank <waldi@debian.org>  Wed, 02 Sep 2009 09:00:58 +0000
+
+firmware-nonfree (0.17) unstable; urgency=low
+
+  [ maximilian attems ]
+  * templates/control.source.in: section non-free/kernel.
+  * Update iwlwifi-3945 to 15.32.2.9. (closes: #526114)
+  * linux/defines: Fix upstream url.
+
+  [ Ben Hutchings ]
+  * Add Radeon RS600, R600-family and R700-family firmware (closes: #532040)
+  * Add Ralink RT2860/RT2890 and RT2870 firmware.
+  * Add firmware for use with ivtv and pvrusb2 drivers (closes: #524230),
+    thanks to Ian Campbell <ijc@hellion.org.uk>.
+  * Fix grammatical errors in the templates for package descriptions,
+    copyright files and EULA prompts
+  * Add myself to Uploaders
+  * Update linux-support build-dep to 2.6.30-1
+
+  [ dann frazier ]
+  * Fix subject-verb agreement problem in firmware-linux description.
+    (Closes: #524382)
+  * Update firmware-linux description to clarify the reasoning for the
+    bundled nature
+  * Add new firmware-bnx2x package (closes: #509646)
+  * Add bnx2 firmware from Linux 2.6.30-rc7
+
+ -- Ben Hutchings <ben@decadent.org.uk>  Tue, 16 Jun 2009 04:03:38 +0100
+
+firmware-nonfree (0.16) unstable; urgency=low
+
+  * Update Intel Pro 2200/2915 firwmare, version 3.1. (closes: #521531)
+  * Update qlogic firmwares: ql2300_fw.bin-3.03.27, ql2322_fw.bin-3.03.27,
+    ql2400_fw.bin-4.04.05, ql2500_fw.bin-4.04.05. (closes: #509693)
+
+ -- maximilian attems <maks@debian.org>  Wed, 01 Apr 2009 16:38:02 +0200
+
+firmware-nonfree (0.15) unstable; urgency=low
+
+  [ Ben Hutchings ]
+  * Add 3Com Typhoon (3CR990) firmware.
+  * Add ATI Rage 128 and Radeon firmware.
+  * Add BayCom DAB-USB firmware.
+  * Add Intel PRO/100 firmware.
+  * Add Kawasaki LSI KL5KUSB101 firmware.
+  * Add Matrox G20/G400/G550 firmware.
+  * Add QLogic QLA1xxx firmware.
+  * Add Tehuti network card firmware.
+
+  [ Bastian Blank ]
+  * Remove own initramfs-hook.
+
+  [ maximilian attems ]
+  * Update iwlwifi-4965 to 228.57.2.23. (closes: #502326)
+  * Add iwlwifi-5000-1.ucode. (closes: #497717)
+    Thanks Frank Lin PIAT <fpiat@klabs.be> for patch.
+  * Update iwlwifi-3945 to 15.28.2.8. (closes: #497593)
+  * Bump standards to 3.8.1, no changes required.
+
+  [ dann frazier ]
+  * Update linux-support build-dep to 2.6.29-1.
+  * Update bnx2 firmware to 2.6.29.
+
+ -- maximilian attems <maks@debian.org>  Fri, 27 Mar 2009 12:34:17 +0100
+
+firmware-nonfree (0.14) unstable; urgency=low
+
+  * Generate license acceptation prompt, based on sun-java5. (closes: #504668)
+  * Add Intel Pro 2100 firwmare, version 1.3. (closes: #504671)
+  * Add Intel Pro 2200/2915 firwmare, version 3.0. (closes: #449235)
+
+ -- Bastian Blank <waldi@debian.org>  Tue, 02 Dec 2008 18:07:12 +0100
+
+firmware-nonfree (0.13) unstable; urgency=low
+
+  * Make firmware-bnx2 trigger update-initramfs (closes: #494936)
+  * Update to 2.6.26-1 (closes: #500692)
+  * Update Intel Wireless 3945 firmware, version 15.28.1.6.
+    (closes: #494703)
+
+ -- dann frazier <dannf@debian.org>  Thu, 02 Oct 2008 11:58:37 -0600
+
+firmware-nonfree (0.12) unstable; urgency=low
+
+  * Remove Intel Wireless 3945 (old style) firmware.
+  * Update Intel Wireless 4965 firmware, version 228.57.1.21.
+    (closes: #489684)
+  * Add Intel Wireless 4965 firmware, version 228.57.2.21.
+
+ -- Bastian Blank <waldi@debian.org>  Mon, 07 Jul 2008 11:19:42 +0200
+
+firmware-nonfree (0.11) unstable; urgency=low
+
+  [ Bastian Blank ]
+  * Update QLogic QLA24XX firmware, version 4.04.00.
+  * Add QLogic QLA25XX firmware, version 4.04.00.
+  * Add Broadcom NetXtremeII firmwares.
+
+  [ dann frazier ]
+  * Correct path to initramfs.conf file in postinst. (closes: #432042)
+
+ -- Bastian Blank <waldi@debian.org>  Sun, 18 May 2008 14:26:49 +0200
+
+firmware-nonfree (0.10) unstable; urgency=low
+
+  [ Daniel Baumann ]
+  * Adding Vcs fields in control.
+
+  [ Bastian Blank ]
+  * Update iwl4965 firmware, version 4.44.1.20. (closes: #463052)
+  * Updating to 2.6.24-1.
+  * Drop udeb support.
+  * Drop old variants of iwlwifi firmwares.
+
+ -- Bastian Blank <waldi@debian.org>  Thu, 31 Jan 2008 20:24:12 +0100
+
+firmware-nonfree (0.9) unstable; urgency=low
+
+  * Merging rt61 and rt73 to ralink as requested by Bastian.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 26 Nov 2007 21:02:00 +0100
+
+firmware-nonfree (0.8) unstable; urgency=low
+
+  * Applying patch from Ben Hutchings <ben@decadent.org.uk> to update
+    gencontrol.py for linux-support-2.6.22-3.
+  * Check for already included firmware by initramfs-tools own functions
+    (Closes: #440967).
+  * Applying patch from Ben Hutchings <ben@decadent.org.uk> to add
+    ralink rt61 firmware, version 1.2.
+  * Applying patch from Ben Hutchings <ben@decadent.org.uk> to add
+    ralink rt73 firmware, version 1.8.
+  * Bumping package to debhelper 5.
+  * Removed some useless whitespaces at EOL and EOF.
+
+ -- Daniel Baumann <daniel@debian.org>  Mon, 26 Nov 2007 15:58:00 +0100
+
+firmware-nonfree (0.7) unstable; urgency=low
+
+  * Set section to non-free/admin.
+  * Added iwl3945 firwmare, version 2.14.1.5,
+    Added iwl4965 firmware, version 4.44.1.18. (closes: #435304)
+
+ -- Bastian Blank <waldi@debian.org>  Thu, 02 Aug 2007 10:09:19 +0200
+
+firmware-nonfree (0.6) unstable; urgency=low
+
+  * Drop Daniel from Uploaders.
+  * Add content lists. (closes: #393469)
+  * Update qlogic firmwares.
+  * Merge iwl3945 and iwl4965 into iwlwifi.
+
+ -- Bastian Blank <waldi@debian.org>  Tue, 10 Jul 2007 22:52:06 +0200
+
+firmware-nonfree (0.5) unstable; urgency=low
+
+  * Building against 2.6.21-2.
+  * Added myself to uploaders.
+  * Updated ipw3945.ucode to version 1.14.2.
+  * Added iwl3945 firwmare, version 2.14.4.
+  * Added iwl4965 firmware, version 4.44.15.
+
+ -- Daniel Baumann <daniel@debian.org>  Thu,  5 Jul 2007 01:16:00 +0100
+
+firmware-nonfree (0.4) unstable; urgency=low
+
+  * Build-depend on linux-support-2.6.18-4; closes: #414773.
+  * Add myself to uploaders.
+
+ -- Steve Langasek <vorlon@debian.org>  Wed, 14 Mar 2007 03:32:31 -0700
+
+firmware-nonfree (0.3) unstable; urgency=low
+
+  * Rename qlogic initramfs-tools hook, closes: #386175
+  * Make initramfs-tools hooks executable, closes: #386172
+  * Bump standars to 3.7.2, no changes required.
+
+ -- Frederik Schüler <fs@debian.org>  Wed,  6 Sep 2006 11:10:29 +0200
+
+firmware-nonfree (0.2) unstable; urgency=low
+
+  * Release into unstable.
+  * Build-depend on linux-support-2.6.17-2.
+
+ -- Frederik Schüler <fs@debian.org>  Tue,  5 Sep 2006 17:36:33 +0200
+
+firmware-nonfree (0.1) experimental; urgency=low
+
+  [ Frederik Schüler ]
+  * Initial release.
+
+ -- Bastian Blank <waldi@debian.org>  Fri,  2 Jun 2006 22:19:21 +0200

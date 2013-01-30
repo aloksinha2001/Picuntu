@@ -1,0 +1,26 @@
+update-alternatives 2013-01-10 23:16:19: run with --install /usr/bin/nmblookup nmblookup /usr/bin/nmblookup.samba3 0 --slave /usr/share/man/man1/nmblookup.1.gz nmblookup.1.gz /usr/share/man/man1/nmblookup.samba3.1.gz
+update-alternatives 2013-01-10 23:16:19: link group nmblookup updated to point to /usr/bin/nmblookup.samba3
+update-alternatives 2013-01-10 23:16:19: run with --install /usr/bin/net net /usr/bin/net.samba3 10 --slave /usr/share/man/man8/net.8.gz net.8.gz /usr/share/man/man8/net.samba3.8.gz
+update-alternatives 2013-01-10 23:16:19: link group net updated to point to /usr/bin/net.samba3
+update-alternatives 2013-01-10 23:16:20: run with --install /usr/bin/testparm testparm /usr/bin/testparm.samba3 10 --slave /usr/share/man/man1/testparm.1.gz testparm.1.gz /usr/share/man/man1/testparm.samba3.1.gz
+update-alternatives 2013-01-10 23:16:20: link group testparm updated to point to /usr/bin/testparm.samba3
+update-alternatives 2013-01-10 23:16:22: run with --install /usr/bin/tclsh tclsh /usr/bin/tclsh8.5 850 --slave /usr/share/man/man1/tclsh.1.gz tclsh.1 /usr/share/man/man1/tclsh8.5.1.gz
+update-alternatives 2013-01-10 23:16:22: link group tclsh updated to point to /usr/bin/tclsh8.5
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/vim vim /usr/bin/vim.nox 40
+update-alternatives 2013-01-10 23:16:26: link group vim updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/vimdiff vimdiff /usr/bin/vim.nox 40
+update-alternatives 2013-01-10 23:16:26: link group vimdiff updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/rvim rvim /usr/bin/vim.nox 40
+update-alternatives 2013-01-10 23:16:26: link group rvim updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/rview rview /usr/bin/vim.nox 40
+update-alternatives 2013-01-10 23:16:26: link group rview updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/vi vi /usr/bin/vim.nox 40 --slave /usr/share/man/fr/man1/vi.1.gz vi.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/vi.1.gz vi.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/vi.1.gz vi.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/vi.1.gz vi.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/man1/vi.1.gz vi.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2013-01-10 23:16:26: link group vi updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/view view /usr/bin/vim.nox 40 --slave /usr/share/man/fr/man1/view.1.gz view.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/view.1.gz view.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/view.1.gz view.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/view.1.gz view.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/man1/view.1.gz view.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2013-01-10 23:16:26: link group view updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:26: run with --install /usr/bin/ex ex /usr/bin/vim.nox 40 --slave /usr/share/man/fr/man1/ex.1.gz ex.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/ex.1.gz ex.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/ex.1.gz ex.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/ex.1.gz ex.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/man1/ex.1.gz ex.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2013-01-10 23:16:26: link group ex updated to point to /usr/bin/vim.nox
+update-alternatives 2013-01-10 23:16:27: run with --install /usr/bin/editor editor /usr/bin/vim.nox 40 --slave /usr/share/man/fr/man1/editor.1.gz editor.fr.1.gz /usr/share/man/fr/man1/vim.1.gz --slave /usr/share/man/it/man1/editor.1.gz editor.it.1.gz /usr/share/man/it/man1/vim.1.gz --slave /usr/share/man/pl/man1/editor.1.gz editor.pl.1.gz /usr/share/man/pl/man1/vim.1.gz --slave /usr/share/man/ru/man1/editor.1.gz editor.ru.1.gz /usr/share/man/ru/man1/vim.1.gz --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/vim.1.gz
+update-alternatives 2013-01-10 23:16:33: run with --remove vtrgb /usr/share/console-setup/vtrgb
+update-alternatives 2013-01-10 23:16:33: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb 50
+update-alternatives 2013-01-10 23:16:33: run with --install /etc/vtrgb vtrgb /etc/console-setup/vtrgb.vga 20

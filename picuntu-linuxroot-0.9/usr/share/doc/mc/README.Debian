@@ -1,0 +1,35 @@
+mc for Debian
+-------------
+
+    New 256-color skins require 256 color mode support in terminal which
+    can be enabled by setting "TERM=xterm-256color"
+
+    New skins may have problems with rendering double-line frames
+    in some terminal applications, presumably due to font settings.
+    In such case you may use '-thin' variant of skin with single-line
+    frame or reconfigure terminal settings.
+
+ -- Dmitry Smirnov <onlyjob@member.fsf.org>  Thu, 16 Mar 2012 13:32:44 +1100
+
+
+ -  In order to get rid of the commandline history to be full with cd commands
+    from the both boxes set this environment variable:
+
+     export HISTCONTROL=ignoreboth
+
+    This is a issue with bash, not mc. This would fix it.
+
+ -  In newer mc versions ( >=4.6.2~pre1-1 ) the behaviour of M-o changed.
+    The old behaviour can now be found on the M-i key.
+
+ -  mc now supports user-defined colors. For a short documentation have a look
+    here:
+
+    http://www.midnight-commander.org/wiki/doc/common/skins
+
+ -- Patrick Winnertz <winnie@debian.org> on Tue, 05 Mar 2008 11:08:27 +0100
+
+    Amendments by
+
+ -- Yury V. Zaytsev <yury@shurup.com> on Tue 29 Dec 2009 16:32:18 CET
+

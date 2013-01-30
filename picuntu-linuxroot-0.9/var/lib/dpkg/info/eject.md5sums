@@ -1,0 +1,12 @@
+e2d1d9b607e4d10425c468ac9a482f95  usr/bin/eject
+42bc32ca5fccd65b8232c50b899f0e2e  usr/bin/volname
+73291c415b066d2c38370523321add29  usr/lib/eject/dmcrypt-get-device
+4aa7528f67585daab2fe20848d3d671d  usr/share/doc/eject/AUTHORS
+ee6d0116340da376d988fa60ea7a17ca  usr/share/doc/eject/NEWS.gz
+8c7e68906e4cf010b9e25fb36ddfdc27  usr/share/doc/eject/README
+de81577c7cf1b8489d40fc18d7393de9  usr/share/doc/eject/TODO
+a032c908a8609269849211f8a9f24714  usr/share/doc/eject/changelog.Debian.gz
+459cffa94aabd8338ab95f8543aea4df  usr/share/doc/eject/copyright
+9b8c6276fb61603c350b4d3c0bec45d1  usr/share/lintian/overrides/eject
+df6ed49a8067f8a02b322664a5ac810a  usr/share/man/man1/eject.1.gz
+93e9ff808402cce6c0ef2503db08b4c8  usr/share/man/man1/volname.1.gz

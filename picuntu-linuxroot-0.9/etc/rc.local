@@ -1,0 +1,31 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order [Cto enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+
+# Disable screen blanking:
+echo 0 > /sys/class/graphics/fb0/blank
+# Set a decent backlight level
+# echo -n 100 > /sys/class/backlight/aml-bl/brightness
+# Fix framebuffer colors
+# fbset -fb /dev/fb0 -a -g 1024 600 1024 600 16hhh
+
+
+# If the screen is not working for you # not tested...
+# Uncomment the following lines
+# Credits to olegk0 on slatedroid
+
+# fbset 1280x720-60-32 -a
+# fbset -rgba 8/16,8/8,8/0,8/24 -a
+
+
+exit 0

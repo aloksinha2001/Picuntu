@@ -1,0 +1,7 @@
+Format: http://dep.debian.net/deps/dep5/
+
+Files: *
+Copyright: Copyright (c) 1995-2011 Joey Hess <joey@kitenet.net>
+License: GPL-2+
+ The full text of the GPL is distributed as doc/COPYING in pdmenu's source,
+ and is distributed in /usr/share/common-licenses/GPL-2 on Debian systems.

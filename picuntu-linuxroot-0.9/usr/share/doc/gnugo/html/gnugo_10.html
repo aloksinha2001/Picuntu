@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 10. The DFA pattern matcher</title>
+
+<meta name="description" content="GNU Go Documentation: 10. The DFA pattern matcher">
+<meta name="keywords" content="GNU Go Documentation: 10. The DFA pattern matcher">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="DFA"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_9.html#Editing-Patterns" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Introduction-to-the-DFA" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_9.html#Patterns" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="The-DFA-pattern-matcher"></a>
+<h1 class="chapter">10. The DFA pattern matcher</h1>
+
+<p>In this chapter, we describe the principles of the GNU Go DFA
+pattern matcher.  The aim of this system is to permit a fast
+pattern matching when it becomes time critical like in owl
+module (<a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>). Since GNU Go 3.2, this is enabled
+by default. You can still get back the traditional pattern matcher
+by running <code>configure --disable-dfa</code> and then recompiling
+GNU Go. 
+</p>
+<p>Otherwise, a finite state machine called a Deterministic Finite
+State Automaton (<a href="#What-is-a-DFA">What is a DFA</a>) will be built off line from the
+pattern database. This is used at runtime to speedup pattern matching
+(<a href="#Pattern-matching-with-DFA">Pattern matching with DFA</a> and <a href="#Incremental-Algorithm">Incremental Algorithm</a>). The
+runtime speedup is at the cost of an increase in memory use and
+compile time.
+</p>
+
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Introduction-to-the-DFA">10.1 Introduction to the DFA</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">  Scanning the board along a path
+</td></tr>
+<tr><td align="left" valign="top"><a href="#What-is-a-DFA">10.2 What is a DFA</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> A recall of language theory.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Pattern-matching-with-DFA">10.3 Pattern matching with DFA</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> How to retrieve go patterns with a DFA?
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Building-the-DFA">10.4 Building the DFA</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> Playing with explosives.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Incremental-Algorithm">10.5 Incremental Algorithm</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> The joy of determinism.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#DFA-Optimizations">10.6 Some DFA Optimizations</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"> Some possible optimizations.
+</td></tr>
+</table>
+
+
+<a name="index-pattern-matching-1"></a>
+<a name="index-fast-pattern-matching"></a>
+<a name="index-pattern-database-1"></a>
+<a name="index-finite-state-automaton"></a>
+<a name="index-automaton"></a>
+<a name="index-dfa"></a>
+<a name="index-dfa_002eh"></a>
+<a name="index-dfa_002ec"></a>
+<a name="index-matchpat_002ec"></a>
+<a name="index-product"></a>
+
+
+<hr size="6">
+<a name="Introduction-to-the-DFA"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#DFA" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#What-is-a-DFA" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Introduction-to-the-DFA-1"></a>
+<h2 class="section">10.1 Introduction to the DFA</h2>
+
+<p>The general idea is as follows:
+</p>
+<p>For each intersection of the board, its neighbourhood is scanned following
+a predefined path.  The actual path used does not matter very much; GNU Go
+uses a spiral as shown below.
+</p>
+<img src="path.png" alt="path">
+
+<p>In each step of the path, the pattern matcher jumps into a state
+determined by what it has found on the board so far. If we have
+successfully matched one or several patterns in this step, this state
+immediately tells us so (in its <em>attribute</em>).
+But the state also implicitly encodes which further patterns can still
+get matched: The information stored in the state contains in which state
+to jump next, depending on whether we find a black, white or empty
+intersection (or an intersection out of board) in the next step of the
+path. The state will also immediately tell us if we cannot find any
+further pattern (by telling us to jump into the <em>error</em> state).
+</p>
+<p>These sloppy explanations may become clearer with the definitions in
+the next section (<a href="#What-is-a-DFA">What is a DFA</a>).
+</p>
+<p>Reading the board following a predefined path reduces
+the two dimentional pattern matching to a linear text searching problem.
+For example, this pattern
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">?X?
+.O?
+?OO
+</pre></td></tr></table>
+
+<p>scanned following the path
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"> B
+C4A
+5139
+628
+ 7
+</pre></td></tr></table>
+
+<p>gives the string <b>&quot;OO?X.?*O*?*?&quot;</b>
+where <b>&quot;?&quot;</b> means <b>&rsquo;don&rsquo;t care&rsquo;</b> and <b>&quot;*&quot;</b> means <b>&rsquo;don&rsquo;t care, can
+even be out of board&rsquo;</b>.
+</p>
+<p>So we can forget that we are dealing with two dimensional patterns and
+consider linear patterns.
+</p>
+
+<hr size="6">
+<a name="What-is-a-DFA"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Introduction-to-the-DFA" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Pattern-matching-with-DFA" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="What-is-a-DFA-1"></a>
+<h2 class="section">10.2 What is a DFA</h2>
+
+<p>The acronym DFA means Deterministic Finite state Automaton
+(See <a href="http://www.eti.pg.gda.pl/~jandac/thesis/node12.html">http://www.eti.pg.gda.pl/~jandac/thesis/node12.html</a>
+or <cite>Hopcroft &amp; Ullman &quot;Introduction to Language Theory&quot;</cite>
+for more details).
+DFA are common tools in compilers design 
+(Read <cite>Aho, Ravi Sethi, Ullman &quot;COMPILERS: Principles, Techniques and Tools&quot;</cite>
+for a complete introduction), a lot of
+powerfull text searching algorithm like <cite>Knuth-Morris-Pratt</cite>
+or <cite>Boyer-Moore</cite> algorithms are based on DFA&rsquo;s
+(See <a href="http://www-igm.univ-mlv.fr/~lecroq/string/">http://www-igm.univ-mlv.fr/~lecroq/string/</a> for a bibliography
+of pattern matching algorithms).
+</p>
+<p>Basically, 
+a DFA is a set of <em>states</em> connected by labeled <em>transitions</em>.
+The labels are the values read on the board,
+in GNU Go these values are EMPTY, WHITE, BLACK or OUT_BOARD, denoted
+respectively by &rsquo;.&rsquo;,&rsquo;O&rsquo;,&rsquo;X&rsquo; and &rsquo;#&rsquo;.
+</p>
+
+<p>The best way to represent a DFA is to draw its transition graph:
+the pattern <b>&quot;????..X&quot;</b> is recognized by the following DFA:
+</p>
+
+<img src="dfa.png" alt="dfa">
+
+
+<p>This means that
+starting from state [1], if you read &rsquo;.&rsquo;,&rsquo;X&rsquo; or &rsquo;O&rsquo; on the board, 
+go to state [2] and so on until you reach state [5].
+From state [5], if you read &rsquo;.&rsquo;, go to state [6]
+otherwise go to error state [0]. 
+And so on until you reach state [8].
+As soon as you reach state [8], 
+you recognize Pattern <b>&quot;????..X&quot;</b>
+</p>
+<p>Adding a pattern like <b>&quot;XXo&quot;</b> (&rsquo;o&rsquo; is a wildcard for not &rsquo;X&rsquo;)
+will transform directly the automaton 
+by synchronization product (<a href="#Building-the-DFA">Building the DFA</a>).
+Consider the following DFA:
+</p>
+
+<img src="dfa2.png" alt="dfa2">
+
+<p>By adding a special <em>error</em> state and completing each state
+by a transition to error state when there is none, we transform
+easily a DFA in a <em>Complete Deterministic Finite state
+Automaton</em> (CDFA).  The synchronization product
+(<a href="#Building-the-DFA">Building the DFA</a>) is only possible on CDFA&rsquo;s.
+</p>
+
+<img src="cdfa.png" alt="cdfa">
+
+<p>The graph of a CDFA is coded by an array of states:
+The 0 state is the &quot;error&quot; state and
+the start state is 1.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">----------------------------------------------------
+ state  |   .    |   O    |   X    |   #    |  att
+----------------------------------------------------
+      1 |      2 |      2 |      9 |      0 |
+      2 |      3 |      3 |      3 |      0 |
+      3 |      4 |      4 |      4 |      0 |
+      5 |      6 |      0 |      0 |      0 |
+      6 |      7 |      0 |      0 |      0 |
+      7 |      0 |      0 |      8 |      0 |
+      8 |      0 |      0 |      0 |      0 | Found pattern &quot;????..X&quot;
+      9 |      3 |      3 |      A |      0 |
+      A |      B |      B |      4 |      0 |
+      B |      5 |      5 |      5 |      0 | Found pattern &quot;XXo&quot;
+----------------------------------------------------
+</pre></td></tr></table>
+
+<p>To each state we associate an often empty
+list of attributes which is the  
+list of pattern indexes recognized when this state is reached.
+In &rsquo;&lsquo;<tt>dfa.h</tt>&rsquo;&rsquo; this is basically represented by two stuctures:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>
+/* dfa state */
+typedef struct state
+{
+  int next[4]; /* transitions for EMPTY, BLACK, WHITE and OUT_BOARD */
+  attrib_t *att;
+}
+state_t;
+
+/* dfa */
+typedef struct dfa
+{
+  attrib_t *indexes; /* Array of pattern indexes */
+  int maxIndexes;
+
+  state_t *states; /* Array of states */
+  int maxStates;
+}
+dfa_t;</code>
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Pattern-matching-with-DFA"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#What-is-a-DFA" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Building-the-DFA" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Pattern-matching-with-DFA-1"></a>
+<h2 class="section">10.3 Pattern matching with DFA</h2>
+
+<p>Recognizing with a DFA is very simple
+and thus very fast 
+(See &rsquo;<code>scan_for_pattern()</code>&rsquo; in the &rsquo;&lsquo;<tt>engine/matchpat.c</tt>&rsquo;&rsquo; file).
+</p>
+
+<p>Starting from the start state, we only need to read the board
+following the spiral path, jump from states to states following
+the transitions labelled by the values read on the board and
+collect the patterns indexes on the way.  If we reach the error
+state (zero), it means that no more patterns will be matched.
+The worst case complexity of this algorithm is o(m) where m is
+the size of the biggest pattern.
+</p>
+<p>Here is an example of scan:
+</p>
+<p>First we build a minimal DFA recognizing these patterns:
+<b>&quot;X..X&quot;</b>, <b>&quot;X???&quot;</b>, <b>&quot;X.OX&quot;</b> and <b>&quot;X?oX&quot;</b>.
+Note that wildcards like &rsquo;?&rsquo;,&rsquo;o&rsquo;, or &rsquo;x&rsquo; give multiple out-transitions.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">----------------------------------------------------
+ state  |   .    |   O    |   X    |   #    |  att
+----------------------------------------------------
+      1 |      0 |      0 |      2 |      0 |
+      2 |      3 |     10 |     10 |      0 |
+      3 |      4 |      7 |      9 |      0 |
+      4 |      5 |      5 |      6 |      0 |
+      5 |      0 |      0 |      0 |      0 |    2
+      6 |      0 |      0 |      0 |      0 |    4    2    1
+      7 |      5 |      5 |      8 |      0 |
+      8 |      0 |      0 |      0 |      0 |    4    2    3
+      9 |      5 |      5 |      5 |      0 |
+     10 |     11 |     11 |      9 |      0 |
+     11 |      5 |      5 |     12 |      0 |
+     12 |      0 |      0 |      0 |      0 |    4    2
+----------------------------------------------------
+</pre></td></tr></table>
+
+<p>We perform the scan of the string 
+<b>&quot;X..XXO....&quot;</b> starting from state 1:
+</p>
+<p>Current state:     1, substring to scan :<b> X..XXO....</b>
+</p>
+<p>We read an &rsquo;X&rsquo; value, so from state 1 we must go to
+state 2.
+</p>
+<p>Current state:     2, substring to scan : <b>..XXO....</b>
+</p>
+<p>We read a &rsquo;.&rsquo; value, so from state 2 we must go to
+state 3 and so on ...
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">Current state:     3, substring to scan : .XXO....
+Current state:     4, substring to scan : XXO....
+Current state:     6, substring to scan : XO....
+Found pattern 4
+Found pattern 2
+Found pattern 1                 
+</pre></td></tr></table>
+
+<p>After reaching state 6 where we match patterns
+1,2 and 4, there is no out-transitions so we stop the matching.
+To keep the same match order as in the standard algorithm, 
+the patterns indexes are collected in an array and sorted by indexes.
+</p>
+<hr size="6">
+<a name="Building-the-DFA"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Pattern-matching-with-DFA" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Incremental-Algorithm" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Building-the-DFA-1"></a>
+<h2 class="section">10.4 Building the DFA</h2>
+
+<p>The most flavouring point is the building of the minimal DFA 
+recognizing a given set of patterns.
+To perform the insertion of a new
+pattern into an already existing DFA one must completly rebuild
+the DFA: the principle is to build the minimal CDFA recognizing
+the new pattern to replace the original CDFA with its
+<em>synchronised product</em> by the new one.
+</p>
+<p>We first give a formal definition:
+Let <b>L</b> be the left CDFA and <b>R</b> be the right one.
+Let <b>B</b> be the <em>synchronised product</em> of <b>L</b> by <b>R</b>.
+Its states are the couples <b>(l,r)</b> where <b>l</b> is a state of <b>L</b> and 
+<b>r</b> is a state of <b>R</b>.
+The state <b>(0,0)</b> is the error state of <b>B</b> and the state
+<b>(1,1)</b> is its initial state.
+To each couple <b>(l,r)</b> we associate the union of patterns
+recognized in both <b>l</b> and <b>r</b>.
+The transitions set of <b>B</b> is the set of transitions
+<b>(l1,r1)&mdash;a&mdash;&gt;(l2,r2)</b> for
+each symbol <b>&rsquo;a&rsquo;</b> such that both <b>l1&mdash;a&mdash;&gt;l2</b> in <b>L</b> 
+and <b>r1&mdash;a&mdash;&gt;r2</b> in <b>R</b>.
+</p>
+<p>The maximal number of states of <b>B</b> is the product of the
+number of states of <b>L</b> and <b>R</b> but almost all this states
+are non reachable from the initial state <b>(1,1)</b>.
+</p>
+<p>The algorithm used in function &rsquo;<code>sync_product()</code>&rsquo; builds
+the minimal product DFA only by keeping the reachable states.
+It recursively scans the product CDFA by following simultaneously
+the transitions of <b>L</b> and <b>R</b>. A hast table
+(<code>gtest</code>) is used to check if a state <b>(l,r)</b> has
+already been reached, the reachable states are remapped on
+a new DFA. The CDFA thus obtained is minimal and recognizes the
+union of the two patterns sets.
+</p>
+<p>For example these two CDFA&rsquo;s:
+</p>
+
+<img src="sync-prod1.png" alt="sync-prod1">
+
+<p>Give by synchronization product the following one:
+</p>
+
+<img src="sync-prod2.png" alt="sync-prod2">
+
+<p>It is possible to construct a special pattern database that
+generates an &quot;explosive&quot; automaton: the size of the DFA is in
+the worst case exponential in the number of patterns it
+recognizes.  But it doesn&rsquo;t occur in pratical situations: 
+the DFA size tends to be <em>stable</em>.  By <em>stable</em> we mean that if we
+add a pattern which greatly increases the size of the DFA it
+also increases the chance that the next added pattern does not
+increase its size at all.  Nevertheless there are many ways to
+reduce the size of the DFA. Good compression methods are
+explained in <cite>Aho, Ravi Sethi, Ullman &quot;COMPILERS:
+Principles, Techniques and Tools&quot; chapter Optimization of
+DFA-based pattern matchers</cite>.
+</p>
+<hr size="6">
+<a name="Incremental-Algorithm"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Building-the-DFA" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA-Optimizations" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Incremental-Algorithm-1"></a>
+<h2 class="section">10.5 Incremental Algorithm</h2>
+
+<p>The incremental version of the DFA pattern matcher is not yet implemented
+in GNU Go but we explain here how it will work.
+By definition of a deterministic automaton, scanning the same
+string will reach the same states every time.
+</p>
+<p>Each reached state during pattern matching is stored in a stack
+<code>top_stack[i][j]</code> and <code>state_stack[i][j][stack_idx]</code>
+We use one stack by intersection <code>(i,j)</code>.  A precomputed reverse
+path list allows to know for each couple of board intersections
+<code>(x,y)</code> its position <code>reverse(x,y)</code> in the spiral scan path
+starting from <code>(0,0)</code>.
+</p>
+<p>When a new stone is put on the board at <code>(lx,ly)</code>, the only work
+of the pattern matcher is:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example"><code>
+ for(each stone on the board at (i,j))
+    if(reverse(lx-i,ly-j) &lt; top_stack[i][j])
+      {
+         begin the dfa scan from the state
+         state_stack[i][j][reverse(lx-i,ly-j)];
+      }
+</code>
+</pre></td></tr></table>
+
+<p>In most situations reverse(lx-i,ly-j) will be inferior to
+top_stack[i][j]. This should speedup a lot pattern matching.
+</p>
+<hr size="6">
+<a name="DFA-Optimizations"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Incremental-Algorithm" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#DFA" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Some-DFA-Optimizations"></a>
+<h2 class="section">10.6 Some DFA Optimizations</h2>
+
+<p>The DFA is constructed to minimize jumps in memory making some
+assumptions about the frequencies of the values: the EMPTY
+value is supposed to appear often on the board, so the the &rsquo;.&rsquo;
+transition are almost always successors in memory.  The
+OUT_BOARD are supposed to be rare, so &rsquo;#&rsquo; transitions will
+almost always imply a big jump.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#DFA" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_11.html#Tactical-Reading" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

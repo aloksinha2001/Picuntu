@@ -1,0 +1,160 @@
+#!/bin/sh
+
+# Copyright (C) 2012, Benjamin Drung <bdrung@debian.org>
+#
+# Permission to use, copy, modify, and/or distribute this software for any
+# purpose with or without fee is hereby granted, provided that the above
+# copyright notice and this permission notice appear in all copies.
+#
+# THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES
+# WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF
+# MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR
+# ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES
+# WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN
+# ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF
+# OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
+
+COMMAND="ubuntu-distro-info"
+
+. "${0%/*}/shunit2-helper-functions.sh"
+
+testAll() {
+    local result="warty
+hoary
+breezy
+dapper
+edgy
+feisty
+gutsy
+hardy
+intrepid
+jaunty
+karmic
+lucid
+maverick
+natty"
+    local pattern=$(echo $result | sed "s/ /\\\\|/g")
+    success "--date 2007-07-07 --all | grep -w \"$pattern\"" "$result"
+    success "-a | grep -w \"$pattern\"" "$result"
+}
+
+testDevel() {
+    success "--date 2011-01-10 --devel" "natty"
+    success "--date 2010-05-10 -d --codename" "maverick"
+}
+
+testLTS() {
+    success "--lts --date=2011-01-10" "lucid"
+}
+
+testStable() {
+    success "--date=2011-01-10 -c --stable" "maverick"
+    success "--date=2009-01-10 -s" "intrepid"
+}
+
+testSupported() {
+    local result="dapper
+hardy
+karmic
+lucid
+maverick
+natty"
+    success "--date=2011-01-10 --supported" "$result"
+}
+
+testUnsupported() {
+    local result="warty
+hoary
+breezy
+edgy
+feisty
+gutsy
+intrepid
+jaunty"
+    success "--date=2011-01-10 --unsupported" "$result"
+}
+
+testFullname() {
+    success "--date=2011-01-10 --stable -f" 'Ubuntu 10.10 "Maverick Meerkat"'
+    success "--date=2011-01-10 --fullname --lts" 'Ubuntu 10.04 LTS "Lucid Lynx"'
+}
+
+testRelease() {
+    success "--date=2011-01-10 --lts --release" "10.04 LTS"
+    success "--date=2011-01-10 -r --stable" "10.10"
+}
+
+testCombinedShortform() {
+    success "-fs --date=2011-01-10" 'Ubuntu 10.10 "Maverick Meerkat"'
+}
+
+testReleaseDate() {
+    success "--date 2010-04-28 -s" "karmic"
+    success "--date 2010-04-28 -d" "lucid"
+    success "--date 2010-04-29 -s" "lucid"
+    success "--date 2010-04-29 -d" "maverick"
+}
+
+testHelp() {
+    local help='Usage: ubuntu-distro-info [options]
+
+Options:
+  -h  --help         show this help message and exit
+      --date=DATE    date for calculating the version (default: today)
+  -a  --all          list all known versions
+  -d  --devel        latest development version
+      --lts          latest long term support (LTS) version
+  -s  --stable       latest stable version
+      --supported    list of all supported stable versions
+      --unsupported  list of all unsupported stable versions
+  -c  --codename     print the codename (default)
+  -f  --fullname     print the full name
+  -r  --release      print the release version
+
+See ubuntu-distro-info(1) for more info.'
+    success "--help" "$help"
+    success "-h" "$help"
+}
+
+testExactlyOne() {
+    local result='ubuntu-distro-info: You have to select exactly one of --all, --devel, --lts, --stable, --supported, --unsupported.'
+    failure "" "$result"
+    failure "--date=2009-01-10 -sad" "$result"
+}
+
+testUnrecognizedOption() {
+    failure "--bar" "ubuntu-distro-info: unrecognized option \`--bar'"
+    failure "-y" "ubuntu-distro-info: unrecognized option \`-y'"
+    failure "--testing" "ubuntu-distro-info: unrecognized option \`--testing'"
+    failure "--oldstable" "ubuntu-distro-info: unrecognized option \`--oldstable'"
+}
+
+testUnrecognizedArguments() {
+    failure "foo" "ubuntu-distro-info: unrecognized arguments: foo"
+    failure "foo --all bar" "ubuntu-distro-info: unrecognized arguments: foo bar"
+}
+
+testMissingArgumentDate() {
+    failure "--date" "ubuntu-distro-info: option \`--date' requires an argument DATE"
+}
+
+testDistributionDataOutdated() {
+    local future_year=$(expr $(date  +"%Y" --date=now) + 7)
+    local outdated_e="Distribution data outdated.
+Please check for an update for distro-info-data. See /usr/share/doc/distro-info-data/README.Debian for details."
+
+    failure "--date 1970-10-03 --lts" "ubuntu-distro-info: $outdated_e"
+    failure "--date ${future_year}-10-03 -s" "ubuntu-distro-info: $outdated_e"
+    failure "--date ${future_year}-10-03 -d" "ubuntu-distro-info: $outdated_e"
+}
+
+testInvalidDate() {
+    failure "--date fail -s" "ubuntu-distro-info: invalid date \`fail'"
+    failure "--date=2010-02-30 -d" "ubuntu-distro-info: invalid date \`2010-02-30'"
+}
+
+testMultipleDates() {
+    failure "--date 2007-06-05 -s --date 2004-03-02" "ubuntu-distro-info: Date specified multiple times."
+}
+
+. shunit2

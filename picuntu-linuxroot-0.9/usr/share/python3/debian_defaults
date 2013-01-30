@@ -1,0 +1,12 @@
+[DEFAULT]
+# the default python3 version
+default-version = python3.2
+
+# all supported python3 versions
+supported-versions = python3.2
+
+# formerly supported python3 versions
+old-versions = python3.1 
+
+# unsupported versions, including older versions
+unsupported-versions = 

@@ -1,0 +1,14 @@
+/.
+/usr
+/usr/bin
+/usr/bin/vim.nox
+/usr/share
+/usr/share/lintian
+/usr/share/lintian/overrides
+/usr/share/lintian/overrides/vim-nox
+/usr/share/bug
+/usr/share/bug/vim-nox
+/usr/share/bug/vim-nox/presubj
+/usr/share/bug/vim-nox/script
+/usr/share/doc
+/usr/share/doc/vim-nox

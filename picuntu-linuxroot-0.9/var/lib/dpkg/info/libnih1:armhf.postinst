@@ -1,0 +1,16 @@
+#!/bin/sh
+
+set -e
+
+if [ "$1" = configure ]; then
+    # Before we shutdown or reboot, upstart needs to re-exec
+    # so that it can safely unmount the root filesystem (LP: #740390)
+    touch /var/run/init.upgraded || :
+fi
+
+# Automatically added by dh_makeshlibs
+if [ "$1" = "configure" ]; then
+	ldconfig
+fi
+# End automatically added section
+

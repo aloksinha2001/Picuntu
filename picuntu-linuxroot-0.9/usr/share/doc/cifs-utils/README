@@ -1,0 +1,29 @@
+This is the release version of cifs-utils, a package of utilities for
+doing and managing mounts of the Linux CIFS filesystem. These programs
+were originally part of Samba, but have now been split off into a
+separate package.
+
+0. PROJECT RESOURCES
+
+    Home page: http://wiki.samba.org/index.php/LinuxCIFS_utils
+    Mailing list: linux-cifs@vger.kernel.org
+    Git Repository: git://git.samba.org/cifs-utils.git
+    Maintainer: Jeffrey Layton <jlayton@samba.org>
+
+1. COMPILING
+
+If you pulled down the git tree directly, then you'll need to
+generate the autoconf/automake files before you can build. cd to
+the top of the build tree and run:
+
+    $ autoreconf -i
+
+If you downloaded a release tarball, then just unpack the sources
+and run these commands:
+
+    $ ./configure
+    $ make
+
+To install binaries and documentation, run this (as root):
+
+    # make install

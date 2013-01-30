@@ -1,0 +1,70 @@
+#!/bin/sh -e
+
+everything() {
+
+# install /etc/ppp/pap-secrets and /etc/ppp/chap-secrets from templates,
+# if necessary
+for file in pap-secrets chap-secrets; do
+  if [ -f /etc/ppp/$file ]; then
+    TAG=$(head --lines=1 /etc/ppp/$file)
+    if [ "$TAG" = "#GENERATED-BY-DEBIAN-INSTALLER#" ]; then
+      (sed -e "s/-HOSTNAME-/$HOST/g" /usr/share/ppp/$file; \
+        cat /etc/ppp/$file) > /etc/ppp/$file.tmp
+      mv /etc/ppp/$file.tmp /etc/ppp/$file
+    fi
+  else
+    sed -e "s/-HOSTNAME-/$HOST/g" < /usr/share/ppp/$file > /etc/ppp/$file
+  fi
+  chmod 600 /etc/ppp/$file
+done
+
+# install template provider files
+if [ ! -f /etc/ppp/peers/provider ]; then
+  install -g dip -m 640 /usr/share/ppp/provider.peer \
+			/etc/ppp/peers/provider
+fi
+if [ ! -f /etc/chatscripts/provider ]; then
+  install -g dip -m 640 /usr/share/ppp/provider.chatscript \
+			/etc/chatscripts/provider
+fi
+
+# fix the log files permissions
+LOG_FILES="/var/log/ppp.log /var/log/ppp-connect-errors"
+for file in $LOG_FILES; do
+  [ -e $file ] || continue
+  chown root:adm $file
+  chmod 640 $file
+done
+
+}
+
+# Migrate init script
+if dpkg --compare-versions "$2" lt "2.4.5~git20081126t100229-0ubuntu2"; then
+  update-rc.d -f pppd-dns remove >/dev/null
+fi
+
+case "$1" in
+    configure)
+	everything
+    ;;
+
+    abort-upgrade|abort-remove|abort-deconfigure)
+    ;;
+
+    *)
+    echo "postinst called with unknown argument '$1'" >&2
+    exit 1
+    ;;
+esac
+
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/pppd-dns" ]; then
+	if [ ! -e "/etc/init/pppd-dns.conf" ]; then
+		update-rc.d pppd-dns start 70 1 2 3 4 5 . >/dev/null
+	fi
+fi
+# End automatically added section
+
+
+exit 0
+

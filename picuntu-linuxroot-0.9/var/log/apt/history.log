@@ -1,0 +1,30 @@
+
+Start-Date: 2013-01-07  14:06:33
+Commandline: apt-get install pdmenu
+Install: pdmenu:armhf (1.3.2)
+End-Date: 2013-01-07  14:06:38
+
+Start-Date: 2013-01-07  14:07:31
+Commandline: apt-get upgrade
+Upgrade: liblxc0:armhf (0.8.0~rc1-4ubuntu38, 0.8.0~rc1-4ubuntu39), linux-libc-dev:armhf (3.5.0-19.30, 3.5.0-21.32), rhythmbox-data:armhf (2.97-1ubuntu5, 2.97-1ubuntu6.1), dconf-service:armhf (0.14.0-0ubuntu2, 0.14.1-0ubuntu0.1), libglib2.0-data:armhf (2.34.0-1ubuntu1, 2.34.1-1ubuntu1), libdconf1:armhf (0.14.0-0ubuntu2, 0.14.1-0ubuntu0.1), libglib2.0-0:armhf (2.34.0-1ubuntu1, 2.34.1-1ubuntu1), dconf-gsettings-backend:armhf (0.14.0-0ubuntu2, 0.14.1-0ubuntu0.1), mountall:armhf (2.42ubuntu0.2, 2.42ubuntu0.3)
+End-Date: 2013-01-07  14:07:50
+
+Start-Date: 2013-01-10  23:12:15
+Commandline: apt-get upgrade
+Upgrade: gpgv:armhf (1.4.11-3ubuntu4, 1.4.11-3ubuntu4.1), gnupg:armhf (1.4.11-3ubuntu4, 1.4.11-3ubuntu4.1)
+End-Date: 2013-01-10  23:12:22
+
+Start-Date: 2013-01-10  23:12:46
+Commandline: apt-get install dialog
+Install: dialog:armhf (1.1-20120215-2ubuntu1)
+End-Date: 2013-01-10  23:12:50
+
+Start-Date: 2013-01-10  23:14:23
+Commandline: apt-get install ntp ntpdate espeak console-setup usbutils lsof lshw cifs-utils keyutils libasn1-8-heimdal libgcrypt11 libgnutls26 libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal libheimntlm0-heimdal libhx509-5-heimdal libkrb5-26-heimdal libldap-2.4-2 libopts25 libp11-kit0 libroken18-heimdal libsasl2-2 libsasl2-modules libtalloc2 libtasn1-3 libtdb1 libusb-1.0-0 libwbclient0 libwind0-heimdal samba-common samba-common-bin vim-nox mysql-common console-common console-setup kbd xkb-data console-data liblua5.1-0 libperl5.14 libpython2.7 libruby1.9.1 libyaml-0-2 tcl8.5 vim-runtime espeak-data libespeak1 libflac8 libjack-jackd2-0 libjson0 libogg0 libportaudio2 libpulse0 libsndfile1 libsonic0 libvorbis0a libvorbisenc2 libxau6 libxcb1 libxdmcp6
+Install: vim-nox:armhf (7.3.547-4ubuntu1.1), libtalloc2:armhf (2.0.7+git20120207-1), espeak:armhf (1.46.02-2ubuntu1), libportaudio2:armhf (19+svn20111121-1build1), lshw:armhf (02.16-1), libhx509-5-heimdal:armhf (1.6~git20120403+dfsg1-2), lsof:armhf (4.86+dfsg-1ubuntu1), libruby1.9.1:armhf (1.9.3.194-1ubuntu1.2), libopts25:armhf (5.12-0.1ubuntu2), libtdb1:armhf (1.2.10-2), libjack-jackd2-0:armhf (1.9.8~dfsg.4+20120529git007cdc37-2ubuntu1), libsasl2-modules:armhf (2.1.25.dfsg1-5), libheimbase1-heimdal:armhf (1.6~git20120403+dfsg1-2), mysql-common:armhf (5.5.28-0ubuntu0.12.10.2), libusb-1.0-0:armhf (1.0.12-2), libgnutls26:armhf (2.12.14-5ubuntu4), libvorbisenc2:armhf (1.3.2-1.3), libtasn1-3:armhf (2.13-2), libheimntlm0-heimdal:armhf (1.6~git20120403+dfsg1-2), xkb-data:armhf (2.5-1ubuntu7), libjson0:armhf (0.10-1ubuntu1), libyaml-0-2:armhf (0.1.4-2build1), libxcb1:armhf (1.8.1-1ubuntu1), libp11-kit0:armhf (0.13-1), samba-common-bin:armhf (3.6.6-3ubuntu5), libxau6:armhf (1.0.7-1), libsonic0:armhf (0.1.17-1.1build1), espeak-data:armhf (1.46.02-2ubuntu1), libgssapi3-heimdal:armhf (1.6~git20120403+dfsg1-2), kbd:armhf (1.15.3-9ubuntu1), libxdmcp6:armhf (1.1.1-1), libgcrypt11:armhf (1.5.0-3ubuntu1), libpython2.7:armhf (2.7.3-5ubuntu4), console-data:armhf (1.12-2), ntp:armhf (4.2.6.p3+dfsg-1ubuntu5), libroken18-heimdal:armhf (1.6~git20120403+dfsg1-2), libflac8:armhf (1.2.1-6build1), libespeak1:armhf (1.46.02-2ubuntu1), libwbclient0:armhf (3.6.6-3ubuntu5), libkrb5-26-heimdal:armhf (1.6~git20120403+dfsg1-2), tcl8.5:armhf (8.5.11-2ubuntu1), libhcrypto4-heimdal:armhf (1.6~git20120403+dfsg1-2), libperl5.14:armhf (5.14.2-13ubuntu0.1), console-setup:armhf (1.70ubuntu6), console-common:armhf (0.7.87), libldap-2.4-2:armhf (2.4.31-1ubuntu2), usbutils:armhf (005-3), cifs-utils:armhf (5.5-1ubuntu1), liblua5.1-0:armhf (5.1.5-4), vim-runtime:armhf (7.3.547-4ubuntu1.1), libsasl2-2:armhf (2.1.25.dfsg1-5), ntpdate:armhf (4.2.6.p3+dfsg-1ubuntu5), samba-common:armhf (3.6.6-3ubuntu5), libpulse0:armhf (2.1-0ubuntu4), libwind0-heimdal:armhf (1.6~git20120403+dfsg1-2), libvorbis0a:armhf (1.3.2-1.3), libasn1-8-heimdal:armhf (1.6~git20120403+dfsg1-2), keyutils:armhf (1.5.5-3), libsndfile1:armhf (1.0.25-5), libogg0:armhf (1.3.0-4)
+End-Date: 2013-01-10  23:16:40
+
+Start-Date: 2013-01-10  23:17:21
+Commandline: apt-get install smbclient
+Install: smbclient:armhf (3.6.6-3ubuntu5)
+End-Date: 2013-01-10  23:17:30

@@ -1,0 +1,8 @@
+734dc255092d96cae4527fb68489aad7  lib/udev/rules.d/55-dm.rules
+74168440ffa5c0afff75638f9da7bc74  lib/udev/rules.d/60-persistent-storage-dm.rules
+f046b79b0dd88110d27717675a0b2822  sbin/dmsetup
+cce4590e540d02104bb33ba998fab955  usr/share/doc/dmsetup/README.udev
+0c26eedb7cf48e3f56fc63ece2d40190  usr/share/doc/dmsetup/copyright
+cef64c9c88d68db2cad22b768ab5238d  usr/share/doc/dmsetup/examples/udev-dm-permissions.rules
+4b0433880e2da3d28259093c87efa973  usr/share/initramfs-tools/hooks/dmsetup
+198ec9cbe0ba3b8664aec2c6af562f7a  usr/share/man/man8/dmsetup.8.gz

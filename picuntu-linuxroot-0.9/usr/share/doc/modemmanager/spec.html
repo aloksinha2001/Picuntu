@@ -1,0 +1,1749 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=ascii" /><title>ModemManager Interface Specification version 0.5</title><style type="text/css">
+
+          body {
+            font-family: sans-serif;
+            margin: 2em;
+            height: 100%;
+            font-size: 1.2em;
+          }
+          h1 {
+            padding-top: 5px;
+            padding-bottom: 5px;
+            font-size: 1.6em;
+            background: #dadae2;
+          }
+          h2 {
+            font-size: 1.3em;
+          }
+          h3 {
+            font-size: 1.2em;
+          }
+          a:link, a:visited, a:link:hover, a:visited:hover {
+            font-weight: bold;
+          }
+          .topbox {
+            padding-top: 10px;
+            padding-left: 10px;
+            border-bottom: black solid 1px;
+            padding-bottom: 10px;
+            background: #dadae2;
+            font-size: 2em;
+            font-weight: bold;
+            color: #5c5c5c;
+          }
+          .topnavbox {
+            padding-left: 10px;
+            padding-top: 5px;
+            padding-bottom: 5px;
+            background: #abacba;
+            border-bottom: black solid 1px;
+            font-size: 1.2em;
+          }
+          .topnavbox a{
+            color: black;
+            font-weight: normal;
+          }
+          .sidebar {
+            float: left;
+            /* width:9em;
+            border-right:#abacba solid 1px;
+            border-left: #abacba solid 1px;
+            height:100%; */
+            border: #abacba solid 1px;
+            padding-left: 10px;
+            margin-left: 10px;
+            padding-right: 10px;
+            margin-right: 10px;
+            color: #5d5d5d;
+            background: #dadae2;
+          }
+          .sidebar a {
+            text-decoration: none;
+            border-bottom: #e29625 dotted 1px;
+            color: #e29625;
+            font-weight: normal;
+          }
+          .sidebar h1 {
+            font-size: 1.2em;
+            color: black;
+          }
+          .sidebar ul {
+            padding-left: 25px;
+            padding-bottom: 10px;
+            border-bottom: #abacba solid 1px;
+          }
+          .sidebar li {
+            padding-top: 2px;
+            padding-bottom: 2px;
+          }
+          .sidebar h2 {
+            font-style:italic;
+            font-size: 0.81em;
+            padding-left: 5px;
+            padding-right: 5px;
+            font-weight: normal;
+          }
+          .date {
+            font-size: 0.6em;
+            float: right;
+            font-style: italic;
+          }
+          .method {
+            margin-left: 1em;
+            margin-right: 4em;
+          }
+          .signal {
+            margin-left: 1em;
+            margin-right: 4em;
+          }
+
+        </style></head><body><h1 class="topbox">ModemManager Interface Specification</h1><h2>Version 0.5</h2><div>Copyright (C) 2008 Novell, Inc.</div><div>Copyright (C) 2008 - 2010 Red Hat, Inc.</div><div>Copyright (C) 2011 The Chromium OS Authors</div><div class="license">
+    <p>This program is free software; you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation; either version 2 of the License, or
+      (at your option) any later version.</p>
+
+    <p>This program is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+      General Public License for more details.</p>
+
+    <p>You should have received a copy of the GNU Lesser General Public
+      License along with this library; if not, write to the Free Software
+      Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.</p>
+  </div><h2>Interfaces</h2><ul><li><code><a href="#org.freedesktop.ModemManager">org.freedesktop.ModemManager</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem">org.freedesktop.ModemManager.Modem</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Simple">org.freedesktop.ModemManager.Modem.Simple</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Cdma">org.freedesktop.ModemManager.Modem.Cdma</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm">org.freedesktop.ModemManager.Modem.Gsm</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Card">org.freedesktop.ModemManager.Modem.Gsm.Card</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Contacts">org.freedesktop.ModemManager.Modem.Gsm.Contacts</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Hso">org.freedesktop.ModemManager.Modem.Gsm.Hso</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Network">org.freedesktop.ModemManager.Modem.Gsm.Network</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.SMS">org.freedesktop.ModemManager.Modem.Gsm.SMS</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Ussd">org.freedesktop.ModemManager.Modem.Gsm.Ussd</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Firmware">org.freedesktop.ModemManager.Modem.Firmware</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Location">org.freedesktop.ModemManager.Modem.Location</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Time">org.freedesktop.ModemManager.Modem.Time</a></code></li><li><code><a href="#org.freedesktop.DBus.Properties">org.freedesktop.DBus.Properties</a></code></li></ul>
+  <h1><a name="org.freedesktop.ModemManager" id="org.freedesktop.ModemManager"></a>org.freedesktop.ModemManager</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.EnumerateDevices" id="org.freedesktop.ModemManager.EnumerateDevices">EnumerateDevices</a> (
+        
+        ) &#8594;
+        ao</h3><div class="docstring">
+        Get the list of modem devices.
+      </div><div><h4>Returns</h4><dl><dt><code>devices</code> -
+      <code>ao</code></dt><dd>
+          List of object paths of modem devices known to the system.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.ScanDevices" id="org.freedesktop.ModemManager.ScanDevices">ScanDevices</a> (
+        
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Start a new scan for connected modem devices.
+      </div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.SetLogging" id="org.freedesktop.ModemManager.SetLogging">SetLogging</a> (
+        s: level
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Set logging verbosity.
+      </div><div><h4>Parameters</h4><dl><dt><code>level</code> -
+      <code>s</code></dt><dd>
+          One of [ERR, WARN, INFO, DEBUG].
+        </dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.DeviceAdded" id="org.freedesktop.ModemManager.DeviceAdded">DeviceAdded</a> (
+        o: device
+        )</h3><div class="docstring">
+        A device was added to the system.
+      </div><div><h4>Parameters</h4><dl><dt><code>device</code> -
+      <code>o</code></dt><dd>
+          The object path of the newly added device.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.DeviceRemoved" id="org.freedesktop.ModemManager.DeviceRemoved">DeviceRemoved</a> (
+        o: device
+        )</h3><div class="docstring">
+        A device was removed from the system, and is no longer available.
+      </div><div><h4>Parameters</h4><dl><dt><code>device</code> -
+      <code>o</code></dt><dd>
+          The object path of the device that was just removed.
+        </dd></dl></div></div><p>Interface has no properties.</p>
+
+
+  <h1><a name="org.freedesktop.ModemManager.Modem" id="org.freedesktop.ModemManager.Modem"></a>org.freedesktop.ModemManager.Modem</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Enable" id="org.freedesktop.ModemManager.Modem.Enable">Enable</a> (
+        b: enable
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Enable the device. Initializes the modem.
+      </div><div><h4>Parameters</h4><dl><dt><code>enable</code> -
+      <code>b</code></dt><dd>
+          True to enable the device, False to disable.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Connect" id="org.freedesktop.ModemManager.Modem.Connect">Connect</a> (
+        s: number
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Dial in.
+      </div><div><h4>Parameters</h4><dl><dt><code>number</code> -
+      <code>s</code></dt><dd>
+          The number to use for dialing.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Disconnect" id="org.freedesktop.ModemManager.Modem.Disconnect">Disconnect</a> (
+        
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Disconnect modem.
+      </div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.GetIP4Config" id="org.freedesktop.ModemManager.Modem.GetIP4Config">GetIP4Config</a> (
+        
+        ) &#8594;
+        (uuuu)</h3><div class="docstring">
+        Request the IP4 configuration from the device.
+        Note that it'll only be supported for IPMethod MM_MODEM_IP_METHOD_STATIC.
+      </div><div><h4>Returns</h4><dl><dt><code>address</code> -
+      <code>(uuuu)</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.GetInfo" id="org.freedesktop.ModemManager.Modem.GetInfo">GetInfo</a> (
+        
+        ) &#8594;
+        (sss)</h3><div class="docstring">
+        Get the card information (manufacturer, modem, version).
+      </div><div><h4>Returns</h4><dl><dt><code>info</code> -
+      <code>(sss)</code></dt><dd>
+          Structure containing manufacturer, model, and version (revision) of the card.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Reset" id="org.freedesktop.ModemManager.Modem.Reset">Reset</a> (
+        
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Clear non-persistent configuration and state, and return the device to
+        a newly-powered-on state.  This command may power-cycle the device.
+      </div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.FactoryReset" id="org.freedesktop.ModemManager.Modem.FactoryReset">FactoryReset</a> (
+        s: code
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Clear the modem's configuration (including persistent configuration and
+        state), and return the device to a factory-default state. This command
+        may or may not power-cycle the device.
+      </div><div><h4>Parameters</h4><dl><dt><code>code</code> -
+      <code>s</code></dt><dd></dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.StateChanged" id="org.freedesktop.ModemManager.Modem.StateChanged">StateChanged</a> (
+        u: old, u: new, u: reason
+        )</h3><div class="docstring">
+        The modem's state (see the State property) changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>old</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_STATE">MM_MODEM_STATE</a>)
+    </dt><dd>
+          Old state.
+        </dd><dt><code>new</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_STATE">MM_MODEM_STATE</a>)
+    </dt><dd>
+          New state.
+        </dd><dt><code>reason</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_STATE_REASON">MM_MODEM_STATE_REASON</a>)
+    </dt><dd>
+          Reason for this state change.
+        </dd></dl></div></div><h2>Properties:</h2><dl><dt><code>Device</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The modem port to use for IP configuration and traffic.
+      </dd><dt><code>DeviceIdentifier</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        A best-effort device identifier based on various device information like
+        model name, firmware revision, USB/PCI/PCMCIA IDs, and other properties.
+        This ID is not guaranteed to be unique and may be shared between
+        identical devices with the same firmware, but is intended to be
+        "unique enough" for use as a casual device identifier for various
+        user experience operations.  This is not the device's IMEI or ESN since
+        those may not be available before unlocking the device via a PIN.
+      </dd><dt><code>MasterDevice</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The physical modem device reference (ie, USB, PCI, PCMCIA device), which
+        may be dependent upon the operating system.  In Linux for example, this
+        points to a sysfs path of the usb_device object.
+      </dd><dt><code>Driver</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The driver handling the device.
+      </dd><dt><code>Type</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_TYPE">MM_MODEM_TYPE</a>)
+    </dt><dd>
+        The modem type.
+      </dd><dt><code>Enabled</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>
+        TRUE if the modem is enabled (ie, powered and usable), FALSE if it is disabled.
+      </dd><dt><code>EquipmentIdentifier</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The identity of the device. This will be the IMEI number for
+        GSM devices and the hex-format ESN/MEID for CDMA devices.
+      </dd><dt><code>UnlockRequired</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        Empty if the device is usable without an unlock code or has already
+        been unlocked. If the device needs to be unlocked before becoming usable this
+        property contains the specific unlock code required. &#160;Valid unlock code values
+        are "" (blank), "sim-pin", "sim-puk", "ph-sim-pin", "ph-fsim-pin",
+        "ph-fsim-puk", "sim-pin2", "sim-puk2", "ph-net-pin", "ph-net-puk",
+        "ph-netsub-pin", "ph-netsub-puk", "ph-sp-pin", "ph-sp-puk", "ph-corp-pin", and
+        "ph-corp-puk".
+      </dd><dt><code>UnlockRetries</code> -
+      <code>u</code> -
+      <code>(read)</code></dt><dd>
+        The number of unlock retries remaining for the unlock code given by the
+        property UnlockRequired, or 999 if the device does not support reporting
+        unlock retries. If UnlockRequired is blank, the value of this property
+        is not meaningful.
+      </dd><dt><code>PinRetryCounts</code> -
+      <code>a{su}</code> -
+      <code>(read)</code></dt><dd>
+        A dictionary in which the keys are the names of the unlock codes
+        specified for the UnlockRequiredProperty, and the values are integers
+        giving the number of PIN tries remaining before the code becomes
+        blocked (requiring a PUK) or permanently blocked. Dictionary entries
+        exist only for the codes for which the modem is able to report retry
+        counts.
+      </dd><dt><code>IpMethod</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_IP_METHOD">MM_MODEM_IP_METHOD</a>)
+    </dt><dd>
+        The IP configuration method.
+      </dd><dt><code>IpTimeout</code> -
+      <code>u</code> -
+      <code>(read)</code></dt><dd>
+        Maximum time to wait for a successful IP establishment, when PPP is used.
+      </dd><dt><code>State</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_STATE">MM_MODEM_STATE</a>)
+    </dt><dd>
+        State of the modem.
+      </dd></dl><h2>Enumerated types:</h2><h3><a name="type-MM_MODEM_TYPE" id="type-MM_MODEM_TYPE">MM_MODEM_TYPE</a></h3><dl><dt><code>MM_MODEM_TYPE_UNKNOWN = 0</code></dt><dd>
+          Unknown device.
+        </dd><dt><code>MM_MODEM_TYPE_GSM = 1</code></dt><dd>
+          A GSM device.
+        </dd><dt><code>MM_MODEM_TYPE_CDMA = 2</code></dt><dd>
+          A CDMA device.
+        </dd></dl><h3><a name="type-MM_MODEM_IP_METHOD" id="type-MM_MODEM_IP_METHOD">MM_MODEM_IP_METHOD</a></h3><dl><dt><code>MM_MODEM_IP_METHOD_PPP = 0</code></dt><dd>
+          Use PPP to get the address.
+        </dd><dt><code>MM_MODEM_IP_METHOD_STATIC = 1</code></dt><dd>
+          Static configuration, the modem will provide IP information.
+        </dd><dt><code>MM_MODEM_IP_METHOD_DHCP = 2</code></dt><dd>
+          Use DHCP
+        </dd></dl><h3><a name="type-MM_MODEM_STATE" id="type-MM_MODEM_STATE">MM_MODEM_STATE</a></h3><dl><dt><code>MM_MODEM_STATE_UNKNOWN = 0</code></dt><dd>
+          State unknown or not reportable.
+        </dd><dt><code>MM_MODEM_STATE_DISABLED = 10</code></dt><dd>
+          Modem is disabled.
+        </dd><dt><code>MM_MODEM_STATE_DISABLING = 20</code></dt><dd>
+          Modem is being disabled.
+        </dd><dt><code>MM_MODEM_STATE_ENABLING = 30</code></dt><dd>
+          Modem is being enabled.
+        </dd><dt><code>MM_MODEM_STATE_ENABLED = 40</code></dt><dd>
+          Modem is enabled.
+        </dd><dt><code>MM_MODEM_STATE_SEARCHING = 50</code></dt><dd>
+          Modem is searching networks.
+        </dd><dt><code>MM_MODEM_STATE_REGISTERED = 60</code></dt><dd>
+          Modem is registered in a network.
+        </dd><dt><code>MM_MODEM_STATE_DISCONNECTING = 70</code></dt><dd>
+          Modem is being disconnected.
+        </dd><dt><code>MM_MODEM_STATE_CONNECTING = 80</code></dt><dd>
+          Modem is being connected.
+        </dd><dt><code>MM_MODEM_STATE_CONNECTED = 90</code></dt><dd>
+          Modem is connected
+        </dd></dl><h3><a name="type-MM_MODEM_STATE_REASON" id="type-MM_MODEM_STATE_REASON">MM_MODEM_STATE_REASON</a></h3><dl><dt><code>MM_MODEM_STATE_REASON_NONE = 0</code></dt><dd>
+          Reason unknown or not reportable.
+        </dd><dt><code>MM_MODEM_STATE_REASON_USER_REQUESTED = 1</code></dt><dd>
+          State change was requested by an interface user.
+        </dd><dt><code>MM_MODEM_STATE_REASON_SUSPEND = 2</code></dt><dd>
+          State change was caused by a system suspend.
+        </dd><dt><code>MM_MODEM_STATE_REASON_ROAMING_NOT_ALLOWED = 3</code></dt><dd>
+          State change was caused because the modem is roaming and roaming
+          is not allowed.
+        </dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Simple" id="org.freedesktop.ModemManager.Modem.Simple"></a>org.freedesktop.ModemManager.Modem.Simple</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Simple.Connect" id="org.freedesktop.ModemManager.Modem.Simple.Connect">Connect</a> (
+        a{sv}: properties
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Do everything needed to connect the modem.
+      </div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          Dictionary of properties needed to get the modem connected.
+          Each implementation is free to add it's own specific key-value pairs. The predefined
+          common ones are:
+
+          'pin'          : string
+          'network_id'   : string (GSM/HSPA only)
+          'band'         : uint
+          'network_mode' : uint
+          'apn'          : string (GSM/HSPA only)
+          'number'       : string
+          'rm-protocol'  : uint (CDMA/EVDO only) (1 - Relay, 2 - Network PPP)
+          'allowed_auth' : uint (GSM/HSPA only) (MM_MODEM_GSM_ALLOWED_AUTH bitfield)
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Simple.GetStatus" id="org.freedesktop.ModemManager.Modem.Simple.GetStatus">GetStatus</a> (
+        
+        ) &#8594;
+        a{sv}</h3><div class="docstring">
+        Get the modem status.
+      </div><div><h4>Returns</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          Dictionary of properties.
+          Each implementation is free to add it's own specific key-value pairs. The predefined
+          common ones are:
+
+          'state'          : uint (always)
+          'signal_quality' : uint  (state &gt;= registered)
+          'operator_code'  : string (state &gt;= registered)
+          'operator_name'  : string (state &gt;= registered)
+          'band'           : uint (state &gt;= registered)
+          'network_mode'   : uint (state &gt;= registered)
+        </dd></dl></div></div><p>Interface has no signals.</p><p>Interface has no properties.</p>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Cdma" id="org.freedesktop.ModemManager.Modem.Cdma"></a>org.freedesktop.ModemManager.Modem.Cdma</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.Activate" id="org.freedesktop.ModemManager.Modem.Cdma.Activate">Activate</a> (
+        s: carrier
+        ) &#8594;
+        u</h3><div class="docstring">
+        Activates the modem for use with a given carrier.  In the
+        event of immediate failure, returns an error value instead of
+        setting a DBus error.
+      </div><div><h4>Parameters</h4><dl><dt><code>carrier</code> -
+      <code>s</code></dt><dd>
+          Name of carrier.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>immediate_error</code> -
+      <code>u</code></dt><dd>
+          An enum from MM_MODEM_CDMA_ACTIVATION_ERROR.  This is
+          returned for immediate errors.  Delayed errors are returned
+          via an ActivationStateChanged signal
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.ActivateManual" id="org.freedesktop.ModemManager.Modem.Cdma.ActivateManual">ActivateManual</a> (
+        a{sv}: properties
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Sets modem configuration data.  Unlike regular Activate(),
+        this does not contact the carrier.  Some modems will reboot
+        after this call is made.
+      </div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          A dictionary of properties to set on the modem.  Keys include 'mdn', 'min'
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.GetSignalQuality" id="org.freedesktop.ModemManager.Modem.Cdma.GetSignalQuality">GetSignalQuality</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring">
+        Get the current signal quality.
+      </div><div><h4>Returns</h4><dl><dt><code>quality</code> -
+      <code>u</code></dt><dd>
+          Signal quality (percent).
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.GetEsn" id="org.freedesktop.ModemManager.Modem.Cdma.GetEsn">GetEsn</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+        Get the Electronic Serial Number of the card.
+      </div><div><h4>Returns</h4><dl><dt><code>esn</code> -
+      <code>s</code></dt><dd>
+          The ESN.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.GetServingSystem" id="org.freedesktop.ModemManager.Modem.Cdma.GetServingSystem">GetServingSystem</a> (
+        
+        ) &#8594;
+        (usu)</h3><div class="docstring">
+        Get the Service System details of the current network, if registered.
+      </div><div><h4>Returns</h4><dl><dt><code>info</code> -
+      <code>(usu)</code></dt><dd>
+          A structure containing the Band Class (0 = unknown, 1 = 800 MHz, 2 = 1900 MHz), the Band ("A" - "F" as defined by IS707-A), and the System ID of the serving network.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.GetRegistrationState" id="org.freedesktop.ModemManager.Modem.Cdma.GetRegistrationState">GetRegistrationState</a> (
+        
+        ) &#8594;
+        u, u</h3><div class="docstring">Get device registration state.</div><div><h4>Returns</h4><dl><dt><code>cdma_1x_state</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a>)
+    </dt><dd>CDMA 1x registration state.</dd><dt><code>evdo_state</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a>)
+    </dt><dd>EVDO registration state.</dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.ActivationStateChanged" id="org.freedesktop.ModemManager.Modem.Cdma.ActivationStateChanged">ActivationStateChanged</a> (
+        u: activation_state, u: activation_error, a{sv}: status_changes
+        )</h3><div class="docstring">
+        The device activation state changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>activation_state</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_ACTIVATION_STATE">MM_MODEM_CDMA_ACTIVATION_STATE</a>)
+    </dt><dd>Current activation state</dd><dt><code>activation_error</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_ACTIVATION_ERROR">MM_MODEM_CDMA_ACTIVATION_ERROR</a>)
+    </dt><dd>Carrier-specific error code</dd><dt><code>status_changes</code> -
+      <code>a{sv}</code></dt><dd>Selected Modem.Simple.GetStatus keys that have changed as a
+          result of this activation state change.  Will include 'mdn'
+          and 'min'.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.SignalQuality" id="org.freedesktop.ModemManager.Modem.Cdma.SignalQuality">SignalQuality</a> (
+        u: quality
+        )</h3><div class="docstring">
+        The signal quality changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>quality</code> -
+      <code>u</code></dt><dd>
+          The new quality in percent, 0..100.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Cdma.RegistrationStateChanged" id="org.freedesktop.ModemManager.Modem.Cdma.RegistrationStateChanged">RegistrationStateChanged</a> (
+        u: cdma-1x-state, u: evdo-state
+        )</h3><div class="docstring">
+        The device registration state changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>cdma-1x-state</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a>)
+    </dt><dd>CDMA 1x registration state.</dd><dt><code>evdo-state</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a>)
+    </dt><dd>EVDO registration state.</dd></dl></div></div><h2>Properties:</h2><dl><dt><code>Meid</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        The modem's Mobile Equipment Identifier.
+      </dd></dl><h2>Enumerated types:</h2><h3><a name="type-MM_MODEM_CDMA_REGISTRATION_STATE" id="type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a></h3><dl><dt><code>MM_MODEM_CDMA_REGISTRATION_STATE_UNKNOWN = 0</code></dt><dd>Registration status is unknown or the device is not registered.</dd><dt><code>MM_MODEM_CDMA_REGISTRATION_STATE_REGISTERED = 1</code></dt><dd>Registered, but roaming status is unknown or cannot be provided by the device.  The device may or may not be roaming.</dd><dt><code>MM_MODEM_CDMA_REGISTRATION_STATE_HOME = 2</code></dt><dd>Currently registered on the home network.</dd><dt><code>MM_MODEM_CDMA_REGISTRATION_STATE_ROAMING = 3</code></dt><dd>Currently registered on a roaming network.</dd></dl><h3><a name="type-MM_MODEM_CDMA_ACTIVATION_STATE" id="type-MM_MODEM_CDMA_ACTIVATION_STATE">MM_MODEM_CDMA_ACTIVATION_STATE</a></h3><dl><dt><code>MM_MODEM_CDMA_ACTIVATION_STATE_NOT_ACTIVATED = 0</code></dt><dd>Device is not activated</dd><dt><code>MM_MODEM_CDMA_ACTIVATION_STATE_ACTIVATING = 1</code></dt><dd>Device is activating</dd><dt><code>MM_MODEM_CDMA_ACTIVATION_STATE_PARTIALLY_ACTIVATED = 2</code></dt><dd>Device is partially activated; carrier-specific steps required to continue.</dd><dt><code>MM_MODEM_CDMA_ACTIVATION_STATE_ACTIVATED = 3</code></dt><dd>Device is ready for use.</dd></dl><h3><a name="type-MM_MODEM_CDMA_ACTIVATION_ERROR" id="type-MM_MODEM_CDMA_ACTIVATION_ERROR">MM_MODEM_CDMA_ACTIVATION_ERROR</a></h3><dl><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_NO_ERROR = 0</code></dt><dd>(Undocumented)</dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_ROAMING = 1</code></dt><dd>
+          Device cannot activate while roaming.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_WRONG_RADIO_INTERFACE = 2</code></dt><dd>
+          Device cannot activate on this network type (eg EVDO vs 1xRTT).
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_COULD_NOT_CONNECT = 3</code></dt><dd>
+          Device could not connect to the network for activation.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_SECURITY_AUTHENTICATION_FAILED = 4</code></dt><dd>
+          Device could not authenticate to the network for activation.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_PROVISIONING_FAILED = 5</code></dt><dd>
+          Later stages of device provisioning failed.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_NO_SIGNAL = 6</code></dt><dd>
+          No signal available.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_UNKNOWN = 7</code></dt><dd>
+          An error occurred.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_TIMED_OUT = 8</code></dt><dd>
+          Activation timed out.
+        </dd><dt><code>MM_MODEM_CDMA_ACTIVATION_ERROR_START_FAILED = 9</code></dt><dd>
+          API call for initial activation failed.
+        </dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm" id="org.freedesktop.ModemManager.Modem.Gsm"></a>org.freedesktop.ModemManager.Modem.Gsm</h1><p>Interface has no methods.</p><p>Interface has no signals.</p><p>Interface has no properties.</p><h2>Enumerated types:</h2><h3><a name="type-MM_MODEM_GSM_ALLOWED_AUTH" id="type-MM_MODEM_GSM_ALLOWED_AUTH">MM_MODEM_GSM_ALLOWED_AUTH</a></h3>
+        A bitfield describing the network's authentication preference; this is
+        only for use if the device offers IpMethods of STATIC or DHCP as in
+        these cases the PPP session is established by the device itself. The
+        ordering of the bitfield matches Ericsson devices in the range 0..4
+      <dl><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_NONE = 0x1</code></dt><dd>Supports no authentication</dd><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_PAP = 0x2</code></dt><dd>Supports PAP authentication</dd><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_CHAP = 0x4</code></dt><dd>Supports CHAP authentication</dd><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_MSCHAP = 0x8</code></dt><dd>Supports MSCHAP authentication</dd><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_MSCHAPV2 = 0x10</code></dt><dd>Supports MSCHAPv2 authentication</dd><dt><code>MM_MODEM_GSM_ALLOWED_AUTH_EAP = 0x20</code></dt><dd>Supports EAP authentication</dd></dl><h3><a name="type-MM_MODEM_GSM_ALLOWED_MODE" id="type-MM_MODEM_GSM_ALLOWED_MODE">MM_MODEM_GSM_ALLOWED_MODE</a></h3>
+        Describes the device's current access mode preference; ie the specific
+        technology preferences the device is allowed to use when connecting to
+        a mobile network.
+      <dl><dt><code>MM_MODEM_GSM_ALLOWED_MODE_ANY = 0</code></dt><dd>Any mode can be used</dd><dt><code>MM_MODEM_GSM_ALLOWED_MODE_2G_PREFERRED = 1</code></dt><dd>Prefer 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_ALLOWED_MODE_3G_PREFERRED = 2</code></dt><dd>Prefer 3G (UMTS or HSxPA)</dd><dt><code>MM_MODEM_GSM_ALLOWED_MODE_2G_ONLY = 3</code></dt><dd>Use only 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_ALLOWED_MODE_3G_ONLY = 4</code></dt><dd>Use only 3G (UMTS or HSxPA)</dd></dl><h3><a name="type-MM_MODEM_GSM_ACCESS_TECH" id="type-MM_MODEM_GSM_ACCESS_TECH">MM_MODEM_GSM_ACCESS_TECH</a></h3>
+        Describes various access technologies that a device uses when connected
+        to a mobile network.
+      <dl><dt><code>MM_MODEM_GSM_ACCESS_TECH_UNKNOWN = 0</code></dt><dd>The access technology used is unknown</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_GSM = 1</code></dt><dd>GSM</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_GSM_COMPACT = 2</code></dt><dd>Compact GSM</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_GPRS = 3</code></dt><dd>GPRS</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_EDGE = 4</code></dt><dd>EDGE (ETSI 27.007: "GSM w/EGPRS")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_UMTS = 5</code></dt><dd>UMTS (ETSI 27.007: "UTRAN")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_HSDPA = 6</code></dt><dd>HSDPA (ETSI 27.007: "UTRAN w/HSDPA")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_HSUPA = 7</code></dt><dd>HSUPA (ETSI 27.007: "UTRAN w/HSUPA")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_HSPA = 8</code></dt><dd>HSPA (ETSI 27.007: "UTRAN w/HSDPA and HSUPA")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_HSPA_PLUS = 9</code></dt><dd>HSPA+ (ETSI 27.007: "UTRAN w/HSPA+")</dd><dt><code>MM_MODEM_GSM_ACCESS_TECH_LTE = 10</code></dt><dd>LTE (ETSI 27.007: "E-UTRAN")</dd></dl><h2>Sets of flags:</h2><h3 xmlns=""><a name="type-MM_MODEM_GSM_DEPRECATED_MODE" id="type-MM_MODEM_GSM_DEPRECATED_MODE">MM_MODEM_GSM_DEPRECATED_MODE</a></h3>
+        DEPRECATED; should not be used in new applications.
+      <dl><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_UNKNOWN = 0x0</code></dt><dd>Unknown or invalid mode.</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_ANY = 0x1</code></dt><dd>For certain operations, allow the modem to pick any available mode.</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_GPRS = 0x2</code></dt><dd>GPRS</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_EDGE = 0x4</code></dt><dd>EDGE</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_UMTS = 0x8</code></dt><dd>UMTS (3G)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_HSDPA = 0x10</code></dt><dd>HSDPA (3G)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_2G_PREFERRED = 0x20</code></dt><dd>Prefer 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_3G_PREFERRED = 0x40</code></dt><dd>Prefer 3G (UMTS/HSDPA/HSUPA/HSPA)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_2G_ONLY = 0x80</code></dt><dd>Use only 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_3G_ONLY = 0x100</code></dt><dd>Use only 3G (UMTS/HSDPA/HSUPA/HSPA)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_HSUPA = 0x200</code></dt><dd>HSUPA (3G)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_HSPA = 0x400</code></dt><dd>HSPA (3G)</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_GSM = 0x800</code></dt><dd>GSM</dd><dt><code>MM_MODEM_GSM_DEPRECATED_MODE_GSM_COMPACT = 0x1000</code></dt><dd>GSM Compact</dd></dl><h3 xmlns=""><a name="type-MM_MODEM_GSM_BAND" id="type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a></h3>
+        A bitfield describing the specific radio bands supported by the device
+        and the radio bands the device is allowed to use when connecting to a
+        mobile network.
+      <dl><dt><code>MM_MODEM_GSM_BAND_UNKNOWN = 0x0</code></dt><dd>Unknown or invalid band</dd><dt><code>MM_MODEM_GSM_BAND_ANY = 0x1</code></dt><dd>For certain operations, allow the modem to select a band automatically.</dd><dt><code>MM_MODEM_GSM_BAND_EGSM = 0x2</code></dt><dd>GSM/GPRS/EDGE 900 MHz</dd><dt><code>MM_MODEM_GSM_BAND_DCS = 0x4</code></dt><dd>GSM/GPRS/EDGE 1800 MHz</dd><dt><code>MM_MODEM_GSM_BAND_PCS = 0x8</code></dt><dd>GSM/GPRS/EDGE 1900 MHz</dd><dt><code>MM_MODEM_GSM_BAND_G850 = 0x10</code></dt><dd>GSM/GPRS/EDGE 850 MHz</dd><dt><code>MM_MODEM_GSM_BAND_U2100 = 0x20</code></dt><dd>WCDMA 2100 MHz (Class I)</dd><dt><code>MM_MODEM_GSM_BAND_U1800 = 0x40</code></dt><dd>WCDMA 3GPP 1800 MHz (Class III)</dd><dt><code>MM_MODEM_GSM_BAND_U17IV = 0x80</code></dt><dd>WCDMA 3GPP AWS 1700/2100 MHz (Class IV)</dd><dt><code>MM_MODEM_GSM_BAND_U800 = 0x100</code></dt><dd>WCDMA 3GPP UMTS 800 MHz (Class VI)</dd><dt><code>MM_MODEM_GSM_BAND_U850 = 0x200</code></dt><dd>WCDMA 3GPP UMTS 850 MHz (Class V)</dd><dt><code>MM_MODEM_GSM_BAND_U900 = 0x400</code></dt><dd>WCDMA 3GPP UMTS 900 MHz (Class VIII)</dd><dt><code>MM_MODEM_GSM_BAND_U17IX = 0x800</code></dt><dd>WCDMA 3GPP UMTS 1700 MHz (Class IX)</dd><dt><code>MM_MODEM_GSM_BAND_U1900 = 0x1000</code></dt><dd>WCDMA 3GPP UMTS 1900 MHz (Class II)</dd><dt><code>MM_MODEM_GSM_BAND_U2600 = 0x2000</code></dt><dd>WCDMA 3GPP UMTS 2600 MHz (Class VII, internal)</dd></dl><h3 xmlns=""><a name="type-MM_MODEM_GSM_FACILITY" id="type-MM_MODEM_GSM_FACILITY">MM_MODEM_GSM_FACILITY</a></h3>
+        A bitfield describing which facilities have a lock enabled, i.e.,
+        requires a pin or unlock code. The facilities include the
+        personalizations (device locks) described in 3GPP spec TS 22.022,
+        and the PIN and PIN2 locks, which are SIM locks.
+      <dl><dt><code>MM_MODEM_GSM_FACILITY_NONE = 0x0</code></dt><dd>No facility</dd><dt><code>MM_MODEM_GSM_FACILITY_SIM = 0x1</code></dt><dd>SIM lock</dd><dt><code>MM_MODEM_GSM_FACILITY_FIXED_DIALING = 0x2</code></dt><dd>Fixed dialing (PIN2) SIM lock</dd><dt><code>MM_MODEM_GSM_FACILITY_PH_SIM = 0x4</code></dt><dd>Device is locked to a specific SIM</dd><dt><code>MM_MODEM_GSM_FACILITY_PH_FSIM = 0x8</code></dt><dd>Device is locked to first SIM inserted</dd><dt><code>MM_MODEM_GSM_FACILITY_NET_PERS = 0x10</code></dt><dd>Network personalization</dd><dt><code>MM_MODEM_GSM_FACILITY_NET_SUB_PERS = 0x20</code></dt><dd>Network subset personalization</dd><dt><code>MM_MODEM_GSM_FACILITY_PROVIDER_PERS = 0x40</code></dt><dd>Service provider personalization</dd><dt><code>MM_MODEM_GSM_FACILITY_CORP_PERS = 0x80</code></dt><dd>Corporate personalization</dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.Card" id="org.freedesktop.ModemManager.Modem.Gsm.Card"></a>org.freedesktop.ModemManager.Modem.Gsm.Card</h1>
+      This interface implements functionality pertaining to the SIM card.
+    <h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.GetImei" id="org.freedesktop.ModemManager.Modem.Gsm.Card.GetImei">GetImei</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+        Get the IMEI of the modem.
+      </div><div><h4>Returns</h4><dl><dt><code>imei</code> -
+      <code>s</code></dt><dd>
+          The IMEI.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.GetImsi" id="org.freedesktop.ModemManager.Modem.Gsm.Card.GetImsi">GetImsi</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+        Get the IMSI of the SIM card.
+      </div><div><h4>Returns</h4><dl><dt><code>imsi</code> -
+      <code>s</code></dt><dd>
+          The IMSI.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.GetOperatorId" id="org.freedesktop.ModemManager.Modem.Gsm.Card.GetOperatorId">GetOperatorId</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+        Returns the ID of the network operator that issued the SIM card,
+        formatted as a 5 or 6-digit MCC/MNC code (ex "310410").
+      </div><div><h4>Returns</h4><dl><dt><code>imsi</code> -
+      <code>s</code></dt><dd>
+          The operator ID formatted as an MCC/MNC code.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.GetSpn" id="org.freedesktop.ModemManager.Modem.Gsm.Card.GetSpn">GetSpn</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+	Returns the SPN (Service Provider Name) from the SIM card,
+      </div><div><h4>Returns</h4><dl><dt><code>spn</code> -
+      <code>s</code></dt><dd>
+	  The Service Provider Name.
+	</dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.SendPuk" id="org.freedesktop.ModemManager.Modem.Gsm.Card.SendPuk">SendPuk</a> (
+        s: puk, s: pin
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Send the PUK and a new PIN to unlock the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>puk</code> -
+      <code>s</code></dt><dd>
+          The PUK code.
+        </dd><dt><code>pin</code> -
+      <code>s</code></dt><dd>
+          The PIN code.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.SendPin" id="org.freedesktop.ModemManager.Modem.Gsm.Card.SendPin">SendPin</a> (
+        s: pin
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Send the PIN to unlock the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>pin</code> -
+      <code>s</code></dt><dd>
+          The PIN code.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.EnablePin" id="org.freedesktop.ModemManager.Modem.Gsm.Card.EnablePin">EnablePin</a> (
+        s: pin, b: enabled
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Enable or disable the PIN checking.
+      </div><div><h4>Parameters</h4><dl><dt><code>pin</code> -
+      <code>s</code></dt><dd>
+          The PIN code.
+        </dd><dt><code>enabled</code> -
+      <code>b</code></dt><dd>
+          True to enable PIN checking.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Card.ChangePin" id="org.freedesktop.ModemManager.Modem.Gsm.Card.ChangePin">ChangePin</a> (
+        s: old_pin, s: new_pin
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Change the PIN code.
+      </div><div><h4>Parameters</h4><dl><dt><code>old_pin</code> -
+      <code>s</code></dt><dd>
+          The current PIN code.
+        </dd><dt><code>new_pin</code> -
+      <code>s</code></dt><dd>
+          The new PIN code.
+        </dd></dl></div></div><p>Interface has no signals.</p><h2>Properties:</h2><dl><dt><code>SimIdentifier</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        An obfuscated SIM identifier based on the IMSI or the ICCID.  This may
+        be available before the PIN has been entered depending on the device
+        itself.
+      </dd><dt><code>SupportedBands</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a>)
+    </dt><dd>
+        DEPRECATED; should not be used in new applications.  Use the
+        SupportedBands property of the Gsm.Network interface instead.
+      </dd><dt><code>SupportedModes</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_DEPRECATED_MODE">MM_MODEM_GSM_DEPRECATED_MODE</a>)
+    </dt><dd>
+        DEPRECATED; should not be used in new applications.  Use the
+        AccessTechnology property, AllowedMode property, and the SetAllowedMode()
+        method of the Gsm.Network interface instead.
+      </dd><dt><code>EnabledFacilityLocks</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_FACILITY">MM_MODEM_GSM_FACILITY</a>)
+    </dt><dd>
+        Facilities for which PIN locking is enabled.
+      </dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts"></a>org.freedesktop.ModemManager.Modem.Gsm.Contacts</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Add" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Add">Add</a> (
+        s: name, s: number
+        ) &#8594;
+        u</h3><div class="docstring">
+        Add a new contact to the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>name</code> -
+      <code>s</code></dt><dd>
+          The name of the contact.
+        </dd><dt><code>number</code> -
+      <code>s</code></dt><dd>
+          The phone number of the contact.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the new contact.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Delete" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Delete">Delete</a> (
+        u: index
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Delete a contact from the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the contact.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Get" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Get">Get</a> (
+        u: index
+        ) &#8594;
+        (uss)</h3><div class="docstring">
+        Retrieve a contact from the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the contact.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>contact</code> -
+      <code>(uss)</code></dt><dd>
+          The contact structure containing index, name, and number.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.List" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.List">List</a> (
+        
+        ) &#8594;
+        a(uss)</h3><div class="docstring">
+        List all contacts on the SIM card.
+      </div><div><h4>Returns</h4><dl><dt><code>results</code> -
+      <code>a(uss)</code></dt><dd>
+          The list of contacts where each contact has an index, name, and number.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Find" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.Find">Find</a> (
+        s: pattern
+        ) &#8594;
+        a(uss)</h3><div class="docstring">
+        Find a contact from the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>pattern</code> -
+      <code>s</code></dt><dd>
+          The pattern to search for.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>results</code> -
+      <code>a(uss)</code></dt><dd>
+          The list of matching contacts where a contact has an index, name, and number.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Contacts.GetCount" id="org.freedesktop.ModemManager.Modem.Gsm.Contacts.GetCount">GetCount</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring">
+        Get the number of contacts stored on the SIM card.
+      </div><div><h4>Returns</h4><dl><dt><code>count</code> -
+      <code>u</code></dt><dd>
+          The number of contacts.
+        </dd></dl></div></div><p>Interface has no signals.</p><p>Interface has no properties.</p>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.Hso" id="org.freedesktop.ModemManager.Modem.Gsm.Hso"></a>org.freedesktop.ModemManager.Modem.Gsm.Hso</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Hso.Authenticate" id="org.freedesktop.ModemManager.Modem.Gsm.Hso.Authenticate">Authenticate</a> (
+        s: username, s: password
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Authenticate using the passed user name and password.
+      </div><div><h4>Parameters</h4><dl><dt><code>username</code> -
+      <code>s</code></dt><dd></dd><dt><code>password</code> -
+      <code>s</code></dt><dd></dd></dl></div></div><p>Interface has no signals.</p><p>Interface has no properties.</p>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.Network" id="org.freedesktop.ModemManager.Modem.Gsm.Network"></a>org.freedesktop.ModemManager.Modem.Gsm.Network</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.Register" id="org.freedesktop.ModemManager.Modem.Gsm.Network.Register">Register</a> (
+        s: network_id
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Register the device to network.
+      </div><div><h4>Parameters</h4><dl><dt><code>network_id</code> -
+      <code>s</code></dt><dd>
+          The network ID to register. An empty string can be used to register to the home network.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.Scan" id="org.freedesktop.ModemManager.Modem.Gsm.Network.Scan">Scan</a> (
+        
+        ) &#8594;
+        aa{ss}</h3><div class="docstring">
+        Scan for available networks.
+      </div><div><h4>Returns</h4><dl><dt><code>results</code> -
+      <code>aa{ss}</code></dt><dd>
+          <p xmlns="">Found networks. It's an array of dictionaries (strings for both
+            keys and values) with each array element describing a mobile network
+            found in the scan.  Each dict may include one or more of the following
+            keys:</p>
+          <ul xmlns="">
+            <li>
+              "status": a number representing network availability status as
+              defined in 3GPP TS 27.007 section 7.3.  e.g. "0" (unknown), "1"
+              (available), "2" (current), or "3" (forbidden).  This key will
+              always be present.
+            </li>
+            <li>
+              "operator-long": long-format name of operator.  If the name is
+              unknown, this field should not be present.
+            </li>
+            <li>
+              "operator-short": short-format name of operator.  If the name is
+              unknown, this field should not be present.
+            </li>
+            <li>
+              "operator-num": mobile code of the operator.  Returned in the
+              format "MCCMNC", where MCC is the three-digit ITU E.212 Mobile
+              Country Code and MNC is the  two- or three-digit GSM Mobile
+              Network Code.  e.g. "31026" or "310260".
+            </li>
+            <li>
+              "access-tech": a number representing the access technology used by
+              this mobile network as described in 3GPP TS 27.007 section 7.3.
+              e.g. "0" (GSM), "1" (GSM Compact), "2" (UTRAN/UMTS), "3" (EDGE),
+              etc.
+            </li>
+          </ul>
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.SetApn" id="org.freedesktop.ModemManager.Modem.Gsm.Network.SetApn">SetApn</a> (
+        s: apn
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Set the APN.
+      </div><div><h4>Parameters</h4><dl><dt><code>apn</code> -
+      <code>s</code></dt><dd>
+          The APN.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.GetSignalQuality" id="org.freedesktop.ModemManager.Modem.Gsm.Network.GetSignalQuality">GetSignalQuality</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring">
+        Get the current signal quality.
+      </div><div><h4>Returns</h4><dl><dt><code>quality</code> -
+      <code>u</code></dt><dd>
+          Signal quality (percent).
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.SetBand" id="org.freedesktop.ModemManager.Modem.Gsm.Network.SetBand">SetBand</a> (
+        u: band
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Sets the bands the device is allowed to use when connecting to a mobile network.
+      </div><div><h4>Parameters</h4><dl><dt><code>band</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a>)
+    </dt><dd>
+          The desired bands, as a set of flags.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.GetBand" id="org.freedesktop.ModemManager.Modem.Gsm.Network.GetBand">GetBand</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring">
+        Returns the current bands the device is using.  (Note for plugin writers: returned value must not be ANY)
+      </div><div><h4>Returns</h4><dl><dt><code>band</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a>)
+    </dt><dd>
+          The current bands, as a set of flags.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.SetNetworkMode" id="org.freedesktop.ModemManager.Modem.Gsm.Network.SetNetworkMode">SetNetworkMode</a> (
+        u: mode
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Set the desired mode the device may use when connecting to a mobile
+        network (DEPRECATED; see SetAllowedMode instead).
+      </div><div><h4>Parameters</h4><dl><dt><code>mode</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE">MM_MODEM_GSM_NETWORK_DEPRECATED_MODE</a>)
+    </dt><dd>
+          The desired network mode.  Only one mode may be specified, and may not be UNKNOWN.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.GetNetworkMode" id="org.freedesktop.ModemManager.Modem.Gsm.Network.GetNetworkMode">GetNetworkMode</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring">
+        Returns the current network mode of the device (DEPRECATED; does not
+        allow returning both the saved mode preference *and* the current access
+        technology of the device at the same time.  See the AllowedMode
+        property instead).
+      </div><div><h4>Returns</h4><dl><dt><code>mode</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE">MM_MODEM_GSM_NETWORK_DEPRECATED_MODE</a>)
+    </dt><dd>
+          Returns the general network mode (ex. 2G/3G preference) of the device.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.GetRegistrationInfo" id="org.freedesktop.ModemManager.Modem.Gsm.Network.GetRegistrationInfo">GetRegistrationInfo</a> (
+        
+        ) &#8594;
+        (uss)</h3><div class="docstring">
+        Get the registration status and the current operator (if registered).
+      </div><div><h4>Returns</h4><dl><dt><code>info</code> -
+      <code>(uss)</code></dt><dd>
+          The returned information is composed of the following items in the
+          following order:
+          <ul xmlns="">
+            <li>
+              Mobile registration status as defined in 3GPP TS 27.007 section
+              10.1.19.  See the MM_MODEM_GSM_NETWORK_REG_STATUS enumeration for
+              possible values.
+            </li>
+            <li>
+              Current operator code of the operator to which the mobile is
+              currently registered.  Returned in the format "MCCMNC", where MCC
+              is the three-digit ITU E.212 Mobile Country Code and MNC is the
+              two- or three-digit GSM Mobile Network Code.  If the MCC and MNC
+              are not known or the mobile is not registered to a mobile network,
+              this value should be a zero-length (blank) string. e.g. "31026"
+              or "310260".
+            </li>
+            <li>
+              Current operator name of the operator to which the mobile is
+              currently registered.  If the operator name is not knowon or the
+              mobile is not registered to a mobile network, this value should
+              be a zero-length (blank) string.
+            </li>
+          </ul>
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.SetAllowedMode" id="org.freedesktop.ModemManager.Modem.Gsm.Network.SetAllowedMode">SetAllowedMode</a> (
+        u: mode
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Set the access technologies a device is allowed to use when connecting
+        to a mobile network.
+      </div><div><h4>Parameters</h4><dl><dt><code>mode</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_ALLOWED_MODE">MM_MODEM_GSM_ALLOWED_MODE</a>)
+    </dt><dd>
+          The allowed mode.  The device may not support all modes; see
+          the org.freedesktop.ModemManager.Gsm.Card.SupportedModes property for
+          allowed modes for each device.  All devices support the "ANY" flag.
+        </dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.SignalQuality" id="org.freedesktop.ModemManager.Modem.Gsm.Network.SignalQuality">SignalQuality</a> (
+        u: quality
+        )</h3><div class="docstring">
+        The signal quality changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>quality</code> -
+      <code>u</code></dt><dd>
+          The new quality in percent, 0..100.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.RegistrationInfo" id="org.freedesktop.ModemManager.Modem.Gsm.Network.RegistrationInfo">RegistrationInfo</a> (
+        u: status, s: operator_code, s: operator_name
+        )</h3><div class="docstring">
+        The registration status changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>status</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_NETWORK_REG_STATUS">MM_MODEM_GSM_NETWORK_REG_STATUS</a>)
+    </dt><dd>
+          Mobile registration status as defined in 3GPP TS 27.007 section
+          10.1.19.
+        </dd><dt><code>operator_code</code> -
+      <code>s</code></dt><dd>
+          Current operator code of the operator to which the mobile is
+          currently registered.  Returned in the format "MCCMNC", where MCC
+          is the three-digit ITU E.212 Mobile Country Code and MNC is the
+          two- or three-digit GSM Mobile Network Code.  If the MCC and MNC
+          are not known or the mobile is not registered to a mobile network,
+          this value should be a zero-length (blank) string.  e.g. "31026" or
+          "310260".
+        </dd><dt><code>operator_name</code> -
+      <code>s</code></dt><dd>
+          Current operator name of the operator to which the mobile is
+          currently registered.  If the operator name is not knowon or the
+          mobile is not registered to a mobile network, this value should
+          be a zero-length (blank) string.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Network.NetworkMode" id="org.freedesktop.ModemManager.Modem.Gsm.Network.NetworkMode">NetworkMode</a> (
+        u: mode
+        )</h3><div class="docstring">
+        The network mode preference changed. (DEPRECATED; see documentation
+        for GetNetworkMode/SetNetworkMode)
+      </div><div><h4>Parameters</h4><dl><dt><code>mode</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE">MM_MODEM_GSM_NETWORK_DEPRECATED_MODE</a>)
+    </dt><dd>The new network mode.</dd></dl></div></div><h2>Properties:</h2><dl><dt><code>AllowedMode</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_ALLOWED_MODE">MM_MODEM_GSM_ALLOWED_MODE</a>)
+    </dt><dd>
+        The allowed access technologies (eg 2G/3G preference) the device is allowed
+        to use when connecting to a mobile network.
+      </dd><dt><code>AccessTechnology</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_ACCESS_TECH">MM_MODEM_GSM_ACCESS_TECH</a>)
+    </dt><dd>
+        The current network access technology used by the device to communicate
+        with the base station.  (Note to plugin writers: if the device's access
+        technology cannot be determined, use UNKNOWN)
+      </dd><dt><code>SupportedBands</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a>)
+    </dt><dd>
+        Bands supported by the card.  (Note for plugin writers: returned value
+        must not contain ANY)
+      </dd></dl><h2>Enumerated types:</h2><h3><a name="type-MM_MODEM_GSM_NETWORK_REG_STATUS" id="type-MM_MODEM_GSM_NETWORK_REG_STATUS">MM_MODEM_GSM_NETWORK_REG_STATUS</a></h3>
+        GSM registration code as defined in 3GPP TS 27.007 section 10.1.19.
+      <dl><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_IDLE = 0</code></dt><dd>
+          Not registered, not searching for new operator to register.
+        </dd><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_HOME = 1</code></dt><dd>
+          Registered on home network.
+        </dd><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_SEARCHING = 2</code></dt><dd>
+          Not registered, searching for new operator to register with.
+        </dd><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_DENIED = 3</code></dt><dd>
+          Registration denied.
+        </dd><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_UNKNOWN = 4</code></dt><dd>
+          Unknown registration status.
+        </dd><dt><code>MM_MODEM_GSM_NETWORK_REG_STATUS_ROAMING = 5</code></dt><dd>
+          Registered on a roaming network.
+        </dd></dl><h3><a name="type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE" id="type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE">MM_MODEM_GSM_NETWORK_DEPRECATED_MODE</a></h3>
+        DEPRECATED; should not be used in new applications.  Use
+        AccessTechnology, AllowedMode, and SetAllowedMode() instead.
+      <dl><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_ANY = 0</code></dt><dd>Any network mode can be used</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_GPRS = 1</code></dt><dd>GPRS</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_EDGE = 2</code></dt><dd>EDGE</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_UMTS = 3</code></dt><dd>UMTS (3G)</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_HSDPA = 4</code></dt><dd>HSDPA</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_2G_PREFERRED = 5</code></dt><dd>Prefer 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_3G_PREFERRED = 6</code></dt><dd>Prefer 3G (UMTS/HSDPA/HSUPA/HSPA)</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_2G_ONLY = 7</code></dt><dd>Use only 2G (GPRS or EDGE)</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_3G_ONLY = 8</code></dt><dd>Use only 3G (UMTS/HSDPA/HSUPA/HSPA)</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_HSUPA = 9</code></dt><dd>HSUPA</dd><dt><code>MM_MODEM_GSM_NETWORK_DEPRECATED_MODE_HSPA = 10</code></dt><dd>HSPA (HSDPA + HSUPA)</dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS" id="org.freedesktop.ModemManager.Modem.Gsm.SMS"></a>org.freedesktop.ModemManager.Modem.Gsm.SMS</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.Delete" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.Delete">Delete</a> (
+        u: index
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Delete an SMS message.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the SMS.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.Get" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.Get">Get</a> (
+        u: index
+        ) &#8594;
+        a{sv}</h3><div class="docstring">
+        Retrieve an SMS from the SIM card.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the SMS.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>sms</code> -
+      <code>a{sv}</code></dt><dd>
+          A dictionary containing SMS properties of the SMS specified by the given index.  This dictionary may contain the following key/value pairs:
+
+          number   : string - Phone number (mandatory)
+          text     : string - SMS text (mandatory, empty if data cannot be decoded)
+          data     : byte array - SMS user data (TP-UD) (mandatory)
+          data-coding-scheme: uint (0..255) - SMS user data coding scheme (TP-DCS) (mandatory)
+          smsc     : string - SMS service center number (optional)
+          class    : uint (0..3) - Message importance and location (optional)
+          completed: boolean - Whether all message parts have been received or not (optional)
+          index    : uint - Index of message (for Get and Delete) (optional)
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.GetFormat" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.GetFormat">GetFormat</a> (
+        
+        ) &#8594;
+        u</h3><div class="docstring"></div><div><h4>Returns</h4><dl><dt><code>result</code> -
+      <code>u</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetFormat" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetFormat">SetFormat</a> (
+        u: format
+        ) &#8594;
+        nothing</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>format</code> -
+      <code>u</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.GetSmsc" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.GetSmsc">GetSmsc</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring"></div><div><h4>Returns</h4><dl><dt><code>result</code> -
+      <code>s</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetSmsc" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetSmsc">SetSmsc</a> (
+        s: smsc
+        ) &#8594;
+        nothing</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>smsc</code> -
+      <code>s</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.List" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.List">List</a> (
+        
+        ) &#8594;
+        aa{sv}</h3><div class="docstring"></div><div><h4>Returns</h4><dl><dt><code>result</code> -
+      <code>aa{sv}</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.Save" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.Save">Save</a> (
+        a{sv}: properties
+        ) &#8594;
+        au</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          SMS properties to save with the following key values:
+
+          number   : string - Phone number (mandatory)
+          text     : string - SMS text (mandatory)
+          smsc     : string - SMS service center number (optional)
+          relative-validity : uint - Minutes until the SMS expires in SMSC (optional)
+          class    : uint (0..3) - Message importance and location (optional)
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>index</code> -
+      <code>au</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.Send" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.Send">Send</a> (
+        a{sv}: properties
+        ) &#8594;
+        au</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          SMS properties to save with the following key values:
+
+          number   : string - Phone number (mandatory)
+          text     : string - SMS text (mandatory)
+          smsc     : string - SMS service center number (optional)
+          relative-validity : uint - Minutes until the SMS expires in SMSC (optional)
+          class    : uint (0..3) - Message importance and location (optional)
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>result</code> -
+      <code>au</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.SendFromStorage" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.SendFromStorage">SendFromStorage</a> (
+        u: index
+        ) &#8594;
+        nothing</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd></dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetIndication" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.SetIndication">SetIndication</a> (
+        u: mode, u: mt, u: bm, u: ds, u: bfr
+        ) &#8594;
+        nothing</h3><div class="docstring"></div><div><h4>Parameters</h4><dl><dt><code>mode</code> -
+      <code>u</code></dt><dd></dd><dt><code>mt</code> -
+      <code>u</code></dt><dd></dd><dt><code>bm</code> -
+      <code>u</code></dt><dd></dd><dt><code>ds</code> -
+      <code>u</code></dt><dd></dd><dt><code>bfr</code> -
+      <code>u</code></dt><dd></dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.SmsReceived" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.SmsReceived">SmsReceived</a> (
+        u: index, b: complete
+        )</h3><div class="docstring">
+        Emitted when any part of a new SMS has been received (but not for subsequent parts, if any).  Not all parts may have been received and the message may not be complete; if it is, the 'complete' argument will be TRUE.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          Index of the new SMS.
+        </dd><dt><code>complete</code> -
+      <code>b</code></dt><dd>
+          TRUE if all message parts have been received, otherwise FALSE.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.SMS.Completed" id="org.freedesktop.ModemManager.Modem.Gsm.SMS.Completed">Completed</a> (
+        u: index, b: completed
+        )</h3><div class="docstring">
+        Emitted when the complete-ness status of an SMS message changes.  An SMS may not necessarily be complete when the first part is received; this signal will be emitted when all parts have been received, even for single-part messages.
+      </div><div><h4>Parameters</h4><dl><dt><code>index</code> -
+      <code>u</code></dt><dd>
+          The index of the SMS.
+        </dd><dt><code>completed</code> -
+      <code>b</code></dt><dd>
+          TRUE if all message parts have been received, otherwise FALSE.
+        </dd></dl></div></div><p>Interface has no properties.</p>
+
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Gsm.Ussd" id="org.freedesktop.ModemManager.Modem.Gsm.Ussd"></a>org.freedesktop.ModemManager.Modem.Gsm.Ussd</h1><h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Initiate" id="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Initiate">Initiate</a> (
+        s: command
+        ) &#8594;
+        s</h3><div class="docstring">
+        Sends a USSD command string to the network initiating a USSD session.
+        When the request is handled by the network, the method returns the
+        response or an appropriate error.  The network may be awaiting further
+        response from the ME after returning from this method and no new command
+        can be initiated until this one is cancelled or ended.
+      </div><div><h4>Parameters</h4><dl><dt><code>command</code> -
+      <code>s</code></dt><dd>
+          The command to start the USSD session with.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>reply</code> -
+      <code>s</code></dt><dd>
+          The network response to the command which started the USSD session.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Respond" id="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Respond">Respond</a> (
+        s: response
+        ) &#8594;
+        s</h3><div class="docstring">
+        Respond to a USSD request that is either initiated by the mobile network,
+        or that is awaiting further input after Initiate() was called.
+      </div><div><h4>Parameters</h4><dl><dt><code>response</code> -
+      <code>s</code></dt><dd>
+          The response to network-initiated USSD command, or a response to a
+          request for further input.
+        </dd></dl></div><div><h4>Returns</h4><dl><dt><code>reply</code> -
+      <code>s</code></dt><dd>
+          The network reply to this response to the network-initiated USSD
+          command.  The reply may require further responses.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Cancel" id="org.freedesktop.ModemManager.Modem.Gsm.Ussd.Cancel">Cancel</a> (
+        
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Cancel an ongoing USSD session, either mobile or network initiated.
+      </div></div><p>Interface has no signals.</p><h2>Properties:</h2><dl><dt><code>State</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        Indicates the state of any ongoing USSD session.  Values may be one of
+        the following: "idle" (no active session), "active" (a session is active
+        and the mobile is waiting for a response), "user-response" (the network
+        is waiting for the client's response, which must be sent using Respond()).
+      </dd><dt><code>NetworkNotification</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        Contains any network-initiated request to which no USSD response is
+        required.  When no USSD session is active, or when there is no network-
+        initiated request, this property will be a zero-length string.
+      </dd><dt><code>NetworkRequest</code> -
+      <code>s</code> -
+      <code>(read)</code></dt><dd>
+        Contains any pending network-initiated request for a response.  Client
+        should call Respond() with the appropriate response to this request.
+        When no USSD session is active, or when there is no pending
+        network-initiated request, this property will be a zero-length string.
+      </dd></dl>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Firmware" id="org.freedesktop.ModemManager.Modem.Firmware"></a>org.freedesktop.ModemManager.Modem.Firmware</h1>
+      This interface allows clients to select or install firmware images on
+      modems.
+
+      Firmware slots and firmware images are identified by arbitrary opaque
+      strings.
+
+      Firmware images are represented as dictionaries of properties.
+      Certain properties are pre-defined, and some are required:
+
+      Name (string, required): A user-readable name for the firmware image.
+      Version (string, optional): The version of the firmware.  The format is
+        unspecified; tools attempting to upgrade firmware automatically must
+        understand the versioning scheme used by the modem driver they are
+        interacting with.  May be displayed to the user.
+    <h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Firmware.List" id="org.freedesktop.ModemManager.Modem.Firmware.List">List</a> (
+        
+        ) &#8594;
+        s, a{sa{sv}}, a{sa{sv}}</h3><div class="docstring">
+        List installed and available firmware images.
+
+        Depending on the type of modem, installed images may be stored on the
+        host or the modem.  The distinction between "installed" and
+        "available" is not one of where the firmware is stored, but that
+        installed images can be selected non-destructively, while available
+        images must be installed into a slot, possibly overwriting another
+        installed image.
+      </div><div><h4>Returns</h4><dl><dt><code>selected</code> -
+      <code>s</code></dt><dd>
+          The identifier of the selected firmware slot, or the empty string if
+          no slot is selected (such as if all slots are empty, or no slots
+          exist).
+        </dd><dt><code>installed</code> -
+      <code>a{sa{sv}}</code></dt><dd>
+          A dictionary of slots into which firmware is and/or can be
+          installed.  The key of each entry is the identifier of the slot,
+          and the value is either an empty dictionary if the slot is empty,
+          or a dictionary of properties of the firmware image installed in
+          that slot.
+
+          The slot identifiers and the mapping between slots and firmware
+          images are guaranteed to remain stable only as long as the modem
+          remains present.
+        </dd><dt><code>available</code> -
+      <code>a{sa{sv}}</code></dt><dd>
+          A dictionary of available firmware images.  The key of each entry is
+          the identifier of the image, and the value is a dictionary of
+          properties of the image.
+
+          The image identifiers are guaranteed to remain stable only as  long
+          as the modem remains present.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Firmware.Select" id="org.freedesktop.ModemManager.Modem.Firmware.Select">Select</a> (
+        s: slot
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Selects a different firmware image to use, and immediately resets the
+        modem so that it begins using the new firmware image.
+
+        Select will fail if the identifier does not match any of the slot
+        identifiers returned by List, or if the slot could not be selected
+        for some reason.
+      </div><div><h4>Parameters</h4><dl><dt><code>slot</code> -
+      <code>s</code></dt><dd>
+          The identifier of the firmware slot to select.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Firmware.Install" id="org.freedesktop.ModemManager.Modem.Firmware.Install">Install</a> (
+        s: image, s: slot
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Install an available firmware image into a slot.
+
+        Install does not guarantee that the image will be installed into the
+        specified slot, but does guarantee that, if the slot is empty, no
+        image will be overwritten, and if the slot is not empty, no image
+        other than the one in that slot will be overwritten.
+
+        Install will fail if either of the identifiers is invalid, or if the
+        image could not be installed into the slot for some reason.
+      </div><div><h4>Parameters</h4><dl><dt><code>image</code> -
+      <code>s</code></dt><dd>
+          The identifier of the firmware image to install.
+        </dd><dt><code>slot</code> -
+      <code>s</code></dt><dd>
+          The identifier of the slot into which the firmware should be
+          installed.
+        </dd></dl></div></div><p>Interface has no signals.</p><p>Interface has no properties.</p>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Location" id="org.freedesktop.ModemManager.Modem.Location"></a>org.freedesktop.ModemManager.Modem.Location</h1>
+      This interface allows devices to provide location information to client
+      applications.  Not all devices can provide this information, or even if
+      they do, they may not be able to provide it while a data session is
+      active.
+    <h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Location.Enable" id="org.freedesktop.ModemManager.Modem.Location.Enable">Enable</a> (
+        b: enable, b: signal_location
+        ) &#8594;
+        nothing</h3><div class="docstring">
+        Enable or disable location information gathering.  This method may
+        require the client to authenticate itself.  This method may also cause
+        any necessary functionality of the mobile be be turned on, including
+        enabling the modem device itself.
+      </div><div><h4>Parameters</h4><dl><dt><code>enable</code> -
+      <code>b</code></dt><dd>
+          TRUE to enable location information gathering, FALSE to disable.
+        </dd><dt><code>signal_location</code> -
+      <code>b</code></dt><dd>
+          When enabling location information gathering, this argument controls
+          whether the device emits signals with new location information or not.
+          When signals are emitted, any client application (including malicious
+          ones!) can listen for location updates unless D-Bus permissions
+          restrict these signals from certain users.  If further security is
+          desired, this argument can be set to FALSE to disable location
+          updates via D-Bus signals and require applications to call
+          authenticated APIs (like GetLocation) to get location information.
+          This argument is ignored when disabling location information
+          gathering.
+        </dd></dl></div></div><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Location.GetLocation" id="org.freedesktop.ModemManager.Modem.Location.GetLocation">GetLocation</a> (
+        
+        ) &#8594;
+        a{uv}</h3><div class="docstring">
+        Return current location information, if any.  This method may require
+        the client to authenticate itself.
+      </div><div><h4>Returns</h4><dl><dt><code>Location</code> -
+      <code>a{uv}</code>
+      (<a xmlns="" href="#type-Location_Information_Map">Location_Information_Map</a>)
+    </dt><dd>
+          Dict of available location information when location information
+          gathering is enabled.  If the modem supports multiple location types
+          it may return more than one here.
+        </dd></dl></div></div><p>Interface has no signals.</p><h2>Properties:</h2><dl><dt><code>Capabilities</code> -
+      <code>u</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-MM_MODEM_LOCATION_CAPABILITIES">MM_MODEM_LOCATION_CAPABILITIES</a>)
+    </dt><dd>
+        Location capabilities of the device.
+      </dd><dt><code>Enabled</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>
+        TRUE if location information gathering is enabled for this device, FALSE
+        if it is disabled. When disabled, the device will not provide location
+        information.
+      </dd><dt><code>SignalsLocation</code> -
+      <code>b</code> -
+      <code>(read)</code></dt><dd>
+        TRUE if location updates will be emitted via D-Bus signals, FALSE
+        if location updates will not be emitted.  See the Enable method for
+        more information.
+      </dd><dt><code>Location</code> -
+      <code>a{uv}</code> -
+      <code>(read)</code>
+      (<a xmlns="" href="#type-Location_Information_Map">Location_Information_Map</a>)
+    </dt><dd>
+        Dict of available location information when location information
+        gathering is enabled.  If the modem supports multiple location types
+        it may return more than one here.  Note that if the device was told
+        not to emit updated location information when location information
+        gathering was initially enabled, this property may not return
+        any location information for security reasons.
+      </dd></dl><h2>Sets of flags:</h2><h3 xmlns=""><a name="type-MM_MODEM_LOCATION_CAPABILITIES" id="type-MM_MODEM_LOCATION_CAPABILITIES">MM_MODEM_LOCATION_CAPABILITIES</a></h3><dl><dt><code>MM_MODEM_LOCATION_CAPABILITY_UNKNOWN = 0x0</code></dt><dd><p xmlns="">Unknown or no capabilties.</p></dd><dt><code>MM_MODEM_LOCATION_CAPABILITY_GPS_NMEA = 0x1</code></dt><dd>
+          <p xmlns="">For capability reporting, indicates the device is capable of
+            providing GPS NMEA-format location information.</p>
+
+          <p xmlns="">For location reporting, devices supporting this capability return
+            a string containing one or more NMEA sentences (D-Bus signature 's').
+            The manager will cache the most recent NMEA sentence of each type for
+            a period of time not less than 30 seconds.  When reporting multiple
+            NMEA sentences, sentences shall be separated by an ASCII Carriage
+            Return and Line Feed (&lt;CR&gt;&lt;LF&gt;) sequence.
+          </p>
+          <p xmlns="">
+            For example, if the device sends a $GPRMC sentence immediately
+            followed by a $GPGGA sentence, the reported location string would be
+            (where of course the &lt;CR&gt;&lt;LF&gt; is replaced with the actual
+            ASCII CR (0x0D) and LF (0x0A) control characters):
+            <pre>
+              $GPRMC,134523.92,V,,,,,,,030136,,,N*73&lt;CR&gt;&lt;LF&gt;$GPGGA,,,,,,0,00,0.5,,M,0.0001999,M,0.0000099,0000*45
+            </pre>
+            If the device sends a new $GPRMC three seconds later, the new $GPRMC
+            replaces the previously received $GPRMC sentence, and the updated
+            string would be:
+            <pre>
+              $GPRMC,134526.92,V,,,,,,,030136,,,N*76&lt;CR&gt;&lt;LF&gt;$GPGGA,,,,,,0,00,0.5,,M,0.0001999,M,0.0000099,0000*45
+            </pre>
+            If the device then sends a $GPGSA sentence about 5 seconds later, the
+            $GPGSA sentence is added to the string (since no $GPGSA sentence was
+            previously received in this session), the updated string would be:
+            <pre>
+              $GPRMC,134526.92,V,,,,,,,030136,,,N*76&lt;CR&gt;&lt;LF&gt;$GPGGA,,,,,,0,00,0.5,,M,0.0001999,M,0.0000099,0000*45&lt;CR&gt;&lt;LF&gt;$GPGSA,A,1,,,,,,,,,,,,,1.1,0.5,1.0*34
+            </pre>
+            The manager may discard any cached sentences older than 30 seconds.
+          </p>
+          <p xmlns="">This allows clients to read the latest positioning data as soon as
+            possible after they start, even if the device is not providing
+            frequent location data updates.
+          </p>
+        </dd><dt><code>MM_MODEM_LOCATION_CAPABILITY_GSM_LAC_CI = 0x2</code></dt><dd>
+          <p xmlns="">For capability reporting, indicates the device is capable of
+            providing GSM Location Area Code/Cell ID location information.</p>
+
+          <p xmlns="">For location reporting, devices supporting this
+            capability return a string in the format "MCC,MNC,LAC,CI" (without the
+            quotes of course) where the following applies:</p>
+          <ul xmlns="">
+            <li>
+              MCC is the three-digit ITU E.212 Mobile Country Code of the
+              network provider to which the mobile is currently registered.
+              This value should be the same MCC as reported by the
+              org.freedesktop.Modem.Gsm.Network.GetRegistrationInfo() method's
+              returned "operator code" argument.
+              e.g. "310"
+            </li>
+            <li>
+              MNC is the two- or three-digit GSM Mobile Network Code of the
+              network provider to which the mobile is currently registered.
+              This value should be the same MCC as reported by the
+              org.freedesktop.Modem.Gsm.Network.GetRegistrationInfo() method's
+              returned "operator code" argument.
+              e.g. "26" or "260"
+            </li>
+            <li>
+              LAC is the two-byte Location Area Code of the base station with
+              which the mobile is registered, in upper-case hexadecimal format
+              without leading zeros, as specified in 3GPP TS 27.007 section
+              10.1.19.  e.g. "84CD".
+            </li>
+            <li>
+              CI is the two- or four-byte Cell Identifier with which the mobile
+              is registered, in upper-case hexadecimal format without leading
+              zeros, as specified in 3GPP TS 27.007.  e.g. "2BAF" or "D30156".
+            </li>
+          </ul>
+          <p xmlns="">The entire string may only be composed of the ASCII digits [0-9],
+            the alphabetical characters [A-F], and the comma (,) character.  No
+            other characters are allowed.  For example: "310,260,8BE3,2BAF" or
+            "250,40,CE00,1CEAD8F0".</p>
+
+          <p xmlns="">If any of these four items (MCC,MNC,LAC,CI) is unknown or the
+            mobile is not registered with a network, then the GSM_LAC_CI location
+            information item should not be provided as a returned value from the
+            GetLocation() method or in the Location property.</p>
+        </dd><dt><code>MM_MODEM_LOCATION_CAPABILITY_GPS_RAW = 0x4</code></dt><dd>
+          <p xmlns="">For capability reporting, indicates the device is capable of
+            providing raw GPS information using a series of defined key/value
+            pairs.</p>
+
+          <p xmlns="">For location reporting, devices supporting this
+            capability return a D-Bus dict (signature a{sv}) mapping well-known
+            keys to values with defined formats.  The allowed key/value pairs
+            and their formats are:</p>
+          <table xmlns="">
+            <tr><th>Key</th><th>Value Type</th><th>Value contents</th><th>Example</th></tr>
+            <tr>
+              <td>latitude</td>
+              <td>d</td>
+              <td>Latitude in Decimal Degrees (positive numbers mean N quadrasphere, negative mean S quadrasphere)</td>
+              <td>38.889722 (ie, 38d 53' 22" N)</td>
+            </tr>
+            <tr>
+              <td>longitude</td>
+              <td>d</td>
+              <td>Longitude in Decimal Degrees (positive numbers mean E quadrasphere, negative mean W quadrasphere)</td>
+              <td>-77.008889 (ie, 77d 0' 32" W)</td>
+            </tr>
+            <tr>
+              <td>altitude</td>
+              <td>d</td>
+              <td>Altitude above sea level in meters</td>
+              <td>33.5</td>
+            </tr>
+            <tr>
+              <td>horiz-velocity</td>
+              <td>d</td>
+              <td>Horizontal velocity in meters-per-second</td>
+              <td>.5</td>
+            </tr>
+            <tr>
+              <td>vert-velocity</td>
+              <td>d</td>
+              <td>Vertical velocity in meters-per-second</td>
+              <td>.01</td>
+            </tr>
+          </table>
+          <p xmlns="">The 'latitude' and 'longitude' keys are required; other keys are
+            optional.</p>
+        </dd></dl><h2>Mapping types:</h2><div class="struct"><h3><a name="type-Location_Information_Map" id="type-Location_Information_Map">Location_Information_Map</a> - a{
+        u: Type &#8594; v: Data
+        }
+      </h3><div class="docstring">
+        A mapping from location type to type-specific location information.
+      </div><div><h4>Members</h4><dl><dt><code>Type</code> -
+      <code>u</code>
+      (<a xmlns="" href="#type-MM_MODEM_LOCATION_CAPABILITIES">MM_MODEM_LOCATION_CAPABILITIES</a>)
+    </dt><dd>
+          Identifies the type and format of the associated location information.
+          Contrary to the value description, this is not a bitfield but uses the
+          same values as the MM_MODEM_LOCATION_CAPABILITIES bitfield.
+        </dd><dt><code>Data</code> -
+      <code>v</code></dt><dd>
+          Contains type-specific location information.  See the documentation for
+          each type for a description of its data format.
+        </dd></dl></div></div>
+
+  <h1><a name="org.freedesktop.ModemManager.Modem.Time" id="org.freedesktop.ModemManager.Modem.Time"></a>org.freedesktop.ModemManager.Modem.Time</h1>
+      This interface allows clients to receive network time and timezone
+      updates broadcast by mobile networks.
+    <h2>Methods:</h2><div class="method"><h3><a name="org.freedesktop.ModemManager.Modem.Time.GetNetworkTime" id="org.freedesktop.ModemManager.Modem.Time.GetNetworkTime">GetNetworkTime</a> (
+        
+        ) &#8594;
+        s</h3><div class="docstring">
+        Gets the current network time.
+
+        This method will only work if the modem tracks, or can request, the
+        current network time; it will not attempt to use previously-received
+        network time updates on the host to guess the current network time.
+      </div><div><h4>Returns</h4><dl><dt><code>time</code> -
+      <code>s</code></dt><dd>
+          If the network time is known, a string containing a date and time in
+          ISO 8601 format.
+
+          If the network time is unknown, the empty string.
+        </dd></dl></div></div><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.ModemManager.Modem.Time.NetworkTimeChanged" id="org.freedesktop.ModemManager.Modem.Time.NetworkTimeChanged">NetworkTimeChanged</a> (
+        s: time
+        )</h3><div class="docstring">
+        Sent when the network time is updated.
+      </div><div><h4>Parameters</h4><dl><dt><code>time</code> -
+      <code>s</code></dt><dd>
+          If the network time is known, a string containing a date and time in
+          ISO 8601 format.
+
+          If the network time is unknown, the empty string.
+        </dd></dl></div></div><h2>Properties:</h2><dl><dt><code>NetworkTimezone</code> -
+      <code>a{sv}</code> -
+      <code>(read)</code></dt><dd>
+        The timezone data provided by the network.  It may include one of more
+        of the following fields:
+
+        'offset': offset of the timezone from UTC, in minutes (including DST,
+                  if applicable).
+        'dst_offset': amount of 'offset' that is due to DST, in minutes.
+        'leap_seconds': number of leap seconds included in the network time.
+      </dd></dl>
+
+  <h1><a name="org.freedesktop.DBus.Properties" id="org.freedesktop.DBus.Properties"></a>org.freedesktop.DBus.Properties</h1><p>Interface has no methods.</p><h2>Signals:</h2><div class="signal"><h3><a name="org.freedesktop.DBus.Properties.MmPropertiesChanged" id="org.freedesktop.DBus.Properties.MmPropertiesChanged">MmPropertiesChanged</a> (
+        s: interface, a{sv}: properties
+        )</h3><div class="docstring">
+        One or more properties' values changed.
+      </div><div><h4>Parameters</h4><dl><dt><code>interface</code> -
+      <code>s</code></dt><dd>
+          The D-Bus interface of the changed properties.
+        </dd><dt><code>properties</code> -
+      <code>a{sv}</code></dt><dd>
+          The changed property names and their new values.
+        </dd></dl></div></div><div class="signal"><h3><a name="org.freedesktop.DBus.Properties.PropertiesChanged" id="org.freedesktop.DBus.Properties.PropertiesChanged">PropertiesChanged</a> (
+        s: interface, a{sv}: changed_properties, as: invalidated_properties
+        )</h3><div class="docstring">
+        One or more properties value changed; this signal implements the
+        D-Bus specification's PropertiesChanged signal.
+      </div><div><h4>Parameters</h4><dl><dt><code>interface</code> -
+      <code>s</code></dt><dd>
+          The D-Bus interface of the changed properties.
+        </dd><dt><code>changed_properties</code> -
+      <code>a{sv}</code></dt><dd>
+          The changed property names and their new values.
+        </dd><dt><code>invalidated_properties</code> -
+      <code>as</code></dt><dd>
+          Properties which are now invalid, but for which the new value is not
+          emitted in this signal.  Clients interested in these properties should
+          issue a Get request for them to retrieve the new value.
+        </dd></dl></div></div><p>Interface has no properties.</p>
+<h1>Errors:</h1>
+  
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.SerialOpenFailed" id="org.freedesktop.ModemManager.Modem.SerialOpenFailed"></a>org.freedesktop.ModemManager.Modem.SerialOpenFailed</h2>
+      Could not open serial device.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.SerialSendFailed" id="org.freedesktop.ModemManager.Modem.SerialSendFailed"></a>org.freedesktop.ModemManager.Modem.SerialSendFailed</h2>
+      Could not write to the serial device.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.SerialResponseTimeout" id="org.freedesktop.ModemManager.Modem.SerialResponseTimeout"></a>org.freedesktop.ModemManager.Modem.SerialResponseTimeout</h2>
+      A response was not received in time.
+    
+
+<h1>Errors:</h1>
+  
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.General" id="org.freedesktop.ModemManager.Modem.General"></a>org.freedesktop.ModemManager.Modem.General</h2>
+      A generic error. An example of a generic error is ModemManager not being able to parse the response from modem.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.OperationNotSupported" id="org.freedesktop.ModemManager.Modem.OperationNotSupported"></a>org.freedesktop.ModemManager.Modem.OperationNotSupported</h2>
+      Operation not implemented by modem.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Connected" id="org.freedesktop.ModemManager.Modem.Connected"></a>org.freedesktop.ModemManager.Modem.Connected</h2>
+      Operation could not be performed while the modem is connected.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Disconnected" id="org.freedesktop.ModemManager.Modem.Disconnected"></a>org.freedesktop.ModemManager.Modem.Disconnected</h2>
+      Operation could not be performed while the modem is disconnected.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.OperationInProgress" id="org.freedesktop.ModemManager.Modem.OperationInProgress"></a>org.freedesktop.ModemManager.Modem.OperationInProgress</h2>
+      Operation could not be performed because it is already in progress.
+    
+
+<h1>Errors:</h1>
+  
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.NoCarrier" id="org.freedesktop.ModemManager.Modem.NoCarrier"></a>org.freedesktop.ModemManager.Modem.NoCarrier</h2>
+      No carrier.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.NoDialtone" id="org.freedesktop.ModemManager.Modem.NoDialtone"></a>org.freedesktop.ModemManager.Modem.NoDialtone</h2>
+      No dialtone.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Busy" id="org.freedesktop.ModemManager.Modem.Busy"></a>org.freedesktop.ModemManager.Modem.Busy</h2>
+      Busy.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.NoAnswer" id="org.freedesktop.ModemManager.Modem.NoAnswer"></a>org.freedesktop.ModemManager.Modem.NoAnswer</h2>
+      No answer.
+    
+
+<h1>Errors:</h1>
+  
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.PhoneFailure" id="org.freedesktop.ModemManager.Modem.Gsm.PhoneFailure"></a>org.freedesktop.ModemManager.Modem.Gsm.PhoneFailure</h2>
+      A phone failure.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NoConnection" id="org.freedesktop.ModemManager.Modem.Gsm.NoConnection"></a>org.freedesktop.ModemManager.Modem.Gsm.NoConnection</h2>
+      No connection to phone.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.LinkReserved" id="org.freedesktop.ModemManager.Modem.Gsm.LinkReserved"></a>org.freedesktop.ModemManager.Modem.Gsm.LinkReserved</h2>
+      Phone-adaptor link reserved.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.OperationNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.OperationNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.OperationNotAllowed</h2>
+      Operation not allowed.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.OperationNotSupported" id="org.freedesktop.ModemManager.Modem.Gsm.OperationNotSupported"></a>org.freedesktop.ModemManager.Modem.Gsm.OperationNotSupported</h2>
+      Operation not supported.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.PhSimPinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.PhSimPinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.PhSimPinRequired</h2>
+      PH-SIM PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.PhFSimPinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.PhFSimPinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.PhFSimPinRequired</h2>
+      PH-FSIM PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.PhFSimPukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.PhFSimPukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.PhFSimPukRequired</h2>
+      PH-FSIM PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimNotInserted" id="org.freedesktop.ModemManager.Modem.Gsm.SimNotInserted"></a>org.freedesktop.ModemManager.Modem.Gsm.SimNotInserted</h2>
+      SIM not inserted.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimPinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.SimPinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.SimPinRequired</h2>
+      SIM PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimPukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.SimPukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.SimPukRequired</h2>
+      SIM PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimFailure" id="org.freedesktop.ModemManager.Modem.Gsm.SimFailure"></a>org.freedesktop.ModemManager.Modem.Gsm.SimFailure</h2>
+      SIM failure.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimBusy" id="org.freedesktop.ModemManager.Modem.Gsm.SimBusy"></a>org.freedesktop.ModemManager.Modem.Gsm.SimBusy</h2>
+      SIM busy.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimWrong" id="org.freedesktop.ModemManager.Modem.Gsm.SimWrong"></a>org.freedesktop.ModemManager.Modem.Gsm.SimWrong</h2>
+      SIM wrong.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.IncorrectPassword" id="org.freedesktop.ModemManager.Modem.Gsm.IncorrectPassword"></a>org.freedesktop.ModemManager.Modem.Gsm.IncorrectPassword</h2>
+      Incorrect password.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimPin2Required" id="org.freedesktop.ModemManager.Modem.Gsm.SimPin2Required"></a>org.freedesktop.ModemManager.Modem.Gsm.SimPin2Required</h2>
+      SIM PIN2 required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.SimPuk2Required" id="org.freedesktop.ModemManager.Modem.Gsm.SimPuk2Required"></a>org.freedesktop.ModemManager.Modem.Gsm.SimPuk2Required</h2>
+      SIM PUK2 required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.MemoryFull" id="org.freedesktop.ModemManager.Modem.Gsm.MemoryFull"></a>org.freedesktop.ModemManager.Modem.Gsm.MemoryFull</h2>
+      Memory full.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.InvalidIndex" id="org.freedesktop.ModemManager.Modem.Gsm.InvalidIndex"></a>org.freedesktop.ModemManager.Modem.Gsm.InvalidIndex</h2>
+      Invalid index.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NotFound" id="org.freedesktop.ModemManager.Modem.Gsm.NotFound"></a>org.freedesktop.ModemManager.Modem.Gsm.NotFound</h2>
+      Not found.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.MemoryFailure" id="org.freedesktop.ModemManager.Modem.Gsm.MemoryFailure"></a>org.freedesktop.ModemManager.Modem.Gsm.MemoryFailure</h2>
+      Memory failure.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.TextTooLong" id="org.freedesktop.ModemManager.Modem.Gsm.TextTooLong"></a>org.freedesktop.ModemManager.Modem.Gsm.TextTooLong</h2>
+      Text string too long.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.InvalidChars" id="org.freedesktop.ModemManager.Modem.Gsm.InvalidChars"></a>org.freedesktop.ModemManager.Modem.Gsm.InvalidChars</h2>
+      Invalid characters in text string.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.DialStringTooLong" id="org.freedesktop.ModemManager.Modem.Gsm.DialStringTooLong"></a>org.freedesktop.ModemManager.Modem.Gsm.DialStringTooLong</h2>
+      Dial string too long.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.InvalidDialString" id="org.freedesktop.ModemManager.Modem.Gsm.InvalidDialString"></a>org.freedesktop.ModemManager.Modem.Gsm.InvalidDialString</h2>
+      Invalid characters in dial string.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NoNetwork" id="org.freedesktop.ModemManager.Modem.Gsm.NoNetwork"></a>org.freedesktop.ModemManager.Modem.Gsm.NoNetwork</h2>
+      No network service.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkTimeout" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkTimeout"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkTimeout</h2>
+      Network timeout.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkNotAllowed</h2>
+      Network not allowed - emergency calls only.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkPinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkPinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkPinRequired</h2>
+      Network personalization PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkPukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkPukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkPukRequired</h2>
+      Network personalization PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPinRequired</h2>
+      Network subset personalization PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.NetworkSubsetPukRequired</h2>
+      Network subset personalization PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.ServicePinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.ServicePinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.ServicePinRequired</h2>
+      Service provider personalization PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.ServicePukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.ServicePukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.ServicePukRequired</h2>
+      Service provider personalization PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.CorporatePinRequired" id="org.freedesktop.ModemManager.Modem.Gsm.CorporatePinRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.CorporatePinRequired</h2>
+      Corporate personalization PIN required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.CorporatePukRequired" id="org.freedesktop.ModemManager.Modem.Gsm.CorporatePukRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.CorporatePukRequired</h2>
+      Corporate personalization PUK required.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.HiddenKeyRequired" id="org.freedesktop.ModemManager.Modem.Gsm.HiddenKeyRequired"></a>org.freedesktop.ModemManager.Modem.Gsm.HiddenKeyRequired</h2>
+      Hidden key required. This key is required when accessing hidden phonebook entries.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.EapMethodNotSupported" id="org.freedesktop.ModemManager.Modem.Gsm.EapMethodNotSupported"></a>org.freedesktop.ModemManager.Modem.Gsm.EapMethodNotSupported</h2>
+      EAP method not supported.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.IncorrectParams" id="org.freedesktop.ModemManager.Modem.Gsm.IncorrectParams"></a>org.freedesktop.ModemManager.Modem.Gsm.IncorrectParams</h2>
+      Incorrect parameters.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.Unknown" id="org.freedesktop.ModemManager.Modem.Gsm.Unknown"></a>org.freedesktop.ModemManager.Modem.Gsm.Unknown</h2>
+      An unknown error.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMs" id="org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMs"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMs</h2>
+      Illegal MS.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMe" id="org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMe"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsIllegalMe</h2>
+      Illegal ME.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsServiceNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.GprsServiceNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsServiceNotAllowed</h2>
+      GPRS services not allowed.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsPlmnNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.GprsPlmnNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsPlmnNotAllowed</h2>
+      PLMN not allowed.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsLocationNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.GprsLocationNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsLocationNotAllowed</h2>
+      Location area not allowed.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsRoamingNotAllowed" id="org.freedesktop.ModemManager.Modem.Gsm.GprsRoamingNotAllowed"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsRoamingNotAllowed</h2>
+      Roaming not allowed in this location area.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsOptionNotSupported" id="org.freedesktop.ModemManager.Modem.Gsm.GprsOptionNotSupported"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsOptionNotSupported</h2>
+      Service option not supported.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsNotSubscribed" id="org.freedesktop.ModemManager.Modem.Gsm.GprsNotSubscribed"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsNotSubscribed</h2>
+      Requested service option not subscribed.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsOutOfOrder" id="org.freedesktop.ModemManager.Modem.Gsm.GprsOutOfOrder"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsOutOfOrder</h2>
+      Service option temporarily out of order.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsPdpAuthFailure" id="org.freedesktop.ModemManager.Modem.Gsm.GprsPdpAuthFailure"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsPdpAuthFailure</h2>
+      PDP authentication failure.
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsUnspecified" id="org.freedesktop.ModemManager.Modem.Gsm.GprsUnspecified"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsUnspecified</h2>
+      Unspecified GPRS error
+    
+
+  <h2><a name="org.freedesktop.ModemManager.Modem.Gsm.GprsInvalidClass" id="org.freedesktop.ModemManager.Modem.Gsm.GprsInvalidClass"></a>org.freedesktop.ModemManager.Modem.Gsm.GprsInvalidClass</h2>
+      Invalid mobile class.
+    
+
+<h1>Index</h1><h2>Index of interfaces</h2><ul><li><code><a href="#org.freedesktop.ModemManager">org.freedesktop.ModemManager</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem">org.freedesktop.ModemManager.Modem</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Simple">org.freedesktop.ModemManager.Modem.Simple</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Cdma">org.freedesktop.ModemManager.Modem.Cdma</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm">org.freedesktop.ModemManager.Modem.Gsm</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Card">org.freedesktop.ModemManager.Modem.Gsm.Card</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Contacts">org.freedesktop.ModemManager.Modem.Gsm.Contacts</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Hso">org.freedesktop.ModemManager.Modem.Gsm.Hso</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Network">org.freedesktop.ModemManager.Modem.Gsm.Network</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.SMS">org.freedesktop.ModemManager.Modem.Gsm.SMS</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Gsm.Ussd">org.freedesktop.ModemManager.Modem.Gsm.Ussd</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Firmware">org.freedesktop.ModemManager.Modem.Firmware</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Location">org.freedesktop.ModemManager.Modem.Location</a></code></li><li><code><a href="#org.freedesktop.ModemManager.Modem.Time">org.freedesktop.ModemManager.Modem.Time</a></code></li><li><code><a href="#org.freedesktop.DBus.Properties">org.freedesktop.DBus.Properties</a></code></li></ul><h2>Index of types</h2><ul><li><code><a href="#type-Location_Information_Map">Location_Information_Map</a></code>
+    - a{ u &#8594; v }
+  </li><li><code><a href="#type-MM_MODEM_CDMA_ACTIVATION_ERROR">MM_MODEM_CDMA_ACTIVATION_ERROR</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_CDMA_ACTIVATION_STATE">MM_MODEM_CDMA_ACTIVATION_STATE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_CDMA_REGISTRATION_STATE">MM_MODEM_CDMA_REGISTRATION_STATE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_ACCESS_TECH">MM_MODEM_GSM_ACCESS_TECH</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_ALLOWED_AUTH">MM_MODEM_GSM_ALLOWED_AUTH</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_ALLOWED_MODE">MM_MODEM_GSM_ALLOWED_MODE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_BAND">MM_MODEM_GSM_BAND</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_DEPRECATED_MODE">MM_MODEM_GSM_DEPRECATED_MODE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_FACILITY">MM_MODEM_GSM_FACILITY</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_NETWORK_DEPRECATED_MODE">MM_MODEM_GSM_NETWORK_DEPRECATED_MODE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_GSM_NETWORK_REG_STATUS">MM_MODEM_GSM_NETWORK_REG_STATUS</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_IP_METHOD">MM_MODEM_IP_METHOD</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_LOCATION_CAPABILITIES">MM_MODEM_LOCATION_CAPABILITIES</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_STATE">MM_MODEM_STATE</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_STATE_REASON">MM_MODEM_STATE_REASON</a></code>
+    - u</li><li><code><a href="#type-MM_MODEM_TYPE">MM_MODEM_TYPE</a></code>
+    - u</li></ul></body></html>

@@ -1,0 +1,541 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 20. Regression testing</title>
+
+<meta name="description" content="GNU Go Documentation: 20. Regression testing">
+<meta name="keywords" content="GNU Go Documentation: 20. Regression testing">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Regression"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_19.html#GTP-command-reference" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression-Testing" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_19.html#GTP" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Regression-testing"></a>
+<h1 class="chapter">20. Regression testing</h1>
+
+<p>The standard purpose of regression testing is to avoid getting the same
+bug twice. When a bug is found, the programmer fixes the bug and adds a
+test to the test suite. The test should fail before the fix and pass
+after the fix. When a new version is about to be released, all the tests
+in the regression test suite are run and if an old bug reappears, this
+will be seen quickly since the appropriate test will fail.
+</p>
+<p>The regression testing in GNU Go is slightly different. A typical test
+case involves specifying a position and asking the engine what move it
+would make. This is compared to one or more correct moves to decide
+whether the test case passes or fails. It is also stored whether a test
+case is expected to pass or fail, and deviations in this status signify
+whether a change has solved some problem and/or broken something
+else. Thus the regression tests both include positions highlighting some
+mistake being done by the engine, which are waiting to be fixed, and
+positions where the engine does the right thing, where we want to detect
+if a change breaks something.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Regression-Testing">20.1 Regression testing in GNU Go</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          Regression Testing in GNU Go
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Test-Suites">20.2 Test suites</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                 Test Suites
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Running-the-Regressions">20.3 Running the Regression Tests</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Running-regress_002epike">20.4 Running regress.pike</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Viewing-with-Emacs">20.5 Viewing tests with Emacs</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#HTML-Views">20.6 HTML Regression Views</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">                  HTML Views
+</td></tr>
+</table>
+
+<hr size="6">
+<a name="Regression-Testing"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Regression" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Test-Suites" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Regression-testing-in-GNU-Go"></a>
+<h2 class="section">20.1 Regression testing in GNU Go</h2>
+
+<p>Regression testing is performed by the files in the &lsquo;<tt>regression/</tt>&rsquo;
+directory. The tests are specified as GTP commands in files with the
+suffix &lsquo;<tt>.tst</tt>&rsquo;, with corresponding correct results and expected
+pass/fail status encoded in GTP comments following the test. To run a
+test suite the shell scripts &lsquo;<tt>test.sh</tt>&rsquo;, &lsquo;<tt>eval.sh</tt>&rsquo;, and
+&lsquo;<tt>regress.sh</tt>&rsquo; can be used. There are also Makefile targets to do
+this. If you <code>make all_batches</code> most of the tests are run. The
+Pike script &lsquo;<tt>regress.pike</tt>&rsquo; can also be used to run all tests or a
+subset of the tests.
+</p>
+<p>Game records used by the regression tests are stored in the
+directory &lsquo;<tt>regression/games/</tt>&rsquo; and its subdirectories.
+</p>
+<hr size="6">
+<a name="Test-Suites"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Regression-Testing" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Running-the-Regressions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Test-suites"></a>
+<h2 class="section">20.2 Test suites</h2>
+
+<p>The regression tests are grouped into suites and stored in files as GTP
+commands. A part of a test suite can look as follows:
+</p><table><tr><td>&nbsp;</td><td><pre class="example"># Connecting with ko at B14 looks best. Cutting at D17 might be
+# considered. B17 (game move) is inferior.
+loadsgf games/strategy25.sgf 61
+90 gg_genmove black
+#? [B14|D17]
+
+# The game move at P13 is a suicidal blunder.
+loadsgf games/strategy25.sgf 249
+95 gg_genmove black
+#? [!P13]
+
+loadsgf games/strategy26.sgf 257
+100 gg_genmove black
+#? [M16]*
+</pre></td></tr></table>
+
+<p>Lines starting with a hash sign, or in general anything following a hash
+sign, are interpreted as comments by the GTP mode and thus ignored by
+the engine. GTP commands are executed in the order they appear, but only
+those on numbered lines are used for testing. The comment lines starting
+with <code>#?</code> are magical to the regression testing scripts and
+indicate correct results and expected pass/fail status. The string
+within brackets is matched as a regular expression against the response
+from the previous numbered GTP command. A particular useful feature of
+regular expressions is that by using &lsquo;<samp>|</samp>&rsquo; it is possible to specify
+alternatives. Thus <code>B14|D17</code> above means that if either <code>B14</code>
+or <code>D17</code> is the move generated in test case 90, it passes. There is
+one important special case to be aware of. If the correct result string
+starts with an exclamation mark, this is excluded from the regular
+expression but afterwards the result of the matching is negated. Thus
+<code>!P13</code> in test case 95 means that any move except <code>P13</code> is
+accepted as a correct result.
+</p>
+<p>In test case 100, the brackets on the <code>#?</code> line is followed by an
+asterisk. This means that the test is expected to fail. If there is no
+asterisk, the test is expected to pass. The brackets may also be
+followed by a &lsquo;<samp>&amp;</samp>&rsquo;, meaning that the result is ignored. This is
+primarily used to report statistics, e.g. how many tactical reading
+nodes were spent while running the test suite.
+</p>
+<hr size="6">
+<a name="Running-the-Regressions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Test-Suites" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Running-regress_002epike" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Running-the-Regression-Tests"></a>
+<h2 class="section">20.3 Running the Regression Tests</h2>
+
+<p><code>./test.sh blunder.tst</code> runs the tests in &lsquo;<tt>blunder.tst</tt>&rsquo; and
+prints the results of the commands on numbered lines, which may look
+like:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">1 E5
+2 F9
+3 O18
+4 B7
+5 A4
+6 E4
+7 E3
+8 A3
+9 D9
+10 J9
+11 B3
+12 C6
+13 C6
+</pre></td></tr></table>
+
+<p>This is usually not very informative, however. More interesting is
+<code>./eval.sh blunder.tst</code> which also compares the results above
+against the correct ones in the test file and prints a report for each
+test on the form:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">1 failed: Correct '!E5', got 'E5'
+2 failed: Correct 'C9|H9', got 'F9'
+3 PASSED
+4 failed: Correct 'B5|C5|C4|D4|E4|E3|F3', got 'B7'
+5 PASSED
+6 failed: Correct 'D4', got 'E4'
+7 PASSED
+8 failed: Correct 'B4', got 'A3'
+9 failed: Correct 'G8|G9|H8', got 'D9'
+10 failed: Correct 'G9|F9|C7', got 'J9'
+11 failed: Correct 'D4|E4|E5|F4|C6', got 'B3'
+12 failed: Correct 'D4', got 'C6'
+13 failed: Correct 'D4|E4|E5|F4', got 'C6'
+</pre></td></tr></table>
+
+<p>The result of a test can be one of four different cases:
+</p>
+<ul>
+<li> <code>passed</code>: An expected pass
+
+<p>This is the ideal result.
+</p>
+</li><li> <code>PASSED</code>: An unexpected pass
+
+<p>This is a result that we are hoping for when we fix a bug. An old test
+case that used to fail is now passing. 
+</p>
+</li><li> <code>failed</code>: An expected failure
+
+<p>The test failed but this was also what we expected, unless we were
+trying to fix the particular mistake highlighted by the test case.
+These tests show weaknesses of the GNU Go engine and are good places to
+search if you want to detect an area which needs improvement.
+</p>
+</li><li> <code>FAILED</code>: An unexpected failure
+
+<p>This should nominally only happen if something is broken by a
+change. However, sometimes GNU Go passes a test, but for the wrong
+reason or for a combination of wrong reasons.  When one of these reasons
+is fixed, the other one may shine through so that the test suddenly
+fails. When a test case unexpectedly fails, it is necessary to make a
+closer examination in order to determine whether a change has broken
+something.
+</p>
+</li></ul>
+
+<p>If you want a less verbose report, <code>./regress.sh . blunder.tst</code>
+does the same thing as the previous command, but only reports unexpected
+results. The example above is compressed to
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">3 unexpected PASS!
+5 unexpected PASS!
+7 unexpected PASS!
+</pre></td></tr></table>
+
+<p>For convenience the tests are also available as makefile targets. For
+example, <code>make blunder</code> runs the tests in the blunder test suite by
+executing <code>eval.sh blunder.tst</code>. <code>make all_batches</code> runs all
+test suites in a sequence using the <code>regress.sh</code> script.
+</p>
+<hr size="6">
+<a name="Running-regress_002epike"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Running-the-Regressions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Viewing-with-Emacs" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Running-regress_002epike-1"></a>
+<h2 class="section">20.4 Running regress.pike</h2>
+
+<p>A more powerful way to run regressions is with the script
+&lsquo;<tt>regress.pike</tt>&rsquo;. This requires that you have Pike
+(<a href="http://pike.ida.liu.se">http://pike.ida.liu.se</a>) installed.
+</p>
+<p>Executing <code>./regress.pike</code> without arguments will run all
+testsuites that <code>make all_batches</code> would run. The difference is
+that unexpected results are reported immediately when they have been
+found (instead of after the whole file has been run) and that statistics
+of time consumption and node usage is presented for each test file and
+in total.
+</p>
+<p>To run a single test suite do e.g. <code>./regress.pike nicklas3.tst</code> or
+<code>./regress.pike nicklas3</code>. The result may look like:
+</p><table><tr><td>&nbsp;</td><td><pre class="example">nicklas3                                 2.96    614772    3322      469
+Total nodes: 614772 3322 469
+Total time: 2.96 (3.22)
+Total uncertainty: 0.00
+</pre></td></tr></table>
+<p>The numbers here mean that the test suite took 2.96 seconds of processor
+time and 3.22 seconds of real time. The consumption of reading nodes was
+614772 for tactical reading, 3322 for owl reading, and 469 for
+connection reading. The last line relates to the variability of the
+generated moves in the test suite, and 0 means that none was decided by
+the randomness contribution to the move valuation. Multiple testsuites
+can be run by e.g. <code>./regress.pike owl ld_owl owl1</code>.
+</p>
+<p>It is also possible to run a single testcase, e.g. <code>./regress.pike
+strategy:6</code>, a number of testcases, e.g. <code>./regress.pike
+strategy:6,23,45</code>, a range of testcases, e.g. <code>./regress.pike
+strategy:13-15</code> or more complex combinations e.g. <code>./regress.pike
+strategy:6,13-15,23,45 nicklas3:602,1403</code>.
+</p>
+<p>There are also command line options to choose what engine to run, what
+options to send to the engine, to turn on verbose output, and to use a
+file to specify which testcases to run. Run <code>./regress.pike --help</code>
+for a complete and up to date list of options.
+</p>
+<hr size="6">
+<a name="Viewing-with-Emacs"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Running-regress_002epike" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#HTML-Views" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Viewing-tests-with-Emacs"></a>
+<h2 class="section">20.5 Viewing tests with Emacs</h2>
+
+<p>To get a quick regression view, you may use the graphical
+display mode available with Emacs (see section <a href="gnugo_3.html#Emacs">GNU Go mode in Emacs</a>). You will
+want the cursor in the regression buffer when you enter
+<code>M-x gnugo</code>, so that GNU Go opens in the correct
+directory. A good way to be in the right directory is to
+open the window of the test you want to investigate. Then
+you can cut and past GTP commands directly from the test to
+the minibuffer, using the <code>:</code> command from
+Emacs. Although Emacs mode does not have a coordinate grid,
+you may get an ascii board with the coordinate grid using
+<code>: showboard</code> command.
+</p>
+<hr size="6">
+<a name="HTML-Views"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Viewing-with-Emacs" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Setting-up-the-HTML-regression-Views" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Regression" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="HTML-Regression-Views"></a>
+<h2 class="section">20.6 HTML Regression Views</h2>
+
+<p>Extremely useful HTML Views of the regression tests may be
+produced using two perl scripts &lsquo;<tt>regression/regress.pl</tt>&rsquo;
+and &lsquo;<tt>regression/regress.plx</tt>&rsquo;.
+</p>
+<ol>
+<li> The driver program (regress.pl) which:
+<ul>
+<li> Runs the regression tests, invoking GNU Go.
+</li><li> Captures the trace output, board position, and pass/fail status,
+sgf output, and dragon status information.
+</li></ul>
+</li><li> The interface to view the captured output (regress.plx) which:
+<ul>
+<li> Never invokes GNU Go.
+</li><li> Displays the captured output in helpful formats (i.e. HTML).
+</li></ul>
+</li></ol>
+
+<hr size="6">
+<a name="Setting-up-the-HTML-regression-Views"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#HTML-Views" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#HTML-Views" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">20.6.1 Setting up the HTML regression Views</h3>
+
+<p>There are many ways configuring Apache to permit CGI scripts, all of them are
+featured in Apache documentation, which can be found at
+<a href="http://httpd.apache.org/docs/2.0/howto/cgi.html">http://httpd.apache.org/docs/2.0/howto/cgi.html</a>
+</p>
+<p>Below you will find one example. 
+</p>
+<p>This documentation assumes an Apache 2.0 included in Fedora Core distribution,
+but it should be fairly close to the config for other distributions.
+</p>
+<p>First, you will need to configure Apache to run CGI scripts in the directory
+you wish to serve the html views from. In &lsquo;<tt>/etc/httpd/conf/httpd.conf</tt>&rsquo;
+there should be a line:
+</p>
+<p><code>DocumentRoot &quot;/var/www/html&quot;</code>
+</p>
+<p>Search for a line <code>&lt;Directory &quot;/path/to/directory&quot;&gt;</code>, where 
+<code>/path/to/directory</code> is the same as provided in <code>DocumentRoot</code>,
+then add <code>ExecCGI</code> to list of <code>Options</code>.
+The whole section should look like:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;Directory &quot;/var/www/html&quot;&gt;
+...
+    Options ... ExecCGI
+...
+&lt;/Directory&gt;
+</pre></td></tr></table>
+
+<p>This allows CGI scripts to be executed in the directory used by regress.plx.
+Next, you need to tell Apache that &lsquo;<tt>.plx</tt>&rsquo; is a CGI script ending. Your
+&lsquo;<tt>httpd.conf</tt>&rsquo; file should contain a line:
+</p>
+<p><code>AddHandler cgi-script ...</code>
+</p>
+<p>If there isn&rsquo;t already, add it; add &lsquo;<tt>.plx</tt>&rsquo; to the list of extensions,
+so line should look like:
+</p>
+<p><code>AddHandler cgi-script ... .plx</code>
+</p>
+<p>You will also need to make sure you have the necessary modules loaded to run
+CGI scripts; mod_cgi and mod_mime should be sufficient. Your &lsquo;<tt>httpd.conf</tt>&rsquo;
+should have the relevant <code>LoadModule cgi_module modules/mod_cgi.so</code> and
+<code>LoadModule mime_module modules/mod_mime.so</code> lines; uncomment them if
+necessary.
+</p>
+<p>Next, you need to put a copy of &lsquo;<tt>regress.plx</tt>&rsquo; in the <code>DocumentRoot</code>
+directory <code>/var/www/html</code> or it subdirectories where you plan to serve the
+html views from.
+</p>
+<p>You will also need to install the Perl module GD
+(<a href="http://search.cpan.org/dist/GD/">http://search.cpan.org/dist/GD/</a>), available from CPAN.
+</p>
+<p>Finally, run &lsquo;<tt>regression/regress.pl</tt>&rsquo; to create the xml data used to
+generate the html views (to do all regression tests run
+&lsquo;<tt>regression/regress.pl -a 1</tt>&rsquo;); then, copy the &lsquo;<tt>html/</tt>&rsquo; directory to
+the same directory as &lsquo;<tt>regress.plx</tt>&rsquo; resides in.
+</p>
+<p>At this point, you should have a working copy of the html regression views.
+</p>
+<p>Additional notes for Debian users: The Perl GD module can be installed
+by <code>apt-get install libgd-perl</code>. It may suffice to add this to
+the apache2 configuration:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">&lt;Directory &quot;/var/www/regression&quot;&gt;
+	Options +ExecCGI
+	AddHandler cgi-script .plx
+	RedirectMatch ^/regression$ /regression/regress.plx
+&lt;/Directory&gt;
+</pre></td></tr></table>
+
+<p>and then make a link from &lsquo;<tt>/var/www/regression</tt>&rsquo; to the GNU Go
+regression directory. The <code>RedirectMatch</code> statement is only
+needed to set up a shorter entry URL.
+</p>
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Regression" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_21.html#Copying" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,114 @@
+Package: flashplugin-nonfree
+Binary: flashplugin-installer, flashplugin-downloader
+Version: 11.2.202.261ubuntu0.12.10.1
+Priority: optional
+Section: multiverse/web
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Bart Martens <bartm@knars.be>
+Build-Depends: debhelper (>= 9)
+Architecture: i386 amd64
+Standards-Version: 3.8.0
+Format: 1.0
+Directory: pool/multiverse/f/flashplugin-nonfree
+Files:
+ 2ea97ce9b2e8850b71abb43f203cd78a 1410 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.dsc
+ 2865a23e95e7d7ce91a9850bb40a9806 44723 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.tar.gz
+Homepage: http://www.adobe.com/products/flashplayer.html
+Package-List: 
+ flashplugin-downloader deb contrib/web optional
+ flashplugin-installer deb contrib/web optional
+Checksums-Sha1:
+ a2d7b5346a889688a8581ee47a733019e5911042 1410 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.dsc
+ 123415d81be09f608f669750e5b3fd8ecddf46ab 44723 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.tar.gz
+Checksums-Sha256:
+ f4981a5969594e84025c43648cd687a0bd09f7bd9c20b8865eb1da0462796986 1410 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.dsc
+ ff54bcbbc0037bab9deafe723cede3a40cfc8b0893e28ae97002e8013b14f425 44723 flashplugin-nonfree_11.2.202.261ubuntu0.12.10.1.tar.gz
+
+Package: mythtv
+Binary: mythtv, mythtv-common, mythtv-doc, mythtv-database, mythtv-backend, mythtv-transcode-utils, mythtv-frontend, libmyth-0.25-0, libmyth-dev, php-mythtv, libmythtv-perl, libmyth-python, mythtv-backend-master, mythtv-dbg, mythplugins, mythgallery, mythgame, mythmusic, mythnews, mythweather, mythweb, mytharchive, mythzoneminder, mythbrowser, mythnetvision, mythtv-theme-mythbuntu
+Version: 2:0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10
+Priority: optional
+Section: multiverse/graphics
+Maintainer: MythTV Ubuntu Maintainers <ubuntu-mythtv@lists.ubuntu.com>
+Build-Depends: debhelper (>= 7.0.50~), quilt, ccache, yasm, libqt4-dev, libqtwebkit-dev | libqt4-webkit-dev | libqt4-dev (<< 4:4.7.0~beta1), libqt4-opengl-dev, libdvb-dev, po-debconf, texi2html, python-central, linux-kernel-headers, libdvdnav-dev, libfreetype6-dev, libavc1394-dev, libiec61883-dev (>= 1.0.0), liblircclient-dev, libxinerama-dev | xlibs-static-dev (<< 6.8.1-1), libxxf86vm-dev | xlibs-static-dev (<< 6.8.1-1), libcrystalhd-dev [i386 amd64], libxvmc-dev | xlibs-static-dev (<< 6.8.1-1), libxext-dev | xlibs-static-dev (<< 6.8.1-1), libimlib2-dev, libasound2-dev, libmp3lame-dev | liblame-dev, libvorbis-dev, libdts-dev, lsb-release, libpulse-dev, libxrandr-dev, libfftw3-dev, libva-dev, libvdpau-dev [i386 amd64 armel] | nvidia-190-libvdpau-dev [i386 amd64] | nvidia-185-libvdpau-dev [i386 amd64] | nvidia-180-libvdpau-dev [i386 amd64], libudev-dev, libclass-dbi-perl, libnet-upnp-perl, libio-socket-inet6-perl, libdbd-mysql-perl, libjson-perl, libwww-perl, python-oauth, python-lxml, python-mysqldb, python-pycurl, python-urlgrabber, libgl1-mesa-dev | xlibmesa-gl-dev | xlibmesa-dev | libgl-dev, libdvdread-dev | libdvdread3-dev, fftw-dev, libflac-dev, libmad0-dev, libcdaudio-dev, libcdio-dev, libcdparanoia-dev | libcdparanoia0-dev, libsdl1.2-dev, libfaad-dev | libfaad2-dev, libexif-dev (>= 0.6.9-6), libfaac-dev, libxvidcore-dev, libtiff5-dev | libtiff4-dev | libtiff-dev, libxv-dev, libtag1-dev, libvisual-0.4-dev, libmysqlclient-dev, libdate-manip-perl, libxml-simple-perl, libimage-size-perl, libdatetime-format-iso8601-perl, libsoap-lite-perl, libx264-dev, libvpx-dev, libavahi-compat-libdnssd-dev, libssl-dev, libcdio-cdda-dev, libcdio-paranoia-dev, libxml2-dev, libass-dev, libcec-dev, libxml-xpath-perl
+Build-Conflicts: libqt3-mt-dev
+Architecture: any all
+Standards-Version: 3.9.3
+Format: 3.0 (quilt)
+Directory: pool/multiverse/m/mythtv
+Files:
+ 1c343549899e281b6e99815dd6f65033 4430 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.dsc
+ 64a2660fc1ecbb88389792b8a432bcd5 85592348 mythtv_0.25.2+fixes.20120802.46cab93.orig.tar.gz
+ 9f465278a77652accfc509ee26cb4e07 217901 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.debian.tar.gz
+Uploaders: Mario Limonciello <superm1@ubuntu.com>, Andres Mejia <amejia@debian.org>,
+Homepage: http://www.mythtv.org
+Vcs-Git: git://github.com/MythTV/packaging.git
+Package-List: 
+ libmyth-0.25-0 deb libs optional
+ libmyth-dev deb libdevel optional
+ libmyth-python deb libs optional
+ libmythtv-perl deb perl optional
+ mytharchive deb graphics optional
+ mythbrowser deb graphics optional
+ mythgallery deb graphics optional
+ mythgame deb graphics optional
+ mythmusic deb graphics optional
+ mythnetvision deb graphics optional
+ mythnews deb graphics optional
+ mythplugins deb graphics optional
+ mythtv deb graphics optional
+ mythtv-backend deb graphics optional
+ mythtv-backend-master deb metapackages optional
+ mythtv-common deb graphics optional
+ mythtv-database deb graphics optional
+ mythtv-dbg deb debug extra
+ mythtv-doc deb doc optional
+ mythtv-frontend deb graphics optional
+ mythtv-theme-mythbuntu deb graphics optional
+ mythtv-transcode-utils deb graphics optional
+ mythweather deb graphics optional
+ mythweb deb graphics optional
+ mythzoneminder deb graphics optional
+ php-mythtv deb graphics optional
+Checksums-Sha1:
+ d2027fb183299504b670b1b35ebd4a0119ee329d 4430 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.dsc
+ a7cd2793887b9b12263e625f70f095f58847040c 85592348 mythtv_0.25.2+fixes.20120802.46cab93.orig.tar.gz
+ 39f2db659dff6b80a292613a888f8da54c59a438 217901 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.debian.tar.gz
+Checksums-Sha256:
+ 62c7e22bd2db12ff0843a18756b5a672ce0bb72e9b8f0c744c5541d693621111 4430 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.dsc
+ 235dafb2e1dd01e491284a9d472aec61484ad616e002ca944d0e1f3837d5f726 85592348 mythtv_0.25.2+fixes.20120802.46cab93.orig.tar.gz
+ b9adf38106f3efc9f318c4bebcaf5f21f5978635a2229500d97b9b68253918da 217901 mythtv_0.25.2+fixes.20120802.46cab93-0ubuntu1.12.10.debian.tar.gz
+
+Package: transcode
+Binary: transcode, transcode-dbg, transcode-doc
+Version: 3:1.1.7-2ubuntu1
+Priority: extra
+Section: multiverse/misc
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Build-Depends: debhelper (>= 7.2), dh-autoreconf, liba52-0.7.4-dev, libasound2-dev, libavcodec-dev, libavformat-dev, libavutil-dev, libdv4-dev, libdvdread-dev, libfaad-dev, libfreetype6-dev, libjpeg-dev, liblzo2-dev, libmagickcore-dev, libmagickwand-dev, libmp3lame-dev, libmpeg2-4-dev, libpopt-dev, libpostproc-dev, libquicktime-dev, libsdl1.2-dev, libswscale-dev, libtheora-dev, libvorbis-dev, libx264-dev, libxaw7-dev, libxft-dev, libxml2-dev, libxv-dev, libxvidcore-dev, libxxf86vm-dev [i386]
+Architecture: any all
+Standards-Version: 3.9.2
+Format: 3.0 (quilt)
+Directory: pool/multiverse/t/transcode
+Files:
+ cba7837379e61a8e8fdc42d370bcfe4e 2072 transcode_1.1.7-2ubuntu1.dsc
+ 9bb25a796a8591fb764de46ee87ce505 2183627 transcode_1.1.7.orig.tar.bz2
+ 7bad3c81e5044bd6e5c0c2281a2e7789 7103 transcode_1.1.7-2ubuntu1.debian.tar.gz
+Uploaders:  Fabian Greffrath <fabian@debian-unofficial.org>, Reinhard Tartler <siretart@tauware.de>, Alessio Treglia <alessio@debian.org>
+Homepage: http://www.transcoding.org/
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-multimedia/transcode.git
+Vcs-Git: git://anonscm.debian.org/pkg-multimedia/transcode.git
+Package-List: 
+ transcode deb video optional
+ transcode-dbg deb debug extra
+ transcode-doc deb doc optional
+Checksums-Sha1:
+ d166ea3c7f45fd9f529eee2215ed5dca014c510a 2072 transcode_1.1.7-2ubuntu1.dsc
+ e35df68b960eb56ef0a59a4cdbed1491be56aee6 2183627 transcode_1.1.7.orig.tar.bz2
+ 9ef44057cf773072c68bd0842be8f0b97384bb84 7103 transcode_1.1.7-2ubuntu1.debian.tar.gz
+Checksums-Sha256:
+ c0026270df08a1437da9dd0edc83a9f6b30984f90eeb292814728b4ae1ad3d16 2072 transcode_1.1.7-2ubuntu1.dsc
+ 1e4e72d8e0dd62a80b8dd90699f5ca64c9b0cb37a5c9325c184166a9654f0a92 2183627 transcode_1.1.7.orig.tar.bz2
+ e93f305ca3a2418a4d0977dbe8653447987656215db3cc826f021466226f3091 7103 transcode_1.1.7-2ubuntu1.debian.tar.gz
+

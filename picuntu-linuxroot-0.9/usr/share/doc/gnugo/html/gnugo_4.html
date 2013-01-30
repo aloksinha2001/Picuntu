@@ -1,0 +1,1090 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 4. GNU Go engine overview</title>
+
+<meta name="description" content="GNU Go Documentation: 4. GNU Go engine overview">
+<meta name="keywords" content="GNU Go Documentation: 4. GNU Go engine overview">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="Overview"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_3.html#Experimental-options" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Examining-the-Position" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_3.html#User-Guide" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="GNU-Go-engine-overview"></a>
+<h1 class="chapter">4. GNU Go engine overview</h1>
+
+
+<p>This chapter is an overview of the GNU Go internals. Further 
+documentation of how any one module or routine works may be found in
+later chapters or comments in the source files.
+</p>
+<p>GNU Go starts by trying to understand the current board position as
+good as possible. Using the information found in this first phase, and
+using additional move generators, a list of candidate moves is generated.
+Finally, each of the candidate moves is valued according to its territorial
+value (including captures or life-and-death effects), and possible
+strategical effects (such as strengthening a weak group).
+</p>
+<p>Note that while GNU Go does, of course, do a lot of reading to analyze
+possible captures, life and death of groups etc., it does not (yet) have
+a fullboard lookahead.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Examining-the-Position">4.1 Gathering Information</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#Move-Generators">4.2 Move Generators</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">			Selecting Candidate Moves
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Move-Valuation">4.3 Move Valuation</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">			Selecting the best Move
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Detailed-Sequence-of-Events">4.4 Detailed Sequence of Events</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">		Outline of <code>genmove()</code>.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Roadmap">4.5 Roadmap</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">				Description of the different files.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Coding-Styles">4.6 Coding styles and conventions</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">			Coding conventions.
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Navigating-the-Source">4.7 Navigating the Source</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+
+<hr size="6">
+<a name="Examining-the-Position"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Overview" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Generators" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Gathering-Information"></a>
+<h2 class="section">4.1 Gathering Information</h2>
+
+<p>This is by far the most important phase in the move generation. 
+Misunderstanding life-and-death situations can cause gross mistakes.
+Wrong territory estimates will lead to inaccurate move valuations. 
+Bad judgement of weaknesses of groups make strategic mistakes likely.
+</p>
+<p>This information gathering is done by the function <code>examine_position()</code>.
+It first calls <code>make_worms()</code>.
+</p>
+<p>Its first steps are very simple: it identifies sets of directly connected
+stones, called <em>worms</em>, and notes their sizes and their number of
+liberties.
+</p>
+<p>Soon after comes the most important step of the worm analysis:
+the tactical reading code (see section <a href="gnugo_11.html#Tactical-Reading">Tactical reading</a>) is called for every
+worm. It tries to read
+out which worms can be captured directly, giving up as soon as a worm
+can reach 5 liberties. If a worm can be captured, the engine of course
+looks for moves defending against this capture. Also, a lot of effort
+is made to find virtually all moves that achieve the capture or defense
+of a worm.
+</p>
+<p>After knowing which worms are tactically stable, we can make a first
+picture of the balance of power across the board: the <a href="gnugo_13.html#Influence">Influence Function</a>
+code is called for the first time.
+</p>
+<p>This is to aid the next step, the analysis of dragons. By a <em>dragon</em>
+we mean a group of stones that cannot be disconnected.
+</p>
+<p>Naturally the first step in the responsible function <code>make_dragons()</code>
+is to identify these dragons, i.e. determine which worms cannot be
+disconnected from each other. This is partly done by patterns, but
+in most cases the specialized readconnect code 
+is called. This module does a minimax search to determine whether two
+given worms can be connected with, resp. disconnected from each other.
+</p>
+<p>Then we compute various measures to determine how strong or weak any given
+dragon is: 
+</p><ul>
+<li> A crude estimate of the number of eyes is made.
+</li><li> The results of the influence computations is used to see which dragons
+are adjacent to own territory or a moyo.
+</li><li> A guess is made for the potential to escape if the dragon got
+under attack.
+</li></ul>
+
+<p>For those dragons that are considered weak, a life and death analysis
+is made (see section <a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>). If two dragons next to each other are found
+that are both not alive, we try to resolve this situation with the semeai
+module.
+</p>
+<p>For a more detailed reference of the worm and dragon analysis (and
+explanations of the data structures used to store the information),
+see See section <a href="gnugo_7.html#Worms-and-Dragons">Worms and Dragons</a>.
+</p>
+<p>The influence code is then called second time to make a detailed analysis
+of likely territory. Of course, the life-and-death status of dragons are
+now taken into account.
+</p>
+<p>The territorial results of the influence module get corrected by the break-in
+module. This specifically tries to analyze where an opponent could break
+into an alleged territory, with sequences that would be too difficult to
+see for the influence code.
+</p>
+
+<hr size="6">
+<a name="Move-Generators"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Examining-the-Position" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Move-Valuation" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Move-Generators-1"></a>
+<h2 class="section">4.2 Move Generators</h2>
+<a name="index-move-generation"></a>
+<a name="index-move-generators"></a>
+<a name="index-move-reasons"></a>
+
+<p>Once we have found out all about the position it is time to generate
+the best move. Moves are proposed by a number of different modules
+called <em>move generators</em>. The move generators themselves
+do not set the values of the moves, but enumerate justifications for
+them, called <em>move reasons</em>. The valuation of the moves comes
+last, after all moves and their reasons have been generated.
+</p>
+<p>For a list and explanation of move reasons used in GNU Go, and how they
+are evaluated, see See section <a href="gnugo_6.html#Move-Generation">Move generation</a>.
+</p>
+<p>There are a couple of move generators that only extract data found in
+the previous phase, examining the position:
+</p>
+<ul>
+<li> <code>worm_reasons()</code>
+<a name="index-worm_005freasons"></a>
+<blockquote><p>Moves that have been found to capture or defend a worm are proposed as
+candidates.
+</p></blockquote>
+
+</li><li> <code>owl_reasons()</code>
+<a name="index-owl_005freasons"></a>
+<blockquote><p>The status of every dragon, as it has been determined by the owl code
+(see section <a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>) in the previous phase, is reviewed. If the status
+is critical, the killing or defending move gets a corresponding move
+reason.
+</p></blockquote>
+
+</li><li> <code>semeai_move_reasons()</code>
+<a name="index-semeai"></a>
+<blockquote><p>Similarly as <code>owl_reasons</code>, this function proposes moves relevant
+for semeais.
+</p></blockquote>
+
+</li><li> <code>break_in_move_reasons()</code>
+<blockquote><p>This suggests moves that have been found to break into opponent&rsquo;s territory
+by the break-in module.
+</p></blockquote>
+</li></ul>
+
+<p>The following move generators do additional work:
+</p>
+<ul>
+<li> <code>fuseki()</code>
+<a name="index-fuseki"></a>
+<blockquote><p>Generate a move in the early fuseki, either in an empty corner of from
+the fuseki database.
+</p></blockquote>
+
+</li><li> <code>shapes()</code>
+<a name="index-shapes"></a>
+<blockquote><p>This is probably the most important move generator.
+It finds patterns from &lsquo;<tt>patterns/patterns.db</tt>&rsquo;,
+&lsquo;<tt>patterns/patterns2.db</tt>&rsquo;, &lsquo;<tt>patterns/fuseki.db</tt>&rsquo;, and the joseki
+files in the current position.  Each pattern is matched in each
+of the 8 possible orientations obtainable by rotation and
+reflection. If the pattern matches, a so called &quot;constraint&quot;
+may be tested which makes use of reading to determine if the
+pattern should be used in the current situation.  Such
+constraints can make demands on number of liberties of
+strings, life and death status, and reading out ladders,
+etc. The patterns may call helper functions, which may
+be hand coded (in &lsquo;<tt>patterns/helpers.c</tt>&rsquo;) or 
+autogenerated.
+</p>
+<p>The patterns can be of a number of different classes
+with different goals.  There are e.g. patterns which
+try to attack or defend groups, patterns which try to
+connect or cut groups, and patterns which simply try
+to make good shape. (In addition to the large pattern
+database called by <code>shapes()</code>, pattern matching
+is used by other modules for different tasks throughout
+the program. See section <a href="gnugo_9.html#Patterns">The Pattern Code</a>, for a complete documentation 
+of patterns.)
+</p></blockquote>
+
+</li><li> <code>combinations()</code>
+<a name="index-atari_005fatari"></a>
+<blockquote><p>See if there are any combination threats or atari sequences and either
+propose them or defend against them.
+</p></blockquote>
+
+</li><li> <code>revise_thrashing_dragon()</code>
+<a name="index-revise_005fthrashing_005fdragon"></a>
+<blockquote><p>This module does not directly propose move: If we are clearly ahead,
+and the last move played by the opponent is part of a dead dragon, we
+want to attack that dragon again to be on the safe side. This is done
+be setting the status of this <em>thrashing dragon</em> to unkown and
+repeating the shape move generation and move valution.
+</p></blockquote>
+
+</li><li> <code>endgame_shapes()</code>
+<a name="index-endgame_005fshapes"></a>
+<blockquote><p>If no move is found with a value greater than 6.0, this module matches a
+set of extra patterns which are designed for the endgame.  The endgame
+patterns can be found in &lsquo;<tt>patterns/endgame.db</tt>&rsquo;.
+</p></blockquote>
+
+</li><li> <code>revise_semeai()</code>
+<a name="index-revise_005fsemeai"></a>
+<blockquote><p>If no move is found, this module changes the status of opponent groups
+involved in a semeai from <code>DEAD</code> to <code>UNKNOWN</code>.  After this,
+genmove runs <code>shapes</code> and <code>endgame_shapes</code> again to see if a
+new move turns up.
+</p></blockquote>
+
+</li><li> <code>fill_liberty()</code>
+<a name="index-fill_005fliberty"></a>
+<blockquote><p>Fill a common liberty. This is only used at the end
+of the game. If necessary a backfilling or backcapturing 
+move is generated.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Move-Valuation"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Generators" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Detailed-Sequence-of-Events" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Move-Valuation-1"></a>
+<h2 class="section">4.3 Move Valuation</h2>
+
+<p>After the move generation modules have run, each proposed candidate
+move goes through a detailed valuation by the function
+<code>review_move_reasons</code>. This invokes some analysis to try to turn
+up other move reasons that may have been missed.
+</p>
+<p>The most important value of a move is its territorial effect.
+see section <a href="gnugo_13.html#Influence-and-Territory">Influence and Territory</a> explains in detail how this is determined.
+</p>
+<p>This value is modified for all move reasons that cannot be expressed
+directly in terms of territory, such as combination attacks (where it
+is not clear which of several strings will get captured), strategical
+effects, connection moves, etc.  A large set heuristics is necessary
+here, e.g. to avoid duplication of such values. This is explained in
+more detail in <a href="gnugo_6.html#Valuation">Valuation of suggested moves</a>.
+</p>
+
+<hr size="6">
+<a name="Detailed-Sequence-of-Events"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Move-Valuation" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Roadmap" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Detailed-Sequence-of-Events-1"></a>
+<h2 class="section">4.4 Detailed Sequence of Events</h2>
+
+<p>First comes the sequence of events when
+<code>examine_position()</code> is run from <code>genmove()</code>. This
+is for reference only.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="format"><code>purge_persistent_caches()</code>
+<code>make_worms()</code>:
+  <code>compute_effective_sizes()</code>
+  <code>compute_unconditional_status()</code>
+  <code>find_worm_attacks_and_defenses()</code>:      
+    for each attackable worm:
+      set <code>worm.attack</code>
+      <code>change_attack()</code> to add the attack point
+    <code>find_attack_patterns()</code> to find a few more attacks
+    for each defensible worm:
+      set <code>worm.attack</code>
+      <code>change_defense()</code> to add the defense point
+    <code>find_defense_patterns()</code> to find a few more defense moves
+    find additional attacks and defenses by testing all
+      immediate liberties
+  find higher order liberties (for each worm)
+  find cutting stones (for each worm)
+  improve attacks and defenses: if capturing a string defends
+    another friendly string, or kills an unfriendly one, we
+    add points of defense or attack. Make repairs if adjacent 
+    strings can both be attacked but not defended.
+  find worm lunches
+  find worm threats
+  identify inessential worms (such as nakade stones)
+<code>compute_worm_influence()</code>:
+  <code>find_influence_patterns()</code>
+  <code>value_influence()</code>
+  <code>segment_influence()</code>
+<code>make_dragons()</code>:
+  <code>find_cuts()</code>
+  <code>find_connections()</code>
+  <code>make_domains()</code> (determine eyeshapes)
+  <code>find_lunches()</code> (adjacent strings that can be captured)
+  <code>find_half_and_false_eyes()</code>
+  <code>eye_computations()</code>: Compute the value of each eye space. 
+    Store its attack and defense point.
+  <code>analyze_false_eye_territory()</code>
+  for each dragon <code>compute_dragon_genus()</code>
+  for each dragon <code>compute_escape()</code> and set escape route data
+  <code>resegment_initial_influence()</code>
+  <code>compute_refined_dragon_weaknesses()</code> (called again after owl)
+  for each dragon <code>compute_crude_status()</code>
+  <code>find_neighbor_dragons()</code>
+  for each dragon compute surround status
+  for each weak dragon run <code>owl_attack()</code> and <code>owl_defend()</code> 
+    to determine points of attack and defense
+  for each dragon compute dragon.status
+  for each thrashing dragon compute owl threats
+  for each dragon compute dragon.safety
+  <code>revise_inessentiality()</code>
+  <code>semeai()</code>:
+    for every semeai, run <code>owl_analyze_semeai()</code>
+    <code>find_moves_to_make_seki()</code>
+  <code>identify_thrashing_dragons()</code>
+  <code>compute_dragon_influence()</code>:
+    <code>compute_influence()</code>
+    <code>break_territories()</code> (see section <a href="gnugo_13.html#Break-Ins">Break Ins</a>)
+  <code>compute_refined_dragon_weaknesses()</code>
+</pre></td></tr></table>
+
+<p>Now a summary of the sequence of events during the
+move generation and selection phases of <code>genmove()</code>, which 
+take place after the information gathering phase has been completed:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="format"><code>estimate_score()</code>
+<code>choose_strategy()</code>
+<code>collect_move_reasons()</code>:
+  <code>worm_reasons()</code>: for each attack and defense point add a move reason
+  <code>semeai_reasons()</code>: for each dragon2.semeai point add a move reason
+  <code>owl_reasons()</code>: for each owl attack and defense point add a move reason
+  <code>break_in_reasons()</code>: for each breakin found add a move reason
+<code>fuseki()</code>
+<code>break_mirror_go()</code>
+<code>shapes()</code>: match patterns around the board (see section <a href="gnugo_9.html#Patterns-Overview">Overview</a>)
+<code>combinations()</code>: look for moves with a double meaning and other tricks
+  <code>find_double_threats()</code>
+  <code>atari_atari()</code>
+<code>review_move_reasons()</code>
+if ahead and there is a thrashing dragon, consider it 
+  alive and reconsider the position
+<code>endgame_shapes()</code>
+<code>endgame()</code>
+if no move found yet, revisit any semeai, change status of dead opponent
+  to alive, then run <code>shapes()</code> and <code>endgame_shapes()</code> again
+if no move found yet, run <code>fill_liberty()</code>
+</pre></td></tr></table>
+
+<hr size="6">
+<a name="Roadmap"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Detailed-Sequence-of-Events" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Files-in-engine_002f" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Roadmap-1"></a>
+<h2 class="section">4.5 Roadmap</h2>
+
+<p>The GNU Go engine is contained in two directories, &lsquo;<tt>engine/</tt>&rsquo; and
+&lsquo;<tt>patterns/</tt>&rsquo;. Code related to the user interface, reading and
+writing of Smart Game Format files, and testing are found in the
+directories &lsquo;<tt>interface/</tt>&rsquo;, &lsquo;<tt>sgf/</tt>&rsquo;, and &lsquo;<tt>regression/</tt>&rsquo;. Code
+borrowed from other GNU programs is contained in &lsquo;<tt>utils/</tt>&rsquo;. That
+directory also includes some code developed within GNU Go which is not
+go specific. Documentation is in &lsquo;<tt>doc/</tt>&rsquo;.
+</p>
+<p>In this document we will describe some of the individual files comprising
+the engine code in &lsquo;<tt>engine/</tt>&rsquo; and &lsquo;<tt>patterns/</tt>&rsquo;. In &lsquo;<tt>interface/</tt>&rsquo; 
+we mention two files:
+</p>
+<ul>
+<li> &lsquo;<tt>gmp.c</tt>&rsquo;
+<blockquote><p>This is the Go Modem Protocol interface (courtesy of 
+William Shubert and others). This takes care of all the 
+details of exchanging setup and moves with Cgoban, or any 
+other driving program recognizing the Go Modem Protocol.
+</p></blockquote>
+</li><li> &lsquo;<tt>main.c</tt>&rsquo;
+<blockquote><p>This contains <code>main()</code>. The &lsquo;<tt>gnugo</tt>&rsquo; target is
+thus built in the &lsquo;<tt>interface/</tt>&rsquo; directory.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Files-in-engine_002f"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Roadmap" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Files-in-patterns_002f" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Roadmap" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.5.1 Files in &lsquo;<tt>engine/</tt>&rsquo;</h3>
+
+<p>In &lsquo;<tt>engine/</tt>&rsquo; there are the following files:
+</p>
+<ul>
+<li> &lsquo;<tt>aftermath.c</tt>&rsquo;
+<blockquote><p>Contains algorithms which may be called at the end of the game to generate
+moves that will generate moves to settle the position, if necessary playing
+out a position to determine exactly the status of every group on the board,
+which GNU Go can get wrong, particularly if there is a seki. This module is
+the basis for the most accurate scoring algorithm available in GNU Go.
+</p></blockquote>
+</li><li> &lsquo;<tt>board.c</tt>&rsquo;
+<blockquote><a name="index-trymove"></a>
+<a name="index-popgo"></a>
+<a name="index-is_005flegal"></a>
+<p>This file contains code for the maintenance of the board.  For example
+it contains the important function <code>trymove()</code> which tries a move
+on the board, and <code>popgo()</code> which removes it by popping the move
+stack. At the same time vital information such as the number of
+liberties for each string and their location is updated incrementally. 
+</p></blockquote>
+</li><li> &lsquo;<tt>breakin.c</tt>&rsquo;
+<blockquote><p>Code to detect moves which can break into supposed territory and moves
+to prevent this.
+</p></blockquote>
+</li><li> &lsquo;<tt>cache.c</tt>&rsquo; and &lsquo;<tt>cache.h</tt>&rsquo;
+<blockquote><p>As a means of speeding up reading, computed results are cached so that
+they can be quickly reused if the same position is encountered through
+e.g. another move ordering. This is implemented using a hash table.
+</p></blockquote>
+</li><li> &lsquo;<tt>clock.c</tt>&rsquo; and &lsquo;<tt>clock.h</tt>&rsquo;
+<blockquote><p>Clock code, including code allowing GNU Go to automatically
+adjust its level in order to avoid losing on time in tournaments.
+</p></blockquote>
+</li><li> &lsquo;<tt>combination.c</tt>&rsquo;
+<blockquote><p>When something can (only) be captured through a series of ataris or
+other threats we call this a combination attack. This file contains code
+to find such attacks and moves to prevent them.
+</p></blockquote>
+</li><li> &lsquo;<tt>dragon.c</tt>&rsquo;
+<blockquote><p>This contains <code>make_dragons()</code>. This function is executed before
+the move-generating modules <code>shapes()</code> <code>semeai()</code> and the
+other move generators but after <code>make_worms()</code>. It tries to connect
+worms into dragons and collect important information about them, such as
+how many liberties each has, whether (in GNU Go&rsquo;s opinion) the dragon
+can be captured, if it lives, etc.
+</p></blockquote>
+</li><li> &lsquo;<tt>endgame.c</tt>&rsquo;
+<blockquote><p>Code to find certain types of endgame moves.
+</p></blockquote>
+</li><li> &lsquo;<tt>filllib.c</tt>&rsquo;
+<blockquote><p>Code to force filling of dame (backfilling if necessary)
+at the end of the game.
+</p></blockquote>
+</li><li> &lsquo;<tt>fuseki.c</tt>&rsquo;
+<blockquote><p>Generates fuseki (opening) moves from a database. Also generates moves
+in empty corners.
+</p></blockquote>
+</li><li> &lsquo;<tt>genmove.c</tt>&rsquo;
+<blockquote><p>This file contains <code>genmove()</code> and its supporting
+routines, particularly <code>examine_position()</code>. 
+</p></blockquote>
+</li><li> &lsquo;<tt>globals.c</tt>&rsquo;
+<blockquote><p>This contains the principal global variables used by GNU Go.
+</p></blockquote>
+</li><li> &lsquo;<tt>gnugo.h</tt>&rsquo;
+<blockquote><p>This file contains declarations forming the public interface to
+the engine.
+</p></blockquote>
+</li><li> &lsquo;<tt>hash.c</tt>&rsquo; and &lsquo;<tt>hash.h</tt>&rsquo;
+<blockquote><p>Hashing code implementing Zobrist hashing. (see section <a href="gnugo_11.html#Hashing">Hashing of Positions</a>) The code in
+&lsquo;<tt>hash.c</tt>&rsquo; provides a way to hash board positions into compact descriptions
+which can be efficiently compared. The caching code in &lsquo;<tt>cache.c</tt>&rsquo;
+makes use of the board hashes when storing and retrieving read results.
+</p></blockquote>
+</li><li> &lsquo;<tt>influence.c</tt>&rsquo; and &lsquo;<tt>influence.h</tt>&rsquo;.
+<blockquote><p>This code determines which regions of the board are under the
+influence of either player.
+(see section <a href="gnugo_13.html#Influence">Influence Function</a>)
+</p></blockquote>
+</li><li> &lsquo;<tt>liberty.h</tt>&rsquo;
+<blockquote><p>Header file for the engine. The name &ldquo;liberty&rdquo; connotes
+freedom (see section <a href="gnugo_21.html#Copying">Copying</a>).
+</p></blockquote>
+</li><li> &lsquo;<tt>matchpat.c</tt>&rsquo;
+<blockquote><p>This file contains the pattern matcher <code>matchpat()</code>, which looks for
+patterns at a particular board location. The actual patterns are in
+the &lsquo;<tt>patterns/</tt>&rsquo; directory. The function <code>matchpat()</code> is
+called by every module which does pattern matching, notably <code>shapes</code>.
+</p></blockquote>
+</li><li> &lsquo;<tt>move_reasons.c</tt>&rsquo; and &lsquo;<tt>move_reasons.h</tt>&rsquo;
+<blockquote><p>Code for keeping track of move reasons.
+</p></blockquote>
+</li><li> &lsquo;<tt>movelist.c</tt>&rsquo;
+<blockquote><p>Supporting code for lists of moves.
+</p></blockquote>
+</li><li> &lsquo;<tt>optics.c</tt>&rsquo;
+<blockquote><p>This file contains the code to recognize eye shapes,
+documented in See section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>.
+</p></blockquote>
+</li><li> &lsquo;<tt>oracle.c</tt>&rsquo;
+<blockquote><p>Code to fork off a second GNU Go process which can be used to simulate
+reading with top level information (e.g. dragon partitioning) available.
+</p></blockquote>
+</li><li> &lsquo;<tt>owl.c</tt>&rsquo;
+<blockquote><p>This file does life and death reading. Move generation is pattern based
+and the code in &lsquo;<tt>optics.c</tt>&rsquo; is used to evaluate the eyespaces for
+vital moves and independent life. A dragon can also live by successfully
+escaping. Semeai reading along the same principles is also implemented
+in this file.
+</p></blockquote>
+</li><li> &lsquo;<tt>persistent.c</tt>&rsquo;
+<blockquote><p>Persistent cache which allows reuse of read results at a later move or
+with additional stones outside an active area, which are those
+intersections thought to affect the read result.
+</p></blockquote>
+</li><li> &lsquo;<tt>printutils.c</tt>&rsquo;
+<blockquote><p>Print utilities.
+</p></blockquote>
+</li><li> &lsquo;<tt>readconnect.c</tt>&rsquo; and &lsquo;<tt>readconnect.h</tt>&rsquo;
+<blockquote><p>This file contains code to determine whether two strings can be
+connected or disconnected.
+</p></blockquote>
+</li><li> &lsquo;<tt>reading.c</tt>&rsquo;
+<blockquote><p>This file contains code to determine whether any given
+string can be attacked or defended. See section <a href="gnugo_11.html#Tactical-Reading">Tactical reading</a>,
+for details.
+</p></blockquote>
+</li><li> &lsquo;<tt>semeai.c</tt>&rsquo;
+<blockquote><p>This file contains <code>semeai()</code>, the module which detects dragons
+in semeai. To determine the semeai results the semeai reading in
+&lsquo;<tt>owl.c</tt>&rsquo; is used.
+</p></blockquote>
+</li><li> &lsquo;<tt>sgfdecide.c</tt>&rsquo;
+<blockquote><p>Code to generate sgf traces for various types of reading.
+</p></blockquote>
+</li><li> &lsquo;<tt>shapes.c</tt>&rsquo;
+<blockquote><p>This file contains <code>shapes()</code>, the module called by <code>genmove()</code>
+which tries to find moves which match a pattern (see section <a href="gnugo_9.html#Patterns">The Pattern Code</a>).
+</p></blockquote>
+</li><li> &lsquo;<tt>showbord.c</tt>&rsquo;
+<blockquote><p>This file contains <code>showboard()</code>, which draws an ASCII
+representation of the board, depicting dragons (stones 
+with same letter) and status (color). This was the 
+primary interface in GNU Go 1.2, but is now a debugging 
+aid.
+</p></blockquote>
+</li><li> &lsquo;<tt>surround.c</tt>&rsquo;
+<blockquote><p>Code to determine whether a dragon is surrounded and to find moves to
+surround with or break out with.
+</p></blockquote>
+</li><li> &lsquo;<tt>utils.c</tt>&rsquo;
+<blockquote><p>An assortment of utilities, described in greater detail below.
+</p></blockquote>
+</li><li> &lsquo;<tt>value_moves.c</tt>&rsquo;
+<blockquote><p>This file contains the code which assigns values to every move
+after all the move reasons are generated. It also tries to generate
+certain kinds of additional move reasons.
+</p></blockquote>
+</li><li> &lsquo;<tt>worm.c</tt>&rsquo;
+<blockquote><p>This file contains <code>make_worms()</code>, code which is run at the
+beginning of each move cycle, before the code in &lsquo;<tt>dragon.c</tt>&rsquo;, to
+determine the attributes of every string. These attributes are things
+like liberties, wether the string can be captured (and how), etc
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Files-in-patterns_002f"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Files-in-engine_002f" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Styles" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Roadmap" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.5.2 Files in &lsquo;<tt>patterns/</tt>&rsquo;</h3>
+
+<p>The directory &lsquo;<tt>patterns/</tt>&rsquo; contains files related to pattern matching.
+Currently there are several types of patterns. A partial list:
+</p>
+<ul>
+<li> move generation patterns in &lsquo;<tt>patterns.db</tt>&rsquo; and &lsquo;<tt>patterns2.db</tt>&rsquo;
+</li><li> move generation patterns in files &lsquo;<tt>hoshi.db</tt>&rsquo; etc. which are
+automatically build from the files &lsquo;<tt>hoshi.sgf</tt>&rsquo; etc. These comprise
+our small Joseki library.
+</li><li> patterns in &lsquo;<tt>owl_attackpats.db</tt>&rsquo;, &lsquo;<tt>owl_defendpats.db</tt>&rsquo;
+and &lsquo;<tt>owl_vital_apats.db</tt>&rsquo;. These generate moves for the owl
+code (see section <a href="gnugo_12.html#The-Owl-Code">The Owl Code</a>).
+</li><li> Connection patterns in &lsquo;<tt>conn.db</tt>&rsquo; (see section <a href="gnugo_9.html#Connections-Database">The Connections Database</a>)
+</li><li> Influence patterns in &lsquo;<tt>influence.db</tt>&rsquo; and &lsquo;<tt>barriers.db</tt>&rsquo;
+(see section <a href="gnugo_13.html#Influence">Influence Function</a>)
+</li><li> eye patterns in &lsquo;<tt>eyes.db</tt>&rsquo; (see section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>).
+</li></ul>
+
+<p>The following list contains, in addition to distributed source files 
+some intermediate automatically generated files such as &lsquo;<tt>patterns.c</tt>&rsquo;.
+These are C source files produced by &quot;compiling&quot; various pattern
+databases, or in some cases (such as &lsquo;<tt>hoshi.db</tt>&rsquo;) themselves 
+automatically generated pattern databases produced by &quot;compiling&quot;
+joseki files in Smart Game Format.
+</p>
+<ul>
+<li> &lsquo;<tt>conn.db</tt>&rsquo; 
+<blockquote><p>Database of connection patterns.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>conn.c</tt>&rsquo; 
+<blockquote><p>Automatically generated file, containing connection
+patterns in form of struct arrays, compiled by <code>mkpat</code>
+from &lsquo;<tt>conn.db</tt>&rsquo;.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>eyes.c</tt>&rsquo; 
+<blockquote><p>Automatically generated file, containing eyeshape
+patterns in form of struct arrays, compiled by <code>mkpat</code> 
+from &lsquo;<tt>eyes.db</tt>&rsquo;.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>eyes.h</tt>&rsquo; 
+<blockquote><p>Header file for &lsquo;<tt>eyes.c</tt>&rsquo;.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>eyes.db</tt>&rsquo; 
+<blockquote><p>Database of eyeshape patterns. See section <a href="gnugo_8.html#Eyes">Eyes and Half Eyes</a>, for
+details.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>helpers.c</tt>&rsquo; 
+<blockquote><p>These are helper functions to assist in evaluating
+moves by matchpat.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>hoshi.sgf</tt>&rsquo; 
+<blockquote><p>Smart Game Format file containing 4-4 point openings
+</p></blockquote>
+
+</li><li> &lsquo;<tt>hoshi.db</tt>&rsquo; 
+<blockquote><p>Automatically generated database of 4-4 point opening
+patterns, make by compiling &lsquo;<tt>hoshi.sgf</tt>&rsquo;
+</p></blockquote>
+
+</li><li> &lsquo;<tt>joseki.c</tt>&rsquo; 
+<blockquote><p>Joseki compiler, which takes a joseki file in
+Smart Game Format, and produces a pattern database.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>komoku.sgf</tt>&rsquo;
+<blockquote><p>Smart Game Format file containing 3-4 point openings
+</p></blockquote>
+
+</li><li> &lsquo;<tt>komoku.db</tt>&rsquo; 
+<blockquote><p>Automatically generated database of 3-4 point opening
+patterns, make by compiling &lsquo;<tt>komoku.sgf</tt>&rsquo;
+</p></blockquote>
+
+</li><li> &lsquo;<tt>mkeyes.c</tt>&rsquo; 
+<blockquote><p>Pattern compiler for the eyeshape databases. This
+program takes &lsquo;<tt>eyes.db</tt>&rsquo; as input and produces &lsquo;<tt>eyes.c</tt>&rsquo;
+as output.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>mkpat.c</tt>&rsquo; 
+<blockquote><p>Pattern compiler for the move generation and connection
+databases. Takes the file &lsquo;<tt>patterns.db</tt>&rsquo; together with
+the autogenerated Joseki pattern files &lsquo;<tt>hoshi.db</tt>&rsquo;, &lsquo;<tt>komoku.db</tt>&rsquo;,
+&lsquo;<tt>sansan.db</tt>&rsquo;, &lsquo;<tt>mokuhadzushi.db</tt>&rsquo;, &lsquo;<tt>takamoku.db</tt>&rsquo; and produces 
+&lsquo;<tt>patterns.c</tt>&rsquo;, or takes &lsquo;<tt>conn.db</tt>&rsquo; and produces &lsquo;<tt>conn.c</tt>&rsquo;.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>mokuhazushi.sgf</tt>&rsquo; 
+<blockquote><p>Smart Game Format file containing 5-3 point openings
+</p></blockquote>
+
+</li><li> &lsquo;<tt>mokuhazushi.db</tt>&rsquo;
+<blockquote><p>Pattern database compiled from mokuhadzushi.sgf
+</p></blockquote>
+
+</li><li> &lsquo;<tt>sansan.sgf</tt>&rsquo; 
+<blockquote><p>Smart Game Format file containing 3-3 point openings
+</p></blockquote>
+
+</li><li> &lsquo;<tt>sansan.db</tt>&rsquo; 
+<blockquote><p>Pattern database compiled from &lsquo;<tt>sansan.sgf</tt>&rsquo;
+</p></blockquote>
+
+</li><li> &lsquo;<tt>takamoku.sgf</tt>&rsquo; 
+<blockquote><p>Smart Game Format file containing 5-4 point openings
+</p></blockquote>
+
+</li><li> &lsquo;<tt>takamoku.db</tt>&rsquo; 
+<blockquote><p>Pattern database compiled from takamoku.sgf.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>patterns.c</tt>&rsquo; 
+<blockquote><p>Pattern data, compiled from patterns.db by mkpat.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>patterns.h</tt>&rsquo; 
+<blockquote><p>Header file relating to the pattern databases.
+</p></blockquote>
+
+</li><li> &lsquo;<tt>patterns.db</tt>&rsquo; and &lsquo;<tt>patterns2.db</tt>&rsquo;
+<blockquote><p>These contain pattern databases in human readable form.  
+</p></blockquote>
+
+</li></ul>
+
+
+<hr size="6">
+<a name="Coding-Styles"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Files-in-patterns_002f" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Conventions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Coding-styles-and-conventions"></a>
+<h2 class="section">4.6 Coding styles and conventions</h2>
+              
+<hr size="6">
+<a name="Coding-Conventions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Coding-Styles" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Tracing" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Styles" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.6.1 Coding Conventions</h3>
+
+<p>Please follow the coding conventions at:
+<a href="http://www.gnu.org/prep/standards_toc.html">http://www.gnu.org/prep/standards_toc.html</a>
+</p>
+<p>Please preface every function with a brief description
+of its usage.
+</p>
+<p>Please help to keep this Texinfo documentation up-to-date.
+</p>
+<hr size="6">
+<a name="Tracing"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Coding-Conventions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Assertions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Styles" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.6.2 Tracing</h3>
+
+<p>A function <code>gprintf()</code> is provided. It is a cut-down
+<code>printf</code>, supporting only <code>%c</code>, <code>%d</code>,
+<code>%s</code>, and without field widths, etc. It does, however,
+add some useful facilities:
+</p>
+<ul>
+<li> <code>%m</code> 
+<blockquote><p>Takes two parameters, and displays a formatted board co-ordinate.
+</p></blockquote>
+</li><li> indentation
+<blockquote><p>Trace messages are automatically indented to reflect
+the current stack depth, so it is clear during read-ahead
+when it puts a move down or takes one back.
+</p></blockquote>
+</li><li> &quot;outdent&quot;
+<blockquote><p><b>As a workaround, <code>%o</code> at the beginning of the:</b> format string suppresses the indentation.
+</p></blockquote>
+</li></ul>
+
+<p>Normally <code>gprintf()</code> is wrapped in one of the following:
+</p>
+<p><code>TRACE(fmt, ...)</code>: 
+</p><blockquote><p>Print the message if the &rsquo;verbose&rsquo; variable &gt; 0.
+(verbose is set by <code>-t</code> on the command line)
+</p></blockquote>
+
+<p><code>DEBUG(flags, fmt, ...)</code>: 
+</p><blockquote><p>While <code>TRACE</code> is intended to afford an overview
+of what GNU Go is considering, <code>DEBUG</code> allows occasional
+in depth study of a module, usually needed when something
+goes wrong. <code>flags</code> is one of the <code>DEBUG_*</code> symbols in
+&lsquo;<tt>engine/gnugo.h</tt>&rsquo;.  The <code>DEBUG</code> macro tests to
+see if that bit is set in the <code>debug</code> variable, and prints
+the message if it is.  The debug variable is set using the
+<code>-d</code> command-line option.  
+</p></blockquote>
+
+<p>The variable <code>verbose</code> controls the tracing. It
+can equal 0 (no trace), 1, 2, 3 or 4 for increasing
+levels of tracing. You can set the trace level at
+the command line by &lsquo;<samp>-t</samp>&rsquo; for <code>verbose=1</code>, 
+&lsquo;<samp>-t -t</samp>&rsquo; for <code>verbose=2</code>, etc. But in
+practice if you want more verbose tracing than level
+1 it is better to use GDB to reach the point where
+you want the tracing; you will often find that the
+variable <code>verbose</code> has been temporarily set to zero
+and you can use the GDB command <code>set var verbose=1</code>
+to turn the tracing back on.
+</p>
+<hr size="6">
+<a name="Assertions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Tracing" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#FIXME" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Styles" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.6.3 Assertions</h3>
+
+<p>Related to tracing are assertions. Developers are strongly encouraged
+to pepper their code with assertions to ensure that data structures
+are as they expect. For example, the helper functions make assertions
+about the contents of the board in the vicinity of the move they
+are evaluating.
+</p>
+<p><code>ASSERT()</code> is a wrapper around the standard C <code>assert()</code>
+function. In addition to the test, it takes an extra pair of parameters
+which are the co-ordinates of a &quot;relevant&quot; board position. If an
+assertion fails, the board position is included in the trace output, and
+<code>showboard()</code> and <code>popgo()</code> are called to unwind and display
+the stack.
+</p>
+<hr size="6">
+<a name="FIXME"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Assertions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Navigating-the-Source" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Coding-Styles" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">4.6.4 FIXME</h3>
+<a name="index-FIXME"></a>
+
+<p>We have adopted the convention of putting the word FIXME
+in comments to denote known bugs, etc.
+</p>
+<hr size="6">
+<a name="Navigating-the-Source"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#FIXME" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Overview" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Navigating-the-Source-1"></a>
+<h2 class="section">4.7 Navigating the Source</h2>
+
+<p>If you are using Emacs, you may find it fast and convenient to use
+Emacs&rsquo; built-in facility for navigating the source. Switch to the
+root directory &lsquo;<tt>gnugo-3.6/</tt>&rsquo; and execute the command:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">find . -print|grep &quot;\.[ch]$&quot; | xargs etags
+</pre></td></tr></table>
+
+<p>This will build a file called &lsquo;<tt>gnugo-3.6/TAGS</tt>&rsquo;. Now to
+find any GNU Go function, type <code>M-.</code> and enter the
+command which you wish to find, or just <code>RET</code> if 
+the cursor is at the name of the function sought. 
+</p>
+<p>The first time you do this you will be prompted for the location
+of the TAGS table.  Enter the path to &lsquo;<tt>gnugo-3.6/TAGS</tt>&rsquo;, and
+henceforth you will be able to find any function with a minimum
+of keystrokes. 
+</p>
+
+
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Overview" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_5.html#Analyzing" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

@@ -1,0 +1,13 @@
+#!/bin/sh -e
+
+case $1 in
+install|upgrade)
+	# drop old editorrc (master alternative and symlink file both)
+	if test -z "$2" || \
+	    dpkg --compare-versions "$2" lt '3.7-2.3~'; then
+		# this will noisily pass if editorrc was already removed,
+		# but not remove a slave alternative
+		(update-alternatives --remove-all editorrc 2>/dev/null || :)
+	fi
+	;;
+esac

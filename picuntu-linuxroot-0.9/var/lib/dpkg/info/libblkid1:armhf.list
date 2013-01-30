@@ -1,0 +1,14 @@
+/.
+/etc
+/etc/blkid.conf
+/lib
+/lib/arm-linux-gnueabihf
+/lib/arm-linux-gnueabihf/libblkid.so.1.1.0
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libblkid1
+/usr/share/doc/libblkid1/copyright
+/etc/blkid.tab
+/lib/arm-linux-gnueabihf/libblkid.so.1
+/usr/share/doc/libblkid1/changelog.Debian.gz

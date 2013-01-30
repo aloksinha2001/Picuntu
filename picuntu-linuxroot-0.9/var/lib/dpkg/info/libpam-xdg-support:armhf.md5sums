@@ -1,0 +1,5 @@
+9696853f5827eac93a08480b6ea5fe06  lib/arm-linux-gnueabihf/security/pam_xdg_support.so
+deaf67506c3a0ea1c7f1ddae42115825  usr/share/doc/libpam-xdg-support/changelog.Debian.gz
+002780ff2505c4bdc251239e74adcc16  usr/share/doc/libpam-xdg-support/copyright
+dab56fb62088a8ec7784473f59565747  usr/share/man/man8/pam_xdg_support.8.gz
+436ce4ab729d17da29dda1cb364cfac4  usr/share/pam-configs/xdg-support

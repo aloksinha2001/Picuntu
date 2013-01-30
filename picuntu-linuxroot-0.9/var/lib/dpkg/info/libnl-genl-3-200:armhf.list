@@ -1,0 +1,11 @@
+/.
+/lib
+/lib/arm-linux-gnueabihf
+/lib/arm-linux-gnueabihf/libnl-genl-3.so.200.5.2
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libnl-genl-3-200
+/usr/share/doc/libnl-genl-3-200/copyright
+/lib/arm-linux-gnueabihf/libnl-genl-3.so.200
+/usr/share/doc/libnl-genl-3-200/changelog.Debian.gz

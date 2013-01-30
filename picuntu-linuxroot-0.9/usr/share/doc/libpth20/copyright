@@ -1,0 +1,70 @@
+Author: Ralf S. Engelschall <rse@gnu.org>
+Download: http://ftp.gnu.org/gnu/pth/
+
+Files: *
+Copyright: (C) 1999-2006 Ralf S. Engelschall <rse@gnu.org>
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Library General Public License for more details.
+ .
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the Free
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU Library General Public License
+ can be found in /usr/share/common-licenses/LGPL-2.1 file.
+
+Files: debian/control
+       debian/libpth-dev.docs
+       debian/libpth-dev.install
+       debian/libpth20.docs
+       debian/libpth20.install
+Copyright: (C) 2006-2009 Daniel Baumann <daniel@debian.org>
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Library General Public License for more details.
+ .
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the Free
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU Library General Public License
+ can be found in /usr/share/common-licenses/LGPL-2.1 file.
+
+Files: debian/patches/01-ia64.patch
+Copyright: (C) 2004 "Jamin W. Collins" <jcollins@asgardsrealm.net>
+License: LGPL-2.1+
+ This library is free software; you can redistribute it and/or
+ modify it under the terms of the GNU Library General Public
+ License as published by the Free Software Foundation; either
+ version 2.1 of the License, or (at your option) any later version.
+ .
+ This library is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ Library General Public License for more details.
+ .
+ You should have received a copy of the GNU Library General Public
+ License along with this library; if not, write to the Free
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA
+ .
+ On Debian systems, the complete text of the GNU Library General Public License
+ can be found in /usr/share/common-licenses/LGPL-2.1 file.
+
+Files: debian/*
+All files (and parts in files) written by
+NIIBE Yutaka <gniibe@fsij.org> are put into public domain.

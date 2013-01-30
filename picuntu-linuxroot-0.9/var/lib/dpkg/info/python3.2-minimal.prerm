@@ -1,0 +1,53 @@
+#! /bin/sh -e
+
+syssite=/usr/lib/python3.2/site-packages
+localsite=/usr/local/lib/python3.2/dist-packages
+
+remove_bytecode()
+{
+    pkg=$1
+    max=$(LANG=C LC_ALL=C xargs --show-limits < /dev/null 2>&1 | awk '/Maximum/ {print int($NF / 4)}')
+    dpkg -L $pkg \
+	| awk -F/ 'BEGIN {OFS="/"} /\.py$/ {$NF=sprintf("__pycache__/%s.*.py[co]", substr($NF,1,length($NF)-3)); print}' \
+	| xargs --max-chars="$max" echo \
+	| while read files; do rm -f $files; done
+    find /usr/lib/python3 /usr/lib/python3.2 -name dist-packages -prune -o -name __pycache__ -empty -print \
+	| xargs -r rm -rf
+}
+
+case "$1" in
+    remove)
+	if [ "$DEBIAN_FRONTEND" != noninteractive ]; then
+	    echo "Unlinking and removing bytecode for runtime python3.2"
+	fi
+	for hook in /usr/share/python3/runtime.d/*.rtremove; do
+	    [ -x $hook ] || continue
+	    $hook rtremove python3.2 || continue
+	done
+
+	remove_bytecode python3.2-minimal
+
+	if which update-binfmts >/dev/null; then
+	    update-binfmts --package python3.2 --remove python3.2 /usr/bin/python3.2
+	fi
+
+	if [ -h $syssite ]; then
+	    rm -f $syssite
+	fi
+	[ -d $localsite ] && rmdir $localsite 2>/dev/null || true
+	[ -d $(dirname $localsite) ] && rmdir $(dirname $localsite) 2>/dev/null || true
+        ;;
+    upgrade)
+	remove_bytecode python3.2-minimal
+        ;;
+    deconfigure)
+        ;;
+    failed-upgrade)
+        ;;
+    *)
+        echo "prerm called with unknown argument \`$1'" >&2
+        exit 1
+    ;;
+esac
+
+

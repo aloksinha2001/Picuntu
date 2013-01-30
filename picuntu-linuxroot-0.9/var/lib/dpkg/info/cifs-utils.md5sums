@@ -1,0 +1,16 @@
+3e9d50079a0b24966b70c9d01e551f66  sbin/mount.cifs
+3dfbd3477a1705cbaed37f74ee5d1ca3  usr/bin/cifscreds
+c661f7bde64ad79d8b0aaa3f35381fe9  usr/bin/getcifsacl
+ccdb7a343c6bface194f28c40fc38653  usr/bin/setcifsacl
+080584632bcdba77a533e7136e680161  usr/sbin/cifs.idmap
+c960af0886053cc45186e961ebc06cee  usr/sbin/cifs.upcall
+96430249f6a587d5d653dac273ee4a43  usr/share/doc/cifs-utils/NEWS.Debian.gz
+b10dc645670c96bc318cb14888a89504  usr/share/doc/cifs-utils/README
+fa633889b93d9437165bca7aa78528a1  usr/share/doc/cifs-utils/changelog.Debian.gz
+7c12a5c871f377e35c12e4412d182902  usr/share/doc/cifs-utils/copyright
+7fa440db2be9f695483378d6bfd0e1fd  usr/share/man/man1/cifscreds.1.gz
+e2ea3d4293c14cf99338809a68e100d1  usr/share/man/man1/getcifsacl.1.gz
+4dce832eeace33f8a72432a007460ee5  usr/share/man/man1/setcifsacl.1.gz
+7cfa248241ce4c2ca6000e3924d94363  usr/share/man/man8/cifs.idmap.8.gz
+0407c8b3774d4fe44311a9e3ce96f35a  usr/share/man/man8/cifs.upcall.8.gz
+9a065ff338e2ed9ebf4eba0e4c00e2cd  usr/share/man/man8/mount.cifs.8.gz

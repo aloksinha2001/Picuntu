@@ -1,0 +1,49 @@
+#!/usr/bin/pdmenu
+
+# picuntu-da-server - 0.9
+# Release date: 20-Dec-12
+#   Read the readme file for instructions
+#
+# Copyright Alok Sinha - asinha@g8.net
+# Released under GPL V2
+
+
+# pdmenu script to manage samba shares 
+
+# TODO: Ask user and load samba share in the reload.
+# 
+
+# Seting up color scheme.
+color:desktop:white:brightblue
+color:title:red:red
+color:base:white:red
+color:shadow:black:black
+color:menu:black:brightcyan
+color:selbar:white:black
+color:menuhot:yellow
+color:unselmenu:gray:white
+preproc: if [ -f /tmp/picuntu.debug ]; then /usr/bin/logger "PICUNTU: PDMENU initialised in debug mode."; fi
+
+menu:smb:Samba/Cifs :Configure samba/cifs: This menu helps configure and load Samba shares. 'q' or 'Esc' or 'x' to go exit.
+nop:  
+nop: 
+exec:_List available shares:display:smbtree -N
+group:_Mount a share
+ exec::makemenu: \
+  	echo "menu:mnt_smb:Select a share to mount.: Select share"; \
+  	smbtree -N |  sed  's/\\/\//g' | sed -e 's/^[ \t]*//' | cut -d " " -f1 | cut -d \t -f1 > /tmp/d ; while read I ; do \
+		echo "exec:$I::export SMB=$I; pdmenu -c /usr/local/picuntu/picuntu-smb.pdm --menu=mount_smb"; \
+  	done < /tmp/d
+  show:::mnt_smb
+  remove:::mnt_smb
+endgroup
+
+nop
+exit:Ne_xt...
+
+preproc:echo "menu:mount_smb:$SMB:Select" 
+	exec:_Mount:edit,pause:FSTAB_LINE=adduser ~USER:~ ~GROUP:~;
+	nop: 
+   nop
+   exit:Ne_xt...
+

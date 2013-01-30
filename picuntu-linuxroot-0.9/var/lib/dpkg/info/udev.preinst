@@ -1,0 +1,93 @@
+#!/bin/sh -e
+# This script can be called in the following ways:
+#
+# Before the package is installed:
+#	<new-preinst> install
+#
+# Before removed package is upgraded:
+#	<new-preinst> install <old-version>
+#
+# Before the package is upgraded:
+#	<new-preinst> upgrade <old-version>
+#
+#
+# If postrm fails during upgrade or fails on failed upgrade:
+#	<old-preinst> abort-upgrade <new-version>
+
+
+# Disable udevadm from being run during an upgrade
+disable_udevadm()
+{
+    # Check for old diverts when --package was still "udev"
+    if [ -n "$(dpkg-divert --list /sbin/udevadm | grep 'by udev$')" ]; then
+        rm -f /sbin/udevadm
+        dpkg-divert --package udev --rename --divert /sbin/udevadm.upgrade \
+        		--remove /sbin/udevadm
+    fi
+
+    dpkg-divert --package fake-udev --rename --divert /sbin/udevadm.upgrade \
+    		--add /sbin/udevadm
+
+    cat <<'UDEVADM' > /sbin/udevadm
+#!/bin/sh
+
+if [ "${0##*/}" = "udevtrigger" ] || [ "$1" = "trigger" ]; then
+    echo "udevadm trigger is not permitted while udev is unconfigured." 1>&2
+    exit 1
+fi
+
+if [ "${0##*/}" = "udevsettle" ] || [ "$1" = "settle" ]; then
+    echo "udevadm settle is not permitted while udev is unconfigured." 1>&2
+    exit 1
+fi
+
+exec /bin/bash -c "exec -a \"\$0\" /sbin/udevadm.upgrade \"\$@\"" "$0" "$@"
+UDEVADM
+    chmod +x /sbin/udevadm
+}
+
+
+case "$1" in
+    install|upgrade)
+    	disable_udevadm
+	;;
+
+    abort-upgrade)
+	;;
+
+    *)
+	echo "$0 called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+# Automatically added by dh_installinit
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/init.d/udev" ] && [ ! -L "/etc/init.d/udev" ]; then
+		if [ "`md5sum \"/etc/init.d/udev\" | sed -e \"s/ .*//\"`" != \
+		     "`dpkg-query -W -f='${Conffiles}' udev | sed -n -e \"\\\\' /etc/init.d/udev '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			echo "Obsolete conffile /etc/init.d/udev has been modified by you, renaming to .dpkg-bak"
+			mv -f "/etc/init.d/udev" "/etc/init.d/udev.dpkg-bak"
+		else
+			rm -f "/etc/init.d/udev"
+		fi
+	fi
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+if [ "$1" = install ] || [ "$1" = upgrade ]; then
+	if [ -e "/etc/init.d/udev-finish" ] && [ ! -L "/etc/init.d/udev-finish" ]; then
+		if [ "`md5sum \"/etc/init.d/udev-finish\" | sed -e \"s/ .*//\"`" != \
+		     "`dpkg-query -W -f='${Conffiles}' udev | sed -n -e \"\\\\' /etc/init.d/udev-finish '{s/ obsolete$//;s/.* //p}\"`" ]
+		then
+			echo "Obsolete conffile /etc/init.d/udev-finish has been modified by you, renaming to .dpkg-bak"
+			mv -f "/etc/init.d/udev-finish" "/etc/init.d/udev-finish.dpkg-bak"
+		else
+			rm -f "/etc/init.d/udev-finish"
+		fi
+	fi
+fi
+# End automatically added section
+
+exit 0

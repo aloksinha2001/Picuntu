@@ -1,0 +1,11 @@
+/etc/resolvconf/resolv.conf.d/base
+/etc/resolvconf/resolv.conf.d/head
+/etc/resolvconf/update.d/dnscache
+/etc/resolvconf/update.d/libc
+/etc/resolvconf/interface-order
+/etc/ppp/ip-up.d/000resolvconf
+/etc/ppp/ip-down.d/000resolvconf
+/etc/dhcp/dhclient-enter-hooks.d/resolvconf
+/etc/network/if-down.d/resolvconf
+/etc/network/if-up.d/000resolvconf
+/etc/init/resolvconf.conf

@@ -1,0 +1,62 @@
+#!/bin/sh -e
+# This script can be called in the following ways:
+#
+# After the package was installed:
+#	<postinst> configure <old-version>
+#
+#
+# If prerm fails during upgrade or fails on failed upgrade:
+#	<old-postinst> abort-upgrade <new-version>
+#
+# If prerm fails during deconfiguration of a package:
+#	<postinst> abort-deconfigure in-favour <new-package> <version>
+#	           removing <old-package> <version>
+#
+# If prerm fails during replacement due to conflict:
+#	<postinst> abort-remove in-favour <new-package> <version>
+
+
+# Remove a no-longer used conffile
+rm_conffile()
+{
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE".dpkg-obsolete ]; then
+	echo "Removing obsolete conffile $CONFFILE"
+	rm -f "$CONFFILE".dpkg-obsolete
+    fi
+}
+
+
+case "$1" in
+    configure)
+        if dpkg --compare-versions "$2" lt-nl 0.6.0; then
+	    # We're upgrading from a version of Upstart that doesn't use
+	    # D-Bus for its IPC.  We have to tell it to re-exec into one
+	    # that does.  It'll lose all state, but we didn't keep much
+	    # in those days.
+	    telinit u
+	else
+	    # Before we shutdown or reboot, we need to re-exec so that we
+	    # can safely remount the root filesystem; we can't just do that
+	    # here because we lose state.
+	    touch /var/run/init.upgraded || :
+	fi
+
+	# Upgrade from karmic development version
+	if dpkg --compare-versions "$2" lt-nl 0.6.3-7; then
+	    rm_conffile /etc/init/dbus-reconnect.conf
+	fi
+	;;
+
+    abort-upgrade|abort-deconfigure|abort-remove)
+	;;
+
+    *)
+	echo "$0 called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+
+exit 0

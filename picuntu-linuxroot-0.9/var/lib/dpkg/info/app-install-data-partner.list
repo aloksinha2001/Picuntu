@@ -1,0 +1,12 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/app-install-data-partner
+/usr/share/doc/app-install-data-partner/copyright
+/usr/share/doc/app-install-data-partner/changelog.gz
+/usr/share/app-install
+/usr/share/app-install/desktop
+/usr/share/app-install/channels
+/usr/share/app-install/channels/precise-partner.list
+/usr/share/app-install/channels/precise-partner.eula

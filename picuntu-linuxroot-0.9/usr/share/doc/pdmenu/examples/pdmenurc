@@ -1,0 +1,27 @@
+#!/usr/bin/pdmenu
+#
+# Note that the above bang-path isn't required, but it lets you run this
+# file directly as a sort of pdmenu script.
+
+# Sample menus for Pdmenu.
+
+# Define the main menu.
+menu:main:Main Menu
+	show:_Internet menu..::internet
+	exec:_Change your password:pause:passwd
+	exec:_Directory listing:truncate:ls -l
+	exec:_Change directory:edit,set:echo PWD=~set to?:~
+	exec:_Who's online?:truncate:echo "These users are online:";w
+	nop
+	exit:_Exit
+
+# This is a submenu.
+menu:internet:Internet:Internet programs
+	exec:_Mail::putt
+	exec:_News::slrn -C -n
+	exec:_WWW::lynx http://www.yahoo.com/
+        exec:_Talk:edit,pause:ytalk -x ~Talk to who?:joey~
+	exec:_Finger:edit,display:finger ~Enter address to finger:~ 2>/dev/null
+	exec:_Telnet:edit,pause:telnet ~Telnet to where?:~
+	nop
+	exit:_Main menu..

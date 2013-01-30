@@ -1,0 +1,9 @@
+# See http://help.ubuntu.com/community/UpgradeNotes for how to upgrade to
+# newer versions of the distribution.
+
+deb http://ports.ubuntu.com/ubuntu-ports/ quantal main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports/ quantal main restricted universe multiverse
+deb http://ports.ubuntu.com/ubuntu-ports/ quantal-updates main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports/ quantal-updates main restricted universe multiverse
+deb http://ports.ubuntu.com/ubuntu-ports/ quantal-security main restricted universe multiverse
+deb-src http://ports.ubuntu.com/ubuntu-ports/ quantal-security main restricted universe multiverse

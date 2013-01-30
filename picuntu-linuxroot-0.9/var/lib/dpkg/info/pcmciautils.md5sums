@@ -1,0 +1,10 @@
+c9fdaa0a046549fd064af63599b4ad9e  lib/udev/pcmcia-check-broken-cis
+d386e4fbec46f6ded06d7918bd418428  lib/udev/pcmcia-socket-startup
+67348238b72ff879ddf2ecf3cd6ea255  lib/udev/rules.d/60-pcmcia.rules
+0c14a786a135af96763416fdd0fa2eda  sbin/pccardctl
+c3a71f12e19abdae6babff2331f1df7f  usr/lib/pcmciautils/config.opts
+2816ab02764216dc7512ebae66577b8b  usr/share/doc/pcmciautils/NEWS.Debian.gz
+c52e0dbfbb193536dac7a36a37e02c12  usr/share/doc/pcmciautils/changelog.Debian.gz
+d461fc60474d21314e7b79fbf455b6ec  usr/share/doc/pcmciautils/copyright
+072a48c96acc2faec9406a82975565d6  usr/share/doc/pcmciautils/mini-howto.txt.gz
+d3c8698cee8ebdd1cbb275e2f45e6f05  usr/share/man/man8/pccardctl.8.gz

@@ -1,0 +1,6 @@
+
+
+
+
+# USB device 0x0bda:0x8179 (usb)
+SUBSYSTEM=="net", ACTION=="add", DRIVERS=="?*", ATTR{address}=="00:92:c3:c0:bc:13", ATTR{dev_id}=="0x0", ATTR{type}=="1", KERNEL=="wlan*", NAME="wlan0"

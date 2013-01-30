@@ -1,0 +1,9 @@
+/dev/sda1 / ext4 rw,noatime 0 0
+proc /proc proc rw,noexec,nosuid,nodev 0 0
+sysfs /sys sysfs rw,noexec,nosuid,nodev 0 0
+none /sys/fs/fuse/connections fusectl rw 0 0
+none /sys/kernel/debug debugfs rw 0 0
+udev /dev devtmpfs rw,mode=0755 0 0
+devpts /dev/pts devpts rw,noexec,nosuid,gid=5,mode=0620 0 0
+none /run/user tmpfs rw,noexec,nosuid,nodev,size=104857600,mode=0755 0 0
+cgroup /sys/fs/cgroup tmpfs rw,relatime,mode=755 0 0

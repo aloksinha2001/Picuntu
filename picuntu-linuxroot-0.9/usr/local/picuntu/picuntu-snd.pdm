@@ -1,0 +1,64 @@
+#!/usr/bin/pdmenu
+
+# picuntu-da-server - 0.9
+# Release date: 31-Jan-13
+#   Read the readme file for instructions
+#
+# Copyright Alok Sinha - asinha@g8.net
+# Released under GPL V2
+
+
+# pdmenu script to install servers/desktop and other convenience tool for 
+# users, using picuntu
+
+# TODO setup Droidmote to be run as service
+# 
+
+# Seting up color scheme.
+color:desktop:white:brightblue
+color:title:red:red
+color:base:white:red
+color:shadow:black:black
+color:menu:black:brightcyan
+color:selbar:white:black
+color:menuhot:yellow
+color:unselmenu:gray:white
+preproc: if [ -f /tmp/picuntu.debug ]; then /usr/bin/logger "PICUNTU: PDMENU initialised in debug mode."; fi
+
+
+
+menu:sound_main:Sound Menu:Welcome to Picuntu Sound config : Picuntu sound config 0.9.1. 'q' or 'Esc' to go back
+      show:  ...---=== Welcome to Picuntu Sound config ===---... ::
+		nop: 
+		nop:Sound device configuration.
+        nop:-------------------------------------
+
+		exec: _List sound devices :display:aplay -l
+		group: Configure Sound _Card..
+		 	exec::makemenu: \
+			  	echo "menu:make_snd_svcs:Select a sound card:Select a sound card to configure...'q' or 'Esc' to go back"; \
+			   	aplay -l | grep card > /tmp/d;sed -i s/":"/" "/g /tmp/d;sed -i s/" "/"_"/g /tmp/d ; while read I ; do \
+ 	   			echo "exec:_$I::export SERVICE=$I; pdmenu $home_dir/picuntu-snd.pdm -c --menu=snd_services"; \
+			  	done < /tmp/d
+			 show:::make_snd_svcs
+			 remove:::make_snd_svcs
+		 endgroup
+		exec: Set _Volume::alsamixer
+		exec: Test _Sound - wav::/usr/bin/aplay /usr/share/sounds/alsa/Front_Center.wav
+		preproc:if [ -f /usr/bin/espeak ]; then echo "exec: Synthesi_Ze sound::/usr/bin/espeak -ven+m4 -s170 -g 15 "Hello. I am Picuntu version 0.9. Nice to meet you" 2>>/tmp/error "; fi
+		nop: 
+		nop: 
+  		exit: E_xit..
+	
+preproc:echo "menu:snd_services:$SERVICE:Select" 
+	exec:_Make changes to /etc/asound.conf:p:echo $SERVICE > /tmp/d;\
+		echo "defaults.pcm.card " `cat /tmp/d | cut -d "_" -f2` > /tmp/asound.conf ; \
+		echo "defaults.pcm.device " `cat /tmp/d | cut -d "," -f2 | cut -d "_" -f3` >> /tmp/asound.conf; \
+		echo "defaults.ctl.card " `cat /tmp/d | cut -d "_" -f2` >> /tmp/asound.conf; \
+		cat /tmp/asound.conf > /etc/asound.conf
+	exec:_Show /etc/asound.conf:display:cat /etc/asound.conf
+	nop: 
+   nop
+   exit:Ne_xt...
+
+

@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# This script makes anacron jobs start/stop when a machine gets or loses AC
+# power.
+
+case $1 in
+    false)
+	start -q anacron || :
+	;;
+    true)
+	stop -q anacron || :
+	;;
+esac

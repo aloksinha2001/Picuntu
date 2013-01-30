@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/share
+/usr/share/doc
+/usr/share/doc/libpipeline1
+/usr/share/doc/libpipeline1/changelog.Debian.gz
+/usr/share/doc/libpipeline1/copyright
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libpipeline.so.1.2.2
+/usr/lib/arm-linux-gnueabihf/libpipeline.so.1

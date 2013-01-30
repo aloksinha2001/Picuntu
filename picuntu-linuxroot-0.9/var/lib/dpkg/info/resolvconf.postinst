@@ -1,0 +1,161 @@
+#!/bin/sh
+#
+# This file is part of the resolvconf package.
+#
+
+set -e
+
+. /usr/share/debconf/confmodule
+
+MYNAME=resolvconf.postinst
+report() { echo "${MYNAME}: $*" ; }
+report_err() { report "Error: $*" >&2 ; }
+report_warn() { report "Warning: $*" >&2 ; }
+report_info() { report "$*" >&2 ; }
+
+OLD_RUN_DIR=/var/run
+
+is_immutable_file() {
+	[ "$1" ] || return 2
+	[ -e "$1" ] || return 1
+	[ ! -L "$1" ] || return 1
+	local ATTR="$(lsattr "$1" 2>/dev/null || :)"
+	[ "$ATTR" ] || return 1
+	echo "$ATTR" | awk '$1 ~ /i/ { exit 0; }; { exit 1; }'
+}
+
+# We use dh_installinit with --no-start
+# Automatically added by dh_installinit
+if [ -x "/etc/init.d/resolvconf" ]; then
+	if [ ! -e "/etc/init/resolvconf.conf" ]; then
+		update-rc.d resolvconf defaults >/dev/null
+	fi
+	invoke-rc.d resolvconf start || exit $?
+fi
+# End automatically added section
+# Automatically added by dh_installinit
+update-rc.d -f resolvconf remove >/dev/null || exit $?
+# End automatically added section
+
+
+
+### Create run-time directories and linkify ###
+#
+# We create the run-time directories here, in the postinst, even though
+# we also do so in the preinst, because
+# * the system may have rebooted since the preinst ran, causing
+#   everything on tmpfses to disappear;
+# * multistrap doesn't run the preinst at all.
+#
+case "$1" in
+  configure)
+	# Linkify /etc/resolv.conf if appropriate
+	db_get resolvconf/linkify-resolvconf
+	if [ "$RET" = "true" ] ; then
+		if is_immutable_file /etc/resolv.conf ; then
+			db_input critical resolvconf/fixing-immutable
+			db_go || :
+			chattr -i /etc/resolv.conf
+		fi
+
+		if [ -f /etc/resolv.conf ] \
+		   && [ ! -L /etc/resolv.conf ]
+		then
+			# Back up original file
+			if [ ! -e /etc/resolvconf/resolv.conf.d/original ] ; then
+				cp -a /etc/resolv.conf /etc/resolvconf/resolv.conf.d/original
+				db_get resolvconf/link-tail-to-original
+				if [ "$RET" = "true" ]; then
+					ln -s original /etc/resolvconf/resolv.conf.d/tail
+				else
+					: > /etc/resolvconf/resolv.conf.d/tail
+				fi
+			else
+				cp -a /etc/resolv.conf /etc/resolv.conf.dpkg-old
+			fi
+				# Even though we create this dir in the preinst,
+			# don't assume that it's still here; a reboot
+			# after unpack may have left us with no upstart
+			# job in place and /run cleaned out.
+			mkdir -p /run/resolvconf/interface
+
+			# Before creating the link, make sure that the original file is
+			# at the target of the link.  /sbin/resolvconf will overwrite
+			# this when it does an update, of course.
+			if [ ! -e /run/resolvconf/resolv.conf ] ; then
+				cp -a /etc/resolv.conf /run/resolvconf/resolv.conf
+			fi
+			# Add the original file to the database so that its contents
+			# are included when resolvconf updates.
+			# Yes, this is an ugly workaround for the problem that there
+			# is no way to obtain nameserver information from interface
+			# configurers after they have done their configuration work.
+			cp -a /etc/resolv.conf /run/resolvconf/interface/original.resolvconf
+		fi
+
+		# Create the link and make sure we don't convert it again on upgrade
+		# The link is relative to allow for cp from outside a chroot into a chroot
+		# to work without overwriting the file outside the chroot (or failing)
+		ln -nsf ../run/resolvconf/resolv.conf /etc/resolv.conf
+		db_set resolvconf/linkify-resolvconf false
+	fi
+
+	# FHS violation; get rid of it, we use /run directly now.
+	if [ -e /etc/resolvconf/run ]; then
+		rm -rf /etc/resolvconf/run
+	fi
+	;;
+  # triggered)
+	# Don't do anything here
+	# ;;
+  # abort-upgrade)
+	# Don't do anything here since we don't do anything in the prerm on upgrade or on failed-upgrade
+	# ;;
+  # abort-remove)
+	# Don't do anything extra here since we don't deconfigure anything in the prerm on remove
+	# ;;
+  # abort-deconfigure)
+	# Don't do anything extra here since we don't do anything in the prerm on deconfigure
+	# ;;
+esac
+
+db_stop
+
+### Notify others of our installation ###
+
+is_installed() {
+	# Same function in preinst, postinst, postrm
+	[ "$1" ] || return 1
+	dpkg-query -W -f='${Status}\n' "$1" 2>/dev/null | grep -siq '^[[:alpha:]]\+ [[:alpha:]]\+ installed$' >/dev/null 2>&1
+}
+
+case "$1" in
+  configure)
+	if [ -f /run/resolvconf/packages-to-notify ] ; then
+		PACKAGES_TO_NOTIFY="$(cat /run/resolvconf/packages-to-notify)"
+		rm -f /run/resolvconf/packages-to-notify
+		for PKG in $PACKAGES_TO_NOTIFY ; do
+			if is_installed "$PKG" ; then
+				SCRPT="/usr/lib/resolvconf/dpkg-event.d/$PKG"
+				if [ -x "$SCRPT" ] ; then
+					"$SCRPT" install || :
+				fi
+			fi
+		done
+	fi
+	;;
+  # triggered)
+	# Don't do anything
+	# ;;
+  # abort-upgrade)
+	# Don't do anything here since we don't do anything in the prerm on upgrade or on failed-upgrade
+	# ;;
+  # abort-remove)
+	# Don't do anything extra here since we don't deconfigure anything in the prerm on remove
+	# ;;
+  # abort-deconfigure)
+	# Don't do anything extra here since we don't do anything in the prerm on deconfigure
+	# ;;
+esac
+
+exit 0

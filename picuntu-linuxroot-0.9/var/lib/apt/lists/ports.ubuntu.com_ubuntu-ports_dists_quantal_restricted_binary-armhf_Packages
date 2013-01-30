@@ -1,0 +1,59 @@
+Package: pvr-omap4
+Priority: extra
+Section: restricted/misc
+Installed-Size: 5662
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: armhf
+Version: 1.9.0.5.1.1-0ubuntu4
+Depends: dkms (>= 1.95), make, coreutils (>= 8.5), grep (>= 2.6.3), linux-headers-omap4, xorg-video-abi-13, libc6 (>= 2.15-0ubuntu8), libdri2-1 (>= 1.0.0~git20120510+26fee2e), libdrm-omap1 (>= 2.4.38), libdrm2 (>= 2.3.1), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.1.1), libx11-6, libxfixes3
+Filename: pool/restricted/p/pvr-omap4/pvr-omap4_1.9.0.5.1.1-0ubuntu4_armhf.deb
+Size: 1684920
+MD5sum: edcadbf3671de4b340c696d4446fe73f
+SHA1: f21427b721bf265d308f3975706eba087c4c99ff
+SHA256: c3391ad89493c89f1d0935f66419d4a92abf521712eb8ebb61e04c3d58930589
+Description: PowerVR SGX540 libraries for OMAP4, libs and drivers.
+Homepage: https://launchpad.net/~tiomap-dev/+archive/release
+Description-md5: c979ec185f4e2162eefad5b45fb57b0e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: pvr-omap4-dbg
+Priority: extra
+Section: restricted/debug
+Installed-Size: 10645
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: armhf
+Source: pvr-omap4
+Version: 1.9.0.5.1.1-0ubuntu4
+Depends: pvr-omap4 (= 1.9.0.5.1.1-0ubuntu4)
+Filename: pool/restricted/p/pvr-omap4/pvr-omap4-dbg_1.9.0.5.1.1-0ubuntu4_armhf.deb
+Size: 4930182
+MD5sum: 6faef597674907723f0af37ada7ed183
+SHA1: e54caba9a64ffd12bb9d31243d8523a10ff8330e
+SHA256: e8beebfbd11796835f13adf2c9359bd5044981faaf46e867618a4244aacb2401
+Description: PowerVR SGX540 libraries for OMAP4, debugging symbols
+Homepage: https://launchpad.net/~tiomap-dev/+archive/release
+Description-md5: cb412390123e86cf1c9240322bc3942e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: pvr-omap4-dev
+Priority: extra
+Section: restricted/misc
+Installed-Size: 266
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: armhf
+Source: pvr-omap4
+Version: 1.9.0.5.1.1-0ubuntu4
+Depends: pvr-omap4 (= 1.9.0.5.1.1-0ubuntu4)
+Filename: pool/restricted/p/pvr-omap4/pvr-omap4-dev_1.9.0.5.1.1-0ubuntu4_armhf.deb
+Size: 37982
+MD5sum: 19608e02b8a3d947955f9dbc2159e2cf
+SHA1: 52657c2f783da0f78c86522f4257eef341aaba71
+SHA256: 46546dc4017594185ba782cb312aee7b998d661af5bf0207dee74481b158cf84
+Description: PowerVR SGX540 libraries for OMAP4, development files
+Homepage: https://launchpad.net/~tiomap-dev/+archive/release
+Description-md5: b368da04a4bb42c3fa5759864c3e14e9
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+

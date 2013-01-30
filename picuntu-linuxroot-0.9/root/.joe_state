@@ -1,0 +1,52 @@
+# JOE state file v1.0
+search
+done
+macros
+done
+files
+	"/etc/rc.local\n"
+done
+find
+done
+replace
+done
+run
+done
+build
+done
+grep
+done
+cmd
+done
+math
+done
+yank
+	"\""
+	":"
+	";"
+	"\""
+	" "
+	";"
+	"\""
+	"x[D4.2.2.2"
+	" "
+	"192"
+	"5."
+	"5"
+	"./"
+	".e"
+	"		"
+	"il"
+	"\n"
+	"q!"
+	"[B"
+	" 0[D"
+	" 0qqq"
+	"q"
+	"\n"
+	"[A"
+	" ssssq "
+done
+file_pos
+	0 "/etc/rc.local"
+done

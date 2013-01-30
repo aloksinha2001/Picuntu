@@ -1,0 +1,12 @@
+[Device]
+Product=Kindle
+Vendor=Amazon
+AccessProtocol=storage
+DeviceMatch=usb:1949:0001;usb:1949:0002;usb:1949:0003;usb:1949:0004;
+
+[Media]
+OutputFormats=audio/mpeg
+
+[storage]
+AudioFolders=music/
+

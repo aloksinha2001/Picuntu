@@ -1,0 +1,67 @@
+This package was debianized by Michael Biebl <biebl@debian.org> on
+Mon, 27 Aug 2007 08:03:51 +0200.
+
+It was downloaded from
+http://ftp.gnome.org/pub/GNOME/sources/network-manager-applet/
+
+Upstream author:
+
+    Dan Williams <dcbw@redhat.com>
+
+
+All files if not specified otherwise are licensed under the following terms:
+
+Copyright:
+
+    Copyright (C) 2004 - 2009 Red Hat, Inc.
+    Copyright (C) 2005 - 2008 Novell, Inc.
+    Copyright (C) 2001, 2002 Free Software Foundation
+
+License:
+
+    This package is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version.
+
+    This package is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU General
+Public License can be found in `/usr/share/common-licenses/GPL'.
+
+
+
+src/utils/nmn-mobile-providers.[ch]
+src/gnome-bluetooth/network-manager-applet.c
+
+Copyright:
+
+    Copyright (C) 2009 Novell, Inc.
+    Copyright (C) 2009 Red Hat, Inc.
+    Copyright (C) 2009 Bastien Nocera <hadess@hadess.net>
+
+License:
+
+    This library is free software; you can redistribute it and/or
+    modify it under the terms of the GNU Lesser General Public
+    License as published by the Free Software Foundation; either
+    version 2 of the License, or (at your option) any later version.
+
+    This library is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+    Lesser General Public License for more details.
+
+    You should have received a copy of the GNU Lesser General Public License
+    along with this package; if not, write to the Free Software
+    Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301 USA
+
+On Debian systems, the complete text of the GNU Lesser General
+Public License can be found in `/usr/share/common-licenses/LGPL'.

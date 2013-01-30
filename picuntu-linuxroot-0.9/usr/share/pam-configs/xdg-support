@@ -1,0 +1,7 @@
+Name: XDG_RUNTIME_DIR support
+Default: yes
+Priority: 0
+Conflicts: systemd
+Session-Type: Additional
+Session:
+	optional			pam_xdg_support.so

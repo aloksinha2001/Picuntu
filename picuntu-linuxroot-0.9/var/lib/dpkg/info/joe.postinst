@@ -1,0 +1,28 @@
+#!/bin/sh -e
+
+if [ "$1" = "configure" ]; then
+
+  update-alternatives --install /usr/bin/editor editor /usr/bin/joe 70 \
+    --slave /var/lib/misc/editorrc editorrc /etc/joe/joerc \
+    --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/joe.1.gz
+  update-alternatives --install /usr/bin/editor editor /usr/bin/jmacs 50 \
+    --slave /var/lib/misc/editorrc editorrc /etc/joe/jmacsrc \
+    --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/jmacs.1.gz
+  update-alternatives --install /usr/bin/editor editor /usr/bin/jstar 50 \
+    --slave /var/lib/misc/editorrc editorrc /etc/joe/jstarrc \
+    --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/jstar.1.gz
+  update-alternatives --install /usr/bin/editor editor /usr/bin/jpico 50 \
+    --slave /var/lib/misc/editorrc editorrc /etc/joe/jpicorc \
+    --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/jpico.1.gz
+  update-alternatives --install /usr/bin/editor editor /usr/bin/rjoe 25 \
+    --slave /var/lib/misc/editorrc editorrc /etc/joe/rjoerc \
+    --slave /usr/share/man/man1/editor.1.gz editor.1.gz /usr/share/man/man1/rjoe.1.gz
+
+  if test -z "$2" || dpkg --compare-versions "$2" lt '3.7-2.3~'; then
+    rm -f /etc/joe/editorrc
+    ln -sf ../../var/lib/misc/editorrc /etc/joe/editorrc
+  fi
+
+  if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+
+fi

@@ -1,0 +1,5 @@
+85c96d989a94b7d7e74acaf0dd3cf365  usr/lib/arm-linux-gnueabihf/libkrb5.so.3.3
+fbeff61fdc2688060fd7f5ade73648f5  usr/share/doc/libkrb5-3/README.Debian.gz
+de24363478b904d8a55c389a59a2a948  usr/share/doc/libkrb5-3/README.gz
+1d592b61381f4c221776d8e32cf81638  usr/share/doc/libkrb5-3/copyright
+0a0210fa81572d81c7f9ed6b0e07fe46  usr/share/lintian/overrides/libkrb5-3

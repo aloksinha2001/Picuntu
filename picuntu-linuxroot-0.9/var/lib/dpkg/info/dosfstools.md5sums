@@ -1,0 +1,13 @@
+06033c6b27d62e3f8c34c9a91c75066a  sbin/dosfsck
+eb4622c9391fcd7aa6e2c87aa06615b0  sbin/dosfslabel
+8e76cb0d56bf1c80dcd02c89da604f61  sbin/mkdosfs
+93711e1501ccc51f4e9712c752d39dbe  usr/share/doc/dosfstools/ANNOUNCE.mkdosfs
+35cfbb9cbcf43bf0230cc5a6e0528201  usr/share/doc/dosfstools/README.dosfsck
+52593f2d08903bee08e4ffa1100d06ff  usr/share/doc/dosfstools/README.dosfstools-2.x
+fc112bd75668e042a449ba004fcc36f6  usr/share/doc/dosfstools/README.mkdosfs
+6f811c393a544fc0ef91d09017bb4e93  usr/share/doc/dosfstools/TODO.dosfstools-2.x
+f665a8bbba62cb563f9dfe4deda71543  usr/share/doc/dosfstools/changelog.Debian.gz
+3430cc33f2305e82bad45abd47801af2  usr/share/doc/dosfstools/copyright
+a585980dcc17d998a90d71f3bc829516  usr/share/man/man8/dosfsck.8.gz
+72be742f35012b4f0ecf482439814cb6  usr/share/man/man8/dosfslabel.8.gz
+45a967221df75d1c3d131f7d551a5f75  usr/share/man/man8/mkdosfs.8.gz

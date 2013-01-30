@@ -1,0 +1,2260 @@
+Package: apache2-mpm-itk
+Priority: extra
+Section: universe/net
+Installed-Size: 55
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-6ubuntu2.1
+Provides: apache2, apache2-mpm, httpd, httpd-cgi
+Depends: apache2.2-common (= 2.2.22-6ubuntu2.1), apache2.2-bin (= 2.2.22-6ubuntu2.1)
+Conflicts: apache2-common, apache2-mpm
+Filename: pool/universe/a/apache2/apache2-mpm-itk_2.2.22-6ubuntu2.1_armhf.deb
+Size: 2326
+MD5sum: b1104cf9e99c2ed33be32659908e0bbf
+SHA1: 6ca439b869e201c4f01210194301ebaa9ee27353
+SHA256: 92e8d744710f8fd7825d05d767ac0f4153d23987c0426f8ff11b8576dbbde15c
+Description: multiuser MPM for Apache 2.2
+Homepage: http://httpd.apache.org/
+Description-md5: 852c600a072cd8e2a37f461a6a0916ad
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: apache2-suexec
+Priority: optional
+Section: universe/web
+Installed-Size: 135
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-6ubuntu2.1
+Replaces: apache2-suexec
+Depends: libc6 (>= 2.15-0ubuntu8), apache2.2-common
+Conflicts: apache-common, apache2-suexec
+Filename: pool/universe/a/apache2/apache2-suexec_2.2.22-6ubuntu2.1_armhf.deb
+Size: 14558
+MD5sum: 594f415b1d993407d7006632d1506a60
+SHA1: 7abb68f63d8caa9b1971fbc5d40f204d272e12ce
+SHA256: 4cddd9a606e672ffe14801de1c8c15be920008d4576b3e4b674874440cf2ac10
+Description: Standard suexec program for Apache 2 mod_suexec
+Homepage: http://httpd.apache.org/
+Description-md5: e83b330db3c94ec36f5e444e45447966
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: apache2-suexec-custom
+Priority: extra
+Section: universe/web
+Installed-Size: 148
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-6ubuntu2.1
+Replaces: apache2-suexec
+Provides: apache2-suexec
+Depends: libc6 (>= 2.15-0ubuntu8), apache2.2-common
+Conflicts: apache-common, apache2-suexec
+Filename: pool/universe/a/apache2/apache2-suexec-custom_2.2.22-6ubuntu2.1_armhf.deb
+Size: 16226
+MD5sum: a6a3aef549583f65b3f60d7b428aca67
+SHA1: 5a97b7f8137fa1282b574bb46330ba1105831de9
+SHA256: 155803fc643b077c418e04204f539fc031d200194223d2c0a661c48912fcde6b
+Description: Configurable suexec program for Apache 2 mod_suexec
+Homepage: http://httpd.apache.org/
+Description-md5: a9c6f07a2dd1c93fd399fa41bfd36cee
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: bogofilter
+Priority: optional
+Section: universe/mail
+Installed-Size: 21
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Serafeim Zanikolas <sez@debian.org>
+Architecture: armhf
+Version: 1.2.2+dfsg1-1ubuntu0.12.10.1
+Depends: bogofilter-common, bogofilter-bdb | bogofilter-db
+Filename: pool/universe/b/bogofilter/bogofilter_1.2.2+dfsg1-1ubuntu0.12.10.1_armhf.deb
+Size: 1018
+MD5sum: 7dedee58623054d1b17a8067a4434da3
+SHA1: 4757201710bd24a1049da36b6f06dc1251d49e56
+SHA256: 2b0d8158c1dc60bbc532d87a630ea455e53f84375c2a68e19bcdcea79cfdf486
+Description: fast Bayesian spam filter (dummy package)
+Description-md5: 968ec277af1658df73a6620e1ea6c7f7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: bogofilter-bdb
+Priority: optional
+Section: universe/mail
+Installed-Size: 664
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Serafeim Zanikolas <sez@debian.org>
+Architecture: armhf
+Source: bogofilter
+Version: 1.2.2+dfsg1-1ubuntu0.12.10.1
+Replaces: bogofilter (<< 0.94.14-1)
+Provides: bogofilter-db
+Depends: libc6 (>= 2.15-0ubuntu8), libdb5.1, libgcc1 (>= 1:4.4.0), libgsl0ldbl (>= 1.9), bogofilter-common
+Suggests: db5.1-util
+Filename: pool/universe/b/bogofilter/bogofilter-bdb_1.2.2+dfsg1-1ubuntu0.12.10.1_armhf.deb
+Size: 242060
+MD5sum: 649cb77425fdb9be0ceddd0e40039c4e
+SHA1: adc7e0a5f8e34c0cbde767caa33497de6947969d
+SHA256: e58157d4ce04c4adb6f6c16a1831618d0a5f808d72b1946d377c0ef87e8bdcbd
+Description: fast Bayesian spam filter (Berkeley DB)
+Description-md5: e83a0090bafdc792b6c35c6bc88649e4
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: bogofilter-common
+Priority: optional
+Section: universe/mail
+Installed-Size: 555
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Serafeim Zanikolas <sez@debian.org>
+Architecture: all
+Source: bogofilter
+Version: 1.2.2+dfsg1-1ubuntu0.12.10.1
+Replaces: bogofilter (<< 0.94.14-1)
+Suggests: doc-base
+Filename: pool/universe/b/bogofilter/bogofilter-common_1.2.2+dfsg1-1ubuntu0.12.10.1_all.deb
+Size: 186286
+MD5sum: 9870ad8234c5da5c33f03a8b7e549d19
+SHA1: f9eca7de8029e45542855edc273dc3b1df77913f
+SHA256: 24b5a701d8be39cd7d98576faf38fb1250c52036b6e526c67d1d567dcca49eb1
+Description: fast Bayesian spam filter (common files)
+Description-md5: 2e806a17661e5d96bbb0a0121098a1e3
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: bogofilter-sqlite
+Priority: optional
+Section: universe/mail
+Installed-Size: 575
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Serafeim Zanikolas <sez@debian.org>
+Architecture: armhf
+Source: bogofilter
+Version: 1.2.2+dfsg1-1ubuntu0.12.10.1
+Provides: bogofilter-db
+Depends: libc6 (>= 2.15-0ubuntu8), libgsl0ldbl (>= 1.9), libsqlite3-0 (>= 3.5.9), bogofilter-common
+Filename: pool/universe/b/bogofilter/bogofilter-sqlite_1.2.2+dfsg1-1ubuntu0.12.10.1_armhf.deb
+Size: 203098
+MD5sum: 7f43d9870def5637afde885d4ceca354
+SHA1: 647ead8f366a87d618a2250c7ccd28cfdd766e8d
+SHA256: 41c248ebfb1537968ef9b23932c9afcd30cd024dc0f1b2aadc7532b0a4dd5af3
+Description: fast Bayesian spam filter (sqlite)
+Description-md5: 6eb04a1cda23db8196381fcabb2bc183
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: cupsddk
+Priority: optional
+Section: universe/text
+Installed-Size: 108
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian CUPS Maintainers <pkg-cups-devel@lists.alioth.debian.org>
+Architecture: all
+Source: cups
+Version: 1.6.1-0ubuntu11.3
+Depends: cups-ppdc
+Filename: pool/universe/c/cups/cupsddk_1.6.1-0ubuntu11.3_all.deb
+Size: 5370
+MD5sum: f6e17e6a35db81958c51cb9eca80d86a
+SHA1: 392d80b81d1f25da955234ebaf77ff8ae8a0d6ed
+SHA256: c7c5b6fa53a7164bbccf90e6cece5a99da5d244ce74f5605ff5c46e20b61f10d
+Description: Common UNIX Printing System (transitional package)
+Homepage: http://www.cups.org
+Description-md5: 9aadce16ef37b93d56befeaf3c431717
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: enigmail
+Priority: optional
+Section: universe/mail
+Installed-Size: 1870
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Original-Maintainer: Alexander Sack <asac@debian.org>
+Architecture: armhf
+Version: 2:1.4.6-0ubuntu0.12.10.1
+Provides: seamonkey-enigmail, thunderbird-enigmail, xul-ext-enigmail
+Depends: libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.1.1), gnupg
+Recommends: thunderbird (>= 16.0) | seamonkey (>= 2.13)
+Filename: pool/universe/e/enigmail/enigmail_1.4.6-0ubuntu0.12.10.1_armhf.deb
+Size: 1311884
+MD5sum: 69fb020ea772195dca516fb5bf544634
+SHA1: 98786fd64113d43b78a8071c66fdae2ff61617ef
+SHA256: 8257889b3a97ac53583527eb452d561237b3683a8ca306fde3d1e5a25ad3d03b
+Description: GPG support for Thunderbird and Debian Icedove
+Enhances: seamonkey, thunderbird
+Description-md5: 1f1e67ab816cad117d3c812e71e25f82
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: glance-client
+Priority: extra
+Section: universe/python
+Installed-Size: 73
+Maintainer: Ubuntu OpenStack <openstack-packaging@lists.ubuntu.com>
+Architecture: all
+Source: glance
+Version: 2012.2-0ubuntu2.3
+Replaces: glance (<< 2012.1~e1~20110919.1021-0ubuntu2)
+Depends: python, glance-common (= 2012.2-0ubuntu2.3)
+Filename: pool/universe/g/glance/glance-client_2012.2-0ubuntu2.3_all.deb
+Size: 11020
+MD5sum: 6c18f5c11e4b71721c6977bbbf6b6212
+SHA1: 14c17b026e19335f998f3e7df9c352c9047a672c
+SHA256: 0ac39c81029b89d67d4f0c3ff0909f8b64e2cbb867308d1a0d2d5f815e95d61e
+Description: OpenStack Image Registry and Delivery Service - client
+Homepage: http://launchpad.net/glance
+Description-md5: 51996298b1544ac6c05b4806e85d1d04
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: gnupg-curl
+Priority: optional
+Section: universe/utils
+Installed-Size: 123
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian GnuPG-Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: gnupg
+Version: 1.4.11-3ubuntu4.1
+Depends: libc6 (>= 2.15-0ubuntu8), libcurl3-gnutls (>= 7.16.2), gnupg
+Filename: pool/universe/g/gnupg/gnupg-curl_1.4.11-3ubuntu4.1_armhf.deb
+Size: 17608
+MD5sum: f2fe809161969b24e9f7b47edb7849e5
+SHA1: 24302249f533e1e8580c61732e7e1ac3c261e939
+SHA256: f258b468ecf76e1db279a87037b07c710880c703b260e054cf6e073ebdb26275
+Description: GNU privacy guard - a free PGP replacement (cURL)
+Multi-Arch: foreign
+Homepage: http://www.gnupg.org
+Description-md5: 55306a4e1e1fd63e577767c1b9f5161c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: gpgsm
+Priority: optional
+Section: universe/utils
+Installed-Size: 712
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Eric Dorland <eric@debian.org>
+Architecture: armhf
+Source: gnupg2
+Version: 2.0.17-2ubuntu3.1
+Replaces: gnupg-agent, gnupg2 (<< 2.0.0-2)
+Depends: libassuan0 (>= 2.0.2), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libgcrypt11 (>= 1.4.5), libgpg-error0 (>= 1.10), libksba8 (>= 1.2.0), libpth20 (>= 2.0.7), libreadline6 (>= 6.0), libusb-0.1-4 (>= 2:0.1.12)
+Filename: pool/universe/g/gnupg2/gpgsm_2.0.17-2ubuntu3.1_armhf.deb
+Size: 404802
+MD5sum: 48f4f227515d8ccd9edcfb7acd527f48
+SHA1: 65912e0bb9b51075ad8cb4d6c62baa967060244e
+SHA256: b22538c4fbd64bb51e34111ddf8ab10419863d9aa7573398cf7a7adc243afbbb
+Description: GNU privacy guard - S/MIME version
+Homepage: http://www.gnupg.org/
+Description-md5: eaa08168026822f8656ab2343df90485
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: kubuntu-desktop, kubuntu-full, kubuntu-active-desktop, kubuntu-active-full, edubuntu-desktop-kde
+
+Package: host
+Priority: optional
+Section: universe/net
+Installed-Size: 46
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Architecture: all
+Source: bind9
+Version: 1:9.8.1.dfsg.P1-4.2ubuntu3.1
+Depends: bind9-host
+Filename: pool/universe/b/bind9/host_9.8.1.dfsg.P1-4.2ubuntu3.1_all.deb
+Size: 5062
+MD5sum: 02146e4aa12429cf9fe8114ec90fc922
+SHA1: c512070972217365b677be102b341fc132943132
+SHA256: 5c99718b0d07491138e56396f0f97e3229698d50d34b4b5af24414e42981d514
+Description: Transitional package
+Description-md5: 3c0b6923194ef2929ab26358ef75c037
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: icedtea-6-jre-cacao
+Priority: extra
+Section: universe/interpreters
+Installed-Size: 858
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Provides: icedtea6-jre-cacao
+Depends: openjdk-6-jre-headless (= 6b24-1.11.5-0ubuntu1~12.10.1), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.6), zlib1g (>= 1:1.1.4)
+Filename: pool/universe/o/openjdk-6/icedtea-6-jre-cacao_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 368320
+MD5sum: ef071e6028a4240fe0d74278c9e43a03
+SHA1: 051d8c4d8027ff3695b4acb1df55becad50fea08
+SHA256: 1e26480d804e7f6207a147a94f6d99dc437287db678de621f7ef35c573eb014c
+Description: Alternative JVM for OpenJDK, using Cacao
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: 24efc2093c93b3e7670092d00aea59d9
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: icedtea-6-jre-jamvm
+Priority: extra
+Section: universe/java
+Installed-Size: 1578
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Depends: openjdk-6-jre-headless (= 6b24-1.11.5-0ubuntu1~12.10.1), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), zlib1g (>= 1:1.1.4)
+Filename: pool/universe/o/openjdk-6/icedtea-6-jre-jamvm_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 582400
+MD5sum: 54beb8be0e03c2ed95d9950b41e2c5ce
+SHA1: 342f91bfce5ade788a0a97a6fd98ea2b999c6675
+SHA256: ce1196b27b537fb17b31eaba6f413fb9c515e761144685b662d972407cc410de
+Description: Alternative JVM for OpenJDK, using JamVM
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: a3b67c2c3683232269f84a02ede3fd4b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: icedtea-6-plugin
+Priority: extra
+Section: universe/web
+Installed-Size: 195
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: icedtea-web
+Version: 1.3-1ubuntu1.1
+Replaces: icedtea-gcjwebplugin, icedtea-plugin (<< 1.2~pre1-1~), openjdk-6-jre (<< 6b18-1.8.7-3)
+Provides: icedtea6-plugin
+Depends: openjdk-6-jre, icedtea-netx (= 1.3-1ubuntu1.1), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libglib2.0-0 (>= 2.31.8), libgtk2.0-0 (>= 2.8.0), libstdc++6 (>= 4.6)
+Conflicts: icedtea-gcjwebplugin (<< 1.0-1ubuntu4), icedtea-plugin (<< 1.2~pre1-1~), icedtea6-plugin (<< 6b21.2~pre1-1~)
+Filename: pool/universe/i/icedtea-web/icedtea-6-plugin_1.3-1ubuntu1.1_armhf.deb
+Size: 71374
+MD5sum: 5966fab5fa4c49fa36d5510efec4ce40
+SHA1: 4fa27e47f9dea3fbcaa4acfc40e80491bec64581
+SHA256: 4c1a1636e2d985d2a6a73a8910f295dbb34c2c3fa4bc21a26e8070e6946a9447
+Description: web browser plugin based on OpenJDK and IcedTea to execute Java applets
+Multi-Arch: same
+Homepage: http://icedtea.classpath.org/wiki/IcedTea-Web
+Npp-Applications: ec8030f7-c20a-464f-9b0e-13a3a9e97384, 92650c4d-4b8e-4d2a-b7eb-24ecf4f6b63a, aa5ca914-c309-495d-91cf-3141bbb04115
+Npp-Description: IcedTea Java Web Browser Plugin for OpenJDK 6 (execution of applets on web pages)
+Npp-Mimetype: application/x-java-vm, application/x-java-applet, application/x-java-applet;version=1.1, application/x-java-applet;version=1.1.1, application/x-java-applet;version=1.1.2, application/x-java-applet;version=1.1.3, application/x-java-applet;version=1.2, application/x-java-applet;version=1.2.1, application/x-java-applet;version=1.2.2, application/x-java-applet;version=1.3, application/x-java-applet;version=1.3.1, application/x-java-applet;version=1.4, application/x-java-applet;version=1.4.1, application/x-java-applet;version=1.4.2, application/x-java-applet;version=1.5, application/x-java-applet;version=1.6, application/x-java-applet;jpi-version=1.6.0_00, application/x-java-bean, application/x-java-bean;version=1.1, application/x-java-bean;version=1.1.1, application/x-java-bean;version=1.1.2, application/x-java-bean;version=1.1.3, application/x-java-bean;version=1.2, application/x-java-bean;version=1.2.1, application/x-java-bean;version=1.2.2, application/x-java-bean;version=1.3, application/x-java-bean;version=1.3.1, application/x-java-bean;version=1.4, application/x-java-bean;version=1.4.1, application/x-java-bean;version=1.4.2, application/x-java-bean;version=1.5, application/x-java-bean;version=1.6, application/x-java-bean;jpi-version=1.6.0_00
+Npp-Name: The IcedTea Web Browser Plugin
+Description-md5: 73779ff36047046383e1c1bd3e13a884
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: icedtea-7-jre-cacao
+Priority: extra
+Section: universe/java
+Installed-Size: 206
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-7
+Version: 7u9-2.3.3-0ubuntu1~12.10.1
+Depends: openjdk-7-jre-headless (= 7u9-2.3.3-0ubuntu1~12.10.1)
+Filename: pool/universe/o/openjdk-7/icedtea-7-jre-cacao_7u9-2.3.3-0ubuntu1~12.10.1_armhf.deb
+Size: 36968
+MD5sum: 5c88f46855423dbe029b936651408b78
+SHA1: baf5d4a6ce27737d150be99c0776c6aa4f8b9728
+SHA256: ba402a90590553ad960727774a2f47fe3a9e9f24cec89b7e006d7ed05ac828d5
+Description: Transitional package for obsolete Cacao JVM for OpenJDK
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: 90155097d608216750af7e7b7d35c3ef
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: icedtea6-plugin
+Priority: extra
+Section: universe/web
+Installed-Size: 21
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: all
+Source: icedtea-web (1.3-1ubuntu1.1)
+Version: 6b21.3-1ubuntu1.1
+Depends: icedtea-6-plugin
+Filename: pool/universe/i/icedtea-web/icedtea6-plugin_6b21.3-1ubuntu1.1_all.deb
+Size: 926
+MD5sum: 15441b7c4e21caca8c42539cfbb07133
+SHA1: 128f6fb70026b9d2e28f8750e62a367256b692ef
+SHA256: 8ec26da588474201a044d93d16de5a59310b1ffb5c007743a959affe10b15643
+Description: web browser plugin to execute Java applets (dependency package)
+Homepage: http://icedtea.classpath.org/wiki/IcedTea-Web
+Description-md5: 6da6e3fbb572567cdab3a35a85e93560
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: jabberd2
+Priority: optional
+Section: universe/net
+Installed-Size: 1050
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian XMPP Maintainers <pkg-xmpp-devel@lists.alioth.debian.org>
+Architecture: armhf
+Version: 2.2.8-2.2ubuntu1
+Replaces: jabberd2-bdb, jabberd2-ldap-bdb, jabberd2-ldap-mysql, jabberd2-ldap-pgsql, jabberd2-mysql, jabberd2-pgsql
+Depends: adduser, libc6 (>= 2.15-0ubuntu8), libdb5.1, libexpat1 (>= 2.0.1), libgsasl7 (>= 1.1), libidn11 (>= 1.13), libldap-2.4-2 (>= 2.4.7), libmysqlclient18 (>= 5.5.13-1), libpam0g (>= 0.99.7.1), libpq5, libsqlite3-0 (>= 3.5.9), libssl1.0.0 (>= 1.0.0), libudns0 (>= 0.0.9), zlib1g (>= 1:1.1.4)
+Conflicts: jabberd2-bdb, jabberd2-ldap-bdb, jabberd2-ldap-mysql, jabberd2-ldap-pgsql, jabberd2-mysql, jabberd2-pgsql
+Filename: pool/universe/j/jabberd2/jabberd2_2.2.8-2.2ubuntu1_armhf.deb
+Size: 450208
+MD5sum: c58973400a1a56fa4aa99843cf2e1189
+SHA1: a8503095384e74101fa8efc13520ca864edf4182
+SHA256: 34ea7fbab01f68794983ca26f4f65d19d41f6f6e9a98c47c3ede8b445e69482e
+Description: Jabber instant messenger server
+Homepage: http://jabberd2.xiaoka.com/
+Description-md5: e73b33867c7220d068eac469d8a52925
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libav-extra-dbg
+Priority: extra
+Section: universe/debug
+Installed-Size: 24832
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Depends: libav-dbg
+Filename: pool/universe/liba/libav-extra/libav-extra-dbg_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 22828308
+MD5sum: 3e5457e5c5540dc3525d3c855d4fd687
+SHA1: 5b86ba7ba6e4621302811864222b47f26ce7841f
+SHA256: dee6f811c2183a1eaa48379567830abee814d98a45ed396e82ee53173807f0b7
+Description: Debug symbols for Libav related packages
+Homepage: http://libav.org/
+Description-md5: 4883fccf171ba58bee24c569eb7b0345
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libav-source
+Priority: optional
+Section: universe/devel
+Installed-Size: 28176
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian multimedia packages maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: all
+Source: libav
+Version: 6:0.8.4-0ubuntu0.12.10.1
+Filename: pool/universe/liba/libav/libav-source_0.8.4-0ubuntu0.12.10.1_all.deb
+Size: 28650912
+MD5sum: 735bffc606684a2736ea66e0dcc18559
+SHA1: 1d37753e413c91b8e08ac66017cd13bb332bb457
+SHA256: 7020e1b9552218cfcc4c5fcdfc92182c9d3ea5ce5fbc846da9a5d08d17b0b785
+Description: Patched Libav sources
+Homepage: http://libav.org/
+Description-md5: 8a0d2d245bbd6e55b0c9cffe1ec99b46
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libavcodec-extra-53
+Priority: optional
+Section: universe/libs
+Installed-Size: 12488
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libavcodec53
+Depends: libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libc6 (>= 2.15-0ubuntu8), libdirac-encoder0, libgcc1 (>= 1:4.4.0), libgsm1 (>= 1.0.13), libmp3lame0, libopencore-amrnb0, libopencore-amrwb0, libopenjpeg2, libschroedinger-1.0-0 (>= 1.0.0), libspeex1 (>= 1.2~beta3-1), libtheora0 (>= 1.0), libva1 (>> 1.0.15~), libvo-aacenc0, libvo-amrwbenc0, libvorbis0a (>= 1.1.2), libvorbisenc2 (>= 1.1.2), libvpx1 (>= 1.0.0), libx264-123, libxvidcore4 (>= 1.2.2), zlib1g (>= 1:1.2.0)
+Pre-Depends: multiarch-support
+Conflicts: libavcodec53
+Breaks: mplayer (<< 2:1.0~rc4.dfsg1+svn34540-1~)
+Filename: pool/universe/liba/libav-extra/libavcodec-extra-53_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 6471636
+MD5sum: c18d86f936abb1a9803aa126e3a8903d
+SHA1: c119a42f060c4368d34cc633998a8ecedc83fad6
+SHA256: fba164958f5f5d0cb2ac978b3c48a7d51815eecadf0a4d270846eee10535c594
+Description: Libav codec library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: 7b88fa15fcd545bfd6b9075bf9b91b34
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libavdevice-extra-53
+Priority: optional
+Section: universe/libs
+Installed-Size: 207
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libavdevice53
+Depends: libasound2 (>= 1.0.16), libavcodec-extra-53 (>= 6:0.8.4ubuntu0.12.10.1), libavformat-extra-53 (>= 6:0.8.4ubuntu0.12.10.1), libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libc6 (>= 2.15-0ubuntu8), libcdio-cdda1 (>= 0.83), libcdio-paranoia1 (>= 0.83), libdc1394-22, libgcc1 (>= 1:4.4.0), libjack-jackd2-0 (>= 1.9.5~dfsg-14) | libjack-0.116, libpulse0 (>= 1:0.99.1), libx11-6 (>= 2:1.4.99.1), libxext6, libxfixes3
+Pre-Depends: multiarch-support
+Conflicts: libavdevice53
+Filename: pool/universe/liba/libav-extra/libavdevice-extra-53_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 59686
+MD5sum: 9363ddc0734cd26d84b7f7cce87314dd
+SHA1: 63a04087c4b75497f46db792461027c3784daf4b
+SHA256: 9066192e8a6743639454ad621ea20cc650ed16b8eccc3e2a0aa8307b7c346f75
+Description: Libav device handling library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: af166fdf0ec57c74e51c5f8737bb1eba
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libavfilter-extra-2
+Priority: optional
+Section: universe/libs
+Installed-Size: 387
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libavfilter2
+Depends: libavcodec-extra-53 (>= 6:0.8.4ubuntu0.12.10.1), libavformat-extra-53 (>= 6:0.8.4ubuntu0.12.10.1), libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libc6 (>= 2.15-0ubuntu8), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:4.4.0), libopencv-core2.3, libopencv-imgproc2.3, libswscale-extra-2 (>= 6:0.8.4ubuntu0.12.10.1)
+Pre-Depends: multiarch-support
+Conflicts: libavfilter2
+Filename: pool/universe/liba/libav-extra/libavfilter-extra-2_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 148744
+MD5sum: 06a0020a2f7238eab4efd8d513970313
+SHA1: 59853ab745bf7c20da17ce79d69020bd2bd16d2d
+SHA256: 52804b5ade2e5172d7859ad2742e533579e14ac9d8eb2722f2983a79d4ed788c
+Description: Libav video postprocessing library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: b2686f7be0d3b9195ef7fa148ec6a780
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libavformat-extra-53
+Priority: optional
+Section: universe/libs
+Installed-Size: 1855
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libavformat53
+Depends: libavcodec-extra-53 (>= 6:0.8.4ubuntu0.12.10.1), libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libbz2-1.0, libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libgnutls26 (>= 2.12.6.1-0), librtmp0 (>= 2.3), zlib1g (>= 1:1.1.4)
+Pre-Depends: multiarch-support
+Conflicts: libavformat53
+Filename: pool/universe/liba/libav-extra/libavformat-extra-53_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 962514
+MD5sum: c2d6c183eb5429bf071f499f127e12c4
+SHA1: 7a5280a63c1c37125dfeb0f4223d76218d478858
+SHA256: 8ad1540361ef1535fb93725103ceffb92abd86477ca94eeb098c63efaedbc517
+Description: Libav file format library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: 147ec950605579b653b3bc620121e812
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libavutil-extra-51
+Priority: optional
+Section: universe/libs
+Installed-Size: 294
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libavutil51
+Depends: libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0)
+Pre-Depends: multiarch-support
+Conflicts: libavutil51
+Filename: pool/universe/liba/libav-extra/libavutil-extra-51_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 123678
+MD5sum: 4ec7df3353d838160f0ec0dc2ff02b04
+SHA1: 111fd346960a3dce9e4ac1cdbbd6ab00fbe09527
+SHA256: 70521ea518f292398bd45eb3e371089de6e342cf2ec8cc3a2a9451604219aa62
+Description: Libav utility library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: 9e573cbf5ff963b51f5bdc8be20f8cbd
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libmysqld-pic
+Priority: optional
+Section: universe/libdevel
+Installed-Size: 13250
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: mysql-5.5
+Version: 5.5.28-0ubuntu0.12.10.2
+Depends: libmysqlclient-dev (>= 5.5.28-0ubuntu0.12.10.2)
+Filename: pool/universe/m/mysql-5.5/libmysqld-pic_5.5.28-0ubuntu0.12.10.2_armhf.deb
+Size: 4500092
+MD5sum: 939210f23d6898063c7c993fb1bc5b16
+SHA1: 9cf61fd625771d02db945e60d64aad425f2113e7
+SHA256: 04ac9973515b837d7df184723710cc7eabe887493c10509f6a6e53484472b05f
+Description: MySQL database development files
+Homepage: http://dev.mysql.com/
+Description-md5: a6e7a6d26021d6ef468e70ec4ac81167
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libpostproc-extra-52
+Priority: optional
+Section: universe/libs
+Installed-Size: 275
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libpostproc52
+Depends: libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libc6 (>= 2.15-0ubuntu8)
+Pre-Depends: multiarch-support
+Conflicts: libpostproc52
+Filename: pool/universe/liba/libav-extra/libpostproc-extra-52_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 91984
+MD5sum: ae9bb8570dea249cd799fb2562a87ab9
+SHA1: da3598197be44b4690d68d27a2a3ee035e2b1e70
+SHA256: 2bfdfde8472106cabdd215a85bd27ccb8acdf1771a87a586397b55b5f074c3d8
+Description: Libav video postprocessing library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: cb1314020471c45aa7130055342c1e68
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libssl0.9.8
+Priority: optional
+Section: universe/libs
+Installed-Size: 1503
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Architecture: armhf
+Source: openssl098
+Version: 0.9.8o-7ubuntu3.1
+Depends: libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), zlib1g (>= 1:1.1.4), debconf (>= 0.5) | debconf-2.0
+Pre-Depends: multiarch-support
+Conflicts: libssl, libssl096-dev (<< 0.9.6-2), openssl (<< 0.9.6-2), ssleay (<< 0.9.2b)
+Filename: pool/universe/o/openssl098/libssl0.9.8_0.9.8o-7ubuntu3.1_armhf.deb
+Size: 707580
+MD5sum: 4b3c05d5a136d9c9ee662d2bf7d20d4d
+SHA1: 12296dc134c5d60d4742e8ab81e91b91969a5324
+SHA256: 1694f7c362b1290759a1958ea818419efa546ba937997663fc5fd9a4a7cfa758
+Description: SSL shared libraries
+Multi-Arch: same
+Description-md5: 2e9416e72fb31714d9b26021a3ee7e85
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libssl0.9.8-dbg
+Priority: extra
+Section: universe/debug
+Installed-Size: 5163
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Architecture: armhf
+Source: openssl098
+Version: 0.9.8o-7ubuntu3.1
+Depends: libssl0.9.8 (= 0.9.8o-7ubuntu3.1)
+Pre-Depends: multiarch-support
+Filename: pool/universe/o/openssl098/libssl0.9.8-dbg_0.9.8o-7ubuntu3.1_armhf.deb
+Size: 1549022
+MD5sum: 5a36686536bfb90d947da16b133fe7f4
+SHA1: 1b7602d7f2b39b6aeca6f7b5730c2c9001f3e546
+SHA256: 42bc8544948f31b7a23d35b09c92cab1794727a2e17d5d27f49c19d93998c7da
+Description: Symbol tables for libssl and libcrypto
+Multi-Arch: same
+Description-md5: fedfa89ced3aa67317f9dac7ba5308da
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libswscale-extra-2
+Priority: optional
+Section: universe/libs
+Installed-Size: 436
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Multimedia Maintainers <pkg-multimedia-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: libav-extra
+Version: 6:0.8.4ubuntu0.12.10.1
+Replaces: libswscale-extra-1 (>> 4:0.7~), libswscale2
+Depends: libavutil-extra-51 (>= 6:0.8.4ubuntu0.12.10.1), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0)
+Pre-Depends: multiarch-support
+Conflicts: libswscale-extra-1 (>> 4:0.7~), libswscale2
+Filename: pool/universe/liba/libav-extra/libswscale-extra-2_0.8.4ubuntu0.12.10.1_armhf.deb
+Size: 148570
+MD5sum: bf20d549e4fba404f4185444388ec809
+SHA1: 6af8fabf0e6d4c70be05ba91296a0d1c4242e3a6
+SHA256: 47e9dcefa13103617fe13a389766919b9b9ca4fd0fe5eeba649996d989ffd468
+Description: Libav video scaling library
+Multi-Arch: same
+Homepage: http://libav.org/
+Description-md5: 310aa629f3a920ec1f220d9db6daee76
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+Task: ubuntustudio-generation, ubuntustudio-video, ubuntustudio-recording
+
+Package: libtcltk-ruby1.8
+Priority: optional
+Section: universe/interpreters
+Installed-Size: 5899
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: armhf
+Source: ruby1.8
+Version: 1.8.7.358-4ubuntu0.1
+Replaces: libtk-ruby1.8
+Provides: libtk-ruby1.8
+Depends: libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libruby1.8 (>= 1.8.7.357-1), tk8.5 (>= 8.5.0)
+Conflicts: libtk-ruby1.8
+Filename: pool/universe/r/ruby1.8/libtcltk-ruby1.8_1.8.7.358-4ubuntu0.1_armhf.deb
+Size: 2180300
+MD5sum: be32b954c26ef10c21e71707a4a16c5d
+SHA1: 86bfc3620820b0fb304a8bd0b64db5e0c6e362d0
+SHA256: ebdc98916173f3558f670676111a0fa211777cfe56467fafca40008b9634e99a
+Description: Tcl/Tk interface for Ruby 1.8
+Homepage: http://www.ruby-lang.org/
+Description-md5: 48456af265ae8a515e66a74dc7be54c9
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libtcltk-ruby1.9.1
+Priority: optional
+Section: universe/ruby
+Installed-Size: 5278
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: armhf
+Source: ruby1.9.1
+Version: 1.9.3.194-1ubuntu1.2
+Depends: libc6 (>= 2.15-0ubuntu8), libruby1.9.1 (>= 1.9.2.0), tcl8.5 (>= 8.5.0), tk8.5 (>= 8.5.0)
+Filename: pool/universe/r/ruby1.9.1/libtcltk-ruby1.9.1_1.9.3.194-1ubuntu1.2_armhf.deb
+Size: 1788238
+MD5sum: d2182c401fc62f287d7747583d97b70d
+SHA1: f712877a36a59aaf80beae0a5470e66e3941f316
+SHA256: 6db24e64cb7231a7d5b03f2fce4932d6f1f958a1bb1a2fc8d18076e243d6e673
+Description: Tcl/Tk interface for Ruby 1.9.1
+Homepage: http://www.ruby-lang.org/
+Description-md5: 62973a5602a348dfc7a9db8e5092abe9
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libtiff-opengl
+Priority: optional
+Section: universe/graphics
+Installed-Size: 129
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jay Berkenbilt <qjb@debian.org>
+Architecture: armhf
+Source: tiff
+Version: 4.0.2-1ubuntu2.1
+Depends: freeglut3, libc6 (>= 2.15-0ubuntu8), libgl1-mesa-glx | libgl1, libtiff5 (>> 4.0.0-1~)
+Filename: pool/universe/t/tiff/libtiff-opengl_4.0.2-1ubuntu2.1_armhf.deb
+Size: 11240
+MD5sum: e576e3f7874f5c7bd1a77657ff6b3184
+SHA1: 00d37e41d2e86ccf36f30c7aa2f1bf4ae0ff3633
+SHA256: 39a8210362469e44aec7ac3ae3c23a9af5a1a23f08d9660f2727720ca0d3f458
+Description: TIFF manipulation and conversion tools
+Homepage: http://libtiff.maptools.org
+Description-md5: 8b1debea0e0eac5de9dc7eb9a32524a2
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libtiff4
+Priority: optional
+Section: universe/libs
+Installed-Size: 386
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jay Berkenbilt <qjb@debian.org>
+Architecture: armhf
+Source: tiff3
+Version: 3.9.6-9ubuntu1.2
+Depends: libc6 (>= 2.15-0ubuntu8), libjbig0, libjpeg8 (>= 8c), zlib1g (>= 1:1.1.4)
+Pre-Depends: multiarch-support
+Filename: pool/universe/t/tiff3/libtiff4_3.9.6-9ubuntu1.2_armhf.deb
+Size: 122570
+MD5sum: 4d906f334b33aef4227e3cbf0feb3627
+SHA1: cbdfa9bcf7a958617de1a2cec1530c587e01d528
+SHA256: 4543cda5eaa0fecbf8d468d2d82c7244b5cea72b022e1892cbfa5498259d7904
+Description: Tag Image File Format (TIFF) library (old version)
+Multi-Arch: same
+Homepage: http://libtiff.maptools.org
+Description-md5: 88bc86aedf8a41857f8c5f15db8bbe3d
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libtiff4-dev
+Priority: optional
+Section: universe/libdevel
+Installed-Size: 658
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jay Berkenbilt <qjb@debian.org>
+Architecture: armhf
+Source: tiff3
+Version: 3.9.6-9ubuntu1.2
+Depends: libtiff4 (= 3.9.6-9ubuntu1.2), libtiffxx0c2 (= 3.9.6-9ubuntu1.2), libc6-dev | libc-dev, zlib1g-dev, libjpeg-dev, libjbig-dev
+Conflicts: libtiff-dev (<< 4.0.0-2), libtiff5-dev
+Filename: pool/universe/t/tiff3/libtiff4-dev_3.9.6-9ubuntu1.2_armhf.deb
+Size: 254212
+MD5sum: c21d14c831a8f6a8cb047f779c1b7c83
+SHA1: 5ed2af5a4c1e63058f48fadbe4eade3a32faa809
+SHA256: fd9d598d8197d2469fb7a8b61902e21279c1fdf6c06bff46769a48f40b76d8c0
+Description: Tag Image File Format (TIFF) library (old version), development files
+Homepage: http://libtiff.maptools.org
+Description-md5: 1d420285d621c56c603af02df5cc9d76
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: libtiffxx0c2
+Priority: optional
+Section: universe/libs
+Installed-Size: 109
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Jay Berkenbilt <qjb@debian.org>
+Architecture: armhf
+Source: tiff3
+Version: 3.9.6-9ubuntu1.2
+Depends: libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.4.0), libtiff4 (>> 3.9.5-3~)
+Pre-Depends: multiarch-support
+Filename: pool/universe/t/tiff3/libtiffxx0c2_3.9.6-9ubuntu1.2_armhf.deb
+Size: 6312
+MD5sum: b629e75ca5c07eaad9a9b0e735c6df48
+SHA1: 11d3624968924b84f1b7f37782874054312f4676
+SHA256: dc14e0e2906d0f1c5451b956c39a8167ebca14d82e75200eb6b6c642f819869c
+Description: Tag Image File Format (TIFF) library (old version) -- C++ interface
+Multi-Arch: same
+Homepage: http://libtiff.maptools.org
+Description-md5: 4fd8d2cbac51748003ded26ca83cac17
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: lwresd
+Priority: optional
+Section: universe/net
+Installed-Size: 414
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: LaMont Jones <lamont@debian.org>
+Architecture: armhf
+Source: bind9
+Version: 1:9.8.1.dfsg.P1-4.2ubuntu3.1
+Depends: libbind9-80 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), libc6 (>= 2.15-0ubuntu8), libcap2 (>= 2.10), libdns81 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), libisc83 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), libisccc80 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), libisccfg82 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), liblwres80 (= 1:9.8.1.dfsg.P1-4.2ubuntu3.1), adduser
+Recommends: libnss-lwres
+Suggests: bind9utils
+Filename: pool/universe/b/bind9/lwresd_9.8.1.dfsg.P1-4.2ubuntu3.1_armhf.deb
+Size: 197436
+MD5sum: f15278b46e98b2530fb0e6f3db49197e
+SHA1: 29ee6c1e665d8f0099c505c952a48ccb18f49458
+SHA256: e096cc77e7c1a52e68a6b7de8fee06c17919b2037d1d2817043bc5a6ef5b28c6
+Description: Lightweight Resolver Daemon
+Description-md5: 71f952026129db86d1ca118762b06ef2
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: lynx-cur-wrapper
+Priority: extra
+Section: universe/web
+Installed-Size: 40
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Atsuhito KOHDA <kohda@debian.org>
+Architecture: all
+Source: lynx-cur
+Version: 2.8.8dev.12-2ubuntu0.1
+Depends: lynx-cur (>= 2.8.8dev.12-2ubuntu0.1)
+Filename: pool/universe/l/lynx-cur/lynx-cur-wrapper_2.8.8dev.12-2ubuntu0.1_all.deb
+Size: 3398
+MD5sum: d69b7dc6dd58c28cb4a95f16012039f2
+SHA1: d80c21cbe6990e7bbf90366d00a635c7537298f4
+SHA256: fca5d77943e384a9619a317de0683c5dad52eef2903772104de4d1cfcc4c82c6
+Description: Wrapper for lynx-cur (transitional package)
+Homepage: http://lynx.isc.org/
+Description-md5: cb5bf96b1082b91fa3c57f015993ee54
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: munin-async
+Priority: optional
+Section: universe/net
+Installed-Size: 82
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Munin Debian Maintainers <packaging@munin-monitoring.org>
+Architecture: all
+Source: munin
+Version: 2.0.2-1ubuntu2.2
+Depends: perl, perl-modules, adduser, munin-common (>= 2.0.2-1ubuntu2.2)
+Recommends: munin-node
+Filename: pool/universe/m/munin/munin-async_2.0.2-1ubuntu2.2_all.deb
+Size: 8444
+MD5sum: 9b8fe924a6a36b4e6d261598b8d965b6
+SHA1: 937b2b4d928129f7786cfbf2675af6f5d005217f
+SHA256: 2dd94731bb293e21947bbdc8c6c04e68c98acdd20395020b5126d5230d58a9aa
+Description: network-wide graphing framework (async master/client)
+Homepage: http://munin-monitoring.org
+Description-md5: 390d7c71211032ea3977a22eb57cde62
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: munin-plugins-java
+Priority: optional
+Section: universe/net
+Installed-Size: 136
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Munin Debian Maintainers <packaging@munin-monitoring.org>
+Architecture: all
+Source: munin
+Version: 2.0.2-1ubuntu2.2
+Replaces: munin-java-plugins (<< 1.999.4548-3~)
+Provides: munin-plugins
+Depends: default-jre-headless | java6-runtime-headless | java5-runtime-headless | java2-runtime-headless, munin-common (>= 2.0.2-1ubuntu2.2)
+Breaks: munin-java-plugins (<< 1.999.4548-3~)
+Filename: pool/universe/m/munin/munin-plugins-java_2.0.2-1ubuntu2.2_all.deb
+Size: 72314
+MD5sum: e996ca4e174d7a1e5799e58b18e50ec7
+SHA1: 22d204dd34ef4967a6dca9a1e04ea39c314dc758
+SHA256: c8b1d22671e5c314d596d239be7d3064fc1fda447fa9fd866841f7aeb777f827
+Description: network-wide graphing framework (java plugins for node)
+Homepage: http://munin-monitoring.org
+Description-md5: 072855de8e842c9eb4ce249c588de592
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mysql-source-5.5
+Priority: optional
+Section: universe/database
+Installed-Size: 22109
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: mysql-5.5
+Version: 5.5.28-0ubuntu0.12.10.2
+Filename: pool/universe/m/mysql-5.5/mysql-source-5.5_5.5.28-0ubuntu0.12.10.2_armhf.deb
+Size: 21684950
+MD5sum: 7d004fdb82416018425b034e7e6f8a06
+SHA1: 97060f08e79e39983e4d2f97f8a921c7e81f0d56
+SHA256: 5b4a9fd45ee824847f6449543034f3fac47c541e7940b8e986735f065b71857b
+Description: MySQL source
+Homepage: http://dev.mysql.com/
+Description-md5: 9bacc0267862ea6c169da6cfe76d3aef
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mysql-testsuite
+Priority: optional
+Section: universe/database
+Installed-Size: 113
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Architecture: all
+Source: mysql-5.5
+Version: 5.5.28-0ubuntu0.12.10.2
+Depends: mysql-testsuite-5.5
+Filename: pool/universe/m/mysql-5.5/mysql-testsuite_5.5.28-0ubuntu0.12.10.2_all.deb
+Size: 11538
+MD5sum: 43811a6f9b257555c80e910c58b2befd
+SHA1: de465db27747e54710c9c3d84f32d5e7d1040ef0
+SHA256: 1af5d3a09143a657bc3981c45e09ff8ea98b6df8e651bf0d418adfe740bc37ff
+Description: MySQL testsuite
+Homepage: http://dev.mysql.com/
+Description-md5: a3c0fd28b808fa1a0d62a5bfb5ba8923
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: mysql-testsuite-5.5
+Priority: optional
+Section: universe/database
+Installed-Size: 108659
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian MySQL Maintainers <pkg-mysql-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: mysql-5.5
+Version: 5.5.28-0ubuntu0.12.10.2
+Depends: mysql-server, mysql-client, libc6 (>= 2.15-0ubuntu8)
+Conflicts: mysql-testsuite (<< 5.5.28-0ubuntu0.12.10.2)
+Filename: pool/universe/m/mysql-5.5/mysql-testsuite-5.5_5.5.28-0ubuntu0.12.10.2_armhf.deb
+Size: 8715904
+MD5sum: 3fc12931b887029abdee05f33a1df145
+SHA1: 1675e2c560537edebcb96aa7c513d837f207255c
+SHA256: d0a552ad23d9b935ab8646fb9795eb4f9db9ed47ba3dd98b6ec93989366029e6
+Description: MySQL testsuite
+Homepage: http://dev.mysql.com/
+Description-md5: 3e88fc28903eb44dd0b2a0eb9f813181
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-ajax-console-proxy
+Priority: extra
+Section: universe/net
+Installed-Size: 40
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2)
+Filename: pool/universe/n/nova/nova-ajax-console-proxy_2012.2-0ubuntu5.2_all.deb
+Size: 2550
+MD5sum: 28af7efc811321d89afb2667d49f0c64
+SHA1: b4686d3e0a44fdba63b9db7e66a95a6bca0edc59
+SHA256: 440cb38d0f97bc6a4b31e1b17ee1b67a55d12daf1af60997d7ee2a26dde7337a
+Description: OpenStack Compute - AJAX console proxy - transitional package
+Homepage: http://launchpad.net/nova
+Description-md5: 571664bc0008e44d5df6784807a6ecf0
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-api-ec2
+Priority: extra
+Section: universe/net
+Installed-Size: 72
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Breaks: nova-api
+Filename: pool/universe/n/nova/nova-api-ec2_2012.2-0ubuntu5.2_all.deb
+Size: 4366
+MD5sum: 3f74d4bc049c704d64c29be888756c1a
+SHA1: b5f9593e49341e71d4dea45abced6c32ad6b2356
+SHA256: f6bd08e51308d559a10a0df4587e7ee72598d3bbf17c5348d48ff83e3d99c8f6
+Description: OpenStack Compute - EC2 API frontend
+Homepage: http://launchpad.net/nova
+Description-md5: 0e9ce8f6a74cac1c566caae9b960a494
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-api-metadata
+Priority: extra
+Section: universe/net
+Installed-Size: 81
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Breaks: nova-api
+Filename: pool/universe/n/nova/nova-api-metadata_2012.2-0ubuntu5.2_all.deb
+Size: 4674
+MD5sum: 366d2855d3fb5c80050ac8bce02d96e7
+SHA1: 0047f6961923582a2bd51df01f7011cf7c45915e
+SHA256: 7385df4156236fac81dc575a31955d1042f35cb2a5302698db163b2b7bcba9fb
+Description: OpenStack Compute - metadata API frontend
+Homepage: http://launchpad.net/nova
+Description-md5: ae9cd778d7894b1a89d138fe3587a7da
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-api-os-compute
+Priority: extra
+Section: universe/net
+Installed-Size: 72
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Breaks: nova-api
+Filename: pool/universe/n/nova/nova-api-os-compute_2012.2-0ubuntu5.2_all.deb
+Size: 4298
+MD5sum: ee11408c5349b636e3f93e234a8378ca
+SHA1: 7647bd83725423394ad96172f41d91d4adfe6dc8
+SHA256: b271e4cc6dfa33ce54cd463e72a02aea947102ce4a88fe6bac1e1a3ed2b2c74f
+Description: OpenStack Compute - OpenStack Compute API frontend
+Homepage: http://launchpad.net/nova
+Description-md5: 32fe3c17415adfec970c371f4bdff9b6
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-api-os-volume
+Priority: extra
+Section: universe/net
+Installed-Size: 72
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Breaks: nova-api
+Filename: pool/universe/n/nova/nova-api-os-volume_2012.2-0ubuntu5.2_all.deb
+Size: 4276
+MD5sum: 536d10b8668c7e31a7e84465854f8517
+SHA1: e13e2a385d63c1f6eeb4280de02acac0bef203be
+SHA256: 4b3dbf61bbe27c7084cb6eeba0616184de142f84b498db5a4cf051308bb93fba
+Description: OpenStack Compute - OpenStack Volume API frontend
+Homepage: http://launchpad.net/nova
+Description-md5: 113cdec8eb8fbd2d123accd10260705c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-compute-qemu
+Priority: extra
+Section: universe/net
+Installed-Size: 48
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2012.2-0ubuntu5.2), python-libvirt, qemu
+Conflicts: nova-compute-hypervisor
+Filename: pool/universe/n/nova/nova-compute-qemu_2012.2-0ubuntu5.2_all.deb
+Size: 2764
+MD5sum: 479186342295a96786ed98198f32104c
+SHA1: 79100bdf6ed946da8ae7714edd7bb7588d4bb9f9
+SHA256: d1a532338f3dfea68835115bccdbb628d1d43dbe8715ae2ae8eb767fe85742d0
+Description: OpenStack Compute - compute node (QEmu)
+Homepage: http://launchpad.net/nova
+Description-md5: 46acbb1c9b077142e1930821f7a05aed
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-compute-uml
+Priority: extra
+Section: universe/net
+Installed-Size: 48
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2012.2-0ubuntu5.2), python-libvirt, user-mode-linux
+Conflicts: nova-compute-hypervisor
+Filename: pool/universe/n/nova/nova-compute-uml_2012.2-0ubuntu5.2_all.deb
+Size: 2778
+MD5sum: 83523b2c7df9780e945dda7db2a39b17
+SHA1: 9d532b655d79e1cae1380edb969042662ab71e11
+SHA256: 6f0fe6a5e9a76f05668bba223a3bf2734a2d67b020c516cc07b28266edd9b67e
+Description: OpenStack Compute - compute node (UserModeLinux)
+Homepage: http://launchpad.net/nova
+Description-md5: 2e1f1302cc5d8396d81672f231d5bb7c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-compute-xcp
+Priority: extra
+Section: universe/net
+Installed-Size: 40
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Provides: nova-compute-hypervisor
+Depends: nova-compute (= 2012.2-0ubuntu5.2), python-xenapi
+Conflicts: nova-compute-hypervisor
+Filename: pool/universe/n/nova/nova-compute-xcp_2012.2-0ubuntu5.2_all.deb
+Size: 2544
+MD5sum: 55d8041d565af6a3010f82a0e33c5dce
+SHA1: d66acb7a70d2438df87bf0d077e11ab1d637789b
+SHA256: 3c63fc9bac661c7cf5e13108558bb51aa689319779b3839ff675ea35447915dd
+Description: OpenStack Compute - compute node (XCP)
+Homepage: http://launchpad.net/nova
+Description-md5: cd2b8dc37486d604d91ed6183d937465
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-compute-xen
+Priority: extra
+Section: universe/net
+Installed-Size: 48
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Provides: nova-compute-hypervisor
+Depends: libvirt-bin, nova-compute (= 2012.2-0ubuntu5.2), python-libvirt, xen-hypervisor-4.1-amd64 | xen-hypervisor-4.1-i386
+Conflicts: nova-compute-hypervisor
+Filename: pool/universe/n/nova/nova-compute-xen_2012.2-0ubuntu5.2_all.deb
+Size: 2786
+MD5sum: 042e828fd25e2bccc2fd878aba0cdd18
+SHA1: 700f3d3355ee0f4c4982a79fc6a2194832b1d6eb
+SHA256: c294c434b59cbac5488f37615e364de08ffe72b6ab7542d2e7b2b459bbf085ac
+Description: OpenStack Compute - compute node (Xen)
+Homepage: http://launchpad.net/nova
+Description-md5: 8268c70ad765a6427d184e1c58a4472c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-console
+Priority: extra
+Section: universe/net
+Installed-Size: 72
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Recommends: nova-consoleauth (>= 2012.1~rc1-0ubuntu2)
+Filename: pool/universe/n/nova/nova-console_2012.2-0ubuntu5.2_all.deb
+Size: 4594
+MD5sum: 32553d03e57acfbba9bb823fbae5dcf7
+SHA1: 59b2e452b99d9228ab5ab3b862b742a09e5f369a
+SHA256: edd9487adfb39835e2e5ce64a91c304672f997397df9d991a97c2c7cad35f4c3
+Description: OpenStack Compute - Console
+Homepage: http://launchpad.net/nova
+Description-md5: 095d3c39f30a44dd0768d8a869e4fa67
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-consoleauth
+Priority: extra
+Section: universe/net
+Installed-Size: 72
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Replaces: nova-console (<< 2012.1~rc1-0ubuntu2)
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Breaks: nova-console (<< 2012.1~rc1-0ubuntu2)
+Filename: pool/universe/n/nova/nova-consoleauth_2012.2-0ubuntu5.2_all.deb
+Size: 4526
+MD5sum: b5c6927cfce1a80b9080c884cba3f511
+SHA1: 84efc7fb402873e5ebd27d4f2349caff207c5797
+SHA256: f625ade1c23ef22f02170c89cbf998cdfcdfb41d1d3b2eb82ec99f11fccb82c7
+Description: OpenStack Compute - Console Authenticator
+Homepage: http://launchpad.net/nova
+Description-md5: 471ffbc52e68b19718599b8e938708d2
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-novncproxy
+Priority: extra
+Section: universe/net
+Installed-Size: 76
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), upstart-job, python
+Suggests: novnc
+Filename: pool/universe/n/nova/nova-novncproxy_2012.2-0ubuntu5.2_all.deb
+Size: 5916
+MD5sum: b0e5f045d48f8165a7b0716388c12217
+SHA1: ad3a85211c007d570d3480e0b3acad0cae308f8b
+SHA256: 311af8d69f0e960f831ba048e2020837170273ddd78b8ebaa3705fbd005ca61b
+Description: OpenStack Compute - NoVNC proxy
+Homepage: http://launchpad.net/nova
+Description-md5: f71a025ccadd58aa7f26e66e99818fa8
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-xcp-network
+Priority: extra
+Section: universe/net
+Installed-Size: 110
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: arptables, ebtables, iproute, lsb-base (>= 3.0.6), nova-xcp-plugins (= 2012.2-0ubuntu5.2), openvswitch-switch, xcp-xapi, python (>= 2.7.1-0ubuntu2)
+Filename: pool/universe/n/nova/nova-xcp-network_2012.2-0ubuntu5.2_all.deb
+Size: 9018
+MD5sum: e225dc661c6c3e0184289b6790d8ebb0
+SHA1: 17342220fe1e2c6f9ca76976057e926703404340
+SHA256: 77118783f7e33c6c679b9ab5efeba28eea082fb7f099a600a51d928face7c28e
+Description: OpenStack Compute network plugin for the Xen Cloud Platform
+Homepage: http://launchpad.net/nova
+Description-md5: c098f07b818aec1687bd6347b404e5b5
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-xcp-plugins
+Priority: extra
+Section: universe/net
+Installed-Size: 113
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: xcp-xapi, python (>= 2.7.1-0ubuntu2)
+Filename: pool/universe/n/nova/nova-xcp-plugins_2012.2-0ubuntu5.2_all.deb
+Size: 22950
+MD5sum: 1be818b4b1bb58b2f6fe4b5e480a75f7
+SHA1: b62a5f08ab7a3422a1b2f67c7267df78775dc708
+SHA256: 1e0ce7e7697ab4bd8724a201eb00bedf69bab29908066601759475880cb7c76a
+Description: OpenStack Compute plugin for the Xen Cloud Platform
+Homepage: http://launchpad.net/nova
+Description-md5: 77e27c2a30cc03fc385be9dd5a21fa09
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: nova-xvpvncproxy
+Priority: extra
+Section: universe/net
+Installed-Size: 69
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Openstack Maintainers <openstack@lists.launchpad.net>
+Architecture: all
+Source: nova
+Version: 2012.2-0ubuntu5.2
+Depends: nova-common (= 2012.2-0ubuntu5.2), python
+Filename: pool/universe/n/nova/nova-xvpvncproxy_2012.2-0ubuntu5.2_all.deb
+Size: 4906
+MD5sum: df30170132f6641ff92b6852641e3cf5
+SHA1: acbd8e3c4cddad7be05720a959bcb9f938151d47
+SHA256: e2fe5f9eb90e28d34ba200f85d447b34b9fba82dcf770d46d6d689bd2f457891
+Description: OpenStack Compute - XVP VNC proxy
+Homepage: http://launchpad.net/nova
+Description-md5: b3739b7ab9595f5c68b1c0e141861b74
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-dbg
+Priority: extra
+Section: universe/devel
+Installed-Size: 130098
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Depends: openjdk-6-jre-headless (= 6b24-1.11.5-0ubuntu1~12.10.1)
+Recommends: openjdk-6-jre (= 6b24-1.11.5-0ubuntu1~12.10.1)
+Suggests: openjdk-6-jdk (= 6b24-1.11.5-0ubuntu1~12.10.1)
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-dbg_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 58370586
+MD5sum: bb707360af49b5192a5c9dc3f2a727ba
+SHA1: 158fb85373b0af00380e0f9222ac04563ec35329
+SHA256: 4142f4c0f77936cc8b13ebe2ad0d84d7885d86dbedb1a0d4d5e4a114a102ea0e
+Description: Java runtime based on OpenJDK (debugging symbols)
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: 62cbbd2d3e6bc94279f18db4f735142b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-demo
+Priority: extra
+Section: universe/devel
+Installed-Size: 3840
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Depends: openjdk-6-jre (>= 6b24-1.11.5-0ubuntu1~12.10.1), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.3.0)
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-demo_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 2274384
+MD5sum: 3eb7975de7322d57508096e23d3d4eb5
+SHA1: cc79cfcbdb149e45ba2724b851204bfb784f0731
+SHA256: 91b891d6d7b2cbdd8da0880f178b651380260b3345e2934732b4fae57860741e
+Description: Java runtime based on OpenJDK (demos and examples)
+Homepage: http://openjdk.java.net/
+Description-md5: c2a5624aa60e4de3025a249886fa82d7
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-doc
+Priority: extra
+Section: universe/doc
+Installed-Size: 239784
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: all
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Suggests: openjdk-6-jdk
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-doc_6b24-1.11.5-0ubuntu1~12.10.1_all.deb
+Size: 20546334
+MD5sum: d4ec0cacdad707b44c6da43f77c463e0
+SHA1: f40ac93076f5c8e246d6af7be313040587a0a4ec
+SHA256: 34f407be30668ba893d579de19996fd5beb7017efc36184dc96f30b47ba02cd5
+Description: OpenJDK Development Kit (JDK) documentation
+Homepage: http://openjdk.java.net/
+Description-md5: c1aebd5e8058a6cce0d5690571eddb7b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-jdk
+Priority: extra
+Section: universe/devel
+Installed-Size: 31341
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Provides: java-compiler, java-sdk, java2-sdk, java5-sdk, java6-sdk
+Depends: openjdk-6-jre (>= 6b24-1.11.5-0ubuntu1~12.10.1), libc6 (>= 2.15-0ubuntu8)
+Recommends: libxt-dev
+Suggests: openjdk-6-demo, openjdk-6-source, visualvm
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-jdk_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 8919954
+MD5sum: e79bb8af535c2873b43fd7295ec79695
+SHA1: 6583e8f93179da9c5ebf21a2b2d89181f7ca91a7
+SHA256: 040faa5ecdaec527640d59734a240fd5683cf145669058cfaf2e2ad0417db170
+Description: OpenJDK Development Kit (JDK)
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: eaff50443f15582a8beb0901034b62cf
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-jre
+Priority: extra
+Section: universe/interpreters
+Installed-Size: 527
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Replaces: openjdk-6-jdk (<< 6b20-1.10~pre2-0ubuntu1), openjdk-6-jre-headless (<< 6b16~pre3)
+Provides: java-runtime, java2-runtime, java5-runtime, java6-runtime
+Depends: openjdk-6-jre-headless (>= 6b24-1.11.5-0ubuntu1~12.10.1), libasound2 (>= 1.0.16), libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libgif4 (>= 4.1.4), libjpeg8 (>= 8c), libpng12-0 (>= 1.2.13-4), libpulse0 (>= 1:0.99.1), libx11-6, libxext6, libxi6, libxrender1, libxtst6, libatk-wrapper-java-jni (>= 0.30.4-0ubuntu2)
+Recommends: ttf-dejavu-extra, icedtea-netx
+Suggests: icedtea-plugin
+Conflicts: icedtea-gcjwebplugin (<< 1.0-1ubuntu4), openjdk-6-dbg (<< 6b17~pre3-1), openjdk-6-demo (<< 6b17~pre3-1), openjdk-6-doc (<< 6b17~pre3-1), openjdk-6-jdk (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1), openjdk-6-jre-lib (<< 6b17~pre3-1), openjdk-6-jre-zero (<< 6b17~pre3-1), openjdk-6-source (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-jre_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 197666
+MD5sum: e3c2d74d68fb3aa41c57e08333d90bd3
+SHA1: 9168a43806fe873b5b5c7ac4f6e1adc87afb2f01
+SHA256: f89bd8296825706d12ba8c6bb97df5f3a38499c434fb19b067f384c4e8da4ab6
+Description: OpenJDK Java runtime, using Hotspot Zero
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: 91d05a39b9f10650db7458e30c6b492b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-jre-headless
+Priority: extra
+Section: universe/interpreters
+Installed-Size: 65777
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: armhf
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Replaces: openjdk-6-jdk (<< 6b20-1.9.1-0ubuntu2), openjdk-6-jre (<< 6b23~pre1), openjdk-6-jre-lib (<< 6b23~pre10)
+Provides: java-runtime-headless, java2-runtime-headless, java5-runtime-headless, java6-runtime-headless, openjdk-6-jre-zero
+Depends: openjdk-6-jre-lib (>= 6b24-1.11.5-0ubuntu1~12.10.1), ca-certificates-java, tzdata-java, java-common (>= 0.28), libcups2, libjpeg8, libnss3-1d (>= 3.12.9+ckbi-1.82-0ubuntu4), libpcsclite1, libc6 (>= 2.15-0ubuntu8), libfreetype6 (>= 2.2.1), libgcc1 (>= 1:4.4.0), libstdc++6 (>= 4.4.0), zlib1g (>= 1:1.1.4)
+Pre-Depends: multiarch-support
+Recommends: icedtea-6-jre-cacao (= 6b24-1.11.5-0ubuntu1~12.10.1), icedtea-6-jre-jamvm (= 6b24-1.11.5-0ubuntu1~12.10.1)
+Suggests: libnss-mdns, sun-java6-fonts, ttf-dejavu-extra, fonts-ipafont-gothic, fonts-ipafont-mincho, ttf-wqy-microhei | ttf-wqy-zenhei, ttf-indic-fonts-core, ttf-telugu-fonts, ttf-oriya-fonts, ttf-kannada-fonts, ttf-bengali-fonts
+Conflicts: default-jre-headless (<< 1.6-43~), icedtea-netx (<< 1.1.1-2~), openjdk-6-dbg (<< 6b17~pre3-1), openjdk-6-demo (<< 6b17~pre3-1), openjdk-6-doc (<< 6b17~pre3-1), openjdk-6-jdk (<< 6b17~pre3-1), openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-lib (<< 6b17~pre3-1), openjdk-6-jre-zero (<< 6b17~pre3-1), openjdk-6-source (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-jre-headless_6b24-1.11.5-0ubuntu1~12.10.1_armhf.deb
+Size: 22919644
+MD5sum: 89df346a406f656b92208d1c728397d3
+SHA1: 596ac2612559a9899437784a7b44f09bf8cc6dae
+SHA256: 5871bf6b07333d5b6069102bce47f613084bb3aee381457ec07e41399a8e9cf7
+Description: OpenJDK Java runtime, using Hotspot Zero (headless)
+Multi-Arch: same
+Homepage: http://openjdk.java.net/
+Description-md5: 66d576ba5edb414029e68aaa8b29d079
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-jre-lib
+Priority: extra
+Section: universe/interpreters
+Installed-Size: 7764
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: all
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Depends: openjdk-6-jre-headless (>= 6b17)
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Breaks: openjdk-6-jre-headless (<< 6b23~pre9-1~)
+Filename: pool/universe/o/openjdk-6/openjdk-6-jre-lib_6b24-1.11.5-0ubuntu1~12.10.1_all.deb
+Size: 6134900
+MD5sum: e1542b5f89ac92fe3d12a9db2d33b8b6
+SHA1: c0ddd0e36a4a00664aad5bb539bd5b2be98e4123
+SHA256: 9cc5a0f59ec7aac75c431226d260a0df3ed569c155c319a0a6cc00c163f899b7
+Description: OpenJDK Java runtime (architecture independent libraries)
+Multi-Arch: foreign
+Homepage: http://openjdk.java.net/
+Description-md5: a996626aed77fd374bd7291146f8d6ee
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: openjdk-6-source
+Priority: extra
+Section: universe/devel
+Installed-Size: 43236
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: OpenJDK Team <openjdk@lists.launchpad.net>
+Architecture: all
+Source: openjdk-6
+Version: 6b24-1.11.5-0ubuntu1~12.10.1
+Depends: openjdk-6-jre (>= 6b24-1.11.5-0ubuntu1~12.10.1), openjdk-6-jdk (>= 6b24-1.11.5-0ubuntu1~12.10.1)
+Conflicts: openjdk-6-jre (<< 6b17~pre3-1), openjdk-6-jre-headless (<< 6b17~pre3-1)
+Filename: pool/universe/o/openjdk-6/openjdk-6-source_6b24-1.11.5-0ubuntu1~12.10.1_all.deb
+Size: 40891938
+MD5sum: b1e63dc71c36651e052bd11d5f2b98fc
+SHA1: 1df42e7b92a1714d141cb58b8afad883a0d87b44
+SHA256: 2017f10411974653c5ea2cd15a51f40b9530d002fbcf613d1acac9e12b756f0d
+Description: OpenJDK Development Kit (JDK) source files
+Homepage: http://openjdk.java.net/
+Description-md5: 328263bb6fbf81f04f5d459d67244ea0
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: owncloud
+Priority: optional
+Section: universe/web
+Installed-Size: 10508
+Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
+Original-Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
+Architecture: all
+Version: 4.0.8debian-1.1ubuntu0.1
+Depends: apache2 | httpd, php5, php5-gd, php-pear, php-xml-parser, php-crypt-blowfish, php-sabredav, php-mdb2, php-mdb2-schema, libphp-phpmailer, php-getid3 (>= 1.9.3-1), php5-curl, owncloud-mysql (= 4.0.8debian-1.1ubuntu0.1) | owncloud-sqlite (= 4.0.8debian-1.1ubuntu0.1), libjs-jquery (>= 1.7.2-1), libjs-jquery-ui, libjs-jquery-jplayer
+Recommends: exim4 | mail-transport-agent
+Filename: pool/universe/o/owncloud/owncloud_4.0.8debian-1.1ubuntu0.1_all.deb
+Size: 2173006
+MD5sum: 8a1102f5d6bd1a3cb15167e6160c1e38
+SHA1: 685494b057dbd46ff77c0f72dbfafcf4a6bf0071
+SHA256: c11311394cf037e91ec28ed80e2c64f8d2e723ae84d85288c93ec96ad263c9df
+Description: cloud storage for files, music, contacts, calendars and many more
+Homepage: http://owncloud.org
+Description-md5: 623eeebd85a23205a9be7087b586d047
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: owncloud-mysql
+Priority: extra
+Section: universe/web
+Installed-Size: 102
+Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
+Original-Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
+Architecture: all
+Source: owncloud
+Version: 4.0.8debian-1.1ubuntu0.1
+Depends: php-mdb2-driver-mysql, mysql-client | virtual-mysql-client
+Recommends: mysql-server
+Filename: pool/universe/o/owncloud/owncloud-mysql_4.0.8debian-1.1ubuntu0.1_all.deb
+Size: 25932
+MD5sum: e3a7073bb8eb64d65b0e1769cb427bf3
+SHA1: f44880a69a2deb36a875c5427a14e63b9a0a3671
+SHA256: c83415de7d155eaae8da2ca18255a04e34e67fc22aa0a0e1aa76b1f8f28821ab
+Description: meta-package providing MySQL dependencies for ownCloud
+Homepage: http://owncloud.org
+Description-md5: 54aa048a84736b16645a63d4972f9ce2
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: owncloud-sqlite
+Priority: extra
+Section: universe/web
+Installed-Size: 271
+Maintainer: Kubuntu Developers <kubuntu-devel@lists.ubuntu.com>
+Original-Maintainer: ownCloud for Debian maintainers <pkg-owncloud-maintainers@lists.alioth.debian.org>
+Architecture: all
+Source: owncloud
+Version: 4.0.8debian-1.1ubuntu0.1
+Depends: php-mdb2, php-pear, php5-sqlite
+Filename: pool/universe/o/owncloud/owncloud-sqlite_4.0.8debian-1.1ubuntu0.1_all.deb
+Size: 50900
+MD5sum: a50424253237bb244ceac5ec5cb7edc7
+SHA1: ad7fd4db3b25c535a3252f1c93f596b64ebcff19
+SHA256: 958780a60e4295eb4d4a64f6b81c71a7fdb0c1451a9d87251a5a2908155b145a
+Description: meta-package providing SQLite dependencies for ownCloud
+Homepage: http://owncloud.org
+Description-md5: fe7fe6e1e2c955933d1477c41fcde4b9
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: pgbouncer
+Priority: optional
+Section: universe/misc
+Installed-Size: 346
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Christoph Berg <myon@debian.org>
+Architecture: armhf
+Version: 1.5.2-2ubuntu0.1
+Depends: lsb-base (>= 3.1), postgresql-common (>= 26), libc6 (>= 2.15-0ubuntu8), libevent-2.0-5 (>= 2.0.10-stable), libgcc1 (>= 1:4.4.0)
+Filename: pool/universe/p/pgbouncer/pgbouncer_1.5.2-2ubuntu0.1_armhf.deb
+Size: 131786
+MD5sum: a2465dbba5844a398e7d704a41ed339a
+SHA1: adfe4e9a8d327fc87697f29fa20c5465bd76990c
+SHA256: be0d1658f06a6b9207e1a37df63c8b26a9cfbc6d0cd099a4fe241b7acee18210
+Description: lightweight connection pooler for PostgreSQL
+Enhances: postgresql (>= 7.4)
+Homepage: http://pgfoundry.org/projects/pgbouncer/
+Description-md5: 01a8a881cdb553661c7e49106374895e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: python3-keyring
+Priority: optional
+Section: universe/python
+Installed-Size: 167
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Carl Chenet <chaica@debian.org>
+Architecture: all
+Source: python-keyring
+Version: 0.9.2-1ubuntu0.2
+Depends: python3 (>= 3.2.3-3~)
+Recommends: python3-crypto
+Filename: pool/universe/p/python-keyring/python3-keyring_0.9.2-1ubuntu0.2_all.deb
+Size: 32582
+MD5sum: c259134424ea438fc3c83332e3dddde1
+SHA1: fe351fcc7d4843b63759d7af113ad1db5530eda7
+SHA256: 40c5d84ab2e501ba3f4a4a5a0d9557257585aca6c41be32d60c9e5735e8afe56
+Description: store and access your passwords safely - Python 3 version of the package
+Homepage: http://home.python-keyring.org/
+Description-md5: cdfa4e281f6f7c926a2a089541027f5c
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ri1.8
+Priority: optional
+Section: universe/interpreters
+Installed-Size: 10838
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: all
+Source: ruby1.8
+Version: 1.8.7.358-4ubuntu0.1
+Provides: ri
+Depends: ruby1.8 (>= 1.8.7.358-4ubuntu0.1)
+Filename: pool/universe/r/ruby1.8/ri1.8_1.8.7.358-4ubuntu0.1_all.deb
+Size: 1171042
+MD5sum: c13617cb3f38893fa5ac92fd4a2d1331
+SHA1: b388a2e1dc41a0d5821a34527eb9377244522090
+SHA256: d174f22bfa7d6d75a40d6d280057467210e04302744cb7ca9c9bbf662d0eb16d
+Description: Ruby Interactive reference (for Ruby 1.8)
+Homepage: http://www.ruby-lang.org/
+Description-md5: 5e8f0f65cf968ef495a31458870804e0
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ri1.9.1
+Priority: optional
+Section: universe/ruby
+Installed-Size: 12757
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: all
+Source: ruby1.9.1
+Version: 1.9.3.194-1ubuntu1.2
+Depends: ruby1.9.1 (>= 1.9.3.194-1ubuntu1.2)
+Filename: pool/universe/r/ruby1.9.1/ri1.9.1_1.9.3.194-1ubuntu1.2_all.deb
+Size: 2012494
+MD5sum: 839553440eacdd393f94cf42bdd5c4d5
+SHA1: 6e2de19c8a87a5cb24c5965733b58fd0ea5527f2
+SHA256: 9d37f8fca8e4996fa91c2cd5ce1581704a4b5ae352fef6b83a368aceab0a422a
+Description: Ruby Interactive reference (for Ruby 1.9.1)
+Homepage: http://www.ruby-lang.org/
+Description-md5: 981b190dbace3c4830f10345d1b59fe3
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ruby1.8-full
+Priority: optional
+Section: universe/ruby
+Installed-Size: 303
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: all
+Source: ruby1.8
+Version: 1.8.7.358-4ubuntu0.1
+Provides: ruby-full
+Depends: ruby1.8, ri1.8, ruby1.8-dev
+Recommends: libtcltk-ruby1.8
+Filename: pool/universe/r/ruby1.8/ruby1.8-full_1.8.7.358-4ubuntu0.1_all.deb
+Size: 2584
+MD5sum: c193cf3196a6f90679d74e5cb2121861
+SHA1: be9b735aaca4fcdb50de710b7bc85d043262ba4c
+SHA256: d583d2b0ff5daa592efc21cb49f0b7b248e16bdd26c2aeb4db7de1fa1d506f00
+Description: Ruby 1.8 full installation
+Homepage: http://www.ruby-lang.org/
+Description-md5: cf5acbfe4fad5f89b4c0a264a8fb4566
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ruby1.9.1-full
+Priority: optional
+Section: universe/ruby
+Installed-Size: 192
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: all
+Source: ruby1.9.1
+Version: 1.9.3.194-1ubuntu1.2
+Depends: ruby1.9.1 (>= 1.9.3.194-1ubuntu1.2), libruby1.9.1-dbg (>= 1.9.3.194-1ubuntu1.2), ruby1.9.1-dev (>= 1.9.3.194-1ubuntu1.2), ruby1.9.1-examples (>= 1.9.3.194-1ubuntu1.2), ri1.9.1 (>= 1.9.3.194-1ubuntu1.2)
+Recommends: libtcltk-ruby1.9.1 (>= 1.9.3.194-1ubuntu1.2)
+Filename: pool/universe/r/ruby1.9.1/ruby1.9.1-full_1.9.3.194-1ubuntu1.2_all.deb
+Size: 2962
+MD5sum: 47359630b9ff1e4014c8c1269e38bb36
+SHA1: 8f11a3f515de02945c1c498a3f056aa8980ce9b7
+SHA256: 1d7b0f1ba95d1105c8bad1061ba712b4afc997108e320dad05cbc76ab1faa94e
+Description: Ruby 1.9.1 full installation
+Homepage: http://www.ruby-lang.org/
+Description-md5: 504440781902afe6d8f91131f9a13760
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ruby1.9.3
+Priority: optional
+Section: universe/ruby
+Installed-Size: 204
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: akira yamada <akira@debian.org>
+Architecture: all
+Source: ruby1.9.1
+Version: 1.9.3.194-1ubuntu1.2
+Depends: ruby1.9.1 (>= 1.9.3.194-1ubuntu1.2)
+Recommends: ruby1.9.1-full (>= 1.9.3.194-1ubuntu1.2)
+Filename: pool/universe/r/ruby1.9.1/ruby1.9.3_1.9.3.194-1ubuntu1.2_all.deb
+Size: 13892
+MD5sum: 428837578edce88053b7df861a1aa0a2
+SHA1: 43eb6b6f93a787d9b96630ef9111feee24f305be
+SHA256: 0ce41215f40016a08922ef2c04d2d9bac589e8120288303d59019d040d83fef4
+Description: Interpreter of object-oriented scripting language Ruby, version 1.9.3
+Homepage: http://www.ruby-lang.org/
+Description-md5: aa611a7522ee6c493d69294af0dd1d4b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: ubufox
+Priority: optional
+Section: universe/web
+Installed-Size: 36
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Architecture: all
+Version: 2.6-0ubuntu0.12.10.1
+Depends: xul-ext-ubufox
+Filename: pool/universe/u/ubufox/ubufox_2.6-0ubuntu0.12.10.1_all.deb
+Size: 1206
+MD5sum: 6c731a895e0bc86b995090593e54ecc2
+SHA1: 91f6100417fd1ab689d6b35357997c8adda4749e
+SHA256: b199a38185e73b862109ffdecf114e490826c876dc8f5571ded7cf10cfa53505
+Description: transitional dummy package
+Homepage: https://launchpad.net/ubufox
+Description-md5: 58b4596f8372b020607ef9cb2b32a594
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: unity-webapps-amazoncloudreader
+Priority: extra
+Section: universe/web
+Installed-Size: 40
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2.2ubuntu0.1
+Depends: unity-webapps-common, xdg-utils
+Filename: pool/universe/u/unity-webapps-amazoncloudreader/unity-webapps-amazoncloudreader_2.2ubuntu0.1_all.deb
+Size: 3364
+MD5sum: 1c156bc156d52d2346d308f394965d06
+SHA1: 9ea0a9230379ffc298321acf26770adf64a2e70e
+SHA256: 168b85e0465611ad11249fc29ccb6caa6a8233c0d9d65209458d3e4b2796ef21
+Description: Unity Webapp for AmazonCloudReader
+Homepage: https://read.amazon.com/
+Ubuntu-Webapps-Domain: read.amazon.com
+Ubuntu-Webapps-Includes: https://read.amazon.com/*
+Ubuntu-Webapps-Name: AmazonCloudReader
+Description-md5: a6446476abda4cd278bd892ed76dfadf
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: unity-webapps-facebookapps
+Priority: extra
+Section: universe/web
+Installed-Size: 40
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2.2ubuntu0.1
+Depends: unity-webapps-common, xdg-utils
+Filename: pool/universe/u/unity-webapps-facebookapps/unity-webapps-facebookapps_2.2ubuntu0.1_all.deb
+Size: 3316
+MD5sum: 9d6b72e7987f42f52cf15fe9176ec66e
+SHA1: 303256b2ef0487dfdd4eeb7c3509e6b9962c95b7
+SHA256: 841fa6513d96b2a86fa8531acb27dd1a52e830145eff95a80f7efa9ecfc0b52c
+Description: Unity Webapp for FacebookApps
+Ubuntu-Webapps-Domain: apps.facebook.com
+Ubuntu-Webapps-Includes: http://apps.facebook.com/*/*;https://apps.facebook.com/*/*
+Ubuntu-Webapps-Name: FacebookApps
+Description-md5: d932a1b482dfbc1113fc13c3fad40e03
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: unity-webapps-librefm
+Priority: extra
+Section: universe/web
+Installed-Size: 41
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2.2ubuntu0.1
+Depends: unity-webapps-common, xdg-utils
+Filename: pool/universe/u/unity-webapps-librefm/unity-webapps-librefm_2.2ubuntu0.1_all.deb
+Size: 3316
+MD5sum: 65ed9742f81bc06d8f232b8b1b546bbc
+SHA1: 496fe505b6bd549efe6ae612aadd02bcd35eb0c6
+SHA256: 8ca7bbb0b23dd7dbccd2a4452888183fe959151b68cf5f87992664f5c74abf1e
+Description: Unity Webapp for LibreFm
+Homepage: http://libre.fm
+Ubuntu-Webapps-Domain: libre.fm
+Ubuntu-Webapps-Includes: http://alpha.libre.fm/*
+Ubuntu-Webapps-Name: LibreFm
+Description-md5: 06c9cfbdea5a085ae6a9f46d1dffcd5b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: unity-webapps-pandora-com
+Priority: extra
+Section: universe/web
+Installed-Size: 43
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Architecture: all
+Version: 2.2ubuntu0.1
+Depends: unity-webapps-common, xdg-utils
+Filename: pool/universe/u/unity-webapps-pandora-com/unity-webapps-pandora-com_2.2ubuntu0.1_all.deb
+Size: 3638
+MD5sum: b8382b532be2e434a1bcd291bee48080
+SHA1: 9a8fe94f262855a89497e96c27a53be5ff00f321
+SHA256: 842b05c00395d269be1e06293ad20e424df8f3969dc453fd88c84ef8e7787aa2
+Description: Unity Webapp for pandora-com
+Homepage: http://www.pandora.com/
+Ubuntu-Webapps-Domain: pandora.com
+Ubuntu-Webapps-Includes: http://www.pandora.com/*;https://www.pandora.com/*
+Ubuntu-Webapps-Name: pandora-com
+Description-md5: 67f16c35ae8066611356888920def080
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-dkms
+Priority: optional
+Section: universe/kernel
+Installed-Size: 3808
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Replaces: virtualbox-ose-dkms (<< 4.0.6-dfsg-1~), virtualbox-ose-source (<< 3.1.0-dfsg-1~)
+Depends: dkms (>= 2.1.0.0), virtualbox (>= 4.1.18-dfsg-1ubuntu1.1)
+Pre-Depends: dpkg (>= 1.15.6~)
+Breaks: virtualbox-ose-dkms (<< 4.0.6-dfsg-1~)
+Filename: pool/universe/v/virtualbox/virtualbox-dkms_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 479956
+MD5sum: b445903bec605f01a9a85207316d1a00
+SHA1: 6e2ae354bb7e831d98168b5cb0bbf648bf17965a
+SHA256: d95db40ed7d6845349cd0ba015b46d3c78da2fa3422271fd3cf37aec4b9226a1
+Description: x86 virtualization solution - kernel module sources for dkms
+Homepage: http://www.virtualbox.org/
+Description-md5: 4d42f0fe51c4a92f2aed5071f84524ae
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-dkms
+Priority: optional
+Section: universe/kernel
+Installed-Size: 3292
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Replaces: virtualbox-ose-guest-dkms (<< 4.0.6-dfsg-1~), virtualbox-ose-guest-source (<< 3.1.0-dfsg-1~)
+Depends: dkms (>= 2.1.0.0), virtualbox-guest-utils (>= 4.1.18-dfsg-1ubuntu1.1)
+Pre-Depends: dpkg (>= 1.15.6~)
+Breaks: virtualbox-ose-guest-dkms (<< 4.0.6-dfsg-1~)
+Filename: pool/universe/v/virtualbox/virtualbox-guest-dkms_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 417614
+MD5sum: 203e498ce8fb2de51eb1185e80746082
+SHA1: 20f323cc719e50629ed25af9995b76cbe52a8d5c
+SHA256: d3657bcf9427d42922d521d09fc8a75310c434942b28dff9bd2a42fba9823519
+Description: x86 virtualization solution - guest addition module source for dkms
+Homepage: http://www.virtualbox.org/
+Modaliases: vboxguest(pci:v000080EEd0000CAFEsv00000000sd00000000bc*sc*i*)
+Description-md5: e15ead9377a7f1e325ded819d3cfaf8b
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-guest-source
+Priority: optional
+Section: universe/kernel
+Installed-Size: 616
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Replaces: virtualbox-ose-guest-source (<< 4.0.6-dfsg-1~)
+Depends: build-essential, debhelper (>= 5), bzip2, kbuild
+Recommends: module-assistant
+Breaks: virtualbox-ose-guest-source (<< 4.0.6-dfsg-1~)
+Filename: pool/universe/v/virtualbox/virtualbox-guest-source_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 521662
+MD5sum: d0f43dfcdcdd6f5acff3167dbee01322
+SHA1: ffd5f1321d6e794a5acbce9aab3e732aa7cdeea9
+SHA256: 020fcb02de7cdcad32e0538b87914377ce1d223acd3c951e4abad722cb9a2da8
+Description: x86 virtualization solution - guest addition module source
+Homepage: http://www.virtualbox.org/
+Description-md5: fd60384a9f99f9f360a9dcc85b3fd6cc
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose
+Priority: optional
+Section: universe/misc
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox
+Filename: pool/universe/v/virtualbox/virtualbox-ose_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22198
+MD5sum: e83fdc48bd490794194fadea751f8e32
+SHA1: 5465130018e3683d2ed5937064eede4d293d4a29
+SHA256: 8cc14e3b67982967f133866d15f8a12488044fcaef7315b0e8c5ae71e6b7c20e
+Description: transitional package for virtualbox
+Homepage: http://www.virtualbox.org/
+Description-md5: 22f6e6d8b13ad9150e23f6a5da2402b8
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-dbg
+Priority: extra
+Section: universe/devel
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-dbg
+Filename: pool/universe/v/virtualbox/virtualbox-ose-dbg_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22210
+MD5sum: b0e42386c69932378883953e6b007642
+SHA1: ca7b1fa2a47a41b71c09c285ce9df9fdf6633756
+SHA256: 4e35120a7c0b93db5d46b5827baa611a58f1e1c40d9df0f660b979828eb7929f
+Description: transitional package for virtualbox-dbg
+Homepage: http://www.virtualbox.org/
+Description-md5: 7b92ded25a694ce174fbd3b6721d3b6e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-dkms
+Priority: optional
+Section: universe/kernel
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-dkms
+Filename: pool/universe/v/virtualbox/virtualbox-ose-dkms_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22210
+MD5sum: af4a241851c7b3fe0dc46710b6227a8f
+SHA1: e75913acd6a68767ae9f3c31a0439a0f99724139
+SHA256: 189caeccefaa92cef00fe6417668b181a1422fc42c4b0d41500cee14de8d5c0a
+Description: transitional package for virtualbox-dkms
+Homepage: http://www.virtualbox.org/
+Description-md5: bf98200362f25189b8b23b4ddb6346c6
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-fuse
+Priority: optional
+Section: universe/misc
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-fuse
+Filename: pool/universe/v/virtualbox/virtualbox-ose-fuse_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22214
+MD5sum: f3c0da30308e05551e4def672369dd7f
+SHA1: e78ae22c54c4aeb0c616574fe3bbed00782cdb4b
+SHA256: fb50bd11d648d644b38688b9f6b4c4a9f01cc7cb9f38457adb13b7b51aebb0ba
+Description: transitional package for virtualbox-fuse
+Homepage: http://www.virtualbox.org/
+Description-md5: 7caeaf4c7507596d7c4419d66fb4182e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-guest-dkms
+Priority: optional
+Section: universe/kernel
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-guest-dkms
+Filename: pool/universe/v/virtualbox/virtualbox-ose-guest-dkms_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22234
+MD5sum: 92aef2cd2892602757d4878bcf2d4f1f
+SHA1: b05c88ce7d77d34d28c456dd94e6f12e1f19b407
+SHA256: d122a90861d4fa567561b4737e84dfe2108ca22e0a10b83aa4a51276fb0e737c
+Description: transitional package for virtualbox-guest-dkms
+Homepage: http://www.virtualbox.org/
+Description-md5: 766967028bc8b88b95e38f62285036c6
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-guest-source
+Priority: optional
+Section: universe/kernel
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-guest-source
+Filename: pool/universe/v/virtualbox/virtualbox-ose-guest-source_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22228
+MD5sum: 7b040ae4bfc4f628a1ad50df5c53cf09
+SHA1: 80bc9929878856931e893f46ac4b7dbfa35028c4
+SHA256: d9865edfbe0458ed142d5622a3218f9f43d77a78c6a9442b2ef8f21fc1d59c51
+Description: transitional package for virtualbox-guest-source
+Homepage: http://www.virtualbox.org/
+Description-md5: 80e9d2db29386374ad657c78377a181e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-guest-utils
+Priority: extra
+Section: universe/misc
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-guest-utils
+Filename: pool/universe/v/virtualbox/virtualbox-ose-guest-utils_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22230
+MD5sum: 8273a3a4dab627f75dc07de2256c1582
+SHA1: 5bb995d6f11c2383c948e59aa5d729e5e73dd688
+SHA256: 3e0c083992e5087693c8385b3167cf857d11c2c28dcd5c536e329845db8db1ec
+Description: transitional package for virtualbox-guest-utils
+Homepage: http://www.virtualbox.org/
+Description-md5: ef6b431011825dc079daa9bb6d7f24c4
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-guest-x11
+Priority: extra
+Section: universe/misc
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-guest-x11
+Filename: pool/universe/v/virtualbox/virtualbox-ose-guest-x11_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22230
+MD5sum: 4c0b4c29bbd07a66ec1b6bf64c2be37e
+SHA1: c8779c3d6c0a07f95e8407733e5b6ab116d0e298
+SHA256: b9ab1b027e4fa0a17d1404148ae3333787bebbc3419c0b48e372b52a6b353042
+Description: transitional package for virtualbox-guest-x11
+Homepage: http://www.virtualbox.org/
+Description-md5: 564410041a942d1b05fcecd3f88d9d45
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-qt
+Priority: extra
+Section: universe/misc
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-qt
+Filename: pool/universe/v/virtualbox/virtualbox-ose-qt_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22212
+MD5sum: 9106a7935050b18b87271a94960cf567
+SHA1: c0ff764283d287c21e5c425b559becd2e9a81a90
+SHA256: eb3f14815a007df22d800370ae90fdfa85f9c0d5102eede39854679967cab211
+Description: transitional package for virtualbox-qt
+Homepage: http://www.virtualbox.org/
+Description-md5: f66f285ae4da8c0e2167052f77fcd712
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-ose-source
+Priority: optional
+Section: universe/kernel
+Installed-Size: 118
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Depends: virtualbox-source
+Filename: pool/universe/v/virtualbox/virtualbox-ose-source_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 22214
+MD5sum: 03e661b69a3e35242d5fef55fc805ee9
+SHA1: 1f1a24ad075cb32c641799fe54d994049f67489f
+SHA256: f3cbe95a7460dafce0cd9aa933dfdd6aaa8ed7101402186ae23036fa25ce1bb8
+Description: transitional package for virtualbox-source
+Homepage: http://www.virtualbox.org/
+Description-md5: 96b920b3e995167cd343aa1af3b2f36f
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: virtualbox-source
+Priority: optional
+Section: universe/kernel
+Installed-Size: 666
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Virtualbox Team <pkg-virtualbox-devel@lists.alioth.debian.org>
+Architecture: all
+Source: virtualbox
+Version: 4.1.18-dfsg-1ubuntu1.1
+Replaces: virtualbox-ose-source (<< 4.0.6-dfsg-1~)
+Depends: build-essential, debhelper (>= 5), bzip2, kbuild
+Recommends: module-assistant
+Breaks: virtualbox-ose-source (<< 4.0.6-dfsg-1~)
+Filename: pool/universe/v/virtualbox/virtualbox-source_4.1.18-dfsg-1ubuntu1.1_all.deb
+Size: 573098
+MD5sum: 9958f2251aa7573e435517dadc7ddfa8
+SHA1: 85f94079d11cba3965a5ac031eff1de76656454a
+SHA256: 542254706bb8047da7fadb87b2edd5f395b6788cbf6e082deae477ecf0ea8c5c
+Description: x86 virtualization solution - kernel module source
+Homepage: http://www.virtualbox.org/
+Description-md5: acc86918ad52775dbe11e2ad558ba197
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xen-docs-4.1
+Priority: optional
+Section: universe/doc
+Installed-Size: 1174
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Architecture: all
+Source: xen
+Version: 4.1.3-3ubuntu1.2
+Filename: pool/universe/x/xen/xen-docs-4.1_4.1.3-3ubuntu1.2_all.deb
+Size: 1162518
+MD5sum: 6fbf6be807c364c5adde1df380625dbf
+SHA1: bb099bdc9185c7b88b42b2dd507ce59ea46e1480
+SHA256: 1bd78e64a74c4136ad155f1a50a37a6e32442ef33c34ee15e3d0428eafa7ae49
+Description: Documentation for Xen
+Description-md5: 6cae9b51dadf4d0824b74e2b7ff1077f
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xen-utils-common
+Priority: optional
+Section: universe/kernel
+Installed-Size: 262
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+Original-Maintainer: Debian Xen Team <pkg-xen-devel@lists.alioth.debian.org>
+Architecture: all
+Source: xen
+Version: 4.1.3-3ubuntu1.2
+Depends: gawk, lsb-base, python, udev, xenstore-utils, ucf
+Filename: pool/universe/x/xen/xen-utils-common_4.1.3-3ubuntu1.2_all.deb
+Size: 70054
+MD5sum: 724dd33d513df73deaf749d11729d450
+SHA1: f9a0903359b41de3f802a67b4076af8050aea8c6
+SHA256: e0339c83124f86ddc1fd5e1b2b033d42a78c727898a682a8c2a950d88ffab14e
+Description: Xen administrative tools - common files
+Description-md5: 8af52ba7dfa8ab5d2f2013a4e86ceb1e
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xul-ext-calendar-timezones
+Priority: optional
+Section: universe/web
+Installed-Size: 481
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Architecture: all
+Source: lightning-extension
+Version: 1.9+build1-0ubuntu0.12.10.1
+Provides: seamonkey-calendar-timezones, thunderbird-calendar-timezones
+Recommends: thunderbird (>= 17.0) | seamonkey (>= 2.0)
+Filename: pool/universe/l/lightning-extension/xul-ext-calendar-timezones_1.9+build1-0ubuntu0.12.10.1_all.deb
+Size: 41640
+MD5sum: df0b13c2a4c78586993daed7dd3dadd4
+SHA1: e8d678650812a22a42bcad3d649b319ec6606984
+SHA256: 9323641d8b9354c387e8cb450e3e60bf0b323eecfbbc732eeb507840c32704a4
+Description: Calendar Extension for Thunderbird - Timezone data
+Enhances: seamonkey, thunderbird
+Description-md5: c6a7c4c59ec49f7fac76a9225234f7f4
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xul-ext-gdata-provider
+Priority: optional
+Section: universe/web
+Installed-Size: 335
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Architecture: all
+Source: lightning-extension
+Version: 1.9+build1-0ubuntu0.12.10.1
+Provides: seamonkey-gdata-provider, thunderbird-gdata-provider
+Depends: xul-ext-lightning
+Recommends: thunderbird (>= 17.0~a1) | seamonkey (>= 2.14~a1)
+Filename: pool/universe/l/lightning-extension/xul-ext-gdata-provider_1.9+build1-0ubuntu0.12.10.1_all.deb
+Size: 51844
+MD5sum: 76261c377c1dfda786f36693e48ae62a
+SHA1: a793d43730106651b5ec9f4176c6c90edc9449c2
+SHA256: c79c387de02c9cbedd0da1baa8f70ae2939dc1c7fefc909706356d81a65b09f7
+Description: Calendar Extension for Thunderbird - Google Calendar support
+Enhances: seamonkey, thunderbird
+Description-md5: f62489adb0c47d7399cead39c714c174
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+
+Package: xul-ext-lightning
+Priority: optional
+Section: universe/web
+Installed-Size: 4457
+Maintainer: Ubuntu Mozilla Team <ubuntu-mozillateam@lists.ubuntu.com>
+Architecture: armhf
+Source: lightning-extension
+Version: 1.9+build1-0ubuntu0.12.10.1
+Provides: imap-client, mail-reader, seamonkey-lightning, thunderbird-lightning
+Depends: xul-ext-calendar-timezones, libc6 (>= 2.15-0ubuntu8), libgcc1 (>= 1:4.4.0), libnspr4 (>= 1.8.0.10), libstdc++6 (>= 4.1.1)
+Recommends: thunderbird (>= 17.0) | seamonkey (>= 2.14), xul-ext-gdata-provider
+Suggests: latex-xft-fonts
+Filename: pool/universe/l/lightning-extension/xul-ext-lightning_1.9+build1-0ubuntu0.12.10.1_armhf.deb
+Size: 1111332
+MD5sum: 213bb220bf86ed6d47dfb5901931397b
+SHA1: 8f86e46083a07e21c30fa5a7c5f169f2b573cf95
+SHA256: 93fe895e712457e5b08a7d161af996558e7f25222b06875192c0c52a99995242
+Description: Calendar Extension for Thunderbird
+Enhances: seamonkey, thunderbird
+Description-md5: a0293e147dba3d166b3727a30a6634a0
+Bugs: https://bugs.launchpad.net/ubuntu/+filebug
+Origin: Ubuntu
+

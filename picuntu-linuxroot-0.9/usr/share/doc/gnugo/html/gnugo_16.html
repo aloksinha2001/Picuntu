@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 16. Handling SGF trees in memory</title>
+
+<meta name="description" content="GNU Go Documentation: 16. Handling SGF trees in memory">
+<meta name="keywords" content="GNU Go Documentation: 16. Handling SGF trees in memory">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="SGF"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_15.html#Some-Board-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-SGFTree-datatype" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_15.html#Libboard" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_17.html#API" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Handling-SGF-trees-in-memory"></a>
+<h1 class="chapter">16. Handling SGF trees in memory</h1>
+
+<a name="index-SGF-files-in-memory"></a>
+
+<p><em>SGF</em> - Smart Game Format - is a file format which is used for storing
+game records for a number of different games, among them chess and
+go. The format is a framework with special adaptions to each game. This
+is not a description of the file format standard. Too see the exact
+definition of the file format, see <a href="http://www.red-bean.com/sgf/">http://www.red-bean.com/sgf/</a>.
+</p>
+<p>GNU Go contains a library to handle go game records in the SGF format in
+memory and to read and write SGF files. This library - <code>libsgf.a</code> -
+is in the <code>sgf</code> subdirectory. To use the SGF routines, include the
+file &lsquo;<tt>sgftree.h</tt>&rsquo;.
+</p>
+<p>Each game record is stored as a tree of <em>nodes</em>, where each node
+represents a state of the game, often after some move is made. Each node
+contains zero or more <em>properties</em>, which gives meaning to the
+node. There can also be a number of <em>child nodes</em> which are
+different variations of the game tree. The first child node is the main
+variation. 
+</p>
+<p>Here is the definition of <code>SGFNode</code>, and <code>SGFProperty</code>, the
+data structures which are used to encode the game tree. 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+typedef struct SGFProperty_t {
+  struct SGFProperty_t *next;
+  short  name;
+  char   value[1];
+} SGFProperty;
+
+</pre><pre class="example">
+typedef struct SGFNode_t {
+  SGFProperty      *props;
+  struct SGFNode_t *parent;
+  struct SGFNode_t *child;
+  struct SGFNode_t *next;
+} SGFNode;
+
+</pre></td></tr></table>
+
+<p>Each node of the SGF tree is stored in an <code>SGFNode</code> struct. It has
+a pointer to a linked list of properties (see below) called
+<code>props</code>. It also has a pointer to a linked list of children, where
+each child is a variation which starts at this node. The variations are
+linked through the <code>next</code> pointer and each variation continues
+through the <code>child</code> pointer. Each and every node also has a pointer
+to its parent node (the <code>parent</code> field), except the top node whose
+parent pointer is <code>NULL</code>.
+</p>
+<p>An SGF property is encoded in the <code>SGFPoperty</code> struct. It is linked
+in a list through the <code>next</code> field.  A property has a <code>name</code>
+which is encoded in a short int.  Symbolic names of properties can be
+found in &lsquo;<tt>sgf_properties.h</tt>&rsquo;.
+</p>
+<p>Some properties also have a value, which could be an integer, a floating
+point value, a character or a string. These values can be accessed or
+set through special functions.
+</p>
+<hr size="6">
+<a name="The-SGFTree-datatype"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SGF" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_17.html#API" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#SGF" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#SGF" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_17.html#API" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">16.1 The SGFTree datatype</h2>
+
+<p>Sometimes we just want to record an ongoing game or something similarly
+simple and not do any sofisticated tree manipulation.  In that case we
+can use the simplified interface provided by <code>SGFTree</code> below. 
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+typedef struct SGFTree_t {
+  SGFNode *root;
+  SGFNode *lastnode;
+} SGFTree;
+
+</pre></td></tr></table>
+
+<p>An <code>SGFTree</code> contains a pointer to the root node of an SGF tree and
+a pointer to the node that we last accessed. Most of the time this will
+be the last move of an ongoing game.
+</p>
+<p>Most of the functions which manipulate an <code>SGFTree</code> work exactly
+like their <code>SGFNode</code> counterparts, except that they work on the
+current node of the tree.
+</p>
+<p>All the functions below that take arguments <code>tree</code> and <code>node</code>
+will work on:
+</p>
+<ol>
+<li>
+<code>node</code> if non-<code>NULL</code>
+</li><li>
+<code>tree-&gt;lastnode</code> if non-<code>NULL</code>
+</li><li>
+The current end of the game tree.
+</li></ol>
+<p>in that order.
+</p>
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#SGF" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_17.html#API" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

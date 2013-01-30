@@ -1,0 +1,81 @@
+#!/bin/sh -e
+# This script can be called in the following ways:
+#
+# After the package was removed:
+#	<postrm> remove
+#
+# After the package was purged:
+#	<postrm> purge
+#
+# After the package was upgraded:
+#	<old-postrm> upgrade <new-version>
+# if that fails:
+#	<new-postrm> failed-upgrade <old-version>
+#
+#
+# After all of the packages files have been replaced:
+#	<postrm> disappear <overwriting-package> <version>
+#
+#
+# If preinst fails during install:
+#	<new-postrm> abort-install
+#
+# If preinst fails during upgrade of removed package:
+#	<new-postrm> abort-install <old-version>
+#
+# If preinst fails during upgrade:
+#	<new-postrm> abort-upgrade <old-version>
+
+
+# Undo removal of a no-longer used conffile
+undo_rm_conffile()
+{
+    CONFFILE="$1"
+
+    if [ ! -e "$CONFFILE" ]; then
+	if [ -e "$CONFFILE".dpkg-bak ]; then
+	    echo "Restoring modified conffile $CONFFILE"
+	    mv -f "$CONFFILE".dpkg-bak "$CONFFILE"
+	elif [ -e "$CONFFILE".dpkg-obsolete ]; then
+	    mv -f "$CONFFILE".dpkg-obsolete "$CONFFILE"
+	fi
+    fi
+}
+
+# Finish removal of a no-longer used conffile
+finish_rm_conffile()
+{
+    CONFFILE="$1"
+
+    if [ -e "$CONFFILE".dpkg-bak ]; then
+	rm -f "$CONFFILE".dpkg-bak
+    fi
+}
+
+
+case "$1" in
+    remove)
+	;;
+
+    purge)
+    	finish_rm_conffile /etc/init/dbus-reconnect.conf
+	;;
+
+    upgrade|failed-upgrade|disappear)
+	;;
+
+    abort-install|abort-upgrade)
+	# Abort upgrade from karmic development version
+	if dpkg --compare-versions "$2" lt-nl 0.6.3-7; then
+	    undo_rm_conffile /etc/init/dbus-reconnect.conf
+	fi
+	;;
+
+    *)
+	echo "$0 called with unknown argument \`$1'" 1>&2
+	exit 1
+	;;
+esac
+
+
+exit 0

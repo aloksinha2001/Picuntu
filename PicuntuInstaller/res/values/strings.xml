@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Picuntu Installer</string>
+    <string name="welcome">Welcome to Picuntu Installer - a tool to install ubuntu linux to your RK3066 based Android TV Box (e.g. MK802-III, UG802, MK808, etc.).\n\nThis tool is complete free and open sourced. It has absolutely NO warranty.</string>
+    <string name="next">Next</string>
+    <string name="iunderstand">I understand, go on.</string>
+    <string name="exit">Exit</string>
+    <string name="selectInstallationSource">Select Installation Source</string>
+    <string name="prev">Prev</string>
+    <string name="fromExternalSD">NOT implemented yet - From files on external SD card</string>
+    <string name="fromLocalServer">From files on my local server (ftp, http, extract on the fly)</string>
+    <string name="fromInternet">NOT implemented yet - From files on Internet server (download to internal SD card)</string>
+    <string name="selectKernelTarget">Select where to install kernel </string>
+    <string name="toKernelPartition">NOT implemented yet - Install to the kernel partition of your TV Box (Your Android system will be destroyed.  Only for advanced users.)</string>
+    <string name="toRecoveryPartition">Install to the recovery partition of your TV Box (you still have your Adroid system and when booting it first boots to Android. Recommended for newbie.)</string>
+    <string name="selectRootfsTarget">Select where to install Picuntu rootfs</string>
+    <string name="toInternalSd">NOT implemented yet - Install to internal SD card for rootfs (your Android will be overwritten!  Only for advanced users.)</string>
+    <string name="toExternalSd">Install to external SD card (if source is from external SD card, the same card will be erased)</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="menu_settings">Settings</string>
+    <string name="title_activity_lan">LanActivity</string>
+    <string name="setUpLan">Setup your local network</string>
+    <string name="fromFtp">From local FTP server</string>
+    <string name="fromHttp">From local HTTP server</string>
+    <string name="title_activity_wan">WanActivity</string>
+    <string name="title_activity_config_overview">ConfigOverviewActivity</string>
+    <string name="title_activity_install_now">InstallNowActivity</string>
+    <string name="title_activity_success">SuccessActivity</string>
+    <string name="title_activity_failure">FailureActivity</string>
+    <string name="setUpWan">Setup the Internet connection</string>
+    <string name="installationOverview">Installation Overview</string>
+    <string name="url">URL:</string>
+    <string name="installnow">Install Now</string>
+    <string name="wanWarning">A large installation file will be downloaded to your internal SD card and then extracted to your targeted rootfs partition.  If downloading failed your installation fails and it has to download the whole file again.  We strongly recommand you download the file to your local server.</string>
+    <string name="ignore">Ignore (already done at last try)</string>
+
+</resources>

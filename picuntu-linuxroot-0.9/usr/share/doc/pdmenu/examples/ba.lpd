@@ -1,0 +1,148 @@
+#!/bin/sh
+
+# Bear Access Launchpad based on pdmenu
+# This file by Randolph Chung <rc42@cornell.edu> 9/25/97
+# Pdmenu is written by Joey Hess <joey@kitenet.net>
+#   requires pdmenu version >= 1.2
+#   also uses several basic GNU utilities: date, grep, mkfifo and tail
+
+OLDTERM=$TERM
+X=OFF
+case "$1" in
+   --no-x|-n) X=OFF ;;
+   --with-x|-x) X=ON ;;
+esac   
+
+export TERM=vt100
+stty rows 24       # some CU telnet servers assume a 24 line display
+
+# So this is a hack... sue me :)
+LINE=`grep -n '^# ba4unix #' $0|cut -d: -f1`
+
+if [ "$X" = "ON" ]; then
+  export browser=netscape
+  export tn3270=x3270
+  export telnet="xterm -e telnet"
+else 
+  export browser=lynx
+  export tn3270=tn3270
+  export telnet=telnet
+fi
+
+tail --lines=+$LINE "$0" | pdmenu -
+export TERM=$OLDTERM
+exit 0
+# make dash -n happy gross eh
+cat <<EOF
+
+# Do not delete or modify the next line
+# ba4unix #
+#Set a pleasing color scheme.
+color:desktop:white:blue
+color:title:black:lightgray
+color:base:black:lightgray
+color:menu:white:red
+       
+#Define the main menu:
+#Not quite bear access... but ...
+menu:main:Bear Access for Unix
+        exec:Bear Access for Unix help::$browser http://cslug.orie.cornell.edu/~lug/ba4unix/help.html
+	group:Kerberos...
+	  exec::makemenu: \
+	  echo "menu:kerb:Kerberos (`klist 2>&1|grep Principal:|cut -f2|tr A-Z a-z|sed -e 's/@cit.*//'`)"; \
+          echo "group:Get kerberos ticket"; \
+	    echo "exec:::kinit"; \
+	    echo "exit"; \
+	  echo "endgroup"; \
+	  echo "group:List kerberos tickets"; \
+	    echo "exec:List kerberos tickets:display:klist 2>&1"; \
+	    echo "exit"; \
+	  echo "endgroup"; \
+          echo "group:Destroy kerberos tickets"; \
+	    echo "exec::display:kdestroy 2>&1"; \
+	    echo "exit"; \
+	  echo "endgroup"; \
+          echo "nop"; \
+          echo "exit:Main Menu"
+	  show:::kerb
+	  remove:::kerb
+	endgroup
+	exec:Mail::mutt
+        exec:Traveler's Mail::$telnet tmail.mail.cornell.edu
+	exec:CUInfo via web::$browser http://www.cornell.edu/
+	exec:CUInfo/WWW via Telnet::$telnet www.cornell.edu
+	exec:World Wide Web::$browser
+	exec:Network News::slrn -n -C
+	show:Library resources...::library
+	exec:Just the Facts::$telnet jtf.cit.cornell.edu 1240
+	exec:Course Technology Information::$browser http://instruct1.cit.cornell.edu/course.html
+	exec:Career Services::$browser http://www.career.cornell.edu/ccs/
+	exec:Who I Am::$browser http://whoiam.cornell.edu/
+	exec:File Transfer (FTP)::ncftp
+	show:Campus Hosts (Telnet)...::$telnet
+	nop
+	exit:Quit:
+
+menu:library:Library Resources:Library Resources
+	exec:Library catalog::$tn3270 notis.library.cornell.edu
+	show:Circulation Services...::lib_circ
+	exec:Cornell Library Web::$browser http://www.library.cornell.edu/
+	exec:Cornell Library Web via telnet::$telnet gateway.library.cornell.edu 328
+	exec:Electronic Journals - WWW::$browser http://www.library.cornell.edu/library/ejournal.html
+        exec:Mann Library Gateway::$browser http://mann.library.cornell.edu/no_javascript/gateway.html
+        show:Abstracts and Indexes...::lib_index
+	show:Cornell Library Catalogs...::lib_cat
+	nop
+	exit:_Main menu...:
+
+menu:lib_circ:Circulation Services
+        exec:Booksout::$telnet gateway.library.cornell.edu 343
+	exec:Course Reserve::$telnet gateway.library.cornell.edu 344
+	exec:Renew, Recall, ILL and More!::$browser http://www.library.cornell.edu/library/forms.html
+	nop
+	exit:return to Library Resources...:
+
+menu:lib_index:Abstracts and Indexes
+        exec:Abstracts & Indexes Linked to the Catalog::$telnet gateway.library.cornell.edu 333
+	exec:Avery Architectural Index::$telnet gateway.library.cornell.edu 304
+	exec:Bib. of the History of Art::$telnet gateway.library.cornell.edu 340
+	exec:Chemical Abstract Student Edition::$telnet gateway.library.cornell.edu 342
+	exec:Ei Compendex - WWW::$browser http://www.englib.cornell.edu/electronic_resources/compendex.html
+	exec:Engineering Index (Eip)::$telnet gateway.library.cornell.edu 309
+	exec:English Short Title Catalog::$telnet gateway.library.cornell.edu 329
+	exec:Foreign Legal Periodicals::$telnet gateway.library.cornell.edu 310
+	exec:Hispanic Amer. Periodicals::$telnet gateway.library.cornell.edu 312
+	exec:Hist. of Science & Tech.::$telnet gateway.library.cornell.edu 313
+	exec:INSPEC::$telnet gateway.library.cornell.edu 317
+	exec:MathSci Net - WWW::$browser http://www.ams.org/mathscinet/
+	exec:Periodical Contents Index - WWW::$browser http://pci.chadwyck.com/
+	exec:RILM (Music Abstracts)::$telnet gateway.library.cornell.edu 341
+	exec:UnCover (Article Delivery)::$telnet gateway.library.cornell.edu 327
+	exec:Books in Print::$tn3270 cbsserv1.cbs.cornell.edu 1242
+        exec:Cornell Lecture Recordings 1975-1995::$telnet gopher2.cit.cornell.edu 301
+	nop
+	exit:return to Library Resources...:
+	
+menu:lib_cat:Library catalogs	
+	exec:Library catalog::$tn3270 notis.library.cornell.edu
+        exec:CUL Experimental WWW Catalog::$browser http://www.library.cornell.edu/catalog/
+        exec:Cornell Medical College Catalog::$telnet gateway.library.cornell.edu 319
+        exec:CRL Catalog (Chicago)::$telnet gateway.library.cornell.edu 308
+        exec:OCLC (WorldCat)::$telnet gateway.library.cornell.edu 321
+        exec:RLIN/Eureka::$telnet gateway.library.cornell.edu 325
+	nop
+        exit:Library resources...:
+	
+menu:$telnet:Campus Hosts:Campus Hosts
+        exec:GAEA (CISER)::$telnet gaea.ciser.cornell.edu
+	exec:INSTRUCT1   ::$telnet instruct1.cit.cornell.edu
+	exec:INSTRUCT2   ::$telnet instruct2.cit.cornell.edu
+	exec:INSTRUCT3   ::$telnet instruct3.cit.cornell.edu
+	exec:RSRCH1      ::$telnet rsrch1.cit.cornell.edu
+	exec:SAFETYNET   ::$telnet safetynet.cit.cornell.edu
+	exec:CORNELLC    ::$tn3270 cornellc.cit.cornell.edu
+	exec:Telnet      ::$telnet
+	exec:TN3270      ::$tn3270
+	nop
+	exit:Main menu...:
+	

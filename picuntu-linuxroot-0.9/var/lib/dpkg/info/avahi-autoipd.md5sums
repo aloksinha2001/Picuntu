@@ -1,0 +1,7 @@
+48935cdeb678cd485a4430796d612c7a  usr/sbin/avahi-autoipd
+95dff79be9f47a657c847893915227d3  usr/share/doc/avahi-autoipd/NEWS.gz
+359847954ee1f4e9970c4afd10ce796b  usr/share/doc/avahi-autoipd/README
+711a3d177b162a2e221d8579b921cae6  usr/share/doc/avahi-autoipd/changelog.Debian.gz
+026515c317e1591092392844df5f1ee0  usr/share/doc/avahi-autoipd/copyright
+8e283a086f098a1f74a15944dfba153a  usr/share/man/man8/avahi-autoipd.8.gz
+1e1d97b43d341812a9c6756010dc386a  usr/share/man/man8/avahi-autoipd.action.8.gz

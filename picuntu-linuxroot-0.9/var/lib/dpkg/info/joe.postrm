@@ -1,0 +1,7 @@
+#!/bin/sh -e
+
+if [ -x "`which update-menus 2>/dev/null`" ]; then update-menus ; fi
+
+if [ "$1" = "purge" ]; then
+  rm -rf /etc/joe
+fi

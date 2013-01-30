@@ -1,0 +1,15 @@
+1bb473ddc49725056193184a4ee072e2  usr/bin/cautious-launcher
+e35321e0662e36c237ba68b6746d89b8  usr/bin/run-mailcap
+33fceb3260d267efa7730a6703fee821  usr/lib/mime/debian-view
+2b9b4ad103ffd242f9f312bdf8b3ac1a  usr/lib/mime/mailcap
+5f38c9d2148fdedaa9e2adf443a571b8  usr/lib/mime/packages/mime-support
+0e1aa0a06739909963852da537063429  usr/sbin/update-mime
+56c35631a888f2a00e1de43d246e92c1  usr/share/doc/mime-support/changelog.Debian.gz
+36bbe2ace0a05c3fb684b73208fbf30b  usr/share/doc/mime-support/copyright
+eb671b226fee8d96440dc38a51af455e  usr/share/doc/mime-support/rfc1522.txt.gz
+1369e1142575aa5b55bbba1c804203bf  usr/share/doc/mime-support/rfc1523.txt.gz
+5b5a5e1fa6686998fba6c340d395e8da  usr/share/doc/mime-support/rfc1524.txt.gz
+a86b90e0cb734dce8fb8af29aed7c89e  usr/share/man/man1/run-mailcap.1.gz
+eda0b20e782fa6b44735c204ecb2a042  usr/share/man/man5/mailcap.5.gz
+4fb964ffaf8c80729eec65ec14cdf040  usr/share/man/man5/mailcap.order.5.gz
+ca452440e94cf6bed6f8692c6f52f8f6  usr/share/man/man8/update-mime.8.gz

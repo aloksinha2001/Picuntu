@@ -1,0 +1,11 @@
+/.
+/usr
+/usr/lib
+/usr/lib/arm-linux-gnueabihf
+/usr/lib/arm-linux-gnueabihf/libespeak.so.1.1.46
+/usr/share
+/usr/share/doc
+/usr/share/doc/libespeak1
+/usr/share/doc/libespeak1/copyright
+/usr/lib/arm-linux-gnueabihf/libespeak.so.1
+/usr/share/doc/libespeak1/changelog.Debian.gz

@@ -1,0 +1,2 @@
+?package(gnugo):needs="text" section="Games/Board" \
+	hints="Go" title="GNU Go" command="/usr/games/gnugo"

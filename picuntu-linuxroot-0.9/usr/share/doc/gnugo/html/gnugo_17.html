@@ -1,0 +1,580 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html401/loose.dtd">
+<html>
+<!-- Created on November 29, 2011 by texi2html 1.82
+texi2html was written by: 
+            Lionel Cons <Lionel.Cons@cern.ch> (original author)
+            Karl Berry  <karl@freefriends.org>
+            Olaf Bachmann <obachman@mathematik.uni-kl.de>
+            and many others.
+Maintained by: Many creative people.
+Send bugs and suggestions to <texi2html-bug@nongnu.org>
+-->
+<head>
+<title>GNU Go Documentation: 17. Application Programmers Interface to GNU Go</title>
+
+<meta name="description" content="GNU Go Documentation: 17. Application Programmers Interface to GNU Go">
+<meta name="keywords" content="GNU Go Documentation: 17. Application Programmers Interface to GNU Go">
+<meta name="resource-type" content="document">
+<meta name="distribution" content="global">
+<meta name="Generator" content="texi2html 1.82">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+<!--
+a.summary-letter {text-decoration: none}
+blockquote.smallquotation {font-size: smaller}
+pre.display {font-family: serif}
+pre.format {font-family: serif}
+pre.menu-comment {font-family: serif}
+pre.menu-preformatted {font-family: serif}
+pre.smalldisplay {font-family: serif; font-size: smaller}
+pre.smallexample {font-size: smaller}
+pre.smallformat {font-family: serif; font-size: smaller}
+pre.smalllisp {font-size: smaller}
+span.roman {font-family:serif; font-weight:normal;}
+span.sansserif {font-family:sans-serif; font-weight:normal;}
+ul.toc {list-style: none}
+-->
+</style>
+
+
+</head>
+
+<body lang="en" bgcolor="#FFFFFF" text="#000000" link="#0000FF" vlink="#800080" alink="#FF0000">
+
+<a name="API"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="gnugo_16.html#The-SGFTree-datatype" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Getting-Started" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo_16.html#SGF" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Application-Programmers-Interface-to-GNU-Go"></a>
+<h1 class="chapter">17. Application Programmers Interface to GNU Go</h1>
+
+<p>If you want to write your own interface to GNU Go, or if you want to
+create a go application using the GNU Go engine, this chapter is of
+interest to you.
+</p>
+<p>First an overview: GNU Go consists of two parts: the GNU Go <i>engine</i>
+and a program (user interface) which uses this engine. These are linked
+together into one binary. The current program implements the following
+user modes:
+</p>
+<ul>
+<li> An interactive board playable on ASCII terminals
+</li><li> solo play - GNU Go plays against itself
+</li><li> replay - a mode which lets the user investigate moves in an existing
+SGF file.
+</li><li> GMP - Go Modem Protocol, a protocol for automatic play between two
+computers.
+</li><li> GTP - Go Text Protocol, a more general go protocol, see section <a href="gnugo_19.html#GTP">The Go Text Protocol</a>.
+</li></ul>
+<a name="index-API"></a>
+
+<p>The GNU Go engine can be used in other applications. For example, supplied
+with GNU Go is another program using the engine, called &lsquo;<tt>debugboard</tt>&rsquo;,
+in the directory &lsquo;<tt>interface/debugboard/</tt>&rsquo;. The program debugboard lets the
+user load SGF files and can then interactively look at different properties of
+the position such as group status and eye status.
+</p>
+<p>The purpose of this Chapter is to show how to interface your own
+program such as <code>debugboard</code> with the GNU Go engine.
+</p>
+<p>Figure 1 describes the structure of a program using the GNU Go
+engine.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">                 +-----------------------------------+
+                 |                                   |
+                 |          Go application           |
+                 |                                   |
+                 +-----+----------+------+           |
+                 |     |          |      |           |
+                 |     |   Game   |      |           |
+                 |     | handling |      |           |
+                 |     |          |      |           |
+                 |     +----+-----+      |           |
+                 |   SGF    |    Move    |           |
+                 | handling | generation |           |
+                 |          |            |           |
+                 +----------+------------+-----------+
+                 |                                   |
+                 |           Board handling          |
+                 |                                   |
+                 +-----------------------------------+
+     
+        Figure 1: The structure of a program using the GNU Go engine
+
+</pre></td></tr></table>
+
+<p>The foundation is a library called <code>libboard.a</code> which provides 
+efficient handling of a go board with rule checks for moves, with
+incremental handling of connected strings of stones and with methods to
+efficiently hash go positions.
+</p>
+<p>On top of this, there is a library which helps the application use
+Smart Game Format (SGF) files, with complete handling of game trees in
+memory and in files. This library is called <code>libsgf.a</code>
+</p>
+<p>The main part of the code within GNU Go is the move generation
+library which given a position generates a move. This part of the
+engine can also be used to manipulate a go position, add or remove
+stones, do tactical and strategic reading and to query the engine for
+legal moves. These functions are collected into <code>libengine.a</code>.
+</p>
+<p>The game handling code helps the application programmer keep tracks
+of the moves in a game. Games can be saved to
+SGF files and then later be read back again. These are also within
+<code>libengine.a</code>. 
+</p>
+<p>The responsibility of the application is to provide the user with a
+user interface, graphical or not, and let the user interact with the
+engine.
+</p>
+<table class="menu" border="0" cellspacing="0">
+<tr><td align="left" valign="top"><a href="#Getting-Started">17.1 How to use the engine in your own program: getting started</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          How to use the engine in your program
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Basic-Data-Structures">17.2 Basic Data Structures in the Engine</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+<tr><td align="left" valign="top"><a href="#The-Board-State">17.3 The board_state struct</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top">          The board_state &lsquo;struct&rsquo;
+</td></tr>
+<tr><td align="left" valign="top"><a href="#Positional-Functions">17.4 Functions which manipulate a Position</a></td><td>&nbsp;&nbsp;</td><td align="left" valign="top"></td></tr>
+</table>
+
+<hr size="6">
+<a name="Getting-Started"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#API" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Basic-Data-Structures" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#API" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<a name="How-to-use-the-engine-in-your-own-program_003a-getting-started"></a>
+<h2 class="section">17.1 How to use the engine in your own program: getting started</h2>
+
+<p>To use the GNU Go engine in your own program you must include
+the file &lsquo;<tt>gnugo.h</tt>&rsquo;. This file describes the whole public API. There is
+another file, &lsquo;<tt>liberty.h</tt>&rsquo;, which describes the internal interface within
+the engine. If you want to make a new module within the engine, e.g.  for
+suggesting moves you will have to include this file also. In this section we
+will only describe the public interface.
+</p>
+<a name="index-init_005fgnugo"></a>
+<p>   Before you do anything else, you have to call the function
+<code>init_gnugo()</code>. This function initializes everything within the engine.
+It takes one parameter: the number of megabytes the engine can use for
+the internal hash table. In addition to this the engine will use a few
+megabytes for other purposes such as data describing groups (liberties,
+life status, etc), eyes and so on.
+</p>
+<hr size="6">
+<a name="Basic-Data-Structures"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Getting-Started" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#The-Board-State" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#API" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<a name="Basic-Data-Structures-in-the-Engine"></a>
+<h2 class="section">17.2 Basic Data Structures in the Engine</h2>
+<a name="index-data-structures"></a>
+<a name="index-position-struct"></a>
+
+
+<p>   There are some basic definitions in gnugo.h which are used
+everywhere. The most important of these are the numeric declarations of
+colors. Each intersection on the board is represented by one of these:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+     color              value
+     EMPTY                0
+     WHITE                1
+     BLACK                2
+
+</pre></td></tr></table>
+
+<p>There is a macro, <code>OTHER_COLOR(color)</code> which can be used to get the
+other color than the parameter. This macro can only be used on <code>WHITE</code>
+or <code>BLACK</code>, but not on <code>EMPTY</code>.
+<a name="index-OTHER_005fCOLOR"></a>
+</p>
+<p>GNU Go uses two different representations of the board, for
+most purposes a one-dimensional one, but for a few purposes a
+two dimensional one (see section <a href="gnugo_15.html#Libboard">The Board Library</a>). The one-dimensional
+board was introduced before GNU Go 3.2, while the two-dimensional
+board dates back to the ancestral program written by Man Lung Li
+before 1995. The API still uses the two-dimensional board, so
+the API functions have not changed much since GNU Go 3.0.
+</p>
+<hr size="6">
+<a name="The-Board-State"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Basic-Data-Structures" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Positional-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#API" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<a name="The-board_005fstate-struct"></a>
+<h2 class="section">17.3 The board_state struct</h2>
+<a name="index-board_005fstate"></a>
+
+<p>A basic data structure in the engine is the <code>board_state</code> struct. 
+This structure is internal to the engine and is defined in &lsquo;<tt>liberty.h</tt>&rsquo;.
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+     typedef unsigned char Intersection;
+     
+     struct board_state {
+       int board_size;
+     
+       Intersection board[BOARDSIZE];
+       int board_ko_pos;
+       int black_captured;
+       int white_captured;
+     
+       Intersection initial_board[BOARDSIZE];
+       int initial_board_ko_pos;
+       int initial_white_captured;
+       int initial_black_captured;
+       int move_history_color[MAX_MOVE_HISTORY];
+       int move_history_pos[MAX_MOVE_HISTORY];
+       int move_history_pointer;
+     
+       float komi;
+       int move_number;
+     };
+
+</pre></td></tr></table>
+
+<p>Here <code>Intersection</code> stores <code>EMPTY</code>, <code>WHITE</code> or
+<code>BLACK</code>. It is currently defined as an <code>unsigned char</code> to make
+it reasonably efficient in both storage and access time. The board state
+contains an array of <code>Intersection</code>&rsquo;s representing the board.
+The move history is contained in the struct. Also contained in
+the struct is the location of a ko (<code>EMPTY</code>) if the last
+move was not a ko capture, the komi, the number of captures, and
+corresponding data for the initial position at the beginning
+of the move history.
+</p>
+<hr size="6">
+<a name="Positional-Functions"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#The-Board-State" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Game-handling" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#API" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+
+<a name="Functions-which-manipulate-a-Position"></a>
+<h2 class="section">17.4 Functions which manipulate a Position</h2>
+
+<p>All the functions in the engine that manipulate Positions have names
+prefixed by <code>gnugo_</code>. These functions still use the two-dimensional
+representation of the board (see section <a href="gnugo_15.html#The-Board-Array">The Board Array</a>). Here is a complete
+list, as prototyped in &lsquo;<tt>gnugo.h</tt>&rsquo;:
+</p>
+<ul>
+<li> <code>void init_gnugo(float memory)</code>
+<a name="index-init_005fgnugo-1"></a>
+<blockquote><p>Initialize the gnugo engine. This needs to be called 
+once only.
+</p></blockquote>
+</li><li> <code>void gnugo_clear_board(int boardsize)</code>
+<a name="index-gnugo_005fclear_005fboard"></a>
+<blockquote><p>Clear the board.
+</p></blockquote>
+</li><li> <code>void gnugo_set_komi(float new_komi)</code>
+<a name="index-gnugo_005fset_005fkomi"></a>
+<blockquote><p>Set the komi.
+</p></blockquote>
+</li><li> <code>void gnugo_add_stone(int i, int j, int color)</code>
+<a name="index-gnugo_005fadd_005fstone"></a>
+<blockquote><p>Place a stone on the board
+</p></blockquote>
+</li><li> <code>void gnugo_remove_stone(int i, int j)</code>
+<a name="index-gnugo_005fremove_005fstone"></a>
+<blockquote><p>Remove a stone from the board
+</p></blockquote>
+</li><li> <code>int gnugo_is_pass(int i, int j)</code>
+<a name="index-gnugo_005fis_005fpass"></a>
+<blockquote><p>Return true if (i,j) is PASS_MOVE
+</p></blockquote>
+</li><li> <code>void gnugo_play_move(int i, int j, int color)</code>
+<a name="index-gnugo_005fplay_005fmove"></a>
+<blockquote><p>Play a move and start the clock
+</p></blockquote>
+</li><li> <code>int gnugo_undo_move(int n)</code>
+<a name="index-gnugo_005fundo_005fmove"></a>
+<blockquote><p>Undo n permanent moves. Returns 1 if successful and 0 if it fails.
+If n moves cannot be undone, no move is undone.
+</p></blockquote>
+</li><li> <code>int gnugo_play_sgfnode(SGFNode *node, int to_move)</code>
+<a name="index-gnugo_005fplay_005fsgfnode"></a>
+<blockquote><p>Perform the moves and place the stones from the SGF node on the 
+board. Return the color of the player whose turn it is to move.
+</p></blockquote>
+</li><li> <code>int gnugo_play_sgftree(SGFNode *root, int *until, SGFNode **curnode)</code>
+<a name="index-gnugo_005fplay_005fsgftree"></a>
+<blockquote><p>Play the moves in ROOT UNTIL movenumber is reached.  Return the color of the
+player whose turn it is to move.  
+</p></blockquote>
+</li><li> <code>int gnugo_is_legal(int i, int j, int color)</code>
+<a name="index-gnugo_005fis_005flegal"></a>
+<blockquote><p>Interface to <code>is_legal()</code>.
+</p></blockquote>
+</li><li> <code>int gnugo_is_suicide(int i, int j, int color)</code>
+<a name="index-gnugo_005fis_005fsuicide"></a>
+<blockquote><p>Interface to <code>is_suicide()</code>.
+</p></blockquote>
+</li><li> <code>int gnugo_placehand(int handicap)</code>
+<a name="index-gnugo_005fplacehand"></a>
+<blockquote><p>Interface to placehand. Sets up handicap pieces and
+returns the number of placed handicap stones.
+</p></blockquote>
+</li><li> <code>void gnugo_recordboard(SGFNode *root)</code>
+<a name="index-gnugo_005frecordboard"></a>
+<blockquote><p>Interface to <code>sgffile_recordboard()</code>
+</p></blockquote>
+</li><li> <code>int gnugo_sethand(int handicap, SGFNode *node)</code>
+<a name="index-gnugo_005fsethand"></a>
+<blockquote><p>Interface to placehand. Sets up handicap stones and
+returns the number of placed handicap stones, updating the sgf file
+</p></blockquote>
+</li><li> <code>float gnugo_genmove(int *i, int *j, int color, int *resign)</code>
+<a name="index-gnugo_005fgenmove"></a>
+<blockquote><p>Interface to <code>genmove()</code>.
+</p></blockquote>
+</li><li> <code>int gnugo_attack(int m, int n, int *i, int *j)</code>
+<a name="index-gnugo_005fattack"></a>
+<blockquote><p>Interface to <code>attack()</code>.
+</p></blockquote>
+</li><li> <code>int gnugo_find_defense(int m, int n, int *i, int *j)</code>
+<a name="index-gnugo_005ffind_005fdefense"></a>
+<blockquote><p>Interface to <code>find_defense()</code>.
+</p></blockquote>
+</li><li> <code>void gnugo_who_wins(int color, FILE *outfile)</code>
+<a name="index-gnugo_005fwho_005fwins"></a>
+<blockquote><p>Interface to <code>who_wins()</code>.
+</p></blockquote>
+</li><li> <code>float gnugo_estimate_score(float *upper, float *lower)</code>
+<a name="index-gnugo_005festimate_005fscore"></a>
+<blockquote><p>Put upper and lower score estimates into <code>*upper</code>, <code>*lower</code> and
+return the average. A positive score favors white. In computing
+the upper bound, <code>CRITICAL</code> dragons are awarded to white; in
+computing the lower bound, they are awarded to black.
+</p></blockquote>
+</li><li> <code>void gnugo_examine_position(int color, int how_much)</code>
+<a name="index-gnugo_005fexamine_005fposition"></a>
+<blockquote><p>Interface to <code>examine_position</code>.
+</p></blockquote>
+</li><li> <code>int gnugo_get_komi()</code>
+<a name="index-gnugo_005fget_005fkomi"></a>
+<blockquote><p>Report the komi.
+</p></blockquote>
+</li><li> <code>void gnugo_get_board(int b[MAX_BOARD][MAX_BOARD])</code>
+<a name="index-gnugo_005fget_005fboard"></a>
+<blockquote><p>Place the board into the &lsquo;<samp>b</samp>&rsquo; array.
+</p></blockquote>
+</li><li> <code>int gnugo_get_boardsize()</code>
+<a name="index-gnugo_005fget_005fboardsize"></a>
+<blockquote><p>Report the board size.
+</p></blockquote>
+</li><li> <code>int gnugo_get_move_number()</code>
+<a name="index-gnugo_005fget_005fmove_005fnumber"></a>
+<blockquote><p>Report the move number.
+</p></blockquote>
+</li></ul>
+
+<hr size="6">
+<a name="Game-handling"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Positional-Functions" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Functions-which-manipulate-a-Gameinfo" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#API" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h2 class="section">17.5 Game handling</h2>
+
+<p>The functions (in see section <a href="#Positional-Functions">Functions which manipulate a Position</a>) are all that are needed to
+create a fully functional go program.  But to make the life easier for the
+programmer, there is a small set of functions specially designed for handling
+ongoing games.
+</p>
+<p>The data structure describing an ongoing game is the <code>Gameinfo</code>. It
+is defined as follows:
+</p>
+<table><tr><td>&nbsp;</td><td><pre class="example">
+typedef struct {
+  int       handicap;
+
+  int       to_move;            /* whose move it currently is */
+  SGFTree   game_record;        /* Game record in sgf format. */
+
+  int       computer_player;    /* BLACK, WHITE, or EMPTY (used as BOTH) */
+
+  char      outfilename[128];   /* Trickle file */
+  FILE      *outfile;
+} Gameinfo;
+
+</pre></td></tr></table>
+
+<p>The meaning of <code>handicap</code> should be obvious. <code>to_move</code> is the
+color of the side whose turn it is to move.
+</p>
+<p>The SGF tree <code>game_record</code> is used to store all the moves in the entire
+game, including a header node which contains, among other things, komi
+and handicap.
+</p>
+<p>If one or both of the opponents is the computer, the field
+<code>computer_player</code> is used. Otherwise it can be ignored.
+</p>
+<p>GNU Go can use a trickle file to continuously save all the moves of an
+ongoing game. This file can also contain information about internal
+state of the engine such as move reasons for various locations or move
+valuations. The name of this file should
+be stored in <code>outfilename</code> and the file pointer to the open file is
+stored in <code>outfile</code>. If no trickle file is used,
+<code>outfilename[0]</code> will contain a null character and <code>outfile</code>
+will be set to <code>NULL</code>.
+</p>
+<hr size="6">
+<a name="Functions-which-manipulate-a-Gameinfo"></a>
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#Game-handling" title="Previous section in reading order"> &lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next section in reading order"> &gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="#Game-handling" title="Up section"> Up </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<h3 class="subsection">17.5.1 Functions which manipulate a Gameinfo</h3>
+
+<p>All the functions in the engine that manipulate Gameinfos have names
+prefixed by <code>gameinfo_</code>.  Here is a complete list, as prototyped in
+&lsquo;<tt>gnugo.h</tt>&rsquo;:
+</p>
+<ul>
+<li> <code>void gameinfo_clear(Gameinfo *ginfo, int boardsize, float komi)</code>
+<a name="index-gameinfo_005fclear"></a>
+<blockquote><p>Initialize the <code>Gameinfo</code> structure.
+</p></blockquote>
+</li><li> <code>void gameinfo_print(Gameinfo *ginfo)</code>
+<a name="index-gameinfo_005fprint"></a>
+<blockquote><p>Print a gameinfo.
+</p></blockquote>
+</li><li> <code>void gameinfo_load_sgfheader(Gameinfo *gameinfo, SGFNode *head)</code>
+<a name="index-gameinfo_005fload_005fsgfheader"></a>
+<blockquote><p>Reads header info from sgf structure and sets the appropriate variables.
+</p></blockquote>
+</li><li> <code>void gameinfo_play_move(Gameinfo *ginfo, int i, int j, int color)</code>
+<a name="index-gameinfo_005fplay_005fmove"></a>
+<blockquote><p>Make a move in the game. Return 1 if the move was legal. In that
+case the move is actually done. Otherwise return 0.
+</p></blockquote>
+</li><li> <code>int gameinfo_play_sgftree_rot(Gameinfo *gameinfo, SGFNode *head, const char *untilstr, int orientation)</code>
+<a name="index-gameinfo_005fplay_005fsgftree_005frot"></a>
+<blockquote><p>Play the moves in an SGF tree. Walk the main variation, actioning the
+properties into the playing board. Returns the color of the next move to be
+made. Head is an sgf tree. Untilstr is an optional string of the form either
+&rsquo;L12&rsquo; or &rsquo;120&rsquo; which tells it to stop playing at that move or move
+number. When debugging, this is the location of the move being examined.
+</p></blockquote>
+</li><li> <code>int gameinfo_play_sgftree(Gameinfo *gameinfo, SGFNode *head, const char *untilstr)</code>
+<a name="index-gameinfo_005fplay_005fsgftree"></a>
+<blockquote><p>Same as previous function, using standard orientation.
+</p></blockquote>
+</li></ul>
+
+
+
+<hr size="6">
+<table cellpadding="1" cellspacing="1" border="0">
+<tr><td valign="middle" align="left">[<a href="#API" title="Beginning of this chapter or previous chapter"> &lt;&lt; </a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_18.html#Utility-Functions" title="Next chapter"> &gt;&gt; </a>]</td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left"> &nbsp; </td>
+<td valign="middle" align="left">[<a href="gnugo.html#Top" title="Cover (top) of document">Top</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_toc.html#SEC_Contents" title="Table of contents">Contents</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_22.html#Concept-Index" title="Index">Index</a>]</td>
+<td valign="middle" align="left">[<a href="gnugo_abt.html#SEC_About" title="About (help)"> ? </a>]</td>
+</tr></table>
+<p>
+ <font size="-1">
+  This document was generated by <em>buildd user</em> on <em>November 29, 2011</em> using <a href="http://www.nongnu.org/texi2html/"><em>texi2html 1.82</em></a>.
+ </font>
+ <br>
+
+</p>
+</body>
+</html>

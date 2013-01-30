@@ -1,0 +1,1 @@
+rsync: embedded-library usr/bin/rsync: zlib

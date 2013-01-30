@@ -1,0 +1,38 @@
+This package was debianized by Luke Yelavich <themuso@ubuntu.com> on
+Fri, 23 Jun 2006 08:49:03 +0200.
+
+It was downloaded from http://prdownloads.sourceforge.net/espeak/speak-1.10-source.zip
+
+Copyright Holders: Jonathan Duddington <jonsd@talktalk.net> 2005-2011
+                   Gilles Casse <gcasse@oralux.org>            2007
+                   Ross Bencina <rossb@audiomulch.com>         1999-2002
+                   Phil Burk <philburk@softsynth.com>          1999-2002
+                   Sun Microsystems, Inc.                      2008
+                   Bill Cox                                    2010
+
+License:
+
+   This package is free software; you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation; either version 3 of the License, or
+   (at your option) any later version.
+
+   This package is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
+
+
+You should have received a copy of the GNU General Public License with
+your Debian GNU system, in /usr/share/common-licenses/GPL-3, or with
+the Debian espeak source package as the file License.txt.  If not, see
+<http://www.gnu.org/licenses/>.
+
+
+The following files have a different license to what is stated above.
+
+big_endian/espeak-phoneme-data.c:
+       Author: Leonardo Boshell <leonardop@gentoo.org>
+       This file has no copyright, as intended by the author, and
+       has been placed in the public domain.
+
