@@ -1,5 +1,5 @@
 Target Date: 15-Mar-2013
-Target Ver: RC 3
+Target Ver: 0.9 RC 3
 
 Bug Fixes
 - Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
