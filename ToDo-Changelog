@@ -1,11 +1,11 @@
 Target Date: 15-Mar-2013
 Target Ver: RC 3
 
-[b]Bug Fixes[/b]
-[indent]- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
+Bug Fixes
+- Check for existing pv - if yes, only then run the tar gauge in pre-picuntu
 - To test, joomla  and make it non-interactive install
 - Suppress errors of wicd/nm-applet - when running together [done]
-[/indent]
+
 
 Enhancements
 	- Picuntu does not have telnet !!! must include (almost a BUG !!)
