@@ -68,8 +68,6 @@ fi
 function conf_var {
 
 # Where you have downloaded the Picuntu Linuxroot
-#	LXROOT="/mnt/disk2/Dev/rk3066-linux/picuntu-linuxroot-0.9/*"
-#  LXROOT="/mnt/disk2/Dev/rk3066-linux/picuntu-linuxroot-0.9.tgz"
 
 TMP_DL="/tmp/picuntu-dl"
 
@@ -150,10 +148,10 @@ PIC_FIL="$DIR_NAME-$CUR_VER.tgz"
 #Over-ride Setup Values for PIC_URL, SHA_URL, PIC_FIL
 PIC_URL="http://192.168.1.112/$PIC_FIL"
 SHA_URL="http://192.168.1.112/sha1.html"
-DEV_PATH="/mnt/disk2/Dev/rk3066-linux/"
+DEV_PATH="/mnt/disk2/Dev/picuntu/"
 # Make tgz file
 
-# cd /mnt/disk2/Dev/rk3066-linux/picuntu-linuxroot-0.9
+# cd /mnt/disk2/Dev/picuntu/picuntu-linuxroot-0.9
 cd "$DEV_PATH/$DIR_NAME"
 
 # tar -czf ../picuntu-linuxroot-0.9-RC3.tgz .
@@ -162,7 +160,7 @@ tar -czf ../$PIC_FIL .
 
 # Make sure, the link to the /var/www
 rm -rf "/var/www/$PIC_FIL"
-# ln -s /mnt/disk2/Dev/rk3066-linux/picuntu-linuxroot-0.9-RC3.tgz /var/www/picuntu-linuxroot-0.9-RC3.tgz
+# ln -s /mnt/disk2/Dev/picuntu/picuntu-linuxroot-0.9-RC3.tgz /var/www/picuntu-linuxroot-0.9-RC3.tgz
 ln -s "$DEV_PATH/$PIC_FIL" "/var/www/$PIC_FIL"
 
 # Make sha1 file in /var/www
@@ -322,7 +320,7 @@ function cp_picuntu {
 		mount -t "$fst" "$disk"1 "$TMOUNT"
 #		read -p "Mounted on $TMOUNT. Press enter to continue..." 
 		echo "Copying contents of $LXROOT into $disk disk"
-#		get_tar_progress "/mnt/disk2/Dev/rk3066-linux/picuntu-linuxroot-0.9-RC3.tgz" "/root/tmp"
+#		get_tar_progress "/mnt/disk2/Dev/picuntu/picuntu-linuxroot-0.9-RC3.tgz" "/root/tmp"
 		echo  "Untarring from $LXROOT"
 		echo  "Into $TMOUNT"
 		get_tar_progress "$LXROOT" "$TMOUNT"
